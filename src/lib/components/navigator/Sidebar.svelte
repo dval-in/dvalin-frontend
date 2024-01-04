@@ -61,7 +61,7 @@
 </script>
 
 <div
-	class={`sidebar scroll-smooth overflow-scroll fixed w-full lg:w-64 h-full flex-col bg-background items-center z-50 bg-primary ${
+	class={`sidebar hide-scrollbar scroll-smooth overflow-scroll fixed w-full lg:w-64 h-full flex-col bg-background items-center z-50 bg-primary ${
 		isMobile ? 'flex' : 'hidden lg:flex'
 	}`}
 >
