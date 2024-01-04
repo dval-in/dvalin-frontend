@@ -14,7 +14,8 @@ const buttonVariants = tv({
 			link: 'text-primary underline-offset-4 hover:underline',
 			sidebar: 'bg-primary text-foreground hover:text-white hover:bg-primary/90 w-full',
 			activeSidebar: 'bg-secondary text-foreground hover:text-white hover:bg-primary/90 w-full',
-			headerSidebar: 'bg-primary text-foreground w-full hover:text-white'
+			headerSidebar: 'bg-primary text-foreground w-full hover:text-white',
+			navigatorClose: 'bg-transparent'
 		},
 		size: {
 			default: 'h-10 px-4 py-2',

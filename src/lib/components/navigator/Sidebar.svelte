@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { showSidebarSections } from '$lib/store/global_state';
+	import {showSidebar, showSidebarSections} from '$lib/store/global_state';
 	import { get } from 'svelte/store';
 	import { Button } from '$lib/components/ui/button';
 	import {
@@ -26,9 +26,11 @@
 		mdiFood,
 		mdiDisc,
 		mdiChevronRight,
-		mdiChevronDown
+		mdiChevronDown, mdiCloseCircle
 	} from '@mdi/js';
+	export let isMobile = false;
 	export let segment: string;
+
 	let collapseStatusIcon: string[] = get(showSidebarSections).map((status, _) => {
 		if (status === true) {
 			return mdiChevronDown;
@@ -51,12 +53,25 @@
 			return n;
 		});
 	}
+
+	function closeNavigator() {
+		showSidebar.set(false)
+	}
 </script>
 
-<div class={'sidebar fixed lg:w-64 h-full flex-col bg-background items-center z-50 bg-primary'}>
+<div class={`sidebar fixed w-full lg:w-64 h-full flex-col bg-background items-center z-50 bg-primary ${isMobile ? 'flex' : 'hidden lg:flex'}\``}>
+	{#if !isMobile}
 	<a href="/" class="relative py-2 items-left w-full">
 		<h1 class="font-display text-3xl font-black text-white py-4 relative z-10">dval.in</h1>
 	</a>
+	{/if}
+	{#if isMobile}
+		<div class="flex flex-row w-full items-center justify-center mt-8">
+			<Button variant="navigatorClose" class="cursor-pointer bg-transparent" on:click={closeNavigator}>
+				<Icon path={mdiCloseCircle} size={2} color="white" className="mb-8 mt-4 opacity-75" />
+			</Button>
+		</div>
+	{/if}
 	<Button variant={segment === 'wish' ? 'activeSidebar' : 'sidebar'} href="wish"
 		><Icon path={mdiStar} color="white" size={1} />Wish Counter</Button
 	>
