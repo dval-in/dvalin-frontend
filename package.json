@@ -46,6 +46,7 @@
 		"i18next": "^23.7.12",
 		"lucide-svelte": "^0.303.0",
 		"svelte-i18next": "^2.2.2",
+		"svelte-persisted-store": "^0.8.0",
 		"tailwind-merge": "^2.2.0",
 		"tailwind-variants": "^0.1.19"
 	},
@@ -53,4 +54,4 @@
 	"main": "postcss.config.js",
 	"author": "",
 	"license": "ISC"
-  }
+}

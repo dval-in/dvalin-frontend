@@ -1,10 +1,8 @@
 <script lang="ts">
-	/* eslint-disable @typescript-eslint/no-explicit-any */
-	// TODO: Fix all these any
 	export let path: any;
-	export let size: any = 1;
-	export let color: any = null;
-	export let flip: any = null;
+	export let size: number = 1;
+	export let color: string = 'white';
+	export let flip: any | null = null;
 	export let rotate = 0;
 	export let marginBottom = 0;
 	export let spin = false;
@@ -48,7 +46,6 @@
 	$: style = getStyles();
 </script>
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
 <svg viewBox="0 0 24 24" {style} class={className}>
 	{#if title}
 		<title>{title}</title>

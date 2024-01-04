@@ -1,6 +1,6 @@
 <script lang="ts">
 	import '../app.scss';
-	import Sidebar from '$lib/components/sidebar/Sidebar.svelte';
+	import Sidebar from '$lib/components/navigator/Sidebar.svelte';
 	import Header from '$lib/components/navigator/Header.svelte';
 	import { page } from '$app/stores';
 	$: segment = $page.url.pathname.substring(1).split('/')[0];
