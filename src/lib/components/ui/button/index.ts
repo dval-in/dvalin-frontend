@@ -7,14 +7,19 @@ const buttonVariants = tv({
 	variants: {
 		variant: {
 			default: 'justify-center bg-primary text-primary-foreground hover:bg-primary/90',
-			destructive: 'justify-center bg-destructive text-destructive-foreground hover:bg-destructive/90',
-			outline: 'justify-center border border-input bg-background hover:bg-accent hover:text-accent-foreground',
+			destructive:
+				'justify-center bg-destructive text-destructive-foreground hover:bg-destructive/90',
+			outline:
+				'justify-center border border-input bg-background hover:bg-accent hover:text-accent-foreground',
 			secondary: 'justify-center bg-secondary text-secondary-foreground hover:bg-secondary/80',
 			ghost: 'justify-center hover:bg-accent hover:text-accent-foreground',
 			link: 'justify-center text-primary underline-offset-4 hover:underline',
-			sidebar: 'bg-primary justify-center ml-0 text-foreground lg:justify-start lg:ml-8 hover:text-white hover:bg-primary/90 w-full',
-			activeSidebar: 'bg-secondary justify-center ml-0 text-foreground lg:justify-start lg:ml-8 hover:text-white hover:bg-primary/90 w-full',
-			headerSidebar: 'justify-center bg-primary text-foreground w-full lg:justify-start hover:text-white',
+			sidebar:
+				'bg-primary justify-center ml-0 text-foreground lg:justify-start lg:ml-8 hover:text-white hover:bg-primary/90 w-full',
+			activeSidebar:
+				'bg-secondary justify-center ml-0 text-foreground lg:justify-start lg:ml-8 hover:text-white hover:bg-primary/90 w-full',
+			headerSidebar:
+				'justify-center bg-primary text-foreground w-full lg:justify-start hover:text-white',
 			navigatorClose: 'justify-center bg-transparent'
 		},
 		size: {
