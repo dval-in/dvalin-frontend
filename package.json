@@ -3,6 +3,7 @@
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
+		"preinstall": "node -e \"if(process.env.npm_execpath.indexOf('pnpm') === -1) throw new Error('You must use PNPM to install')\"",
 		"dev": "vite dev",
 		"build": "vite build",
 		"preview": "vite preview",
@@ -50,8 +51,9 @@
 		"tailwind-merge": "^2.2.0",
 		"tailwind-variants": "^0.1.19"
 	},
-	"description": "## This is dval.in, successor and better version of paimon.moe, and is the one site for all Genshin Impact Guides and Help. Character, Info, Weapons, Wishes, Guides, and more in one spot.",
-	"main": "postcss.config.js",
-	"author": "",
-	"license": "ISC"
+	"engines": {
+		"npm": "please-use-pnpm",
+		"yarn": "please-use-pnpm"
+	},
+	"description": "This is dval.in, successor and better version of paimon.moe, and is the one site for all Genshin Impact Guides and Help. Character, Info, Weapons, Wishes, Guides, and more in one spot."
 }

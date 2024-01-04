@@ -23,6 +23,9 @@ dependencies:
   svelte-i18next:
     specifier: ^2.2.2
     version: 2.2.2(i18next@23.7.12)(svelte@4.2.8)
+  svelte-persisted-store:
+    specifier: ^0.8.0
+    version: 0.8.0(svelte@4.2.8)
   tailwind-merge:
     specifier: ^2.2.0
     version: 2.2.0
@@ -3122,6 +3125,15 @@ packages:
     dependencies:
       svelte: 4.2.8
     dev: true
+
+  /svelte-persisted-store@0.8.0(svelte@4.2.8):
+    resolution: {integrity: sha512-MwVIlJXQFxp+qCbCelsvHYNxxy8AlRJguPj7m+IBB0lpO3jsxFM3wcjO3ytkoZPkUbwUssTLs0XNIFSJL2jXqw==}
+    engines: {node: '>=0.14'}
+    peerDependencies:
+      svelte: ^3.48.0 || >4.0.0
+    dependencies:
+      svelte: 4.2.8
+    dev: false
 
   /svelte-preprocess@5.1.3(postcss@8.4.32)(sass@1.69.6)(svelte@4.2.8)(typescript@5.3.3):
     resolution: {integrity: sha512-xxAkmxGHT+J/GourS5mVJeOXZzne1FR5ljeOUAMXUkfEhkLEllRreXpbl3dIYJlcJRfL1LO1uIAPpBpBfiqGPw==}
