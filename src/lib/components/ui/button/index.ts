@@ -3,19 +3,19 @@ import { tv, type VariantProps } from 'tailwind-variants';
 import type { Button as ButtonPrimitive } from 'bits-ui';
 
 const buttonVariants = tv({
-	base: 'inline-flex items-center justify-center rounded-md text-sm font-medium whitespace-nowrap ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
+	base: 'inline-flex items-center rounded-md text-sm font-medium whitespace-nowrap ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
 	variants: {
 		variant: {
-			default: 'bg-primary text-primary-foreground hover:bg-primary/90',
-			destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90',
-			outline: 'border border-input bg-background hover:bg-accent hover:text-accent-foreground',
-			secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
-			ghost: 'hover:bg-accent hover:text-accent-foreground',
-			link: 'text-primary underline-offset-4 hover:underline',
-			sidebar: 'bg-primary text-foreground hover:text-white hover:bg-primary/90 w-full',
-			activeSidebar: 'bg-secondary text-foreground hover:text-white hover:bg-primary/90 w-full',
-			headerSidebar: 'bg-primary text-foreground w-full hover:text-white',
-			navigatorClose: 'bg-transparent'
+			default: 'justify-center bg-primary text-primary-foreground hover:bg-primary/90',
+			destructive: 'justify-center bg-destructive text-destructive-foreground hover:bg-destructive/90',
+			outline: 'justify-center border border-input bg-background hover:bg-accent hover:text-accent-foreground',
+			secondary: 'justify-center bg-secondary text-secondary-foreground hover:bg-secondary/80',
+			ghost: 'justify-center hover:bg-accent hover:text-accent-foreground',
+			link: 'justify-center text-primary underline-offset-4 hover:underline',
+			sidebar: 'bg-primary justify-center ml-0 text-foreground lg:justify-start lg:ml-8 hover:text-white hover:bg-primary/90 w-full',
+			activeSidebar: 'bg-secondary justify-center ml-0 text-foreground lg:justify-start lg:ml-8 hover:text-white hover:bg-primary/90 w-full',
+			headerSidebar: 'justify-center bg-primary text-foreground w-full lg:justify-start hover:text-white',
+			navigatorClose: 'justify-center bg-transparent'
 		},
 		size: {
 			default: 'h-10 px-4 py-2',

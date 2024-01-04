@@ -61,7 +61,7 @@
 </script>
 
 <div
-	class={`sidebar fixed w-full lg:w-64 h-full flex-col bg-background items-center z-50 bg-primary ${
+	class={`sidebar scroll-smooth overflow-scroll fixed w-full lg:w-64 h-full flex-col bg-background items-center z-50 bg-primary ${
 		isMobile ? 'flex' : 'hidden lg:flex'
 	}`}
 >
@@ -84,8 +84,8 @@
 	<Button variant={segment === 'wish' ? 'activeSidebar' : 'sidebar'} href="wish"
 		><Icon path={mdiStar} color="white" size={1} />Wish Counter</Button
 	>
-	<Collapsible open={get(showSidebarSections)[0]} class="w-1/2 lg:w-full">
-		<CollapsibleTrigger>
+	<Collapsible open={get(showSidebarSections)[0]} class="w-full">
+		<CollapsibleTrigger class="w-full">
 			<Button on:click={() => rightClicked(0)} variant={'headerSidebar'}
 				><Icon path={collapseStatusIcon[0]} color="white" size={1} />Your Collection</Button
 			>
@@ -102,8 +102,8 @@
 			>
 		</CollapsibleContent>
 	</Collapsible>
-	<Collapsible open={get(showSidebarSections)[1]} class="w-1/2 lg:w-full">
-		<CollapsibleTrigger>
+	<Collapsible open={get(showSidebarSections)[1]} class="w-full">
+		<CollapsibleTrigger class="w-full">
 			<Button on:click={() => rightClicked(1)} variant={'headerSidebar'}
 				><Icon path={collapseStatusIcon[1]} color="white" size={1} />Trackers</Button
 			>
@@ -136,8 +136,8 @@
 			>
 		</CollapsibleContent>
 	</Collapsible>
-	<Collapsible open={get(showSidebarSections)[2]} class="w-1/2 lg:w-full">
-		<CollapsibleTrigger>
+	<Collapsible open={get(showSidebarSections)[2]} class="w-full">
+		<CollapsibleTrigger class="w-full">
 			<Button on:click={() => rightClicked(2)} variant={'headerSidebar'}
 				><Icon path={collapseStatusIcon[2]} color="white" size={1} />Tools</Button
 			>
