@@ -112,7 +112,7 @@
 			>
 		</CollapsibleContent>
 	</Collapsible>
-	<Collapsible>
+	<Collapsible open={get(showSidebarSections)[2]}>
 		<CollapsibleTrigger>
 			<Button on:click={() => rightClicked(2)} variant={'headerSidebar'}
 				><Icon path={collapseStatusIcon[2]} color="white" size={1} />Tools</Button
