@@ -29,28 +29,23 @@
 		mdiChevronDown
 	} from '@mdi/js';
 	export let segment: string;
-	let path: string[] = [];
-	let num = 0;
-	if (get(showSidebarSections)[num] === true) {
-		path.push(mdiChevronDown);
-	} else {
-		path.push(mdiChevronRight);
-	}
-	function rclick0() {
-		return rightClicked(0);
-	}
-	function rclick1() {
-		return rightClicked(1);
-	}
-	function rclick2() {
-		return rightClicked(2);
-	}
-	function rightClicked(num: number) {
-		if (get(showSidebarSections)[num] === true) {
-			path[num] = mdiChevronRight;
+	let collapseStatusIcon: string[] = get(showSidebarSections).map((status, _) => {
+		if (status === true) {
+			return mdiChevronDown;
 		} else {
-			path[num] = mdiChevronDown;
+			return mdiChevronRight;
 		}
+	});
+	showSidebarSections.subscribe((value) => {
+		value.forEach((status, index) => {
+			if (status === true) {
+				collapseStatusIcon[index] = mdiChevronDown;
+			} else {
+				collapseStatusIcon[index] = mdiChevronRight;
+			}
+		});
+	});
+	function rightClicked(num: number) {
 		showSidebarSections.update((n) => {
 			n[num] = !n[num];
 			return n;
@@ -67,8 +62,8 @@
 	>
 	<Collapsible open={get(showSidebarSections)[0]}>
 		<CollapsibleTrigger>
-			<Button on:click={rclick0} variant={'headerSidebar'}
-				><Icon {path} color="white" size={1} />Your Collection</Button
+			<Button on:click={() => rightClicked(0)} variant={'headerSidebar'}
+				><Icon path={collapseStatusIcon[0]} color="white" size={1} />Your Collection</Button
 			>
 		</CollapsibleTrigger>
 		<CollapsibleContent>
@@ -85,15 +80,15 @@
 	</Collapsible>
 	<Collapsible open={get(showSidebarSections)[1]}>
 		<CollapsibleTrigger>
-			<Button on:click={rclick1} variant={'headerSidebar'}
-				><Icon {path} color="white" size={1} />Trackers</Button
+			<Button on:click={() => rightClicked(1)} variant={'headerSidebar'}
+				><Icon path={collapseStatusIcon[1]} color="white" size={1} />Trackers</Button
 			>
 		</CollapsibleTrigger>
 		<CollapsibleContent>
 			<Button variant={segment === 'todo' ? 'activeSidebar' : 'sidebar'} href="todo"
 				><Icon path={mdiClipboardTextOutline} color="white" size={1} />To-Do</Button
 			>
-			<Button variant={segment === 'acesension' ? 'activeSidebar' : 'sidebar'} href="ascension"
+			<Button variant={segment === 'ascension' ? 'activeSidebar' : 'sidebar'} href="ascension"
 				><Icon path={mdiStarOutline} color="white" size={1} />Ascension</Button
 			>
 			<Button variant={segment === 'fishing' ? 'activeSidebar' : 'sidebar'} href="fishing"
@@ -102,8 +97,8 @@
 			<Button variant={segment === 'furnishing' ? 'activeSidebar' : 'sidebar'} href="furnishing"
 				><Icon path={mdiBedKing} color="white" size={1} />Furnishing</Button
 			>
-			<Button variant={segment === 'achivement' ? 'activeSidebar' : 'sidebar'} href="achivement"
-				><Icon path={mdiPartyPopper} color="white" size={1} />Achivement</Button
+			<Button variant={segment === 'achievement' ? 'activeSidebar' : 'sidebar'} href="achievement"
+				><Icon path={mdiPartyPopper} color="white" size={1} />Achievement</Button
 			>
 			<Button variant={segment === 'books' ? 'activeSidebar' : 'sidebar'} href="books"
 				><Icon path={mdiBookshelf} color="white" size={1} />Books</Button
@@ -119,8 +114,8 @@
 	</Collapsible>
 	<Collapsible>
 		<CollapsibleTrigger>
-			<Button on:click={rclick2} variant={'headerSidebar'}
-				><Icon {path} color="white" size={1} />Tools</Button
+			<Button on:click={() => rightClicked(2)} variant={'headerSidebar'}
+				><Icon path={collapseStatusIcon[2]} color="white" size={1} />Tools</Button
 			>
 		</CollapsibleTrigger>
 		<CollapsibleContent>
