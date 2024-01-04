@@ -3,6 +3,7 @@
 
 # Get the commit message
 commit_msg=$(cat "$1")
+original_commit_msg=$(cat "$1")
 
 # Check if the commit message contains the [CI Skip] prefix
 if echo "$commit_msg" | grep -q '^\[CI Skip\]'; then
@@ -14,3 +15,4 @@ if echo "$commit_msg" | grep -q '^\[CI Skip\]'; then
 fi
 
 pnpm exec commitlint --edit "$1"
+echo "$original_commit_msg" > "$1"
