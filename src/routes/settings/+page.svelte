@@ -98,24 +98,5 @@
 </div>
 
 <style>
-/* The style for the radio buttons and the image */
-.image-select {
-  /* Use a flex layout to align the radio buttons and the image vertically */
-  display: flex;
-  /* Use a column direction to stack the radio buttons and the image horizontally */
-  flex-direction: column;
-  /* Use a center alignment to center the radio buttons and the image */
-  align-items: center;
-}
-
-/* The style for the image element */
-#preview {
-  /* Use a fixed size for the image element */
-  width: 150px;
-  height: 100px;
-  /* Add some margin around the image element */
-  margin: 10px;
-  /* Use a border for the image element */
-  border: 2px solid gray;
-}
+/* Styling if needed. Go Here */
 </style>
