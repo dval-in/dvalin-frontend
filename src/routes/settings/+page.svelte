@@ -48,6 +48,7 @@
 
 		document.body.removeChild(element);
 	}
+	
 </script>
 
 <div>
@@ -58,7 +59,17 @@
 				<!--TODO: Replace this with i18n key-->
 				<Card.Title>User Settings</Card.Title>
 			</Card.Header>
-			<Card.Content></Card.Content>
+			<Card.Content>
+				<div class="rounded-xl border-2 border-blue-500">
+
+					<input type="radio" id="option1" name="theme" value="option1">
+					<label for="option1">Light</label>
+					<br>
+
+					<input type="radio" id="option2" name="theme" value="option2">
+					<label for="option2">Dark</label>
+				</div>
+			</Card.Content>
 		</Card.Root>
 		<!--Here is the Global Settings region-->
 		<Card.Root>
@@ -87,5 +98,24 @@
 </div>
 
 <style>
-	/* Add any styling here if needed */
+/* The style for the radio buttons and the image */
+.image-select {
+  /* Use a flex layout to align the radio buttons and the image vertically */
+  display: flex;
+  /* Use a column direction to stack the radio buttons and the image horizontally */
+  flex-direction: column;
+  /* Use a center alignment to center the radio buttons and the image */
+  align-items: center;
+}
+
+/* The style for the image element */
+#preview {
+  /* Use a fixed size for the image element */
+  width: 150px;
+  height: 100px;
+  /* Add some margin around the image element */
+  margin: 10px;
+  /* Use a border for the image element */
+  border: 2px solid gray;
+}
 </style>

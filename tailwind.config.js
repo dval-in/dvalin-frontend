@@ -1,4 +1,5 @@
 import { fontFamily } from 'tailwindcss/defaultTheme';
+import { createThemes } from 'tw-colors';
 /* eslint-disable @typescript-eslint/naming-convention */
 /** @type {import('tailwindcss').Config} */
 const config = {
@@ -7,7 +8,7 @@ const config = {
 	corePlugins: {
 		preflight: true
 	},
-	safelist: ['dark'],
+	safelist: ['fontaine'],
 	theme: {
 		container: {
 			center: true,
@@ -17,41 +18,7 @@ const config = {
 			}
 		},
 		extend: {
-			colors: {
-				border: 'hsl(var(--input) / <alpha-value>)',
-				input: 'hsl(var(--input) / <alpha-value>)',
-				ring: 'hsl(var(--ring) / <alpha-value>)',
-				background: '#3F6797',
-				foreground: '#D0DFE9',
-				primary: {
-					DEFAULT: 'hsl(var(--primary) / <alpha-value>)',
-					foreground: 'hsl(var(--primary-foreground) / <alpha-value>)'
-				},
-				secondary: {
-					DEFAULT: '#1C274B',
-					foreground: 'hsl(var(--secondary-foreground) / <alpha-value>)'
-				},
-				destructive: {
-					DEFAULT: 'hsl(var(--destructive) / <alpha-value>)',
-					foreground: 'hsl(var(--destructive-foreground) / <alpha-value>)'
-				},
-				muted: {
-					DEFAULT: 'hsl(var(--muted) / <alpha-value>)',
-					foreground: 'hsl(var(--muted-foreground) / <alpha-value>)'
-				},
-				accent: {
-					DEFAULT: 'hsl(var(--accent) / <alpha-value>)',
-					foreground: 'hsl(var(--accent-foreground) / <alpha-value>)'
-				},
-				popover: {
-					DEFAULT: 'hsl(var(--popover) / <alpha-value>)',
-					foreground: 'hsl(var(--popover-foreground) / <alpha-value>)'
-				},
-				card: {
-					DEFAULT: 'hsl(var(--card) / <alpha-value>)',
-					foreground: 'hsl(var(--card-foreground) / <alpha-value>)'
-				}
-			},
+			colors: {},
 			borderRadius: {
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',
@@ -61,7 +28,46 @@ const config = {
 				sans: [...fontFamily.sans]
 			}
 		}
-	}
+	},
+	plugins: [
+		createThemes(
+			{
+				fontaine: {
+					border: '#000000',
+					input: '#000000',
+					background: '#3F6797',
+					foreground: '#D0DFE9',
+					activeSidebar: '#000000',
+					sidebarText: '#8BB0C9',
+					fill: '#D0DFE9',
+					sidebar: '#10172A'
+				},
+				sumeru: {
+					border: '#000000',
+					input: '#000000',
+					background: '#2d6a4f',
+					foreground: '#b7e4c7',
+					activeSidebar: '#000000',
+					sidebarText: '#d8f3dc',
+					fill: '#b7e4c7',
+					sidebar: '#081c15'
+				},
+				liyue: {
+					border: '#000000',
+					input: '#000000',
+					background: '#E7C561',
+					foreground: '#5A4608',
+					activeSidebar: '#000000',
+					sidebarText: '#312504',
+					fill: '#5A4608',
+					sidebar: '#C6A237'
+				}
+			},
+			{
+				defaultTheme: 'fontaine'
+			}
+		)
+	]
 };
 
 export default config;
