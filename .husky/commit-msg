@@ -1,0 +1,18 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Get the commit message
+commit_msg=$(cat "$1")
+original_commit_msg=$(cat "$1")
+
+# Check if the commit message contains the [CI Skip] prefix
+if echo "$commit_msg" | grep -q '^\[CI Skip\]'; then
+  # Remove the [CI Skip] prefix
+  commit_msg=$(echo "$commit_msg" | sed 's/^\[CI Skip\] //')
+
+  # Write the modified commit message back to the file
+  echo "$commit_msg" > "$1"
+fi
+
+pnpm exec commitlint --edit "$1"
+echo "$original_commit_msg" > "$1"
