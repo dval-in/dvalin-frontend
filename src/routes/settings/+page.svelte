@@ -114,14 +114,14 @@
 							class="m-2"
 							variant="destructive"
 							on:click={() => handleSettingFileSelect(SettingFileMode.Import)}
-							>Import settings from file</Button
-						>
+							><u>Import settings from file</u></Button
+							>
 						<Button
 							class="m-2"
 							variant="default"
 							on:click={() => handleSettingFileSelect(SettingFileMode.Export)}
-							>Export settings to file</Button
-						>
+							><u>Export settings to file<u></Button
+							>
 					</div>
 				</Card.Content>
 			</Card.Root>

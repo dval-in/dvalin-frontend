@@ -37,7 +37,7 @@ const config = {
 					border: '#000000',
 					input: '#000000',
 					background: '#1C3563',
-					foreground: '#555555', // sample
+					foreground: '#CCCCCC', // sample
 					activeSidebar: '#000000',
 					sidebarText: '#8BB0C9',
 					fill: '#D0DFE9',
@@ -57,7 +57,7 @@ const config = {
 					border: '#000000',
 					input: '#000000',
 					background: '#E7C561',
-					foreground: '#555555', // error
+					foreground: '#CCCCCC', // error
 					activeSidebar: '#000000',
 					sidebarText: '#312504',
 					fill: '#5A4608',
