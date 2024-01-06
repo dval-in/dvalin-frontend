@@ -62,8 +62,8 @@
 
 <div
 	class={`sidebar hide-scrollbar scroll-smooth overflow-scroll fixed w-full lg:w-64 h-full flex-col items-center z-50 bg-sidebar ${
-	isMobile ? 'flex' : 'hidden lg:flex'
-}`}
+		isMobile ? 'flex' : 'hidden lg:flex'
+	}`}
 >
 	{#if !isMobile}
 		<a href="/" class="relative py-2 items-left w-full">
