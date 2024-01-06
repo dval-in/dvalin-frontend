@@ -68,7 +68,7 @@
 					<Card.Title>User Settings</Card.Title>
 				</Card.Header>
 				<Card.Content>
-					<div class="rounded-xl border-2 border-border">
+					<div class="rounded-xl border-2 border-border bg-black/20">
 						<input
 							type="radio"
 							id="option1"
@@ -109,7 +109,7 @@
 					<Card.Title>Global Settings</Card.Title>
 				</Card.Header>
 				<Card.Content>
-					<div class="rounded-xl border-2 border-red-500">
+					<div class="rounded-xl border-2 border-red-500 bg-black/20">
 						<Button
 							class="m-2"
 							variant="destructive"
