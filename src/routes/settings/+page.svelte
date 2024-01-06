@@ -4,7 +4,6 @@
 	import { settings } from '$lib/store/global_state';
 	import { get } from 'svelte/store';
 	import { type Settings, Convert as SettingsConvertor } from '$lib/structs/settings';
-	let categoryOn: string;
 
 	enum SettingFileMode {
 		Import,
@@ -58,7 +57,6 @@
 	}
 </script>
 
-{#key categoryOn}
 	<div>
 		<div class="flex flex-col gap-y-3">
 			<!--Here is the User Settings region-->
@@ -75,7 +73,6 @@
 							name="theme"
 							value="option1"
 							on:click={() => themeChange(0)}
-							bind:group={categoryOn}
 						/>
 						<label for="option1">Blue</label>
 						<br />
@@ -86,7 +83,6 @@
 							name="theme"
 							value="option2"
 							on:click={() => themeChange(1)}
-							bind:group={categoryOn}
 						/>
 						<label for="option2">Green</label>
 						<br />
@@ -127,4 +123,3 @@
 			</Card.Root>
 		</div>
 	</div>
-{/key}

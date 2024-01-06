@@ -22,10 +22,7 @@
 			styles.push(['width', width]);
 			styles.push(['height', width]);
 		}
-		styles.push(['fill', color !== null ? color : 'currentColor']);
-		if (flip === true || flip === 'h') {
-			transform.push('scaleX(-1)');
-		}
+
 		if (flip === true || flip === 'v') {
 			transform.push('scaleY(-1)');
 		}
@@ -46,7 +43,7 @@
 	$: style = getStyles();
 </script>
 
-<svg viewBox="0 0 24 24" {style} class={className}>
+<svg viewBox="0 0 24 24" {style} class="{className} {color}">
 	{#if title}
 		<title>{title}</title>
 	{/if}

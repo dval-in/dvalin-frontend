@@ -49,7 +49,7 @@ const config = {
                     background: '#304b42',
                     foreground: '#13644d',
                     activeSidebar: '#000000',
-                    sidebarText: '#d8f3dc',
+                    sidebarText: '#97c9a1',
                     fill: '#b7e4c7',
                     sidebar: '#081c15'
                 },
