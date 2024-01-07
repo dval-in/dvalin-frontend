@@ -18,7 +18,7 @@ const config = {
 			}
 		},
 		extend: {
-			backgroundColor: "#000000",
+			backgroundColor: '#000000',
 			colors: {},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -35,7 +35,7 @@ const config = {
 			{
 				t0: {
 					border: '#000000',
-					input: '#000000',
+					text: '#ffffff',
 					background: '#1c3563',
 					foreground: '#3F6797',
 					activeSidebar: '#000000',
@@ -45,23 +45,22 @@ const config = {
 				},
 				t1: {
 					border: '#000000',
-					input: '#000000',
+					text: '#ffffff',
 					background: '#304b42',
 					foreground: '#13644d',
 					activeSidebar: '#000000',
-					sidebarText: '#d8f3dc',
+					sidebarText: '#97c9a1',
 					fill: '#b7e4c7',
 					sidebar: '#081c15'
 				},
 				t2: {
 					border: '#000000',
-					input: '#000000',
-					background: '#E7C561',
-					foreground: '#5A4608',
-					activeSidebar: '#000000',
-					sidebarText: '#312504',
-					fill: '#5A4608',
-					sidebar: '#C6A237'
+					text: '#000000',
+					background: '#cdab4a',
+					foreground: '#d2b45e',
+					activeSidebar: '#c09b28',
+					sidebarText: '#27200b',
+					sidebar: '#9e812c'
 				}
 			},
 			{

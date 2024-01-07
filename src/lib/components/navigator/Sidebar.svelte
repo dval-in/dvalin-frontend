@@ -62,12 +62,14 @@
 
 <div
 	class={`sidebar hide-scrollbar scroll-smooth overflow-scroll fixed w-full lg:w-64 h-full flex-col items-center z-50 bg-sidebar ${
-	isMobile ? 'flex' : 'hidden lg:flex'
-}`}
+		isMobile ? 'flex' : 'hidden lg:flex'
+	}`}
 >
 	{#if !isMobile}
 		<a href="/" class="relative py-2 items-left w-full">
-			<h1 class="font-display text-3xl font-black text-white py-4 relative z-10">dval.in</h1>
+			<h1 class="font-display text-3xl font-black text-fill-sidebarText py-4 relative z-10">
+				dval.in
+			</h1>
 		</a>
 	{/if}
 	{#if isMobile}
@@ -77,85 +79,156 @@
 				class="cursor-pointer bg-transparent"
 				on:click={closeNavigator}
 			>
-				<Icon path={mdiCloseCircle} size={2} color="white" className="mb-8 mt-4 opacity-75" />
+				<Icon
+					path={mdiCloseCircle}
+					size={2}
+					color="fill-sidebarText group-hover:fill-white"
+					className="mb-8 mt-4 opacity-75"
+				/>
 			</Button>
 		</div>
 	{/if}
 	<Button variant={segment === 'wish' ? 'activeSidebar' : 'sidebar'} href="wish"
-		><Icon path={mdiStar} color="white" size={1} />Wish Counter</Button
+		><Icon path={mdiStar} color="fill-sidebarText group-hover:fill-white" size={1} />Wish Counter</Button
 	>
 	<Collapsible open={get(showSidebarSections)[0]} class="w-full">
 		<CollapsibleTrigger class="w-full">
 			<Button on:click={() => rightClicked(0)} variant={'headerSidebar'}
-				><Icon path={collapseStatusIcon[0]} color="white" size={1} />Your Collection</Button
+				><Icon
+					path={collapseStatusIcon[0]}
+					color="fill-sidebarText group-hover:fill-white"
+					size={1}
+				/>Your Collection</Button
 			>
 		</CollapsibleTrigger>
 		<CollapsibleContent>
 			<Button variant={segment === 'characters' ? 'activeSidebar' : 'sidebar'} href="characters"
-				><Icon path={mdiAccountMultiple} color="white" size={1} />Characters</Button
+				><Icon
+					path={mdiAccountMultiple}
+					color="fill-sidebarText group-hover:fill-white"
+					size={1}
+				/>Characters</Button
 			>
 			<Button variant={segment === 'weapons' ? 'activeSidebar' : 'sidebar'} href="weapons"
-				><Icon path={mdiSwordCross} color="white" size={1} />Weapons</Button
+				><Icon
+					path={mdiSwordCross}
+					color="fill-sidebarText group-hover:fill-white"
+					size={1}
+				/>Weapons</Button
 			>
 			<Button variant={segment === 'inventory' ? 'activeSidebar' : 'sidebar'} href="inventory"
-				><Icon path={mdiBagPersonal} color="white" size={1} />Inventory</Button
+				><Icon
+					path={mdiBagPersonal}
+					color="fill-sidebarText group-hover:fill-white"
+					size={1}
+				/>Inventory</Button
 			>
 		</CollapsibleContent>
 	</Collapsible>
 	<Collapsible open={get(showSidebarSections)[1]} class="w-full">
 		<CollapsibleTrigger class="w-full">
 			<Button on:click={() => rightClicked(1)} variant={'headerSidebar'}
-				><Icon path={collapseStatusIcon[1]} color="white" size={1} />Trackers</Button
+				><Icon
+					path={collapseStatusIcon[1]}
+					color="fill-sidebarText group-hover:fill-white"
+					size={1}
+				/>Trackers</Button
 			>
 		</CollapsibleTrigger>
 		<CollapsibleContent>
 			<Button variant={segment === 'todo' ? 'activeSidebar' : 'sidebar'} href="todo"
-				><Icon path={mdiClipboardTextOutline} color="white" size={1} />To-Do</Button
+				><Icon
+					path={mdiClipboardTextOutline}
+					color="fill-sidebarText group-hover:fill-white"
+					size={1}
+				/>To-Do</Button
 			>
 			<Button variant={segment === 'ascension' ? 'activeSidebar' : 'sidebar'} href="ascension"
-				><Icon path={mdiStarOutline} color="white" size={1} />Ascension</Button
+				><Icon
+					path={mdiStarOutline}
+					color="fill-sidebarText group-hover:fill-white"
+					size={1}
+				/>Ascension</Button
 			>
 			<Button variant={segment === 'fishing' ? 'activeSidebar' : 'sidebar'} href="fishing"
-				><Icon path={mdiFish} color="white" size={1} />Fishing</Button
+				><Icon
+					path={mdiFish}
+					color="fill-sidebarText group-hover:fill-white"
+					size={1}
+				/>Fishing</Button
 			>
 			<Button variant={segment === 'furnishing' ? 'activeSidebar' : 'sidebar'} href="furnishing"
-				><Icon path={mdiBedKing} color="white" size={1} />Furnishing</Button
+				><Icon
+					path={mdiBedKing}
+					color="fill-sidebarText group-hover:fill-white"
+					size={1}
+				/>Furnishing</Button
 			>
 			<Button variant={segment === 'achievement' ? 'activeSidebar' : 'sidebar'} href="achievement"
-				><Icon path={mdiPartyPopper} color="white" size={1} />Achievement</Button
+				><Icon
+					path={mdiPartyPopper}
+					color="fill-sidebarText group-hover:fill-white"
+					size={1}
+				/>Achievement</Button
 			>
 			<Button variant={segment === 'books' ? 'activeSidebar' : 'sidebar'} href="books"
-				><Icon path={mdiBookshelf} color="white" size={1} />Books</Button
+				><Icon
+					path={mdiBookshelf}
+					color="fill-sidebarText group-hover:fill-white"
+					size={1}
+				/>Books</Button
 			>
 			<Button variant={segment === 'recipes' ? 'activeSidebar' : 'sidebar'} href="recipes"
-				><Icon path={mdiFood} color="white" size={1} />Recipes</Button
+				><Icon
+					path={mdiFood}
+					color="fill-sidebarText group-hover:fill-white"
+					size={1}
+				/>Recipes</Button
 			>
 			<Button
 				variant={segment === 'spin-crystals' ? 'activeSidebar' : 'sidebar'}
-				href="spin-crystals"><Icon path={mdiDisc} color="white" size={1} />Spin Crystals</Button
+				href="spin-crystals"
+				><Icon path={mdiDisc} color="fill-sidebarText group-hover:fill-white" size={1} />Spin
+				Crystals</Button
 			>
 		</CollapsibleContent>
 	</Collapsible>
 	<Collapsible open={get(showSidebarSections)[2]} class="w-full">
 		<CollapsibleTrigger class="w-full">
 			<Button on:click={() => rightClicked(2)} variant={'headerSidebar'}
-				><Icon path={collapseStatusIcon[2]} color="white" size={1} />Tools</Button
+				><Icon
+					path={collapseStatusIcon[2]}
+					color="fill-sidebarText group-hover:fill-white"
+					size={1}
+				/>Tools</Button
 			>
 		</CollapsibleTrigger>
 		<CollapsibleContent>
 			<Button variant={segment === 'reminder' ? 'activeSidebar' : 'sidebar'} href="reminder"
-				><Icon path={mdiAlarm} color="white" size={1} />Reminder</Button
+				><Icon
+					path={mdiAlarm}
+					color="fill-sidebarText group-hover:fill-white"
+					size={1}
+				/>Reminder</Button
 			>
 			<Button variant={segment === 'timeline' ? 'activeSidebar' : 'sidebar'} href="timeline"
-				><Icon path={mdiChartTimeline} color="white" size={1} />Timeline</Button
+				><Icon
+					path={mdiChartTimeline}
+					color="fill-sidebarText group-hover:fill-white"
+					size={1}
+				/>Timeline</Button
 			>
 			<Button variant={segment === 'tcg' ? 'activeSidebar' : 'sidebar'} href="tcg"
-				><Icon path={mdiCards} color="white" size={1} />TCG</Button
+				><Icon
+					path={mdiCards}
+					color="fill-sidebarText group-hover:fill-white"
+					size={1}
+				/>TCG</Button
 			>
 		</CollapsibleContent>
 	</Collapsible>
 	<br />
 	<Button variant={segment === 'settings' ? 'activeSidebar' : 'sidebar'} href="settings"
-		><Icon path={mdiCog} color="white" size={1} />Settings</Button
+		><Icon path={mdiCog} color="fill-sidebarText group-hover:fill-white" size={1} />Settings</Button
 	>
 </div>
