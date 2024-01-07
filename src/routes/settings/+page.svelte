@@ -103,7 +103,9 @@
 				<div class="rounded-xl border-2 border-green-500 bg-black/20">
 					<p style="font-size: 18px"><b><u> Accessibility </u></b></p>
 					<br />
-					<label for="option1">Increase Font Size</label>
+					<label for="option1">Increase Font Size (WIP)</label>
+					<br />
+					<label for="option2">Increase Contrast (WIP)</label>
 				</div>
 			</Card.Content>
 		</Card.Root>
