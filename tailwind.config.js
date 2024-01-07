@@ -3,7 +3,7 @@ import { createThemes } from 'tw-colors';
 /* eslint-disable @typescript-eslint/naming-convention */
 /** @type {import('tailwindcss').Config} */
 const config = {
-	darkMode: ['class'],
+    darkMode: ['class'],
 	content: ['./src/**/*.{html,js,svelte,ts}'],
 	corePlugins: {
 		preflight: true
@@ -27,8 +27,8 @@ const config = {
 			},
 			fontFamily: {
 				sans: [...fontFamily.sans]
-			}
-		}
+		    }
+        },
 	},
 	plugins: [
 		createThemes(
@@ -45,22 +45,22 @@ const config = {
 				},
 				t1: {
 					border: '#000000',
-					text: '#ffffff',
-					background: '#304b42',
-					foreground: '#13644d',
+					text: '#FFFFFF',
+					background: '#304B42',
+					foreground: '#13644D',
 					activeSidebar: '#000000',
-					sidebarText: '#97c9a1',
-					fill: '#b7e4c7',
-					sidebar: '#081c15'
+					sidebarText: '#97C9A1',
+					fill: '#B7E4C7',
+					sidebar: '#081C15'
 				},
 				t2: {
 					border: '#000000',
 					text: '#000000',
-					background: '#cdab4a',
-					foreground: '#d2b45e',
-					activeSidebar: '#c09b28',
-					sidebarText: '#27200b',
-					sidebar: '#9e812c'
+					background: '#CDAB4A',
+					foreground: '#D2B45E',
+					activeSidebar: '#C09B28',
+					sidebarText: '#27200B',
+					sidebar: '#9E812C'
 				}
 			},
 			{
