@@ -10,7 +10,7 @@
 	$: segment = $page.url.pathname.substring(1).split('/')[0];
 </script>
 
-<html lang="en" class="{themeClass} bg-background min-h-screen">
+<html lang="en" class="{themeClass} text-text bg-background min-h-screen">
 	<div id="main" class="h-full">
 		<Header />
 		<!--  Sidebar navigator for large screen-->
