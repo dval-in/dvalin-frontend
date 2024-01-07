@@ -35,7 +35,7 @@ const config = {
 			{
 				t0: {
 					border: '#000000',
-					text: '#ffffff',
+					text: '#FFFFFF',
 					background: '#1c3563',
 					foreground: '#3F6797',
 					activeSidebar: '#000000',
@@ -55,12 +55,33 @@ const config = {
 				},
 				t2: {
 					border: '#000000',
+					text: '#C17BBA',
+					background: '#3E328A',
+					foreground: '#3B7DB0',
+					activeSidebar: '#101F46',
+					sidebarText: '#926ADE',
+					fill: '#101F46',
+					sidebar: '#101F46'
+				},
+				t3: {
+					border: '#000000',
 					text: '#000000',
 					background: '#CDAB4A',
 					foreground: '#D2B45E',
 					activeSidebar: '#C09B28',
 					sidebarText: '#27200B',
+					fill: '#6E1E29',
 					sidebar: '#9E812C'
+				},
+				t4: {
+					border: '#000000',
+					text: '#DBEBE2',
+					background: '#997F66',
+					foreground: '#5A9189',
+					activeSidebar: '#C4BBA8',
+					sidebarText: '#A47535',
+					fill: '#C1846B',
+					sidebar: '#27200B'
 				}
 			},
 			{

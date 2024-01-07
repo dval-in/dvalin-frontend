@@ -89,14 +89,34 @@
 					<label for="option2">Sumeru</label>
 					<br />
 
+					<input 
+					type="radio"
+					id="option3"
+					name="theme"
+					value="option3"
+					on:click={() => themeChange(2)}
+					/>
+					<label for="option3">Inazuma</label>
+					<br />
+
 					<input
 						type="radio"
-						id="option3"
+						id="option4"
 						name="theme"
-						value="option3"
-						on:click={() => themeChange(2)}
+						value="option4"
+						on:click={() => themeChange(3)}
 					/>
-					<label for="option3">Liyue</label>
+					<label for="option4">Liyue</label>
+					<br />
+
+					<input 
+						type="radio"
+						id="option5"
+						name="theme"
+						value="option5"
+						on:click={() => themeChange(4)}
+					/>
+					<label for="option5">Mondstadt</label>
 				</div>
 			</Card.Content>
 			<Card.Content>
