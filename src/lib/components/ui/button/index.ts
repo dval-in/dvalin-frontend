@@ -7,10 +7,8 @@ const buttonVariants = tv({
 	variants: {
 		variant: {
 			default: 'justify-center bg-primary text-primary-foreground hover:bg-fill/20',
-			destructive:
-				'justify-center bg-destructive text-destructive-foreground hover:bg-fill/20',
-			outline:
-				'justify-center border border-input bg-background hover:bg-accent hover:bg-fill/20',
+			destructive: 'justify-center bg-destructive text-destructive-foreground hover:bg-fill/20',
+			outline: 'justify-center border border-input bg-background hover:bg-accent hover:bg-fill/20',
 			secondary: 'justify-center bg-secondary text-secondary-foreground hover:bg-fill/20',
 			ghost: 'justify-center hover:bg-accent hover:text-accent-foreground',
 			link: 'justify-center text-primary underline-offset-4 hover:bg-fill/20',
@@ -26,7 +24,7 @@ const buttonVariants = tv({
 			default: 'h-10 px-4 py-2',
 			sm: 'h-9 rounded-md px-3',
 			lg: 'h-11 rounded-md px-8',
-			icon: 'h-10 w-10',
+			icon: 'h-10 w-10'
 		}
 	},
 	defaultVariants: {

@@ -20,13 +20,13 @@ New Characters
 `;
 </script>
 
-<div class="">
+<div class="h-[calc(100dvh-1rem)]">
 	<section class="flex flex-row justify-between px-5 items-center mb-5">
 		<h1 class="text-4xl font-semibold">Home</h1>
 		<Button class="rounded-xl border-2 border-gray-600">Edit</Button>
 	</section>
 	<div
-		class="h-dvh [column-count:3] [column-width:20em] gap-2 [&>div:not(:first-child)]:mt-2 [&>div:not(:first-child)]:break-inside-avoid"
+		class="h-fit [column-count:auto] [column-width:max(20em,_min(26vw,_70vw))] gap-2 [&>div:not(:first-child)]:mt-2 [&>div:not(:first-child)]:break-inside-avoid"
 	>
 		<!-- Welcome card -->
 		<Card.Root class="break-inside-avoid text-white flex flex-col">
@@ -64,7 +64,16 @@ New Characters
 				<Card.Title>Reminder</Card.Title>
 			</Card.Header>
 			<Card.Content>
-				<p class="whitespace-pre-line"></p>
+				<p class="whitespace-pre-line">Daily
+					daily quest
+					something else
+					3day
+					farm nobushi
+					farm hilichurls
+					weekly
+					parametric
+					crystalfly
+				</p>
 			</Card.Content>
 		</Card.Root>
 		<!-- Events card -->
@@ -84,7 +93,15 @@ New Characters
 				<Card.Title>To-do List</Card.Title>
 			</Card.Header>
 			<Card.Content>
-				<p class="whitespace-pre-line"></p>
+				<p class="whitespace-pre-line">Farmable today:
+					thing
+					thing
+					thing
+					thing
+					summary:
+					some more
+					even more thing
+				</p>
 			</Card.Content>
 		</Card.Root>
 		<!-- Achievements card -->
@@ -94,7 +111,11 @@ New Characters
 				<Card.Title>Achievements</Card.Title>
 			</Card.Header>
 			<Card.Content>
-				<p class="whitespace-pre-line"></p>
+				<p class="whitespace-pre-line">Latest achievement:
+					name of achievement
+					overall progress
+					progress bar with percantages
+				</p>
 			</Card.Content>
 		</Card.Root>
 		<!-- Pity card -->
@@ -104,7 +125,10 @@ New Characters
 				<Card.Title>Pity</Card.Title>
 			</Card.Header>
 			<Card.Content>
-				<p class="whitespace-pre-line"></p>
+				<p class="whitespace-pre-line">Character Pity gold color 5* and purple for 4*
+					weapon Pity gold color 5* and purple for 4*
+					standart pity gold color 5* and purple for 4*
+				</p>
 			</Card.Content>
 		</Card.Root>
 		<!-- Display card -->
@@ -114,7 +138,10 @@ New Characters
 				<Card.Title>Display</Card.Title>
 			</Card.Header>
 			<Card.Content>
-				<p class="whitespace-pre-line"></p>
+				<p class="whitespace-pre-line">char or weapon icon
+					name
+					info
+				</p>
 			</Card.Content>
 		</Card.Root>
 	</div>
