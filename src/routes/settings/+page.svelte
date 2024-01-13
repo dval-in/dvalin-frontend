@@ -89,12 +89,12 @@
 					<label for="option2">Sumeru</label>
 					<br />
 
-					<input 
-					type="radio"
-					id="option3"
-					name="theme"
-					value="option3"
-					on:click={() => themeChange(2)}
+					<input
+						type="radio"
+						id="option3"
+						name="theme"
+						value="option3"
+						on:click={() => themeChange(2)}
 					/>
 					<label for="option3">Inazuma</label>
 					<br />
@@ -109,7 +109,7 @@
 					<label for="option4">Liyue</label>
 					<br />
 
-					<input 
+					<input
 						type="radio"
 						id="option5"
 						name="theme"
