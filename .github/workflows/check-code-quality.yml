@@ -1,0 +1,23 @@
+name: check-code-quality
+run-name: Check code quality
+on: [pull_request]
+jobs:
+  check-typescript:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
+        with:
+          node-version: lts
+      - run: pnpm install
+      - run: pnpm tsc
+  check-prettier:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
+        with:
+          node-version: lts
+      - run: pnpm install
+      - run: pnpm run lint
+    
