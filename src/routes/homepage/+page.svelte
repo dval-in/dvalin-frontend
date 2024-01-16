@@ -64,14 +64,8 @@ New Characters
 				<Card.Title>Reminder</Card.Title>
 			</Card.Header>
 			<Card.Content>
-				<p class="whitespace-pre-line">Daily
-					daily quest
-					something else
-					3day
-					farm nobushi
-					farm hilichurls
-					weekly
-					parametric
+				<p class="whitespace-pre-line">
+					Daily daily quest something else 3day farm nobushi farm hilichurls weekly parametric
 					crystalfly
 				</p>
 			</Card.Content>
@@ -93,14 +87,8 @@ New Characters
 				<Card.Title>To-do List</Card.Title>
 			</Card.Header>
 			<Card.Content>
-				<p class="whitespace-pre-line">Farmable today:
-					thing
-					thing
-					thing
-					thing
-					summary:
-					some more
-					even more thing
+				<p class="whitespace-pre-line">
+					Farmable today: thing thing thing thing summary: some more even more thing
 				</p>
 			</Card.Content>
 		</Card.Root>
@@ -111,10 +99,8 @@ New Characters
 				<Card.Title>Achievements</Card.Title>
 			</Card.Header>
 			<Card.Content>
-				<p class="whitespace-pre-line">Latest achievement:
-					name of achievement
-					overall progress
-					progress bar with percantages
+				<p class="whitespace-pre-line">
+					Latest achievement: name of achievement overall progress progress bar with percantages
 				</p>
 			</Card.Content>
 		</Card.Root>
@@ -125,8 +111,8 @@ New Characters
 				<Card.Title>Pity</Card.Title>
 			</Card.Header>
 			<Card.Content>
-				<p class="whitespace-pre-line">Character Pity gold color 5* and purple for 4*
-					weapon Pity gold color 5* and purple for 4*
+				<p class="whitespace-pre-line">
+					Character Pity gold color 5* and purple for 4* weapon Pity gold color 5* and purple for 4*
 					standart pity gold color 5* and purple for 4*
 				</p>
 			</Card.Content>
@@ -138,10 +124,7 @@ New Characters
 				<Card.Title>Display</Card.Title>
 			</Card.Header>
 			<Card.Content>
-				<p class="whitespace-pre-line">char or weapon icon
-					name
-					info
-				</p>
+				<p class="whitespace-pre-line">char or weapon icon name info</p>
 			</Card.Content>
 		</Card.Root>
 	</div>
