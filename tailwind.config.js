@@ -3,7 +3,7 @@ import { createThemes } from 'tw-colors';
 /* eslint-disable @typescript-eslint/naming-convention */
 /** @type {import('tailwindcss').Config} */
 const config = {
-	darkMode: ['class'],
+    darkMode: ['class'],
 	content: ['./src/**/*.{html,js,svelte,ts}'],
 	corePlugins: {
 		preflight: true
@@ -27,8 +27,8 @@ const config = {
 			},
 			fontFamily: {
 				sans: [...fontFamily.sans]
-			}
-		}
+		    }
+        },
 	},
 	plugins: [
 		createThemes(
@@ -85,22 +85,11 @@ const config = {
 				t5: {
 					border: '#000000',
 					text: '#000000',
-					background: '#CDAB4A',
-					foreground: '#D2B45E',
-					activeSidebar: '#C09B28',
-					sidebarText: '#27200B',
-					fill: '#6E1E29',
-					sidebar: '#9E812C'
-				},
-				t6: {
-					border: '#000000',
-					text: '#DBEBE2',
-					background: '#997F66',
-					foreground: '#5A9189',
-					activeSidebar: '#C4BBA8',
-					sidebarText: '#A47535',
-					fill: '#C1846B',
-					sidebar: '#27200B'
+					background: '#cdab4a',
+					foreground: '#d2b45e',
+					activeSidebar: '#c09b28',
+					sidebarText: '#27200b',
+					sidebar: '#9e812c'
 				}
 			},
 			{
