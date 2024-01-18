@@ -76,7 +76,7 @@
 						value="option1"
 						on:click={() => themeChange(0)}
 					/>
-					<label for="option1">Fontaine</label>
+					<label for="option1">Abyss</label>
 					<br />
 
 					<input
@@ -86,9 +86,9 @@
 						value="option2"
 						on:click={() => themeChange(1)}
 					/>
-					<label for="option2">Sumeru</label>
+					<label for="option2">Light</label>
 					<br />
-
+					
 					<input
 						type="radio"
 						id="option3"
@@ -96,7 +96,7 @@
 						value="option3"
 						on:click={() => themeChange(2)}
 					/>
-					<label for="option3">Inazuma</label>
+					<label for="option3">Fontaine</label>
 					<br />
 
 					<input
@@ -106,7 +106,7 @@
 						value="option4"
 						on:click={() => themeChange(3)}
 					/>
-					<label for="option4">Liyue</label>
+					<label for="option4">Sumeru</label>
 					<br />
 
 					<input
@@ -116,7 +116,27 @@
 						value="option5"
 						on:click={() => themeChange(4)}
 					/>
-					<label for="option5">Mondstadt</label>
+					<label for="option5">Inazuma</label>
+					<br />
+
+					<input
+						type="radio"
+						id="option6"
+						name="theme"
+						value="option6"
+						on:click={() => themeChange(5)}
+					/>
+					<label for="option6">Liyue</label>
+					<br />
+
+					<input
+						type="radio"
+						id="option7"
+						name="theme"
+						value="option7"
+						on:click={() => themeChange(6)}
+					/>
+					<label for="option7">Mondstadt</label>
 				</div>
 			</Card.Content>
 			<Card.Content>

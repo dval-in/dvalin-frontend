@@ -36,6 +36,25 @@ const config = {
 				t0: {
 					border: '#000000',
 					text: '#FFFFFF',
+					background: '#1C1C22',
+					foreground: '#373743',
+					activeSidebar: '#000000',
+					sidebar: '#373743',
+					sidebarText: '#FFFFFF',
+					fill: '#D3BC8E'
+				},
+				t1: {
+					border: '#000000',
+					text: '#393946',
+					background: '#FFFFFF',
+					foreground: '#FFFFFF',
+					sidebar: '#F8F5F2',
+					sidebarText: '#000000',
+					fill: '#D3BC8E'
+				},
+				t2: {
+					border: '#000000',
+					text: '#FFFFFF',
 					background: '#1c3563',
 					foreground: '#3F6797',
 					activeSidebar: '#000000',
@@ -43,7 +62,7 @@ const config = {
 					fill: '#D0DFE9',
 					sidebar: '#10172A'
 				},
-				t1: {
+				t3: {
 					border: '#000000',
 					text: '#FFFFFF',
 					background: '#304B42',
@@ -53,7 +72,7 @@ const config = {
 					fill: '#B7E4C7',
 					sidebar: '#081C15'
 				},
-				t2: {
+				t4: {
 					border: '#000000',
 					text: '#C17BBA',
 					background: '#3E328A',
@@ -63,7 +82,7 @@ const config = {
 					fill: '#101F46',
 					sidebar: '#101F46'
 				},
-				t3: {
+				t5: {
 					border: '#000000',
 					text: '#000000',
 					background: '#CDAB4A',
@@ -73,7 +92,7 @@ const config = {
 					fill: '#6E1E29',
 					sidebar: '#9E812C'
 				},
-				t4: {
+				t6: {
 					border: '#000000',
 					text: '#DBEBE2',
 					background: '#997F66',
@@ -85,7 +104,7 @@ const config = {
 				}
 			},
 			{
-				defaultTheme: 't4'
+				defaultTheme: 't0'
 			}
 		)
 	]
