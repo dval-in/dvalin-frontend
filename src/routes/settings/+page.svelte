@@ -63,7 +63,7 @@
 		<Card.Root>
 			<Card.Header>
 				<!--TODO: Replace this with i18n key-->
-				<Card.Title style="font-size: 21px"><b><u>User Settings</u></b></Card.Title>
+				<Card.Title style="font-size: 21px; color:"><b><u>User Settings</u></b></Card.Title>
 			</Card.Header>
 			<Card.Content>
 				<div class="rounded-xl border-2 border-border bg-black/20">
@@ -88,7 +88,7 @@
 					/>
 					<label for="option2">Light</label>
 					<br />
-					
+
 					<input
 						type="radio"
 						id="option3"
@@ -157,7 +157,7 @@
 				<div class="rounded-xl border-2 border-red-500 bg-black/20">
 					<Button
 						class="m-2"
-						variant="destructive"
+						variant="default"
 						on:click={() => handleSettingFileSelect(SettingFileMode.Import)}
 						><u>Import Data</u></Button
 					>

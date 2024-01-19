@@ -15,7 +15,7 @@ const buttonVariants = tv({
 			ghost: 'justify-center hover:bg-accent hover:text-accent-foreground',
 			link: 'justify-center text-primary underline-offset-4 hover:bg-fill/20',
 			sidebar:
-				'bg-sidebar justify-center ml-0 text-sidebarText lg:justify-start lg:ml-8 hover:text-white hover:bg-fill/20 w-full',
+				'bg-sidebar justify-center ml-0 text-sidebarText lg:justify-start lg:ml-8 hover:text-sidebarHover hover:bg-primary/20 w-full',
 			activeSidebar:
 				'bg-activeSidebar justify-center ml-0 text-sidebarText/110 lg:justify-start lg:ml-8 hover:text-white hover:bg-primary/90 w-full',
 			headerSidebar:
@@ -26,7 +26,7 @@ const buttonVariants = tv({
 			default: 'h-10 px-4 py-2',
 			sm: 'h-9 rounded-md px-3',
 			lg: 'h-11 rounded-md px-8',
-			icon: 'h-10 w-10',
+			icon: 'h-10 w-10'
 		}
 	},
 	defaultVariants: {
