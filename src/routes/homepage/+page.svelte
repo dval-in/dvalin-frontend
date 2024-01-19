@@ -65,14 +65,7 @@ New Characters
 			</Card.Header>
 			<Card.Content>
 				<p class="whitespace-pre-line">
-					Daily 
-					daily quest 
-					something else 
-					3day 
-					farm nobushi 
-					farm hilichurls 
-					weekly 
-					parametric
+					Daily daily quest something else 3day farm nobushi farm hilichurls weekly parametric
 					crystalfly
 				</p>
 			</Card.Content>
@@ -95,15 +88,7 @@ New Characters
 			</Card.Header>
 			<Card.Content>
 				<p class="whitespace-pre-line">
-					Farmable today: 
-					thing 
-					thing 
-					thing 
-					thing 
-					summary: 
-					some more 
-					even more 
-					thing
+					Farmable today: thing thing thing thing summary: some more even more thing
 				</p>
 			</Card.Content>
 		</Card.Root>
@@ -115,9 +100,7 @@ New Characters
 			</Card.Header>
 			<Card.Content>
 				<p class="whitespace-pre-line">
-					Latest achievement: name of achievement 
-					overall progress 
-					progress bar with percantages
+					Latest achievement: name of achievement overall progress progress bar with percantages
 				</p>
 			</Card.Content>
 		</Card.Root>
@@ -129,8 +112,7 @@ New Characters
 			</Card.Header>
 			<Card.Content>
 				<p class="whitespace-pre-line">
-					Character Pity gold color 5* and purple for 4* 
-					weapon Pity gold color 5* and purple for 4*
+					Character Pity gold color 5* and purple for 4* weapon Pity gold color 5* and purple for 4*
 					standart pity gold color 5* and purple for 4*
 				</p>
 			</Card.Content>
@@ -142,9 +124,7 @@ New Characters
 				<Card.Title>Display</Card.Title>
 			</Card.Header>
 			<Card.Content>
-				<p class="whitespace-pre-line">char or weapon icon 
-					name 
-					info</p>
+				<p class="whitespace-pre-line">char or weapon icon name info</p>
 			</Card.Content>
 		</Card.Root>
 	</div>
