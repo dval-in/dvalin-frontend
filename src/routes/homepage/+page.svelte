@@ -1,6 +1,7 @@
 <script lang="ts">
 	import * as Card from '$lib/components/ui/card';
 	import { Button } from '$lib/components/ui/button';
+	import Text from '$lib/components/typography/Text.svelte';
 
 	let changeLog = `Version 4.3:
 
@@ -32,13 +33,15 @@ New Characters
 		<Card.Root class="break-inside-avoid text-white flex flex-col">
 			<Card.Header>
 				<!--TODO: Replace this with i18n key-->
-				<Card.Title>Welcome to Dval.in!</Card.Title>
+				<Card.Title>
+					<Text type="h4">Welcome to Dval.in!</Text>
+				</Card.Title>
 			</Card.Header>
 			<Card.Content class="flex-1">
-				<p>
+				<Text type="p">
 					Your best Genshin Impact companion! Dval.in helps you plan what to farm with an ascension
 					calculator, and it also tracks your progress with a todo list and a wish counter.
-				</p>
+				</Text>
 			</Card.Content>
 			<Card.Footer class="flex-1 items-end justify-end">
 				<Button class="rounded-xl border-2 border-gray-600">Hide</Button>
@@ -48,10 +51,12 @@ New Characters
 		<Card.Root class="text-white flex flex-col">
 			<Card.Header>
 				<!--TODO: Replace this with i18n key-->
-				<Card.Title>Changelog:</Card.Title>
+				<Card.Title>
+					<Text type="h4">Changelog:</Text>
+				</Card.Title>
 			</Card.Header>
 			<Card.Content class="flex-1">
-				<p class="whitespace-pre-line">{changeLog}</p>
+				<Text type="p">{changeLog}</Text>
 			</Card.Content>
 			<Card.Footer class="flex-1 items-end justify-end">
 				<Button variant="default" class="rounded-xl border-2 border-gray-600">More</Button>
@@ -61,70 +66,82 @@ New Characters
 		<Card.Root class="text-white">
 			<Card.Header>
 				<!--TODO: Replace this with i18n key-->
-				<Card.Title>Reminder</Card.Title>
+				<Card.Title>
+					<Text type="h4">Reminder</Text>
+				</Card.Title>
 			</Card.Header>
 			<Card.Content>
-				<p class="whitespace-pre-line">
+				<Text type="p">
 					Daily daily quest something else 3day farm nobushi farm hilichurls weekly parametric
 					crystalfly
-				</p>
+				</Text>
 			</Card.Content>
 		</Card.Root>
 		<!-- Events card -->
 		<Card.Root class="text-white">
 			<Card.Header>
 				<!--TODO: Replace this with i18n key-->
-				<Card.Title>Current Events</Card.Title>
+				<Card.Title>
+					<Text type="h4">Current Events</Text>
+				</Card.Title>
 			</Card.Header>
 			<Card.Content>
-				<p class="whitespace-pre-line"></p>
+				<Text type="p"></Text>
 			</Card.Content>
 		</Card.Root>
 		<!-- To-do card -->
 		<Card.Root class="text-white">
 			<Card.Header>
 				<!--TODO: Replace this with i18n key-->
-				<Card.Title>To-do List</Card.Title>
+				<Card.Title>
+					<Text type="h4">To-do List</Text>
+				</Card.Title>
 			</Card.Header>
 			<Card.Content>
-				<p class="whitespace-pre-line">
+				<Text type="p">
 					Farmable today: thing thing thing thing summary: some more even more thing
-				</p>
+				</Text>
 			</Card.Content>
 		</Card.Root>
 		<!-- Achievements card -->
 		<Card.Root class="text-white">
 			<Card.Header>
 				<!--TODO: Replace this with i18n key-->
-				<Card.Title>Achievements</Card.Title>
+				<Card.Title>
+					<Text type="h4">Achievements</Text>
+				</Card.Title>
 			</Card.Header>
 			<Card.Content>
-				<p class="whitespace-pre-line">
+				<Text type="p">
 					Latest achievement: name of achievement overall progress progress bar with percantages
-				</p>
+				</Text>
 			</Card.Content>
 		</Card.Root>
 		<!-- Pity card -->
 		<Card.Root class="text-white">
 			<Card.Header>
 				<!--TODO: Replace this with i18n key-->
-				<Card.Title>Pity</Card.Title>
+				<Card.Title>
+					<Text type="h4">Pity</Text>
+				</Card.Title>
 			</Card.Header>
 			<Card.Content>
-				<p class="whitespace-pre-line">
+				<Text type="p">
 					Character Pity gold color 5* and purple for 4* weapon Pity gold color 5* and purple for 4*
 					standart pity gold color 5* and purple for 4*
-				</p>
+				</Text>
 			</Card.Content>
 		</Card.Root>
 		<!-- Display card -->
 		<Card.Root class="text-white">
 			<Card.Header>
 				<!--TODO: Replace this with i18n key-->
-				<Card.Title>Display</Card.Title>
+				<Card.Title>
+					<Text type="h4">Display</Text>
+				</Card.Title>
 			</Card.Header>
 			<Card.Content>
-				<p class="whitespace-pre-line">char or weapon icon name info</p>
+				<Text type="p">char or weapon icon name info</Text>
 			</Card.Content>
 		</Card.Root>
 	</div>
