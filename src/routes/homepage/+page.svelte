@@ -30,14 +30,6 @@ New Characters
 		order: number;
 	};
 
-	// type AchievementCategory = {
-	// 	idN: number;
-	// 	id: string;
-	// 	name: string;
-	// 	order: number;
-	// 	achievements: Achievement[];
-	// };
-
 	const mockAchievement: Achievement = {
 		id: 0,
 		name: 'Test Achievement',
@@ -47,20 +39,12 @@ New Characters
 		order: 0
 	};
 
-	// const mockAchievementCategory: AchievementCategory = {
-	// 	idN: 0,
-	// 	id: 'testCategory',
-	// 	name: 'Test Category',
-	// 	order: 0,
-	// 	achievements: [mockAchievement]
-	// };
-
 	let achievementsDone = 998;
 	let achievementsTotal = 1143;
 
-	let characterPity = [76, 8];
-	let weaponPity = [23, 2];
-	let standartPity = [53, 5];
+	let characterPity: [number, number] = [76, 8];
+	let weaponPity: [number, number] = [23, 2];
+	let standartPity: [number, number] = [53, 5];
 </script>
 
 <div class="h-[calc(100dvh-1rem)]">
