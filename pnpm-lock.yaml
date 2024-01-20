@@ -20,6 +20,9 @@ dependencies:
   lucide-svelte:
     specifier: ^0.303.0
     version: 0.303.0(svelte@4.2.8)
+  svelte-dragdroplist:
+    specifier: ^1.1.1
+    version: 1.1.1(svelte@4.2.8)
   svelte-i18next:
     specifier: ^2.2.2
     version: 2.2.2(i18next@23.7.12)(svelte@4.2.8)
@@ -3605,6 +3608,14 @@ packages:
       - stylus
       - sugarss
     dev: true
+
+  /svelte-dragdroplist@1.1.1(svelte@4.2.8):
+    resolution: {integrity: sha512-63jrgGeBG3J+ZjHhfnzhRdikj/lAdAbGDoryiGw2lrGr5/et3Tp8Y0Vmgf6t4lSkhq/DMmjxbwaVmWNj4nGiUg==}
+    peerDependencies:
+      svelte: ^3.0.0
+    dependencies:
+      svelte: 4.2.8
+    dev: false
 
   /svelte-eslint-parser@0.33.1(svelte@4.2.8):
     resolution: {integrity: sha512-vo7xPGTlKBGdLH8T5L64FipvTrqv3OQRx9d2z5X05KKZDlF4rQk8KViZO4flKERY+5BiVdOh7zZ7JGJWo5P0uA==}
