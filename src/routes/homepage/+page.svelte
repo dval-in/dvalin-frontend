@@ -2,6 +2,7 @@
 	import * as Card from '$lib/components/ui/card';
 	import { Button } from '$lib/components/ui/button';
 	import Text from '$lib/components/typography/Text.svelte';
+	import { Progress } from '$lib/components/ui/progress';
 
 	let changeLog = `Version 4.3:
 
@@ -54,7 +55,8 @@ New Characters
 	// 	achievements: [mockAchievement]
 	// };
 
-	// let achievementProgress = 87.23;
+	let achievementsDone = 998;
+	let achievementsTotal = 1143;
 
 	let characterPity = [76, 8];
 	let weaponPity = [23, 2];
@@ -144,6 +146,20 @@ New Characters
 				</Text>
 			</Card.Content>
 		</Card.Root>
+		<!-- Farmable today card -->
+		<Card.Root class="text-white">
+			<Card.Header>
+				<!--TODO: Replace this with i18n key-->
+				<Card.Title>
+					<Text type="h4">Domain Rotation</Text>
+				</Card.Title>
+			</Card.Header>
+			<Card.Content>
+				<Text type="p">
+					talent materials, weapon materials + corresponding chars/weaps
+				</Text>
+			</Card.Content>
+		</Card.Root>
 		<!-- Achievements card -->
 		<Card.Root class="text-white">
 			<Card.Header>
@@ -153,11 +169,23 @@ New Characters
 				</Card.Title>
 			</Card.Header>
 			<Card.Content>
-				<Text type="p">
-					Latest achievement: {mockAchievement.name}
-				</Text>
-				<Text type="p">overall progress progress bar with percantages</Text>
+				<div class="flex flex-row justify-between">
+					<Text type="large">Latest achievement:</Text>
+					<div>
+						<Text type="p">{mockAchievement.name}</Text>
+					</div>
+				</div>
+				<div class="flex flex-row justify-between mt-4">
+					<Text type="large">Overall progress:</Text>
+					<div>
+						<Text type="p">{achievementsDone}/{achievementsTotal}</Text>
+					</div>
+				</div>
+				<Progress value={(achievementsDone / achievementsTotal) * 100} class="mt-1.5"></Progress>
 			</Card.Content>
+			<Card.Footer class="flex justify-end">
+				<Button class="rounded-xl border-2 border-gray-600">Achievements</Button>
+			</Card.Footer>
 		</Card.Root>
 		<!-- Pity card -->
 		<Card.Root class="text-white">
