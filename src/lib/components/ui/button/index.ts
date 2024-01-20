@@ -6,14 +6,16 @@ const buttonVariants = tv({
 	base: 'inline-flex items-center rounded-md text-sm font-medium whitespace-nowrap ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 group',
 	variants: {
 		variant: {
-			default: 'justify-center bg-primary text-primary-foreground hover:bg-fill/20',
-			destructive: 'justify-center bg-destructive text-destructive-foreground hover:bg-fill/20',
-			outline: 'justify-center border border-input bg-background hover:bg-accent hover:bg-fill/20',
-			secondary: 'justify-center bg-secondary text-secondary-foreground hover:bg-fill/20',
+			default: 'justify-center bg-primary text-primary-foreground hover:bg-primary/90',
+			destructive:
+				'justify-center bg-destructive text-destructive-foreground hover:bg-destructive/90',
+			outline:
+				'justify-center border border-input bg-background hover:bg-accent hover:text-accent-foreground',
+			secondary: 'justify-center bg-secondary text-secondary-foreground hover:bg-secondary/80',
 			ghost: 'justify-center hover:bg-accent hover:text-accent-foreground',
 			link: 'justify-center text-primary underline-offset-4 hover:bg-fill/20',
 			sidebar:
-				'bg-sidebar justify-center ml-0 text-sidebarText lg:justify-start lg:ml-8 hover:text-white hover:bg-fill/20 w-full',
+				'bg-sidebar justify-center ml-0 text-sidebarText lg:justify-start lg:ml-8 hover:text-sidebarHover hover:bg-primary/20 w-full',
 			activeSidebar:
 				'bg-activeSidebar justify-center ml-0 text-sidebarText/110 lg:justify-start lg:ml-8 hover:text-white hover:bg-primary/90 w-full',
 			headerSidebar:
