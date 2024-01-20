@@ -6,6 +6,8 @@
 	// import { type Settings, Convert as SettingsConvertor } from '$lib/structs/settings';
 </script>
 
+<Button href="login">Sign In</Button>
+
 <div class="col-span-2 row-span-2">
 	<Card.Root class="size-full text-white flex flex-col">
 		<Card.Header>
