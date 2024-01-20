@@ -29,32 +29,32 @@ New Characters
 		order: number;
 	};
 
-	type AchievementCategory = {
-		_id: number;
-		id: string;
-		name: string;
-		order: number;
-		achievements: Achievement[];
-	};
+	// type AchievementCategory = {
+	// 	idN: number;
+	// 	id: string;
+	// 	name: string;
+	// 	order: number;
+	// 	achievements: Achievement[];
+	// };
 
 	const mockAchievement: Achievement = {
 		id: 0,
-		name: 'testAchievement',
+		name: 'Test Achievement',
 		desc: 'lorem ipsum',
 		reward: 1,
 		hidden: false,
 		order: 0
 	};
 
-	const mockAchievementCategory: AchievementCategory = {
-		_id: 0,
-		id: '0',
-		name: 'testCategory',
-		order: 0,
-		achievements: [mockAchievement]
-	};
+	// const mockAchievementCategory: AchievementCategory = {
+	// 	idN: 0,
+	// 	id: 'testCategory',
+	// 	name: 'Test Category',
+	// 	order: 0,
+	// 	achievements: [mockAchievement]
+	// };
 
-	let achievementProgress = 87.23;
+	// let achievementProgress = 87.23;
 
 	let characterPity = [76, 8];
 	let weaponPity = [23, 2];
@@ -112,7 +112,9 @@ New Characters
 			</Card.Header>
 			<Card.Content>
 				<Text type="p">
-					Daily teapot currency/friendship, dailies/encounters, [enemies], welkin 2day local specialties, iron, electro crystals 3day crystal chunks, teapot farm, fish weekly parametric crystalfly [weekly bosses] reputation
+					Daily teapot currency/friendship, dailies/encounters, [enemies], welkin 2day local
+					specialties, iron, electro crystals 3day crystal chunks, teapot farm, fish weekly
+					parametric crystalfly [weekly bosses] reputation
 				</Text>
 			</Card.Content>
 		</Card.Root>
@@ -152,11 +154,9 @@ New Characters
 			</Card.Header>
 			<Card.Content>
 				<Text type="p">
-					Latest achievement: {mockAchievement.name} 
+					Latest achievement: {mockAchievement.name}
 				</Text>
-				<Text type=p>
-					overall progress progress bar with percantages
-				</Text>
+				<Text type="p">overall progress progress bar with percantages</Text>
 			</Card.Content>
 		</Card.Root>
 		<!-- Pity card -->
@@ -169,51 +169,57 @@ New Characters
 			</Card.Header>
 			<Card.Content>
 				<div class="flex flex-row justify-between items-center">
-					<Text type="large">
-						Character Banner
-					</Text>
+					<Text type="large">Character Banner</Text>
 					<div class="flex flex-row">
-						<div class="text-amber-500 w-14 h-14 flex justify-center items-center rounded-md bg-fill/[.03] mr-5">
-							<Text type=large>
+						<div
+							class="text-amber-500 w-14 h-14 flex justify-center items-center rounded-md bg-fill/[.03] mr-5"
+						>
+							<Text type="large">
 								{characterPity[0]}
 							</Text>
 						</div>
-						<div class="text-violet-400 w-14 h-14 flex justify-center items-center rounded-md bg-fill/[.03]">
-							<Text type=large>
+						<div
+							class="text-violet-400 w-14 h-14 flex justify-center items-center rounded-md bg-fill/[.03]"
+						>
+							<Text type="large">
 								{characterPity[1]}
 							</Text>
 						</div>
 					</div>
 				</div>
 				<div class="flex flex-row justify-between items-center mt-4">
-					<Text type="large">
-						Weapon Banner
-					</Text>
+					<Text type="large">Weapon Banner</Text>
 					<div class="flex flex-row">
-						<div class="text-amber-500 w-14 h-14 flex justify-center items-center rounded-md bg-fill/[.03] mr-5">
-							<Text type=large>
+						<div
+							class="text-amber-500 w-14 h-14 flex justify-center items-center rounded-md bg-fill/[.03] mr-5"
+						>
+							<Text type="large">
 								{weaponPity[0]}
 							</Text>
 						</div>
-						<div class="text-violet-400 w-14 h-14 flex justify-center items-center rounded-md bg-fill/[.03]">
-							<Text type=large>
+						<div
+							class="text-violet-400 w-14 h-14 flex justify-center items-center rounded-md bg-fill/[.03]"
+						>
+							<Text type="large">
 								{weaponPity[1]}
 							</Text>
 						</div>
 					</div>
 				</div>
 				<div class="flex flex-row justify-between items-center mt-4">
-					<Text type="large">
-						Standart Banner
-					</Text>
+					<Text type="large">Standart Banner</Text>
 					<div class="flex flex-row">
-						<div class="text-amber-500 w-14 h-14 flex justify-center items-center rounded-md bg-fill/[.03] mr-5">
-							<Text type=large>
+						<div
+							class="text-amber-500 w-14 h-14 flex justify-center items-center rounded-md bg-fill/[.03] mr-5"
+						>
+							<Text type="large">
 								{standartPity[0]}
 							</Text>
 						</div>
-						<div class="text-violet-400 w-14 h-14 flex justify-center items-center rounded-md bg-fill/[.03]">
-							<Text type=large>
+						<div
+							class="text-violet-400 w-14 h-14 flex justify-center items-center rounded-md bg-fill/[.03]"
+						>
+							<Text type="large">
 								{standartPity[1]}
 							</Text>
 						</div>
