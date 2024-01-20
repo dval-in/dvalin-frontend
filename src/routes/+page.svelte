@@ -1,9 +1,6 @@
 <script lang="ts">
 	import * as Card from '$lib/components/ui/card';
 	import { Button } from '$lib/components/ui/button';
-  import { settings } from '$lib/store/global_state';
-	import { get } from 'svelte/store';
-	import { type Settings, Convert as SettingsConvertor } from '$lib/structs/settings';
 </script>
 
 <div class="col-span-2 row-span-2">
