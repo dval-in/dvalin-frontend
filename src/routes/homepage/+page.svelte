@@ -168,11 +168,11 @@ New Characters
 			</Card.Header>
 			<Card.Content>
 				<div class="flex flex-row justify-between">
-					<Text type="large">Latest achievement:</Text>
+					<Text type="p">Latest achievement:</Text>
 					<Text type="p">{mockAchievement.name}</Text>
 				</div>
 				<div class="flex flex-row justify-between mt-4">
-					<Text type="large">Overall progress:</Text>
+					<Text type="p">Overall progress:</Text>
 					<Text type="p">{achievementsDone}/{achievementsTotal}</Text>
 				</div>
 				<Progress value={(achievementsDone / achievementsTotal) * 100} class="mt-1.5"></Progress>
@@ -191,60 +191,60 @@ New Characters
 			</Card.Header>
 			<Card.Content>
 				<div class="flex flex-row justify-between items-center">
-					<Text type="large">Character Banner</Text>
+					<Text type="p">Character Banner</Text>
 					<div class="flex flex-row">
-						<div
-							class="text-amber-500 w-14 h-14 flex justify-center items-center rounded-md bg-fill/[.03] mr-5"
-						>
-							<Text type="large">
+						<Text type="p">
+							<div
+								class="text-amber-500 w-14 h-14 flex justify-center items-center rounded-md bg-gray-300/[.03] mr-5"
+							>
 								{characterPity[0]}
-							</Text>
-						</div>
-						<div
-							class="text-violet-400 w-14 h-14 flex justify-center items-center rounded-md bg-fill/[.03]"
-						>
-							<Text type="large">
+							</div>
+						</Text>
+						<Text type="p">
+							<div
+								class="text-violet-400 w-14 h-14 flex justify-center items-center rounded-md bg-gray-300/[.03]"
+							>
 								{characterPity[1]}
-							</Text>
-						</div>
+							</div>
+						</Text>
 					</div>
 				</div>
 				<div class="flex flex-row justify-between items-center mt-4">
-					<Text type="large">Weapon Banner</Text>
+					<Text type="p">Weapon Banner</Text>
 					<div class="flex flex-row">
-						<div
-							class="text-amber-500 w-14 h-14 flex justify-center items-center rounded-md bg-fill/[.03] mr-5"
-						>
-							<Text type="large">
+						<Text type="p">
+							<div
+								class="text-amber-500 w-14 h-14 flex justify-center items-center rounded-md bg-gray-300/[.03] mr-5"
+							>
 								{weaponPity[0]}
-							</Text>
-						</div>
-						<div
-							class="text-violet-400 w-14 h-14 flex justify-center items-center rounded-md bg-fill/[.03]"
-						>
-							<Text type="large">
+							</div>
+						</Text>
+						<Text type="p">
+							<div
+								class="text-violet-400 w-14 h-14 flex justify-center items-center rounded-md bg-gray-300/[.03]"
+							>
 								{weaponPity[1]}
-							</Text>
-						</div>
+							</div>
+						</Text>
 					</div>
 				</div>
 				<div class="flex flex-row justify-between items-center mt-4">
-					<Text type="large">Standart Banner</Text>
+					<Text type="p">Standart Banner</Text>
 					<div class="flex flex-row">
-						<div
-							class="text-amber-500 w-14 h-14 flex justify-center items-center rounded-md bg-fill/[.03] mr-5"
-						>
-							<Text type="large">
+						<Text type="p">
+							<div
+								class="text-amber-500 w-14 h-14 flex justify-center items-center rounded-md bg-gray-300/[.03] mr-5"
+							>
 								{standartPity[0]}
-							</Text>
-						</div>
-						<div
-							class="text-violet-400 w-14 h-14 flex justify-center items-center rounded-md bg-fill/[.03]"
-						>
-							<Text type="large">
+							</div>
+						</Text>
+						<Text type="p">
+							<div
+								class="text-violet-400 w-14 h-14 flex justify-center items-center rounded-md bg-gray-300/[.03]"
+							>
 								{standartPity[1]}
-							</Text>
-						</div>
+							</div>
+						</Text>
 					</div>
 				</div>
 			</Card.Content>
