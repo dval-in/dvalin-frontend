@@ -19,6 +19,46 @@ New Characters
   - Elemental Burst: Ring of Bursting Grenades
 
 `;
+
+	type Achievement = {
+		id: number;
+		name: string;
+		desc: string;
+		reward: number;
+		hidden: boolean;
+		order: number;
+	};
+
+	type AchievementCategory = {
+		_id: number;
+		id: string;
+		name: string;
+		order: number;
+		achievements: Achievement[];
+	};
+
+	const mockAchievement: Achievement = {
+		id: 0,
+		name: 'testAchievement',
+		desc: 'lorem ipsum',
+		reward: 1,
+		hidden: false,
+		order: 0
+	};
+
+	const mockAchievementCategory: AchievementCategory = {
+		_id: 0,
+		id: '0',
+		name: 'testCategory',
+		order: 0,
+		achievements: [mockAchievement]
+	};
+
+	let achievementProgress = 87.23;
+
+	let characterPity = [76, 8];
+	let weaponPity = [23, 2];
+	let standartPity = [53, 5];
 </script>
 
 <div class="h-[calc(100dvh-1rem)]">
@@ -55,11 +95,11 @@ New Characters
 					<Text type="h4">Changelog:</Text>
 				</Card.Title>
 			</Card.Header>
-			<Card.Content class="flex-1">
+			<Card.Content class="flex-1 whitespace-pre-line">
 				<Text type="p">{changeLog}</Text>
 			</Card.Content>
 			<Card.Footer class="flex-1 items-end justify-end">
-				<Button variant="default" class="rounded-xl border-2 border-gray-600">More</Button>
+				<Button class="rounded-xl border-2 border-gray-600">More</Button>
 			</Card.Footer>
 		</Card.Root>
 		<!-- Reminder card -->
@@ -72,8 +112,7 @@ New Characters
 			</Card.Header>
 			<Card.Content>
 				<Text type="p">
-					Daily daily quest something else 3day farm nobushi farm hilichurls weekly parametric
-					crystalfly
+					Daily teapot currency/friendship, dailies/encounters, [enemies], welkin 2day local specialties, iron, electro crystals 3day crystal chunks, teapot farm, fish weekly parametric crystalfly [weekly bosses] reputation
 				</Text>
 			</Card.Content>
 		</Card.Root>
@@ -113,7 +152,10 @@ New Characters
 			</Card.Header>
 			<Card.Content>
 				<Text type="p">
-					Latest achievement: name of achievement overall progress progress bar with percantages
+					Latest achievement: {mockAchievement.name} 
+				</Text>
+				<Text type=p>
+					overall progress progress bar with percantages
 				</Text>
 			</Card.Content>
 		</Card.Root>
@@ -126,11 +168,61 @@ New Characters
 				</Card.Title>
 			</Card.Header>
 			<Card.Content>
-				<Text type="p">
-					Character Pity gold color 5* and purple for 4* weapon Pity gold color 5* and purple for 4*
-					standart pity gold color 5* and purple for 4*
-				</Text>
+				<div class="flex flex-row justify-between items-center">
+					<Text type="large">
+						Character Banner
+					</Text>
+					<div class="flex flex-row">
+						<div class="text-amber-500 w-14 h-14 flex justify-center items-center rounded-md bg-fill/[.03] mr-5">
+							<Text type=large>
+								{characterPity[0]}
+							</Text>
+						</div>
+						<div class="text-violet-400 w-14 h-14 flex justify-center items-center rounded-md bg-fill/[.03]">
+							<Text type=large>
+								{characterPity[1]}
+							</Text>
+						</div>
+					</div>
+				</div>
+				<div class="flex flex-row justify-between items-center mt-4">
+					<Text type="large">
+						Weapon Banner
+					</Text>
+					<div class="flex flex-row">
+						<div class="text-amber-500 w-14 h-14 flex justify-center items-center rounded-md bg-fill/[.03] mr-5">
+							<Text type=large>
+								{weaponPity[0]}
+							</Text>
+						</div>
+						<div class="text-violet-400 w-14 h-14 flex justify-center items-center rounded-md bg-fill/[.03]">
+							<Text type=large>
+								{weaponPity[1]}
+							</Text>
+						</div>
+					</div>
+				</div>
+				<div class="flex flex-row justify-between items-center mt-4">
+					<Text type="large">
+						Standart Banner
+					</Text>
+					<div class="flex flex-row">
+						<div class="text-amber-500 w-14 h-14 flex justify-center items-center rounded-md bg-fill/[.03] mr-5">
+							<Text type=large>
+								{standartPity[0]}
+							</Text>
+						</div>
+						<div class="text-violet-400 w-14 h-14 flex justify-center items-center rounded-md bg-fill/[.03]">
+							<Text type=large>
+								{standartPity[1]}
+							</Text>
+						</div>
+					</div>
+				</div>
 			</Card.Content>
+			<Card.Footer class="flex justify-end">
+				<Button class="rounded-xl border-2 border-gray-600">Wish Counter</Button>
+			</Card.Footer>
 		</Card.Root>
 		<!-- Display card -->
 		<Card.Root class="text-white">
