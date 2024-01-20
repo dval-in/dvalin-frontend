@@ -155,9 +155,7 @@ New Characters
 				</Card.Title>
 			</Card.Header>
 			<Card.Content>
-				<Text type="p">
-					talent materials, weapon materials + corresponding chars/weaps
-				</Text>
+				<Text type="p">talent materials, weapon materials + corresponding chars/weaps</Text>
 			</Card.Content>
 		</Card.Root>
 		<!-- Achievements card -->
