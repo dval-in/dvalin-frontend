@@ -24,8 +24,12 @@
 	};
 
 	export let type: keyof typeof textMapping;
+
+	export let margin: boolean = false;
 </script>
 
-<svelte:component this={textMapping[type]}>
-	<slot />
-</svelte:component>
+<div class:mt-6={margin}>
+	<svelte:component this={textMapping[type]}>
+		<slot />
+	</svelte:component>
+</div>

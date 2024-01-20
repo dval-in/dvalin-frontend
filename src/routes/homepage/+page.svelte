@@ -169,15 +169,11 @@ New Characters
 			<Card.Content>
 				<div class="flex flex-row justify-between">
 					<Text type="large">Latest achievement:</Text>
-					<div>
-						<Text type="p">{mockAchievement.name}</Text>
-					</div>
+					<Text type="p">{mockAchievement.name}</Text>
 				</div>
 				<div class="flex flex-row justify-between mt-4">
 					<Text type="large">Overall progress:</Text>
-					<div>
-						<Text type="p">{achievementsDone}/{achievementsTotal}</Text>
-					</div>
+					<Text type="p">{achievementsDone}/{achievementsTotal}</Text>
 				</div>
 				<Progress value={(achievementsDone / achievementsTotal) * 100} class="mt-1.5"></Progress>
 			</Card.Content>
