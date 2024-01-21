@@ -5,8 +5,8 @@
 	import { Progress } from '$lib/components/ui/progress';
 	import * as Dialog from '$lib/components/ui/dialog';
 	import DragDropList from '$lib/components/ui/dragdrop/DragDropList.svelte';
-	import { Label } from '$lib/components/ui/label';
-	import { Checkbox } from '$lib/components/ui/checkbox';
+	// import { Label } from '$lib/components/ui/label';
+	// import { Checkbox } from '$lib/components/ui/checkbox';
 
 	let changeLog = `Version 4.3:
 
@@ -25,28 +25,29 @@ New Characters
 
 `;
 
-
-	let order: string[] = ["welcome", "changelog", "reminder", "events", "todo", "rotation", "achievments", "pity", "display"];
+	// let order: string[] = [
+	// 	'welcome',
+	// 	'changelog',
+	// 	'reminder',
+	// 	'events',
+	// 	'todo',
+	// 	'rotation',
+	// 	'achievments',
+	// 	'pity',
+	// 	'display'
+	// ];
 
 	let dragDropList = [
-				{"id": 0, "check": "Welcome"},
-				{"id": 1, "check": "ChangeLog"},
-				{"id": 2, "check": "Reminder"},
-				{"id": 3, "check": "Events"},
-				{"id": 4, "check": "To-do List"},
-				{"id": 5, "check": "Domain Rotation"},
-				{"id": 6, "check": "Achievements"},
-				{"id": 7, "check": "Pity"},
-				{"id": 8, "check": "Display"}];
-
-
-
-
-
-
-
-
-
+		{ id: 0, check: 'Welcome' },
+		{ id: 1, check: 'ChangeLog' },
+		{ id: 2, check: 'Reminder' },
+		{ id: 3, check: 'Events' },
+		{ id: 4, check: 'To-do List' },
+		{ id: 5, check: 'Domain Rotation' },
+		{ id: 6, check: 'Achievements' },
+		{ id: 7, check: 'Pity' },
+		{ id: 8, check: 'Display' }
+	];
 
 	type Achievement = {
 		id: number;
@@ -91,7 +92,7 @@ New Characters
 					</Dialog.Description>
 				</Dialog.Header>
 				<div>
-					<DragDropList bind:data={dragDropList}/>
+					<DragDropList bind:data={dragDropList} />
 				</div>
 			</Dialog.Content>
 		</Dialog.Root>

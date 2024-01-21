@@ -173,12 +173,28 @@
 						<p>{datum.text}</p>
 					{:else if datum.check}
 						<div class="w-full h-full flex flex-row items-center justify-between px-16">
-							<Label for={datum.check.replace(/[^a-zA-Z]/g, '').replace(/(?:^\w|[A-Z]|\b\w)/g, (match, index) => index === 0 ? match.toLowerCase() : match.toUpperCase()).concat('Check')}>
+							<Label
+								for={datum.check
+									.replace(/[^a-zA-Z]/g, '')
+									.replace(/(?:^\w|[A-Z]|\b\w)/g, (match, index) =>
+										index === 0 ? match.toLowerCase() : match.toUpperCase()
+									)
+									.concat('Check')}
+							>
 								<Text type="h4">
 									{datum.check}
 								</Text>
 							</Label>
-							<Checkbox class="" id={datum.check.replace(/[^a-zA-Z]/g, '').replace(/(?:^\w|[A-Z]|\b\w)/g, (match, index) => index === 0 ? match.toLowerCase() : match.toUpperCase()).concat('Check')} checked />
+							<Checkbox
+								class=""
+								id={datum.check
+									.replace(/[^a-zA-Z]/g, '')
+									.replace(/(?:^\w|[A-Z]|\b\w)/g, (match, index) =>
+										index === 0 ? match.toLowerCase() : match.toUpperCase()
+									)
+									.concat('Check')}
+								checked
+							/>
 						</div>
 					{:else}
 						<p>{datum}</p>
