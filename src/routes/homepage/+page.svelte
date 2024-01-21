@@ -3,6 +3,10 @@
 	import { Button } from '$lib/components/ui/button';
 	import Text from '$lib/components/typography/Text.svelte';
 	import { Progress } from '$lib/components/ui/progress';
+	import * as Dialog from '$lib/components/ui/dialog';
+	import DragDropList from '$lib/components/ui/dragdrop/DragDropList.svelte';
+	import { Label } from '$lib/components/ui/label';
+	import { Checkbox } from '$lib/components/ui/checkbox';
 
 	let changeLog = `Version 4.3:
 
@@ -20,6 +24,29 @@ New Characters
   - Elemental Burst: Ring of Bursting Grenades
 
 `;
+
+
+	let order: string[] = ["welcome", "changelog", "reminder", "events", "todo", "rotation", "achievments", "pity", "display"];
+
+	let dragDropList = [
+				{"id": 0, "check": "Welcome"},
+				{"id": 1, "check": "ChangeLog"},
+				{"id": 2, "check": "Reminder"},
+				{"id": 3, "check": "Events"},
+				{"id": 4, "check": "To-do List"},
+				{"id": 5, "check": "Domain Rotation"},
+				{"id": 6, "check": "Achievements"},
+				{"id": 7, "check": "Pity"},
+				{"id": 8, "check": "Display"}];
+
+
+
+
+
+
+
+
+
 
 	type Achievement = {
 		id: number;
@@ -48,9 +75,27 @@ New Characters
 </script>
 
 <div class="h-[calc(100dvh-1rem)]">
-	<section class="flex flex-row justify-between px-5 items-center mb-5">
+	<section class="flex flex-row flex-wrap justify-between px-5 items-center mb-5">
 		<h1 class="text-4xl font-semibold">Home</h1>
-		<Button class="rounded-xl border-2 border-gray-600">Edit</Button>
+		<Dialog.Root>
+			<Dialog.Trigger>
+				<Button class="rounded-xl border-2 border-gray-600">Edit</Button>
+			</Dialog.Trigger>
+			<Dialog.Content>
+				<Dialog.Header>
+					<Dialog.Title>
+						<Text type="h3">Edit the layout</Text>
+					</Dialog.Title>
+					<Dialog.Description>
+						<Text type="p">Edit your homepage layout to fit your needs.</Text>
+					</Dialog.Description>
+				</Dialog.Header>
+				<div>
+					<DragDropList bind:data={dragDropList}/>
+				</div>
+			</Dialog.Content>
+		</Dialog.Root>
+		<DragDropList></DragDropList>
 	</section>
 	<div
 		class="h-fit [column-count:auto] [column-width:max(20em,_min(26vw,_70vw))] gap-2 [&>div:not(:first-child)]:mt-2 [&>div:not(:first-child)]:break-inside-avoid"

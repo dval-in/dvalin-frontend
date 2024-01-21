@@ -48,7 +48,6 @@
 		"formsnap": "^0.4.2",
 		"i18next": "^23.7.12",
 		"lucide-svelte": "^0.303.0",
-		"svelte-dragdroplist": "^1.1.1",
 		"svelte-i18next": "^2.2.2",
 		"svelte-persisted-store": "^0.8.0",
 		"sveltekit-superforms": "^1.13.4",
