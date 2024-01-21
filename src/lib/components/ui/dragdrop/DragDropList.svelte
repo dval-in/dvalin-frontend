@@ -1,5 +1,8 @@
 <script>
 	import { flip } from 'svelte/animate';
+	import { Label } from '$lib/components/ui/label';
+	import { Checkbox } from '$lib/components/ui/checkbox';
+	import Text from '$lib/components/typography/Text.svelte';
 
 	export let data = [];
 	export let removesItems = false;
@@ -80,7 +83,7 @@
      grabbed element when triggered.
      You'll also find reactive styling below, which keeps it from being directly
      part of the imperative javascript handlers. -->
-<main class="dragdroplist">
+<main class="basis-[100%]">
 	<div
 		bind:this={ghost}
 		id="ghost"
@@ -115,7 +118,7 @@
 					: ''}
 				class="item"
 				data-index={i}
-				data-id={datum.id ? datum.id : JSON.stringify(datum)}
+				data-id={datum.id}
 				data-grabY="0"
 				on:mousedown={function (ev) {
 					grab(ev.clientY, this);
@@ -163,11 +166,36 @@
 					</button>
 				</div>
 
-				<div class="content">
+				<div class="content m-0 w-full">
 					{#if datum.html}
 						{@html datum.html}
 					{:else if datum.text}
 						<p>{datum.text}</p>
+					{:else if datum.check}
+						<div class="w-full h-full flex flex-row items-center justify-between px-16">
+							<Label
+								for={datum.check
+									.replace(/[^a-zA-Z]/g, '')
+									.replace(/(?:^\w|[A-Z]|\b\w)/g, (match, index) =>
+										index === 0 ? match.toLowerCase() : match.toUpperCase()
+									)
+									.concat('Check')}
+							>
+								<Text type="h4">
+									{datum.check}
+								</Text>
+							</Label>
+							<Checkbox
+								class=""
+								id={datum.check
+									.replace(/[^a-zA-Z]/g, '')
+									.replace(/(?:^\w|[A-Z]|\b\w)/g, (match, index) =>
+										index === 0 ? match.toLowerCase() : match.toUpperCase()
+									)
+									.concat('Check')}
+								checked
+							/>
+						</div>
 					{:else}
 						<p>{datum}</p>
 					{/if}
@@ -199,81 +227,37 @@
 	}
 
 	.list {
-		cursor: grab;
-		z-index: 5;
-		display: flex;
-		flex-direction: column;
+		@apply cursor-grab z-[5] flex flex-col shrink;
 	}
-
 	.item {
-		box-sizing: border-box;
-		display: inline-flex;
-		width: 100%;
-		min-height: 3em;
-		margin-bottom: 0.5em;
-		background-color: white;
-		border: 1px solid rgb(190, 190, 190);
-		border-radius: 2px;
-		user-select: none;
+		@apply bg-foreground box-border inline-flex w-full min-h-[3em] border select-none mb-[0.5em] rounded-sm border-solid border-black;
 	}
-
 	.item:last-child {
-		margin-bottom: 0;
+		@apply mb-0;
 	}
-
 	.item:not(#grabbed):not(#ghost) {
-		z-index: 10;
+		@apply z-10;
 	}
-
-	.item > * {
-		margin: auto;
-	}
-
 	.buttons {
-		width: 32px;
-		min-width: 32px;
-		margin: auto 0;
-		display: flex;
-		flex-direction: column;
+		@apply w-8 min-w-[32px] flex flex-col mx-0 my-auto;
 	}
-
 	.buttons button {
-		cursor: pointer;
-		width: 18px;
-		height: 18px;
-		margin: 0 auto;
-		padding: 0;
-		border: 1px solid rgba(0, 0, 0, 0);
-		background-color: inherit;
+		@apply cursor-pointer w-[18px] h-[18px] border bg-inherit mx-auto my-0 p-0 border-solid border-[rgba(0,0,0,0)] focus:border focus:border-solid focus:border-[black];
+		@apply invert;
 	}
-
-	.buttons button:focus {
-		border: 1px solid black;
-	}
-
 	.delete {
-		width: 32px;
+		@apply w-8;
 	}
-
 	#grabbed {
-		opacity: 0;
+		@apply opacity-[0.0];
 	}
-
 	#ghost {
-		pointer-events: none;
-		z-index: -5;
-		position: absolute;
-		top: 0;
-		left: 0;
-		opacity: 0;
+		@apply pointer-events-none z-[-5] absolute opacity-[0.0] left-0 top-0;
 	}
-
 	#ghost * {
-		pointer-events: none;
+		@apply pointer-events-none;
 	}
-
 	#ghost.haunting {
-		z-index: 20;
-		opacity: 1;
+		@apply z-20 opacity-[1.0];
 	}
 </style>
