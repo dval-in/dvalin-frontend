@@ -9,6 +9,7 @@
 		Import,
 		Export
 	}
+
 	// Function to handle file selection
 	function handleSettingFileSelect(mode: SettingFileMode) {
 		// Import settings from file
@@ -36,6 +37,7 @@
 
 	console.log(get(settings));
 
+	// Function to download settings
 	function download(filename: string, text: string) {
 		var element = document.createElement('a');
 		element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
@@ -48,6 +50,8 @@
 
 		document.body.removeChild(element);
 	}
+
+	// Function to change theme to selected
 	function themeChange(themeNumber: number) {
 		settings.update((n) => {
 			n.global.theme = themeNumber;
@@ -61,6 +65,17 @@
 	<div class="flex flex-col gap-y-3">
 		<!--Here is the User Settings region-->
 		<Card.Root>
+			<Card.Header>
+				<Card.Title style="font-size: 21px"><b><u>Log-In</u></b></Card.Title>
+			</Card.Header>
+			<Card.Content>
+				<div
+					class="flex items-center justify-center flex-col rounded-xl border-2 border-border bg-black/20"
+				>
+					<p style="font-size: 18px"><b><u>Currently Logged Out</u></b></p>
+					<Button href="login" class="m-5" variant="default"><u>Sign In</u></Button>
+				</div>
+			</Card.Content>
 			<Card.Header>
 				<!--TODO: Replace this with i18n key-->
 				<Card.Title style="font-size: 21px; color:"><b><u>User Settings</u></b></Card.Title>
@@ -143,7 +158,12 @@
 				<div class="rounded-xl border-2 border-green-500 bg-black/20">
 					<p style="font-size: 18px"><b><u> Accessibility </u></b></p>
 					<br />
-					<label for="option1">Increase Font Size</label>
+					<label for="option1">Increase Font Size (WIP)</label>
+					<br />
+					<div class="flex justify-evenly rounded-xl border-2 bg-black/20">
+						<Button class="m-5" variant="default" on:click={() => themeChange(0)}>+</Button>
+						<Button class="m-5" variant="default" on:click={() => themeChange(1)}>-</Button>
+					</div>
 				</div>
 			</Card.Content>
 		</Card.Root>
@@ -154,15 +174,15 @@
 				<Card.Title style="font-size: 21px"><b><u>Global Settings</u></b></Card.Title>
 			</Card.Header>
 			<Card.Content>
-				<div class="rounded-xl border-2 border-red-500 bg-black/20">
+				<div class="flex justify-evenly rounded-xl border-2 border-red-500 bg-black/20">
 					<Button
-						class="m-2"
+						class="m-5"
 						variant="default"
 						on:click={() => handleSettingFileSelect(SettingFileMode.Import)}
 						><u>Import Data</u></Button
 					>
 					<Button
-						class="m-2"
+						class="m-5"
 						variant="default"
 						on:click={() => handleSettingFileSelect(SettingFileMode.Export)}
 						><u>Export Data<u></u></u></Button

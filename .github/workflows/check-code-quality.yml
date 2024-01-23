@@ -11,7 +11,11 @@ jobs:
           node-version: lts/Iron
       - run: npm install -g pnpm
       - run: pnpm install
-      - run: pnpm tsc
+      - name: Check TypeScript
+        env:
+          GITHUB_ID: ${{ secrets.AUTH_GITHUB_ID }}
+          GITHUB_SECRET: ${{ secrets.AUTH_GITHUB_SECRET }}
+        run: pnpm tsc
   check-prettier:
     runs-on: ubuntu-latest
     steps:
