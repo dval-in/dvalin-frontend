@@ -78,7 +78,7 @@
 			</Card.Content>
 			<Card.Header>
 				<!--TODO: Replace this with i18n key-->
-				<Card.Title style="font-size: 21px"><b><u>User Settings</u></b></Card.Title>
+				<Card.Title style="font-size: 21px; color:"><b><u>User Settings</u></b></Card.Title>
 			</Card.Header>
 			<Card.Content>
 				<div class="rounded-xl border-2 border-border bg-black/20">
