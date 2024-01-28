@@ -10,7 +10,7 @@ const config = {
 	},
 	safelist: ['0'],
 	theme: {
-		container: {
+	container: {
 			center: true,
 			padding: '2rem',
 			screens: {
