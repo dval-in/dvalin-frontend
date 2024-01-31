@@ -6,6 +6,6 @@
 </script>
 
 <Button {...$$restProps}>
-	<Icon path={icon} color="fill-sidebarText group-hover:fill-white mr-2" size={1} />
+	<Icon path={icon} color="fill-sidebarText group-hover:fill-white" size={1} />
 	<slot />
 </Button>
