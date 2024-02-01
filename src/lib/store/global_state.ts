@@ -1,9 +1,5 @@
-import { writable } from 'svelte/store';
 import { persisted } from 'svelte-persisted-store';
-import { type Settings, Convert as SettingsConvert } from '$lib/structs/settings';
-
-export const showSidebar = writable(false);
-export const showSidebarSections = persisted('showSidebarSections', [true, true, true]);
+import { Convert as SettingsConvert, type Settings } from '$lib/structs/settings';
 
 export const settings = persisted(
 	'settings',
