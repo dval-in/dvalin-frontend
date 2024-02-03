@@ -27,7 +27,6 @@
 
 <br />
 <div class="relative flex items-center flex-wrap mx-24">
-
 	<a href="alhaitham">
 		<div
 			class="relative flex flex-col mt-6 text-text bg-foreground shadow-md bg-clip-border rounded-xl w-80 mx-3"
@@ -128,44 +127,46 @@
 	</a>
 </div>
 
-
-<div class="relative flex items-center flex-col flex-wrap mt-6 text-text bg-foreground shadow-md bg-clip-border rounded-xl w-80 mx-24">
-    <a href="albedo">
-        <Card.Root>
-            <Card.Content>
-                <div
-				class="relative h-50 mx-4 mt-6 overflow-hidden text-text shadow-lg bg-clip-border rounded-xl bg-foreground shadow-background/40"
-			    >
-				    <img 
-                        src="https://www.ginx.tv/uploads/pasted_image_0-137.png" 
-                        alt="Albedo" />
-			    </div>
-			    <div class="p-1">
-				    <h5
-					class="block mb-1 text-xl text-center antialiased font-semibold leading-snug tracking-normal text-text"
-				    >
-					    Albedo
-				    </h5>
-                </Card.Content>
-        </Card.Root>
-    </a>
-    <a href="alhaitham">
-        <Card.Root>
-            <Card.Content>
-                <div
-				class="relative h-50 mx-4 mt-6 overflow-hidden text-text shadow-lg bg-clip-border rounded-xl bg-foreground shadow-background/40"
-			    >
-				    <img 
-                        src="https://i.pinimg.com/736x/b2/2a/ad/b22aad873bb14b5a6837489cab2f84ac.jpg" 
-                        alt="Alhaitham" />
-			    </div>
-			    <div class="p-1">
-				    <h5
-					class="block mb-1 text-xl text-center antialiased font-semibold leading-snug tracking-normal text-text"
-				    >
-					    Alhaitham
-				    </h5>
-                </Card.Content>
-        </Card.Root>
-    </a>
+<div
+	class="relative flex items-center flex-col flex-wrap mt-6 text-text bg-foreground shadow-md bg-clip-border rounded-xl w-80 mx-24"
+>
+	<a href="albedo">
+		<Card.Root>
+			<Card.Content>
+				<div
+					class="relative h-50 mx-4 mt-6 overflow-hidden text-text shadow-lg bg-clip-border rounded-xl bg-foreground shadow-background/40"
+				>
+					<img src="https://www.ginx.tv/uploads/pasted_image_0-137.png" alt="Albedo" />
+				</div>
+				<div class="p-1">
+					<h5
+						class="block mb-1 text-xl text-center antialiased font-semibold leading-snug tracking-normal text-text"
+					>
+						Albedo
+					</h5>
+				</div></Card.Content
+			>
+		</Card.Root>
+	</a>
+	<a href="alhaitham">
+		<Card.Root>
+			<Card.Content>
+				<div
+					class="relative h-50 mx-4 mt-6 overflow-hidden text-text shadow-lg bg-clip-border rounded-xl bg-foreground shadow-background/40"
+				>
+					<img
+						src="https://i.pinimg.com/736x/b2/2a/ad/b22aad873bb14b5a6837489cab2f84ac.jpg"
+						alt="Alhaitham"
+					/>
+				</div>
+				<div class="p-1">
+					<h5
+						class="block mb-1 text-xl text-center antialiased font-semibold leading-snug tracking-normal text-text"
+					>
+						Alhaitham
+					</h5>
+				</div></Card.Content
+			>
+		</Card.Root>
+	</a>
 </div>
