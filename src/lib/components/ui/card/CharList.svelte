@@ -5,14 +5,13 @@
 	export let link: string;
 	export let name: string;
 	export let img: string;
-    export let hp: number;
-    export let atk: number;
-    export let def: number;
-    export let element: string = '';
-    export let weapon: string = '';
-    export let constel: number = 0;
-    export let rarity: string = '';
-
+	export let hp: number;
+	export let atk: number;
+	export let def: number;
+	export let element: string = '';
+	export let weapon: string = '';
+	export let constel: number = 0;
+	export let rarity: string = '';
 </script>
 
 <a href={link} class="w-64 mx-2 my-2">
@@ -25,7 +24,10 @@
 				<h5
 					class="block mb-3 text-xl text-center antialiased font-semibold leading-snug tracking-normal text-text"
 				>
-					{name} {hp} {atk} {def} //expert mode// //add character own to show//
+					{name}
+					{hp}
+					{atk}
+					{def} //expert mode// //add character own to show//
 				</h5>
 			</div>
 		</Content>
