@@ -14,10 +14,9 @@ const buttonVariants = tv({
 			secondary: 'justify-center bg-secondary text-secondary-foreground hover:bg-secondary/80',
 			ghost: 'justify-center hover:bg-accent hover:text-accent-foreground',
 			link: 'justify-center text-primary underline-offset-4 hover:bg-fill/20',
-			sidebar:
-				'bg-sidebar justify-center ml-0 text-sidebarText lg:justify-start lg:ml-8 hover:text-sidebarHover hover:bg-primary/20 w-full',
+			sidebar: 'bg-sidebar text-sidebarText hover:text-sidebarHover hover:bg-primary/20 w-full',
 			activeSidebar:
-				'bg-activeSidebar justify-center ml-0 text-sidebarText/110 lg:justify-start lg:ml-8 hover:text-white hover:bg-primary/90 w-full',
+				'bg-activeSidebar text-sidebarText/110 hover:text-white hover:bg-primary/90 w-full',
 			headerSidebar:
 				'justify-center bg-black/10 text-sidebarText/80 w-full lg:justify-start hover:text-white',
 			navigatorClose: 'justify-center bg-transparent'
