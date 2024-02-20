@@ -5,9 +5,9 @@
 	import type { Wish } from '$lib/structs/wish';
 	import PullChip from './pull-chip/PullChip.svelte';
 
-	export var icon: string;
-	export var title: string;
-	export var data: Wish[];
+	export let icon: string;
+	export let title: string;
+	export let data: Wish[];
 </script>
 
 <div class="flex flex-1 flex-col bg-tertiary rounded-md p-4 gap-3 lg:max-w-[450px]">

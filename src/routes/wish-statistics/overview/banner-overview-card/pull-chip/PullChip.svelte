@@ -1,9 +1,9 @@
 <script lang="ts">
 	import Text from '$lib/components/typography/Text.svelte';
 
-	export var name: string;
-	export var counter: number;
-	export var type: 'character' | 'weapon';
+	export let name: string;
+	export let counter: number;
+	export let type: 'character' | 'weapon';
 
 	const imgUrl =
 		type === 'character'
