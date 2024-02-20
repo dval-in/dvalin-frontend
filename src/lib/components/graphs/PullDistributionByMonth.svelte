@@ -24,7 +24,11 @@
 			...data.bannerHistory.standard
 		];
 
-		bannerHistoryData.forEach((d) => {
+		const sortedBannerHistory = bannerHistoryData.sort((a, b) => {
+			return new Date(b.date).valueOf() - new Date(a.date).valueOf();
+		});
+
+		sortedBannerHistory.forEach((d) => {
 			const date = new Date(d.date);
 			const dateKey = date.getFullYear() + '-' + (date.getMonth() + 1);
 			if (pullsByMonth[dateKey] === undefined) {
@@ -55,7 +59,7 @@
 		yNice
 	>
 		<Svg>
-			<Axis grid placement="left" rule />
+			<Axis grid labelProps={{ class: 'fill-text' }} placement="left" rule />
 			<Axis labelProps={{ class: 'fill-text' }} placement="bottom" />
 			<LinearGradient class="from-text/50 to-text/0" let:url vertical>
 				<Area fill={url} line={{ class: 'stroke-2 stroke-text opacity-20' }} />
