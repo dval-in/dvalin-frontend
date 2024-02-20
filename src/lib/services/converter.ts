@@ -1,14 +1,16 @@
 import type { PaimonData } from '$lib/structs/paimon_data';
-import type { ApplicationState } from '$lib/structs/application_state';
+import type { ApplicationState, Settings } from '$lib/structs/application_state';
 
 export default class ConverterService {
-	static convertPaimonDataToApplicationState(paimonData: PaimonData): ApplicationState {
+	static convertPaimonDataToApplicationState(
+		paimonData: PaimonData,
+		settings: Settings
+	): ApplicationState {
 		return {
 			achievements: {},
 			characters: {},
 			settings: {
-				theme: 'light',
-				locale: 'en'
+				...settings
 			},
 			tcg: {},
 			user: {
