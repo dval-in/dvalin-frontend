@@ -33,11 +33,11 @@
 		class={`flex ${isSidebarOpen ? '' : 'sm:max-lg:hidden'} flex-1 items-center justify-between mb-3`}
 	>
 		<Text type="h3">{title}</Text>
-		<Icon path={collapseStatusIcon} color="fill-sidebarText" size={1} />
+		<Icon path={collapseStatusIcon} />
 	</CollapsibleTrigger>
 
 	<CollapsibleContent class="flex flex-col gap-1">
-		<Separator class={`bg-white mb-3 hidden ${isSidebarOpen ? '' : 'sm:max-lg:block'}`} />
+		<Separator class={`mb-3 hidden ${isSidebarOpen ? '' : 'sm:max-lg:block'}`} />
 		{#each paths as path}
 			<SidebarEntry
 				title={path.title}

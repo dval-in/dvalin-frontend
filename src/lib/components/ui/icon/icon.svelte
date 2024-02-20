@@ -1,7 +1,7 @@
 <script lang="ts">
 	export let path: any;
 	export let size: number = 1;
-	export let color: string = 'white';
+	export let color: string = 'fill-text';
 	export let flip: any | null = null;
 	export let rotate = 0;
 	export let marginBottom = 0;
