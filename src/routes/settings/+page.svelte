@@ -8,6 +8,7 @@
 	import type { PaimonData } from '$lib/structs/paimon_data';
 	import ConverterService from '$lib/services/converter';
 	import { Button } from '$lib/components/ui/button';
+	import { toast } from 'svelte-sonner';
 
 	function handleSettingsImport() {
 		let element = document.createElement('input');
@@ -19,8 +20,23 @@
 				const file = target.files[0];
 				// Handle file operations here
 				file.text().then((text) => {
-					let paimonData: PaimonData = JSON.parse(text);
-					applicationState.set(ConverterService.convertPaimonDataToApplicationState(paimonData));
+					try {
+						let paimonData: PaimonData = JSON.parse(text);
+						applicationState.set(
+							ConverterService.convertPaimonDataToApplicationState(
+								paimonData,
+								$applicationState.settings
+							)
+						);
+						toast.success('Imported successfully!', {
+							description:
+								'Your data has been imported successfully and stored locally in your Browser'
+						});
+					} catch (e) {
+						toast.error('An error happened!', {
+							description: 'Make sure you upload the right file format'
+						});
+					}
 				});
 			}
 		};
@@ -68,13 +84,23 @@
 				class={`flex w-[150px] h-[200px] ${$applicationState.settings.theme === 'light' ? 'bg-neutral border-primary' : 'bg-text border-text'} justify-start items-end p-2 border-4 rounded-md`}
 				on:click={() => changeThemeTo('light')}
 			>
-				<Text type="h3">Light</Text>
+				<Text
+					textColor={`${$applicationState.settings.theme === 'light' ? 'text' : 'neutral'}`}
+					type="h3"
+				>
+					Light
+				</Text>
 			</Button>
 			<Button
 				class={`flex w-[150px] h-[200px] ${$applicationState.settings.theme === 'dark' ? 'bg-neutral border-primary' : 'bg-text border-text text-neutral'} justify-start items-end p-2 border-4 rounded-md`}
 				on:click={() => changeThemeTo('dark')}
 			>
-				<Text type="h3">Dark</Text>
+				<Text
+					textColor={`${$applicationState.settings.theme === 'dark' ? 'text' : 'neutral'}`}
+					type="h3"
+				>
+					Dark
+				</Text>
 			</Button>
 		</div>
 	</div>

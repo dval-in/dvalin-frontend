@@ -1,3 +1,3 @@
-<div class="text-lg font-semibold text-text">
+<div class="text-lg font-semibold">
 	<slot />
 </div>

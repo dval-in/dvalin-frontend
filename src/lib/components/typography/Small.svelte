@@ -1,3 +1,3 @@
-<small class="text-sm font-medium leading-none text-text">
+<small class="text-sm font-medium leading-none">
 	<slot />
 </small>

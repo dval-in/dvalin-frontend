@@ -10,13 +10,13 @@
 	export let data: Wish[];
 </script>
 
-<div class="flex flex-1 flex-col bg-tertiary rounded-md p-4 gap-3 lg:max-w-[450px]">
+<div class="flex flex-1 flex-col bg-tertiary rounded-md p-4 gap-3">
 	<div class="flex justify-between">
 		<div class="flex items-center gap-1">
 			<Icon path={icon} />
 			<Text type="h3">{title}</Text>
 		</div>
-		<Button>View more</Button>
+		<Button href="/wish-statistics/detailed/character">View more</Button>
 	</div>
 	<div class="flex justify-between gap-2">
 		<div

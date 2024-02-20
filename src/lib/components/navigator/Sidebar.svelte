@@ -62,19 +62,19 @@
 </script>
 
 <div
-	class={`fixed flex w-full ${isSidebarOpen ? 'sm:w-72' : 'sm:w-20'} lg:w-72 ${isSidebarOpen ? 'h-full' : 'h-16'} sm:h-full flex-col z-50 p-2.5 lg:p-5 lg:pl-10 max-sm:px-5 sm:max-lg:pr-0 sm:max-lg:py-5 bg-tertiary ${isSidebarOpen ? '' : 'max-sm:rounded-b-xl'} sm:rounded-r-xl transition-all`}
+	class={`fixed flex w-full ${isSidebarOpen ? 'sm:w-72' : 'sm:w-20'} xl:w-72 ${isSidebarOpen ? 'h-full' : 'h-16'} sm:h-full flex-col z-50 p-2.5 xl:p-5 xl:pl-10 max-sm:px-5 sm:max-xl:pr-0 sm:max-xl:py-5 bg-tertiary ${isSidebarOpen ? '' : 'max-sm:rounded-b-xl'} sm:rounded-r-xl transition-all`}
 >
 	<div
-		class={`flex ${isSidebarOpen ? 'flex-row' : 'sm:max-lg:flex-col'} items-center justify-between gap-2.5 sm:max-lg:mr-2.5`}
+		class={`flex ${isSidebarOpen ? 'flex-row' : 'sm:max-xl:flex-col'} items-center justify-between gap-2.5 sm:max-xl:mr-2.5`}
 	>
 		<div class="flex flex-row items-center">
 			<div class={`rounded-full bg-red-500 w-10 h-10`} />
-			<a class={`ml-2 ${isSidebarOpen ? '' : 'sm:max-lg:hidden'}`} href="/">
+			<a class={`ml-2 ${isSidebarOpen ? '' : 'sm:max-xl:hidden'}`} href="/">
 				<Text type="h1">dval.in</Text>
 			</a>
 		</div>
 
-		<div class="lg:hidden">
+		<div class="xl:hidden">
 			{#if isSidebarOpen}
 				<Button variant="ghost" on:click={closeSidebar}>
 					<Icon path={mdiCloseCircle} />
@@ -129,7 +129,7 @@
 		/>
 
 		<div class="mt-3">
-			<Separator class={`bg-text mb-3 hidden ${isSidebarOpen ? '' : 'sm:max-lg:block'}`} />
+			<Separator class={`bg-text mb-3 hidden ${isSidebarOpen ? '' : 'sm:max-xl:block'}`} />
 			<SidebarEntry
 				icon={mdiCog}
 				{isSidebarOpen}
@@ -141,10 +141,10 @@
 	</div>
 
 	<div
-		class={`flex flex-row items-center justify-between sm:max-lg:mr-2.5 ${isSidebarOpen ? '' : 'max-sm:max-h-0 max-sm:overflow-hidden'}`}
+		class={`flex flex-row items-center justify-between sm:max-xl:mr-2.5 ${isSidebarOpen ? '' : 'max-sm:max-h-0 max-sm:overflow-hidden'}`}
 	>
 		<div
-			class={`flex rounded-full bg-red-500 w-10 h-10 ${isSidebarOpen ? '' : 'sm:max-lg:hidden'}`}
+			class={`flex rounded-full bg-red-500 w-10 h-10 ${isSidebarOpen ? '' : 'sm:max-xl:hidden'}`}
 		/>
 		<div class="flex">
 			<SidebarEntry

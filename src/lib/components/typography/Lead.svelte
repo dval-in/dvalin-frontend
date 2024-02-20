@@ -1,3 +1,3 @@
-<p class="text-xl text-muted-foreground text-text">
+<p class="text-xl text-muted-foreground">
 	<slot />
 </p>

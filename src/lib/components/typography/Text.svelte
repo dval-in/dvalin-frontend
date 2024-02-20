@@ -26,9 +26,11 @@
 	export let type: keyof typeof textMapping;
 
 	export let margin: boolean = false;
+
+	export let textColor: string = 'text';
 </script>
 
-<div class:mt-6={margin}>
+<div class={`text-${textColor}`} class:mt-6={margin}>
 	<svelte:component this={textMapping[type]}>
 		<slot />
 	</svelte:component>
