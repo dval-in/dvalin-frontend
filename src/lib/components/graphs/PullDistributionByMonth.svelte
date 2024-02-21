@@ -24,11 +24,7 @@
 			...data.bannerHistory.standard
 		];
 
-		const sortedBannerHistory = bannerHistoryData.sort((a, b) => {
-			return new Date(b.date).valueOf() - new Date(a.date).valueOf();
-		});
-
-		sortedBannerHistory.forEach((d) => {
+		bannerHistoryData.forEach((d) => {
 			const date = new Date(d.date);
 			const dateKey = date.getFullYear() + '-' + (date.getMonth() + 1);
 			if (pullsByMonth[dateKey] === undefined) {
@@ -37,9 +33,11 @@
 			pullsByMonth[dateKey] = pullsByMonth[dateKey] + 1;
 		});
 
-		return Object.keys(pullsByMonth).map((key) => {
-			return { date: new Date(key), value: pullsByMonth[key] };
-		});
+		return Object.keys(pullsByMonth)
+			.map((key) => {
+				return { date: new Date(key), value: pullsByMonth[key] };
+			})
+			.sort((a, b) => new Date(a.date).valueOf() - new Date(b.date).valueOf());
 	};
 </script>
 
