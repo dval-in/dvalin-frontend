@@ -28,7 +28,7 @@ export default class ConverterService {
 							name: pull.id,
 							date: pull.time,
 							pity: pull.pity,
-							rarity: 5
+							rarity: Math.floor(Math.random() * 3) + 3
 						};
 					}),
 					weapon: paimonData['wish-counter-weapon-event'].pulls.flatMap((pull) => {
@@ -37,7 +37,7 @@ export default class ConverterService {
 							name: pull.id,
 							date: pull.time,
 							pity: pull.pity,
-							rarity: 5
+							rarity: Math.floor(Math.random() * 3) + 3
 						};
 					}),
 					standard: paimonData['wish-counter-standard'].pulls.flatMap((pull) => {
@@ -46,7 +46,7 @@ export default class ConverterService {
 							name: pull.id,
 							date: pull.time,
 							pity: pull.pity,
-							rarity: 5
+							rarity: Math.floor(Math.random() * 3) + 3
 						};
 					})
 				}
