@@ -1,28 +1,24 @@
 <script lang="ts">
-	import { Content, Root } from '$lib/components/ui/card';
+	import Text from '$lib/components/typography/Text.svelte';
+	import { type Elements, type Weapons } from '$lib/structs/types';
 
 	export let link: string;
 	export let name: string;
 	export let img: string;
-	export let element: string = '';
-	export let weapon: string = '';
+	export let element: Elements;
+	export let weapon: Weapons;
+	export let level: number;
+	export let constellation: number;
 </script>
 
-<a href={link} class="w-64 mx-2 my-2">
-	<Root>
-		<Content>
-			<div
-				class="relative h-50 mx-4 mt-6 overflow-hidden text-text shadow-lg bg-clip-border rounded-xl bg-foreground shadow-background/40"
-			>
-				<img src={img} alt={name} />
-			</div>
-			<div class="p-1">
-				<h5
-					class="block mb-3 text-xl text-center antialiased font-semibold leading-snug tracking-normal text-text"
-				>
-					{name}
-				</h5>
-			</div>
-		</Content>
-	</Root>
+<a href={link} class="flex flex-col w-36 xl:w-48 bg-fivestar rounded-md overflow-hidden">
+	<div class="flex justify-center p-4 pb-0">
+		<img class="w-24 h-24 xl:w-36 xl:h-36" src={img} alt={name} />
+	</div>
+	<div class="flex flex-1 justify-center p-4 rounded-t-md text-center bg-foreground items-center">
+		<Text type="h3">
+			{name}
+		</Text>
+		<div class="hidden">{weapon} {level} {constellation} {element}</div>
+	</div>
 </a>

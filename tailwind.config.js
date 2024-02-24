@@ -19,7 +19,9 @@ const config = {
 		},
 		extend: {
 			backgroundColor: '#000000',
-			colors: {},
+			colors: {
+				fivestar: '#FFB13F'
+			},
 			borderRadius: {
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',

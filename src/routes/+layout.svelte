@@ -12,7 +12,7 @@
 		<Sidebar />
 		<!--  Main content-->
 		<div class="sm:pl-20 lg:pl-72 max-sm:pt-16">
-			<div class="p-4 sm:pt-14">
+			<div class="p-4 sm:pt-14 scrollbar-gutter">
 				<slot />
 			</div>
 		</div>

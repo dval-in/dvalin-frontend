@@ -10,7 +10,7 @@
 	export let def: number;
 	export let element: string = '';
 	export let weapon: string = '';
-	export let constel: number = 0;
+	export let constellation: number = 0;
 	export let rarity: string = '';
 </script>
 
@@ -27,7 +27,11 @@
 					{name}
 					{hp}
 					{atk}
-					{def} //expert mode// //add character own to show//
+					{def} //expert mode// //add character own to show// //customizability//
+					{element}
+					{weapon}
+					{constellation}
+					{rarity}
 				</h5>
 			</div>
 		</Content>
