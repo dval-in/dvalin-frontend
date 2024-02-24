@@ -23,6 +23,9 @@ dependencies:
   d3-scale:
     specifier: ^4.0.2
     version: 4.0.2
+  d3-shape:
+    specifier: ^3.2.0
+    version: 3.2.0
   formsnap:
     specifier: ^0.4.2
     version: 0.4.3(svelte@4.2.9)(sveltekit-superforms@1.13.4)(zod@3.22.4)
