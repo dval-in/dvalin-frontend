@@ -8,6 +8,10 @@
 	export let icon: string;
 	export let title: string;
 	export let data: Wish[];
+
+	const sortedWishData = data.sort(
+		(a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf()
+	);
 </script>
 
 <div class="flex flex-1 flex-col bg-tertiary rounded-md p-4 gap-3">
@@ -16,7 +20,7 @@
 			<Icon path={icon} />
 			<Text type="h3">{title}</Text>
 		</div>
-		<Button href="/wish-statistics/detailed/character">View more</Button>
+		<Button href={'/wish-statistics/detailed/' + title.toLowerCase()}>View more</Button>
 	</div>
 	<div class="flex justify-between gap-2">
 		<div
@@ -45,7 +49,7 @@
 	<div class="flex flex-col gap-2">
 		<Text type="h4">Latest pulls</Text>
 		<div class="flex flex-wrap gap-2">
-			{#each data.slice(0, 10) as pull}
+			{#each sortedWishData.slice(0, 10) as pull}
 				<PullChip type={pull.type} name={pull.name} counter={pull.pity} />
 			{/each}
 		</div>
