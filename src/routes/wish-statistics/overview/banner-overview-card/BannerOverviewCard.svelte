@@ -20,7 +20,7 @@
 			<Icon path={icon} />
 			<Text type="h3">{title}</Text>
 		</div>
-		<Button href={'/wish-statistics/detailed/' + title.toLowerCase()}>View more</Button>
+		<Button href={'/wish-statistics/' + title.toLowerCase()}>View more</Button>
 	</div>
 	<div class="flex justify-between gap-2">
 		<div
