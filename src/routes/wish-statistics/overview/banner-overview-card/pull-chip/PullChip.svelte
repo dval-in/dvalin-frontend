@@ -8,7 +8,7 @@
 	const imgUrl =
 		type === 'character'
 			? 'https://s3-api.dval.in/character/' + name + '/icon.webp'
-			: 'https://s3-api.dval.in/weapons/weapons/' + name + '.png';
+			: 'https://s3-api.dval.in/weapons/' + name + '.png';
 </script>
 
 <div class="flex items-center gap-2 bg-neutral p-1 rounded-md">
