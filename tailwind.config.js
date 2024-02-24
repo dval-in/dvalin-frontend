@@ -27,6 +27,9 @@ const config = {
 				md: 'calc(var(--radius) - 2px)',
 				sm: 'calc(var(--radius) - 4px)'
 			},
+			colors: {
+				fiveStar: '#FFB13F'
+			},
 			fontFamily: {
 				sans: [...fontFamily.sans]
 			}

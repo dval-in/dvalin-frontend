@@ -1,3 +1,5 @@
+export type Banner = 'character' | 'weapon' | 'standard';
+
 export interface Wish {
 	type: 'weapon' | 'character';
 	name: string;
