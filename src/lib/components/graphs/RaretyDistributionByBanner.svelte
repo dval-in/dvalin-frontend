@@ -15,8 +15,6 @@
 			test[wish.rarity] = test[wish.rarity] + 1;
 		});
 
-		console.log(test);
-
 		return Object.keys(test)
 			.map((key) => {
 				const a = Number.parseInt(key);
@@ -25,10 +23,7 @@
 			.sort((a, b) => a.rarity - b.rarity);
 	};
 
-	console.log(getData());
-
 	const colorKeys = [0, 1, 2];
-	console.log(colorKeys);
 	const keyColors = ['#5E93B2', '#7B5C90', '#FFB13F'];
 </script>
 

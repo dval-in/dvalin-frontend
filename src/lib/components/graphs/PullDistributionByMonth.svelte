@@ -45,8 +45,6 @@
 				.sort((a, b) => new Date(a.date).valueOf() - new Date(b.date).valueOf())
 		);
 	};
-
-	console.log(getMonthlyData());
 </script>
 
 <div class="h-[300px] w-full">
