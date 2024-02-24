@@ -5,6 +5,9 @@
 		Content as DropdownMenuContent,
 		CheckboxItem as DropdownMenuCheckboxItem
 	} from '$lib/components/ui/dropdown-menu';
+	import { Button } from '$lib/components/ui/button';
+	import Icon from '$lib/components/ui/icon/icon.svelte';
+	import { mdiFilter } from '@mdi/js';
 
 	export const getDistinct = (items) => {
 		return Array.from(new Set(items));
@@ -12,8 +15,6 @@
 </script>
 
 <script lang="ts">
-	import { Button } from '$lib/components/ui/button';
-
 	export let filterValue;
 	export let preFilteredValues;
 	export let title: string;
@@ -22,9 +23,14 @@
 
 <DropdownMenuRoot>
 	<DropdownMenuTrigger asChild let:builder>
-		<Button builders={[builder]} variant="ghost">{title}</Button>
+		<Button builders={[builder]} variant="ghost">
+			{title}
+			{#if $filterValue !== undefined}
+				<Icon path={mdiFilter} />
+			{/if}
+		</Button>
 	</DropdownMenuTrigger>
-	<DropdownMenuContent class="w-56">
+	<DropdownMenuContent>
 		<DropdownMenuCheckboxItem
 			checked={$filterValue === undefined}
 			onCheckedChange={() => ($filterValue = undefined)}

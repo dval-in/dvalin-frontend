@@ -1,22 +1,17 @@
 <script lang="ts">
-	import { scaleTime } from 'd3-scale';
-	import { format, PeriodType } from 'svelte-ux';
-	import {
-		Area,
-		Axis,
-		Chart,
-		Highlight,
-		LinearGradient,
-		RectClipPath,
-		Svg,
-		Tooltip
-	} from 'layerchart';
+	import { scaleOrdinal, scaleTime } from 'd3-scale';
+	import { format, formatDate, PeriodType } from 'svelte-ux';
+	import { AreaStack, Axis, Chart, Highlight, Svg, Tooltip, TooltipItem } from 'layerchart';
 	import type { Wishes } from '$lib/structs/application_state';
+	import { stack } from 'd3-shape';
+	import { flatten } from 'svelte-ux/utils/array';
 
 	export let data: Wishes;
 
+	const keys = ['3', '4', '5'];
+
 	const getMonthlyData = () => {
-		let pullsByMonth: { [key: string]: number } = {};
+		let pullsByMonth: { [key: string]: { [key: string]: number } } = {};
 
 		const bannerHistoryData = [
 			...data.bannerHistory.character,
@@ -28,57 +23,65 @@
 			const date = new Date(d.date);
 			const dateKey = date.getFullYear() + '-' + (date.getMonth() + 1);
 			if (pullsByMonth[dateKey] === undefined) {
-				pullsByMonth[dateKey] = 0;
+				// eslint-disable-next-line @typescript-eslint/naming-convention
+				pullsByMonth[dateKey] = { '3': 0, '4': 0, '5': 0 };
 			}
-			pullsByMonth[dateKey] = pullsByMonth[dateKey] + 1;
+			pullsByMonth[dateKey][d.rarity] = pullsByMonth[dateKey][d.rarity] + 1;
 		});
 
-		return Object.keys(pullsByMonth)
-			.map((key) => {
-				return { date: new Date(key), value: pullsByMonth[key] };
-			})
-			.sort((a, b) => new Date(a.date).valueOf() - new Date(b.date).valueOf());
+		return stack().keys(keys)(
+			Object.keys(pullsByMonth)
+				.map((key) => {
+					return {
+						date: new Date(key),
+						// eslint-disable-next-line @typescript-eslint/naming-convention
+						'3': pullsByMonth[key]['3'],
+						// eslint-disable-next-line @typescript-eslint/naming-convention
+						'4': pullsByMonth[key]['4'],
+						// eslint-disable-next-line @typescript-eslint/naming-convention
+						'5': pullsByMonth[key]['5']
+					};
+				})
+				.sort((a, b) => new Date(a.date).valueOf() - new Date(b.date).valueOf())
+		);
 	};
+
+	console.log(getMonthlyData());
 </script>
 
 <div class="h-[300px] w-full">
 	<Chart
 		data={getMonthlyData()}
+		flatData={flatten(getMonthlyData())}
 		let:height
 		let:padding
-		let:tooltip
-		let:width
-		padding={{ top: 48, bottom: 24, left: 16, right: 16 }}
+		padding={{ left: 16, bottom: 24 }}
+		r="key"
+		rDomain={keys}
+		rRange={['#5E93B2', '#7B5C90', '#FFB13F']}
+		rScale={scaleOrdinal()}
 		tooltip
-		x={'date'}
+		x={(d) => d.data.date}
 		xScale={scaleTime()}
-		y="value"
-		yDomain={[0, null]}
+		y={[0, 1]}
 		yNice
 	>
 		<Svg>
 			<Axis grid labelProps={{ class: 'fill-text' }} placement="left" rule />
-			<Axis labelProps={{ class: 'fill-text' }} placement="bottom" />
-			<LinearGradient class="from-text/50 to-text/0" let:url vertical>
-				<Area fill={url} line={{ class: 'stroke-2 stroke-text opacity-20' }} />
-				<RectClipPath {height} spring width={tooltip.data ? tooltip.x : width} x={0} y={0}>
-					<Area fill={url} line={{ class: 'stroke-2 stroke-text' }} />
-				</RectClipPath>
-			</LinearGradient>
+			<Axis
+				format={(d) => formatDate(d, PeriodType.MonthYear, { variant: 'short' })}
+				labelProps={{ class: 'fill-text' }}
+				placement="bottom"
+				rule
+			/>
+			<AreaStack />
 			<Highlight lines={{ class: 'stroke-text [stroke-dasharray:unset]' }} points />
 		</Svg>
-
-		<Tooltip
-			anchor="top"
-			class="text-sm font-semibold bg-primary text-text-content leading-3 px-2 py-1 rounded whitespace-nowrap"
-			let:data
-			variant="none"
-			x="data"
-			y={0}
-		>
-			{data.value}
+		<Tooltip header={(data) => format(data.data.date, PeriodType.MonthYear)} let:data>
+			{#each keys as key}
+				<TooltipItem label={key} value={data.data[key]} />
+			{/each}
 		</Tooltip>
-
 		<Tooltip
 			anchor="top"
 			class="text-sm font-semibold bg-primary text-text-content leading-3 px-2 py-1 rounded whitespace-nowrap"
@@ -87,7 +90,7 @@
 			x="data"
 			y={height + padding.top + 2}
 		>
-			{format(data.date, PeriodType.MonthYear)}
+			{format(data.data.date, PeriodType.MonthYear)}
 		</Tooltip>
 	</Chart>
 </div>
