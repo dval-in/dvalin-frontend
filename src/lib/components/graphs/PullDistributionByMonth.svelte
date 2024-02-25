@@ -76,6 +76,7 @@
 			<Highlight lines={{ class: 'stroke-text [stroke-dasharray:unset]' }} points />
 		</Svg>
 		<Tooltip header={(data) => format(data.data.date, PeriodType.MonthYear)} let:data>
+			<TooltipItem label={'total'} value={data.data['3'] + data.data['4'] + data.data['5']} />
 			{#each keys as key}
 				<TooltipItem label={key} value={data.data[key]} />
 			{/each}
