@@ -13,7 +13,7 @@
 		<Sidebar />
 		<!--  Main content-->
 		<div class="sm:pl-20 xl:pl-72 max-sm:pt-16 sm:flex sm:justify-center">
-			<div class="flex flex-1 p-4 sm:pt-14 sm:max-w-[1536px] scrollbarGutter">
+			<div class="flex flex-1 p-4 sm:pt-14 sm:max-w-[1536px] scrollbar-gutter">
 				<slot />
 			</div>
 		</div>

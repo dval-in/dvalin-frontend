@@ -28,7 +28,7 @@ const config = {
 				sm: 'calc(var(--radius) - 4px)'
 			},
 			colors: {
-				fiveStar: '#FFB13F'
+				fivestar: '#FFB13F'
 			},
 			fontFamily: {
 				sans: [...fontFamily.sans]
