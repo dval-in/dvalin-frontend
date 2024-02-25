@@ -17,7 +17,7 @@
 	<Root>
 		<Content>
 			<div
-				class="relative h-50 mx-4 mt-6 overflow-hidden text-text shadow-lg bg-clip-border rounded-xl bg-foreground shadow-background/40"
+				class="relative h-50 mx-4 mt-6 overflow-hidden text-text shadow-lg bg-clip-border rounded-xl bg-tertiary shadow-background/40"
 			>
 				<img alt={name} class="h-20 w-20" src={img} />
 				<h5

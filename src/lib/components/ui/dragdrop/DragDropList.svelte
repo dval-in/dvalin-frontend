@@ -86,8 +86,8 @@
 <main class="basis-[100%]">
 	<div
 		bind:this={ghost}
-		id="ghost"
 		class={grabbed ? 'item haunting' : 'item'}
+		id="ghost"
 		style={'top: ' + (mouseY + offsetY - layerY) + 'px'}
 	>
 		<p></p>
@@ -98,10 +98,6 @@
 			ev.stopPropagation();
 			drag(ev.clientY);
 		}}
-		on:touchmove={function (ev) {
-			ev.stopPropagation();
-			drag(ev.touches[0].clientY);
-		}}
 		on:mouseup={function (ev) {
 			ev.stopPropagation();
 			release(ev);
@@ -109,6 +105,10 @@
 		on:touchend={function (ev) {
 			ev.stopPropagation();
 			release(ev.touches[0]);
+		}}
+		on:touchmove={function (ev) {
+			ev.stopPropagation();
+			drag(ev.touches[0].clientY);
 		}}
 	>
 		{#each data as datum, i (datum.id ? datum.id : JSON.stringify(datum))}
@@ -145,11 +145,10 @@
 							moveDatum(i, i - 1);
 						}}
 					>
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16px" height="16px"
-							><path d="M0 0h24v24H0V0z" fill="none" /><path
-								d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6 1.41 1.41z"
-							/></svg
-						>
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16px" height="16px">
+							<path d="M0 0h24v24H0V0z" fill="none" />
+							<path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6 1.41 1.41z" />
+						</svg>
 					</button>
 					<button
 						class="down"
@@ -158,11 +157,10 @@
 							moveDatum(i, i + 1);
 						}}
 					>
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16px" height="16px"
-							><path d="M0 0h24v24H0V0z" fill="none" /><path
-								d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"
-							/></svg
-						>
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16px" height="16px">
+							<path d="M0 0h24v24H0V0z" fill="none" />
+							<path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
+						</svg>
 					</button>
 				</div>
 
@@ -208,11 +206,12 @@
 								removeDatum(i);
 							}}
 						>
-							<svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 0 24 24" width="16"
-								><path d="M0 0h24v24H0z" fill="none" /><path
+							<svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 0 24 24" width="16">
+								<path d="M0 0h24v24H0z" fill="none" />
+								<path
 									d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
-								/></svg
-							>
+								/>
+							</svg>
 						</button>
 					{/if}
 				</div>
@@ -229,34 +228,44 @@
 	.list {
 		@apply cursor-grab z-[5] flex flex-col shrink;
 	}
+
 	.item {
-		@apply bg-foreground box-border inline-flex w-full min-h-[3em] border select-none mb-[0.5em] rounded-sm border-solid border-black;
+		@apply bg-tertiary box-border inline-flex w-full min-h-[3em] border select-none mb-[0.5em] rounded-sm border-solid border-black;
 	}
+
 	.item:last-child {
 		@apply mb-0;
 	}
+
 	.item:not(#grabbed):not(#ghost) {
 		@apply z-10;
 	}
+
 	.buttons {
 		@apply w-8 min-w-[32px] flex flex-col mx-0 my-auto;
 	}
+
 	.buttons button {
 		@apply cursor-pointer w-[18px] h-[18px] border bg-inherit mx-auto my-0 p-0 border-solid border-[rgba(0,0,0,0)] focus:border focus:border-solid focus:border-[black];
 		@apply invert;
 	}
+
 	.delete {
 		@apply w-8;
 	}
+
 	#grabbed {
 		@apply opacity-[0.0];
 	}
+
 	#ghost {
 		@apply pointer-events-none z-[-5] absolute opacity-[0.0] left-0 top-0;
 	}
+
 	#ghost * {
 		@apply pointer-events-none;
 	}
+
 	#ghost.haunting {
 		@apply z-20 opacity-[1.0];
 	}

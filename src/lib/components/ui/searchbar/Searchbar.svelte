@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { mdiSearchWeb } from '@mdi/js';
 	import { goto } from '$app/navigation';
 	import {
 		Dialog as CommandRoot,
@@ -9,9 +8,8 @@
 		Group as CommandGroup,
 		Item as CommandItem
 	} from '$lib/components/ui/command';
-	import { type Elements, type Weapons } from '$lib/structs/types';
-	import S3Service from '$lib/services/s3';
 	import IconButton from '../icon-button/IconButton.svelte';
+	import { mdiDatabaseSearch } from '@mdi/js';
 
 	export let searchGroup: string;
 	export let searchableDataList: { name: string; link: string; img: string }[];
@@ -26,7 +24,7 @@
 	};
 </script>
 
-<IconButton icon={mdiSearchWeb} onClick={opencmd}>Search</IconButton>
+<IconButton icon={mdiDatabaseSearch} onClick={opencmd}>Search</IconButton>
 
 <CommandRoot bind:open>
 	<CommandInput placeholder={'Search for ' + searchGroup + '...'} />

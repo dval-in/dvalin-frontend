@@ -11,12 +11,12 @@
 	export let constellation: number;
 </script>
 
-<a href={link} class="flex flex-col w-36 xl:w-48 bg-fivestar rounded-md overflow-hidden">
-	<div class="flex justify-center p-4 pb-0">
-		<img class="w-24 h-24 xl:w-36 xl:h-36" src={img} alt={name} />
+<a class="flex flex-col w-24 xl:w-36 rounded-md overflow-hidden" href={link}>
+	<div class="flex justify-center bg-fivestar">
+		<img alt={name} class="w-24 h-24 xl:w-36 xl:h-36" src={img} />
 	</div>
-	<div class="flex flex-1 justify-center p-4 rounded-t-md text-center bg-foreground items-center">
-		<Text type="h3">
+	<div class="flex flex-1 justify-center p-2 text-center bg-tertiary items-center">
+		<Text type="h4">
 			{name}
 		</Text>
 		<div class="hidden">{weapon} {level} {constellation} {element}</div>

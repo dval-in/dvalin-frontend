@@ -64,7 +64,16 @@ const config = {
 				}
 			},
 			{
-				defaultTheme: 'dark'
+				defaultTheme: {
+					/**
+					 * when `@media (prefers-color-scheme: light)` is matched,
+					 */
+					light: 'light',
+					/**
+					 * when `@media (prefers-color-scheme: dark)` is matched,
+					 */
+					dark: 'dark'
+				}
 			}
 		)
 	]
