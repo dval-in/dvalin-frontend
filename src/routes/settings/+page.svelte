@@ -66,19 +66,8 @@
 		<!--Here is the User Settings region-->
 		<Card.Root>
 			<Card.Header>
-				<Card.Title style="font-size: 21px"><b><u>Log-In</u></b></Card.Title>
-			</Card.Header>
-			<Card.Content>
-				<div
-					class="flex items-center justify-center flex-col rounded-xl border-2 border-border bg-black/20"
-				>
-					<p style="font-size: 18px"><b><u>Currently Logged Out</u></b></p>
-					<Button href="login" class="m-5" variant="default"><u>Sign In</u></Button>
-				</div>
-			</Card.Content>
-			<Card.Header>
 				<!--TODO: Replace this with i18n key-->
-				<Card.Title style="font-size: 21px; color:"><b><u>User Settings</u></b></Card.Title>
+				<Card.Title style="font-size: 21px"><b><u>User Settings</u></b></Card.Title>
 			</Card.Header>
 			<Card.Content>
 				<div class="rounded-xl border-2 border-border bg-black/20">

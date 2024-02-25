@@ -19,7 +19,9 @@ const config = {
 		},
 		extend: {
 			backgroundColor: '#000000',
-			colors: {},
+			colors: {
+				fivestar: '#FFB13F'
+			},
 			borderRadius: {
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',
@@ -41,7 +43,7 @@ const config = {
 					activeSidebar: '#000000',
 					sidebar: '#373743',
 					sidebarText: '#FFFFFF',
-					sidebarHover: '#8EA5d3',
+					sidebarHover: '#FFFFFF',
 					primary: '#D3BC8E'
 				},
 				t1: {
@@ -52,7 +54,7 @@ const config = {
 					activeSidebar: '#D3BC8E',
 					sidebar: '#F8F5F2',
 					sidebarText: '#000000',
-					sidebarHover: '#8EA5d3',
+					sidebarHover: '#000000',
 					primary: '#D3BC8E'
 				},
 				t2: {
