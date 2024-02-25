@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { Content, Root } from '$lib/components/ui/card';
-	import type { number } from 'zod';
 
 	export let link: string;
 	export let name: string;
@@ -14,13 +13,13 @@
 	export let rarity: string = '';
 </script>
 
-<a href={link} class="w-64 mx-2 my-2">
+<a class="w-64 mx-2 my-2" href={link}>
 	<Root>
 		<Content>
 			<div
 				class="relative h-50 mx-4 mt-6 overflow-hidden text-text shadow-lg bg-clip-border rounded-xl bg-foreground shadow-background/40"
 			>
-				<img class="h-20 w-20" src={img} alt={name} />
+				<img alt={name} class="h-20 w-20" src={img} />
 				<h5
 					class="block mb-3 text-xl text-center antialiased font-semibold leading-snug tracking-normal text-text"
 				>
