@@ -7,6 +7,6 @@
 </script>
 
 <Button on:click={onClick} {...$$restProps}>
-	<Icon path={icon} color="fill-sidebarText group-hover:fill-white" size={1} />
+	<Icon path={icon} />
 	<slot />
 </Button>

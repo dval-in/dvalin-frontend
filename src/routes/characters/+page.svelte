@@ -2,7 +2,6 @@
 	import IconButton from '$lib/components/ui/icon-button/IconButton.svelte';
 	import { mdiFilterOutline, mdiSort, mdiViewList, mdiViewGrid } from '@mdi/js';
 	import CharCard from '$lib/components/ui/card/CharCard.svelte';
-	// import CharList from '$lib/components/ui/card/CharList.svelte';
 	import Text from '$lib/components/typography/Text.svelte';
 	import { type Elements, type Weapons } from '$lib/structs/types';
 	import Searchbar from '$lib/components/ui/searchbar/Searchbar.svelte';
@@ -10,8 +9,8 @@
 
 	let view = true;
 
-	const changeViewType = () => {
-		view = view ? false : true;
+	const toggleViewType = () => {
+		view = !view;
 	};
 
 	let data: { link: string; name: string; element: Elements; weapon: Weapons; img: string }[] = [
@@ -34,7 +33,7 @@
 			name: 'Aloy',
 			element: 'pyro',
 			weapon: 'bow',
-			img: S3Service.getCharacterLink('amber') + '/icon.webp'
+			img: S3Service.getCharacterLink('aloy') + '/icon.webp'
 		},
 		{
 			link: '/characters/amber',
@@ -49,60 +48,18 @@
 			element: 'geo',
 			weapon: 'bow',
 			img: S3Service.getCharacterLink('Arataki_Itto') + '/icon.webp'
-		},
-		{
-			link: '/characters/arataki-itto',
-			name: 'Arataki Itto',
-			element: 'geo',
-			weapon: 'bow',
-			img: S3Service.getCharacterLink('Arataki_Itto') + '/icon.webp'
-		},
-		{
-			link: '/characters/arataki-itto',
-			name: 'Arataki Itto',
-			element: 'geo',
-			weapon: 'bow',
-			img: S3Service.getCharacterLink('Arataki_Itto') + '/icon.webp'
-		},
-		{
-			link: '/characters/arataki-itto',
-			name: 'Arataki Itto',
-			element: 'geo',
-			weapon: 'bow',
-			img: S3Service.getCharacterLink('Arataki_Itto') + '/icon.webp'
-		},
-		{
-			link: '/characters/arataki-itto',
-			name: 'Arataki Itto',
-			element: 'geo',
-			weapon: 'bow',
-			img: S3Service.getCharacterLink('Arataki_Itto') + '/icon.webp'
-		},
-		{
-			link: '/characters/arataki-itto',
-			name: 'Arataki Itto',
-			element: 'geo',
-			weapon: 'bow',
-			img: S3Service.getCharacterLink('Arataki_Itto') + '/icon.webp'
-		},
-		{
-			link: '/characters/arataki-itto',
-			name: 'Arataki Itto',
-			element: 'geo',
-			weapon: 'bow',
-			img: S3Service.getCharacterLink('Arataki_Itto') + '/icon.webp'
 		}
 	];
 </script>
 
-<div class="flex flex-col gap-6">
+<div class="flex flex-1 flex-col gap-6">
 	<div class="flex flex-1 flex-wrap justify-between gap-4 items-center">
 		<Text type="h1">Characters</Text>
 		<div class="flex gap-2">
 			<Searchbar searchGroup="Characters" searchableDataList={data} />
 			<IconButton icon={mdiSort}>Sort By</IconButton>
 			<IconButton icon={mdiFilterOutline}>Filter By</IconButton>
-			<IconButton icon={view ? mdiViewList : mdiViewGrid} on:click={changeViewType} />
+			<IconButton icon={view ? mdiViewList : mdiViewGrid} onClick={toggleViewType} />
 		</div>
 	</div>
 

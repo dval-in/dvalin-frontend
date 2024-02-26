@@ -27,17 +27,17 @@
 	};
 </script>
 
-<Collapsible open={isOpen} class="mt-3">
+<Collapsible class="mt-3" open={isOpen}>
 	<CollapsibleTrigger
+		class={`flex ${isSidebarOpen ? '' : 'sm:max-xl:hidden'} flex-1 items-center justify-between mb-3`}
 		on:click={toggleCollapsible}
-		class={`flex ${isSidebarOpen ? '' : 'sm:max-lg:hidden'} flex-1 items-center justify-between mb-3`}
 	>
 		<Text type="h3">{title}</Text>
-		<Icon path={collapseStatusIcon} color="fill-sidebarText" size={1} />
+		<Icon path={collapseStatusIcon} />
 	</CollapsibleTrigger>
 
 	<CollapsibleContent class="flex flex-col gap-1">
-		<Separator class={`bg-white mb-3 hidden ${isSidebarOpen ? '' : 'sm:max-lg:block'}`} />
+		<Separator class={`mb-3 hidden ${isSidebarOpen ? '' : 'sm:max-xl:block'}`} />
 		{#each paths as path}
 			<SidebarEntry
 				title={path.title}

@@ -62,27 +62,27 @@
 </script>
 
 <div
-	class={`fixed flex w-full ${isSidebarOpen ? 'sm:w-72' : 'sm:w-20'} lg:w-72 ${isSidebarOpen ? 'h-full' : 'h-16'} sm:h-full flex-col z-50 p-2.5 lg:p-5 lg:pl-10 max-sm:px-5 sm:max-lg:pr-0 sm:max-lg:py-5 bg-sidebar ${isSidebarOpen ? '' : 'max-sm:rounded-b-xl'} sm:rounded-r-xl transition-all`}
+	class={`fixed flex w-full ${isSidebarOpen ? 'sm:w-72' : 'sm:w-20'} xl:w-72 ${isSidebarOpen ? 'h-full' : 'h-16'} sm:h-full flex-col z-50 p-2.5 xl:p-5 xl:pl-10 max-sm:px-5 sm:max-xl:pr-0 sm:max-xl:py-5 bg-tertiary ${isSidebarOpen ? '' : 'max-sm:rounded-b-xl'} sm:rounded-r-xl transition-all`}
 >
 	<div
-		class={`flex ${isSidebarOpen ? 'flex-row' : 'sm:max-lg:flex-col'} items-center justify-between gap-2.5 sm:max-lg:mr-2.5`}
+		class={`flex ${isSidebarOpen ? 'flex-row' : 'sm:max-xl:flex-col'} items-center justify-between gap-2.5 sm:max-xl:mr-2.5`}
 	>
 		<div class="flex flex-row items-center">
 			<div class={`rounded-full bg-red-500 w-10 h-10`} />
-			<a href="/" class={`ml-2 ${isSidebarOpen ? '' : 'sm:max-lg:hidden'}`}>
+			<a class={`ml-2 ${isSidebarOpen ? '' : 'sm:max-xl:hidden'}`} href="/">
 				<Text type="h1">dval.in</Text>
 			</a>
 		</div>
 
-		<div class="lg:hidden">
+		<div class="xl:hidden">
 			{#if isSidebarOpen}
 				<Button variant="ghost" on:click={closeSidebar}>
-					<Icon path={mdiCloseCircle} size={1} color="fill-sidebarText cursor-pointer" />
+					<Icon path={mdiCloseCircle} />
 				</Button>
 			{/if}
 			{#if !isSidebarOpen}
 				<Button variant="ghost" on:click={openSidebar}>
-					<Icon path={mdiMenu} size={1} color="fill-sidebarText cursor-pointer" />
+					<Icon path={mdiMenu} />
 				</Button>
 			{/if}
 		</div>
@@ -92,73 +92,73 @@
 		class={`overflow-y-auto flex flex-col flex-1 gap-1 max-sm:h-full my-2.5 pr-1 ${isSidebarOpen ? '' : 'max-sm:max-h-0 max-sm:overflow-hidden'}`}
 	>
 		<SidebarEntry
-			title="Dashboard"
-			link={'/'}
 			icon={mdiHome}
 			{isSidebarOpen}
+			link={'/'}
 			onClick={closeSidebar}
+			title="Dashboard"
 		/>
 		<SidebarEntry
-			title="Wish Counter"
-			link={'/wish-counter'}
 			icon={mdiStar}
 			{isSidebarOpen}
+			link={'/wish-statistics/overview'}
 			onClick={closeSidebar}
+			title="Wish Statistics"
 		/>
 
 		<SidebarCategory
-			title="Your Collection"
+			{closeSidebar}
+			forceOpen={!isSidebarOpen}
+			{isSidebarOpen}
 			paths={paths.collection}
-			forceOpen={!isSidebarOpen}
-			{isSidebarOpen}
-			{closeSidebar}
+			title="Your Collection"
 		/>
 		<SidebarCategory
-			title="Trackers"
+			{closeSidebar}
+			forceOpen={!isSidebarOpen}
+			{isSidebarOpen}
 			paths={paths.tracker}
-			forceOpen={!isSidebarOpen}
-			{isSidebarOpen}
-			{closeSidebar}
+			title="Trackers"
 		/>
 		<SidebarCategory
-			title="Tools"
-			paths={paths.tools}
+			{closeSidebar}
 			forceOpen={!isSidebarOpen}
 			{isSidebarOpen}
-			{closeSidebar}
+			paths={paths.tools}
+			title="Tools"
 		/>
 
 		<div class="mt-3">
-			<Separator class={`bg-white mb-3 hidden ${isSidebarOpen ? '' : 'sm:max-lg:block'}`} />
+			<Separator class={`bg-text mb-3 hidden ${isSidebarOpen ? '' : 'sm:max-xl:block'}`} />
 			<SidebarEntry
-				title="Settings"
-				link={'/settings'}
 				icon={mdiCog}
 				{isSidebarOpen}
+				link={'/settings'}
 				onClick={closeSidebar}
+				title="Settings"
 			/>
 		</div>
 	</div>
 
 	<div
-		class={`flex flex-row items-center justify-between sm:max-lg:mr-2.5 ${isSidebarOpen ? '' : 'max-sm:max-h-0 max-sm:overflow-hidden'}`}
+		class={`flex flex-row items-center justify-between sm:max-xl:mr-2.5 ${isSidebarOpen ? '' : 'max-sm:max-h-0 max-sm:overflow-hidden'}`}
 	>
 		<div
-			class={`flex rounded-full bg-red-500 w-10 h-10 ${isSidebarOpen ? '' : 'sm:max-lg:hidden'}`}
+			class={`flex rounded-full bg-red-500 w-10 h-10 ${isSidebarOpen ? '' : 'sm:max-xl:hidden'}`}
 		/>
 		<div class="flex">
 			<SidebarEntry
-				title="Login or Register"
-				link={'/login'}
 				icon={mdiAccount}
-				variant="default"
 				{isSidebarOpen}
+				link={'/login'}
 				onClick={closeSidebar}
+				title="Login or Register"
+				variant="default"
 			/>
 		</div>
 	</div>
 </div>
 
 <div
-	class={`bg-black/50 transition-all absolute top-0 left-0 right-0 bottom-0 ${isSidebarOpen ? '' : 'hidden'}`}
-></div>
+	class={`bg-black/80 transition-all absolute top-0 left-0 right-0 bottom-0 ${isSidebarOpen ? '' : 'hidden'}`}
+/>

@@ -10,15 +10,12 @@ const buttonVariants = tv({
 			destructive:
 				'justify-center bg-destructive text-destructive-foreground hover:bg-destructive/90',
 			outline:
-				'justify-center border border-input bg-background hover:bg-accent hover:text-accent-foreground',
+				'justify-center border border-input bg-neutral hover:bg-accent hover:text-accent-foreground',
 			secondary: 'justify-center bg-secondary text-secondary-foreground hover:bg-secondary/80',
-			ghost: 'justify-center hover:bg-accent hover:text-accent-foreground',
+			ghost: 'justify-center hover:bg-primary hover:text-accent-foreground',
 			link: 'justify-center text-primary underline-offset-4 hover:bg-fill/20',
-			sidebar: 'bg-sidebar text-sidebarText hover:text-sidebarHover hover:bg-primary/20 w-full',
-			activeSidebar:
-				'bg-activeSidebar text-sidebarText/110 hover:text-white hover:bg-primary/90 w-full',
-			headerSidebar:
-				'justify-center bg-black/10 text-sidebarText/80 w-full lg:justify-start hover:text-white',
+			sidebar: 'bg-tertiary text-text hover:bg-tertiaryHover w-full',
+			activeSidebar: 'bg-tertiaryActive text-text w-full',
 			navigatorClose: 'justify-center bg-transparent'
 		},
 		size: {

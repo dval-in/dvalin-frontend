@@ -1,20 +1,22 @@
 <script lang="ts">
-	import { settings } from '$lib/store/global_state';
-	import { get } from 'svelte/store';
+	import { applicationState } from '$lib/store/global_state';
 	import '../app.pcss';
 	import Sidebar from '$lib/components/navigator/Sidebar.svelte';
+	import { get } from 'svelte/store';
+	import { Toaster } from 'svelte-sonner';
 
-	let themeClass = `t${get(settings).global.theme}`;
+	console.log(get(applicationState));
 </script>
 
-<html lang="en" class="{themeClass} text-text bg-background min-h-screen">
-	<div id="main" class="h-full">
+<div class={`${$applicationState.settings.theme} bg-neutral text-text min-h-screen`}>
+	<div class="h-full" id="main">
 		<Sidebar />
 		<!--  Main content-->
-		<div class="sm:pl-20 lg:pl-72 max-sm:pt-16">
-			<div class="p-4 sm:pt-14 scrollbar-gutter">
+		<div class="sm:pl-20 xl:pl-72 max-sm:pt-16 sm:flex sm:justify-center">
+			<div class="flex flex-1 p-4 sm:pt-14 sm:max-w-[1536px] scrollbar-gutter">
 				<slot />
 			</div>
 		</div>
+		<Toaster richColors />
 	</div>
-</html>
+</div>

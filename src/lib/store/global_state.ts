@@ -1,28 +1,31 @@
 import { persisted } from 'svelte-persisted-store';
-import { Convert as SettingsConvert, type Settings } from '$lib/structs/settings';
+import { type ApplicationState } from '$lib/structs/application_state';
 
-export const settings = persisted(
-	'settings',
-	{
-		global: {
-			theme: 0
-		},
-		user: {
-			logined: false,
-			email: '',
-			username: ''
+const defaultValues: ApplicationState = {
+	settings: {
+		theme: 'dark',
+		locale: 'en'
+	},
+	user: {
+		ar: 0,
+		server: 'eu',
+		uid: 0,
+		wl: 0
+	},
+	wishes: {
+		bannerHistory: {
+			character: [],
+			weapon: [],
+			standard: []
 		}
 	},
-	{
-		storage: 'local',
-		syncTabs: true,
-		serializer: {
-			parse: (text: string): Settings => {
-				return SettingsConvert.toSettings(text);
-			},
-			stringify: (data: Settings): string => {
-				return SettingsConvert.settingsToJson(data);
-			}
-		}
-	}
-);
+	achievements: {},
+	characters: {},
+	weapons: {},
+	tcg: {}
+};
+
+export const applicationState = persisted('applicationState', defaultValues, {
+	storage: 'local',
+	syncTabs: true
+});

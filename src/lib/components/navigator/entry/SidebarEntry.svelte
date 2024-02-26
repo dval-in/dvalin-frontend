@@ -12,11 +12,11 @@
 </script>
 
 <IconButton
-	{icon}
-	variant={currentActivePath === link ? 'activeSidebar' : 'sidebar'}
-	href={link}
-	{onClick}
 	{...$$restProps}
+	href={link}
+	{icon}
+	{onClick}
+	variant={currentActivePath === link ? 'activeSidebar' : 'sidebar'}
 >
-	<div class={`ml-2 ${isSidebarOpen ? '' : 'sm:max-lg:hidden'}`}>{title}</div>
+	<div class={`ml-2 ${isSidebarOpen ? '' : 'sm:max-xl:hidden'}`}>{title}</div>
 </IconButton>
