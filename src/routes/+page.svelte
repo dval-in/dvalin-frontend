@@ -12,7 +12,22 @@
 				<Card.Title>Changelog:</Card.Title>
 			</Card.Header>
 			<Card.Content class="flex-1">
-				<Text type="p">Changelog TXT</Text>
+				<Text type="p"
+					>Improved import (support a wider range of exports, no multi account though!!)</Text
+				>
+				<Text type="p">Beginner's banner</Text>
+				<Text type="p">
+					Improved pull list (added pull number, highlight 4 & 5 star, filter by dates)
+				</Text>
+				<Text type="p"
+					>Fixed images (no brokey anymore!!!!, huge thanks to @Flappydom for helping with renaming
+					files)
+				</Text>
+				<Text type="p">Improved search experience</Text>
+				<Text type="p">Characters are retrieved from user data</Text>
+				<Text type="p">
+					Use GOOD types under the hood (You cant see it but believe me... its there)
+				</Text>
 			</Card.Content>
 			<Card.Footer class="flex-1 items-end gap-5 justify-end">
 				<Button variant="default">More</Button>
