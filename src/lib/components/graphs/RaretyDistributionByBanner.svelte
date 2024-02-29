@@ -48,7 +48,7 @@
 		<Svg>
 			<Pie {tooltip} />
 		</Svg>
-		<Tooltip let:data>
+		<Tooltip class="bg-neutral" let:data>
 			<TooltipItem format="integer" label="Star" value={data.rarity} valueAlign="right" />
 			<TooltipItem format="integer" label="value" value={data.value} valueAlign="right" />
 			<TooltipItem

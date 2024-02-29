@@ -28,7 +28,6 @@ const config = {
 				sm: 'calc(var(--radius) - 4px)'
 			},
 			colors: {
-				fivestar: '#FFB13F',
 				fourstar: '#7B5C90',
 				threestar: '#5E93B2'
 			},
@@ -50,7 +49,8 @@ const config = {
 					tertiaryHover: '#535365',
 					tertiaryActive: '#1C1C22',
 					neutral: '#1C1C22',
-					text: '#FFFFFF'
+					text: '#FFFFFF',
+					fivestar: '#805920'
 				},
 				light: {
 					border: '#000000',
@@ -62,7 +62,8 @@ const config = {
 					tertiaryHover: '#D1C7B2',
 					tertiaryActive: '#FFFFFF',
 					neutral: '#FFFFFF',
-					text: '#393946'
+					text: '#393946',
+					fivestar: '#ffd89f'
 				}
 			},
 			{
