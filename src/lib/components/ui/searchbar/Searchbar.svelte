@@ -9,7 +9,7 @@
 		Item as CommandItem
 	} from '$lib/components/ui/command';
 	import IconButton from '../icon-button/IconButton.svelte';
-	import { mdiDatabaseSearch } from '@mdi/js';
+	import { mdiMagnify } from '@mdi/js';
 
 	export let searchGroup: string;
 	export let searchableDataList: { name: string; link: string; img: string }[];
@@ -24,7 +24,14 @@
 	};
 </script>
 
-<IconButton icon={mdiDatabaseSearch} onClick={opencmd}>Search</IconButton>
+<IconButton
+	class="min-w-48 max-sm:flex-1 justify-start"
+	icon={mdiMagnify}
+	onClick={opencmd}
+	variant="outline"
+>
+	Search...
+</IconButton>
 
 <CommandRoot bind:open>
 	<CommandInput placeholder={'Search for ' + searchGroup + '...'} />

@@ -1,33 +1,40 @@
 <script lang="ts">
 	import { scaleOrdinal } from 'd3-scale';
 	import { Chart, Pie, Svg, Tooltip, TooltipItem } from 'layerchart';
-	import type { Wish } from '$lib/structs/wish';
+	import type { IWish } from '$lib/types/wish';
 
-	export let wishData: Wish[];
+	export let wishData: IWish[];
+
+	const wishesWithRarity = wishData.map((wish) => {
+		return {
+			...wish,
+			rarity: 5
+		};
+	});
 
 	const getData = () => {
-		const test: { [key: number]: number } = {};
+		const rarityCount: { [key: number]: number } = {};
 
-		wishData.forEach((wish) => {
-			if (test[wish.rarity] === undefined) {
-				test[wish.rarity] = 0;
+		wishesWithRarity.forEach((wishWithRarity) => {
+			if (rarityCount[wishWithRarity.rarity] === undefined) {
+				rarityCount[wishWithRarity.rarity] = 0;
 			}
-			test[wish.rarity] = test[wish.rarity] + 1;
+			rarityCount[wishWithRarity.rarity] = rarityCount[wishWithRarity.rarity] + 1;
 		});
 
-		return Object.keys(test)
+		return Object.keys(rarityCount)
 			.map((key) => {
-				const a = Number.parseInt(key);
-				return { rarity: a, value: test[a] };
+				const rarity = Number.parseInt(key);
+				return { rarity, value: rarityCount[rarity] };
 			})
 			.sort((a, b) => a.rarity - b.rarity);
 	};
 
-	const colorKeys = [0, 1, 2];
+	const colorKeys = [3, 4, 5];
 	const keyColors = ['#5E93B2', '#7B5C90', '#FFB13F'];
 </script>
 
-<div class="h-[300px] w-full">
+<div class="h-[300px] min-w-[300px] w-full">
 	<Chart
 		data={getData()}
 		let:tooltip

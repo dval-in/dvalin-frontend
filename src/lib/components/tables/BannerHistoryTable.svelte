@@ -32,40 +32,86 @@
 	import {
 		addColumnFilters,
 		addPagination,
+		addResizedColumns,
 		addSortBy,
 		matchFilter
 	} from 'svelte-headless-table/plugins';
 	import { Button } from '$lib/components/ui/button';
-	import type { Wish } from '$lib/structs/wish';
 	import SelectFilter from './SelectFilter.svelte';
 	import NameCell from '$lib/components/tables/NameCell.svelte';
+	import type { IWish } from '$lib/types/wish';
+	import DateRangeFilter from '$lib/components/tables/DateRangeFilter.svelte';
+	import RarityCell from '$lib/components/tables/RarityCell.svelte';
 
-	const PAGE_SIZE = 50;
+	const PAGE_SIZE = 25;
 
-	export let data: Wish[];
+	export let data: IWish[];
 
-	const table = createTable(readable(data), {
+	const wishesWithRarity = data.map((w) => {
+		return {
+			...w,
+			rarity: 5
+		};
+	});
+
+	const table = createTable(readable(wishesWithRarity), {
 		page: addPagination({ initialPageSize: PAGE_SIZE }),
 		filter: addColumnFilters(),
 		sort: addSortBy({
-			initialSortKeys: [{ id: 'date', order: 'desc' }],
+			initialSortKeys: [{ id: 'number', order: 'desc' }],
 			toggleOrder: ['asc', 'desc']
-		})
+		}),
+		resize: addResizedColumns()
 	});
+
+	const dateRangeFilter = ({
+		filterValue,
+		value
+	}: {
+		filterValue: (number | null)[];
+		value: string;
+	}) => {
+		const [min, max] = filterValue;
+		const unixTime = new Date(value).getTime();
+		if (min === null || max === null) return true;
+
+		return min <= unixTime && unixTime <= max;
+	};
 
 	const columns = table.createColumns([
 		table.column({
+			accessor: 'number',
+			header: '#',
+			plugins: {
+				resize: {
+					initialWidth: 64
+				}
+			}
+		}),
+		table.column({
 			accessor: 'date',
 			header: 'Date',
-			cell: ({ value }) => {
-				return new Date(value).toDateString();
+			cell: ({ value }) => new Date(value).toLocaleDateString(),
+			plugins: {
+				sort: {
+					disable: true
+				},
+				filter: {
+					fn: dateRangeFilter,
+					initialFilterValue: [null, null],
+					render: ({ filterValue, preFilteredValues }) =>
+						createRender(DateRangeFilter, { filterValue, preFilteredValues })
+				},
+				resize: {
+					initialWidth: 100
+				}
 			}
 		}),
 		table.column({
 			accessor: 'type',
 			header: 'Type',
 			cell: ({ value }) => {
-				return createRender(Icon, { path: value === 'character' ? mdiAccount : mdiSwordCross });
+				return createRender(Icon, { path: value === 'Character' ? mdiAccount : mdiSwordCross });
 			},
 			plugins: {
 				sort: {
@@ -75,19 +121,29 @@
 					fn: matchFilter,
 					render: ({ filterValue, preFilteredValues }) =>
 						createRender(SelectFilter, { filterValue, title: 'Type', preFilteredValues })
+				},
+				resize: {
+					initialWidth: 88
 				}
 			}
 		}),
 		table.column({
-			accessor: 'name',
+			accessor: 'key',
 			header: 'Name',
-			cell: (v) => {
-				return createRender(NameCell, { type: v.row.cellForId.type.value, name: v.value });
+			cell: ({ value }) => {
+				return createRender(NameCell, {
+					name: value
+				});
 			}
 		}),
 		table.column({
 			accessor: 'rarity',
 			header: createRender(Icon, { path: mdiStar }),
+			cell: ({ value }) => {
+				return createRender(RarityCell, {
+					rarity: value
+				});
+			},
 			plugins: {
 				sort: {
 					disable: true
@@ -100,12 +156,20 @@
 							title: 'Rarity',
 							preFilteredValues
 						})
+				},
+				resize: {
+					initialWidth: 96
 				}
 			}
 		}),
 		table.column({
 			accessor: 'pity',
-			header: 'Pity'
+			header: 'Pity',
+			plugins: {
+				resize: {
+					initialWidth: 84
+				}
+			}
 		})
 	]);
 
@@ -117,17 +181,17 @@
 	$: $sortKeys;
 </script>
 
-<div class="flex flex-1 flex-col">
-	<TableRoot {...$tableAttrs} class="flex flex-1 flex-col">
-		<TableHeader class="flex flex-1 flex-col">
+<div>
+	<TableRoot {...$tableAttrs}>
+		<TableHeader>
 			{#each $headerRows as headerRow (headerRow.id)}
 				<Subscribe rowAttrs={headerRow.attrs()} let:rowAttrs>
-					<TableRow {...rowAttrs} class="flex flex-1 flex-row">
+					<TableRow {...rowAttrs}>
 						{#each headerRow.cells as cell (cell.id)}
 							<Subscribe attrs={cell.attrs()} let:attrs props={cell.props()} let:props>
 								<TableHead
 									{...attrs}
-									class={`${cell.id === 'name' ? 'flex-1' : `flex`} ${cell.id === 'date' ? 'min-w-36' : ''} ${cell.id === 'type' ? 'min-w-24 justify-center' : ''} ${cell.id === 'rarity' || cell.id === 'pity' ? 'min-w-28 justify-center' : ''}`}
+									class={`px-0 ${cell.id === 'key' ? 'text-start' : 'text-center'}`}
 								>
 									{#if !props.sort.disabled}
 										<Button variant="ghost" on:click={props.sort.toggle}>
@@ -139,9 +203,7 @@
 											{/if}
 										</Button>
 									{:else if props.filter?.render}
-										<div>
-											<Render of={props.filter.render} />
-										</div>
+										<Render of={props.filter.render} />
 									{:else}
 										<Render of={cell.render()} />
 									{/if}
@@ -152,15 +214,18 @@
 				</Subscribe>
 			{/each}
 		</TableHeader>
-		<TableBody {...$tableBodyAttrs} class="flex flex-1 flex-col">
+		<TableBody {...$tableBodyAttrs}>
 			{#each $pageRows as row (row.id)}
 				<Subscribe rowAttrs={row.attrs()} let:rowAttrs>
-					<TableRow {...rowAttrs} class="flex flex-1 flex-row">
+					<TableRow
+						{...rowAttrs}
+						class={`${row.cellForId.rarity.value === 5 ? 'bg-fivestar' : 0} ${row.cellForId.rarity.value === 4 ? 'bg-fourstar' : 0}`}
+					>
 						{#each row.cells as cell (cell.id)}
 							<Subscribe attrs={cell.attrs()} let:attrs>
 								<TableCell
 									{...attrs}
-									class={`items-center ${cell.id === 'name' ? 'flex-1' : `flex`} ${cell.id === 'date' ? 'min-w-36' : ''} ${cell.id === 'type' ? 'min-w-24 justify-center' : ''} ${cell.id === 'rarity' || cell.id === 'pity' ? 'min-w-28 justify-center' : ''}`}
+									class={`p-2  ${cell.id === 'key' ? 'text-start' : 'text-center'} `}
 								>
 									<Render of={cell.render()} />
 								</TableCell>

@@ -2,22 +2,25 @@
 	import { scaleOrdinal, scaleTime } from 'd3-scale';
 	import { format, formatDate, PeriodType } from 'svelte-ux';
 	import { AreaStack, Axis, Chart, Highlight, Svg, Tooltip, TooltipItem } from 'layerchart';
-	import type { Wishes } from '$lib/structs/application_state';
 	import { stack } from 'd3-shape';
 	import { flatten } from 'svelte-ux/utils/array';
+	import type { IWish, IWishes } from '$lib/types/wish';
+	import type { WishBannerKey } from '$lib/types/keys/WishBannerKey';
 
-	export let data: Wishes;
+	export let data: IWishes;
 
 	const keys = ['3', '4', '5'];
 
 	const getMonthlyData = () => {
 		let pullsByMonth: { [key: string]: { [key: string]: number } } = {};
 
-		const bannerHistoryData = [
-			...data.bannerHistory.character,
-			...data.bannerHistory.weapon,
-			...data.bannerHistory.standard
-		];
+		const bannerHistoryData: IWish[] = [];
+
+		Object.keys(data).forEach((key: string) => {
+			const wishes = data[key as WishBannerKey];
+
+			bannerHistoryData.push(...(wishes !== undefined ? wishes : []));
+		});
 
 		bannerHistoryData.forEach((d) => {
 			const date = new Date(d.date);
@@ -26,14 +29,14 @@
 				// eslint-disable-next-line @typescript-eslint/naming-convention
 				pullsByMonth[dateKey] = { '3': 0, '4': 0, '5': 0 };
 			}
-			pullsByMonth[dateKey][d.rarity] = pullsByMonth[dateKey][d.rarity] + 1;
+			pullsByMonth[dateKey][5] = pullsByMonth[dateKey][5] + 1;
 		});
 
 		return stack().keys(keys)(
 			Object.keys(pullsByMonth)
 				.map((key) => {
 					return {
-						date: new Date(key),
+						date: new Date(key).getTime(),
 						// eslint-disable-next-line @typescript-eslint/naming-convention
 						'3': pullsByMonth[key]['3'],
 						// eslint-disable-next-line @typescript-eslint/naming-convention
@@ -45,6 +48,8 @@
 				.sort((a, b) => new Date(a.date).valueOf() - new Date(b.date).valueOf())
 		);
 	};
+
+	const formatDateLabel = (d: string) => formatDate(d, PeriodType.MonthYear, { variant: 'short' });
 </script>
 
 <div class="h-[300px] w-full">
@@ -61,17 +66,12 @@
 		tooltip
 		x={(d) => d.data.date}
 		xScale={scaleTime()}
-		y={[0, 1]}
+		y={['0', '1']}
 		yNice
 	>
 		<Svg>
 			<Axis grid labelProps={{ class: 'fill-text' }} placement="left" rule />
-			<Axis
-				format={(d) => formatDate(d, PeriodType.MonthYear, { variant: 'short' })}
-				labelProps={{ class: 'fill-text' }}
-				placement="bottom"
-				rule
-			/>
+			<Axis format={formatDateLabel} labelProps={{ class: 'fill-text' }} placement="bottom" rule />
 			<AreaStack />
 			<Highlight lines={{ class: 'stroke-text [stroke-dasharray:unset]' }} points />
 		</Svg>

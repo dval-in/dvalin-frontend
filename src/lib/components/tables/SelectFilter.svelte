@@ -9,7 +9,7 @@
 	import Icon from '$lib/components/ui/icon/icon.svelte';
 	import { mdiFilter } from '@mdi/js';
 
-	export const getDistinct = (items) => {
+	export const getDistinct = (items: string[]) => {
 		return Array.from(new Set(items));
 	};
 </script>

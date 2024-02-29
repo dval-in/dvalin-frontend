@@ -1,5 +1,7 @@
 <script lang="ts">
 	import Text from '$lib/components/typography/Text.svelte';
+	import DefaultLayout from '$lib/components/layout/DefaultLayout.svelte';
+	import { page } from '$app/stores';
 
 	let quoteGenerator: { quote: string; author: string }[] = [
 		{
@@ -477,11 +479,10 @@
 	}
 </script>
 
-<div class="flex flex-1 flex-col gap-6">
-	<Text type="h1">Error: Work-In-Progress</Text>
+<DefaultLayout title="Error">
 	<div>
 		<Text type="h2">{randomQuote.quote}</Text>
 		<Text type="h2">{randomQuote.author}</Text>
 	</div>
-	<Text type="p">Code: 404</Text>
-</div>
+	<Text type="p">Code: {$page.error?.message}</Text>
+</DefaultLayout>

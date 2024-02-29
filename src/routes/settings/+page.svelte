@@ -4,11 +4,12 @@
 	import { applicationState } from '$lib/store/global_state';
 	import IconButton from '$lib/components/ui/icon-button/IconButton.svelte';
 	import { mdiExport, mdiImport } from '@mdi/js';
-	import type { Theme } from '$lib/structs/theme';
-	import type { PaimonData } from '$lib/structs/paimon_data';
+	import type { Theme } from '$lib/types/theme';
+	import type { PaimonData } from '$lib/types/import/paimon';
 	import ConverterService from '$lib/services/converter';
 	import { Button } from '$lib/components/ui/button';
 	import { toast } from 'svelte-sonner';
+	import DefaultLayout from '$lib/components/layout/DefaultLayout.svelte';
 
 	function handleSettingsImport() {
 		let element = document.createElement('input');
@@ -74,9 +75,7 @@
 	}
 </script>
 
-<div class="flex flex-1 flex-col gap-6">
-	<Text type="h1">Settings</Text>
-
+<DefaultLayout title="Settings">
 	<div class="flex flex-col gap-2">
 		<Text type="h3">Theming</Text>
 		<div class="flex flex-row gap-4">
@@ -113,4 +112,4 @@
 			<IconButton icon={mdiExport} onClick={handleSettingsExport}>Export Data</IconButton>
 		</div>
 	</div>
-</div>
+</DefaultLayout>

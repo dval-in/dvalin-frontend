@@ -2,12 +2,12 @@
 	import { Button } from '$lib/components/ui/button/index.js';
 	import Text from '$lib/components/typography/Text.svelte';
 	import Icon from '$lib/components/ui/icon/icon.svelte';
-	import type { Wish } from '$lib/structs/wish';
-	import PullChip from './pull-chip/PullChip.svelte';
+	import PullChip from '$lib/components/ui/pull-chip/PullChip.svelte';
+	import type { IWish } from '$lib/types/wish';
 
 	export let icon: string;
 	export let title: string;
-	export let data: Wish[];
+	export let data: IWish[];
 
 	const sortedWishData = data.sort(
 		(a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf()
@@ -50,7 +50,7 @@
 		<Text type="h4">Latest pulls</Text>
 		<div class="flex flex-wrap gap-2">
 			{#each sortedWishData.slice(0, 10) as pull}
-				<PullChip type={pull.type} name={pull.name} counter={pull.pity} />
+				<PullChip name={pull.key} counter={pull.pity} />
 			{/each}
 		</div>
 	</div>

@@ -1,12 +1,13 @@
 <script lang="ts">
 	import Text from '$lib/components/typography/Text.svelte';
-	import { type Elements, type Weapons } from '$lib/structs/types';
+	import type { Elements } from '$lib/types/elements';
+	import type { WeaponTypes } from '$lib/types/weapon';
 
 	export let link: string;
 	export let name: string;
 	export let img: string;
 	export let element: Elements;
-	export let weapon: Weapons;
+	export let weapon: WeaponTypes;
 	export let level: number;
 	export let constellation: number;
 </script>
