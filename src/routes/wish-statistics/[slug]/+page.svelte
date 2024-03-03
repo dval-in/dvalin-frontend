@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { applicationState } from '$lib/store/global_state';
 	import Text from '$lib/components/typography/Text.svelte';
-	import BannerHistoryTable from '$lib/components/tables/BannerHistoryTable.svelte';
 	import RaretyDistributionByBanner from '$lib/components/graphs/RaretyDistributionByBanner.svelte';
 	import type { IMappedWish, IWish } from '$lib/types/wish';
 	import DefaultLayout from '$lib/components/layout/DefaultLayout.svelte';
@@ -9,6 +8,7 @@
 	import type { CharacterIndex } from '$lib/types/index/character';
 	import type { WeaponIndex } from '$lib/types/index/weapon';
 	import { isCharacterKey } from '$lib/types/keys/CharacterKey';
+	import BannerHistoryTable from '$lib/components/tables/banner-history-table/BannerHistoryTable.svelte';
 
 	/** @type {import('../../../../.svelte-kit/types/src/routes').PageData} */
 	export let data: {

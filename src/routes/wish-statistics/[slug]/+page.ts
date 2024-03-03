@@ -2,9 +2,10 @@ import { error } from '@sveltejs/kit';
 import type { WishBannerKey } from '$lib/types/keys/WishBannerKey';
 import type { CharacterIndex } from '$lib/types/index/character';
 import type { WeaponIndex } from '$lib/types/index/weapon';
+import type { RouteParams } from '../../../../.svelte-kit/types/src/routes/wish-statistics/[slug]/$types';
 
 /** @type {import('./$types').PageLoad} */
-export async function load({ params }) {
+export async function load({ params }: { params: RouteParams }) {
 	let pageType: WishBannerKey;
 	let characterIndex: CharacterIndex;
 	let weaponIndex: WeaponIndex;

@@ -38,9 +38,9 @@
 	} from 'svelte-headless-table/plugins';
 	import { Button } from '$lib/components/ui/button';
 	import SelectFilter from './SelectFilter.svelte';
-	import NameCell from '$lib/components/tables/NameCell.svelte';
 	import type { IMappedWish } from '$lib/types/wish';
-	import DateRangeFilter from '$lib/components/tables/DateRangeFilter.svelte';
+	import DateRangeFilter from '$lib/components/tables/banner-history-table/DateRangeFilter.svelte';
+	import NameCell from '$lib/components/tables/banner-history-table/NameCell.svelte';
 
 	const PAGE_SIZE = 25;
 
