@@ -194,6 +194,8 @@ function convertPaimonCharacter(paimonPullId: string): CharacterKey {
 
 function convertPaimonWeapon(paimonPullId: string): WeaponKey {
 	switch (paimonPullId) {
+		case 'unknown_3_star':
+			return 'Unknown3Star';
 		case 'a_thousand_floating_dreams':
 			return 'AThousandFloatingDreams';
 		case 'akuoumaru':

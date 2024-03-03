@@ -38,6 +38,7 @@ export async function load({ params }: { params: RouteParams }) {
 	if (characterIndexResponse.ok && weaponIndexResponse.ok) {
 		characterIndex = await characterIndexResponse.json();
 		weaponIndex = await weaponIndexResponse.json();
+		weaponIndex['Unknown3Star'] = { name: 'Unknown 3 star', rarity: 3 };
 	} else {
 		error(500, 'Internal error');
 	}
