@@ -28,9 +28,7 @@
 				<Text type="p">
 					Use GOOD types under the hood (You cant see it but believe me... its there)
 				</Text>
-				<Text type="p">
-					Removed random rarity in preparation for character/weapon/rarity mapping
-				</Text>
+				<Text type="p">Character/weapon/rarity mapping</Text>
 			</Card.Content>
 			<Card.Footer class="flex-1 items-end gap-5 justify-end">
 				<Button variant="default">More</Button>
