@@ -24,8 +24,9 @@
 	};
 
 	if ($applicationState.characters !== undefined) {
-		data = Object.keys($applicationState.characters).map((key: string) => {
-			if (isCharacterKey(key)) {
+		data = Object.keys($applicationState.characters)
+			.filter((key: string) => isCharacterKey(key))
+			.map((key: CharacterKey) => {
 				return {
 					link: '/characters/' + key.toLowerCase(),
 					name: key,
@@ -33,8 +34,7 @@
 					weapon: 'bow',
 					img: S3Service.getCharacterLink(key) + '/icon.webp'
 				};
-			}
-		});
+			});
 	}
 </script>
 
