@@ -5,7 +5,7 @@
 	import Searchbar from '$lib/components/ui/searchbar/Searchbar.svelte';
 	import S3Service from '$lib/services/s3';
 	import { applicationState } from '$lib/store/global_state';
-	import type { CharacterKey } from '$lib/types/keys/CharacterKey';
+	import { type CharacterKey, isCharacterKey } from '$lib/types/keys/CharacterKey';
 	import DefaultLayout from '$lib/components/layout/DefaultLayout.svelte';
 	import type { WeaponTypes } from '$lib/types/weapon';
 	import type { Elements } from '$lib/types/elements';
@@ -25,13 +25,15 @@
 
 	if ($applicationState.characters !== undefined) {
 		data = Object.keys($applicationState.characters).map((key: string) => {
-			return {
-				link: '/characters/' + key.toLowerCase(),
-				name: key as CharacterKey,
-				element: 'geo',
-				weapon: 'bow',
-				img: S3Service.getCharacterLink(key as CharacterKey) + '/icon.webp'
-			};
+			if (isCharacterKey(key)) {
+				return {
+					link: '/characters/' + key.toLowerCase(),
+					name: key,
+					element: 'geo',
+					weapon: 'bow',
+					img: S3Service.getCharacterLink(key) + '/icon.webp'
+				};
+			}
 		});
 	}
 </script>

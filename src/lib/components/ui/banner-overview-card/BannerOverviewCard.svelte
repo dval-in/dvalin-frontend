@@ -4,14 +4,15 @@
 	import Icon from '$lib/components/ui/icon/icon.svelte';
 	import PullChip from '$lib/components/ui/pull-chip/PullChip.svelte';
 	import type { IWish } from '$lib/types/wish';
+	import type { IMappedWish } from '$lib/types/wish.js';
 
 	export let icon: string;
 	export let title: string;
-	export let data: IWish[];
+	export let data: IMappedWish[];
 
-	const sortedWishData = data.sort(
-		(a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf()
-	);
+	const filterFiveStars = (): IMappedWish[] => {
+		return data.filter((wish: IMappedWish) => wish.rarity === 5).slice(0, 10);
+	};
 </script>
 
 <div class="flex flex-1 flex-col bg-tertiary rounded-md p-4 gap-3">
@@ -49,8 +50,8 @@
 	<div class="flex flex-col gap-2">
 		<Text type="h4">Latest pulls</Text>
 		<div class="flex flex-wrap gap-2">
-			{#each sortedWishData.slice(0, 10) as pull}
-				<PullChip name={pull.key} counter={pull.pity} />
+			{#each filterFiveStars() as pull}
+				<PullChip name={pull.name} key={pull.key} counter={pull.pity} />
 			{/each}
 		</div>
 	</div>

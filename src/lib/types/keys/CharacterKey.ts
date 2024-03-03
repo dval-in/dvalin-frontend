@@ -1,4 +1,4 @@
-const characterKey = [
+const characterKeyList = [
 	'Albedo',
 	'Alhaitham',
 	'Aloy',
@@ -81,8 +81,8 @@ const characterKey = [
 	'Zhongli' // Zhongli
 ];
 
-export type CharacterKey = (typeof characterKey)[number];
+export type CharacterKey = (typeof characterKeyList)[number];
 
 export const isCharacterKey = (key: string): key is CharacterKey => {
-	return characterKey.includes(key);
+	return characterKeyList.includes(key);
 };

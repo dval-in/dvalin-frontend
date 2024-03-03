@@ -1,25 +1,18 @@
 <script lang="ts">
 	import { scaleOrdinal } from 'd3-scale';
 	import { Chart, Pie, Svg, Tooltip, TooltipItem } from 'layerchart';
-	import type { IWish } from '$lib/types/wish';
+	import type { IMappedWish } from '$lib/types/wish';
 
-	export let wishData: IWish[];
-
-	const wishesWithRarity = wishData.map((wish) => {
-		return {
-			...wish,
-			rarity: 5
-		};
-	});
+	export let wishData: IMappedWish[];
 
 	const getData = () => {
 		const rarityCount: { [key: number]: number } = {};
 
-		wishesWithRarity.forEach((wishWithRarity) => {
-			if (rarityCount[wishWithRarity.rarity] === undefined) {
-				rarityCount[wishWithRarity.rarity] = 0;
+		wishData.forEach((wish: IMappedWish) => {
+			if (rarityCount[wish.rarity] === undefined) {
+				rarityCount[wish.rarity] = 0;
 			}
-			rarityCount[wishWithRarity.rarity] = rarityCount[wishWithRarity.rarity] + 1;
+			rarityCount[wish.rarity] = rarityCount[wish.rarity] + 1;
 		});
 
 		return Object.keys(rarityCount)

@@ -4,12 +4,13 @@
 	import { type CharacterKey, isCharacterKey } from '$lib/types/keys/CharacterKey';
 	import type { WeaponKey } from '$lib/types/keys/WeaponKey';
 
-	export let name: CharacterKey | WeaponKey;
+	export let name: string;
+	export let key: CharacterKey | WeaponKey;
 	export let counter: number;
 
-	const imgUrl = isCharacterKey(name)
-		? S3Service.getCharacterLink(name) + '/icon.webp'
-		: S3Service.getWeaponLink(name) + '/icon.png';
+	const imgUrl = isCharacterKey(key)
+		? S3Service.getCharacterLink(key) + '/icon.webp'
+		: S3Service.getWeaponLink(key) + '/icon.png';
 </script>
 
 <div class="flex items-center gap-2 bg-neutral p-1 rounded-md">

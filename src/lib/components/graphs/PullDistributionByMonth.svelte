@@ -4,17 +4,17 @@
 	import { AreaStack, Axis, Chart, Highlight, Svg, Tooltip, TooltipItem } from 'layerchart';
 	import { stack } from 'd3-shape';
 	import { flatten } from 'svelte-ux/utils/array';
-	import type { IWish, IWishes } from '$lib/types/wish';
+	import type { IMappedWish, IMappedWishes } from '$lib/types/wish';
 	import type { WishBannerKey } from '$lib/types/keys/WishBannerKey';
 
-	export let data: IWishes;
+	export let data: IMappedWishes;
 
 	const keys = ['3', '4', '5'];
 
 	const getMonthlyData = () => {
 		let pullsByMonth: { [key: string]: { [key: string]: number } } = {};
 
-		const bannerHistoryData: IWish[] = [];
+		const bannerHistoryData: IMappedWish[] = [];
 
 		Object.keys(data).forEach((key: string) => {
 			const wishes = data[key as WishBannerKey];
@@ -29,7 +29,7 @@
 				// eslint-disable-next-line @typescript-eslint/naming-convention
 				pullsByMonth[dateKey] = { '3': 0, '4': 0, '5': 0 };
 			}
-			pullsByMonth[dateKey][5] = pullsByMonth[dateKey][5] + 1;
+			pullsByMonth[dateKey][d.rarity] = pullsByMonth[dateKey][d.rarity] + 1;
 		});
 
 		return stack().keys(keys)(

@@ -39,22 +39,14 @@
 	import { Button } from '$lib/components/ui/button';
 	import SelectFilter from './SelectFilter.svelte';
 	import NameCell from '$lib/components/tables/NameCell.svelte';
-	import type { IWish } from '$lib/types/wish';
+	import type { IMappedWish } from '$lib/types/wish';
 	import DateRangeFilter from '$lib/components/tables/DateRangeFilter.svelte';
-	import RarityCell from '$lib/components/tables/RarityCell.svelte';
 
 	const PAGE_SIZE = 25;
 
-	export let data: IWish[];
+	export let data: IMappedWish[];
 
-	const wishesWithRarity = data.map((w) => {
-		return {
-			...w,
-			rarity: 5
-		};
-	});
-
-	const table = createTable(readable(wishesWithRarity), {
+	const table = createTable(readable(data), {
 		page: addPagination({ initialPageSize: PAGE_SIZE }),
 		filter: addColumnFilters(),
 		sort: addSortBy({
@@ -139,11 +131,6 @@
 		table.column({
 			accessor: 'rarity',
 			header: createRender(Icon, { path: mdiStar }),
-			cell: ({ value }) => {
-				return createRender(RarityCell, {
-					rarity: value
-				});
-			},
 			plugins: {
 				sort: {
 					disable: true

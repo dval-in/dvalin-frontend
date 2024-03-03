@@ -386,7 +386,7 @@ function convertPaimonWeapon(paimonPullId: string): WeaponKey {
 			return 'Predator';
 		case 'primordial_jade_cutter':
 			return 'PrimordialJadeCutter';
-		case 'primordial_jade_winged_spear':
+		case 'primordial_jade_winged-spear':
 			return 'PrimordialJadeWingedSpear';
 		case 'prospectors_drill':
 			return 'ProspectorsDrill';

@@ -13,6 +13,34 @@
 	import PullDistributionByMonth from '$lib/components/graphs/PullDistributionByMonth.svelte';
 	import { applicationState } from '$lib/store/global_state';
 	import DefaultLayout from '$lib/components/layout/DefaultLayout.svelte';
+	import type { CharacterIndex } from '$lib/types/index/character';
+	import type { IMappedWishes, IWish, IWishes } from '$lib/types/wish';
+	import type { WeaponIndex } from '$lib/types/index/weapon';
+	import { isWishBannerKey } from '$lib/types/keys/WishBannerKey';
+	import { isCharacterKey } from '$lib/types/keys/CharacterKey';
+
+	/** @type {import('../../../../.svelte-kit/types/src/routes').PageData} */
+	export let data: { Character: CharacterIndex; Weapon: WeaponIndex };
+	let wishData: IMappedWishes = {};
+	const wishes: IWishes | undefined = $applicationState.wishes;
+
+	if (wishes !== undefined) {
+		Object.keys(wishes).forEach((key: string) => {
+			if (isWishBannerKey(key)) {
+				wishData[key] = wishes[key]?.map((wish: IWish) => {
+					const index = isCharacterKey(wish.key)
+						? data['Character'][wish.key]
+						: data['Weapon'][wish.key];
+
+					return {
+						...wish,
+						name: index.name,
+						rarity: index.rarity
+					};
+				});
+			}
+		});
+	}
 </script>
 
 <DefaultLayout title="Wish statistics">
@@ -22,33 +50,17 @@
 	</svelte:fragment>
 
 	<div class="flex flex-wrap gap-4">
-		{#if $applicationState.wishes?.CharacterEvent !== undefined}
-			<BannerOverviewCard
-				data={$applicationState.wishes.CharacterEvent}
-				icon={mdiAccount}
-				title="Character"
-			/>
+		{#if wishData?.CharacterEvent !== undefined}
+			<BannerOverviewCard data={wishData.CharacterEvent} icon={mdiAccount} title="Character" />
 		{/if}
-		{#if $applicationState.wishes?.WeaponEvent !== undefined}
-			<BannerOverviewCard
-				data={$applicationState.wishes.WeaponEvent}
-				icon={mdiSwordCross}
-				title="Weapon"
-			/>
+		{#if wishData?.WeaponEvent !== undefined}
+			<BannerOverviewCard data={wishData.WeaponEvent} icon={mdiSwordCross} title="Weapon" />
 		{/if}
-		{#if $applicationState.wishes?.Standard !== undefined}
-			<BannerOverviewCard
-				data={$applicationState.wishes.Standard}
-				icon={mdiTrashCanOutline}
-				title="Standard"
-			/>
+		{#if wishData?.Standard !== undefined}
+			<BannerOverviewCard data={wishData.Standard} icon={mdiTrashCanOutline} title="Standard" />
 		{/if}
-		{#if $applicationState.wishes?.Beginner !== undefined}
-			<BannerOverviewCard
-				data={$applicationState.wishes.Beginner}
-				icon={mdiBaby}
-				title="Beginner"
-			/>
+		{#if wishData?.Beginner !== undefined}
+			<BannerOverviewCard data={wishData.Beginner} icon={mdiBaby} title="Beginner" />
 		{/if}
 	</div>
 	<div class="flex flex-wrap gap-4">
@@ -56,7 +68,7 @@
 			<div class="flex flex-1 flex-col gap-2">
 				<Text type="h3">Wish distribution over time</Text>
 				<div class="flex flex-1 bg-tertiary rounded-md p-4">
-					<PullDistributionByMonth data={$applicationState.wishes} />
+					<PullDistributionByMonth data={wishData} />
 				</div>
 			</div>
 		{/if}
