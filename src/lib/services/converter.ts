@@ -298,7 +298,7 @@ function convertPaimonWeapon(paimonPullId: string): WeaponKey {
 			return 'FlowingPurity';
 		case 'forest_regalia':
 			return 'ForestRegalia';
-		case 'freedom_sworn':
+		case 'freedom-sworn':
 			return 'FreedomSworn';
 		case 'frostbearer':
 			return 'Frostbearer';
