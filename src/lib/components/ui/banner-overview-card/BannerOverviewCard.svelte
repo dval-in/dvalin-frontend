@@ -50,12 +50,17 @@
 			</div>
 		</div>
 	</div>
+
 	<div class="flex flex-col gap-2">
 		<Text type="h4">Latest 5* pulls</Text>
 		<div class="flex flex-wrap gap-2">
-			{#each filterFiveStars() as pull}
-				<PullChip name={pull.name} key={pull.key} counter={pull.pity} />
-			{/each}
+			{#if filterFiveStars().length > 0}
+				{#each filterFiveStars() as pull}
+					<PullChip name={pull.name} key={pull.key} counter={pull.pity} />
+				{/each}
+			{:else}
+				You haven't pulled a 5* in this banner yet
+			{/if}
 		</div>
 	</div>
 </div>
