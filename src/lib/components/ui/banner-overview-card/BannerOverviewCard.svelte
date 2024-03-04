@@ -11,7 +11,10 @@
 	export let data: IMappedWish[];
 
 	const filterFiveStars = (): IMappedWish[] => {
-		return data.filter((wish: IMappedWish) => wish.rarity === 5).slice(0, 10);
+		return data
+			.filter((wish: IMappedWish) => wish.rarity === 5)
+			.sort((a, b) => b.number - a.number)
+			.slice(0, 10);
 	};
 </script>
 
@@ -48,7 +51,7 @@
 		</div>
 	</div>
 	<div class="flex flex-col gap-2">
-		<Text type="h4">Latest pulls</Text>
+		<Text type="h4">Latest 5* pulls</Text>
 		<div class="flex flex-wrap gap-2">
 			{#each filterFiveStars() as pull}
 				<PullChip name={pull.name} key={pull.key} counter={pull.pity} />
