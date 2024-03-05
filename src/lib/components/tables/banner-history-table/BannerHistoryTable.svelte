@@ -40,6 +40,7 @@
 	import type { IMappedWish } from '$lib/types/wish';
 	import DateRangeFilter from '$lib/components/tables/banner-history-table/DateRangeFilter.svelte';
 	import NameCell from '$lib/components/tables/banner-history-table/NameCell.svelte';
+	import DateCell from '$lib/components/tables/banner-history-table/DateCell.svelte';
 
 	const PAGE_SIZE = 25;
 
@@ -87,7 +88,9 @@
 		table.column({
 			accessor: 'date',
 			header: 'Date',
-			cell: ({ value }) => new Date(value).toLocaleDateString(),
+			cell: ({ value }) => {
+				return createRender(DateCell, { value: value.toString() });
+			},
 			plugins: {
 				sort: {
 					disable: true
