@@ -21,10 +21,10 @@
 	import { createTable, Subscribe, Render, createRender } from 'svelte-headless-table';
 	import {
 		mdiAccount,
-		mdiChevronDown,
+		mdiArrowDown,
+		mdiArrowUp,
 		mdiChevronLeft,
 		mdiChevronRight,
-		mdiChevronUp,
 		mdiStar,
 		mdiSwordCross
 	} from '@mdi/js';
@@ -33,8 +33,7 @@
 		addColumnFilters,
 		addPagination,
 		addResizedColumns,
-		addSortBy,
-		matchFilter
+		addSortBy
 	} from 'svelte-headless-table/plugins';
 	import { Button } from '$lib/components/ui/button';
 	import SelectFilter from './SelectFilter.svelte';
@@ -68,6 +67,11 @@
 		if (min === null || max === null) return true;
 
 		return min <= unixTime && unixTime <= max;
+	};
+
+	const includeFilter = ({ filterValue, value }: { filterValue: string[]; value: string }) => {
+		if (filterValue.length === 0) return true;
+		return filterValue.includes(value);
 	};
 
 	const columns = table.createColumns([
@@ -110,7 +114,8 @@
 					disable: true
 				},
 				filter: {
-					fn: matchFilter,
+					fn: includeFilter,
+					initialFilterValue: [],
 					render: ({ filterValue, preFilteredValues }) =>
 						createRender(SelectFilter, { filterValue, title: 'Type', preFilteredValues })
 				},
@@ -136,7 +141,8 @@
 					disable: true
 				},
 				filter: {
-					fn: matchFilter,
+					fn: includeFilter,
+					initialFilterValue: [],
 					render: ({ filterValue, preFilteredValues }) =>
 						createRender(SelectFilter, {
 							filterValue,
@@ -168,7 +174,7 @@
 	$: $sortKeys;
 </script>
 
-<div>
+<div class="flex flex-1 flex-col gap-2">
 	<TableRoot {...$tableAttrs}>
 		<TableHeader>
 			{#each $headerRows as headerRow (headerRow.id)}
@@ -184,9 +190,9 @@
 										<Button variant="ghost" on:click={props.sort.toggle}>
 											<Render of={cell.render()} />
 											{#if props.sort.order === 'asc'}
-												<Icon path={mdiChevronDown} />
+												<Icon path={mdiArrowDown} />
 											{:else if props.sort.order === 'desc'}
-												<Icon path={mdiChevronUp} />
+												<Icon path={mdiArrowUp} />
 											{/if}
 										</Button>
 									{:else if props.filter?.render}
@@ -228,7 +234,9 @@
 			<PaginationItem>
 				<PaginationPrevButton on:click={() => ($pageIndex = $pageIndex - 1)}>
 					<Icon path={mdiChevronLeft} />
-					<Text type="p">Previous</Text>
+					<div class="max-sm:hidden">
+						<Text type="p">Previous</Text>
+					</div>
 				</PaginationPrevButton>
 			</PaginationItem>
 			{#each pages as page (page.key)}
@@ -250,7 +258,9 @@
 			{/each}
 			<PaginationItem>
 				<PaginationNextButton on:click={() => ($pageIndex = $pageIndex + 1)}>
-					<Text type="p">Next</Text>
+					<div class="max-sm:hidden">
+						<Text type="p">Next</Text>
+					</div>
 					<Icon path={mdiChevronRight} />
 				</PaginationNextButton>
 			</PaginationItem>

@@ -5,8 +5,9 @@
 	import { Button } from '$lib/components/ui/button';
 	import { RangeCalendar } from '$lib/components/ui/range-calendar';
 	import { Popover, PopoverTrigger, PopoverContent } from '$lib/components/ui/popover';
-	import { mdiFilter } from '@mdi/js';
+	import { mdiChevronDown, mdiFilter, mdiFilterRemove } from '@mdi/js';
 	import Icon from '$lib/components/ui/icon/icon.svelte';
+	import IconButton from '$lib/components/ui/icon-button/IconButton.svelte';
 
 	export let filterValue;
 	export let preFilteredValues;
@@ -37,6 +38,11 @@
 			? value.end.add({ days: 1 }).toDate(getLocalTimeZone()).getTime()
 			: null;
 	};
+
+	const clearFilter = () => {
+		$filterValue = [null, null];
+		value = undefined;
+	};
 </script>
 
 <div class="grid gap-2">
@@ -48,12 +54,24 @@
 				variant="ghost"
 			>
 				Date
-				{#if $filterValue[0] !== null}
+				{#if $filterValue[0] !== null && $filterValue[1] !== null}
 					<Icon path={mdiFilter} />
+				{:else}
+					<Icon path={mdiChevronDown} />
 				{/if}
 			</Button>
 		</PopoverTrigger>
 		<PopoverContent align="start" class="w-auto p-0">
+			<div class="p-3 pb-0">
+				<IconButton
+					class="w-full"
+					disabled={value === undefined}
+					icon={mdiFilterRemove}
+					onClick={clearFilter}
+				>
+					Clear Filter
+				</IconButton>
+			</div>
 			<RangeCalendar
 				bind:value
 				initialFocus
@@ -61,6 +79,7 @@
 				minValue={fromDate(new Date(min), getLocalTimeZone())}
 				numberOfMonths={1}
 				{onValueChange}
+				placeholder={fromDate(new Date(max), getLocalTimeZone())}
 			/>
 		</PopoverContent>
 	</Popover>

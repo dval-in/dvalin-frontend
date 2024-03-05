@@ -18,6 +18,8 @@
 	import type { WeaponIndex } from '$lib/types/index/weapon';
 	import { isWishBannerKey } from '$lib/types/keys/WishBannerKey';
 	import { isCharacterKey } from '$lib/types/keys/CharacterKey';
+	import { Card } from '$lib/components/ui/card';
+	import { CardContent, CardHeader } from '$lib/components/ui/card/index.js';
 
 	/** @type {import('../../../../.svelte-kit/types/src/routes').PageData} */
 	export let data: { Character: CharacterIndex; Weapon: WeaponIndex };
@@ -63,14 +65,16 @@
 			<BannerOverviewCard data={wishData.Beginner} icon={mdiBaby} title="Beginner" />
 		{/if}
 	</div>
-	<div class="flex flex-wrap gap-4">
-		{#if $applicationState.wishes}
-			<div class="flex flex-1 flex-col gap-2">
-				<Text type="h3">Wish distribution over time</Text>
-				<div class="flex flex-1 bg-tertiary rounded-md p-4">
+	{#if $applicationState.wishes}
+		<div class="flex flex-wrap gap-4">
+			<Card class="flex flex-1 flex-col gap-2">
+				<CardHeader>
+					<Text type="h3">Wish distribution over time</Text>
+				</CardHeader>
+				<CardContent>
 					<PullDistributionByMonth data={wishData} />
-				</div>
-			</div>
-		{/if}
-	</div>
+				</CardContent>
+			</Card>
+		</div>
+	{/if}
 </DefaultLayout>

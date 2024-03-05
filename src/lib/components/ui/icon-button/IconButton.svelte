@@ -6,7 +6,11 @@
 	export let onClick: () => void = () => {};
 </script>
 
-<Button on:click={onClick} {...$$restProps}>
+<Button {...$$restProps} on:click={onClick}>
 	<Icon path={icon} />
-	<slot />
+	{#if $$slots}
+		<div class="ml-2">
+			<slot />
+		</div>
+	{/if}
 </Button>

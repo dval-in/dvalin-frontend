@@ -1,17 +1,17 @@
 <script lang="ts">
-	import * as Card from '$lib/components/ui/card';
 	import { Button } from '$lib/components/ui/button';
 	import Text from '$lib/components/typography/Text.svelte';
 	import DefaultLayout from '$lib/components/layout/DefaultLayout.svelte';
+	import { Card, CardContent, CardFooter, CardHeader } from '$lib/components/ui/card';
 </script>
 
 <DefaultLayout title="Dashboard">
 	<div class="col-span-2 row-span-2">
-		<Card.Root class="size-full flex flex-col">
-			<Card.Header>
-				<Card.Title>Changelog:</Card.Title>
-			</Card.Header>
-			<Card.Content class="flex-1">
+		<Card class="size-full flex flex-col">
+			<CardHeader>
+				<Text type="h3">Changelog:</Text>
+			</CardHeader>
+			<CardContent class="flex-1">
 				<Text type="p">
 					Improved import (support a wider range of exports, no multi account though!!)
 				</Text>
@@ -29,11 +29,11 @@
 					Use GOOD types under the hood (You cant see it but believe me... its there)
 				</Text>
 				<Text type="p">Character/weapon/rarity mapping</Text>
-			</Card.Content>
-			<Card.Footer class="flex-1 items-end gap-5 justify-end">
+			</CardContent>
+			<CardFooter class="flex-1 justify-end gap-2">
 				<Button variant="default">More</Button>
 				<Button variant="ghost">Hide</Button>
-			</Card.Footer>
-		</Card.Root>
+			</CardFooter>
+		</Card>
 	</div>
 </DefaultLayout>
