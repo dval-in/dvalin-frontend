@@ -24,7 +24,7 @@
 
 		bannerHistoryData.forEach((d) => {
 			const date = new Date(d.date);
-			const dateKey = date.getFullYear() + '-' + (date.getMonth() + 1);
+			const dateKey = date.getMonth() + 1 + '.01.' + date.getFullYear();
 			if (pullsByMonth[dateKey] === undefined) {
 				// eslint-disable-next-line @typescript-eslint/naming-convention
 				pullsByMonth[dateKey] = { '3': 0, '4': 0, '5': 0 };
