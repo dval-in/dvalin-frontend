@@ -11,11 +11,11 @@ export async function load({ params }: { params: RouteParams }) {
 	let weaponIndex: WeaponIndex;
 
 	const characterIndexResponse = await fetch(
-		'https://raw.githubusercontent.com/dval-in/dvalin-data/character/data/EN/Character/index.json'
+		'https://raw.githubusercontent.com/dval-in/dvalin-data/main/data/EN/Character/index.json'
 	);
 
 	const weaponIndexResponse = await fetch(
-		'https://raw.githubusercontent.com/dval-in/dvalin-data/weapons/data/EN/Weapon/index.json'
+		'https://raw.githubusercontent.com/dval-in/dvalin-data/main/data/EN/Weapon/index.json'
 	);
 
 	switch (params.slug) {
