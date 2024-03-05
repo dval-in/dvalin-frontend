@@ -244,6 +244,8 @@ function convertPaimonWeapon(paimonPullId: string): WeaponKey {
 			return 'CompoundBow';
 		case 'cool_steel':
 			return 'CoolSteel';
+		case 'cranes_echoing_call':
+			return 'CranesEchoingCall';
 		case 'crescent_pike':
 			return 'CrescentPike';
 		case 'dark_iron_sword':
@@ -332,7 +334,7 @@ function convertPaimonWeapon(paimonPullId: string): WeaponKey {
 			return 'KagurasVerity';
 		case 'katsuragikiri_nagamasa':
 			return 'KatsuragikiriNagamasa';
-		case 'key_of_khaj_nisut':
+		case 'key_of_khaj-nisut':
 			return 'KeyOfKhajNisut';
 		case 'kings_squire':
 			return 'KingsSquire';
