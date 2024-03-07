@@ -1,29 +1,12 @@
 import type { PaimonCharacters, PaimonData, PaimonPulls } from '$lib/types/import/paimon';
 import type { ApplicationState } from '$lib/types/application_state';
-import type { ServerKey } from '$lib/types/keys/ServerKey';
+import { isServerKey } from '$lib/types/keys/ServerKey';
 import type { IWish } from '$lib/types/wish';
 import type { WeaponKey } from '$lib/types/keys/WeaponKey';
 import type { CharacterKey } from '$lib/types/keys/CharacterKey';
 import type { ISettings } from '$lib/types/settings';
 import type { ICharacters } from '$lib/types/character';
 import type { BannerKey } from '$lib/types/keys/BannerKey';
-
-function convertPaimonServer(paimonServer: string): ServerKey {
-	switch (paimonServer) {
-		case 'Europe':
-			return 'Europe';
-		case 'America':
-			return 'America';
-		case 'Asia':
-			return 'Asia';
-		case 'HK-TW':
-			return 'HK-TW';
-		case 'China':
-			return 'China';
-		default:
-			return 'Europe';
-	}
-}
 
 function convertPaimonCharacter(paimonPullId: string): CharacterKey {
 	switch (paimonPullId) {
@@ -244,6 +227,8 @@ function convertPaimonWeapon(paimonPullId: string): WeaponKey {
 			return 'CompoundBow';
 		case 'cool_steel':
 			return 'CoolSteel';
+		case 'cranes_echoing_call':
+			return 'CranesEchoingCall';
 		case 'crescent_pike':
 			return 'CrescentPike';
 		case 'dark_iron_sword':
@@ -332,7 +317,7 @@ function convertPaimonWeapon(paimonPullId: string): WeaponKey {
 			return 'KagurasVerity';
 		case 'katsuragikiri_nagamasa':
 			return 'KatsuragikiriNagamasa';
-		case 'key_of_khaj_nisut':
+		case 'key_of_khaj-nisut':
 			return 'KeyOfKhajNisut';
 		case 'kings_squire':
 			return 'KingsSquire';
@@ -628,7 +613,7 @@ export default class ConverterService {
 			},
 			user: {
 				ar: paimonData.ar,
-				server: convertPaimonServer(paimonData.server),
+				...(isServerKey(paimonData.server) ? { server: paimonData.server } : undefined),
 				uid: paimonData['wish-uid'],
 				wl: paimonData.wl
 			},
