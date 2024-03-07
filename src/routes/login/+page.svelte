@@ -2,7 +2,6 @@
 	import { signIn, signOut } from '@auth/sveltekit/client';
 	import { page } from '$app/stores';
 	import { Button } from '$lib/components/ui/button';
-	// import * as Card from '$lib/components/ui/card';
 </script>
 
 {#if $page.data.session?.user}

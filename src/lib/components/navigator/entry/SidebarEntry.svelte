@@ -18,5 +18,5 @@
 	{onClick}
 	variant={currentActivePath === link ? 'activeSidebar' : 'sidebar'}
 >
-	<div class={`ml-2 ${isSidebarOpen ? '' : 'sm:max-xl:hidden'}`}>{title}</div>
+	<div class={`${isSidebarOpen ? '' : 'sm:max-xl:hidden'}`}>{title}</div>
 </IconButton>
