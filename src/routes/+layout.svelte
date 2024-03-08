@@ -4,9 +4,16 @@
 	import Sidebar from '$lib/components/navigator/Sidebar.svelte';
 	import { get } from 'svelte/store';
 	import { Toaster } from 'svelte-sonner';
+	import { pwaInfo } from 'virtual:pwa-info';
+
+	$: webManifestLink = pwaInfo ? pwaInfo.webManifest.href : '';
 
 	console.log(get(applicationState));
 </script>
+
+<svelte:head>
+	<link href={webManifestLink} rel="manifest" />
+</svelte:head>
 
 <div class={`${$applicationState.settings.theme} bg-neutral text-text min-h-screen`}>
 	<div class="h-full" id="main">
