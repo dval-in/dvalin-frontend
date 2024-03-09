@@ -26,6 +26,7 @@
 	import { Separator } from '$lib/components/ui/separator';
 	import SidebarCategory from '$lib/components/navigator/category/SidebarCategory.svelte';
 	import SidebarEntry from '$lib/components/navigator/entry/SidebarEntry.svelte';
+	import logo from '$lib/assets/logo.svg';
 
 	const paths = {
 		collection: [
@@ -68,7 +69,7 @@
 		class={`flex ${isSidebarOpen ? 'flex-row' : 'sm:max-xl:flex-col'} items-center justify-between gap-2.5 sm:max-xl:mr-2.5`}
 	>
 		<div class="flex flex-row items-center">
-			<div class={`rounded-full bg-red-500 w-10 h-10`} />
+			<img alt="Stormterror flying" class={`rounded-full w-10 h-10`} src={logo} />
 			<a class={`ml-2 ${isSidebarOpen ? '' : 'sm:max-xl:hidden'}`} href="/">
 				<Text type="h1">dval.in</Text>
 			</a>
