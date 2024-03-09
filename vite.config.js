@@ -18,7 +18,7 @@ export default defineConfig({
 				name: 'Dval.in',
 				description: 'Dval.in description',
 				// eslint-disable-next-line @typescript-eslint/naming-convention
-				theme_color: '#ffffff',
+				theme_color: '#D3BC8E',
 				icons: [
 					{
 						src: 'pwa-192x192.png',
@@ -31,6 +31,9 @@ export default defineConfig({
 						type: 'image/png'
 					}
 				]
+			},
+			pwaAssets: {
+				config: 'pwa-assets.config.ts'
 			}
 		})
 	]

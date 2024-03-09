@@ -5,6 +5,7 @@
 	import { get } from 'svelte/store';
 	import { Toaster } from 'svelte-sonner';
 	import { pwaInfo } from 'virtual:pwa-info';
+	import { pwaAssetsHead } from 'virtual:pwa-assets/head';
 
 	$: webManifestLink = pwaInfo ? pwaInfo.webManifest.href : '';
 
@@ -13,6 +14,12 @@
 
 <svelte:head>
 	<link href={webManifestLink} rel="manifest" />
+	{#if pwaAssetsHead.themeColor}
+		<meta name="theme-color" content={pwaAssetsHead.themeColor.content} />
+	{/if}
+	{#each pwaAssetsHead.links as link}
+		<link {...link} />
+	{/each}
 </svelte:head>
 
 <div class={`${$applicationState.settings.theme} bg-neutral text-text min-h-screen`}>
