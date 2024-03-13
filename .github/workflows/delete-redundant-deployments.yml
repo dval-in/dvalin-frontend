@@ -1,6 +1,6 @@
 # yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
 
-name: "Delete redundant deployments"
+name: 'Delete redundant deployments'
 on:
   pull_request:
     types:

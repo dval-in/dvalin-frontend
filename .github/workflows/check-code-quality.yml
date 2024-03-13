@@ -1,13 +1,13 @@
 # yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
 
-name: "Check code quality"
+name: 'Check code quality'
 on:
   push:
     branches:
       - main
   pull_request:
     branches:
-      - "**"
+      - '**'
 
 jobs:
   check-typescript:

@@ -1,9 +1,9 @@
 # yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
 
-name: "Deploy to Cloudflare"
+name: 'Deploy to Cloudflare'
 on:
   workflow_run:
-    workflows: [ Check code quality ]
+    workflows: [Check code quality]
     types:
       - completed
 
