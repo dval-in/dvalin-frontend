@@ -11,7 +11,8 @@
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"prepare": "pnpm husky install",
 		"lint": "prettier --check . && eslint .",
-		"format": "prettier --write ."
+		"format": "prettier --write .",
+		"generate-pwa-assets": "pwa-assets-generator"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "^18.4.3",
@@ -24,6 +25,8 @@
 		"@types/eslint": "8.56.0",
 		"@typescript-eslint/eslint-plugin": "^6.0.0",
 		"@typescript-eslint/parser": "^6.0.0",
+		"@vite-pwa/assets-generator": "^0.2.4",
+		"@vite-pwa/sveltekit": "^0.4.0",
 		"autoprefixer": "^10.4.16",
 		"eslint": "^8.56.0",
 		"eslint-config-prettier": "^9.1.0",
@@ -41,6 +44,7 @@
 		"tslib": "^2.4.1",
 		"typescript": "^5.0.0",
 		"vite": "^5.0.3",
+		"vite-plugin-pwa": "^0.19.2",
 		"wrangler": "^3.23.0"
 	},
 	"type": "module",
