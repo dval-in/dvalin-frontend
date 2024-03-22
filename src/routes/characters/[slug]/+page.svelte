@@ -30,7 +30,7 @@
 				alt="{data.character} Gacha Splash"
 			/>
 			<div class="flex w-full justify-center absolute bottom-3 left-0">
-				{#each {length: data.characterData.rarity} as _ }
+				{#each { length: data.characterData.rarity } as _}
 					<Star strokeWidth={0} fill={data.characterData.rarity == 5 ? '#FFB13F' : '#7B5C90'} />
 				{/each}
 			</div>
@@ -63,31 +63,46 @@
 					<Table.Root>
 						<Table.Header>
 							<Table.Row class="p-2 border-b border-secondary/50">
-								{#each data.characterData.ascension[0].stats as stat}
-									<Table.Head class="p-2 px-4 font-bold"
-										>{stat.label === 'Ascend' ? 'ASC' : stat.label}</Table.Head
-									>
+								{#each data.characterData.ascension[0].stats as stat, i}
+									<Table.Head class="p-2 px-4 font-bold">
+										{stat.label === 'Ascend' ? 'ASC' : stat.label}
+									</Table.Head>
+									{#if i == 0}
+										<Table.Head class="p-2 px-4 font-bold">Level</Table.Head>
+									{/if}
 								{/each}
 							</Table.Row>
 						</Table.Header>
 						<Table.Body>
-							{#each data.characterData.ascension as ascension}
+							{#each data.characterData.ascension.slice(0,7) as ascension, j}
 								<Table.Row class="p-2 border-y border-secondary/50">
-									{#each ascension.stats as stat}
+									{#each ascension.stats as stat, i}
 										<Table.Cell class="p-2 px-4">
 											<div class="flex flex-col">
-												{#if stat.label != 'Ascend'}<p>
-														{stat.values?.at(0) == '-' && stat.label === 'Ascend'
-															? '0'
-															: stat.values?.at(0)}
-													</p>{/if}
+												{#if stat.label != 'Ascend' && stat.values?.at(0) != '-'}
+													<!--p>
+														{stat.values?.at(0)}
+													</p-->
+												{/if}
 												<p>
-													{stat.values?.at(0) == '-' && stat.label === 'Ascend'
-														? '0'
+													{stat.values?.at(0) != '-' && stat.label != 'Ascend' && i < 5
+														? data.characterData.ascension.slice(0,7)?.at(j+1)?.stats[i].values?.at(0)
 														: stat.values?.at(1)}
 												</p>
 											</div>
 										</Table.Cell>
+										{#if i == 0}
+											<Table.Cell class="p-2 px-4">
+												<div class="flex flex-col">
+													<!--p>
+														{data.characterData.ascension[j - 1]
+															? data.characterData.ascension[j - 1].level[0]
+															: ''}
+													</p-->
+													<p>{data.characterData.ascension.at(j+1)?.level?.at(0)}</p>
+												</div>
+											</Table.Cell>
+										{/if}
 									{/each}
 								</Table.Row>
 							{/each}
@@ -148,17 +163,17 @@
 				<div class="basis-1/4 flex flex-col gap-4">
 					<Card.Root class="flex flex-col w-full gap-2">
 						<Text type="h3">Weapons</Text>
-						<div class="flex gap-2 w-full h-fit">
+						<div class="flex gap-2 w-full">
 							<img
-								class="aspect-square object-cover h-0 min-h-full"
+								class="flex-grow aspect-square object-cover h-0 min-h-full"
 								src={S3Service.getWeaponLink(data.characterData.signatureWeapon) + '/icon.png'}
 								alt={data.characterData.signatureWeapon}
 							/>
-							<div class="flex-grow flex flex-col gap-2">
+							<div class="flex-grow flex flex-col gap-1 text-md min-h-0">
 								<div class="flex w-full justify-start">
-									{#each {length: data.characterData.rarity} as _ }
+									{#each { length: data.characterData.rarity } as _}
 										<Star
-											class="lg:size-5"
+											class="lg:size-4"
 											strokeWidth={0}
 											fill={data.weaponIndex[data.characterData.signatureWeapon].rarity == 5
 												? '#FFB13F'
@@ -167,11 +182,11 @@
 									{/each}
 								</div>
 								<Text type="h4">{data.weaponIndex[data.characterData.signatureWeapon].name}</Text>
-								<Badge class="w-fit rounded bg-neutral p-1" variant="default">R1</Badge>
+								<Badge type="default" class="w-fit rounded bg-neutral">R1</Badge>
 							</div>
 						</div>
 						<!--BIS Weapon Rec-->
-						{#each {length: 4} as _ }
+						{#each { length: 4 } as _}
 							<div class="flex w-full flex-row gap-2 items-center">
 								<img
 									class="aspect-square object-cover h-0 min-h-full"
@@ -213,7 +228,51 @@
 						</div>
 					</Card.Root>
 				</div>
-				<Card.Root class="basis-1/4 h-fit"></Card.Root>
+				<div class="basis-1/4 flex flex-col gap-4">
+					<Card.Root class="flex flex-col w-full gap-2">
+						<Text type="h3">Artifacts</Text>
+						<div class="flex gap-2 w-full">
+							<img
+								class="aspect-square object-cover h-0 min-h-full"
+								src={S3Service.getArtifactLink('HuskOfOpulentDreams') + '/flower.png'}
+								alt="HuskOfOpulentDreams"
+							/>
+							<div class="flex-grow flex flex-col gap-1 text-md h-full">
+								<div class="flex w-full justify-start">
+									{#each { length: data.characterData.rarity } as _}
+										<Star
+											class="lg:size-4"
+											strokeWidth={0}
+											fill={data.weaponIndex[data.characterData.signatureWeapon].rarity == 5
+												? '#FFB13F'
+												: '#7B5C90'}
+										/>
+									{/each}
+								</div>
+								<Text type="h4">Husk Of Opulent Dreams</Text>
+								<Badge type="default" class="w-fit rounded bg-neutral">x4</Badge>
+							</div>
+						</div>
+
+						{#each { length: 4 } as _}
+							<div class="flex w-full flex-row gap-2 items-center">
+								<img
+									class="aspect-square object-cover h-0 min-h-full"
+									src={S3Service.getArtifactLink('HuskOfOpulentDreams') + '/flower.png'}
+									alt="HuskOfOpulentDreams"
+								/>
+								<Star
+									class="lg:size-4"
+									strokeWidth={0}
+									fill={data.weaponIndex[data.characterData.signatureWeapon].rarity == 5
+										? '#FFB13F'
+										: '#7B5C90'}
+								/>
+								<Text type="p">Husk of Opulent Dreams</Text>
+							</div>
+						{/each}
+					</Card.Root>
+				</div>
 			</Tabs.Content>
 		</Tabs.Root>
 	</section>
