@@ -3,13 +3,13 @@
 name: 'Deploy to Cloudflare'
 on:
   workflow_run:
-    workflows: [Check code quality]
+    workflows: [ Check code quality ]
     types:
       - completed
 
 jobs:
   on-success:
-    if: ${{ github.actor != 'dependabot[bot]' }}
+    if: ${{ github.actor != 'dependabot[bot]' && github.event.pull_request.head.repo.full_name == 'dval-in/dval-in' }}
     permissions:
       contents: read
       deployments: write
