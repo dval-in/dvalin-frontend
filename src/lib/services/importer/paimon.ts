@@ -639,6 +639,10 @@ export class PaimonMoeImporterService implements IImporterService {
 					...(data['wish-counter-beginners'] !== undefined
 						? // eslint-disable-next-line @typescript-eslint/naming-convention
 							{ Beginner: convertPaimonWishes(data['wish-counter-beginners'].pulls) }
+						: undefined),
+					...(data['wish-counter-chronicled'] !== undefined
+						? // eslint-disable-next-line @typescript-eslint/naming-convention
+							{ Chronicled: convertPaimonWishes(data['wish-counter-chronicled'].pulls) }
 						: undefined)
 				}
 			};

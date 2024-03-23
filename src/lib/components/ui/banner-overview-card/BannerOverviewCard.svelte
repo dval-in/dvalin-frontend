@@ -8,7 +8,8 @@
 	import { Card, CardHeader } from '$lib/components/ui/card';
 	import { CardContent } from '$lib/components/ui/card/index.js';
 	import InfoCell from '$lib/components/ui/info-cell/InfoCell.svelte';
-	import { mdiMoonWaningCrescent } from '@mdi/js';
+	import { mdiAlert, mdiCloseCircle, mdiMoonWaningCrescent } from '@mdi/js';
+	import { Alert, AlertDescription, AlertTitle } from '$lib/components/ui/alert';
 
 	export let icon: string;
 	export let title: string;
@@ -50,16 +51,20 @@
 			</InfoCell>
 		</div>
 		<div class="flex flex-col gap-2">
-			<Text type="h4">Latest 5* pulls</Text>
-			<div class="flex flex-wrap gap-2">
-				{#if filterFiveStars().length > 0}
+			{#if filterFiveStars().length > 0}
+				<Text type="h4">Latest 5* pulls</Text>
+				<div class="flex flex-wrap gap-2">
 					{#each filterFiveStars() as pull}
 						<PullChip name={pull.name} key={pull.key} counter={pull.pity} />
 					{/each}
-				{:else}
-					You haven't pulled a 5* in this banner yet
-				{/if}
-			</div>
+				</div>
+			{:else}
+				<Alert class="gap-6">
+					<Icon path={mdiCloseCircle} />
+					<AlertTitle>Come back later</AlertTitle>
+					<AlertDescription>You haven't pulled a 5* in this banner yet</AlertDescription>
+				</Alert>
+			{/if}
 		</div>
 	</CardContent>
 </Card>

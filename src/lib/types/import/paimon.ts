@@ -37,6 +37,7 @@ export interface PaimonData {
 	'wish-counter-standard'?: PaimonBanner;
 	'wish-counter-weapon-event'?: PaimonBanner;
 	'wish-counter-beginners'?: PaimonBanner;
+	'wish-counter-chronicled'?: PaimonBanner;
 	'wish-uid'?: number;
 	wl: number;
 }
