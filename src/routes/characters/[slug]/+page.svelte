@@ -85,9 +85,7 @@
 													</p-->
 												{/if}
 												<p>
-													{stat.values?.at(0) != '-' && stat.label != 'Ascend' && i < 5
-														? data.characterData.ascension.slice(0,7)?.at(j+1)?.stats[i].values?.at(0)
-														: stat.values?.at(1)}
+													{j ==0 && stat.values?.at(1) == 1 ?  "0" : stat.values?.at(1)}
 												</p>
 											</div>
 										</Table.Cell>
@@ -238,7 +236,7 @@
 								alt="HuskOfOpulentDreams"
 							/>
 							<div class="flex-grow flex flex-col gap-1 text-md h-full">
-								<div class="flex w-full justify-start">
+								<div class="flex w-full justify-start h-full">
 									{#each { length: data.characterData.rarity } as _}
 										<Star
 											class="lg:size-4"
