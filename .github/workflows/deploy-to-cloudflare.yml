@@ -3,7 +3,7 @@
 name: 'Deploy to Cloudflare'
 on:
   workflow_run:
-    workflows: [ Check code quality ]
+    workflows: [Check code quality]
     types:
       - completed
 
