@@ -45,7 +45,7 @@
 				on:click={() => changeThemeTo('light')}
 			>
 				<Text
-					textColor={`${$applicationState.settings.theme === 'light' ? 'text' : 'neutral'}`}
+					class={`${$applicationState.settings.theme === 'light' ? 'text-text' : 'text-neutral'}`}
 					type="h3"
 				>
 					Light
@@ -56,7 +56,7 @@
 				on:click={() => changeThemeTo('dark')}
 			>
 				<Text
-					textColor={`${$applicationState.settings.theme === 'dark' ? 'text' : 'neutral'}`}
+					class={`${$applicationState.settings.theme === 'dark' ? 'text-text' : 'text-neutral'}`}
 					type="h3"
 				>
 					Dark

@@ -15,11 +15,16 @@
 	export let title: string;
 	export let data: IMappedWish[];
 
+	const fiveStars = data
+		.filter((wish: IMappedWish) => wish.rarity === 5)
+		.sort((a, b) => b.number - a.number);
+
+	const fourStars = data.filter((wish: IMappedWish) => wish.rarity === 4);
+
+	const threeStars = data.filter((wish: IMappedWish) => wish.rarity === 3);
+
 	const filterFiveStars = (): IMappedWish[] => {
-		return data
-			.filter((wish: IMappedWish) => wish.rarity === 5)
-			.sort((a, b) => b.number - a.number)
-			.slice(0, 10);
+		return fiveStars.slice(0, 10);
 	};
 </script>
 
@@ -42,12 +47,25 @@
 				</svelte:fragment>
 			</InfoCell>
 			<InfoCell title="% of total pulls">
-				<Text type="h4">{0}</Text>
-				<Text type="h4">{0}</Text>
+				{#if fiveStars.length > 0}
+					<Text class="text-fivestar" type="h4">
+						{((fiveStars.length / data.length) * 100).toFixed(1)}
+					</Text>
+				{/if}
+				{#if fourStars.length > 0}
+					<Text class="text-fourstar" type="h4">
+						{((fourStars.length / data.length) * 100).toFixed(1)}
+					</Text>
+				{/if}
+				{#if threeStars.length > 0}
+					<Text class="text-threestar" type="h4">
+						{((threeStars.length / data.length) * 100).toFixed(1)}
+					</Text>
+				{/if}
 			</InfoCell>
 			<InfoCell title="Pity">
-				<Text type="h4">{0}</Text>
-				<Text type="h4">{0}</Text>
+				<Text class="text-fivestar" type="h4">{0}</Text>
+				<Text class="text-fourstar" type="h4">{0}</Text>
 			</InfoCell>
 		</div>
 		<div class="flex flex-col gap-2">
