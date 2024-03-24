@@ -17,6 +17,8 @@
 	} from '$lib/components/ui/alert-dialog';
 	import { Alert, AlertDescription, AlertTitle } from '$lib/components/ui/alert';
 	import Icon from '$lib/components/ui/icon/icon.svelte';
+	import { goto } from '$app/navigation';
+	import Text from '$lib/components/typography/Text.svelte';
 
 	let value: ImporterServices = 'dvalin';
 	const importerService = new ImporterService();
@@ -54,6 +56,7 @@
 						description:
 							'Your data has been imported successfully and stored locally in your Browser'
 					});
+					goto('/settings');
 				} catch (e) {
 					toast.error('An error happened!', {
 						description: 'Make sure you upload the right file format'
@@ -65,40 +68,44 @@
 </script>
 
 <DefaultLayout title="Import account data">
-	<div class="flex flex-1 flex-col justify-between">
-		<Tabs bind:value>
-			<TabsList>
-				<TabsTrigger value="dvalin">Dval.in</TabsTrigger>
-				<TabsTrigger value="paimon">Paimon.moe</TabsTrigger>
-			</TabsList>
-		</Tabs>
+	<Tabs bind:value>
+		<TabsList>
+			<TabsTrigger value="dvalin">Dval.in</TabsTrigger>
+			<TabsTrigger value="paimon">Paimon.moe</TabsTrigger>
+		</TabsList>
+	</Tabs>
 
-		<div class="flex items-center gap-2">
-			<IconButton icon={mdiImport} onClick={selectFile}>Select file</IconButton>
+	<div class="flex items-center gap-2">
+		<IconButton icon={mdiImport} onClick={selectFile}>Select file</IconButton>
+		{#if file !== undefined}
 			{file?.name}
-		</div>
+		{:else}
+			<Text type="p">No file selected</Text>
+		{/if}
+	</div>
 
-		<div class="flex flex-col gap-2">
-			<Alert class="gap-6">
-				<Icon path={mdiAlert} />
-				<AlertTitle>Watch out!</AlertTitle>
-				<AlertDescription>This will overwrite your data</AlertDescription>
-			</Alert>
-			<IconButton
-				icon={mdiImport}
-				onClick={() => {
-					dialogOpen = true;
-				}}
-				>Start import
-			</IconButton>
-		</div>
+	<div class="flex flex-col gap-2">
+		<Alert class="gap-6">
+			<Icon color="fill-red-500" path={mdiAlert} />
+			<AlertTitle>Watch out!</AlertTitle>
+			<AlertDescription>This will overwrite your existing data</AlertDescription>
+		</Alert>
+		<IconButton
+			disabled={file === undefined}
+			icon={mdiImport}
+			onClick={() => {
+				dialogOpen = true;
+			}}
+		>
+			Start import
+		</IconButton>
 	</div>
 </DefaultLayout>
 
 <AlertDialog bind:open={dialogOpen}>
 	<AlertDialogContent class="sm:max-w-[425px]">
 		<AlertDialogHeader>
-			<AlertDialogTitle>Import account data</AlertDialogTitle>
+			<AlertDialogTitle>Are you sure?</AlertDialogTitle>
 			<AlertDialogDescription></AlertDialogDescription>
 		</AlertDialogHeader>
 
@@ -109,9 +116,9 @@
 				}}
 				variant="outline"
 			>
-				Cancel
+				No
 			</Button>
-			<Button on:click={handleSettingsImport}>Continue</Button>
+			<Button on:click={handleSettingsImport}>Yes</Button>
 		</AlertDialogFooter>
 	</AlertDialogContent>
 </AlertDialog>
