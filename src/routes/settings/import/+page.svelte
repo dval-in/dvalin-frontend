@@ -76,7 +76,7 @@
 	</Tabs>
 
 	<div class="flex items-center gap-2">
-		<IconButton icon={mdiImport} onClick={selectFile}>Select file</IconButton>
+		<IconButton icon={mdiImport} on:click={selectFile}>Select file</IconButton>
 		{#if file !== undefined}
 			{file?.name}
 		{:else}
@@ -93,7 +93,7 @@
 		<IconButton
 			disabled={file === undefined}
 			icon={mdiImport}
-			onClick={() => {
+			on:click={() => {
 				dialogOpen = true;
 			}}
 		>

@@ -70,7 +70,7 @@
 
 		<div class="flex flex-row gap-4">
 			<IconButton href="/settings/import" icon={mdiImport}>Import Data</IconButton>
-			<IconButton icon={mdiExport} onClick={handleSettingsExport}>Export Data</IconButton>
+			<IconButton icon={mdiExport} on:click={handleSettingsExport}>Export Data</IconButton>
 		</div>
 	</div>
 </DefaultLayout>
