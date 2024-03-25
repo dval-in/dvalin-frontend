@@ -37,6 +37,8 @@ function convertPaimonCharacter(paimonPullId: string): CharacterKey {
 			return 'Chevreuse';
 		case 'chongyun':
 			return 'Chongyun';
+		case 'chiori':
+			return 'Chiori';
 		case 'collei':
 			return 'Collei';
 		case 'cyno':
@@ -238,6 +240,8 @@ function convertPaimonWeapon(paimonPullId: string): WeaponKey {
 			return 'Deathmatch';
 		case 'debate_club':
 			return 'DebateClub';
+		case 'dialogues_of_the_desert_sages':
+			return 'DialoguesOfTheDesertSages';
 		case 'dodoco_tales':
 			return 'DodocoTales';
 		case 'dragons_bane':
@@ -514,6 +518,8 @@ function convertPaimonWeapon(paimonPullId: string): WeaponKey {
 			return 'TwinNephrite';
 		case 'ultimate_overlords_mega_magic_sword':
 			return 'UltimateOverlordsMegaMagicSword';
+		case 'uraku_misugiri':
+			return 'UrakuMisugiri';
 		case 'verdict':
 			return 'Verdict';
 		case 'vortex_vanquisher':
