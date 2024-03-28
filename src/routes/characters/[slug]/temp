@@ -1,0 +1,108 @@
+	<section class="flex w-full flex-col gap-4 p-6 box-border md:h-[65vh] md:flex-row">
+		<div class="flex items-center gap-2 md:hidden">
+			<Button on:click={goBack} variant="ghost" size="icon"
+				><Icon color="fill-primary" path={mdiArrowLeft} /></Button
+			><Text textColor="primary" type="h1">{data.characterData.name}</Text>
+		</div>
+		<Card class="p-0 sm:p-0 aspect-[1/2] w-full box-border relative md:w-auto">
+			<img
+				class="h-0 min-h-full rounded-md object-cover object-center"
+				src={splash}
+				alt="{data.characterData.name} Gacha Splash"
+			/>
+			<div class="flex w-full justify-center absolute bottom-3 left-0">
+				{#each { length: data.characterData.rarity } as _}
+					<Icon
+						path={mdiStar}
+						color={data.characterData.rarity == 5 ? 'fill-fivestar' : 'fill-fourstar'}
+					/>
+				{/each}
+			</div>
+		</Card>
+
+		<div class="flex-grow min-h-0 box-border flex gap-2 flex-col">
+			<span class="hidden md:block"
+				><Text textColor="primary" type="h1">{data.characterData.name}</Text></span
+			>
+			<span class="font-bold">{data.characterData.element} • {data.characterData.weaponType}</span>
+			<div class="flex flex-row w-fZull">
+				<Badge class="rounded bg-tertiary" variant="default">Sub-DPS</Badge>
+				<!--Find Badge Data Somewhere?-->
+				<!--
+						{#each badges as badge}
+						 <Badge variant="default">{ badge }</Badge>
+						{/each}
+					-->
+			</div>
+			<!--Badges-->
+
+			<Text type="p">{data.characterData.description}</Text>
+
+			<Tabs.Root value="stats" class="w-full h-full min-h-0flex-grow-0">
+				<Tabs.List class="grid w-full grid-cols-3">
+					<Tabs.Trigger value="stats">Stats</Tabs.Trigger>
+					<Tabs.Trigger value="talents">Talents</Tabs.Trigger>
+					<Tabs.Trigger value="constellations">Constellations</Tabs.Trigger>
+				</Tabs.List>
+				<Tabs.Content
+					value="stats"
+					class="border border-secondary/50"
+				>
+					<Table.Root class="h-full">
+						<Table.Header>
+							<Table.Row class="p-2 border-b border-secondary/50">
+								{#each ascensions[0].stats as stat, i}
+									<Table.Head class="p-2 px-4 font-bold">
+										{stat.label === 'Ascend' ? 'ASC' : stat.label.replace('Base ', '')}
+									</Table.Head>
+									{#if i == 0}
+										<Table.Head class="p-2 px-4 font-bold">Level</Table.Head>
+									{/if}
+								{/each}
+							</Table.Row>
+						</Table.Header>
+						<Table.Body>
+							{#each ascensions.slice(1, 8) as ascension, j}
+								<Table.Row class="p-2 border-y border-secondary/50">
+									{#each ascension.stats as stat, i}
+										<Table.Cell class="p-2 px-4">
+											<div class="flex flex-col">
+												{#if i != 0}
+													<p>
+														{ascensions.at(j)?.stats[i].values?.at(1)}
+													</p>
+												{/if}
+												<p>
+													{stat.values?.at(0)}
+												</p>
+											</div>
+										</Table.Cell>
+
+										{#if i == 0}
+											<Table.Cell class="p-2 px-4">
+												<div class="flex flex-col">
+													<p>
+														{ascensions.at(j)?.level?.at(0)}
+													</p>
+													{#if ascensions.at(j + 1)}
+														<p>
+															{ascensions.at(j + 1)?.level?.at(0)}
+														</p>
+													{/if}
+												</div>
+											</Table.Cell>
+										{/if}
+										<!--Level Data-->
+									{/each}
+								</Table.Row>
+							{/each}
+						</Table.Body>
+					</Table.Root>
+				</Tabs.Content>
+				<!--Ascension Table-->
+				<Tabs.Content value="talents"></Tabs.Content>
+				<Tabs.Content value="constellations"></Tabs.Content>
+			</Tabs.Root>
+		</div>
+		<!--Text Column-->
+	</section>
