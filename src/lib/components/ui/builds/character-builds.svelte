@@ -69,7 +69,9 @@
 	{#each builds as build}
 		<Tabs.Content value={build.name}>
 			<div class="flex flex-col md:flex-row gap-4 pt-2">
-				<div class="flex flex-col md:order-2 md:grid md:grid-cols-2 md:grid-rows-2 md:grid-flow-dense gap-4">
+				<div
+					class="flex flex-col md:order-2 md:grid md:grid-cols-2 md:grid-rows-2 md:grid-flow-dense gap-4"
+				>
 					<Card class="h-min max-w-full flex flex-col gap-4 p-4 md:h-auto">
 						<Text type="h3">Weapons</Text>
 						<WeaponItem
@@ -155,7 +157,6 @@
 						</Text>
 					{/each}
 				</div>
-				
 			</div>
 		</Tabs.Content>
 	{/each}
