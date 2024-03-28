@@ -93,7 +93,6 @@
 								{/each}
 							</Table.Row>
 						</Table.Header>
-
 						<Table.Body>
 							{#each ascensions.slice(1, 8) as ascension, j}
 								<Table.Row class="p-2 border-y border-secondary/50">
