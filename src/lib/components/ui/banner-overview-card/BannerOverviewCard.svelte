@@ -38,7 +38,7 @@
 	</CardHeader>
 	<CardContent class="flex flex-col gap-2">
 		<div class="flex flex-row gap-2">
-			<InfoCell title="Total pulls">
+			<InfoCell class="bg-neutral" title="Total pulls">
 				<Text type="h4">{data.length}</Text>
 
 				<svelte:fragment slot="tooltip">
@@ -46,7 +46,7 @@
 					<Text type="h4">{data.length * 160}</Text>
 				</svelte:fragment>
 			</InfoCell>
-			<InfoCell title="% of total pulls">
+			<InfoCell class="bg-neutral" title="% of total pulls">
 				{#if fiveStars.length > 0}
 					<Text class="text-fivestar" type="h4">
 						{((fiveStars.length / data.length) * 100).toFixed(1)}
@@ -63,7 +63,7 @@
 					</Text>
 				{/if}
 			</InfoCell>
-			<InfoCell title="Pity">
+			<InfoCell class="bg-neutral" title="Pity">
 				<Text class="text-fivestar" type="h4">{0}</Text>
 				<Text class="text-fourstar" type="h4">{0}</Text>
 			</InfoCell>
