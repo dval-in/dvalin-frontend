@@ -17,7 +17,7 @@
 {#if signature}
 	<div class="flex gap-2 w-full">
 		<img
-			class="flex-grow aspect-square object-contain h-0 min-h-full"
+			class="basis-1/4 aspect-square object-contain w-full"
 			src={S3Service.getWeaponLink(key) + '/icon.png'}
 			alt={index[key].name}
 		/>
@@ -32,13 +32,15 @@
 		</div>
 	</div>
 {:else}
-	<div class="flex w-full flex-row gap-2 items-center">
+	<div class="w-full flex gap-2 items-center">
 		<img
 			class="aspect-square object-cover h-0 min-h-full"
 			src={S3Service.getWeaponLink(key) + '/icon.png'}
 			alt={index[key].name}
 		/>
-		<Icon path={mdiStar} color={rarity == 5 ? 'fill-fivestar' : 'fill-fourstar'} />
-		<Text type="p">{index[key].name}</Text>
+		<div class="flex flex-row gap-2 w-full">
+			<Icon path={mdiStar} color={rarity == 5 ? 'fill-fivestar' : 'fill-fourstar'} />
+			<Text type="p">{index[key].name}</Text>
+		</div>
 	</div>
 {/if}

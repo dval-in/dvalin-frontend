@@ -14,11 +14,11 @@
 {#if signature}
 	<div class="flex gap-2 w-full">
 		<img
-			class="flex-grow aspect-square object-contain h-0 min-h-full"
+			class="basis-1/4 aspect-square object-contain w-full"
 			src={S3Service.getArtifactLink(key) + '/flower.png'}
 			alt={key}
 		/>
-		<div class="flex flex-col gap-1 box-border h-full">
+		<div class="gap-1 box-border h-full">
 			<div class="flex w-full justify-start">
 				{#each { length: rarity } as _}
 					<Icon path={mdiStar} color={rarity == 5 ? 'fill-fivestar' : 'fill-fourstar'} />
@@ -35,7 +35,11 @@
 			src={S3Service.getArtifactLink(key) + '/flower.png'}
 			alt={key}
 		/>
-		<Icon path={mdiStar} color={rarity == 5 ? 'fill-fivestar' : 'fill-fourstar'} />
-		<Text type="p">{key.replace(/([A-Z])/g, ' $1').trim()}</Text>
+		<div class="flex w-full gap-1 items-center">
+			<Icon path={mdiStar} color={rarity == 5 ? 'fill-fivestar' : 'fill-fourstar'} />
+			<div class="flex flex-1 flex-wrap">
+				<p class="leading-7">{key.replace(/([A-Z])/g, ' $1').trim()}</p>
+			</div>
+		</div>
 	</div>
 {/if}

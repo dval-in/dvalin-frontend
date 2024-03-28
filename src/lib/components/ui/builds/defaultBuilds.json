@@ -33,7 +33,11 @@
 					"key": "HuskOfOpulentDreams",
 					"quantity": 4
 				}
-			]
+			],
+			"stats": {
+				"main": ["DEF %", "GEO DMG", "CRIT Rate"],
+				"sub": ["CRIT Rate or DMG", "DEF%", "ATK%"]
+			}
 		}
 	},
 	{
@@ -70,7 +74,11 @@
 					"key": "HuskOfOpulentDreams",
 					"quantity": 4
 				}
-			]
+			],
+			"stats": {
+				"main": ["DEF %", "GEO DMG", "CRIT Rate"],
+				"sub": ["CRIT Rate or DMG", "DEF%", "ATK%"]
+			}
 		}
 	},
 	{
@@ -107,7 +115,11 @@
 					"key": "HuskOfOpulentDreams",
 					"quantity": 4
 				}
-			]
+			],
+			"stats": {
+				"main": ["DEF %", "GEO DMG", "CRIT Rate"],
+				"sub": ["CRIT Rate or DMG", "DEF%", "ATK%"]
+			}
 		}
 	}
 ]
