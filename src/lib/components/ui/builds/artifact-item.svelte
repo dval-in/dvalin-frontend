@@ -29,14 +29,14 @@
 		</div>
 	</div>
 {:else}
-	<div class="flex w-full flex-row gap-2 items-center">
+	<div class="grid grid-cols-[2rem_auto] gap-2 items-center">
 		<img
-			class="aspect-square object-cover h-0 min-h-full"
+			class="aspect-square object-contain h-0 min-h-full"
 			src={S3Service.getArtifactLink(key) + '/flower.png'}
 			alt={key}
 		/>
-		<div class="flex w-full gap-1 items-center">
-			<Icon path={mdiStar} color={rarity == 5 ? 'fill-fivestar' : 'fill-fourstar'} />
+		<div class="flex w-full gap-2 items-center">
+			<Icon size=".7" path={mdiStar} color={rarity == 5 ? 'fill-fivestar' : 'fill-fourstar'} />
 			<div class="flex flex-1 flex-wrap">
 				<p class="leading-7">{key.replace(/([A-Z])/g, ' $1').trim()}</p>
 			</div>

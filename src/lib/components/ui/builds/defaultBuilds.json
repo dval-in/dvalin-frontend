@@ -9,7 +9,12 @@
 		"talentPriority": ["Elemental Skill", "Normal Attack", "ELemental Burst"],
 		"weapons": {
 			"signatureWeapon": "CinnabarSpindle",
-			"altWeapons": ["CinnabarSpindle", "CinnabarSpindle", "CinnabarSpindle", "CinnabarSpindle"]
+			"altWeapons": [
+				"AThousandFloatingDreams",
+				"CinnabarSpindle",
+				"CinnabarSpindle",
+				"CinnabarSpindle"
+			]
 		},
 		"artifacts": {
 			"signatureSet": {

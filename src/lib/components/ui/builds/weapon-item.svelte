@@ -32,15 +32,17 @@
 		</div>
 	</div>
 {:else}
-	<div class="w-full flex gap-2 items-center">
+	<div class="grid grid-cols-[2rem_auto] gap-2 items-center">
 		<img
-			class="aspect-square object-cover h-0 min-h-full"
+			class="aspect-square object-contain h-0 min-h-full"
 			src={S3Service.getWeaponLink(key) + '/icon.png'}
-			alt={index[key].name}
+			alt={key}
 		/>
-		<div class="flex flex-row gap-2 w-full">
-			<Icon path={mdiStar} color={rarity == 5 ? 'fill-fivestar' : 'fill-fourstar'} />
-			<Text type="p">{index[key].name}</Text>
+		<div class="flex w-full gap-2 items-center">
+			<Icon size=".7" path={mdiStar} color={rarity == 5 ? 'fill-fivestar' : 'fill-fourstar'} />
+			<div class="flex flex-1 flex-wrap w-full">
+				<p class="leading-7">{key.replace(/([A-Z])/g, ' $1').trim()}</p>
+			</div>
 		</div>
 	</div>
 {/if}

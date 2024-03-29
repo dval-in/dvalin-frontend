@@ -68,11 +68,11 @@
 	</Tabs.List>
 	{#each builds as build}
 		<Tabs.Content value={build.name}>
-			<div class="flex flex-col md:flex-row gap-4 pt-2">
+			<div class="flex flex-col lg:flex-row gap-4 pt-2">
 				<div
-					class="flex flex-col md:order-2 md:grid md:grid-cols-2 md:grid-rows-2 md:grid-flow-dense gap-4"
+					class="flex flex-col lg:order-2 lg:grid lg:grid-cols-2 lg:grid-rows-2 lg:grid-flow-dense gap-4"
 				>
-					<Card class="h-min max-w-full flex flex-col gap-4 p-4 md:h-auto">
+					<Card class="h-min max-w-full flex flex-col gap-4 p-4 lg:h-auto">
 						<Text type="h3">Weapons</Text>
 						<WeaponItem
 							signature={true}
@@ -94,7 +94,7 @@
 					</Card>
 					<!--Weapon Recomendation Card-->
 
-					<Card class="h-min max-w-full flex flex-col gap-4 p-4 md: row-span-2">
+					<Card class="h-min max-w-full flex flex-col gap-4 p-4 lg:row-span-2">
 						<Text type="h3">Artifacts</Text>
 						<ArtifactItem
 							signature={true}
@@ -150,7 +150,7 @@
 					</Card>
 					<!--Talent Priority Card-->
 				</div>
-				<div class="basis-3/4 flex flex-col gap-2 md:order-1">
+				<div class="basis-3/4 flex flex-col gap-2 lg:order-1">
 					{#each build.description as p}
 						<Text type="p">
 							{p}
