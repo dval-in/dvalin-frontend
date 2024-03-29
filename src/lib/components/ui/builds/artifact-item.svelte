@@ -37,7 +37,7 @@
 			alt={key}
 		/>
 		<div class="flex w-full gap-2 items-center">
-			<Icon size=".7" path={mdiStar} color={rarity == 5 ? 'fill-fivestar' : 'fill-fourstar'} />
+			<Icon size=".7" path={mdiStar} class={rarity === 5 ? 'fill-fivestar' : 'fill-fourstar'} />
 			<div class="flex flex-1 flex-wrap">
 				<p class="leading-7">{key.replace(/([A-Z])/g, ' $1').trim()}</p>
 			</div>

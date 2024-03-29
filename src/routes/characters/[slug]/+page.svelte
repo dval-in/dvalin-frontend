@@ -35,7 +35,7 @@
 	>
 		<div class="flex items-center gap-2 lg:col-start-2">
 			<Button class="lg:hidden" on:click={goBack} variant="ghost" size="icon">
-				<Icon color="fill-primary" path={mdiArrowLeft} />
+				<Icon class="fill-primary" path={mdiArrowLeft} />
 			</Button>
 			<Text textColor="primary" type="h1">{data.characterData.name}</Text>
 		</div>
@@ -51,7 +51,7 @@
 				{#each { length: data.characterData.rarity } as _}
 					<Icon
 						path={mdiStar}
-						color={data.characterData.rarity == 5 ? 'fill-fivestar' : 'fill-fourstar'}
+						class={data.characterData.rarity == 5 ? 'fill-fivestar' : 'fill-fourstar'}
 					/>
 				{/each}
 			</div>
