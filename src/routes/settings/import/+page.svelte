@@ -86,7 +86,7 @@
 
 	<div class="flex flex-col gap-2">
 		<Alert class="gap-6">
-			<Icon color="fill-red-500" path={mdiAlert} />
+			<Icon class="fill-red-500" path={mdiAlert} />
 			<AlertTitle>Watch out!</AlertTitle>
 			<AlertDescription>This will overwrite your existing data</AlertDescription>
 		</Alert>
