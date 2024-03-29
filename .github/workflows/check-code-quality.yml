@@ -1,6 +1,14 @@
-name: check-code-quality
-run-name: Check code quality
-on: [pull_request]
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+
+name: 'Check code quality'
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - '**'
+
 jobs:
   check-typescript:
     runs-on: ubuntu-latest
