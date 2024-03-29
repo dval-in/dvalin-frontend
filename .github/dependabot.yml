@@ -3,6 +3,11 @@
 version: 2
 updates:
   - package-ecosystem: github-actions
+    directory: /.github/
+    schedule:
+      interval: daily
+  - package-ecosystem: npm
     directory: /
     schedule:
-      interval: weekly
+      interval: daily
+    versioning-strategy: increase
