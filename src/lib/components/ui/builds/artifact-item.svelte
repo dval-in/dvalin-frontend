@@ -5,6 +5,7 @@
 	import Badge from '../badge/badge.svelte';
 	import S3Service from '$lib/services/s3';
 	import type { ArtifactSetKey } from '$lib/types/keys/ArtifactSetKey';
+
 	export let signature: Boolean,
 		rarity: number,
 		quantity: number = 4,
@@ -21,7 +22,7 @@
 		<div class="flex flex-col gap-1 box-border h-full">
 			<div class="flex w-full justify-start">
 				{#each { length: rarity } as _}
-					<Icon path={mdiStar} color={rarity == 5 ? 'fill-fivestar' : 'fill-fourstar'} />
+					<Icon path={mdiStar} class={rarity === 5 ? 'fill-fivestar' : 'fill-fourstar'} />
 				{/each}
 			</div>
 			<Text type="h4">{key.replace(/([A-Z])/g, ' $1').trim()}</Text>
@@ -35,7 +36,7 @@
 			src={S3Service.getArtifactLink(key) + '/flower.png'}
 			alt={key}
 		/>
-		<Icon path={mdiStar} color={rarity == 5 ? 'fill-fivestar' : 'fill-fourstar'} />
+		<Icon path={mdiStar} class={rarity === 5 ? 'fill-fivestar' : 'fill-fourstar'} />
 		<Text type="p">{key.replace(/([A-Z])/g, ' $1').trim()}</Text>
 	</div>
 {/if}

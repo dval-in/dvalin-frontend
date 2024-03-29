@@ -1,13 +1,14 @@
 <script lang="ts">
 	export let path: any;
 	export let size: number = 1;
-	export let color: string = 'fill-text';
 	export let flip: any | null = null;
 	export let rotate = 0;
-	export let marginBottom = 0;
 	export let spin = false;
 	export let title = '';
-	export let className = '';
+
+	let exportedClass = '';
+
+	export { exportedClass as class };
 
 	$: inverse = typeof spin !== 'boolean' && spin < 0 ? true : false;
 	$: spintime = Math.abs(spin === true ? 2 : 0);
@@ -17,6 +18,7 @@
 	const getStyles = () => {
 		const transform = [];
 		const styles = [];
+
 		if (size !== null) {
 			const width = typeof size === 'string' ? size : `${size * 1.5}rem`;
 			styles.push(['width', width]);
@@ -33,9 +35,6 @@
 			styles.push(['transform', transform.join(' ')]);
 			styles.push(['transform-origin', 'center']);
 		}
-		if (marginBottom > 0) {
-			styles.push(['margin-bottom', `${marginBottom}px`]);
-		}
 		return styles.reduce((cur, item) => {
 			return `${cur} ${item[0]}:${item[1]};`;
 		}, '');
@@ -43,7 +42,7 @@
 	$: style = getStyles();
 </script>
 
-<svg viewBox="0 0 24 24" {style} class="{className} {color}">
+<svg class="fill-text {exportedClass}" {style} viewBox="0 0 24 24">
 	{#if title}
 		<title>{title}</title>
 	{/if}
