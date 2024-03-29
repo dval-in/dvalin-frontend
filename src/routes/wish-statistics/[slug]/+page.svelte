@@ -22,6 +22,9 @@
 	};
 	let wishData: IMappedWish[] = [];
 	const wishes: IWish[] | undefined = $applicationState.wishes?.[data.pageType];
+	let fiveStars = [];
+	let fourStars = [];
+	let threeStars = [];
 
 	if (wishes !== undefined) {
 		wishData = wishes.map((wish: IWish) => {
@@ -35,6 +38,14 @@
 				rarity: index.rarity
 			};
 		});
+
+		fiveStars = wishData
+			.filter((wish: IMappedWish) => wish.rarity === 5)
+			.sort((a, b) => b.number - a.number);
+
+		fourStars = wishData.filter((wish: IMappedWish) => wish.rarity === 4);
+
+		threeStars = wishData.filter((wish: IMappedWish) => wish.rarity === 3);
 	}
 </script>
 
@@ -44,7 +55,7 @@
 	<div class="flex flex-1 flex-col sm:flex-row sm:flex-wrap gap-4">
 		<div class="flex flex-col gap-4">
 			<div class="flex flex-row gap-2">
-				<InfoCell title="Total pulls">
+				<InfoCell class="bg-tertiary" title="Total pulls">
 					<Text type="h4">{wishData.length}</Text>
 
 					<svelte:fragment slot="tooltip">
@@ -52,11 +63,24 @@
 						<Text type="h4">{wishData.length * 160}</Text>
 					</svelte:fragment>
 				</InfoCell>
-				<InfoCell title="% of total pulls">
-					<Text type="h4">{0}</Text>
-					<Text type="h4">{0}</Text>
+				<InfoCell class="bg-tertiary" title="% of total pulls">
+					{#if fiveStars.length > 0}
+						<Text class="text-fivestar" type="h4">
+							{((fiveStars.length / wishData.length) * 100).toFixed(1)}
+						</Text>
+					{/if}
+					{#if fourStars.length > 0}
+						<Text class="text-fourstar" type="h4">
+							{((fourStars.length / wishData.length) * 100).toFixed(1)}
+						</Text>
+					{/if}
+					{#if threeStars.length > 0}
+						<Text class="text-threestar" type="h4">
+							{((threeStars.length / wishData.length) * 100).toFixed(1)}
+						</Text>
+					{/if}
 				</InfoCell>
-				<InfoCell title="Pity">
+				<InfoCell class="bg-tertiary" title="Pity">
 					<Text type="h4">{0}</Text>
 					<Text type="h4">{0}</Text>
 				</InfoCell>

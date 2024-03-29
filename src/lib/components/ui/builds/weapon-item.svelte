@@ -24,7 +24,7 @@
 		<div class="flex-grow flex flex-col gap-1 text-md min-h-0">
 			<div class="flex w-full justify-start">
 				{#each { length: rarity } as _}
-					<Icon path={mdiStar} color={rarity == 5 ? 'fill-fivestar' : 'fill-fourstar'} />
+					<Icon path={mdiStar} class={rarity === 5 ? 'fill-fivestar' : 'fill-fourstar'} />
 				{/each}
 			</div>
 			<Text type="h4">{index[key].name}</Text>
