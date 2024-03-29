@@ -79,7 +79,7 @@
 		rDomain={keys}
 		rRange={colorKeys}
 		rScale={scaleOrdinal()}
-		tooltip
+		tooltip={{ mode: 'bisect-x' }}
 		x={(d) => d.data.date}
 		xScale={scaleTime()}
 		y={['0', '1']}
