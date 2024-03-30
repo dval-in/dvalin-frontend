@@ -63,7 +63,8 @@
 		);
 	};
 
-	const formatDateLabel = (d: string) => formatDate(d, PeriodType.MonthYear, { variant: 'short' });
+	const formatDateLabel = (d: string) =>
+		formatDate(d, PeriodType.MonthYear, { variant: 'short' });
 </script>
 
 <div class="h-[350px] w-full">
@@ -87,7 +88,12 @@
 	>
 		<Svg>
 			<Axis grid labelProps={{ class: 'fill-text' }} placement="left" rule />
-			<Axis format={formatDateLabel} labelProps={{ class: 'fill-text' }} placement="bottom" rule />
+			<Axis
+				format={formatDateLabel}
+				labelProps={{ class: 'fill-text' }}
+				placement="bottom"
+				rule
+			/>
 			<AreaStack let:data>
 				{#each data as seriesData}
 					<Area
@@ -97,7 +103,13 @@
 						fill={colorKeys.at(seriesData.key - 3)}
 						fill-opacity={0.5}
 					/>
-					<RectClipPath x={0} y={0} width={tooltip.data ? tooltip.x : width} {height} spring>
+					<RectClipPath
+						x={0}
+						y={0}
+						width={tooltip.data ? tooltip.x : width}
+						{height}
+						spring
+					>
 						<Area
 							data={seriesData}
 							y0={(d) => d[0]}
@@ -137,7 +149,10 @@
 			<div class="flex flex-col gap-2 justify-center items-start">
 				{#each keys as key}
 					<div class="flex gap-1 justify-center items-center">
-						<Icon path={mdiStar} class={`fill-[${colorKeys.at(Number.parseInt(key) - 3)}]`} />
+						<Icon
+							path={mdiStar}
+							class={`fill-[${colorKeys.at(Number.parseInt(key) - 3)}]`}
+						/>
 						<Text type="p">{key}: {data.data[key]}</Text>
 					</div>
 				{/each}

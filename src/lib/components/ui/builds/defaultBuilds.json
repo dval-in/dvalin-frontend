@@ -9,7 +9,12 @@
 		"talentPriority": ["Elemental Skill", "Normal Attack", "ELemental Burst"],
 		"weapons": {
 			"signatureWeapon": "CinnabarSpindle",
-			"altWeapons": ["CinnabarSpindle", "CinnabarSpindle", "CinnabarSpindle", "CinnabarSpindle"]
+			"altWeapons": [
+				"CinnabarSpindle",
+				"CinnabarSpindle",
+				"CinnabarSpindle",
+				"CinnabarSpindle"
+			]
 		},
 		"artifacts": {
 			"signatureSet": {
@@ -46,7 +51,12 @@
 		"talentPriority": ["Elemental Skill", "Normal Attack", "ELemental Burst"],
 		"weapons": {
 			"signatureWeapon": "CinnabarSpindle",
-			"altWeapons": ["CinnabarSpindle", "CinnabarSpindle", "CinnabarSpindle", "CinnabarSpindle"]
+			"altWeapons": [
+				"CinnabarSpindle",
+				"CinnabarSpindle",
+				"CinnabarSpindle",
+				"CinnabarSpindle"
+			]
 		},
 		"artifacts": {
 			"signatureSet": {
@@ -83,7 +93,12 @@
 		"talentPriority": ["Elemental Skill", "Normal Attack", "ELemental Burst"],
 		"weapons": {
 			"signatureWeapon": "CinnabarSpindle",
-			"altWeapons": ["CinnabarSpindle", "CinnabarSpindle", "CinnabarSpindle", "CinnabarSpindle"]
+			"altWeapons": [
+				"CinnabarSpindle",
+				"CinnabarSpindle",
+				"CinnabarSpindle",
+				"CinnabarSpindle"
+			]
 		},
 		"artifacts": {
 			"signatureSet": {

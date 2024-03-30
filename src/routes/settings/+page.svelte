@@ -12,7 +12,8 @@
 		let element = document.createElement('a');
 		element.setAttribute(
 			'href',
-			'data:text/plain;charset=utf-8,' + encodeURIComponent(JSON.stringify(get(applicationState)))
+			'data:text/plain;charset=utf-8,' +
+				encodeURIComponent(JSON.stringify(get(applicationState)))
 		);
 		element.setAttribute('download', 'settings.json');
 		element.style.display = 'none';

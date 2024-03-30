@@ -9,8 +9,6 @@
 	import Button from '$lib/components/ui/button/button.svelte';
 	import Icon from '$lib/components/ui/icon/icon.svelte';
 	import { mdiStar } from '@mdi/js';
-	import * as Tabs from '$lib/components/ui/character-tabs';
-	import * as Table from '$lib/components/ui/table';
 	import CharacterBuilds from '$lib/components/ui/builds/character-builds.svelte';
 	import defaultBuilds from '$lib/components/ui/builds/defaultBuilds.json';
 
@@ -45,7 +43,9 @@
 
 		<div class="flex-grow h-full flex gap-2 flex-col box-border">
 			<Text textColor="primary" type="h1">{data.characterData.name}</Text>
-			<span class="font-bold">{data.characterData.element} • {data.characterData.weaponType}</span>
+			<span class="font-bold"
+				>{data.characterData.element} • {data.characterData.weaponType}</span
+			>
 			<div class="flex flex-row w-full">
 				<Badge class="rounded bg-tertiary" variant="default">Sub-DPS</Badge>
 				<!--Find Badge Data Somewhere?-->
@@ -65,7 +65,10 @@
 					<Tabs.Trigger value="talents">Talents</Tabs.Trigger>
 					<Tabs.Trigger value="constellations">Constellations</Tabs.Trigger>
 				</Tabs.List>
-				<Tabs.Content value="stats" class="min-h-0 overflow-scroll border border-secondary/50">
+				<Tabs.Content
+					value="stats"
+					class="min-h-0 overflow-scroll border border-secondary/50"
+				>
 					<Table.Root>
 						<Table.Header>
 							<Table.Row class="p-2 border-b border-secondary/50">

@@ -9,16 +9,16 @@
 		Row as TableRow
 	} from '$lib/components/ui/table';
 	import {
-		Root as PaginationRoot,
 		Content as PaginationContent,
+		Ellipsis as PaginationEllipsis,
 		Item as PaginationItem,
+		Link as PaginationLink,
 		NextButton as PaginationNextButton,
 		PrevButton as PaginationPrevButton,
-		Link as PaginationLink,
-		Ellipsis as PaginationEllipsis
+		Root as PaginationRoot
 	} from '$lib/components/ui/pagination';
 	import { readable } from 'svelte/store';
-	import { createTable, Subscribe, Render, createRender } from 'svelte-headless-table';
+	import { createRender, createTable, Render, Subscribe } from 'svelte-headless-table';
 	import {
 		mdiAccount,
 		mdiArrowDown,
@@ -110,7 +110,9 @@
 			accessor: 'type',
 			header: 'Type',
 			cell: ({ value }) => {
-				return createRender(Icon, { path: value === 'Character' ? mdiAccount : mdiSwordCross });
+				return createRender(Icon, {
+					path: value === 'Character' ? mdiAccount : mdiSwordCross
+				});
 			},
 			plugins: {
 				sort: {
@@ -120,7 +122,11 @@
 					fn: includeFilter,
 					initialFilterValue: [],
 					render: ({ filterValue, preFilteredValues }) =>
-						createRender(SelectFilter, { filterValue, title: 'Type', preFilteredValues })
+						createRender(SelectFilter, {
+							filterValue,
+							title: 'Type',
+							preFilteredValues
+						})
 				},
 				resize: {
 					initialWidth: 88
@@ -184,7 +190,12 @@
 				<Subscribe rowAttrs={headerRow.attrs()} let:rowAttrs>
 					<TableRow {...rowAttrs}>
 						{#each headerRow.cells as cell (cell.id)}
-							<Subscribe attrs={cell.attrs()} let:attrs props={cell.props()} let:props>
+							<Subscribe
+								attrs={cell.attrs()}
+								let:attrs
+								props={cell.props()}
+								let:props
+							>
 								<TableHead
 									{...attrs}
 									class={`px-0 ${cell.id === 'key' ? 'text-start' : 'text-center'}`}
