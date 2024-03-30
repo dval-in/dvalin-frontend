@@ -65,8 +65,7 @@
 		"tslib": "^2.4.1",
 		"typescript": "^5.0.0",
 		"vite": "^5.0.3",
-		"vite-plugin-pwa": "^0.19.7",
-		"wrangler": "^3.23.0"
+		"vite-plugin-pwa": "^0.19.7"
 	},
 	"engines": {
 		"pnpm": ">= 8",
