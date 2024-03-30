@@ -16,4 +16,4 @@
 
 ### Contributing
 
-See [CONTRIBUTING.md](https://github.com/dval.in/dvalin-frontend/blob/master/CONTRIBUTING.md)
+See [CONTRIBUTING.md](https://github.com/dval-in/dvalin-frontend/blob/main/CONTRIBUTING.md)
