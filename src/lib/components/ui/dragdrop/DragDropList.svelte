@@ -4,7 +4,7 @@
 	import { Checkbox } from '$lib/components/ui/checkbox';
 	import Text from '$lib/components/typography/Text.svelte';
 
-	class DatumType{
+	class DatumType {
 		id?: number;
 		check?: string;
 		html?: string;
@@ -58,7 +58,7 @@
 	}
 
 	function dragEnter(target: EventTarget) {
-		if(!(target instanceof HTMLElement)) return;
+		if (!(target instanceof HTMLElement)) return;
 		// swap items in data
 		if (grabbed && target != grabbed && target.classList.contains('item')) {
 			moveDatum(parseInt(grabbed.dataset.index!), parseInt(target.dataset.index!));
