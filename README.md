@@ -12,8 +12,9 @@
 
 1. [Clone the repository](https://docs.github.com/articles/cloning-a-repository)
 2. Install dependencies (`pnpm install`)
-3. Run frontend (`pnpm run dev`)
+3. Create a copy of .env.example named .env.local
+4. Run frontend (`pnpm run dev`)
 
 ### Contributing
 
-See [CONTRIBUTING.md](https://github.com/dval.in/dvalin-frontend/blob/master/CONTRIBUTING.md)
+See [CONTRIBUTING.md](https://github.com/dval-in/dvalin-frontend/blob/main/CONTRIBUTING.md)
