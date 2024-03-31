@@ -36,5 +36,8 @@ export default defineConfig({
 				config: 'pwa-assets.config.ts'
 			}
 		})
-	]
+	],
+	define: {
+		SUPERFORMS_LEGACY: true
+	}
 });
