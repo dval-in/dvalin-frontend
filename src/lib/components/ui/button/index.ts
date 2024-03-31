@@ -11,7 +11,8 @@ const buttonVariants = tv({
 				'justify-center bg-destructive text-destructive-foreground hover:bg-destructive/90',
 			outline:
 				'justify-center border border-text bg-neutral hover:bg-accent hover:text-accent-foreground',
-			secondary: 'justify-center bg-secondary text-secondary-foreground hover:bg-secondary/80',
+			secondary:
+				'justify-center bg-secondary text-secondary-foreground hover:bg-secondary/80',
 			ghost: 'justify-center hover:bg-primary hover:text-accent-foreground',
 			link: 'justify-center text-primary underline-offset-4 hover:bg-fill/20',
 			sidebar: 'bg-tertiary text-text hover:bg-tertiaryHover w-full',

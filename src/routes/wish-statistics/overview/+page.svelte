@@ -54,13 +54,21 @@
 
 	<div class="flex flex-wrap gap-4">
 		{#if wishData?.CharacterEvent !== undefined}
-			<BannerOverviewCard data={wishData.CharacterEvent} icon={mdiAccount} title="Character" />
+			<BannerOverviewCard
+				data={wishData.CharacterEvent}
+				icon={mdiAccount}
+				title="Character"
+			/>
 		{/if}
 		{#if wishData?.WeaponEvent !== undefined}
 			<BannerOverviewCard data={wishData.WeaponEvent} icon={mdiSwordCross} title="Weapon" />
 		{/if}
 		{#if wishData?.Standard !== undefined}
-			<BannerOverviewCard data={wishData.Standard} icon={mdiTrashCanOutline} title="Standard" />
+			<BannerOverviewCard
+				data={wishData.Standard}
+				icon={mdiTrashCanOutline}
+				title="Standard"
+			/>
 		{/if}
 		{#if wishData?.Chronicled !== undefined}
 			<BannerOverviewCard data={wishData.Chronicled} icon={mdiBook} title="Chronicled" />

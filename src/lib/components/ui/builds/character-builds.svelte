@@ -115,7 +115,11 @@
 							class="grid grid-cols-3 grid-rows-2 grid-flow-col items-center justify-items-center"
 						>
 							{#each build.artifacts.stats.main as item, i}
-								<img class="size-12" alt={buildItems[i].name} src={buildItems[i].img} />
+								<img
+									class="size-12"
+									alt={buildItems[i].name}
+									src={buildItems[i].img}
+								/>
 								<Text type="p">{item}</Text>
 							{/each}
 						</div>

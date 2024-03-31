@@ -1,11 +1,20 @@
-# Dval.in
+# Dvalin - Frontend
 
-## This is dval.in, successor and better version of paimon.moe, and is the one site for all Genshin Impact Guides and Help. Character, Info, Weapons, Wishes, Guides, and more in one spot.
+### How to use
 
-### REQUIRED - Commit Messages: Use the Conventional Commits (https://www.conventionalcommits.org/en/v1.0.0/)
+#### Requirements:
 
-### Development Guide
+-   [Node 20](https://nodejs.org/)
+-   [pnpm](https://pnpm.io/)
+-   [dvalin-backend](https://github.com/dval-in/dvalin-backend)
 
-1. Clone the repository
-2. Do `pnpm install` to install the dependencies and git hooks (MUST DO)
-3. Do `pnpm run dev` to start the development server
+#### Steps:
+
+1. [Clone the repository](https://docs.github.com/articles/cloning-a-repository)
+2. Install dependencies (`pnpm install`)
+3. Create a copy of .env.example named .env.local
+4. Run frontend (`pnpm run dev`)
+
+### Contributing
+
+See [CONTRIBUTING.md](https://github.com/dval-in/dvalin-frontend/blob/main/CONTRIBUTING.md)

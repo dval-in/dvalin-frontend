@@ -101,7 +101,9 @@
 						<Table.Row class="p-2 border-b border-secondary/50">
 							{#each ascensions[0].stats as stat, i}
 								<Table.Head class="p-2 px-4 font-bold">
-									{stat.label === 'Ascend' ? 'ASC' : stat.label.replace('Base ', '')}
+									{stat.label === 'Ascend'
+										? 'ASC'
+										: stat.label.replace('Base ', '')}
 								</Table.Head>
 								{#if i == 0}
 									<Table.Head class="p-2 px-4 font-bold">Level</Table.Head>
@@ -165,20 +167,32 @@
 										<div
 											class="flex flex-col gap-4 py-4 lg:grid lg:grid-cols-2 lg:items-center lg:h-full lg:auto-rows-auto"
 										>
-											<div class="flex flex-col gap-4 lg:grid lg:grid-rows-subgrid lg:row-span-2">
-												<Table.Root class="border border-secondary lg:w-full lg:h-full">
+											<div
+												class="flex flex-col gap-4 lg:grid lg:grid-rows-subgrid lg:row-span-2"
+											>
+												<Table.Root
+													class="border border-secondary lg:w-full lg:h-full"
+												>
 													<Table.Body>
 														{#each skill.attributes as attr}
 															<Table.Row class="border-secondary">
-																<Table.Cell class="p-2 font-bold border-r border-secondary"
+																<Table.Cell
+																	class="p-2 font-bold border-r border-secondary"
 																	>{attr.label}</Table.Cell
 																>
-																<Table.Cell class="p-2">{attr.values[talentLevels[i]]}</Table.Cell>
+																<Table.Cell class="p-2"
+																	>{attr.values[
+																		talentLevels[i]
+																	]}</Table.Cell
+																>
 															</Table.Row>
 														{/each}
 													</Table.Body>
 												</Table.Root>
-												<Text type="h4">Skill Attributes: (Level {talentLevels[i] + 1})</Text>
+												<Text type="h4"
+													>Skill Attributes: (Level {talentLevels[i] +
+														1})</Text
+												>
 											</div>
 											<div
 												class="flex-shrink flex flex-col gap-6 lg:grid lg:grid-rows-subgrid lg:row-span-2"

@@ -631,12 +631,18 @@ export class PaimonMoeImporterService implements IImporterService {
 					...(data['wish-counter-character-event'] !== undefined
 						? {
 								// eslint-disable-next-line @typescript-eslint/naming-convention
-								CharacterEvent: convertPaimonWishes(data['wish-counter-character-event'].pulls)
+								CharacterEvent: convertPaimonWishes(
+									data['wish-counter-character-event'].pulls
+								)
 							}
 						: undefined),
 					...(data['wish-counter-weapon-event'] !== undefined
-						? // eslint-disable-next-line @typescript-eslint/naming-convention
-							{ WeaponEvent: convertPaimonWishes(data['wish-counter-weapon-event'].pulls) }
+						? {
+								// eslint-disable-next-line @typescript-eslint/naming-convention
+								WeaponEvent: convertPaimonWishes(
+									data['wish-counter-weapon-event'].pulls
+								)
+							}
 						: undefined),
 					...(data['wish-counter-standard'] !== undefined
 						? // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -647,8 +653,12 @@ export class PaimonMoeImporterService implements IImporterService {
 							{ Beginner: convertPaimonWishes(data['wish-counter-beginners'].pulls) }
 						: undefined),
 					...(data['wish-counter-chronicled'] !== undefined
-						? // eslint-disable-next-line @typescript-eslint/naming-convention
-							{ Chronicled: convertPaimonWishes(data['wish-counter-chronicled'].pulls) }
+						? {
+								// eslint-disable-next-line @typescript-eslint/naming-convention
+								Chronicled: convertPaimonWishes(
+									data['wish-counter-chronicled'].pulls
+								)
+							}
 						: undefined)
 				}
 			};
