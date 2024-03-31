@@ -1,32 +1,21 @@
-import { writable } from 'svelte/store';
 import { persisted } from 'svelte-persisted-store';
-import { type Settings, Convert as SettingsConvert } from '$lib/structs/settings';
+import { type ApplicationState } from '$lib/types/application_state';
 
-export const showSidebar = writable(false);
-export const showSidebarSections = persisted('showSidebarSections', [true, true, true]);
-
-export const settings = persisted(
-	'settings',
-	{
-		global: {
-			theme: 0
-		},
-		user: {
-			logined: false,
-			email: '',
-			username: ''
-		}
+const defaultValues: ApplicationState = {
+	format: 'dvalin',
+	version: 0,
+	settings: {
+		theme: 'dark',
+		locale: 'en'
 	},
-	{
-		storage: 'local',
-		syncTabs: true,
-		serializer: {
-			parse: (text: string): Settings => {
-				return SettingsConvert.toSettings(text);
-			},
-			stringify: (data: Settings): string => {
-				return SettingsConvert.settingsToJson(data);
-			}
-		}
+	user: {
+		ar: 0,
+		uid: 0,
+		wl: 0
 	}
-);
+};
+
+export const applicationState = persisted('applicationState', defaultValues, {
+	storage: 'local',
+	syncTabs: true
+});

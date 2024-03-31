@@ -1,27 +1,34 @@
 <script lang="ts">
-	import { settings } from '$lib/store/global_state';
-	import { get } from 'svelte/store';
-	let themeClass = `t${get(settings).global.theme}`;
+	import { applicationState } from '$lib/store/global_state';
 	import '../app.pcss';
 	import Sidebar from '$lib/components/navigator/Sidebar.svelte';
-	import Header from '$lib/components/navigator/Header.svelte';
-	import { page } from '$app/stores';
-	import { showSidebar } from '$lib/store/global_state';
-	$: segment = $page.url.pathname.substring(1).split('/')[0];
+	import { get } from 'svelte/store';
+	import { Toaster } from 'svelte-sonner';
+	import { pwaInfo } from 'virtual:pwa-info';
+	import { pwaAssetsHead } from 'virtual:pwa-assets/head';
+
+	$: webManifestLink = pwaInfo ? pwaInfo.webManifest.href : '';
+
+	console.log(get(applicationState));
 </script>
 
-<html lang="en" class="{themeClass} text-text bg-background min-h-screen">
-	<div id="main" class="h-full">
-		<Header />
-		<!--  Sidebar navigator for large screen-->
-		<Sidebar {segment} />
-		<!--  Top navigator for mobile-->
-		{#if $showSidebar}
-			<Sidebar {segment} isMobile />
-		{/if}
+<svelte:head>
+	<link href={webManifestLink} rel="manifest" />
+	{#if pwaAssetsHead.themeColor}
+		<meta name="theme-color" content={pwaAssetsHead.themeColor.content} />
+	{/if}
+	{#each pwaAssetsHead.links as link}
+		<link {...link} />
+	{/each}
+</svelte:head>
+
+<div class={`${$applicationState.settings.theme} bg-neutral text-text min-h-screen`}>
+	<div class="h-full" id="main">
+		<Sidebar />
 		<!--  Main content-->
-		<div class="ml-0 pt-16 lg:ml-64 lg:pt-4 md:px-4">
+		<div class="sm:pl-20 xl:pl-72 max-sm:pt-16 sm:flex sm:justify-center">
 			<slot />
 		</div>
+		<Toaster richColors />
 	</div>
-</html>
+</div>

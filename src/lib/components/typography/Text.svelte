@@ -25,10 +25,12 @@
 
 	export let type: keyof typeof textMapping;
 
-	export let margin: boolean = false;
+	let exportedClass = '';
+
+	export { exportedClass as class };
 </script>
 
-<div class:mt-6={margin}>
+<div class={exportedClass}>
 	<svelte:component this={textMapping[type]}>
 		<slot />
 	</svelte:component>
