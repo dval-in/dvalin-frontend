@@ -1,25 +1,32 @@
-<script>
+<script lang="ts">
 	import { flip } from 'svelte/animate';
 	import { Label } from '$lib/components/ui/label';
 	import { Checkbox } from '$lib/components/ui/checkbox';
 	import Text from '$lib/components/typography/Text.svelte';
 
-	export let data = [];
+	class DatumType{
+		id?: number;
+		check?: string;
+		html?: string;
+		text?: string;
+	}
+
+	export let data: DatumType[] = [];
 	export let removesItems = false;
 
-	let ghost;
-	let grabbed;
+	let ghost: HTMLElement;
+	let grabbed: HTMLElement | null;
 
-	let lastTarget;
+	let lastTarget: Element;
 
 	let mouseY = 0; // pointer y coordinate within client
 	let offsetY = 0; // y distance from top of grabbed element to pointer
 	let layerY = 0; // distance from top of list to top of client
 
-	function grab(clientY, element) {
+	function grab(clientY: number, element: HTMLElement) {
 		// modify grabbed element
 		grabbed = element;
-		grabbed.dataset.grabY = clientY;
+		grabbed.dataset.grabY = String(clientY);
 
 		// modify ghost element (which is actually dragged)
 		ghost.innerHTML = grabbed.innerHTML;
@@ -31,44 +38,45 @@
 	}
 
 	// drag handler updates cursor position
-	function drag(clientY) {
+	function drag(clientY: number) {
 		if (grabbed) {
 			mouseY = clientY;
-			layerY = ghost.parentNode.getBoundingClientRect().y;
+			layerY = ghost.parentElement!.getBoundingClientRect().y;
 		}
 	}
 
 	// touchEnter handler emulates the mouseenter event for touch input
 	// (more or less)
-	function touchEnter(ev) {
+	function touchEnter(ev: Touch) {
 		drag(ev.clientY);
 		// trigger dragEnter the first time the cursor moves over a list item
-		let target = document.elementFromPoint(ev.clientX, ev.clientY).closest('.item');
+		let target = document.elementFromPoint(ev.clientX, ev.clientY)!.closest('.item') as HTMLElement;
 		if (target && target != lastTarget) {
 			lastTarget = target;
-			dragEnter(ev, target);
+			dragEnter(target);
 		}
 	}
 
-	function dragEnter(ev, target) {
+	function dragEnter(target: EventTarget) {
+		if(!(target instanceof HTMLElement)) return;
 		// swap items in data
 		if (grabbed && target != grabbed && target.classList.contains('item')) {
-			moveDatum(parseInt(grabbed.dataset.index), parseInt(target.dataset.index));
+			moveDatum(parseInt(grabbed.dataset.index!), parseInt(target.dataset.index!));
 		}
 	}
 
 	// does the actual moving of items in data
-	function moveDatum(from, to) {
+	function moveDatum(from: number, to: number) {
 		let temp = data[from];
 		data = [...data.slice(0, from), ...data.slice(from + 1)];
 		data = [...data.slice(0, to), temp, ...data.slice(to)];
 	}
 
-	function release(ev) {
+	function release() {
 		grabbed = null;
 	}
 
-	function removeDatum(index) {
+	function removeDatum(index: number) {
 		data = [...data.slice(0, index), ...data.slice(index + 1)];
 	}
 </script>
@@ -92,6 +100,7 @@
 	>
 		<p></p>
 	</div>
+	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<div
 		class="list"
 		on:mousemove={function (ev) {
@@ -104,14 +113,15 @@
 		}}
 		on:mouseup={function (ev) {
 			ev.stopPropagation();
-			release(ev);
+			release();
 		}}
 		on:touchend={function (ev) {
 			ev.stopPropagation();
-			release(ev.touches[0]);
+			release();
 		}}
 	>
 		{#each data as datum, i (datum.id ? datum.id : JSON.stringify(datum))}
+			<!-- svelte-ignore a11y-no-static-element-interactions -->
 			<div
 				id={grabbed && (datum.id ? datum.id : JSON.stringify(datum)) == grabbed.dataset.id
 					? 'grabbed'
@@ -121,14 +131,14 @@
 				data-id={datum.id}
 				data-grabY="0"
 				on:mousedown={function (ev) {
-					grab(ev.clientY, this);
+					grab(ev.clientY, ev.currentTarget);
 				}}
 				on:touchstart={function (ev) {
-					grab(ev.touches[0].clientY, this);
+					grab(ev.touches[0].clientY, ev.currentTarget);
 				}}
 				on:mouseenter={function (ev) {
 					ev.stopPropagation();
-					dragEnter(ev, ev.target);
+					dragEnter(ev.currentTarget);
 				}}
 				on:touchmove={function (ev) {
 					ev.stopPropagation();
