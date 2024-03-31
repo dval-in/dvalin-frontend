@@ -20,8 +20,8 @@
 					Improved pull list (added pull number, highlight 4 & 5 star, filter by dates)
 				</Text>
 				<Text type="p">
-					Fixed images (no brokey anymore!!!!, huge thanks to @Flappydom for helping with renaming
-					files)
+					Fixed images (no brokey anymore!!!!, huge thanks to @Flappydom for helping with
+					renaming files)
 				</Text>
 				<Text type="p">Improved search experience</Text>
 				<Text type="p">Characters are retrieved from user data</Text>

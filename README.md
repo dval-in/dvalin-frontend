@@ -4,9 +4,9 @@
 
 #### Requirements:
 
-- [Node 20](https://nodejs.org/)
-- [pnpm](https://pnpm.io/)
-- [dvalin-backend](https://github.com/dval-in/dvalin-backend)
+-   [Node 20](https://nodejs.org/)
+-   [pnpm](https://pnpm.io/)
+-   [dvalin-backend](https://github.com/dval-in/dvalin-backend)
 
 #### Steps:
 
