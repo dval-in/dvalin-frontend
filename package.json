@@ -26,7 +26,7 @@
 		"lucide-svelte": "^0.303.0",
 		"mode-watcher": "^0.2.1",
 		"svelte-i18next": "^2.2.2",
-		"svelte-persisted-store": "^0.8.0",
+		"svelte-persisted-store": "^0.9.1",
 		"svelte-sonner": "^0.3.18",
 		"svelte-ux": "^0.60.6",
 		"sveltekit-superforms": "^1.13.4",
