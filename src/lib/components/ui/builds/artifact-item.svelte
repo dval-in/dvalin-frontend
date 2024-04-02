@@ -38,7 +38,7 @@
 		/>
 		<div class="flex w-full gap-2 items-center">
 			<Icon
-				size=".7"
+				size={0.7}
 				path={mdiStar}
 				class={rarity === 5 ? 'fill-fivestar' : 'fill-fourstar'}
 			/>
