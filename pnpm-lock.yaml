@@ -55,7 +55,7 @@ dependencies:
     version: 0.60.6(@babel/core@7.24.0)(postcss@8.4.33)(sass@1.72.0)(svelte@4.2.12)
   sveltekit-superforms:
     specifier: ^1.13.4
-    version: 1.13.4(@sveltejs/kit@2.5.0)(svelte@4.2.12)(zod@3.22.4)
+    version: 1.13.4(@sveltejs/kit@2.5.5)(svelte@4.2.12)(zod@3.22.4)
   tailwind-merge:
     specifier: ^2.2.0
     version: 2.2.1
@@ -78,10 +78,10 @@ devDependencies:
     version: 18.6.0
   '@sveltejs/adapter-static':
     specifier: ^3.0.1
-    version: 3.0.1(@sveltejs/kit@2.5.0)
+    version: 3.0.1(@sveltejs/kit@2.5.5)
   '@sveltejs/kit':
-    specifier: ^2.0.0
-    version: 2.5.0(@sveltejs/vite-plugin-svelte@3.0.2)(svelte@4.2.12)(vite@5.0.12)
+    specifier: ^2.5.5
+    version: 2.5.5(@sveltejs/vite-plugin-svelte@3.0.2)(svelte@4.2.12)(vite@5.0.12)
   '@sveltejs/vite-plugin-svelte':
     specifier: ^3.0.0
     version: 3.0.2(svelte@4.2.12)(vite@5.0.12)
@@ -105,7 +105,7 @@ devDependencies:
     version: 0.2.4
   '@vite-pwa/sveltekit':
     specifier: ^0.4.0
-    version: 0.4.0(@sveltejs/kit@2.5.0)(@vite-pwa/assets-generator@0.2.4)(vite-plugin-pwa@0.19.7)
+    version: 0.4.0(@sveltejs/kit@2.5.5)(@vite-pwa/assets-generator@0.2.4)(vite-plugin-pwa@0.19.7)
   autoprefixer:
     specifier: ^10.4.16
     version: 10.4.17(postcss@8.4.33)
@@ -2069,16 +2069,16 @@ packages:
       string.prototype.matchall: 4.0.10
     dev: true
 
-  /@sveltejs/adapter-static@3.0.1(@sveltejs/kit@2.5.0):
+  /@sveltejs/adapter-static@3.0.1(@sveltejs/kit@2.5.5):
     resolution: {integrity: sha512-6lMvf7xYEJ+oGeR5L8DFJJrowkefTK6ZgA4JiMqoClMkKq0s6yvsd3FZfCFvX1fQ0tpCD7fkuRVHsnUVgsHyNg==}
     peerDependencies:
       '@sveltejs/kit': ^2.0.0
     dependencies:
-      '@sveltejs/kit': 2.5.0(@sveltejs/vite-plugin-svelte@3.0.2)(svelte@4.2.12)(vite@5.0.12)
+      '@sveltejs/kit': 2.5.5(@sveltejs/vite-plugin-svelte@3.0.2)(svelte@4.2.12)(vite@5.0.12)
     dev: true
 
-  /@sveltejs/kit@2.5.0(@sveltejs/vite-plugin-svelte@3.0.2)(svelte@4.2.12)(vite@5.0.12):
-    resolution: {integrity: sha512-1uyXvzC2Lu1FZa30T4y5jUAC21R309ZMRG0TPt+PPPbNUoDpy8zSmSNVWYaBWxYDqLGQ5oPNWvjvvF2IjJ1jmA==}
+  /@sveltejs/kit@2.5.5(@sveltejs/vite-plugin-svelte@3.0.2)(svelte@4.2.12)(vite@5.0.12):
+    resolution: {integrity: sha512-ULe3PB00q4+wYRL+IS5FDPsCEVnhEITofm7b9Yz8malcH3r1SAnW/JJ6T13hIMeu8QNRIuVQWo+P4+2VklbnLQ==}
     engines: {node: '>=18.13'}
     hasBin: true
     requiresBuild: true
@@ -2361,7 +2361,7 @@ packages:
       unconfig: 0.3.11
     dev: true
 
-  /@vite-pwa/sveltekit@0.4.0(@sveltejs/kit@2.5.0)(@vite-pwa/assets-generator@0.2.4)(vite-plugin-pwa@0.19.7):
+  /@vite-pwa/sveltekit@0.4.0(@sveltejs/kit@2.5.5)(@vite-pwa/assets-generator@0.2.4)(vite-plugin-pwa@0.19.7):
     resolution: {integrity: sha512-pzIH5ohlXwbadYbKqnRiMtDSGa5DvzUGCT2X34kAAsrg9QhL5jLCMqiWfST8zJMgtbt/k7k/vWBI/p6Pgk5DNg==}
     engines: {node: '>=16.14 || >=18.13'}
     peerDependencies:
@@ -2372,7 +2372,7 @@ packages:
       '@vite-pwa/assets-generator':
         optional: true
     dependencies:
-      '@sveltejs/kit': 2.5.0(@sveltejs/vite-plugin-svelte@3.0.2)(svelte@4.2.12)(vite@5.0.12)
+      '@sveltejs/kit': 2.5.5(@sveltejs/vite-plugin-svelte@3.0.2)(svelte@4.2.12)(vite@5.0.12)
       '@vite-pwa/assets-generator': 0.2.4
       kolorist: 1.8.0
       vite-plugin-pwa: 0.19.7(@vite-pwa/assets-generator@0.2.4)(vite@5.0.12)(workbox-build@7.0.0)(workbox-window@7.0.0)
@@ -3753,7 +3753,7 @@ packages:
       zod: ^3.22.2
     dependencies:
       svelte: 4.2.12
-      sveltekit-superforms: 1.13.4(@sveltejs/kit@2.5.0)(svelte@4.2.12)(zod@3.22.4)
+      sveltekit-superforms: 1.13.4(@sveltejs/kit@2.5.5)(svelte@4.2.12)(zod@3.22.4)
       zod: 3.22.4
     dev: false
 
@@ -6158,14 +6158,14 @@ packages:
       magic-string: 0.30.5
       periscopic: 3.1.0
 
-  /sveltekit-superforms@1.13.4(@sveltejs/kit@2.5.0)(svelte@4.2.12)(zod@3.22.4):
+  /sveltekit-superforms@1.13.4(@sveltejs/kit@2.5.5)(svelte@4.2.12)(zod@3.22.4):
     resolution: {integrity: sha512-rM2+Ictaw7OAIorCLmvg82orci/mtO9ZouI4emtx8SyYngx9aED+eNZlHPLufgB6D7geL2a+hMSFtM3zmMQixQ==}
     peerDependencies:
       '@sveltejs/kit': 1.x || 2.x
       svelte: 3.x || 4.x
       zod: 3.x
     dependencies:
-      '@sveltejs/kit': 2.5.0(@sveltejs/vite-plugin-svelte@3.0.2)(svelte@4.2.12)(vite@5.0.12)
+      '@sveltejs/kit': 2.5.5(@sveltejs/vite-plugin-svelte@3.0.2)(svelte@4.2.12)(vite@5.0.12)
       devalue: 4.3.2
       klona: 2.0.6
       svelte: 4.2.12
