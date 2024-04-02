@@ -7,9 +7,9 @@
 	import type { ArtifactSetKey } from '$lib/types/keys/ArtifactSetKey';
 	import type { WeaponIndex } from '$lib/types/index/weapon';
 	import { isWeaponKey, type WeaponKey } from '$lib/types/keys/WeaponKey';
-	import IconCirclet from './Icon_Circlet_of_Logos.png';
-	import IconGoblet from './Icon_Goblet_of_Eonothem.png';
-	import IconSands from './Icon_Sands_of_Eon.png';
+	import IconCirclet from '$lib/assets/Icon_Circlet_of_Logos.png';
+	import IconGoblet from '$lib/assets/Icon_Goblet_of_Eonothem.png';
+	import IconSands from '$lib/assets/Icon_Sands_of_Eon.png';
 
 	export let builds: Build[];
 	export let weaponIndex: WeaponIndex;
