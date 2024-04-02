@@ -36,7 +36,7 @@
 
 <main class="flex-col w-full h-min">
 	<section
-		class="grid grid-cols-1 gap-4 p-6 box-content lg:h-[60vh] lg:grid-cols-[15rem_1fr] lg:grid-flow-dense lg:grid-rows-[auto_minmax(0,1fr)]"
+		class="grid grid-cols-1 gap-4 p-6 box-content lg:h-max lg:min-h-[55vh] lg:grid-cols-[14rem_1fr] lg:grid-flow-dense lg:grid-rows-[auto_minmax(0,1fr)]"
 	>
 		<div class="flex items-center gap-2 lg:col-start-2">
 			<Button class="lg:hidden" on:click={goBack} variant="ghost" size="icon">
@@ -52,7 +52,7 @@
 				alt="{data.characterData.name} Gacha Splash"
 			/>
 			<img
-				class="hidden w-auto h-full rounded-lg object-cover object-center lg:block"
+				class="hidden w-auto rounded-lg object-cover object-center lg:block"
 				src={card}
 				alt="{data.characterData.name} Gacha Card"
 			/>

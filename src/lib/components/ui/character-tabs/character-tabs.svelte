@@ -20,13 +20,11 @@
 		<StatTable {ascensions} />
 	</Tabs.Content>
 	<!--Ascension Table-->
-	<Tabs.Content value="talents" class="lg:flex-shrink relative">
+	<Tabs.Content value="talents" class="lg:flex-shrink relative lg:h-full lg:overflow-auto">
 		<TalentTable skills={characterData.skills} passives={characterData.passives} />
 	</Tabs.Content>
 	<Tabs.Content value="constellations" class="lg:flex-shrink lg:overflow-auto">
-		<div
-			class="grid grid-cols-1 grid-row-6 gap-2 lg:h-fit lg:grid-cols-2 lg:grid-rows-[auto_auto_auto] lg:grid-flow-col"
-		>
+		<div class="grid grid-cols-1 grid-row-6 gap-2">
 			{#each characterData.constellations as con}
 				<Card class="flex flex-col gap-2 flex-1">
 					<Text type="h4">{con.level}. {con.name}</Text>
