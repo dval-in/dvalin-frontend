@@ -48,8 +48,8 @@ dependencies:
     specifier: ^0.9.1
     version: 0.9.1(svelte@4.2.12)
   svelte-sonner:
-    specifier: ^0.3.20
-    version: 0.3.20(svelte@4.2.12)
+    specifier: ^0.3.21
+    version: 0.3.21(svelte@4.2.12)
   svelte-ux:
     specifier: ^0.60.6
     version: 0.60.6(@babel/core@7.24.0)(postcss@8.4.33)(sass@1.72.0)(svelte@4.2.12)
@@ -6055,8 +6055,8 @@ packages:
       svelte-subscribe: 2.0.1(svelte@4.2.12)
     dev: true
 
-  /svelte-sonner@0.3.20(svelte@4.2.12):
-    resolution: {integrity: sha512-Ya5sI/OLwjlh9cHxUpQJN9NpeNY1iWEVfA4mk+sGjyZAqEKNvf01KrI+edWTPGi42q+TS2ANN22e691uk5cg4w==}
+  /svelte-sonner@0.3.21(svelte@4.2.12):
+    resolution: {integrity: sha512-OodylZ4ZwX4XNnpujEGzUiX66aIwve4QulI7qNmKIw49LIfAxV1LTQaJ6Xj5KsNqWz72NsO1txxV3im3021vEg==}
     peerDependencies:
       svelte: '>=3 <5'
     dependencies:
