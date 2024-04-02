@@ -20,7 +20,7 @@
 		"cmdk-sv": "^0.0.13",
 		"d3-scale": "^4.0.2",
 		"d3-shape": "^3.2.0",
-		"formsnap": "^0.4.2",
+		"formsnap": "^0.4.4",
 		"i18next": "^23.10.1",
 		"layerchart": "^0.34.0",
 		"lucide-svelte": "^0.303.0",
