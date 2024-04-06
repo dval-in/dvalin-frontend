@@ -3,8 +3,8 @@
 	import { type Character } from '$lib/types/data/Character';
 	import Card from '$lib/components/ui/card/card.svelte';
 	import Text from '$lib/components/typography/Text.svelte';
-	import StatTable from './stat-table.svelte';
-	import TalentTable from './talent-table.svelte';
+	import StatTable from '$lib/components/tables/character-tab-table/StatTable.svelte';
+	import TalentTable from '$lib/components/tables/character-tab-table/TalentTable.svelte';
 
 	export let characterData: Character;
 	const ascensions = characterData.ascension;

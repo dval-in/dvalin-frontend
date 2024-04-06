@@ -15,14 +15,18 @@
 {#if signature}
 	<div class="flex gap-2 w-full">
 		<img
-			class="basis-1/4 aspect-square object-contain w-full"
+			class="basis-1/4 w-14 aspect-square object-contain"
 			src={S3Service.getArtifactLink(key) + '/flower.png'}
 			alt={key}
 		/>
 		<div class="gap-1 box-border h-full">
 			<div class="flex w-full justify-start">
 				{#each { length: rarity } as _}
-					<Icon path={mdiStar} class={rarity === 5 ? 'fill-fivestar' : 'fill-fourstar'} />
+					<Icon
+						size={0.8}
+						path={mdiStar}
+						class={`${rarity === 5 ? 'fill-fivestar' : 'fill-fourstar'}`}
+					/>
 				{/each}
 			</div>
 			<Text type="h4">{key.replace(/([A-Z])/g, ' $1').trim()}</Text>

@@ -17,14 +17,18 @@
 {#if signature}
 	<div class="flex gap-2 w-full">
 		<img
-			class="basis-1/4 aspect-square object-contain w-full"
+			class="basis-1/4 w-14 aspect-square object-contain"
 			src={S3Service.getWeaponLink(key) + '/icon.png'}
 			alt={index[key].name}
 		/>
 		<div class="flex-grow flex flex-col gap-1 text-md min-h-0">
 			<div class="flex w-full justify-start">
 				{#each { length: rarity } as _}
-					<Icon path={mdiStar} class={rarity === 5 ? 'fill-fivestar' : 'fill-fourstar'} />
+					<Icon
+						size={0.8}
+						path={mdiStar}
+						class={rarity === 5 ? 'fill-fivestar' : 'fill-fourstar'}
+					/>
 				{/each}
 			</div>
 			<Text type="h4">{index[key].name}</Text>

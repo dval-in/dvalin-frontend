@@ -112,11 +112,11 @@
 						</div>
 						<Text type="h4">Main Stats</Text>
 						<div
-							class="grid grid-cols-3 grid-rows-2 grid-flow-col items-center justify-items-center"
+							class="grid grid-cols-3 grid-rows-2 grid-flow-col items-center justify-items-center text-center gap-2"
 						>
 							{#each build.artifacts.stats.main as item, i}
 								<img
-									class="size-12"
+									class="w-full min-w-0 object-contain h-fit max-w-12"
 									alt={buildItems[i].name}
 									src={buildItems[i].img}
 								/>
@@ -135,22 +135,22 @@
 
 					<Card class="h-min max-w-full flex flex-col gap-4 p-4">
 						<Text type="h3">Talents</Text>
-						<div class="flex flex-row w-full gap-2 h-16 justify-center items-center">
+						<div class="flex flex-row flex-1 gap-2 h-16 justify-center items-center">
 							<img
-								class="aspect-square object-cover h-0 min-h-full"
-								src=""
+								class="w-full min-w-0 object-contain max-w-12"
+								src={buildItems[0].img}
 								alt={build.talentPriority[0]}
 							/>
 							<p>&gt;</p>
 							<img
-								class="aspect-square object-cover h-0 min-h-full"
-								src=""
+								class="w-full min-w-0 object-contain max-w-12"
+								src={buildItems[0].img}
 								alt={build.talentPriority[1]}
 							/>
 							<p>&gt;</p>
 							<img
-								class="aspect-square object-cover h-0 min-h-full"
-								src=""
+								class="w-full min-w-0 object-contain max-w-12"
+								src={buildItems[0].img}
 								alt={build.talentPriority[2]}
 							/>
 						</div>

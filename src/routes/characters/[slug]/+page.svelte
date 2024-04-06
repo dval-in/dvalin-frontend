@@ -20,14 +20,8 @@
 		weaponIndex: WeaponIndex;
 	};
 
-	const card =
-		S3Service.getCharacterLink(data.character) +
-		'/gacha_card.' +
-		data.characterData.pictures.gatchaCard.split('.')[1];
-	const splash =
-		S3Service.getCharacterLink(data.character) +
-		'/gacha_splash.' +
-		data.characterData.pictures.gachaSplash.split('.')[1];
+	const card = S3Service.getCharacterLink(data.character) + '/gacha_card.webp';
+	const splash = S3Service.getCharacterLink(data.character) + '/gacha_splash.webp';
 
 	function goBack() {
 		history.back();
@@ -36,7 +30,7 @@
 
 <main class="flex-col w-full h-min">
 	<section
-		class="grid grid-cols-1 gap-4 p-6 box-content lg:h-max lg:min-h-[55vh] lg:grid-cols-[14rem_1fr] lg:grid-flow-dense lg:grid-rows-[auto_minmax(0,1fr)]"
+		class="grid grid-cols-1 gap-4 p-6 box-content lg:h-max lg:min-h-[40vh] lg:grid-cols-[14rem_1fr] lg:grid-flow-dense lg:grid-rows-[auto_minmax(0,1fr)]"
 	>
 		<div class="flex items-center gap-2 lg:col-start-2">
 			<Button class="lg:hidden" on:click={goBack} variant="ghost" size="icon">

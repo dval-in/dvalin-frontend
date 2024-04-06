@@ -1,11 +1,17 @@
 import { type CharacterKey } from '$lib/types/keys/CharacterKey';
 import { error } from '@sveltejs/kit';
+import type { PageLoad } from './$types';
 import type { RouteParams } from '../../characters/[slug]/$types';
 import type { Character } from '$lib/types/data/Character';
 import type { WeaponIndex } from '$lib/types/index/weapon';
 
-/** @type {import('./$types').PageLoad} */
-export async function load({ params }: { params: RouteParams }) {
+export const load: PageLoad = async ({
+	fetch,
+	params
+}: {
+	fetch: unknown;
+	params: RouteParams;
+}) => {
 	let characterData: Character;
 	let weaponIndex: WeaponIndex;
 
@@ -27,4 +33,4 @@ export async function load({ params }: { params: RouteParams }) {
 	}
 
 	return { character, characterData, weaponIndex };
-}
+};

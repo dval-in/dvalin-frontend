@@ -1,12 +1,12 @@
 <script lang="ts">
 	import Card from '$lib/components/ui/card/card.svelte';
 	import Text from '$lib/components/typography/Text.svelte';
-	import * as Table from './table';
+	import * as Table from '$lib/components/tables/character-tab-table';
 	import * as Collapsible from '$lib/components/ui/collapsible';
 	import { Slider } from '$lib/components/ui/slider';
 	import type { Passive, Skill } from '$lib/types/data/Character';
 	import Button from '$lib/components/ui/button/button.svelte';
-	import Icon from '../icon/icon.svelte';
+	import Icon from '../../ui/icon/icon.svelte';
 	import { mdiClose } from '@mdi/js';
 
 	export let skills: Skill[];
@@ -39,16 +39,20 @@
 	</div>
 	<div class="flex flex-1 flex-col gap-2 lg:flex-row lg:max-h-full">
 		{#each passives as passive}
-			<Card class="flex flex-col bg-neutral border-secondary w-full lg:overflow-auto">
-				<Collapsible.Root>
-					<Collapsible.Trigger>
-						<Text type="p" class="font-bold text-lg">
+			<Card
+				class="flex flex-col bg-neutral border-secondary h-full w-full lg:overflow-auto sm:p-0"
+			>
+				<Collapsible.Root class="h-full">
+					<Collapsible.Trigger class="flex flex-col w-full p-4 h-full">
+						<Text type="p" class="font-bold text-lg w-full">
 							{`${passive.level == 0 ? 'Utility Passive: ' : `A${passive.level}: `} ${passive.name}`}
 						</Text>
+						<Collapsible.Content>
+							<Text type="p" class="text-sm lg:overflow-auto"
+								>{passive.description}</Text
+							>
+						</Collapsible.Content>
 					</Collapsible.Trigger>
-					<Collapsible.Content>
-						<Text type="p" class="text-sm lg:overflow-auto">{passive.description}</Text>
-					</Collapsible.Content>
 				</Collapsible.Root>
 			</Card>
 		{/each}
@@ -74,37 +78,40 @@
 		<Text type="p">{skillTypes[currentSkill]}</Text>
 	</div>
 	<div class="flex flex-col gap-4 lg:items-start lg:flex-row lg:h-full lg:max-h-full lg:min-h-0">
-		<Table.Root class="border border-secondary lg:w-full lg:h-full lg:overflow-auto">
-			<Table.Body>
-				{#each skills[currentSkill].attributes as attr}
-					<Table.Row class="border-secondary">
-						<Table.Cell class="py-1 px-2 font-bold border-r border-secondary text-sm"
-							>{attr.label}</Table.Cell
-						>
-						<Table.Cell class="py-1 px-2 text-sm"
-							>{attr.values[talentLevels[currentSkill]]}</Table.Cell
-						>
-					</Table.Row>
-				{/each}
-			</Table.Body>
-		</Table.Root>
+		<div class="lg:flex lg:flex-col lg:w-full lg:h-full">
+			<Table.Root class="flex-1 border border-secondary lg:overflow-auto">
+				<Table.Body>
+					{#each skills[currentSkill].attributes as attr}
+						<Table.Row class="border-secondary">
+							<Table.Cell
+								class="py-1 px-2 font-bold border-r border-secondary text-sm"
+								>{attr.label}</Table.Cell
+							>
+							<Table.Cell class="py-1 px-2 text-sm"
+								>{attr.values[talentLevels[currentSkill]]}</Table.Cell
+							>
+						</Table.Row>
+					{/each}
+				</Table.Body>
+			</Table.Root>
+			<div class="p-4 w-full flex flex-col gap-3 justify-between lg:flex-row">
+				<Text type="p" class="font-bold size-base w-full">
+					Skill Attributes: (Level {talentLevels[currentSkill] + 1})
+				</Text>
+				<Slider
+					value={[10]}
+					onValueChange={(v) => {
+						talentLevels[currentSkill] = v[0];
+					}}
+					max={14}
+					step={1}
+				/>
+			</div>
+		</div>
 
-		<div id="skill" class="lg:w-full lg:overflow-auto lg:h-full">
+		<div id="skill" class="lg:w-full lg:overflow-auto lg:h-full text-sm">
 			{skills[currentSkill].description}
 		</div>
-	</div>
-	<div class="p-4 w-full flex flex-col gap-3 justify-between lg:flex-row">
-		<Text type="h4" class="h-fit">
-			Skill Attributes: (Level {talentLevels[currentSkill] + 1})
-		</Text>
-		<Slider
-			value={[10]}
-			onValueChange={(v) => {
-				talentLevels[currentSkill] = v[0];
-			}}
-			max={14}
-			step={1}
-		/>
 	</div>
 </Card>
 
