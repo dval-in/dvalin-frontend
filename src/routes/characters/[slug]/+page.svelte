@@ -2,15 +2,16 @@
 	import { type WeaponIndex } from '$lib/types/index/weapon';
 	import { type CharacterKey } from '$lib/types/keys/CharacterKey';
 	import { type Character } from '$lib/types/data/Character';
+	import { mdiArrowLeft, mdiStar } from '@mdi/js';
 	import S3Service from '$lib/services/s3';
 	import Text from '$lib/components/typography/Text.svelte';
 	import Card from '$lib/components/ui/card/card.svelte';
 	import Badge from '$lib/components/ui/badge/badge.svelte';
 	import Button from '$lib/components/ui/button/button.svelte';
 	import Icon from '$lib/components/ui/icon/icon.svelte';
-	import { mdiStar } from '@mdi/js';
 	import CharacterBuilds from '$lib/components/ui/builds/character-builds.svelte';
 	import defaultBuilds from '$lib/components/ui/builds/defaultBuilds.json';
+	import CharacterTabs from '$lib/components/ui/character-tabs/character-tabs.svelte';
 
 	/** @type {import('../../../../.svelte-kit/types/src/routes').PageData} */
 	export let data: {
@@ -19,111 +20,61 @@
 		weaponIndex: WeaponIndex;
 	};
 
+	const card = S3Service.getCharacterLink(data.character) + '/gacha_card.webp';
 	const splash = S3Service.getCharacterLink(data.character) + '/gacha_splash.webp';
-	const ascensions = data.characterData.ascension;
+
+	function goBack() {
+		history.back();
+	}
 </script>
 
-<main class="flex-col w-full h-full">
-	<section class="flex w-full gap-4 p-6 box-border h-[75vh]">
-		<Card class="aspect-[1/2] box-border relative">
+<main class="flex-col w-full h-min">
+	<section
+		class="grid grid-cols-1 gap-4 p-6 box-content lg:h-max lg:min-h-[40vh] lg:grid-cols-[14rem_1fr] lg:grid-flow-dense lg:grid-rows-[auto_minmax(0,1fr)]"
+	>
+		<div class="flex items-center gap-2 lg:col-start-2">
+			<Button class="lg:hidden" on:click={goBack} variant="ghost" size="icon">
+				<Icon class="fill-primary" path={mdiArrowLeft} />
+			</Button>
+			<Text class="text-primary" type="h1">{data.characterData.name}</Text>
+		</div>
+
+		<Card class="p-0 sm:p-0 relative lg:w-full lg:row-span-full lg:h-full">
 			<img
-				class="h-0 min-h-full rounded-md object-cover object-center"
+				class="aspect-auto w-full rounded-lg object-contain object-center lg:hidden"
 				src={splash}
 				alt="{data.characterData.name} Gacha Splash"
+			/>
+			<img
+				class="hidden w-auto rounded-lg object-cover object-center lg:block"
+				src={card}
+				alt="{data.characterData.name} Gacha Card"
 			/>
 			<div class="flex w-full justify-center absolute bottom-3 left-0">
 				{#each { length: data.characterData.rarity } as _}
 					<Icon
 						path={mdiStar}
-						color={data.characterData.rarity == 5 ? 'fill-fivestar' : 'fill-fourstar'}
+						class={data.characterData.rarity == 5 ? 'fill-fivestar' : 'fill-fourstar'}
 					/>
 				{/each}
 			</div>
 		</Card>
 
-		<div class="flex-grow h-full flex gap-2 flex-col box-border">
-			<Text textColor="primary" type="h1">{data.characterData.name}</Text>
-			<span class="font-bold"
-				>{data.characterData.element} • {data.characterData.weaponType}</span
-			>
-			<div class="flex flex-row w-full">
-				<Badge class="rounded bg-tertiary" variant="default">Sub-DPS</Badge>
-				<!--Find Badge Data Somewhere?-->
-				<!--
-						{#each badges as badge}
-						 <Badge variant="default">{ badge }</Badge>
-						{/each}
-					-->
+		<div class="flex flex-col gap-2 lg:row-start-2 lg:h-full">
+			<span class="font-bold">
+				{data.characterData.element} • {data.characterData.weaponType}
+			</span>
+			<div class="flex flex-row w-full gap-2 lg:row-start-3">
+				{#each defaultBuilds as build}
+					<Badge class="rounded bg-tertiary h-min p-2" variant="default"
+						>{build.name}</Badge
+					>
+				{/each}
 			</div>
 			<!--Badges-->
+			<Text class="w-full lg:row-start-4" type="p">{data.characterData.description}</Text>
 
-			<Text type="p">{data.characterData.description}</Text>
-
-			<Tabs.Root value="stats" class="w-full flex-grow-0 min-h-0">
-				<Tabs.List class="grid w-full grid-cols-3">
-					<Tabs.Trigger value="stats">Stats</Tabs.Trigger>
-					<Tabs.Trigger value="talents">Talents</Tabs.Trigger>
-					<Tabs.Trigger value="constellations">Constellations</Tabs.Trigger>
-				</Tabs.List>
-				<Tabs.Content
-					value="stats"
-					class="min-h-0 overflow-scroll border border-secondary/50"
-				>
-					<Table.Root>
-						<Table.Header>
-							<Table.Row class="p-2 border-b border-secondary/50">
-								{#each ascensions[0].stats as stat, i}
-									<Table.Head class="p-2 px-4 font-bold">
-										{stat.label === 'Ascend' ? 'ASC' : stat.label}
-									</Table.Head>
-									{#if i == 0}
-										<Table.Head class="p-2 px-4 font-bold">Level</Table.Head>
-									{/if}
-								{/each}
-							</Table.Row>
-						</Table.Header>
-						<Table.Body>
-							{#each ascensions.slice(1, 8) as ascension, j}
-								<Table.Row class="p-2 border-y border-secondary/50">
-									{#each ascension.stats as stat, i}
-										<Table.Cell class="p-2 px-4">
-											<div class="flex flex-col">
-												{#if i != 0}
-													<p>
-														{ascensions.at(j)?.stats[i].values?.at(1)}
-													</p>
-												{/if}
-												<p>
-													{stat.values?.at(0)}
-												</p>
-											</div>
-										</Table.Cell>
-
-										{#if i == 0}
-											<Table.Cell class="p-2 px-4">
-												<div class="flex flex-col">
-													<p>
-														{ascensions.at(j)?.level?.at(0)}
-													</p>
-													{#if ascensions.at(j + 1)}
-														<p>
-															{ascensions.at(j + 1)?.level?.at(0)}
-														</p>
-													{/if}
-												</div>
-											</Table.Cell>
-										{/if}
-										<!--Level Data-->
-									{/each}
-								</Table.Row>
-							{/each}
-						</Table.Body>
-					</Table.Root>
-				</Tabs.Content>
-				<!--Ascension Table-->
-				<Tabs.Content value="talents"></Tabs.Content>
-				<Tabs.Content value="constellations"></Tabs.Content>
-			</Tabs.Root>
+			<CharacterTabs characterData={data.characterData}></CharacterTabs>
 		</div>
 		<!--Text Column-->
 	</section>

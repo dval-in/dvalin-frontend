@@ -17,14 +17,18 @@
 {#if signature}
 	<div class="flex gap-2 w-full">
 		<img
-			class="flex-grow aspect-square object-contain h-0 min-h-full"
+			class="basis-1/4 w-14 aspect-square object-contain"
 			src={S3Service.getWeaponLink(key) + '/icon.png'}
 			alt={index[key].name}
 		/>
 		<div class="flex-grow flex flex-col gap-1 text-md min-h-0">
 			<div class="flex w-full justify-start">
 				{#each { length: rarity } as _}
-					<Icon path={mdiStar} class={rarity === 5 ? 'fill-fivestar' : 'fill-fourstar'} />
+					<Icon
+						size={0.8}
+						path={mdiStar}
+						class={rarity === 5 ? 'fill-fivestar' : 'fill-fourstar'}
+					/>
 				{/each}
 			</div>
 			<Text type="h4">{index[key].name}</Text>
@@ -32,13 +36,21 @@
 		</div>
 	</div>
 {:else}
-	<div class="flex w-full flex-row gap-2 items-center">
+	<div class="grid grid-cols-[2rem_auto] gap-2 items-center">
 		<img
-			class="aspect-square object-cover h-0 min-h-full"
+			class="aspect-square object-contain h-0 min-h-full"
 			src={S3Service.getWeaponLink(key) + '/icon.png'}
-			alt={index[key].name}
+			alt={key}
 		/>
-		<Icon path={mdiStar} class={rarity === 5 ? 'fill-fivestar' : 'fill-fourstar'} />
-		<Text type="p">{index[key].name}</Text>
+		<div class="flex w-full gap-2 items-center">
+			<Icon
+				size=".7"
+				path={mdiStar}
+				class={rarity == 5 ? 'fill-fivestar' : 'fill-fourstar'}
+			/>
+			<div class="flex flex-1 flex-wrap w-full">
+				<p class="leading-7">{key.replace(/([A-Z])/g, ' $1').trim()}</p>
+			</div>
+		</div>
 	</div>
 {/if}

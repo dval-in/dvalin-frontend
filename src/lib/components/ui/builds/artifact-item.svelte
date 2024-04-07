@@ -15,14 +15,18 @@
 {#if signature}
 	<div class="flex gap-2 w-full">
 		<img
-			class="flex-grow aspect-square object-contain h-0 min-h-full"
+			class="basis-1/4 w-14 aspect-square object-contain"
 			src={S3Service.getArtifactLink(key) + '/flower.png'}
 			alt={key}
 		/>
-		<div class="flex flex-col gap-1 box-border h-full">
+		<div class="gap-1 box-border h-full">
 			<div class="flex w-full justify-start">
 				{#each { length: rarity } as _}
-					<Icon path={mdiStar} class={rarity === 5 ? 'fill-fivestar' : 'fill-fourstar'} />
+					<Icon
+						size={0.8}
+						path={mdiStar}
+						class={`${rarity === 5 ? 'fill-fivestar' : 'fill-fourstar'}`}
+					/>
 				{/each}
 			</div>
 			<Text type="h4">{key.replace(/([A-Z])/g, ' $1').trim()}</Text>
@@ -30,13 +34,21 @@
 		</div>
 	</div>
 {:else}
-	<div class="flex w-full flex-row gap-2 items-center">
+	<div class="grid grid-cols-[2rem_auto] gap-2 items-center">
 		<img
-			class="aspect-square object-cover h-0 min-h-full"
+			class="aspect-square object-contain h-0 min-h-full"
 			src={S3Service.getArtifactLink(key) + '/flower.png'}
 			alt={key}
 		/>
-		<Icon path={mdiStar} class={rarity === 5 ? 'fill-fivestar' : 'fill-fourstar'} />
-		<Text type="p">{key.replace(/([A-Z])/g, ' $1').trim()}</Text>
+		<div class="flex w-full gap-2 items-center">
+			<Icon
+				size={0.7}
+				path={mdiStar}
+				class={rarity === 5 ? 'fill-fivestar' : 'fill-fourstar'}
+			/>
+			<div class="flex flex-1 flex-wrap">
+				<p class="leading-7">{key.replace(/([A-Z])/g, ' $1').trim()}</p>
+			</div>
+		</div>
 	</div>
 {/if}
