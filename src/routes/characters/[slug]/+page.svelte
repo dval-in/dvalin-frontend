@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { type WeaponIndex } from '$lib/types/index/weapon';
 	import { type CharacterKey } from '$lib/types/keys/CharacterKey';
 	import { type Character } from '$lib/types/data/Character';
 	import { mdiArrowLeft, mdiStar } from '@mdi/js';
@@ -17,11 +16,10 @@
 	export let data: {
 		character: CharacterKey;
 		characterData: Character;
-		weaponIndex: WeaponIndex;
 	};
 
-	const card = S3Service.getCharacterLink(data.character) + '/gacha_card.webp';
-	const splash = S3Service.getCharacterLink(data.character) + '/gacha_splash.webp';
+	const card = S3Service.getCharacter(data.character).gachaCard;
+	const splash = S3Service.getCharacter(data.character).gachaSplash;
 
 	function goBack() {
 		history.back();
@@ -54,7 +52,7 @@
 				{#each { length: data.characterData.rarity } as _}
 					<Icon
 						path={mdiStar}
-						class={data.characterData.rarity == 5 ? 'fill-fivestar' : 'fill-fourstar'}
+						class={data.characterData.rarity === 5 ? 'fill-fivestar' : 'fill-fourstar'}
 					/>
 				{/each}
 			</div>
@@ -74,7 +72,7 @@
 			<!--Badges-->
 			<Text class="w-full lg:row-start-4" type="p">{data.characterData.description}</Text>
 
-			<CharacterTabs characterData={data.characterData}></CharacterTabs>
+			<CharacterTabs characterData={data.characterData} />
 		</div>
 		<!--Text Column-->
 	</section>
@@ -87,6 +85,6 @@
 				>View on KQM</Button
 			>
 		</span>
-		<CharacterBuilds builds={defaultBuilds} weaponIndex={data.weaponIndex} />
+		<CharacterBuilds builds={defaultBuilds} />
 	</section>
 </main>

@@ -1,20 +1,19 @@
 <script lang="ts">
 	import IconButton from '$lib/components/ui/icon-button/IconButton.svelte';
-	import { mdiFilterOutline, mdiSort, mdiViewList, mdiViewGrid } from '@mdi/js';
+	import { mdiFilterOutline, mdiSort, mdiViewGrid, mdiViewList } from '@mdi/js';
 	import CharCard from '$lib/components/ui/card/CharCard.svelte';
 	import Searchbar from '$lib/components/ui/searchbar/Searchbar.svelte';
 	import S3Service from '$lib/services/s3';
-	import { applicationState } from '$lib/store/global_state';
-	import { type CharacterKey, isCharacterKey } from '$lib/types/keys/CharacterKey';
+	import {
+		type CharacterKey,
+		characterKeyList,
+		isCharacterKey
+	} from '$lib/types/keys/CharacterKey';
 	import DefaultLayout from '$lib/components/layout/DefaultLayout.svelte';
 	import type { WeaponTypes } from '$lib/types/weapon';
 	import type { Elements } from '$lib/types/elements';
-	import type { WeaponIndex } from '$lib/types/index/weapon';
-
-	/** @type {import('../../../../.svelte-kit/types/src/routes').PageData} */
-	export let data: {
-		index: WeaponIndex;
-	};
+	import { dataIndexStore } from '$lib/store/index_store';
+	import { applicationState } from '$lib/store/global_state';
 
 	let view = true;
 	let charData: {
@@ -24,24 +23,27 @@
 		weapon: WeaponTypes;
 		img: string;
 		rarity: number;
+		obtained: boolean;
 	}[] = [];
 
-	if ($applicationState.characters !== undefined) {
-		charData = Object.keys($applicationState.characters)
-			.filter((key: string) => isCharacterKey(key))
-			.map((key: CharacterKey) => {
-				const index = data.index[key];
+	const userCharData = $applicationState.characters;
 
-				return {
-					link: '/characters/' + key.toLowerCase(),
-					name: index.name,
-					element: 'geo',
-					weapon: 'bow',
-					img: S3Service.getCharacterLink(key) + '/icon.webp',
-					rarity: index.rarity
-				};
-			});
-	}
+	charData = characterKeyList
+		.filter((key) => isCharacterKey(key))
+		.map((key: CharacterKey) => {
+			const index = $dataIndexStore.character[key];
+
+			return {
+				obtained:
+					userCharData !== undefined ? Object.keys(userCharData).includes(key) : false,
+				link: '/characters/' + key.toLowerCase(),
+				name: index !== undefined ? index.name : key,
+				element: 'geo',
+				weapon: 'bow',
+				img: S3Service.getCharacter(key).icon,
+				rarity: index !== undefined ? index.rarity : 0
+			};
+		});
 
 	const toggleViewType = () => {
 		view = !view;
@@ -66,6 +68,7 @@
 				element={character.element}
 				weapon={character.weapon}
 				rarity={character.rarity}
+				obtained={character.obtained}
 			/>
 		{/each}
 	</div>

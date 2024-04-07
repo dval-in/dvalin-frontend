@@ -16,7 +16,7 @@
 	<div class="flex gap-2 w-full">
 		<img
 			class="basis-1/4 w-14 aspect-square object-contain"
-			src={S3Service.getArtifactLink(key) + '/flower.png'}
+			src={S3Service.getArtifact(key).flower}
 			alt={key}
 		/>
 		<div class="gap-1 box-border h-full">
@@ -37,7 +37,7 @@
 	<div class="grid grid-cols-[2rem_auto] gap-2 items-center">
 		<img
 			class="aspect-square object-contain h-0 min-h-full"
-			src={S3Service.getArtifactLink(key) + '/flower.png'}
+			src={S3Service.getArtifact(key).flower}
 			alt={key}
 		/>
 		<div class="flex w-full gap-2 items-center">

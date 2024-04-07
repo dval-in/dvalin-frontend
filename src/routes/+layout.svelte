@@ -6,10 +6,16 @@
 	import { Toaster } from 'svelte-sonner';
 	import { pwaInfo } from 'virtual:pwa-info';
 	import { pwaAssetsHead } from 'virtual:pwa-assets/head';
+	import { dataIndexStore } from '$lib/store/index_store';
 
+	/** @type {import('./$types').LayoutData} */
+	export let data;
 	$: webManifestLink = pwaInfo ? pwaInfo.webManifest.href : '';
 
+	dataIndexStore.set(data);
+
 	console.log(get(applicationState));
+	console.log(get(dataIndexStore));
 </script>
 
 <svelte:head>

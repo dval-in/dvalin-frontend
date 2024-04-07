@@ -5,8 +5,6 @@
 	import type { IMappedWish, IWish } from '$lib/types/wish';
 	import DefaultLayout from '$lib/components/layout/DefaultLayout.svelte';
 	import type { WishBannerKey } from '$lib/types/keys/WishBannerKey';
-	import type { CharacterIndex } from '$lib/types/index/character';
-	import type { WeaponIndex } from '$lib/types/index/weapon';
 	import { isCharacterKey } from '$lib/types/keys/CharacterKey';
 	import BannerHistoryTable from '$lib/components/tables/banner-history-table/BannerHistoryTable.svelte';
 	import { Card } from '$lib/components/ui/card';
@@ -14,11 +12,11 @@
 	import InfoCell from '$lib/components/ui/info-cell/InfoCell.svelte';
 	import { mdiMoonWaningCrescent } from '@mdi/js';
 	import Icon from '$lib/components/ui/icon/icon.svelte';
+	import { dataIndexStore } from '$lib/store/index_store';
 
 	/** @type {import('../../../../.svelte-kit/types/src/routes').PageData} */
 	export let data: {
 		pageType: WishBannerKey;
-		index: { Character: CharacterIndex; Weapon: WeaponIndex };
 	};
 	let wishData: IMappedWish[] = [];
 	const wishes: IWish[] | undefined = $applicationState.wishes?.[data.pageType];
@@ -29,13 +27,13 @@
 	if (wishes !== undefined) {
 		wishData = wishes.map((wish: IWish) => {
 			const index = isCharacterKey(wish.key)
-				? data.index['Character'][wish.key]
-				: data.index['Weapon'][wish.key];
+				? $dataIndexStore.character[wish.key]
+				: $dataIndexStore.weapon[wish.key];
 
 			return {
 				...wish,
-				name: index.name,
-				rarity: index.rarity
+				name: index !== undefined ? index.name : wish.key,
+				rarity: index !== undefined ? index.rarity : 0
 			};
 		});
 
