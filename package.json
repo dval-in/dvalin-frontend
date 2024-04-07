@@ -48,7 +48,7 @@
 		"@typescript-eslint/parser": "^6.0.0",
 		"@vite-pwa/assets-generator": "^0.2.4",
 		"@vite-pwa/sveltekit": "^0.4.0",
-		"autoprefixer": "^10.4.16",
+		"autoprefixer": "^10.4.19",
 		"eslint": "^8.57.0",
 		"eslint-config-prettier": "^9.1.0",
 		"eslint-plugin-prettier": "^5.1.3",
