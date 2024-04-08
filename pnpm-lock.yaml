@@ -18,8 +18,8 @@ dependencies:
     specifier: ^2.1.0
     version: 2.1.0
   cmdk-sv:
-    specifier: ^0.0.13
-    version: 0.0.13(svelte@4.2.12)
+    specifier: ^0.0.17
+    version: 0.0.17(svelte@4.2.12)
   d3-scale:
     specifier: ^4.0.2
     version: 4.0.2
@@ -2838,13 +2838,13 @@ packages:
     engines: {node: '>=6'}
     dev: false
 
-  /cmdk-sv@0.0.13(svelte@4.2.12):
-    resolution: {integrity: sha512-WrYn0MMdVyzJx+KuOQy028/7mv+uMwO1cxVBM0uJ4KA+50PX792epsj8Yw3It8WfWR8Rae7siBCg54mIAlKsiw==}
+  /cmdk-sv@0.0.17(svelte@4.2.12):
+    resolution: {integrity: sha512-28QTrK1tT1TSNoGq9MVnzjeLNNjCgjmsM8c2HJfDpRt9t+GD+9m3wX/WdAPaP9jdoNYU0SSdZVdgsGgpaSQOYQ==}
     peerDependencies:
       svelte: ^4.0.0
     dependencies:
       bits-ui: 0.9.9(svelte@4.2.12)
-      nanoid: 5.0.4
+      nanoid: 5.0.6
       svelte: 4.2.12
     dev: false
 
@@ -4804,12 +4804,6 @@ packages:
   /nanoid@4.0.2:
     resolution: {integrity: sha512-7ZtY5KTCNheRGfEFxnedV5zFiORN1+Y1N6zvPTnHQd8ENUvfaDBeuJDZb2bN/oXwXxu3qkTXDzy57W5vAmDTBw==}
     engines: {node: ^14 || ^16 || >=18}
-    hasBin: true
-    dev: false
-
-  /nanoid@5.0.4:
-    resolution: {integrity: sha512-vAjmBf13gsmhXSgBrtIclinISzFFy22WwCYoyilZlsrRXNIHSwgFQ1bEdjRwMT3aoadeIF6HMuDRlOxzfXV8ig==}
-    engines: {node: ^18 || >=20}
     hasBin: true
     dev: false
 
