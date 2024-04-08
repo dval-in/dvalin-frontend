@@ -36,8 +36,8 @@ dependencies:
     specifier: ^0.34.0
     version: 0.34.0(@babel/core@7.24.3)(postcss@8.4.38)(sass@1.74.1)(svelte@4.2.12)(typescript@5.4.3)(vite@5.2.8)
   lucide-svelte:
-    specifier: ^0.303.0
-    version: 0.303.0(svelte@4.2.12)
+    specifier: ^0.365.0
+    version: 0.365.0(svelte@4.2.12)
   mode-watcher:
     specifier: ^0.2.1
     version: 0.2.1(svelte@4.2.12)
@@ -4669,10 +4669,10 @@ packages:
       yallist: 4.0.0
     dev: true
 
-  /lucide-svelte@0.303.0(svelte@4.2.12):
-    resolution: {integrity: sha512-Lt5kH3pGSSQdFDgL+y09xkp8FCGm7pQBdxmRxdpA0/im5AHl6WGDECWdiB4dnBCp8njOgWd0TaSqgkL0dF0efg==}
+  /lucide-svelte@0.365.0(svelte@4.2.12):
+    resolution: {integrity: sha512-px3SDEGepR4sICxU38B9VFJJHglZjWnucTlZbbOgySxkAuZRr+b9CHwTDJKA2Xzs7dSjFKaasequwDg0SRIfiA==}
     peerDependencies:
-      svelte: '>=3 <5'
+      svelte: ^3 || ^4 || ^5.0.0-next.42
     dependencies:
       svelte: 4.2.12
     dev: false
