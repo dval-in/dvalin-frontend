@@ -21,7 +21,7 @@
 		"d3-scale": "^4.0.2",
 		"d3-shape": "^3.2.0",
 		"formsnap": "^0.4.4",
-		"i18next": "^23.10.1",
+		"i18next": "^23.11.0",
 		"layerchart": "^0.34.0",
 		"lucide-svelte": "^0.365.0",
 		"mode-watcher": "^0.3.0",
