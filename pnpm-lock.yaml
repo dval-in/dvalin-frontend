@@ -51,8 +51,8 @@ dependencies:
     specifier: ^0.3.21
     version: 0.3.21(svelte@4.2.12)
   svelte-ux:
-    specifier: ^0.60.6
-    version: 0.60.6(@babel/core@7.24.3)(postcss@8.4.38)(sass@1.74.1)(svelte@4.2.12)
+    specifier: ^0.62.6
+    version: 0.62.6(@babel/core@7.24.3)(postcss@8.4.38)(sass@1.74.1)(svelte@4.2.12)
   sveltekit-superforms:
     specifier: ^1.13.4
     version: 1.13.4(@sveltejs/kit@2.5.5)(svelte@4.2.12)(zod@3.22.4)
@@ -3208,10 +3208,6 @@ packages:
       is-data-view: 1.0.1
     dev: true
 
-  /date-fns@3.3.1:
-    resolution: {integrity: sha512-y8e109LYGgoQDveiEBD3DYXKba1jWf5BA8YU1FL5Tvm0BTdEfy54WLCwnuYWZNnzzvALy/QQ4Hov+Q9RVRv+Zw==}
-    dev: false
-
   /date-fns@3.6.0:
     resolution: {integrity: sha512-fRHTG8g/Gif+kSh50gaGEdToemgfj74aRX3swtiouboip5JDLAyDE9F11nHMIcvOaXeOC6D7SpNhi7uFyB7Uww==}
     dev: false
@@ -4111,10 +4107,6 @@ packages:
     engines: {node: '>= 4'}
     dev: true
 
-  /immer@10.0.3:
-    resolution: {integrity: sha512-pwupu3eWfouuaowscykeckFmVTpqbzW+rXFCX8rQLkZzM9ftBmU/++Ra+o+L27mz03zJTlyV4UUr+fdKNffo4A==}
-    dev: false
-
   /immer@10.0.4:
     resolution: {integrity: sha512-cuBuGK40P/sk5IzWa9QPUaAdvPHjkk1c+xYsd9oZw+YQQEV+10G0P5uMpGctZZKnyQ+ibRO08bD25nWLmYi2pw==}
     dev: false
@@ -4533,7 +4525,7 @@ packages:
       posthog-js: 1.116.6
       shapefile: 0.6.6
       svelte: 4.2.12
-      svelte-ux: 0.62.4(@babel/core@7.24.3)(postcss@8.4.38)(sass@1.74.1)(svelte@4.2.12)
+      svelte-ux: 0.62.6(@babel/core@7.24.3)(postcss@8.4.38)(sass@1.74.1)(svelte@4.2.12)
       topojson-client: 3.1.0
     transitivePeerDependencies:
       - '@babel/core'
@@ -6026,42 +6018,8 @@ packages:
       svelte: 4.2.12
     dev: true
 
-  /svelte-ux@0.60.6(@babel/core@7.24.3)(postcss@8.4.38)(sass@1.74.1)(svelte@4.2.12):
-    resolution: {integrity: sha512-lkfGW1rGtXqHnHBDxBlHGOgLnKr5INzPCbdc6N4TDS5ZvAz8AAuvbUvDd+kPjwuCyuCNXapXLePiHgGPf2kk4A==}
-    peerDependencies:
-      svelte: ^3.56.0 || ^4.0.0
-    dependencies:
-      '@floating-ui/dom': 1.6.3
-      '@fortawesome/fontawesome-common-types': 6.5.1
-      '@mdi/js': 7.4.47
-      clsx: 2.1.0
-      culori: 4.0.1
-      d3-array: 3.2.4
-      d3-scale: 4.0.2
-      date-fns: 3.3.1
-      immer: 10.0.3
-      lodash-es: 4.17.21
-      prism-svelte: 0.5.0
-      prism-themes: 1.9.0
-      prismjs: 1.29.0
-      sveld: 0.19.1(@babel/core@7.24.3)(postcss@8.4.38)(sass@1.74.1)
-      svelte: 4.2.12
-      tailwind-merge: 2.2.2
-      zod: 3.22.4
-    transitivePeerDependencies:
-      - '@babel/core'
-      - coffeescript
-      - less
-      - postcss
-      - postcss-load-config
-      - pug
-      - sass
-      - stylus
-      - sugarss
-    dev: false
-
-  /svelte-ux@0.62.4(@babel/core@7.24.3)(postcss@8.4.38)(sass@1.74.1)(svelte@4.2.12):
-    resolution: {integrity: sha512-khFAcq0UmVQKsIV0qW/P5zSbhr2blHOFH7clrNTPYqki7wwMXi0OYoXFDdEIFsyINdREeOt4RcLkUrfmdEDMUg==}
+  /svelte-ux@0.62.6(@babel/core@7.24.3)(postcss@8.4.38)(sass@1.74.1)(svelte@4.2.12):
+    resolution: {integrity: sha512-yCmtgVraB940MQyeuarvg38o+aqomRHtg36eoA76yCh2RRy6DhKQ+WV371SrTTbK/vBbmLpXC8rarWDSIjf/Cw==}
     peerDependencies:
       svelte: ^3.56.0 || ^4.0.0
     dependencies:
