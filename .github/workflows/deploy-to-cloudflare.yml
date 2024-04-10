@@ -9,6 +9,9 @@ on:
     branches:
       - main
 
+env:
+  VITE_BACKEND_URL: ${{ vars.BACKEND_URL }}
+
 jobs:
   deploy:
     permissions:
