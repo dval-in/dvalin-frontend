@@ -11,6 +11,8 @@
 	import CharacterBuilds from '$lib/components/ui/builds/character-builds.svelte';
 	import defaultBuilds from '$lib/components/ui/builds/defaultBuilds.json';
 	import CharacterTabs from '$lib/components/ui/character-tabs/character-tabs.svelte';
+	import DefaultLayout from '$lib/components/layout/DefaultLayout.svelte';
+	import { goto } from '$app/navigation';
 
 	/** @type {import('../../../../.svelte-kit/types/src/routes').PageData} */
 	export let data: {
@@ -21,17 +23,17 @@
 	const card = S3Service.getCharacter(data.character).gachaCard;
 	const splash = S3Service.getCharacter(data.character).gachaSplash;
 
-	function goBack() {
-		history.back();
-	}
+	const goBack = () => {
+		goto('/characters');
+	};
 </script>
 
-<main class="flex-col w-full h-min">
+<DefaultLayout title="">
 	<section
-		class="grid grid-cols-1 gap-4 p-6 box-content lg:h-max lg:min-h-[40vh] lg:grid-cols-[14rem_1fr] lg:grid-flow-dense lg:grid-rows-[auto_minmax(0,1fr)]"
+		class="grid grid-cols-1 gap-4 box-content lg:h-max lg:min-h-[40vh] lg:grid-cols-[14rem_1fr] lg:grid-flow-dense lg:grid-rows-[auto_minmax(0,1fr)]"
 	>
 		<div class="flex items-center gap-2 lg:col-start-2">
-			<Button class="lg:hidden" on:click={goBack} variant="ghost" size="icon">
+			<Button class="" on:click={goBack} variant="ghost" size="icon">
 				<Icon class="fill-primary" path={mdiArrowLeft} />
 			</Button>
 			<Text class="text-primary" type="h1">{data.characterData.name}</Text>
@@ -64,9 +66,9 @@
 			</span>
 			<div class="flex flex-row w-full gap-2 lg:row-start-3">
 				{#each defaultBuilds as build}
-					<Badge class="rounded bg-tertiary h-min p-2" variant="default"
-						>{build.name}</Badge
-					>
+					<Badge class="rounded bg-tertiary h-min p-2" variant="default">
+						{build.name}
+					</Badge>
 				{/each}
 			</div>
 			<!--Badges-->
@@ -78,13 +80,13 @@
 	</section>
 	<!--Basic Character Details-->
 
-	<section class="flex flex-col w-full gap-4 p-6 box-border">
+	<section class="flex flex-col w-full gap-4 box-border">
 		<span class="flex justify-between">
 			<Text type="h2">Builds</Text>
-			<Button href="https://keqingmains.com/{data.character.toLocaleLowerCase()}"
-				>View on KQM</Button
-			>
+			<Button href="https://keqingmains.com/{data.character.toLocaleLowerCase()}">
+				View on KQM
+			</Button>
 		</span>
 		<CharacterBuilds builds={defaultBuilds} />
 	</section>
-</main>
+</DefaultLayout>

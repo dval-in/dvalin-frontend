@@ -26,15 +26,15 @@
 	const paths = {
 		collection: [
 			{
-				title: $i18n.t('characters.overview.title'),
+				title: 'characters.overview.title',
 				link: '/characters',
 				icon: mdiAccountMultiple
 			},
-			{ title: 'Weapons', link: '/weapons', icon: mdiSwordCross },
-			{ title: 'Inventory', link: '/inventory', icon: mdiBagPersonal }
+			{ title: 'weapons.title', link: '/weapons', icon: mdiSwordCross },
+			{ title: 'inventory.title', link: '/inventory', icon: mdiBagPersonal }
 		],
 		tracker: [
-			{ title: 'To-Do', link: '/todo', icon: mdiClipboardTextOutline }
+			{ title: 'todo.title', link: '/todo', icon: mdiClipboardTextOutline }
 			/*{ title: 'Ascension', link: '/ascension', icon: mdiStar },
 			{ title: 'Fishing', link: '/fishing', icon: mdiFish },
 			{ title: 'Furnishing', link: '/furnishing', icon: mdiBedKing },
@@ -48,7 +48,7 @@
 			{ title: 'Timeline', link: '/timeline', icon: mdiChartTimeline },
 			{ title: 'TCG', link: '/tcg', icon: mdiCards }*/
 			{
-				title: 'Map',
+				title: 'map.title',
 				link: 'https://act.hoyolab.com/ys/app/interactive-map/index.html',
 				icon: mdiMap,
 				external: true
@@ -119,21 +119,21 @@
 			forceOpen={!isSidebarOpen}
 			{isSidebarOpen}
 			paths={paths.collection}
-			title="Your Collection"
+			title={$i18n.t('navigation.category.collection')}
 		/>
 		<SidebarCategory
 			{closeSidebar}
 			forceOpen={!isSidebarOpen}
 			{isSidebarOpen}
 			paths={paths.tracker}
-			title="Trackers"
+			title={$i18n.t('navigation.category.trackers')}
 		/>
 		<SidebarCategory
 			{closeSidebar}
 			forceOpen={!isSidebarOpen}
 			{isSidebarOpen}
 			paths={paths.tools}
-			title="Tools"
+			title={$i18n.t('navigation.category.tools')}
 		/>
 
 		<div class="mt-3">
@@ -143,7 +143,7 @@
 				{isSidebarOpen}
 				link={'/settings'}
 				on:click={closeSidebar}
-				title="Settings"
+				title={$i18n.t('settings.overview.title')}
 			/>
 		</div>
 	</div>
@@ -152,7 +152,7 @@
 		class={`flex flex-row items-center justify-between sm:max-xl:mr-2.5 ${isSidebarOpen ? '' : 'max-sm:max-h-0 max-sm:overflow-hidden'}`}
 	>
 		<img
-			src={'http://localhost:5173/src/lib/assets/languages/' + $i18n.language + '.svg'}
+			src={'src/lib/assets/languages/' + $i18n.language + '.svg'}
 			class={`flex rounded-full w-10 h-10 object-cover ${isSidebarOpen ? '' : 'sm:max-xl:hidden'}`}
 			on:click={() => {
 				if ($i18n.language !== 'DE') {
@@ -162,6 +162,7 @@
 				}
 			}}
 		/>
+
 		<div class="flex">
 			{#if backend.auth.isAuthenticated()}
 				<SidebarEntry
@@ -169,7 +170,7 @@
 					{isSidebarOpen}
 					link={backend.auth.logout()}
 					on:click={closeSidebar}
-					title="Logout"
+					title={$i18n.t('navigation.logout')}
 				/>
 			{:else}
 				<SidebarEntry

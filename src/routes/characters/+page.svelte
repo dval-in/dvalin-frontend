@@ -36,7 +36,7 @@
 			return {
 				obtained:
 					userCharData !== undefined ? Object.keys(userCharData).includes(key) : false,
-				link: '/characters/' + key.toLowerCase(),
+				link: '/characters/' + key,
 				name: index !== undefined ? index.name : key,
 				element: 'geo',
 				weapon: 'bow',

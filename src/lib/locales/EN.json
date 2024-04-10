@@ -1,10 +1,18 @@
 {
 	"translation": {
+		"navigation.category.collection": "Your collection",
+		"navigation.category.trackers": "Trackers",
+		"navigation.category.tools": "Tools",
 		"navigation.login": "Login or register",
+		"navigation.logout": "Logout",
 		"wish.overview.title": "Wish statistic",
 		"wish.overview.import_wish_button": "Import wishes",
 		"wish.overview.global_statistic_button": "Global statistic",
 		"characters.overview.title": "Characters",
-		"settings.overview.title": "Settings"
+		"settings.overview.title": "Settings",
+		"map.title": "Map",
+		"todo.title": "To-Do",
+		"inventory.title": "Inventory",
+		"weapons.title": "Weapons"
 	}
 }

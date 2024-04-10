@@ -16,7 +16,7 @@
 
 <a class="flex flex-col w-24 xl:w-36 rounded-md overflow-hidden" href={link}>
 	<div
-		class={`flex justify-center ${rarity === 5 ? 'bg-fivestar' : 'bg-fourstar'} ${obtained ? '' : 'opacity-25'}`}
+		class={`flex justify-center ${rarity === 5 ? 'bg-fivestar' : 'bg-fourstar'} ${obtained ? '' : 'opacity-50'}`}
 	>
 		<img alt={name} class="w-24 h-24 xl:w-36 xl:h-36" src={img} />
 	</div>

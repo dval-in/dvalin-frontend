@@ -3,6 +3,7 @@
 	import { page } from '$app/stores';
 	import Icon from '$lib/components/ui/icon/icon.svelte';
 	import { mdiLink } from '@mdi/js';
+	import i18n from '$lib/services/i18n';
 
 	export let icon: string;
 	export let link: string;
@@ -21,7 +22,7 @@
 	variant={currentActivePath === link ? 'activeSidebar' : 'sidebar'}
 >
 	<div class={`${isSidebarOpen ? '' : 'sm:max-xl:hidden'}`}>
-		{title}
+		{$i18n.t(title)}
 		{#if external}
 			<Icon path={mdiLink}></Icon>
 		{/if}
