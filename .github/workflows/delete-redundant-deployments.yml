@@ -7,11 +7,9 @@ on:
       - closed
     branches:
       - main
-      - preview
 
 jobs:
   delete:
-    if: ${{ github.actor != 'dependabot[bot]' && github.event.pull_request.head.repo.full_name == 'dval-in/dval-in' }}
     permissions:
       contents: read
       deployments: write

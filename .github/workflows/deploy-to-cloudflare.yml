@@ -2,13 +2,15 @@
 
 name: 'Deploy to Cloudflare'
 on:
-  workflow_run:
-    workflows: [Check code quality]
-    types:
-      - completed
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  on-success:
+  deploy:
     permissions:
       contents: read
       deployments: write
