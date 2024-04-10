@@ -50,7 +50,7 @@
 	};
 </script>
 
-<DefaultLayout title="Characters">
+<DefaultLayout title="characters.overview.title">
 	<svelte:fragment slot="titlebarActions">
 		<Searchbar searchGroup="Characters" searchableDataList={charData} />
 		<IconButton icon={mdiSort}>Sort By</IconButton>

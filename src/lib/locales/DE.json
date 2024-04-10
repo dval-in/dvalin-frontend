@@ -1,0 +1,10 @@
+{
+	"translation": {
+		"navigation.login": "Anmelden",
+		"wish.overview.title": "Gebetsstatistik",
+		"wish.overview.import_wish_button": "Gebete importieren",
+		"wish.overview.global_statistic_button": "Globale Statistik",
+		"characters.overview.title": "Charaktere",
+		"settings.overview.title": "Einstellungen"
+	}
+}

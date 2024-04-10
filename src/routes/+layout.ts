@@ -1,14 +1,16 @@
 import { error } from '@sveltejs/kit';
 import type { CharacterIndex } from '$lib/types/index/character';
 import type { WeaponIndex } from '$lib/types/index/weapon';
+import BackendService from '$lib/services/backend';
 
 /** @type {import('./$types').LayoutServerLoad} */
 export async function load({ fetch }) {
 	let characterIndex: CharacterIndex;
 	let weaponIndex: WeaponIndex;
+	const backend = new BackendService();
 
-	const characterIndexResponse = await fetch('https://backend.dval.in/data/Character/index');
-	const weaponIndexResponse = await fetch('https://backend.dval.in/data/Weapon/index');
+	const characterIndexResponse = await fetch(backend.data.getCharacterIndex());
+	const weaponIndexResponse = await fetch(backend.data.getWeaponIndex());
 
 	if (characterIndexResponse.ok && weaponIndexResponse.ok) {
 		characterIndex = await characterIndexResponse.json();

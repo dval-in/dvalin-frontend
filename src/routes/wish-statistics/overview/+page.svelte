@@ -20,6 +20,7 @@
 	import { Card } from '$lib/components/ui/card';
 	import { CardContent, CardHeader } from '$lib/components/ui/card/index.js';
 	import { dataIndexStore } from '$lib/store/index_store';
+	import i18n from '$lib/services/i18n';
 
 	let wishData: IMappedWishes = {};
 	const wishes: IWishes | undefined = $applicationState.wishes;
@@ -43,10 +44,12 @@
 	}
 </script>
 
-<DefaultLayout title="Wish statistics">
+<DefaultLayout title="wish.overview.title">
 	<svelte:fragment slot="titlebarActions">
-		<IconButton icon={mdiImport}>Import wishes</IconButton>
-		<IconButton icon={mdiGlobeModel}>Global statistics</IconButton>
+		<IconButton icon={mdiImport}>{$i18n.t('wish.overview.import_wish_button')}</IconButton>
+		<IconButton icon={mdiGlobeModel}>
+			{$i18n.t('wish.overview.global_statistic_button')}
+		</IconButton>
 	</svelte:fragment>
 
 	<div class="flex flex-wrap gap-4">

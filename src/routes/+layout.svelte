@@ -15,7 +15,6 @@
 	dataIndexStore.set(data);
 
 	console.log(get(applicationState));
-	console.log(get(dataIndexStore));
 </script>
 
 <svelte:head>

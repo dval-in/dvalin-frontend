@@ -4,21 +4,14 @@
 	import {
 		mdiAccount,
 		mdiAccountMultiple,
-		mdiAlarm,
 		mdiBagPersonal,
-		mdiBedKing,
-		mdiBookshelf,
-		mdiCards,
-		mdiChartTimeline,
 		mdiClipboardTextOutline,
 		mdiCloseCircle,
 		mdiCog,
-		mdiDisc,
-		mdiFish,
-		mdiFood,
 		mdiHome,
+		mdiLogout,
+		mdiMap,
 		mdiMenu,
-		mdiPartyPopper,
 		mdiStar,
 		mdiSwordCross
 	} from '@mdi/js';
@@ -27,27 +20,39 @@
 	import SidebarCategory from '$lib/components/navigator/category/SidebarCategory.svelte';
 	import SidebarEntry from '$lib/components/navigator/entry/SidebarEntry.svelte';
 	import logo from '$lib/assets/logo.svg';
+	import BackendService from '$lib/services/backend';
+	import i18n from '$lib/services/i18n/index';
 
 	const paths = {
 		collection: [
-			{ title: 'Characters', link: '/characters', icon: mdiAccountMultiple },
+			{
+				title: $i18n.t('characters.overview.title'),
+				link: '/characters',
+				icon: mdiAccountMultiple
+			},
 			{ title: 'Weapons', link: '/weapons', icon: mdiSwordCross },
 			{ title: 'Inventory', link: '/inventory', icon: mdiBagPersonal }
 		],
 		tracker: [
-			{ title: 'To-Do', link: '/todo', icon: mdiClipboardTextOutline },
-			{ title: 'Ascension', link: '/ascension', icon: mdiStar },
+			{ title: 'To-Do', link: '/todo', icon: mdiClipboardTextOutline }
+			/*{ title: 'Ascension', link: '/ascension', icon: mdiStar },
 			{ title: 'Fishing', link: '/fishing', icon: mdiFish },
 			{ title: 'Furnishing', link: '/furnishing', icon: mdiBedKing },
 			{ title: 'Achievement', link: '/achievement', icon: mdiPartyPopper },
 			{ title: 'Books', link: '/books', icon: mdiBookshelf },
 			{ title: 'Recipes', link: '/recipes', icon: mdiFood },
-			{ title: 'Spin Crystals', link: '/spin-crystals', icon: mdiDisc }
+			{ title: 'Spin Crystals', link: '/spin-crystals', icon: mdiDisc }*/
 		],
 		tools: [
-			{ title: 'Reminder', link: '/reminder', icon: mdiAlarm },
+			/*	{ title: 'Reminder', link: '/reminder', icon: mdiAlarm },
 			{ title: 'Timeline', link: '/timeline', icon: mdiChartTimeline },
-			{ title: 'TCG', link: '/tcg', icon: mdiCards }
+			{ title: 'TCG', link: '/tcg', icon: mdiCards }*/
+			{
+				title: 'Map',
+				link: 'https://act.hoyolab.com/ys/app/interactive-map/index.html',
+				icon: mdiMap,
+				external: true
+			}
 		]
 	};
 
@@ -60,6 +65,8 @@
 	const closeSidebar = () => {
 		isSidebarOpen = false;
 	};
+
+	const backend = new BackendService();
 </script>
 
 <div
@@ -104,7 +111,7 @@
 			{isSidebarOpen}
 			link={'/wish-statistics/overview'}
 			on:click={closeSidebar}
-			title="Wish Statistics"
+			title={$i18n.t('wish.overview.title')}
 		/>
 
 		<SidebarCategory
@@ -144,18 +151,35 @@
 	<div
 		class={`flex flex-row items-center justify-between sm:max-xl:mr-2.5 ${isSidebarOpen ? '' : 'max-sm:max-h-0 max-sm:overflow-hidden'}`}
 	>
-		<div
-			class={`flex rounded-full bg-red-500 w-10 h-10 ${isSidebarOpen ? '' : 'sm:max-xl:hidden'}`}
+		<img
+			src={'http://localhost:5173/src/lib/assets/languages/' + $i18n.language + '.svg'}
+			class={`flex rounded-full w-10 h-10 object-cover ${isSidebarOpen ? '' : 'sm:max-xl:hidden'}`}
+			on:click={() => {
+				if ($i18n.language !== 'DE') {
+					$i18n.changeLanguage('DE');
+				} else {
+					$i18n.changeLanguage('EN');
+				}
+			}}
 		/>
 		<div class="flex">
-			<SidebarEntry
-				icon={mdiAccount}
-				{isSidebarOpen}
-				link={'/login'}
-				on:click={closeSidebar}
-				title="Login or Register"
-				variant="default"
-			/>
+			{#if backend.auth.isAuthenticated()}
+				<SidebarEntry
+					icon={mdiLogout}
+					{isSidebarOpen}
+					link={backend.auth.logout()}
+					on:click={closeSidebar}
+					title="Logout"
+				/>
+			{:else}
+				<SidebarEntry
+					icon={mdiAccount}
+					{isSidebarOpen}
+					link={'/login'}
+					on:click={closeSidebar}
+					title={$i18n.t('navigation.login')}
+				/>
+			{/if}
 		</div>
 	</div>
 </div>

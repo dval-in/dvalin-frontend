@@ -1,0 +1,10 @@
+{
+	"translation": {
+		"navigation.login": "Login or register",
+		"wish.overview.title": "Wish statistic",
+		"wish.overview.import_wish_button": "Import wishes",
+		"wish.overview.global_statistic_button": "Global statistic",
+		"characters.overview.title": "Characters",
+		"settings.overview.title": "Settings"
+	}
+}
