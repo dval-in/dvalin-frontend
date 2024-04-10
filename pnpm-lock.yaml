@@ -30,8 +30,8 @@ dependencies:
     specifier: ^0.4.4
     version: 0.4.4(svelte@4.2.12)(sveltekit-superforms@1.13.4)(zod@3.22.4)
   i18next:
-    specifier: ^23.11.0
-    version: 23.11.0
+    specifier: ^23.11.1
+    version: 23.11.1
   layerchart:
     specifier: ^0.34.0
     version: 0.34.0(@babel/core@7.24.3)(postcss@8.4.38)(sass@1.74.1)(svelte@4.2.12)(typescript@5.4.4)(vite@5.2.8)
@@ -43,7 +43,7 @@ dependencies:
     version: 0.3.0(svelte@4.2.12)
   svelte-i18next:
     specifier: ^2.2.2
-    version: 2.2.2(i18next@23.11.0)(svelte@4.2.12)
+    version: 2.2.2(i18next@23.11.1)(svelte@4.2.12)
   svelte-persisted-store:
     specifier: ^0.9.1
     version: 0.9.1(svelte@4.2.12)
@@ -4062,8 +4062,8 @@ packages:
     hasBin: true
     dev: true
 
-  /i18next@23.11.0:
-    resolution: {integrity: sha512-VwFtlgy2LDbY0Qs6VfekIm6mv5/JmSJrtBf4aszl7Vby8+GcBlri0/7dkMZXmzTfiBMPUPBOmYCdQK7K4emkGQ==}
+  /i18next@23.11.1:
+    resolution: {integrity: sha512-mXw4A24BiPZKRsbb9ewgSvjYd6fxFCNwJyfK6nYfSTIAX2GkCWcb598m3DFkDZmqADatvuASrKo6qwORz3VwTQ==}
     dependencies:
       '@babel/runtime': 7.24.1
     dev: false
@@ -5890,13 +5890,13 @@ packages:
     dependencies:
       svelte: 4.2.12
 
-  /svelte-i18next@2.2.2(i18next@23.11.0)(svelte@4.2.12):
+  /svelte-i18next@2.2.2(i18next@23.11.1)(svelte@4.2.12):
     resolution: {integrity: sha512-IpJDZCH5cCgKfHQHgiLmGT4j9HCdg4fqsP3oP2deLu8PxmNj0Ui6khMiDoxAxedAiYEhr0xendv2xqh3Rq+uQQ==}
     peerDependencies:
       i18next: '*'
       svelte: '*'
     dependencies:
-      i18next: 23.11.0
+      i18next: 23.11.1
       svelte: 4.2.12
     dev: false
 
