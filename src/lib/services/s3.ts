@@ -40,7 +40,7 @@ class S3WeaponBucket {
 
 	public constructor(weapon: WeaponKey) {
 		this.baseUrl = S3Service.baseUrl + '/weapons/' + weapon;
-		this.icon = this.baseUrl + '/icon.png';
+		this.icon = this.baseUrl + '/icon.webp';
 	}
 }
 
@@ -56,10 +56,10 @@ class S3ArtifactBucket {
 	public constructor(artifact: ArtifactSetKey) {
 		this.baseUrl = S3Service.baseUrl + '/artifacts/' + artifact;
 
-		this.circlet = this.baseUrl + '/circlet.png';
-		this.flower = this.baseUrl + '/flower.png';
-		this.goblet = this.baseUrl + '/goblet.png';
-		this.plume = this.baseUrl + '/plume.png';
-		this.sands = this.baseUrl + '/sands.png';
+		this.circlet = this.baseUrl + '/circlet.webp';
+		this.flower = this.baseUrl + '/flower.webp';
+		this.goblet = this.baseUrl + '/goblet.webp';
+		this.plume = this.baseUrl + '/plume.webp';
+		this.sands = this.baseUrl + '/sands.webp';
 	}
 }
