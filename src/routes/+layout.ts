@@ -2,9 +2,10 @@ import { error } from '@sveltejs/kit';
 import type { CharacterIndex } from '$lib/types/index/character';
 import type { WeaponIndex } from '$lib/types/index/weapon';
 import BackendService from '$lib/services/backend';
+import type { LayoutLoadEvent } from '../../.svelte-kit/types/src/routes/$types';
 
 /** @type {import('./$types').LayoutServerLoad} */
-export async function load({ fetch }) {
+export async function load({ fetch }: LayoutLoadEvent) {
 	let characterIndex: CharacterIndex;
 	let weaponIndex: WeaponIndex;
 	const backend = new BackendService();

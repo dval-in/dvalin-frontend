@@ -7,6 +7,7 @@ import DE from '$lib/locales/DE.json';
 import { goto } from '$app/navigation';
 import { page } from '$app/stores';
 import { browser } from '$app/environment';
+import { isLocale } from '$lib/types/locale';
 
 const i18n = createI18nStore(i18next);
 
@@ -21,13 +22,15 @@ i18next
 	})
 	.then(() => {
 		i18next.on('languageChanged', function (lng) {
-			applicationState.update((a) => ({
-				...a,
-				settings: {
-					...a.settings,
-					locale: lng
-				}
-			}));
+			if (isLocale(lng)) {
+				applicationState.update((state) => ({
+					...state,
+					settings: {
+						...state.settings,
+						locale: lng
+					}
+				}));
+			}
 			if (browser) {
 				goto(get(page).url.pathname, { invalidateAll: true });
 			}

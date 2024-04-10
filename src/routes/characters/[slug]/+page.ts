@@ -2,9 +2,10 @@ import { type CharacterKey } from '$lib/types/keys/CharacterKey';
 import { error } from '@sveltejs/kit';
 import type { Character } from '$lib/types/data/Character';
 import BackendService from '$lib/services/backend';
+import type { PageLoadEvent } from '../../../../.svelte-kit/types/src/routes/characters/[slug]/$types';
 
 /** @type {import('./$types').PageLoad} */
-export async function load({ params, fetch }) {
+export async function load({ params, fetch }: PageLoadEvent) {
 	let characterData: Character;
 	const backend = new BackendService();
 
