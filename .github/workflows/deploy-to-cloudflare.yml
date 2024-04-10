@@ -2,13 +2,16 @@
 
 name: 'Deploy to Cloudflare'
 on:
-  workflow_run:
-    workflows: [Check code quality]
-    types:
-      - completed
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  on-success:
+  deploy:
+    if: ${{ github.actor != 'dependabot[bot]' && github.event.pull_request.head.repo.full_name == 'dval-in/dvalin-frontend' }}
     permissions:
       contents: read
       deployments: write
