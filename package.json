@@ -23,7 +23,7 @@
 		"formsnap": "^0.4.4",
 		"i18next": "^23.11.0",
 		"layerchart": "^0.34.0",
-		"lucide-svelte": "^0.365.0",
+		"lucide-svelte": "^0.366.0",
 		"mode-watcher": "^0.3.0",
 		"svelte-i18next": "^2.2.2",
 		"svelte-persisted-store": "^0.9.1",
