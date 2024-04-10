@@ -10,7 +10,6 @@ on:
 
 jobs:
   delete:
-    if: ${{ github.actor != 'dependabot[bot]' && github.event.pull_request.head.repo.full_name == 'dval-in/dvalin-frontend' }}
     permissions:
       contents: read
       deployments: write
