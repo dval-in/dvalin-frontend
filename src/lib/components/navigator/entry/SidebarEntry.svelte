@@ -20,11 +20,11 @@
 	{icon}
 	on:click
 	variant={currentActivePath === link ? 'activeSidebar' : 'sidebar'}
+	class={`${isSidebarOpen ? '' : 'sm:max-xl:justify-center'}`}
+	contentClass={`${isSidebarOpen ? '' : 'sm:max-xl:hidden'}`}
 >
-	<div class={`${isSidebarOpen ? '' : 'sm:max-xl:hidden'}`}>
-		{$i18n.t(title)}
-		{#if external}
-			<Icon path={mdiLink}></Icon>
-		{/if}
-	</div>
+	{$i18n.t(title)}
+	{#if external}
+		<Icon path={mdiLink}></Icon>
+	{/if}
 </IconButton>

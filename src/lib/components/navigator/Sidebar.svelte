@@ -22,6 +22,7 @@
 	import logo from '$lib/assets/logo.svg';
 	import BackendService from '$lib/services/backend';
 	import i18n from '$lib/services/i18n/index';
+	import LanguageSwitcher from '$lib/components/navigator/language-switcher/LanguageSwitcher.svelte';
 
 	const paths = {
 		collection: [
@@ -70,7 +71,7 @@
 </script>
 
 <div
-	class={`fixed flex w-full ${isSidebarOpen ? 'sm:w-72' : 'sm:w-20'} xl:w-72 ${isSidebarOpen ? 'h-full' : 'h-16'} sm:h-full flex-col z-50 p-2.5 xl:p-5 xl:pl-10 max-sm:px-5 sm:max-xl:pr-0 sm:max-xl:py-5 bg-tertiary ${isSidebarOpen ? '' : 'max-sm:rounded-b-xl'} sm:rounded-r-xl transition-all`}
+	class={`fixed flex w-full ${isSidebarOpen ? 'sm:w-72' : 'sm:w-20'} xl:w-72 ${isSidebarOpen ? 'h-full' : 'h-16'} gap-2.5 sm:h-full flex-col z-50 p-2.5 xl:p-5 xl:pl-10 max-sm:px-5 sm:max-xl:pr-0 sm:max-xl:py-5 bg-tertiary ${isSidebarOpen ? '' : 'max-sm:rounded-b-xl'} sm:rounded-r-xl transition-all`}
 >
 	<div
 		class={`flex ${isSidebarOpen ? 'flex-row' : 'sm:max-xl:flex-col'} items-center justify-between gap-2.5 sm:max-xl:mr-2.5`}
@@ -97,7 +98,7 @@
 	</div>
 
 	<div
-		class={`overflow-y-auto flex flex-col flex-1 gap-1 max-sm:h-full my-2.5 pr-1 ${isSidebarOpen ? '' : 'max-sm:max-h-0 max-sm:overflow-hidden'}`}
+		class={`overflow-y-auto flex flex-col flex-1 gap-1 max-sm:h-full pr-1 ${isSidebarOpen ? '' : 'max-sm:max-h-0 max-sm:overflow-hidden'} scrollbar-gutter`}
 	>
 		<SidebarEntry
 			icon={mdiHome}
@@ -149,42 +150,33 @@
 	</div>
 
 	<div
-		class={`flex flex-row items-center justify-between sm:max-xl:mr-2.5 ${isSidebarOpen ? '' : 'max-sm:max-h-0 max-sm:overflow-hidden'}`}
+		class={`flex ${isSidebarOpen ? 'flex-row' : 'sm:max-xl:flex-col xl:flex-row'} gap-2.5 items-center sm:max-xl:mr-2.5 ${isSidebarOpen ? '' : 'max-sm:max-h-0 max-sm:overflow-hidden'}`}
 	>
-		<img
-			src={'src/lib/assets/languages/' + $i18n.language + '.svg'}
-			class={`flex rounded-full w-10 h-10 object-cover ${isSidebarOpen ? '' : 'sm:max-xl:hidden'}`}
-			on:click={() => {
-				if ($i18n.language !== 'DE') {
-					$i18n.changeLanguage('DE');
-				} else {
-					$i18n.changeLanguage('EN');
-				}
-			}}
-		/>
+		{#if backend.auth.isAuthenticated()}
+			<SidebarEntry
+				icon={mdiLogout}
+				{isSidebarOpen}
+				link={backend.auth.logout()}
+				on:click={closeSidebar}
+				title={$i18n.t('navigation.logout')}
+			/>
+		{:else}
+			<SidebarEntry
+				class="flex"
+				icon={mdiAccount}
+				{isSidebarOpen}
+				link={'/login'}
+				on:click={closeSidebar}
+				title={$i18n.t('navigation.login')}
+			/>
+		{/if}
 
-		<div class="flex">
-			{#if backend.auth.isAuthenticated()}
-				<SidebarEntry
-					icon={mdiLogout}
-					{isSidebarOpen}
-					link={backend.auth.logout()}
-					on:click={closeSidebar}
-					title={$i18n.t('navigation.logout')}
-				/>
-			{:else}
-				<SidebarEntry
-					icon={mdiAccount}
-					{isSidebarOpen}
-					link={'/login'}
-					on:click={closeSidebar}
-					title={$i18n.t('navigation.login')}
-				/>
-			{/if}
-		</div>
+		<LanguageSwitcher />
 	</div>
 </div>
 
 <div
-	class={`bg-black/80 transition-all absolute top-0 left-0 right-0 bottom-0 ${isSidebarOpen ? '' : 'hidden'}`}
+	role="button"
+	class={`bg-black/80 z-40 transition-all fixed top-0 left-0 right-0 bottom-0 ${isSidebarOpen ? '' : 'hidden'}`}
+	on:click={closeSidebar}
 />
