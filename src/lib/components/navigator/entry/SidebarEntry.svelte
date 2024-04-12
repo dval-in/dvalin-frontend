@@ -17,6 +17,7 @@
 <IconButton
 	{...$$restProps}
 	href={link}
+	target={external ? '_blank' : ''}
 	{icon}
 	on:click
 	variant={currentActivePath === link ? 'activeSidebar' : 'sidebar'}
@@ -25,6 +26,6 @@
 >
 	{$i18n.t(title)}
 	{#if external}
-		<Icon path={mdiLink}></Icon>
+		<Icon path={mdiLink} />
 	{/if}
 </IconButton>
