@@ -27,7 +27,7 @@
 		"mode-watcher": "^0.3.0",
 		"svelte-i18next": "^2.2.2",
 		"svelte-persisted-store": "^0.9.1",
-		"svelte-sonner": "^0.3.21",
+		"svelte-sonner": "^0.3.22",
 		"svelte-ux": "^0.62.7",
 		"sveltekit-superforms": "^1.13.4",
 		"tailwind-merge": "^2.2.2",
