@@ -4,21 +4,14 @@
 	import {
 		mdiAccount,
 		mdiAccountMultiple,
-		mdiAlarm,
 		mdiBagPersonal,
-		mdiBedKing,
-		mdiBookshelf,
-		mdiCards,
-		mdiChartTimeline,
 		mdiClipboardTextOutline,
 		mdiCloseCircle,
 		mdiCog,
-		mdiDisc,
-		mdiFish,
-		mdiFood,
 		mdiHome,
+		mdiLogout,
+		mdiMap,
 		mdiMenu,
-		mdiPartyPopper,
 		mdiStar,
 		mdiSwordCross
 	} from '@mdi/js';
@@ -27,27 +20,40 @@
 	import SidebarCategory from '$lib/components/navigator/category/SidebarCategory.svelte';
 	import SidebarEntry from '$lib/components/navigator/entry/SidebarEntry.svelte';
 	import logo from '$lib/assets/logo.svg';
+	import BackendService from '$lib/services/backend';
+	import i18n from '$lib/services/i18n/index';
+	import LanguageSwitcher from '$lib/components/navigator/language-switcher/LanguageSwitcher.svelte';
 
 	const paths = {
 		collection: [
-			{ title: 'Characters', link: '/characters', icon: mdiAccountMultiple },
-			{ title: 'Weapons', link: '/weapons', icon: mdiSwordCross },
-			{ title: 'Inventory', link: '/inventory', icon: mdiBagPersonal }
+			{
+				title: 'characters.overview.title',
+				link: '/characters',
+				icon: mdiAccountMultiple
+			},
+			{ title: 'weapons.title', link: '/weapons', icon: mdiSwordCross },
+			{ title: 'inventory.title', link: '/inventory', icon: mdiBagPersonal }
 		],
 		tracker: [
-			{ title: 'To-Do', link: '/todo', icon: mdiClipboardTextOutline },
-			{ title: 'Ascension', link: '/ascension', icon: mdiStar },
+			{ title: 'todo.title', link: '/todo', icon: mdiClipboardTextOutline }
+			/*{ title: 'Ascension', link: '/ascension', icon: mdiStar },
 			{ title: 'Fishing', link: '/fishing', icon: mdiFish },
 			{ title: 'Furnishing', link: '/furnishing', icon: mdiBedKing },
 			{ title: 'Achievement', link: '/achievement', icon: mdiPartyPopper },
 			{ title: 'Books', link: '/books', icon: mdiBookshelf },
 			{ title: 'Recipes', link: '/recipes', icon: mdiFood },
-			{ title: 'Spin Crystals', link: '/spin-crystals', icon: mdiDisc }
+			{ title: 'Spin Crystals', link: '/spin-crystals', icon: mdiDisc }*/
 		],
 		tools: [
-			{ title: 'Reminder', link: '/reminder', icon: mdiAlarm },
+			/*	{ title: 'Reminder', link: '/reminder', icon: mdiAlarm },
 			{ title: 'Timeline', link: '/timeline', icon: mdiChartTimeline },
-			{ title: 'TCG', link: '/tcg', icon: mdiCards }
+			{ title: 'TCG', link: '/tcg', icon: mdiCards }*/
+			{
+				title: 'map.title',
+				link: 'https://act.hoyolab.com/ys/app/interactive-map/index.html',
+				icon: mdiMap,
+				external: true
+			}
 		]
 	};
 
@@ -60,10 +66,12 @@
 	const closeSidebar = () => {
 		isSidebarOpen = false;
 	};
+
+	const backend = new BackendService();
 </script>
 
 <div
-	class={`fixed flex w-full ${isSidebarOpen ? 'sm:w-72' : 'sm:w-20'} xl:w-72 ${isSidebarOpen ? 'h-full' : 'h-16'} sm:h-full flex-col z-50 p-2.5 xl:p-5 xl:pl-10 max-sm:px-5 sm:max-xl:pr-0 sm:max-xl:py-5 bg-tertiary ${isSidebarOpen ? '' : 'max-sm:rounded-b-xl'} sm:rounded-r-xl transition-all`}
+	class={`fixed flex w-full ${isSidebarOpen ? 'sm:w-72' : 'sm:w-20'} xl:w-72 ${isSidebarOpen ? 'h-full' : 'h-16'} gap-2.5 sm:h-full flex-col z-50 p-2.5 xl:p-5 xl:pl-10 max-sm:px-5 sm:max-xl:pr-0 sm:max-xl:py-5 bg-tertiary ${isSidebarOpen ? '' : 'max-sm:rounded-b-xl'} sm:rounded-r-xl transition-all`}
 >
 	<div
 		class={`flex ${isSidebarOpen ? 'flex-row' : 'sm:max-xl:flex-col'} items-center justify-between gap-2.5 sm:max-xl:mr-2.5`}
@@ -90,7 +98,7 @@
 	</div>
 
 	<div
-		class={`overflow-y-auto flex flex-col flex-1 gap-1 max-sm:h-full my-2.5 pr-1 ${isSidebarOpen ? '' : 'max-sm:max-h-0 max-sm:overflow-hidden'}`}
+		class={`overflow-y-auto flex flex-col flex-1 gap-1 max-sm:h-full pr-1 ${isSidebarOpen ? '' : 'max-sm:max-h-0 max-sm:overflow-hidden'} scrollbar-gutter`}
 	>
 		<SidebarEntry
 			icon={mdiHome}
@@ -104,7 +112,7 @@
 			{isSidebarOpen}
 			link={'/wish-statistics/overview'}
 			on:click={closeSidebar}
-			title="Wish Statistics"
+			title={$i18n.t('wish.overview.title')}
 		/>
 
 		<SidebarCategory
@@ -112,21 +120,21 @@
 			forceOpen={!isSidebarOpen}
 			{isSidebarOpen}
 			paths={paths.collection}
-			title="Your Collection"
+			title={$i18n.t('navigation.category.collection')}
 		/>
 		<SidebarCategory
 			{closeSidebar}
 			forceOpen={!isSidebarOpen}
 			{isSidebarOpen}
 			paths={paths.tracker}
-			title="Trackers"
+			title={$i18n.t('navigation.category.trackers')}
 		/>
 		<SidebarCategory
 			{closeSidebar}
 			forceOpen={!isSidebarOpen}
 			{isSidebarOpen}
 			paths={paths.tools}
-			title="Tools"
+			title={$i18n.t('navigation.category.tools')}
 		/>
 
 		<div class="mt-3">
@@ -136,30 +144,39 @@
 				{isSidebarOpen}
 				link={'/settings'}
 				on:click={closeSidebar}
-				title="Settings"
+				title={$i18n.t('settings.overview.title')}
 			/>
 		</div>
 	</div>
 
 	<div
-		class={`flex flex-row items-center justify-between sm:max-xl:mr-2.5 ${isSidebarOpen ? '' : 'max-sm:max-h-0 max-sm:overflow-hidden'}`}
+		class={`flex ${isSidebarOpen ? 'flex-row' : 'sm:max-xl:flex-col xl:flex-row'} gap-2.5 items-center sm:max-xl:mr-2.5 ${isSidebarOpen ? '' : 'max-sm:max-h-0 max-sm:overflow-hidden'}`}
 	>
-		<div
-			class={`flex rounded-full bg-red-500 w-10 h-10 ${isSidebarOpen ? '' : 'sm:max-xl:hidden'}`}
-		/>
-		<div class="flex">
+		{#if backend.auth.isAuthenticated()}
 			<SidebarEntry
+				icon={mdiLogout}
+				{isSidebarOpen}
+				link={backend.auth.logout()}
+				on:click={closeSidebar}
+				title={$i18n.t('navigation.logout')}
+			/>
+		{:else}
+			<SidebarEntry
+				class="flex"
 				icon={mdiAccount}
 				{isSidebarOpen}
 				link={'/login'}
 				on:click={closeSidebar}
-				title="Login or Register"
-				variant="default"
+				title={$i18n.t('navigation.login')}
 			/>
-		</div>
+		{/if}
+
+		<LanguageSwitcher />
 	</div>
 </div>
 
 <div
-	class={`bg-black/80 transition-all absolute top-0 left-0 right-0 bottom-0 ${isSidebarOpen ? '' : 'hidden'}`}
+	role="button"
+	class={`bg-black/80 z-40 transition-all fixed top-0 left-0 right-0 bottom-0 ${isSidebarOpen ? '' : 'hidden'}`}
+	on:click={closeSidebar}
 />

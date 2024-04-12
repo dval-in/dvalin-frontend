@@ -1,4 +1,4 @@
-const characterKeyList = [
+export const characterKeyList = [
 	'Albedo',
 	'Alhaitham',
 	'Aloy',
@@ -59,7 +59,6 @@ const characterKeyList = [
 	'Sayu', // Sayu
 	'Shenhe', // Shenhe
 	'ShikanoinHeizou', // Shikanoin Heizou
-	'Somnia', // Somnia
 	'Sucrose', // Sucrose
 	'Tartaglia', // Tartaglia
 	'Thoma', // Thoma

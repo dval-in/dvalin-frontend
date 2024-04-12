@@ -27,25 +27,28 @@
 	};
 </script>
 
-<Collapsible class="mt-3" open={isOpen}>
-	<CollapsibleTrigger
-		class={`flex ${isSidebarOpen ? '' : 'sm:max-xl:hidden'} flex-1 items-center justify-between mb-3`}
-		on:click={toggleCollapsible}
-	>
-		<Text type="h3">{title}</Text>
-		<Icon path={collapseStatusIcon} />
-	</CollapsibleTrigger>
+{#if paths.length > 0}
+	<Collapsible class="mt-3" open={isOpen}>
+		<CollapsibleTrigger
+			class={`flex ${isSidebarOpen ? '' : 'sm:max-xl:hidden'} flex-1 items-center justify-between mb-3`}
+			on:click={toggleCollapsible}
+		>
+			<Text type="h3">{title}</Text>
+			<Icon path={collapseStatusIcon} />
+		</CollapsibleTrigger>
 
-	<CollapsibleContent class="flex flex-col gap-1">
-		<Separator class={`mb-3 hidden ${isSidebarOpen ? '' : 'sm:max-xl:block'}`} />
-		{#each paths as path}
-			<SidebarEntry
-				title={path.title}
-				link={path.link}
-				icon={path.icon}
-				{isSidebarOpen}
-				on:click={closeSidebar}
-			/>
-		{/each}
-	</CollapsibleContent>
-</Collapsible>
+		<CollapsibleContent class="flex flex-col gap-1">
+			<Separator class={`mb-3 hidden ${isSidebarOpen ? '' : 'sm:max-xl:block'}`} />
+			{#each paths as path}
+				<SidebarEntry
+					title={path.title}
+					link={path.link}
+					icon={path.icon}
+					external={path.external}
+					{isSidebarOpen}
+					on:click={closeSidebar}
+				/>
+			{/each}
+		</CollapsibleContent>
+	</Collapsible>
+{/if}

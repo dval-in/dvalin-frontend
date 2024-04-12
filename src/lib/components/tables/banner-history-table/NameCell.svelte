@@ -6,8 +6,8 @@
 	export let name: CharacterKey | WeaponKey;
 
 	const imgUrl = isCharacterKey(name)
-		? S3Service.getCharacterLink(name) + '/icon.webp'
-		: S3Service.getWeaponLink(name) + '/icon.png';
+		? S3Service.getCharacter(name).icon
+		: S3Service.getWeapon(name).icon;
 </script>
 
 <div class="flex flex-1 items-center gap-2">
