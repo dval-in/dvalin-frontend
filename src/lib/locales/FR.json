@@ -1,0 +1,19 @@
+{
+	"translation": {
+		"navigation.category.collection": "Collection",
+		"navigation.category.trackers": "Suivi",
+		"navigation.category.tools": "Outils",
+		"navigation.languageswitcher.title": "Langue",
+		"navigation.login": "Connexion / inscription",
+		"navigation.logout": "Déconnexion",
+		"wish.overview.title": "Statistiques",
+		"wish.overview.import_wish_button": "Importer les vœux",
+		"wish.overview.global_statistic_button": "Statistiques globales",
+		"characters.overview.title": "Personnages",
+		"settings.overview.title": "Paramètres",
+		"map.title": "Carte",
+		"todo.title": "Planificateur",
+		"inventory.title": "Inventaire",
+		"weapons.title": "Armes"
+	}
+}
