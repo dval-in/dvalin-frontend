@@ -1,0 +1,140 @@
+[
+	{
+		"name": "Sub DPS",
+		"description": [
+			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec aliquet urna in nunc ultrices tempus. Nullam bibendum nunc et sapien aliquet, at bibendum nulla ollicitudin. Duis laoreet at leo vitae ultrices. Nullam finibus sodales libero et laoreet. Sed ac consequat lorem. Quisque sodales quam ligula, sed eleifend odio fringilla vel. Integer auctor, quam sit amet ornare porta, mauris augue vulputate neque, ac dapibus dui augue sed neque. Curabitur vel fringilla lacus, in interdum felis. Donec ornare nulla ac risus porttitor tempor.",
+			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec aliquet urna in nunc ultrices tempus. Nullam bibendum nunc et sapien aliquet, at bibendum nulla ollicitudin. Duis laoreet at leo vitae ultrices. Nullam finibus sodales libero et laoreet. Sed ac consequat lorem. Quisque sodales quam ligula, sed eleifend odio fringilla vel. Integer auctor, quam sit amet ornare porta, mauris augue vulputate neque, ac dapibus dui augue sed neque. Curabitur vel fringilla lacus, in interdum felis. Donec ornare nulla ac risus porttitor tempor.",
+			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec aliquet urna in nunc ultrices tempus. Nullam bibendum nunc et sapien aliquet, at bibendum nulla ollicitudin. Duis laoreet at leo vitae ultrices. Nullam finibus sodales libero et laoreet. Sed ac consequat lorem. Quisque sodales quam ligula, sed eleifend odio fringilla vel. Integer auctor, quam sit amet ornare porta, mauris augue vulputate neque, ac dapibus dui augue sed neque. Curabitur vel fringilla lacus, in interdum felis. Donec ornare nulla ac risus porttitor tempor."
+		],
+		"talentPriority": ["Elemental Skill", "Normal Attack", "ELemental Burst"],
+		"weapons": {
+			"signatureWeapon": "CinnabarSpindle",
+			"altWeapons": [
+				"AThousandFloatingDreams",
+				"CinnabarSpindle",
+				"CinnabarSpindle",
+				"CinnabarSpindle"
+			]
+		},
+		"artifacts": {
+			"signatureSet": {
+				"key": "HuskOfOpulentDreams",
+				"quantity": 4
+			},
+			"altSets": [
+				{
+					"key": "HuskOfOpulentDreams",
+					"quantity": 4
+				},
+				{
+					"key": "HuskOfOpulentDreams",
+					"quantity": 4
+				},
+				{
+					"key": "HuskOfOpulentDreams",
+					"quantity": 4
+				},
+				{
+					"key": "HuskOfOpulentDreams",
+					"quantity": 4
+				}
+			],
+			"stats": {
+				"main": ["DEF %", "GEO DMG", "CRIT Rate"],
+				"sub": ["CRIT Rate or DMG", "DEF%", "ATK%"]
+			}
+		}
+	},
+	{
+		"name": "Main DPS",
+		"description": [
+			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec aliquet urna in nunc ultrices tempus. Nullam bibendum nunc et sapien aliquet, at bibendum nulla ollicitudin. Duis laoreet at leo vitae ultrices. Nullam finibus sodales libero et laoreet. Sed ac consequat lorem. Quisque sodales quam ligula, sed eleifend odio fringilla vel. Integer auctor, quam sit amet ornare porta, mauris augue vulputate neque, ac dapibus dui augue sed neque. Curabitur vel fringilla lacus, in interdum felis. Donec ornare nulla ac risus porttitor tempor.",
+			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec aliquet urna in nunc ultrices tempus. Nullam bibendum nunc et sapien aliquet, at bibendum nulla ollicitudin. Duis laoreet at leo vitae ultrices. Nullam finibus sodales libero et laoreet. Sed ac consequat lorem. Quisque sodales quam ligula, sed eleifend odio fringilla vel. Integer auctor, quam sit amet ornare porta, mauris augue vulputate neque, ac dapibus dui augue sed neque. Curabitur vel fringilla lacus, in interdum felis. Donec ornare nulla ac risus porttitor tempor.",
+			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec aliquet urna in nunc ultrices tempus. Nullam bibendum nunc et sapien aliquet, at bibendum nulla ollicitudin. Duis laoreet at leo vitae ultrices. Nullam finibus sodales libero et laoreet. Sed ac consequat lorem. Quisque sodales quam ligula, sed eleifend odio fringilla vel. Integer auctor, quam sit amet ornare porta, mauris augue vulputate neque, ac dapibus dui augue sed neque. Curabitur vel fringilla lacus, in interdum felis. Donec ornare nulla ac risus porttitor tempor."
+		],
+		"talentPriority": ["Elemental Skill", "Normal Attack", "ELemental Burst"],
+		"weapons": {
+			"signatureWeapon": "CinnabarSpindle",
+			"altWeapons": [
+				"CinnabarSpindle",
+				"CinnabarSpindle",
+				"CinnabarSpindle",
+				"CinnabarSpindle"
+			]
+		},
+		"artifacts": {
+			"signatureSet": {
+				"key": "HuskOfOpulentDreams",
+				"quantity": 4
+			},
+			"altSets": [
+				{
+					"key": "HuskOfOpulentDreams",
+					"quantity": 4
+				},
+				{
+					"key": "HuskOfOpulentDreams",
+					"quantity": 4
+				},
+				{
+					"key": "HuskOfOpulentDreams",
+					"quantity": 4
+				},
+				{
+					"key": "HuskOfOpulentDreams",
+					"quantity": 4
+				}
+			],
+			"stats": {
+				"main": ["DEF %", "GEO DMG", "CRIT Rate"],
+				"sub": ["CRIT Rate or DMG", "DEF%", "ATK%"]
+			}
+		}
+	},
+	{
+		"name": "Support",
+		"description": [
+			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec aliquet urna in nunc ultrices tempus. Nullam bibendum nunc et sapien aliquet, at bibendum nulla ollicitudin. Duis laoreet at leo vitae ultrices. Nullam finibus sodales libero et laoreet. Sed ac consequat lorem. Quisque sodales quam ligula, sed eleifend odio fringilla vel. Integer auctor, quam sit amet ornare porta, mauris augue vulputate neque, ac dapibus dui augue sed neque. Curabitur vel fringilla lacus, in interdum felis. Donec ornare nulla ac risus porttitor tempor.",
+			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec aliquet urna in nunc ultrices tempus. Nullam bibendum nunc et sapien aliquet, at bibendum nulla ollicitudin. Duis laoreet at leo vitae ultrices. Nullam finibus sodales libero et laoreet. Sed ac consequat lorem. Quisque sodales quam ligula, sed eleifend odio fringilla vel. Integer auctor, quam sit amet ornare porta, mauris augue vulputate neque, ac dapibus dui augue sed neque. Curabitur vel fringilla lacus, in interdum felis. Donec ornare nulla ac risus porttitor tempor.",
+			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec aliquet urna in nunc ultrices tempus. Nullam bibendum nunc et sapien aliquet, at bibendum nulla ollicitudin. Duis laoreet at leo vitae ultrices. Nullam finibus sodales libero et laoreet. Sed ac consequat lorem. Quisque sodales quam ligula, sed eleifend odio fringilla vel. Integer auctor, quam sit amet ornare porta, mauris augue vulputate neque, ac dapibus dui augue sed neque. Curabitur vel fringilla lacus, in interdum felis. Donec ornare nulla ac risus porttitor tempor."
+		],
+		"talentPriority": ["Elemental Skill", "Normal Attack", "ELemental Burst"],
+		"weapons": {
+			"signatureWeapon": "CinnabarSpindle",
+			"altWeapons": [
+				"CinnabarSpindle",
+				"CinnabarSpindle",
+				"CinnabarSpindle",
+				"CinnabarSpindle"
+			]
+		},
+		"artifacts": {
+			"signatureSet": {
+				"key": "HuskOfOpulentDreams",
+				"quantity": 4
+			},
+			"altSets": [
+				{
+					"key": "HuskOfOpulentDreams",
+					"quantity": 4
+				},
+				{
+					"key": "HuskOfOpulentDreams",
+					"quantity": 4
+				},
+				{
+					"key": "HuskOfOpulentDreams",
+					"quantity": 4
+				},
+				{
+					"key": "HuskOfOpulentDreams",
+					"quantity": 4
+				}
+			],
+			"stats": {
+				"main": ["DEF %", "GEO DMG", "CRIT Rate"],
+				"sub": ["CRIT Rate or DMG", "DEF%", "ATK%"]
+			}
+		}
+	}
+]
