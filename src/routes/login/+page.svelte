@@ -11,5 +11,7 @@
 </script>
 
 <DefaultLayout title="Login">
+	<Button on:click={() => nav(backend.auth.login('google'))}>Google</Button>
+	<Button on:click={() => nav(backend.auth.login('microsoft'))}>Microsoft</Button>
 	<Button on:click={() => nav(backend.auth.login('github'))}>Github</Button>
 </DefaultLayout>
