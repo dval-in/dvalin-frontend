@@ -4,6 +4,8 @@ import { applicationState } from '$lib/store/global_state';
 import { get } from 'svelte/store';
 import EN from '$lib/locales/EN.json';
 import DE from '$lib/locales/DE.json';
+import FR from '$lib/locales/FR.json';
+import IT from '$lib/locales/IT.json';
 import { goto } from '$app/navigation';
 import { page } from '$app/stores';
 import { browser } from '$app/environment';
@@ -17,7 +19,9 @@ i18next
 		fallbackLng: 'EN',
 		resources: {
 			EN,
-			DE
+			DE,
+			FR,
+			IT
 		}
 	})
 	.then(() => {
