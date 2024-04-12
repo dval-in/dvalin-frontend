@@ -22,7 +22,8 @@ export class BackendAuthService {
 
 	isAuthenticated() {
 		if (browser) {
-			return getCookie('consentUUID') !== null;
+			const isAuthenticatedCookie = getCookie('isAuthenticated');
+			return isAuthenticatedCookie !== null && isAuthenticatedCookie !== 'false';
 		}
 
 		return false;
