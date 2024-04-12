@@ -2,6 +2,8 @@
 	import i18n from '$lib/services/i18n/index.js';
 	import langFlagDE from '$lib/assets/languages/DE.svg';
 	import langFlagEN from '$lib/assets/languages/EN.svg';
+	import langFlagFR from '$lib/assets/languages/FR.svg';
+	import langFlagIT from '$lib/assets/languages/IT.svg';
 	import {
 		Dialog,
 		DialogContent,
@@ -25,6 +27,10 @@
 				return langFlagEN;
 			case 'DE':
 				return langFlagDE;
+			case 'FR':
+				return langFlagFR;
+			case 'IT':
+				return langFlagIT;
 			default:
 				return langFlagEN;
 		}
