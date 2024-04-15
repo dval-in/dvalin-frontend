@@ -4,7 +4,7 @@
 	import langFlagEN from '$lib/assets/languages/EN.svg';
 	import langFlagFR from '$lib/assets/languages/FR.svg';
 	import langFlagIT from '$lib/assets/languages/IT.svg';
-	import langFlagPTBR from '$lib/assets/languages/PTBR.svg';
+	import langFlagPT from '$lib/assets/languages/PT.svg';
 	import langFlagPL from '$lib/assets/languages/PL.svg';
 	import langFlagRU from '$lib/assets/languages/RU.svg';
 	import {
@@ -36,8 +36,8 @@
 				return langFlagIT;
 			case 'PL':
 				return langFlagPL;
-			case 'PTBR':
-				return langFlagPTBR;
+			case 'PT':
+				return langFlagPT;
 			case 'RU':
 				return langFlagRU;
 			default:

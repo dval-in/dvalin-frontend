@@ -1,4 +1,4 @@
-const localeList = ['DE', 'EN', 'FR', 'IT', 'PL', 'PTBR', 'RU'];
+const localeList = ['DE', 'EN', 'FR', 'IT', 'PL', 'PT', 'RU'];
 
 export type Locale = (typeof localeList)[number];
 

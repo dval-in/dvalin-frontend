@@ -7,7 +7,7 @@ import EN from '$lib/locales/EN.json';
 import FR from '$lib/locales/FR.json';
 import IT from '$lib/locales/IT.json';
 import PL from '$lib/locales/PL.json';
-import PTBR from '$lib/locales/PTBR.json';
+import PT from '$lib/locales/PT.json';
 import RU from '$lib/locales/RU.json';
 import { goto } from '$app/navigation';
 import { page } from '$app/stores';
@@ -26,7 +26,7 @@ i18next
 			FR,
 			IT,
 			PL,
-			PTBR,
+			PT,
 			RU
 		}
 	})
