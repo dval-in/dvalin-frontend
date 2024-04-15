@@ -2,18 +2,16 @@
 
 name: 'Deploy to Cloudflare'
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+  workflow_run:
+    workflows: [Check code quality]
+    types:
+      - completed
 
 env:
   VITE_BACKEND_URL: ${{ vars.BACKEND_URL }}
 
 jobs:
-  deploy:
+  on-success:
     permissions:
       contents: read
       deployments: write
