@@ -41,4 +41,4 @@ jobs:
           cloudflare-project-name: ${{ vars.CLOUDFLARE_PROJECT_NAME }}
           directory: 'build'
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          github-environment: ${{ vars.CLOUDFLARE_PROJECT_NAME }} ${{ (github.ref == 'refs/heads/main' && '(Production)') || '(Preview)' }}
+          github-environment: ${{ vars.CLOUDFLARE_PROJECT_NAME }} ${{ (github.event.workflow_run.head_branch == 'refs/heads/main' && '(Production)') || '(Preview)' }}
