@@ -9,6 +9,9 @@ on:
     branches:
       - '**'
 
+env:
+  VITE_BACKEND_URL: ${{ vars.BACKEND_URL }}
+
 jobs:
   check-typescript:
     runs-on: ubuntu-latest
