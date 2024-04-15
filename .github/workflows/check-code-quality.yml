@@ -33,6 +33,7 @@ jobs:
       - run: pnpm run lint
   deploy-to-cloudflare:
     needs: [check-typescript, check-prettier]
+    if: ${{ github.event_name != 'pull_request' || github.actor != 'dependabot[bot] }}
     permissions:
       contents: read
       deployments: write
