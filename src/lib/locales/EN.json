@@ -6,6 +6,7 @@
 		"navigation.languageswitcher.title": "Choose your language",
 		"navigation.login": "Login or register",
 		"navigation.logout": "Logout",
+		"dashboard.title": "Dashboard",
 		"wish.overview.title": "Wish statistic",
 		"wish.overview.import_wish_button": "Import wishes",
 		"wish.overview.global_statistic_button": "Global statistic",

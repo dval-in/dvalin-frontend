@@ -4,6 +4,9 @@
 	import langFlagEN from '$lib/assets/languages/EN.svg';
 	import langFlagFR from '$lib/assets/languages/FR.svg';
 	import langFlagIT from '$lib/assets/languages/IT.svg';
+	import langFlagPTBR from '$lib/assets/languages/PTBR.svg';
+	import langFlagPL from '$lib/assets/languages/PL.svg';
+	import langFlagRU from '$lib/assets/languages/RU.svg';
 	import {
 		Dialog,
 		DialogContent,
@@ -23,14 +26,20 @@
 
 	const matchLocaleToFlag = (locale: string) => {
 		switch (locale) {
-			case 'EN':
-				return langFlagEN;
 			case 'DE':
 				return langFlagDE;
+			case 'EN':
+				return langFlagEN;
 			case 'FR':
 				return langFlagFR;
 			case 'IT':
 				return langFlagIT;
+			case 'PL':
+				return langFlagPL;
+			case 'PTBR':
+				return langFlagPTBR;
+			case 'RU':
+				return langFlagRU;
 			default:
 				return langFlagEN;
 		}
