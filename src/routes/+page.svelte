@@ -5,7 +5,7 @@
 	import { Card, CardContent, CardFooter, CardHeader } from '$lib/components/ui/card';
 </script>
 
-<DefaultLayout title="Dashboard">
+<DefaultLayout title="dashboard.title">
 	<div class="col-span-2 row-span-2">
 		<Card class="size-full flex flex-col">
 			<CardHeader>

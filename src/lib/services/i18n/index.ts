@@ -2,10 +2,13 @@ import i18next from 'i18next';
 import { createI18nStore } from 'svelte-i18next';
 import { applicationState } from '$lib/store/global_state';
 import { get } from 'svelte/store';
-import EN from '$lib/locales/EN.json';
 import DE from '$lib/locales/DE.json';
+import EN from '$lib/locales/EN.json';
 import FR from '$lib/locales/FR.json';
 import IT from '$lib/locales/IT.json';
+import PL from '$lib/locales/PL.json';
+import PT from '$lib/locales/PT.json';
+import RU from '$lib/locales/RU.json';
 import { goto } from '$app/navigation';
 import { page } from '$app/stores';
 import { browser } from '$app/environment';
@@ -18,10 +21,13 @@ i18next
 		lng: get(applicationState).settings.locale,
 		fallbackLng: 'EN',
 		resources: {
-			EN,
 			DE,
+			EN,
 			FR,
-			IT
+			IT,
+			PL,
+			PT,
+			RU
 		}
 	})
 	.then(() => {
