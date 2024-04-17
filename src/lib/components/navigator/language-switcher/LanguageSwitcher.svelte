@@ -7,6 +7,8 @@
 	import langFlagPT from '$lib/assets/languages/PT.svg';
 	import langFlagPL from '$lib/assets/languages/PL.svg';
 	import langFlagRU from '$lib/assets/languages/RU.svg';
+	import langFlagTH from '$lib/assets/languages/TH.svg';
+	import langFlagZH from '$lib/assets/languages/ZH.svg';
 	import {
 		Dialog,
 		DialogContent,
@@ -40,6 +42,12 @@
 				return langFlagPT;
 			case 'RU':
 				return langFlagRU;
+			case 'TH':
+				return langFlagTH;
+			case 'ZHS':
+				return langFlagZH;
+			case 'ZHT':
+				return langFlagZH;
 			default:
 				return langFlagEN;
 		}
