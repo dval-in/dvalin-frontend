@@ -8,7 +8,8 @@
 	import langFlagPL from '$lib/assets/languages/PL.svg';
 	import langFlagRU from '$lib/assets/languages/RU.svg';
 	import langFlagTH from '$lib/assets/languages/TH.svg';
-	import langFlagZH from '$lib/assets/languages/ZH.svg';
+	import langFlagZHS from '$lib/assets/languages/ZHS.svg';
+	import langFlagZHT from '$lib/assets/languages/ZHT.svg';
 	import {
 		Dialog,
 		DialogContent,
@@ -45,9 +46,9 @@
 			case 'TH':
 				return langFlagTH;
 			case 'ZHS':
-				return langFlagZH;
+				return langFlagZHS;
 			case 'ZHT':
-				return langFlagZH;
+				return langFlagZHT;
 			default:
 				return langFlagEN;
 		}
@@ -91,7 +92,7 @@
 					alt="language switcher"
 					class={`flex rounded-full w-10 h-10 object-cover ${selectedLanguage === language ? 'border-primary border-4' : 'border-0'} transition-all`}
 				/>
-				<Text type="p">{language}</Text>
+				<Text type="p">{$i18n.t('language.' + language)}</Text>
 			</Button>
 		{/each}
 
