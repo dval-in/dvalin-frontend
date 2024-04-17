@@ -15,6 +15,16 @@
 		"map.title": "Map",
 		"todo.title": "To-Do",
 		"inventory.title": "Inventory",
-		"weapons.title": "Weapons"
+		"weapons.title": "Weapons",
+		"language.DE": "Deutsch",
+		"language.EN": "English",
+		"language.FR": "Français",
+		"language.IT": "Italiano",
+		"language.PL": "Polski",
+		"language.PT": "Português",
+		"language.RU": "Русский",
+		"language.TH": "แบบไทย",
+		"language.ZHS": "中国人",
+		"language.ZHT": "中國人"
 	}
 }

@@ -1,0 +1,20 @@
+{
+	"translation": {
+		"navigation.category.collection": "你的收藏",
+		"navigation.category.trackers": "記錄器",
+		"navigation.category.tools": "工具",
+		"navigation.languageswitcher.title": "選擇你的語言",
+		"navigation.login": "登入或註冊",
+		"navigation.logout": "登出",
+		"dashboard.title": "主頁",
+		"wish.overview.title": "許願數據",
+		"wish.overview.import_wish_button": "匯入許願記錄",
+		"wish.overview.global_statistic_button": "全球數據統計",
+		"characters.overview.title": "角色",
+		"settings.overview.title": "設定",
+		"map.title": "地圖",
+		"todo.title": "待辦清單",
+		"inventory.title": "背包",
+		"weapons.title": "武器"
+	}
+}
