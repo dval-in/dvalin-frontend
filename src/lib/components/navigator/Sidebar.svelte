@@ -105,7 +105,7 @@
 			{isSidebarOpen}
 			link={'/'}
 			on:click={closeSidebar}
-			title="Dashboard"
+			title={$i18n.t('dashboard.title')}
 		/>
 		<SidebarEntry
 			icon={mdiStar}

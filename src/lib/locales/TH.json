@@ -1,0 +1,20 @@
+{
+	"translation": {
+		"navigation.category.collection": "คอลเลคชั่นของคุณ",
+		"navigation.category.trackers": "ตัวติดตาม",
+		"navigation.category.tools": "เครื่องมือ",
+		"navigation.languageswitcher.title": "เลือกภาษา",
+		"navigation.login": "ลงชื่อเข้าใช้หรือลงทะเบียน",
+		"navigation.logout": "ออกจากระบบ",
+		"dashboard.title": "แผงควบคุม",
+		"wish.overview.title": "ความปรารถนา",
+		"wish.overview.import_wish_button": "ความปรารถนาสำคัญ",
+		"wish.overview.global_statistic_button": "สถิติโลก",
+		"characters.overview.title": "ตัวละคร",
+		"settings.overview.title": "การตั้งค่า",
+		"map.title": "แผนที่",
+		"todo.title": "สิ่งที่ต้องทำ",
+		"inventory.title": "รายการ",
+		"weapons.title": "อาวุธ"
+	}
+}

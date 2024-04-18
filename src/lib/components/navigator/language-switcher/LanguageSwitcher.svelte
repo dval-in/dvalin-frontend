@@ -4,6 +4,12 @@
 	import langFlagEN from '$lib/assets/languages/EN.svg';
 	import langFlagFR from '$lib/assets/languages/FR.svg';
 	import langFlagIT from '$lib/assets/languages/IT.svg';
+	import langFlagPT from '$lib/assets/languages/PT.svg';
+	import langFlagPL from '$lib/assets/languages/PL.svg';
+	import langFlagRU from '$lib/assets/languages/RU.svg';
+	import langFlagTH from '$lib/assets/languages/TH.svg';
+	import langFlagZHS from '$lib/assets/languages/ZHS.svg';
+	import langFlagZHT from '$lib/assets/languages/ZHT.svg';
 	import {
 		Dialog,
 		DialogContent,
@@ -23,14 +29,26 @@
 
 	const matchLocaleToFlag = (locale: string) => {
 		switch (locale) {
-			case 'EN':
-				return langFlagEN;
 			case 'DE':
 				return langFlagDE;
+			case 'EN':
+				return langFlagEN;
 			case 'FR':
 				return langFlagFR;
 			case 'IT':
 				return langFlagIT;
+			case 'PL':
+				return langFlagPL;
+			case 'PT':
+				return langFlagPT;
+			case 'RU':
+				return langFlagRU;
+			case 'TH':
+				return langFlagTH;
+			case 'ZHS':
+				return langFlagZHS;
+			case 'ZHT':
+				return langFlagZHT;
 			default:
 				return langFlagEN;
 		}
@@ -74,7 +92,7 @@
 					alt="language switcher"
 					class={`flex rounded-full w-10 h-10 object-cover ${selectedLanguage === language ? 'border-primary border-4' : 'border-0'} transition-all`}
 				/>
-				<Text type="p">{language}</Text>
+				<Text type="p">{$i18n.t('language.' + language)}</Text>
 			</Button>
 		{/each}
 

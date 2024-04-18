@@ -1,0 +1,20 @@
+{
+	"translation": {
+		"navigation.category.collection": "Coleção",
+		"navigation.category.trackers": "Progresso",
+		"navigation.category.tools": "Ferramentas",
+		"navigation.languageswitcher.title": "Idioma",
+		"navigation.login": "Entrar",
+		"navigation.logout": "Sair",
+		"dashboard.title": "Painel principal",
+		"wish.overview.title": "Histórico de orações",
+		"wish.overview.import_wish_button": "Importar orações",
+		"wish.overview.global_statistic_button": "Estatísticas globais",
+		"characters.overview.title": "Personagens",
+		"settings.overview.title": "Configurações",
+		"map.title": "Mapa",
+		"todo.title": "Tarefas",
+		"inventory.title": "Inventário",
+		"weapons.title": "Armas"
+	}
+}

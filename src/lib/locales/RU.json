@@ -1,0 +1,20 @@
+{
+	"translation": {
+		"navigation.category.collection": "Ваша Коллекция",
+		"navigation.category.trackers": "Счётчики",
+		"navigation.category.tools": "Инструменты",
+		"navigation.languageswitcher.title": "Выберите язык",
+		"navigation.login": "Войти или Зарегистрироваться",
+		"navigation.logout": "Выйти с аккаунта",
+		"dashboard.title": "Dashboard",
+		"wish.overview.title": "Счётчик молитв",
+		"wish.overview.import_wish_button": "Импортировать крутки",
+		"wish.overview.global_statistic_button": "Глобальная статистика",
+		"characters.overview.title": "Персонажи",
+		"settings.overview.title": "Настройки",
+		"map.title": "Карта",
+		"todo.title": "Список дел",
+		"inventory.title": "Инвентарь",
+		"weapons.title": "Оружие"
+	}
+}

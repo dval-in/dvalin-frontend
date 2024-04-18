@@ -6,6 +6,7 @@
 		"navigation.languageswitcher.title": "Choose your language",
 		"navigation.login": "Login or register",
 		"navigation.logout": "Logout",
+		"dashboard.title": "Dashboard",
 		"wish.overview.title": "Wish statistic",
 		"wish.overview.import_wish_button": "Import wishes",
 		"wish.overview.global_statistic_button": "Global statistic",
@@ -14,6 +15,16 @@
 		"map.title": "Map",
 		"todo.title": "To-Do",
 		"inventory.title": "Inventory",
-		"weapons.title": "Weapons"
+		"weapons.title": "Weapons",
+		"language.DE": "Deutsch",
+		"language.EN": "English",
+		"language.FR": "Français",
+		"language.IT": "Italiano",
+		"language.PL": "Polski",
+		"language.PT": "Português",
+		"language.RU": "Русский",
+		"language.TH": "แบบไทย",
+		"language.ZHS": "简体中文",
+		"language.ZHT": "繁體中文"
 	}
 }

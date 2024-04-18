@@ -1,0 +1,20 @@
+{
+	"translation": {
+		"navigation.category.collection": "Twoja kolekcja",
+		"navigation.category.trackers": "Trackery",
+		"navigation.category.tools": "Narzędzia",
+		"navigation.languageswitcher.title": "Wybierz swój język",
+		"navigation.login": "Zaloguj się lub zarejestruj",
+		"navigation.logout": "Wyloguj się",
+		"dashboard.title": "Dashboard",
+		"wish.overview.title": "Statystyki Wishy",
+		"wish.overview.import_wish_button": "Importuj wishe",
+		"wish.overview.global_statistic_button": "Globalne statystyki",
+		"characters.overview.title": "Postacie",
+		"settings.overview.title": "Ustawienia",
+		"map.title": "Mapa",
+		"todo.title": "Do zrobienia",
+		"inventory.title": "Ekwipunek",
+		"weapons.title": "Bronie"
+	}
+}
