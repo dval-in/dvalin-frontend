@@ -2,14 +2,18 @@
 
 name: 'Deploy to Cloudflare'
 on:
-  workflow_run:
-    workflows: [Check code quality]
-    types:
-      - completed
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+env:
+  VITE_BACKEND_URL: ${{ vars.BACKEND_URL }}
 
 jobs:
-  on-success:
-    if: ${{ github.actor != 'dependabot[bot]' && github.event.pull_request.head.repo.full_name == 'dval-in/dval-in' }}
+  deploy:
     permissions:
       contents: read
       deployments: write

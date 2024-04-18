@@ -1,19 +1,17 @@
 import { error } from '@sveltejs/kit';
 import type { CharacterIndex } from '$lib/types/index/character';
 import type { WeaponIndex } from '$lib/types/index/weapon';
+import BackendService from '$lib/services/backend';
+import type { LayoutLoadEvent } from '../../.svelte-kit/types/src/routes/$types';
 
-/** @type {import('./$types').PageLoad} */
-export async function load() {
+/** @type {import('./$types').LayoutServerLoad} */
+export async function load({ fetch }: LayoutLoadEvent) {
 	let characterIndex: CharacterIndex;
 	let weaponIndex: WeaponIndex;
+	const backend = new BackendService();
 
-	const characterIndexResponse = await fetch(
-		'https://raw.githubusercontent.com/dval-in/dvalin-data/main/data/EN/Character/index.json'
-	);
-
-	const weaponIndexResponse = await fetch(
-		'https://raw.githubusercontent.com/dval-in/dvalin-data/main/data/EN/Weapon/index.json'
-	);
+	const characterIndexResponse = await fetch(backend.data.getCharacterIndex());
+	const weaponIndexResponse = await fetch(backend.data.getWeaponIndex());
 
 	if (characterIndexResponse.ok && weaponIndexResponse.ok) {
 		characterIndex = await characterIndexResponse.json();
@@ -24,5 +22,5 @@ export async function load() {
 	}
 
 	// eslint-disable-next-line @typescript-eslint/naming-convention
-	return { Character: characterIndex, Weapon: weaponIndex };
+	return { character: characterIndex, weapon: weaponIndex };
 }

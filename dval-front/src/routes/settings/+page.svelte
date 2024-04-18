@@ -37,7 +37,7 @@
 	}
 </script>
 
-<DefaultLayout title="Settings">
+<DefaultLayout title="settings.overview.title">
 	<div class="flex flex-col gap-2">
 		<Text type="h3">Theming</Text>
 		<div class="flex flex-row gap-4">

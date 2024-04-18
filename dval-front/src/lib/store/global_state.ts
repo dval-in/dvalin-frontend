@@ -6,7 +6,7 @@ const defaultValues: ApplicationState = {
 	version: 0,
 	settings: {
 		theme: 'dark',
-		locale: 'en'
+		locale: 'EN'
 	},
 	user: {
 		ar: 0,

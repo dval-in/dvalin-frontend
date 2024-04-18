@@ -1,0 +1,19 @@
+{
+	"translation": {
+		"navigation.category.collection": "Deine Sammlung",
+		"navigation.category.trackers": "Trackers",
+		"navigation.category.tools": "Tools",
+		"navigation.languageswitcher.title": "Wähle deine Sprache",
+		"navigation.login": "Anmelden",
+		"navigation.logout": "Abmelden",
+		"wish.overview.title": "Gebetsstatistik",
+		"wish.overview.import_wish_button": "Gebete importieren",
+		"wish.overview.global_statistic_button": "Globale Statistik",
+		"characters.overview.title": "Charaktere",
+		"settings.overview.title": "Einstellungen",
+		"map.title": "Karte",
+		"todo.title": "To-Do",
+		"inventory.title": "Inventar",
+		"weapons.title": "Waffen"
+	}
+}

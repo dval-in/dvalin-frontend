@@ -1,18 +1,17 @@
 <script lang="ts">
-	import * as Tabs from '$lib/components/ui/character-tabs';
 	import Text from '$lib/components/typography/Text.svelte';
 	import Card from '../card/card.svelte';
 	import WeaponItem from './weapon-item.svelte';
 	import ArtifactItem from './artifact-item.svelte';
 	import type { ArtifactSetKey } from '$lib/types/keys/ArtifactSetKey';
-	import type { WeaponIndex } from '$lib/types/index/weapon';
 	import { isWeaponKey, type WeaponKey } from '$lib/types/keys/WeaponKey';
 	import IconCirclet from '$lib/assets/Icon_Circlet_of_Logos.png';
 	import IconGoblet from '$lib/assets/Icon_Goblet_of_Eonothem.png';
 	import IconSands from '$lib/assets/Icon_Sands_of_Eon.png';
+	import { dataIndexStore } from '$lib/store/index_store.js';
+	import { Tabs, TabsContent, TabsList, TabsTrigger } from '$lib/components/ui/tabs';
 
 	export let builds: Build[];
-	export let weaponIndex: WeaponIndex;
 
 	type Build = {
 		name: string;
@@ -24,11 +23,11 @@
 		};
 		artifacts: {
 			signatureSet: {
-				key: string;
+				key: ArtifactSetKey;
 				quantity: number;
 			};
 			altSets: {
-				key: string;
+				key: ArtifactSetKey;
 				quantity: number;
 			}[];
 			stats: {
@@ -40,9 +39,9 @@
 
 	function getKey(key: string): ArtifactSetKey | WeaponKey {
 		if (isWeaponKey(key)) {
-			return <WeaponKey>key;
+			return key;
 		} else {
-			return <ArtifactSetKey>key;
+			return key;
 		}
 	}
 
@@ -63,14 +62,14 @@
 	// [IMPORTANT!] Change IMG links later!!
 </script>
 
-<Tabs.Root value={builds[0].name} class="w-full">
-	<Tabs.List class={`grid grid-cols-${builds.length}`}>
+<Tabs value={builds[0].name} class="w-full">
+	<TabsList class={`grid grid-cols-${builds.length}`}>
 		{#each builds as build}
-			<Tabs.Trigger value={build.name}>{build.name}</Tabs.Trigger>
+			<TabsTrigger value={build.name}>{build.name}</TabsTrigger>
 		{/each}
-	</Tabs.List>
+	</TabsList>
 	{#each builds as build}
-		<Tabs.Content value={build.name}>
+		<TabsContent value={build.name}>
 			<div class="flex flex-col lg:flex-row gap-4 pt-2">
 				<div
 					class="flex flex-col lg:order-2 lg:grid lg:grid-cols-2 lg:grid-rows-2 lg:grid-flow-dense gap-4"
@@ -79,18 +78,17 @@
 						<Text type="h3">Weapons</Text>
 						<WeaponItem
 							signature={true}
-							rarity={weaponIndex[getKey(build.weapons.signatureWeapon)].rarity}
+							rarity={$dataIndexStore.weapon[getKey(build.weapons.signatureWeapon)]
+								.rarity}
 							refine={1}
 							key={getKey(build.weapons.signatureWeapon)}
-							index={weaponIndex}
 						/>
 						<div class="flex flex-col gap-2">
 							{#each build.weapons.altWeapons as alt}
 								<WeaponItem
 									signature={false}
-									rarity={weaponIndex[getKey(alt)].rarity}
+									rarity={$dataIndexStore.weapon[getKey(alt)].rarity}
 									key={getKey(alt)}
-									index={weaponIndex}
 								/>
 							{/each}
 						</div>
@@ -103,11 +101,11 @@
 							signature={true}
 							rarity={5}
 							quantity={build.artifacts.signatureSet.quantity}
-							key={getKey(build.artifacts.signatureSet.key)}
+							key={build.artifacts.signatureSet.key}
 						/>
 						<div class="flex flex-col gap-2">
 							{#each build.artifacts.altSets as alt}
-								<ArtifactItem signature={false} rarity={5} key={getKey(alt.key)} />
+								<ArtifactItem signature={false} rarity={5} key={alt.key} />
 							{/each}
 						</div>
 						<Text type="h4">Main Stats</Text>
@@ -165,6 +163,6 @@
 					{/each}
 				</div>
 			</div>
-		</Tabs.Content>
+		</TabsContent>
 	{/each}
-</Tabs.Root>
+</Tabs>

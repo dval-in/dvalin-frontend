@@ -9,8 +9,8 @@
 	export let counter: number;
 
 	const imgUrl = isCharacterKey(key)
-		? S3Service.getCharacterLink(key) + '/icon.webp'
-		: S3Service.getWeaponLink(key) + '/icon.png';
+		? S3Service.getCharacter(key).icon
+		: S3Service.getWeapon(key).icon;
 </script>
 
 <div class="flex items-center gap-2 bg-neutral p-1 rounded-md">
