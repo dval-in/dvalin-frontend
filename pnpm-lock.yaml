@@ -45,8 +45,8 @@ dependencies:
     specifier: ^2.2.2
     version: 2.2.2(i18next@23.11.2)(svelte@4.2.15)
   svelte-persisted-store:
-    specifier: ^0.9.1
-    version: 0.9.1(svelte@4.2.15)
+    specifier: ^0.9.2
+    version: 0.9.2(svelte@4.2.15)
   svelte-sonner:
     specifier: ^0.3.22
     version: 0.3.22(svelte@4.2.15)
@@ -5929,8 +5929,8 @@ packages:
       svelte: 4.2.15
     dev: true
 
-  /svelte-persisted-store@0.9.1(svelte@4.2.15):
-    resolution: {integrity: sha512-l00I8Dy5GKjdjnE9ZcMeXLLMhvgV0+Iuru0Mue7eU3tB+pHBwBB2RVVqw2uC2Hbrf7cyZtsV/lnPKhjTHIWphQ==}
+  /svelte-persisted-store@0.9.2(svelte@4.2.15):
+    resolution: {integrity: sha512-jp7W98yMgBhgz5fWnjZBCmCX89Rse13iqVpjK+1ByS6iYkvW9WT+F2vwsep3f0Zy/tnGYbb8MI+9Vx7W0NQsPg==}
     engines: {node: '>=0.14'}
     peerDependencies:
       svelte: ^3.48.0 || ^4.0.0 || ^5.0.0-next.0
