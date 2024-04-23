@@ -55,7 +55,7 @@ dependencies:
     version: 0.62.8(@babel/core@7.24.3)(postcss@8.4.38)(sass@1.75.0)(svelte@4.2.15)
   sveltekit-superforms:
     specifier: ^1.13.4
-    version: 1.13.4(@sveltejs/kit@2.5.6)(svelte@4.2.15)(zod@3.22.5)
+    version: 1.13.4(@sveltejs/kit@2.5.7)(svelte@4.2.15)(zod@3.22.5)
   tailwind-merge:
     specifier: ^2.2.2
     version: 2.2.2
@@ -78,10 +78,10 @@ devDependencies:
     version: 19.2.2
   '@sveltejs/adapter-static':
     specifier: ^3.0.1
-    version: 3.0.1(@sveltejs/kit@2.5.6)
+    version: 3.0.1(@sveltejs/kit@2.5.7)
   '@sveltejs/kit':
-    specifier: ^2.5.6
-    version: 2.5.6(@sveltejs/vite-plugin-svelte@3.1.0)(svelte@4.2.15)(vite@5.2.10)
+    specifier: ^2.5.7
+    version: 2.5.7(@sveltejs/vite-plugin-svelte@3.1.0)(svelte@4.2.15)(vite@5.2.10)
   '@sveltejs/vite-plugin-svelte':
     specifier: ^3.1.0
     version: 3.1.0(svelte@4.2.15)(vite@5.2.10)
@@ -105,7 +105,7 @@ devDependencies:
     version: 0.2.4
   '@vite-pwa/sveltekit':
     specifier: ^0.4.0
-    version: 0.4.0(@sveltejs/kit@2.5.6)(@vite-pwa/assets-generator@0.2.4)(vite-plugin-pwa@0.19.8)
+    version: 0.4.0(@sveltejs/kit@2.5.7)(@vite-pwa/assets-generator@0.2.4)(vite-plugin-pwa@0.19.8)
   autoprefixer:
     specifier: ^10.4.19
     version: 10.4.19(postcss@8.4.38)
@@ -2075,16 +2075,16 @@ packages:
       string.prototype.matchall: 4.0.11
     dev: true
 
-  /@sveltejs/adapter-static@3.0.1(@sveltejs/kit@2.5.6):
+  /@sveltejs/adapter-static@3.0.1(@sveltejs/kit@2.5.7):
     resolution: {integrity: sha512-6lMvf7xYEJ+oGeR5L8DFJJrowkefTK6ZgA4JiMqoClMkKq0s6yvsd3FZfCFvX1fQ0tpCD7fkuRVHsnUVgsHyNg==}
     peerDependencies:
       '@sveltejs/kit': ^2.0.0
     dependencies:
-      '@sveltejs/kit': 2.5.6(@sveltejs/vite-plugin-svelte@3.1.0)(svelte@4.2.15)(vite@5.2.10)
+      '@sveltejs/kit': 2.5.7(@sveltejs/vite-plugin-svelte@3.1.0)(svelte@4.2.15)(vite@5.2.10)
     dev: true
 
-  /@sveltejs/kit@2.5.6(@sveltejs/vite-plugin-svelte@3.1.0)(svelte@4.2.15)(vite@5.2.10):
-    resolution: {integrity: sha512-AYb02Jm5MfNqJHc8zrj7ScQAFAKmTUCkpkfoi8EVaZZDdnjkvI7L2GtnTDhpiXSAZRVitZX4qm59sMS1FgL+lQ==}
+  /@sveltejs/kit@2.5.7(@sveltejs/vite-plugin-svelte@3.1.0)(svelte@4.2.15)(vite@5.2.10):
+    resolution: {integrity: sha512-6uedTzrb7nQrw6HALxnPrPaXdIN2jJJTzTIl96Z3P5NiG+OAfpdPbrWrvkJ3GN4CfWqrmU4dJqwMMRMTD/C7ow==}
     engines: {node: '>=18.13'}
     hasBin: true
     requiresBuild: true
@@ -2096,7 +2096,7 @@ packages:
       '@sveltejs/vite-plugin-svelte': 3.1.0(svelte@4.2.15)(vite@5.2.10)
       '@types/cookie': 0.6.0
       cookie: 0.6.0
-      devalue: 4.3.2
+      devalue: 5.0.0
       esm-env: 1.0.0
       import-meta-resolve: 4.0.0
       kleur: 4.1.5
@@ -2408,7 +2408,7 @@ packages:
       unconfig: 0.3.11
     dev: true
 
-  /@vite-pwa/sveltekit@0.4.0(@sveltejs/kit@2.5.6)(@vite-pwa/assets-generator@0.2.4)(vite-plugin-pwa@0.19.8):
+  /@vite-pwa/sveltekit@0.4.0(@sveltejs/kit@2.5.7)(@vite-pwa/assets-generator@0.2.4)(vite-plugin-pwa@0.19.8):
     resolution: {integrity: sha512-pzIH5ohlXwbadYbKqnRiMtDSGa5DvzUGCT2X34kAAsrg9QhL5jLCMqiWfST8zJMgtbt/k7k/vWBI/p6Pgk5DNg==}
     engines: {node: '>=16.14 || >=18.13'}
     peerDependencies:
@@ -2419,7 +2419,7 @@ packages:
       '@vite-pwa/assets-generator':
         optional: true
     dependencies:
-      '@sveltejs/kit': 2.5.6(@sveltejs/vite-plugin-svelte@3.1.0)(svelte@4.2.15)(vite@5.2.10)
+      '@sveltejs/kit': 2.5.7(@sveltejs/vite-plugin-svelte@3.1.0)(svelte@4.2.15)(vite@5.2.10)
       '@vite-pwa/assets-generator': 0.2.4
       kolorist: 1.8.0
       vite-plugin-pwa: 0.19.8(@vite-pwa/assets-generator@0.2.4)(vite@5.2.10)(workbox-build@7.0.0)(workbox-window@7.0.0)
@@ -3310,6 +3310,10 @@ packages:
 
   /devalue@4.3.2:
     resolution: {integrity: sha512-KqFl6pOgOW+Y6wJgu80rHpo2/3H07vr8ntR9rkkFIRETewbf5GaYYcakYfiKz89K+sLsuPkQIZaXDMjUObZwWg==}
+    dev: false
+
+  /devalue@5.0.0:
+    resolution: {integrity: sha512-gO+/OMXF7488D+u3ue+G7Y4AA3ZmUnB3eHJXmBTgNHvr4ZNzl36A0ZtG+XCRNYCkYx/bFmw4qtkoFLa+wSrwAA==}
 
   /didyoumean@1.2.2:
     resolution: {integrity: sha512-gxtyfqMg7GKyhQmb056K7M3xszy/myH8w+B4RT+QXBQsvAOdc3XymqDDPHx1BgPgsdAA5SIifona89YtRATDzw==}
@@ -3834,7 +3838,7 @@ packages:
       zod: ^3.22.2
     dependencies:
       svelte: 4.2.15
-      sveltekit-superforms: 1.13.4(@sveltejs/kit@2.5.6)(svelte@4.2.15)(zod@3.22.5)
+      sveltekit-superforms: 1.13.4(@sveltejs/kit@2.5.7)(svelte@4.2.15)(zod@3.22.5)
       zod: 3.22.5
     dev: false
 
@@ -6065,14 +6069,14 @@ packages:
       magic-string: 0.30.9
       periscopic: 3.1.0
 
-  /sveltekit-superforms@1.13.4(@sveltejs/kit@2.5.6)(svelte@4.2.15)(zod@3.22.5):
+  /sveltekit-superforms@1.13.4(@sveltejs/kit@2.5.7)(svelte@4.2.15)(zod@3.22.5):
     resolution: {integrity: sha512-rM2+Ictaw7OAIorCLmvg82orci/mtO9ZouI4emtx8SyYngx9aED+eNZlHPLufgB6D7geL2a+hMSFtM3zmMQixQ==}
     peerDependencies:
       '@sveltejs/kit': 1.x || 2.x
       svelte: 3.x || 4.x
       zod: 3.x
     dependencies:
-      '@sveltejs/kit': 2.5.6(@sveltejs/vite-plugin-svelte@3.1.0)(svelte@4.2.15)(vite@5.2.10)
+      '@sveltejs/kit': 2.5.7(@sveltejs/vite-plugin-svelte@3.1.0)(svelte@4.2.15)(vite@5.2.10)
       devalue: 4.3.2
       klona: 2.0.6
       svelte: 4.2.15
