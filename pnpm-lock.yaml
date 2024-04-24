@@ -33,8 +33,8 @@ dependencies:
     specifier: ^23.11.2
     version: 23.11.2
   layerchart:
-    specifier: ^0.36.0
-    version: 0.36.0(@babel/core@7.24.3)(postcss@8.4.38)(sass@1.75.0)(svelte@4.2.15)(typescript@5.4.5)(vite@5.2.10)
+    specifier: ^0.36.1
+    version: 0.36.1(@babel/core@7.24.3)(postcss@8.4.38)(sass@1.75.0)(svelte@4.2.15)(typescript@5.4.5)(vite@5.2.10)
   lucide-svelte:
     specifier: ^0.372.0
     version: 0.372.0(svelte@4.2.15)
@@ -4500,8 +4500,8 @@ packages:
       typescript: 5.4.5
     dev: false
 
-  /layerchart@0.36.0(@babel/core@7.24.3)(postcss@8.4.38)(sass@1.75.0)(svelte@4.2.15)(typescript@5.4.5)(vite@5.2.10):
-    resolution: {integrity: sha512-8u/QnjoXhjuiw89Z0H2HQlSc1gj8ws96rx+UdHMJR3bbFn8ia2gh+P4d6djPCMZlnre2FV6wdcdUKAwRnUCK/Q==}
+  /layerchart@0.36.1(@babel/core@7.24.3)(postcss@8.4.38)(sass@1.75.0)(svelte@4.2.15)(typescript@5.4.5)(vite@5.2.10):
+    resolution: {integrity: sha512-xhKfmeavyAuiYUdbXcAjnPTS6JA4pW68QjV9f9S+429nvzczuOrj1h8OclTDdF1qPAyjvnOLb853c6UyjjwMJQ==}
     peerDependencies:
       svelte: ^3.56.0 || ^4.0.0
     dependencies:
