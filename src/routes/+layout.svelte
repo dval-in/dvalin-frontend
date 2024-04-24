@@ -6,13 +6,17 @@
 	import { Toaster } from 'svelte-sonner';
 	import { pwaInfo } from 'virtual:pwa-info';
 	import { pwaAssetsHead } from 'virtual:pwa-assets/head';
-	import { dataIndexStore } from '$lib/store/index_store';
+	import { QueryClient, QueryClientProvider } from '@tanstack/svelte-query';
+	import { browser } from '$app/environment';
 
-	/** @type {import('./$types').LayoutData} */
-	export let data;
+	const queryClient = new QueryClient({
+		defaultOptions: {
+			queries: {
+				enabled: browser
+			}
+		}
+	});
 	$: webManifestLink = pwaInfo ? pwaInfo.webManifest.href : '';
-
-	dataIndexStore.set(data);
 
 	console.log(get(applicationState));
 </script>
@@ -27,13 +31,15 @@
 	{/each}
 </svelte:head>
 
-<div class={`${$applicationState.settings.theme} bg-neutral text-text min-h-screen`}>
-	<div class="h-full" id="main">
-		<Sidebar />
-		<!--  Main content-->
-		<div class="sm:pl-20 xl:pl-72 max-sm:pt-16 sm:flex sm:justify-center">
-			<slot />
+<QueryClientProvider client={queryClient}>
+	<div class={`${$applicationState.settings.theme} bg-neutral text-text min-h-screen`}>
+		<div class="h-full" id="main">
+			<Sidebar />
+			<!--  Main content-->
+			<div class="sm:pl-20 xl:pl-72 max-sm:pt-16 sm:flex sm:justify-center">
+				<slot />
+			</div>
+			<Toaster richColors />
 		</div>
-		<Toaster richColors />
 	</div>
-</div>
+</QueryClientProvider>
