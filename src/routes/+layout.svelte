@@ -33,10 +33,10 @@
 
 <QueryClientProvider client={queryClient}>
 	<div class={`${$applicationState.settings.theme} bg-neutral text-text min-h-screen`}>
-		<div class="h-full" id="main">
+		<div class="min-h-screen" id="main">
 			<Sidebar />
 			<!--  Main content-->
-			<div class="sm:pl-20 xl:pl-72 max-sm:pt-16 sm:flex sm:justify-center">
+			<div class="sm:pl-20 xl:pl-72 max-sm:pt-16 sm:flex sm:justify-center min-h-screen">
 				<slot />
 			</div>
 			<Toaster richColors />
