@@ -55,11 +55,17 @@ export class BackendHoyoService {
 		return responseObject;
 	}
 
+	private async backendFetch(url: string) {
+		return fetch(url, {
+			credentials: 'include'
+		});
+	}
+
 	fetchHoyoWishHistory(authkey: string) {
 		return createQuery<BackendStateResponse | FetchHoyoWishHistoryResponse>({
 			queryKey: ['fetchHoyoWishhistory'],
 			queryFn: async () =>
-				await fetch(this.baseUrl + '/wishhistory?authkey=' + authkey).then(
+				await this.backendFetch(this.baseUrl + '/wishhistory?authkey=' + authkey).then(
 					this.checkBackendResponse<FetchHoyoWishHistoryResponse>
 				)
 		});
@@ -69,7 +75,7 @@ export class BackendHoyoService {
 		return createQuery<BackendStateResponse | FetchHoyoWishHistoryStatusResponse>({
 			queryKey: ['fetchHoyoWishhistoryStatus'],
 			queryFn: async () =>
-				await fetch(this.baseUrl + '/wishhistory/status').then(
+				await this.backendFetch(this.baseUrl + '/wishhistory/status').then(
 					this.checkBackendResponse<FetchHoyoWishHistoryStatusResponse>
 				)
 		});
