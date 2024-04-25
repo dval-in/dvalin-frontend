@@ -7,6 +7,7 @@
 	import type { Theme } from '$lib/types/theme';
 	import { Button } from '$lib/components/ui/button';
 	import DefaultLayout from '$lib/components/layout/DefaultLayout.svelte';
+	import BackendService from '$lib/services/backend';
 
 	const handleSettingsExport = () => {
 		let element = document.createElement('a');
@@ -35,6 +36,8 @@
 			};
 		});
 	}
+
+	const backend = new BackendService();
 </script>
 
 <DefaultLayout title="settings.overview.title">
@@ -70,7 +73,9 @@
 		<Text type="h3">Data</Text>
 
 		<div class="flex flex-row gap-4">
-			<IconButton href="/settings/import" icon={mdiImport}>Import Data</IconButton>
+			{#if !backend.auth.isAuthenticated()}
+				<IconButton href="/settings/import" icon={mdiImport}>Import Data</IconButton>
+			{/if}
 			<IconButton icon={mdiExport} on:click={handleSettingsExport}>Export Data</IconButton>
 		</div>
 	</div>

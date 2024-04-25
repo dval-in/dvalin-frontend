@@ -1,4 +1,4 @@
-import { createQuery } from '@tanstack/svelte-query';
+import { createMutation, createQuery } from '@tanstack/svelte-query';
 import { goto } from '$app/navigation';
 import { toast } from 'svelte-sonner';
 
@@ -61,11 +61,10 @@ export class BackendHoyoService {
 		});
 	}
 
-	fetchHoyoWishHistory(authkey: string) {
-		return createQuery<BackendStateResponse | FetchHoyoWishHistoryResponse>({
-			queryKey: ['fetchHoyoWishhistory'],
-			queryFn: async () =>
-				await this.backendFetch(this.baseUrl + '/wishhistory?authkey=' + authkey).then(
+	mutateHoyoWishHistory() {
+		return createMutation({
+			mutationFn: (authkey: string) =>
+				this.backendFetch(this.baseUrl + '/wishhistory?authkey=' + authkey).then(
 					this.checkBackendResponse<FetchHoyoWishHistoryResponse>
 				)
 		});
