@@ -7,9 +7,9 @@
 	import { Label } from '$lib/components/ui/label';
 	import Text from '$lib/components/typography/Text.svelte';
 	import { useQueryClient } from '@tanstack/svelte-query';
+	import { toast } from 'svelte-sonner';
 
 	let wishURL = '';
-	let errorMessage: string | undefined = undefined;
 
 	const backend = new BackendService();
 	const fetchHoyoWishHistoryStatus = backend.hoyo.fetchHoyoWishHistoryStatus();
@@ -17,31 +17,30 @@
 	const client = useQueryClient();
 
 	const fetchHoyoWishHistory = () => {
-		if (wishURL !== '') {
-			const authkey = new URL(wishURL).searchParams.get('authkey');
-
-			if (authkey !== null) {
-				$mutateHoyoWishHistory.mutate(authkey, {
-					onSuccess: () => {
-						client.invalidateQueries({ queryKey: ['fetchHoyoWishhistoryStatus'] });
-					},
-					onError: (error) => {
-						console.log(JSON.stringify(error));
-						errorMessage = error.message;
-					}
-				});
-			}
-		} else {
-			console.log('empty input');
+		if (!URL.canParse(wishURL)) {
+			toast.error('Url brokey');
+			return;
 		}
+
+		const authkey = new URL(wishURL).searchParams.get('authkey');
+
+		if (authkey === null) {
+			toast.error('Url no auth key');
+			return;
+		}
+
+		$mutateHoyoWishHistory.mutate(encodeURI(authkey), {
+			onSuccess: () => {
+				client.invalidateQueries({ queryKey: ['fetchHoyoWishhistoryStatus'] });
+			},
+			onError: (error) => {
+				toast.error(error.message);
+			}
+		});
 	};
 </script>
 
 <DefaultLayout title={$i18n.t('wish.import.title')}>
-	{#if errorMessage !== undefined}
-		<Text type="p">{errorMessage}</Text>
-	{/if}
-
 	{#if $fetchHoyoWishHistoryStatus.isPending}
 		<Text type="p">loading</Text>
 	{/if}
@@ -67,7 +66,10 @@
 				bind:value={wishURL}
 				placeholder="https://webstatic-sea.hoyoverse.com/genshin/event/e20190909gacha-v3/index.html?authkey=.......&game_biz=hk4e_global"
 			/>
-			<Button on:click={fetchHoyoWishHistory} disabled={$mutateHoyoWishHistory.isPending}>
+			<Button
+				on:click={fetchHoyoWishHistory}
+				disabled={$mutateHoyoWishHistory.isPending || wishURL === ''}
+			>
 				Import History
 			</Button>
 		{:else if $fetchHoyoWishHistoryStatus.data.state === 'IN_PROGRESS'}
