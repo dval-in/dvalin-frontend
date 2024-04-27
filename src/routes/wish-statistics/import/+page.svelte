@@ -29,9 +29,16 @@
 			return;
 		}
 
-		$mutateHoyoWishHistory.mutate(encodeURI(authkey), {
-			onSuccess: () => {
-				client.invalidateQueries({ queryKey: ['fetchHoyoWishhistoryStatus'] });
+		const testkey = encodeURI(authkey);
+
+		console.log(testkey);
+
+		$mutateHoyoWishHistory.mutate(testkey, {
+			onSuccess: (response) => {
+				if (response.state === 'CREATED') {
+					toast.success('Created');
+					client.invalidateQueries({ queryKey: ['fetchHoyoWishhistoryStatus'] });
+				}
 			},
 			onError: (error) => {
 				toast.error(error.message);
