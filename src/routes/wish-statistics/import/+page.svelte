@@ -29,7 +29,7 @@
 			return;
 		}
 
-		const testkey = encodeURI(authkey);
+		const testkey = encodeURIComponent(authkey);
 
 		console.log(testkey);
 
