@@ -20,7 +20,7 @@ type FetchHoyoWishHistoryStatusResponse =
 	  }
 	| {
 			state: 'COMPLETED_RATE_LIMIT';
-			data: { completedTime: string };
+			data: { completedTimestamp: string };
 	  };
 
 export class BackendHoyoService {

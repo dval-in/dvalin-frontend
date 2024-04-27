@@ -85,7 +85,7 @@
 		{:else if $fetchHoyoWishHistoryStatus.data.state === 'COMPLETED_RATE_LIMIT'}
 			<Text type="p">Your request was completed and your wishes were imported</Text>
 			<Text type="p">
-				{new Date(parseInt($fetchHoyoWishHistoryStatus.data.data.completedTime) * 1000)}
+				{new Date($fetchHoyoWishHistoryStatus.data.data.completedTimestamp)}
 			</Text>
 		{/if}
 	{/if}
