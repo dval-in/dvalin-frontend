@@ -5,6 +5,7 @@
 	import IconButton from '$lib/components/ui/icon-button/IconButton.svelte';
 	import { mdiAccount, mdiDevices, mdiGithub, mdiGoogle, mdiMicrosoft, mdiServer } from '@mdi/js';
 	import Icon from '$lib/components/ui/icon/icon.svelte';
+	import i18n from '$lib/services/i18n';
 
 	const backend = new BackendService();
 
@@ -13,43 +14,33 @@
 	};
 </script>
 
-<DefaultLayout title="Login">
+<DefaultLayout title={$i18n.t('login.title')}>
 	<div class="flex flex-1 flex-col sm:flex-row gap-6 items-center">
 		<div class="flex flex-1 flex-col gap-6">
-			<Text type="h2">Be able to do more with an Account!</Text>
 			<div class="flex flex-row gap-4 items-center">
 				<Icon size={2} path={mdiDevices} />
 				<div class="flex flex-1 flex-col">
-					<Text type="h4">Cross-device synchronization</Text>
+					<Text type="h4">{$i18n.t('login.perk.cross_device_sync.title')}</Text>
 					<Text type="p">
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae deserunt
-						velit autem veniam doloribus nulla. Culpa fugiat nemo accusantium cumque
-						soluta tenetur tempora veritatis magnam nulla aliquid. Similique,
-						perspiciatis unde?
+						{$i18n.t('login.perk.cross_device_sync.description')}
 					</Text>
 				</div>
 			</div>
 			<div class="flex flex-row gap-4 items-center">
 				<Icon size={2} path={mdiServer} />
 				<div class="flex flex-1 flex-col">
-					<Text type="h4">Access to server side functions</Text>
+					<Text type="h4">{$i18n.t('login.perk.server_access.title')}</Text>
 					<Text type="p">
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae deserunt
-						velit autem veniam doloribus nulla. Culpa fugiat nemo accusantium cumque
-						soluta tenetur tempora veritatis magnam nulla aliquid. Similique,
-						perspiciatis unde?
+						{$i18n.t('login.perk.server_access.description')}
 					</Text>
 				</div>
 			</div>
 			<div class="flex flex-row gap-4 items-center">
 				<Icon size={2} path={mdiAccount} />
 				<div class="flex flex-1 flex-col">
-					<Text type="h4">Share your personal profile</Text>
+					<Text type="h4">{$i18n.t('login.perk.personal_profile.title')}</Text>
 					<Text type="p">
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae deserunt
-						velit autem veniam doloribus nulla. Culpa fugiat nemo accusantium cumque
-						soluta tenetur tempora veritatis magnam nulla aliquid. Similique,
-						perspiciatis unde?
+						{$i18n.t('login.perk.personal_profile.description')}
 					</Text>
 				</div>
 			</div>

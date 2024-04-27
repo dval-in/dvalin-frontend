@@ -13,6 +13,7 @@
 	import CharacterTabs from '$lib/components/ui/character-tabs/character-tabs.svelte';
 	import DefaultLayout from '$lib/components/layout/DefaultLayout.svelte';
 	import { goto } from '$app/navigation';
+	import i18n from '$lib/services/i18n';
 
 	/** @type {import('../../../../.svelte-kit/types/src/routes').PageData} */
 	export let data: {
@@ -28,7 +29,7 @@
 	};
 </script>
 
-<DefaultLayout title="">
+<DefaultLayout>
 	<section
 		class="grid grid-cols-1 gap-4 box-content lg:h-max lg:min-h-[40vh] lg:grid-cols-[14rem_1fr] lg:grid-flow-dense lg:grid-rows-[auto_minmax(0,1fr)]"
 	>
@@ -82,9 +83,9 @@
 
 	<section class="flex flex-col w-full gap-4 box-border">
 		<span class="flex justify-between">
-			<Text type="h2">Builds</Text>
+			<Text type="h2">{$i18n.t('characters.detailed.category.builds.title')}</Text>
 			<Button href="https://keqingmains.com/{data.character.toLocaleLowerCase()}">
-				View on KQM
+				{$i18n.t('characters.detailed.category.builds.view_on_kqm_button')}
 			</Button>
 		</span>
 		<CharacterBuilds builds={defaultBuilds} />

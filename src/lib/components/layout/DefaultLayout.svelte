@@ -1,12 +1,11 @@
 <script lang="ts">
 	import Text from '$lib/components/typography/Text.svelte';
-	import i18n from '$lib/services/i18n';
 
 	export let title: string = '';
 </script>
 
 <svelte:head>
-	<title>{'Dval.in | ' + $i18n.t(title)}</title>
+	<title>{'Dval.in | ' + title}</title>
 </svelte:head>
 
 <div class="flex flex-1 p-2 sm:p-4 sm:pt-14 sm:max-w-[1536px] scrollbar-gutter">
@@ -16,7 +15,7 @@
 				class="flex max-sm:flex-col max-sm:flex-1 flex-row flex-wrap justify-between gap-4 sm:gap-6"
 			>
 				{#if title !== ''}
-					<Text class="text-primary" type="h1">{$i18n.t(title)}</Text>
+					<Text class="text-primary" type="h1">{title}</Text>
 				{/if}
 				{#if $$slots.titlebarActions}
 					<div

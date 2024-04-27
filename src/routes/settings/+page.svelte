@@ -8,6 +8,7 @@
 	import { Button } from '$lib/components/ui/button';
 	import DefaultLayout from '$lib/components/layout/DefaultLayout.svelte';
 	import BackendService from '$lib/services/backend';
+	import i18n from '$lib/services/i18n';
 
 	const handleSettingsExport = () => {
 		let element = document.createElement('a');
@@ -40,9 +41,9 @@
 	const backend = new BackendService();
 </script>
 
-<DefaultLayout title="settings.overview.title">
+<DefaultLayout title={$i18n.t('settings.overview.title')}>
 	<div class="flex flex-col gap-2">
-		<Text type="h3">Theming</Text>
+		<Text type="h3">{$i18n.t('settings.category.theming.title')}</Text>
 		<div class="flex flex-row gap-4">
 			<Button
 				class={`flex w-[150px] h-[200px] ${$applicationState.settings.theme === 'light' ? 'bg-neutral border-primary' : 'bg-text border-text'} justify-start items-end p-2 border-4 rounded-md`}
@@ -52,7 +53,7 @@
 					class={`${$applicationState.settings.theme === 'light' ? 'text-text' : 'text-neutral'}`}
 					type="h3"
 				>
-					Light
+					{$i18n.t('theme.light.title')}
 				</Text>
 			</Button>
 			<Button
@@ -63,20 +64,24 @@
 					class={`${$applicationState.settings.theme === 'dark' ? 'text-text' : 'text-neutral'}`}
 					type="h3"
 				>
-					Dark
+					{$i18n.t('theme.dark.title')}
 				</Text>
 			</Button>
 		</div>
 	</div>
 
 	<div class="flex flex-col gap-2">
-		<Text type="h3">Data</Text>
+		<Text type="h3">{$i18n.t('settings.category.data.title')}</Text>
 
 		<div class="flex flex-row gap-4">
 			{#if !backend.auth.isAuthenticated()}
-				<IconButton href="/settings/import" icon={mdiImport}>Import Data</IconButton>
+				<IconButton href="/settings/import" icon={mdiImport}
+					>{$i18n.t('settings.category.data.import_data_button')}</IconButton
+				>
 			{/if}
-			<IconButton icon={mdiExport} on:click={handleSettingsExport}>Export Data</IconButton>
+			<IconButton icon={mdiExport} on:click={handleSettingsExport}
+				>{$i18n.t('settings.category.data.export_data_button')}</IconButton
+			>
 		</div>
 	</div>
 </DefaultLayout>

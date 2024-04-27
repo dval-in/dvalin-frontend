@@ -5,6 +5,7 @@
 	import Text from '$lib/components/typography/Text.svelte';
 	import StatTable from '$lib/components/tables/character-tab-table/StatTable.svelte';
 	import TalentTable from '$lib/components/tables/character-tab-table/TalentTable.svelte';
+	import i18n from '$lib/services/i18n';
 
 	export let characterData: Character;
 	const ascensions = characterData.ascension;
@@ -12,9 +13,13 @@
 
 <Tabs value="talents" class="lg:flex lg:flex-col lg:flex-grow lg:h-0">
 	<TabsList class="grid w-full grid-cols-3">
-		<TabsTrigger value="stats">Stats</TabsTrigger>
-		<TabsTrigger value="talents">Talents</TabsTrigger>
-		<TabsTrigger value="constellations">Constellations</TabsTrigger>
+		<TabsTrigger value="stats">{$i18n.t('characters.detailed.tab.stats.title')}</TabsTrigger>
+		<TabsTrigger value="talents">
+			{$i18n.t('characters.detailed.tab.talents.title')}
+		</TabsTrigger>
+		<TabsTrigger value="constellations">
+			{$i18n.t('characters.detailed.tab.constellations.title')}
+		</TabsTrigger>
 	</TabsList>
 	<TabsContent value="stats" class="border border-secondary/50 lg:flex-shrink lg:overflow-auto">
 		<StatTable {ascensions} />

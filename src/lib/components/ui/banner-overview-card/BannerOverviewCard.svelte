@@ -3,13 +3,13 @@
 	import Text from '$lib/components/typography/Text.svelte';
 	import Icon from '$lib/components/ui/icon/icon.svelte';
 	import PullChip from '$lib/components/ui/pull-chip/PullChip.svelte';
-	import type { IWish } from '$lib/types/wish';
 	import type { IMappedWish } from '$lib/types/wish.js';
 	import { Card, CardHeader } from '$lib/components/ui/card';
 	import { CardContent } from '$lib/components/ui/card/index.js';
 	import InfoCell from '$lib/components/ui/info-cell/InfoCell.svelte';
-	import { mdiAlert, mdiCloseCircle, mdiMoonWaningCrescent } from '@mdi/js';
+	import { mdiCloseCircle, mdiMoonWaningCrescent } from '@mdi/js';
 	import { Alert, AlertDescription, AlertTitle } from '$lib/components/ui/alert';
+	import i18n from '$lib/services/i18n';
 
 	export let icon: string;
 	export let title: string;
@@ -34,11 +34,11 @@
 			<Icon path={icon} />
 			<Text type="h3">{title}</Text>
 		</div>
-		<Button href={'/wish-statistics/' + title.toLowerCase()}>View more</Button>
+		<Button href={'/wish-statistics/' + title.toLowerCase()}>{$i18n.t('action.more')}</Button>
 	</CardHeader>
 	<CardContent class="flex flex-col gap-2">
 		<div class="flex flex-row gap-2">
-			<InfoCell class="bg-neutral" title="Total pulls">
+			<InfoCell class="bg-neutral" title={$i18n.t('wish.overview.info.total_pull_count')}>
 				<Text type="h4">{data.length}</Text>
 
 				<svelte:fragment slot="tooltip">
@@ -46,7 +46,10 @@
 					<Text type="h4">{data.length * 160}</Text>
 				</svelte:fragment>
 			</InfoCell>
-			<InfoCell class="bg-neutral" title="% of total pulls">
+			<InfoCell
+				class="bg-neutral"
+				title={$i18n.t('wish.overview.info.total_pull_percentage')}
+			>
 				{#if fiveStars.length > 0}
 					<Text class="text-fivestar" type="h4">
 						{((fiveStars.length / data.length) * 100).toFixed(1)}
@@ -63,14 +66,14 @@
 					</Text>
 				{/if}
 			</InfoCell>
-			<InfoCell class="bg-neutral" title="Pity">
+			<InfoCell class="bg-neutral" title={$i18n.t('wish.overview.info.pity')}>
 				<Text class="text-fivestar" type="h4">{0}</Text>
 				<Text class="text-fourstar" type="h4">{0}</Text>
 			</InfoCell>
 		</div>
 		<div class="flex flex-col gap-2">
 			{#if filterFiveStars().length > 0}
-				<Text type="h4">Latest 5* pulls</Text>
+				<Text type="h4">{$i18n.t('wish.overview.card.latest_pulls.title')}</Text>
 				<div class="flex flex-wrap gap-2">
 					{#each filterFiveStars() as pull}
 						<PullChip name={pull.name} key={pull.key} counter={pull.pity} />
@@ -79,8 +82,12 @@
 			{:else}
 				<Alert class="gap-6">
 					<Icon path={mdiCloseCircle} />
-					<AlertTitle>Come back later</AlertTitle>
-					<AlertDescription>You haven't pulled a 5* in this banner yet</AlertDescription>
+					<AlertTitle>
+						{$i18n.t('wish.overview.card.latest_pulls.no_pulls.title')}
+					</AlertTitle>
+					<AlertDescription>
+						{$i18n.t('wish.overview.card.latest_pulls.no_pulls.description')}
+					</AlertDescription>
 				</Alert>
 			{/if}
 		</div>

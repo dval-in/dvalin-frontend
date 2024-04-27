@@ -10,6 +10,7 @@
 	import IconSands from '$lib/assets/Icon_Sands_of_Eon.png';
 	import { dataIndexStore } from '$lib/store/index_store.js';
 	import { Tabs, TabsContent, TabsList, TabsTrigger } from '$lib/components/ui/tabs';
+	import i18n from '$lib/services/i18n';
 
 	export let builds: Build[];
 
@@ -75,7 +76,9 @@
 					class="flex flex-col lg:order-2 lg:grid lg:grid-cols-2 lg:grid-rows-2 lg:grid-flow-dense gap-4"
 				>
 					<Card class="h-min max-w-full flex flex-col gap-4 p-4 lg:h-auto">
-						<Text type="h3">Weapons</Text>
+						<Text type="h3">
+							{$i18n.t('characters.detailed.category.builds.weapons.title')}
+						</Text>
 						<WeaponItem
 							signature={true}
 							rarity={$dataIndexStore.weapon[getKey(build.weapons.signatureWeapon)]
@@ -96,7 +99,9 @@
 					<!--Weapon Recomendation Card-->
 
 					<Card class="h-min max-w-full flex flex-col gap-4 p-4 lg:row-span-2">
-						<Text type="h3">Artifacts</Text>
+						<Text type="h3">
+							{$i18n.t('characters.detailed.category.builds.artifacts.title')}
+						</Text>
 						<ArtifactItem
 							signature={true}
 							rarity={5}
@@ -108,7 +113,11 @@
 								<ArtifactItem signature={false} rarity={5} key={alt.key} />
 							{/each}
 						</div>
-						<Text type="h4">Main Stats</Text>
+						<Text type="h4">
+							{$i18n.t(
+								'characters.detailed.category.builds.artifacts.main_stats.title'
+							)}
+						</Text>
 						<div
 							class="grid grid-cols-3 grid-rows-2 grid-flow-col items-center justify-items-center text-center gap-2"
 						>
@@ -122,7 +131,11 @@
 							{/each}
 						</div>
 
-						<Text type="h4">Sub Stats</Text>
+						<Text type="h4">
+							{$i18n.t(
+								'characters.detailed.category.builds.artifacts.sub_stats.title'
+							)}
+						</Text>
 						<div class="flex flex-col gap-1">
 							{#each build.artifacts.stats.sub as item}
 								<Text type="p">{item}</Text>
@@ -132,7 +145,9 @@
 					<!--Artifact Recomendation Card-->
 
 					<Card class="h-min max-w-full flex flex-col gap-4 p-4">
-						<Text type="h3">Talents</Text>
+						<Text type="h3">
+							{$i18n.t('characters.detailed.category.builds.talents.title')}
+						</Text>
 						<div class="flex flex-row flex-1 gap-2 h-16 justify-center items-center">
 							<img
 								class="w-full min-w-0 object-contain max-w-12"

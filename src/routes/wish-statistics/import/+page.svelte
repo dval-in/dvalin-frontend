@@ -67,13 +67,17 @@
 				bind:value={wishURL}
 				placeholder="https://webstatic-sea.hoyoverse.com/genshin/event/e20190909gacha-v3/index.html?authkey=.......&game_biz=hk4e_global"
 			/>
-			<Button on:click={fetchHoyoWishHistory}>Import History</Button>
+			<Button on:click={fetchHoyoWishHistory} disabled={$mutateHoyoWishHistory.isPending}>
+				Import History
+			</Button>
 		{:else if $fetchHoyoWishHistoryStatus.data.state === 'IN_PROGRESS'}
 			<Text type="p">Your request is being processed</Text>
-			<Text type="p">Currently{$fetchHoyoWishHistoryStatus.data.data.max}</Text>
+			<Text type="p">Currently {$fetchHoyoWishHistoryStatus.data.data.max}</Text>
 		{:else if $fetchHoyoWishHistoryStatus.data.state === 'COMPLETED_RATE_LIMIT'}
 			<Text type="p">Your request was completed and your wishes were imported</Text>
-			<Text type="p">{new Date($fetchHoyoWishHistoryStatus.data.data.completedTime)}</Text>
+			<Text type="p">
+				{new Date(parseInt($fetchHoyoWishHistoryStatus.data.data.completedTime) * 1000)}
+			</Text>
 		{/if}
 	{/if}
 </DefaultLayout>

@@ -14,6 +14,7 @@
 	import type { Elements } from '$lib/types/elements';
 	import { dataIndexStore } from '$lib/store/index_store';
 	import { applicationState } from '$lib/store/global_state';
+	import i18n from '$lib/services/i18n';
 
 	let view = true;
 	let charData: {
@@ -50,11 +51,11 @@
 	};
 </script>
 
-<DefaultLayout title="characters.overview.title">
+<DefaultLayout title={$i18n.t('characters.overview.title')}>
 	<svelte:fragment slot="titlebarActions">
 		<Searchbar searchGroup="Characters" searchableDataList={charData} />
-		<IconButton icon={mdiSort}>Sort By</IconButton>
-		<IconButton icon={mdiFilterOutline}>Filter By</IconButton>
+		<IconButton icon={mdiSort}>{$i18n.t('action.sort_by')}</IconButton>
+		<IconButton icon={mdiFilterOutline}>{$i18n.t('action.filter_by')}</IconButton>
 		<IconButton icon={view ? mdiViewList : mdiViewGrid} on:click={toggleViewType} />
 	</svelte:fragment>
 	<div class="flex flex-wrap gap-4 justify-center">

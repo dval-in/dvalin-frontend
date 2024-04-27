@@ -25,7 +25,6 @@
 		mdiArrowUp,
 		mdiChevronLeft,
 		mdiChevronRight,
-		mdiStar,
 		mdiSwordCross
 	} from '@mdi/js';
 	import Icon from '$lib/components/ui/icon/icon.svelte';
@@ -41,6 +40,7 @@
 	import DateRangeFilter from '$lib/components/tables/banner-history-table/DateRangeFilter.svelte';
 	import NameCell from '$lib/components/tables/banner-history-table/NameCell.svelte';
 	import DateCell from '$lib/components/tables/banner-history-table/DateCell.svelte';
+	import i18n from '$lib/services/i18n';
 
 	const PAGE_SIZE = 25;
 
@@ -87,7 +87,7 @@
 		}),
 		table.column({
 			accessor: 'date',
-			header: 'Date',
+			header: $i18n.t('table.banner_history.date'),
 			cell: ({ value }) => {
 				return createRender(DateCell, { value: value.toString() });
 			},
@@ -108,7 +108,7 @@
 		}),
 		table.column({
 			accessor: 'type',
-			header: 'Type',
+			header: $i18n.t('table.banner_history.type'),
 			cell: ({ value }) => {
 				return createRender(Icon, {
 					path: value === 'Character' ? mdiAccount : mdiSwordCross
@@ -124,7 +124,7 @@
 					render: ({ filterValue, preFilteredValues }) =>
 						createRender(SelectFilter, {
 							filterValue,
-							title: 'Type',
+							title: $i18n.t('table.banner_history.type'),
 							preFilteredValues
 						})
 				},
@@ -135,7 +135,7 @@
 		}),
 		table.column({
 			accessor: 'key',
-			header: 'Name',
+			header: $i18n.t('table.banner_history.name'),
 			cell: ({ value }) => {
 				return createRender(NameCell, {
 					name: value
@@ -144,7 +144,7 @@
 		}),
 		table.column({
 			accessor: 'rarity',
-			header: createRender(Icon, { path: mdiStar }),
+			header: $i18n.t('table.banner_history.rarity'),
 			plugins: {
 				sort: {
 					disable: true
@@ -155,7 +155,7 @@
 					render: ({ filterValue, preFilteredValues }) =>
 						createRender(SelectFilter, {
 							filterValue,
-							title: 'Rarity',
+							title: $i18n.t('table.banner_history.rarity'),
 							preFilteredValues
 						})
 				},
@@ -166,7 +166,7 @@
 		}),
 		table.column({
 			accessor: 'pity',
-			header: 'Pity',
+			header: $i18n.t('table.banner_history.pity'),
 			plugins: {
 				resize: {
 					initialWidth: 84
@@ -249,7 +249,7 @@
 				<PaginationPrevButton on:click={() => ($pageIndex = $pageIndex - 1)}>
 					<Icon path={mdiChevronLeft} />
 					<div class="max-sm:hidden">
-						<Text type="p">Previous</Text>
+						<Text type="p">{$i18n.t('action.previous')}</Text>
 					</div>
 				</PaginationPrevButton>
 			</PaginationItem>
@@ -273,7 +273,7 @@
 			<PaginationItem>
 				<PaginationNextButton on:click={() => ($pageIndex = $pageIndex + 1)}>
 					<div class="max-sm:hidden">
-						<Text type="p">Next</Text>
+						<Text type="p">{$i18n.t('action.next')}</Text>
 					</div>
 					<Icon path={mdiChevronRight} />
 				</PaginationNextButton>

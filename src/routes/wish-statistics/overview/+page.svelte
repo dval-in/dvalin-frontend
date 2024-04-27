@@ -47,7 +47,7 @@
 	const backend = new BackendService();
 </script>
 
-<DefaultLayout title="wish.overview.title">
+<DefaultLayout title={$i18n.t('wish.overview.title')}>
 	<svelte:fragment slot="titlebarActions">
 		{#if backend.auth.isAuthenticated()}
 			<IconButton icon={mdiImport} href="/wish-statistics/import">
@@ -64,31 +64,43 @@
 			<BannerOverviewCard
 				data={wishData.CharacterEvent}
 				icon={mdiAccount}
-				title="Character"
+				title={$i18n.t('wish.overview.card.title.CharacterEvent')}
 			/>
 		{/if}
 		{#if wishData?.WeaponEvent !== undefined}
-			<BannerOverviewCard data={wishData.WeaponEvent} icon={mdiSwordCross} title="Weapon" />
+			<BannerOverviewCard
+				data={wishData.WeaponEvent}
+				icon={mdiSwordCross}
+				title={$i18n.t('wish.overview.card.title.WeaponEvent')}
+			/>
 		{/if}
 		{#if wishData?.Standard !== undefined}
 			<BannerOverviewCard
 				data={wishData.Standard}
 				icon={mdiTrashCanOutline}
-				title="Standard"
+				title={$i18n.t('wish.overview.card.title.Standard')}
 			/>
 		{/if}
 		{#if wishData?.Chronicled !== undefined}
-			<BannerOverviewCard data={wishData.Chronicled} icon={mdiBook} title="Chronicled" />
+			<BannerOverviewCard
+				data={wishData.Chronicled}
+				icon={mdiBook}
+				title={$i18n.t('wish.overview.card.title.Chronicled')}
+			/>
 		{/if}
 		{#if wishData?.Beginner !== undefined}
-			<BannerOverviewCard data={wishData.Beginner} icon={mdiBaby} title="Beginner" />
+			<BannerOverviewCard
+				data={wishData.Beginner}
+				icon={mdiBaby}
+				title={$i18n.t('wish.overview.card.title.Beginner')}
+			/>
 		{/if}
 	</div>
 	{#if $applicationState.wishes}
 		<div class="flex flex-wrap gap-4">
 			<Card class="flex flex-1 flex-col gap-2">
 				<CardHeader>
-					<Text type="h3">Wish distribution over time</Text>
+					<Text type="h3">{$i18n.t('chart.wish_distribution_time.title')}</Text>
 				</CardHeader>
 				<CardContent>
 					<PullDistributionByMonth data={wishData} />

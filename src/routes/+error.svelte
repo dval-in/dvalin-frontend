@@ -2,6 +2,7 @@
 	import Text from '$lib/components/typography/Text.svelte';
 	import DefaultLayout from '$lib/components/layout/DefaultLayout.svelte';
 	import { page } from '$app/stores';
+	import i18n from '$lib/services/i18n';
 
 	let quoteGenerator: { quote: string; author: string }[] = [
 		{
@@ -419,7 +420,7 @@
 	}
 </script>
 
-<DefaultLayout title="Error">
+<DefaultLayout title={$i18n.t('error.title')}>
 	<div>
 		<Text type="h2">{randomQuote.quote}</Text>
 		<Text type="h2">{randomQuote.author}</Text>

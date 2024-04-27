@@ -13,6 +13,7 @@
 	import { mdiMoonWaningCrescent } from '@mdi/js';
 	import Icon from '$lib/components/ui/icon/icon.svelte';
 	import { dataIndexStore } from '$lib/store/index_store';
+	import i18n from '$lib/services/i18n';
 
 	/** @type {import('../../../../.svelte-kit/types/src/routes').PageData} */
 	export let data: {
@@ -47,13 +48,14 @@
 	}
 </script>
 
-<DefaultLayout
-	title={data.pageType.at(0)?.toUpperCase() + data.pageType.slice(1) + ' banner history'}
->
+<DefaultLayout title={$i18n.t('wish.detailed.title.' + data.pageType)}>
 	<div class="flex flex-1 flex-col sm:flex-row sm:flex-wrap gap-4">
 		<div class="flex flex-col gap-4">
 			<div class="flex flex-row gap-2">
-				<InfoCell class="bg-tertiary" title="Total pulls">
+				<InfoCell
+					class="bg-tertiary"
+					title={$i18n.t('wish.detailed.info.total_pull_count')}
+				>
 					<Text type="h4">{wishData.length}</Text>
 
 					<svelte:fragment slot="tooltip">
@@ -61,7 +63,10 @@
 						<Text type="h4">{wishData.length * 160}</Text>
 					</svelte:fragment>
 				</InfoCell>
-				<InfoCell class="bg-tertiary" title="% of total pulls">
+				<InfoCell
+					class="bg-tertiary"
+					title={$i18n.t('wish.detailed.info.total_pull_percentage')}
+				>
 					{#if fiveStars.length > 0}
 						<Text class="text-fivestar" type="h4">
 							{((fiveStars.length / wishData.length) * 100).toFixed(1)}
@@ -78,7 +83,7 @@
 						</Text>
 					{/if}
 				</InfoCell>
-				<InfoCell class="bg-tertiary" title="Pity">
+				<InfoCell class="bg-tertiary" title={$i18n.t('wish.detailed.info.pity')}>
 					<Text type="h4">{0}</Text>
 					<Text type="h4">{0}</Text>
 				</InfoCell>
@@ -86,7 +91,7 @@
 
 			<Card class="flex flex-col">
 				<CardHeader>
-					<Text type="h3">Rarity distribution</Text>
+					<Text type="h3">{$i18n.t('chart.rarity_distribution.title')}</Text>
 				</CardHeader>
 				<CardContent>
 					<RaretyDistributionByBanner {wishData} />

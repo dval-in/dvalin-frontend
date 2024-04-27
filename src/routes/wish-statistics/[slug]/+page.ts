@@ -1,9 +1,9 @@
 import { error } from '@sveltejs/kit';
 import type { WishBannerKey } from '$lib/types/keys/WishBannerKey';
-import type { RouteParams } from '../../../../.svelte-kit/types/src/routes/wish-statistics/[slug]/$types';
+import type { PageLoadEvent } from '../../../../.svelte-kit/types/src/routes/wish-statistics/[slug]/$types';
 
 /** @type {import('./$types').PageLoad} */
-export async function load({ params }: { params: RouteParams }) {
+export async function load({ params }: PageLoadEvent) {
 	let pageType: WishBannerKey;
 
 	switch (params.slug) {
@@ -26,6 +26,5 @@ export async function load({ params }: { params: RouteParams }) {
 			error(404, 'Not found');
 	}
 
-	// eslint-disable-next-line @typescript-eslint/naming-convention
 	return { pageType };
 }

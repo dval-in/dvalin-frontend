@@ -3,9 +3,10 @@
 	import Text from '$lib/components/typography/Text.svelte';
 	import DefaultLayout from '$lib/components/layout/DefaultLayout.svelte';
 	import { Card, CardContent, CardFooter, CardHeader } from '$lib/components/ui/card';
+	import i18n from '$lib/services/i18n';
 </script>
 
-<DefaultLayout title="dashboard.title">
+<DefaultLayout title={$i18n.t('dashboard.title')}>
 	<div class="col-span-2 row-span-2">
 		<Card class="size-full flex flex-col">
 			<CardHeader>
@@ -31,8 +32,8 @@
 				<Text type="p">Character/weapon/rarity mapping</Text>
 			</CardContent>
 			<CardFooter class="flex-1 justify-end gap-2">
-				<Button variant="default">More</Button>
-				<Button variant="ghost">Hide</Button>
+				<Button variant="default">{$i18n.t('action.more')}</Button>
+				<Button variant="ghost">{$i18n.t('action.hide')}</Button>
 			</CardFooter>
 		</Card>
 	</div>
