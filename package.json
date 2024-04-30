@@ -15,7 +15,7 @@
 	"dependencies": {
 		"@internationalized/date": "^3.5.2",
 		"@mdi/js": "^7.4.47",
-		"bits-ui": "^0.21.5",
+		"bits-ui": "^0.21.6",
 		"clsx": "^2.1.1",
 		"cmdk-sv": "^0.0.17",
 		"d3-scale": "^4.0.2",
