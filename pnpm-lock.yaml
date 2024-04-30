@@ -28,7 +28,7 @@ dependencies:
     version: 3.2.0
   formsnap:
     specifier: ^0.4.4
-    version: 0.4.4(svelte@4.2.15)(sveltekit-superforms@1.13.4)(zod@3.23.4)
+    version: 0.4.4(svelte@4.2.15)(sveltekit-superforms@1.13.4)(zod@3.23.5)
   i18next:
     specifier: ^23.11.3
     version: 23.11.3
@@ -55,7 +55,7 @@ dependencies:
     version: 0.62.8(@babel/core@7.24.3)(postcss@8.4.38)(sass@1.75.0)(svelte@4.2.15)
   sveltekit-superforms:
     specifier: ^1.13.4
-    version: 1.13.4(@sveltejs/kit@2.5.7)(svelte@4.2.15)(zod@3.23.4)
+    version: 1.13.4(@sveltejs/kit@2.5.7)(svelte@4.2.15)(zod@3.23.5)
   tailwind-merge:
     specifier: ^2.3.0
     version: 2.3.0
@@ -66,8 +66,8 @@ dependencies:
     specifier: ^3.3.1
     version: 3.3.1(tailwindcss@3.4.3)
   zod:
-    specifier: ^3.23.4
-    version: 3.23.4
+    specifier: ^3.23.5
+    version: 3.23.5
 
 devDependencies:
   '@commitlint/cli':
@@ -3830,7 +3830,7 @@ packages:
       cross-spawn: 7.0.3
       signal-exit: 4.1.0
 
-  /formsnap@0.4.4(svelte@4.2.15)(sveltekit-superforms@1.13.4)(zod@3.23.4):
+  /formsnap@0.4.4(svelte@4.2.15)(sveltekit-superforms@1.13.4)(zod@3.23.5):
     resolution: {integrity: sha512-O+Cf4GneR4CLP48J0c5AJY6eowc+1N3DYZz9uIJ3Mk57AjdL5l8DQEA+HmRfse4UEPepizEPl+M4vFg8cON2BQ==}
     peerDependencies:
       svelte: ^4.0.0
@@ -3838,8 +3838,8 @@ packages:
       zod: ^3.22.2
     dependencies:
       svelte: 4.2.15
-      sveltekit-superforms: 1.13.4(@sveltejs/kit@2.5.7)(svelte@4.2.15)(zod@3.23.4)
-      zod: 3.23.4
+      sveltekit-superforms: 1.13.4(@sveltejs/kit@2.5.7)(svelte@4.2.15)(zod@3.23.5)
+      zod: 3.23.5
     dev: false
 
   /fraction.js@4.3.7:
@@ -6037,7 +6037,7 @@ packages:
       sveld: 0.19.1(@babel/core@7.24.3)(postcss@8.4.38)(sass@1.75.0)
       svelte: 4.2.15
       tailwind-merge: 2.3.0
-      zod: 3.23.4
+      zod: 3.23.5
     transitivePeerDependencies:
       - '@babel/core'
       - coffeescript
@@ -6069,7 +6069,7 @@ packages:
       magic-string: 0.30.9
       periscopic: 3.1.0
 
-  /sveltekit-superforms@1.13.4(@sveltejs/kit@2.5.7)(svelte@4.2.15)(zod@3.23.4):
+  /sveltekit-superforms@1.13.4(@sveltejs/kit@2.5.7)(svelte@4.2.15)(zod@3.23.5):
     resolution: {integrity: sha512-rM2+Ictaw7OAIorCLmvg82orci/mtO9ZouI4emtx8SyYngx9aED+eNZlHPLufgB6D7geL2a+hMSFtM3zmMQixQ==}
     peerDependencies:
       '@sveltejs/kit': 1.x || 2.x
@@ -6080,7 +6080,7 @@ packages:
       devalue: 4.3.2
       klona: 2.0.6
       svelte: 4.2.15
-      zod: 3.23.4
+      zod: 3.23.5
     dev: false
 
   /synckit@0.8.8:
@@ -6782,6 +6782,6 @@ packages:
     engines: {node: '>=12.20'}
     dev: true
 
-  /zod@3.23.4:
-    resolution: {integrity: sha512-/AtWOKbBgjzEYYQRNfoGKHObgfAZag6qUJX1VbHo2PRBgS+wfWagEY2mizjfyAPcGesrJOcx/wcl0L9WnVrHFw==}
+  /zod@3.23.5:
+    resolution: {integrity: sha512-fkwiq0VIQTksNNA131rDOsVJcns0pfVUjHzLrNBiF/O/Xxb5lQyEXkhZWcJ7npWsYlvs+h0jFWXXy4X46Em1JA==}
     dev: false
