@@ -1,13 +1,12 @@
 import { isPaimonData, type PaimonCharacters, type PaimonPulls } from '$lib/types/import/paimon';
-import type { ApplicationState } from '$lib/types/application_state';
 import { isServerKey } from '$lib/types/keys/ServerKey';
 import type { IWish } from '$lib/types/wish';
 import type { WeaponKey } from '$lib/types/keys/WeaponKey';
 import type { CharacterKey } from '$lib/types/keys/CharacterKey';
-import type { ISettings } from '$lib/types/settings';
 import type { ICharacters } from '$lib/types/character';
 import type { BannerKey } from '$lib/types/keys/BannerKey';
 import type { IImporterService } from '$lib/services/importer/index';
+import type { UserProfile } from '$lib/types/user_profile';
 
 function convertPaimonCharacter(paimonPullId: string): CharacterKey {
 	switch (paimonPullId) {
@@ -141,7 +140,11 @@ function convertPaimonCharacter(paimonPullId: string): CharacterKey {
 			return 'Thoma';
 		case 'tighnari':
 			return 'Tighnari';
-		case 'traveler':
+		case 'traveler_geo':
+		case 'traveler_anemo':
+		case 'traveler_electro':
+		case 'traveler_dendro':
+		case 'traveler_hydro':
 			return 'Traveler';
 		case 'venti':
 			return 'Venti';
@@ -174,7 +177,7 @@ function convertPaimonCharacter(paimonPullId: string): CharacterKey {
 		case 'zhongli':
 			return 'Zhongli';
 		default:
-			return <CharacterKey>paimonPullId;
+			throw new Error('Unknown key ' + paimonPullId);
 	}
 }
 
@@ -547,7 +550,7 @@ function convertPaimonWeapon(paimonPullId: string): WeaponKey {
 		case 'xiphos_moonlight':
 			return 'XiphosMoonlight';
 		default:
-			return <WeaponKey>paimonPullId;
+			throw new Error('Unknown key ' + paimonPullId);
 	}
 }
 
@@ -608,14 +611,11 @@ function convertPaimonCharacters(paimonCharacters: PaimonCharacters): ICharacter
 }
 
 export class PaimonMoeImporterService implements IImporterService {
-	import(data: unknown, applicationSettings: ISettings): ApplicationState {
+	import(data: unknown): UserProfile {
 		if (isPaimonData(data)) {
 			return {
 				format: 'dvalin',
 				version: 0,
-				settings: {
-					...applicationSettings
-				},
 				user: {
 					ar: data.ar,
 					...(data.server !== undefined && isServerKey(data.server)
@@ -663,7 +663,7 @@ export class PaimonMoeImporterService implements IImporterService {
 				}
 			};
 		} else {
-			throw 'wrong format';
+			throw new Error('Make sure you upload the right file format');
 		}
 	}
 }

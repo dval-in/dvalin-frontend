@@ -13,8 +13,8 @@
 	import type { WeaponTypes } from '$lib/types/weapon';
 	import type { Elements } from '$lib/types/elements';
 	import { dataIndexStore } from '$lib/store/index_store';
-	import { applicationState } from '$lib/store/global_state';
 	import i18n from '$lib/services/i18n';
+	import { userProfile } from '$lib/store/user_profile';
 
 	let view = true;
 	let charData: {
@@ -27,7 +27,7 @@
 		obtained: boolean;
 	}[] = [];
 
-	const userCharData = $applicationState.characters;
+	const userCharData = $userProfile.characters;
 
 	charData = characterKeyList
 		.filter((key) => isCharacterKey(key))

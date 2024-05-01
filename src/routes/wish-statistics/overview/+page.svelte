@@ -12,7 +12,6 @@
 		mdiTrashCanOutline
 	} from '@mdi/js';
 	import PullDistributionByMonth from '$lib/components/graphs/PullDistributionByMonth.svelte';
-	import { applicationState } from '$lib/store/global_state';
 	import DefaultLayout from '$lib/components/layout/DefaultLayout.svelte';
 	import type { IMappedWishes, IWish, IWishes } from '$lib/types/wish';
 	import { isWishBannerKey } from '$lib/types/keys/WishBannerKey';
@@ -22,9 +21,10 @@
 	import { dataIndexStore } from '$lib/store/index_store';
 	import i18n from '$lib/services/i18n';
 	import BackendService from '$lib/services/backend';
+	import { userProfile } from '$lib/store/user_profile';
 
 	let wishData: IMappedWishes = {};
-	const wishes: IWishes | undefined = $applicationState.wishes;
+	const wishes: IWishes | undefined = $userProfile.wishes;
 
 	if (wishes !== undefined) {
 		Object.keys(wishes).forEach((key: string) => {
@@ -96,7 +96,7 @@
 			/>
 		{/if}
 	</div>
-	{#if $applicationState.wishes}
+	{#if wishes}
 		<div class="flex flex-wrap gap-4">
 			<Card class="flex flex-1 flex-col gap-2">
 				<CardHeader>

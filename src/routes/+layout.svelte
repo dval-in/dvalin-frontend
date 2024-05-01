@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { applicationState } from '$lib/store/global_state';
+	import { applicationState } from '$lib/store/application_state';
 	import '../app.pcss';
 	import Sidebar from '$lib/components/navigator/Sidebar.svelte';
 	import { get } from 'svelte/store';

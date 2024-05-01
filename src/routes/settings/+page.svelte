@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { get } from 'svelte/store';
 	import Text from '$lib/components/typography/Text.svelte';
-	import { applicationState } from '$lib/store/global_state';
+	import { applicationState } from '$lib/store/application_state';
 	import IconButton from '$lib/components/ui/icon-button/IconButton.svelte';
 	import { mdiExport, mdiImport } from '@mdi/js';
 	import type { Theme } from '$lib/types/theme';
@@ -9,13 +9,13 @@
 	import DefaultLayout from '$lib/components/layout/DefaultLayout.svelte';
 	import BackendService from '$lib/services/backend';
 	import i18n from '$lib/services/i18n';
+	import { userProfile } from '$lib/store/user_profile';
 
 	const handleSettingsExport = () => {
 		let element = document.createElement('a');
 		element.setAttribute(
 			'href',
-			'data:text/plain;charset=utf-8,' +
-				encodeURIComponent(JSON.stringify(get(applicationState)))
+			'data:text/plain;charset=utf-8,' + encodeURIComponent(JSON.stringify(get(userProfile)))
 		);
 		element.setAttribute('download', 'settings.json');
 		element.style.display = 'none';

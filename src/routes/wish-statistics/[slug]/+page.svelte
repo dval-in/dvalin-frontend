@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { applicationState } from '$lib/store/global_state';
 	import Text from '$lib/components/typography/Text.svelte';
 	import RaretyDistributionByBanner from '$lib/components/graphs/RaretyDistributionByBanner.svelte';
 	import type { IMappedWish, IWish } from '$lib/types/wish';
@@ -14,13 +13,14 @@
 	import Icon from '$lib/components/ui/icon/icon.svelte';
 	import { dataIndexStore } from '$lib/store/index_store';
 	import i18n from '$lib/services/i18n';
+	import { userProfile } from '$lib/store/user_profile';
 
 	/** @type {import('../../../../.svelte-kit/types/src/routes').PageData} */
 	export let data: {
 		pageType: WishBannerKey;
 	};
 	let wishData: IMappedWish[] = [];
-	const wishes: IWish[] | undefined = $applicationState.wishes?.[data.pageType];
+	const wishes: IWish[] | undefined = $userProfile.wishes?.[data.pageType];
 	let fiveStars = [];
 	let fourStars = [];
 	let threeStars = [];

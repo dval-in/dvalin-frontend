@@ -1,6 +1,6 @@
 import i18next from 'i18next';
 import { createI18nStore } from 'svelte-i18next';
-import { applicationState } from '$lib/store/global_state';
+import { applicationState } from '$lib/store/application_state';
 import { get } from 'svelte/store';
 import DE from '$lib/locales/DE.json';
 import EN from '$lib/locales/EN.json';

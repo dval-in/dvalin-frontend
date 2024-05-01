@@ -19,7 +19,7 @@
 	import { Separator } from '$lib/components/ui/separator';
 	import SidebarCategory from '$lib/components/navigator/category/SidebarCategory.svelte';
 	import SidebarEntry from '$lib/components/navigator/entry/SidebarEntry.svelte';
-	import logo from '$lib/assets/logo.svg';
+	import logo from '$lib/assets/logo.webp';
 	import BackendService from '$lib/services/backend';
 	import i18n from '$lib/services/i18n/index';
 	import LanguageSwitcher from '$lib/components/navigator/language-switcher/LanguageSwitcher.svelte';
