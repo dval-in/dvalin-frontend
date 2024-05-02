@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@internationalized/date':
-    specifier: ^3.5.2
-    version: 3.5.2
+    specifier: ^3.5.3
+    version: 3.5.3
   '@mdi/js':
     specifier: ^7.4.47
     version: 7.4.47
@@ -1776,8 +1776,8 @@ packages:
     resolution: {integrity: sha512-6EwiSjwWYP7pTckG6I5eyFANjPhmPjUX9JRLUSfNPC7FX7zK9gyZAfUEaECL6ALTpGX5AjnBq3C9XmVWPitNpw==}
     dev: true
 
-  /@internationalized/date@3.5.2:
-    resolution: {integrity: sha512-vo1yOMUt2hzp63IutEaTUxROdvQg1qlMRsbCvbay2AK2Gai7wIgCyK5weEX3nHkiLgo4qCXHijFNC/ILhlRpOQ==}
+  /@internationalized/date@3.5.3:
+    resolution: {integrity: sha512-X9bi8NAEHAjD8yzmPYT2pdJsbe+tYSEBAfowtlxJVJdZR3aK8Vg7ZUT1Fm5M47KLzp/M1p1VwAaeSma3RT7biw==}
     dependencies:
       '@swc/helpers': 0.5.3
     dev: false
@@ -1836,7 +1836,7 @@ packages:
     dependencies:
       '@floating-ui/core': 1.6.0
       '@floating-ui/dom': 1.6.3
-      '@internationalized/date': 3.5.2
+      '@internationalized/date': 3.5.3
       dequal: 2.0.3
       focus-trap: 7.5.4
       nanoid: 4.0.2
@@ -1850,7 +1850,7 @@ packages:
     dependencies:
       '@floating-ui/core': 1.6.0
       '@floating-ui/dom': 1.6.3
-      '@internationalized/date': 3.5.2
+      '@internationalized/date': 3.5.3
       dequal: 2.0.3
       focus-trap: 7.5.4
       nanoid: 5.0.6
@@ -2711,7 +2711,7 @@ packages:
     peerDependencies:
       svelte: ^4.0.0 || ^5.0.0-next.118
     dependencies:
-      '@internationalized/date': 3.5.2
+      '@internationalized/date': 3.5.3
       '@melt-ui/svelte': 0.76.2(svelte@4.2.15)
       nanoid: 5.0.6
       svelte: 4.2.15
