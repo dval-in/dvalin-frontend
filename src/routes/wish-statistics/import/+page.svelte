@@ -8,6 +8,8 @@
 	import Text from '$lib/components/typography/Text.svelte';
 	import { useQueryClient } from '@tanstack/svelte-query';
 	import { toast } from 'svelte-sonner';
+	import { mdiCheck, mdiHumanQueue } from '@mdi/js';
+	import Icon from '$lib/components/ui/icon/icon.svelte';
 
 	let wishURL = '';
 
@@ -47,11 +49,10 @@
 	};
 </script>
 
-<DefaultLayout title={$i18n.t('wish.import.title')}>
-	{#if $fetchHoyoWishHistoryStatus.isPending}
-		<Text type="p">loading</Text>
-	{/if}
-
+<DefaultLayout
+	title={$i18n.t('wish.import.title')}
+	isLoading={$fetchHoyoWishHistoryStatus.isPending || $fetchHoyoWishHistoryStatus.isLoading}
+>
 	{#if $fetchHoyoWishHistoryStatus.isError}
 		<Text type="p">Something went wrong. Please try again later.</Text>
 	{/if}
@@ -79,14 +80,30 @@
 			>
 				Import History
 			</Button>
-		{:else if $fetchHoyoWishHistoryStatus.data.state === 'IN_PROGRESS'}
-			<Text type="p">Your request is being processed</Text>
-			<Text type="p">Currently {$fetchHoyoWishHistoryStatus.data.data.max}</Text>
+		{:else if $fetchHoyoWishHistoryStatus.data.state === 'QUEUED'}
+			<div class="flex flex-1 flex-col justify-center items-center gap-6">
+				<Icon path={mdiHumanQueue} size={2} />
+				<Text type="h2">Your request is waiting to be processed</Text>
+				<Text type="p">
+					Currently {$fetchHoyoWishHistoryStatus.data.data.count} requests are waiting in queue
+				</Text>
+			</div>
+		{:else if $fetchHoyoWishHistoryStatus.data.state === 'ACTIVE'}
+			<div class="flex flex-1 flex-col justify-center items-center gap-6">
+				<Icon path={mdiHumanQueue} size={2} />
+				<Text type="h2">Your request is being processed</Text>
+			</div>
 		{:else if $fetchHoyoWishHistoryStatus.data.state === 'COMPLETED_RATE_LIMIT'}
-			<Text type="p">Your request was completed and your wishes were imported</Text>
-			<Text type="p">
-				{new Date($fetchHoyoWishHistoryStatus.data.data.completedTimestamp)}
-			</Text>
+			<div class="flex flex-1 flex-col justify-center items-center gap-6">
+				<Icon path={mdiCheck} size={2} />
+				<Text type="h2">Your request was completed and your wishes were imported</Text>
+				<Text type="p">
+					You will be able to import wishes again on {new Date(
+						$fetchHoyoWishHistoryStatus.data.data.completedTimestamp +
+							$fetchHoyoWishHistoryStatus.data.data.rateLimitDuration
+					).toLocaleString()}
+				</Text>
+			</div>
 		{/if}
 	{/if}
 </DefaultLayout>

@@ -20,8 +20,8 @@
 	import { CardContent, CardHeader } from '$lib/components/ui/card/index.js';
 	import { dataIndexStore } from '$lib/store/index_store';
 	import i18n from '$lib/services/i18n';
-	import BackendService from '$lib/services/backend';
 	import { userProfile } from '$lib/store/user_profile';
+	import { applicationState } from '$lib/store/application_state';
 
 	let wishData: IMappedWishes = {};
 	const wishes: IWishes | undefined = $userProfile.wishes;
@@ -43,13 +43,11 @@
 			}
 		});
 	}
-
-	const backend = new BackendService();
 </script>
 
 <DefaultLayout title={$i18n.t('wish.overview.title')}>
 	<svelte:fragment slot="titlebarActions">
-		{#if backend.auth.isAuthenticated()}
+		{#if $applicationState.isAuthenticated}
 			<IconButton icon={mdiImport} href="/wish-statistics/import">
 				{$i18n.t('wish.overview.import_wish_button')}
 			</IconButton>

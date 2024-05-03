@@ -7,7 +7,6 @@
 	import type { Theme } from '$lib/types/theme';
 	import { Button } from '$lib/components/ui/button';
 	import DefaultLayout from '$lib/components/layout/DefaultLayout.svelte';
-	import BackendService from '$lib/services/backend';
 	import i18n from '$lib/services/i18n';
 	import { userProfile } from '$lib/store/user_profile';
 
@@ -37,8 +36,6 @@
 			};
 		});
 	}
-
-	const backend = new BackendService();
 </script>
 
 <DefaultLayout title={$i18n.t('settings.overview.title')}>
@@ -74,7 +71,7 @@
 		<Text type="h3">{$i18n.t('settings.category.data.title')}</Text>
 
 		<div class="flex flex-row gap-4">
-			{#if !backend.auth.isAuthenticated()}
+			{#if !$applicationState.isAuthenticated}
 				<IconButton href="/settings/import" icon={mdiImport}
 					>{$i18n.t('settings.category.data.import_data_button')}</IconButton
 				>

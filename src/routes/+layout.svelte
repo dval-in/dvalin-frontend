@@ -3,11 +3,13 @@
 	import '../app.pcss';
 	import Sidebar from '$lib/components/navigator/Sidebar.svelte';
 	import { get } from 'svelte/store';
-	import { Toaster } from 'svelte-sonner';
+	import { toast, Toaster } from 'svelte-sonner';
 	import { pwaInfo } from 'virtual:pwa-info';
 	import { pwaAssetsHead } from 'virtual:pwa-assets/head';
 	import { QueryClient, QueryClientProvider } from '@tanstack/svelte-query';
 	import { browser } from '$app/environment';
+	import { io } from 'socket.io-client';
+	import i18n from '$lib/services/i18n';
 
 	const queryClient = new QueryClient({
 		defaultOptions: {
@@ -17,6 +19,37 @@
 		}
 	});
 	$: webManifestLink = pwaInfo ? pwaInfo.webManifest.href : '';
+
+	if (browser) {
+		const socket = io(import.meta.env.VITE_BACKEND_URL, { withCredentials: true });
+
+		socket.on('authenticationState', (state: boolean) => {
+			applicationState.set({
+				...get(applicationState),
+				isAuthenticated: state
+			});
+		});
+
+		socket.on('invalidateQuery', (queryKey: string[]) => {
+			queryClient.invalidateQueries({ queryKey });
+		});
+
+		socket.on(
+			'toast',
+			(toastMessage: { type: 'success' | 'error' | 'info'; message: string }) => {
+				const message = $i18n.t(toastMessage.message);
+
+				switch (toastMessage.type) {
+					case 'success':
+						return toast.success(message);
+					case 'error':
+						return toast.error(message);
+					case 'info':
+						return toast.info(message);
+				}
+			}
+		);
+	}
 
 	console.log(get(applicationState));
 </script>

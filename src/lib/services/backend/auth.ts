@@ -1,6 +1,3 @@
-import { browser } from '$app/environment';
-import { getCookie } from '$lib/utils';
-
 export class BackendAuthService {
 	private readonly baseUrl: string;
 
@@ -18,14 +15,5 @@ export class BackendAuthService {
 
 	getProviders() {
 		return this.baseUrl;
-	}
-
-	isAuthenticated() {
-		if (browser) {
-			const isAuthenticatedCookie = getCookie('isAuthenticated');
-			return isAuthenticatedCookie !== null && isAuthenticatedCookie !== 'false';
-		}
-
-		return false;
 	}
 }

@@ -23,6 +23,7 @@
 	import BackendService from '$lib/services/backend';
 	import i18n from '$lib/services/i18n/index';
 	import LanguageSwitcher from '$lib/components/navigator/language-switcher/LanguageSwitcher.svelte';
+	import { applicationState } from '$lib/store/application_state';
 
 	const paths = {
 		collection: [
@@ -152,7 +153,7 @@
 	<div
 		class={`flex ${isSidebarOpen ? 'flex-row' : 'sm:max-xl:flex-col xl:flex-row'} gap-2.5 items-center sm:max-xl:mr-2.5 ${isSidebarOpen ? '' : 'max-sm:max-h-0 max-sm:overflow-hidden'}`}
 	>
-		{#if backend.auth.isAuthenticated()}
+		{#if $applicationState.isAuthenticated}
 			<SidebarEntry
 				icon={mdiLogout}
 				{isSidebarOpen}

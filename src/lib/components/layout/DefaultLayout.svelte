@@ -1,7 +1,9 @@
 <script lang="ts">
 	import Text from '$lib/components/typography/Text.svelte';
+	import Loading from '$lib/components/ui/loading/Loading.svelte';
 
 	export let title: string = '';
+	export let isLoading: boolean = false;
 </script>
 
 <svelte:head>
@@ -26,6 +28,12 @@
 				{/if}
 			</div>
 		{/if}
-		<slot />
+		{#if isLoading}
+			<div class="flex flex-1 flex-col justify-center items-center">
+				<Loading />
+			</div>
+		{:else}
+			<slot />
+		{/if}
 	</div>
 </div>
