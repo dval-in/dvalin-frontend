@@ -40,7 +40,6 @@
 			const date = new Date(d.date);
 			const dateKey = date.getMonth() + 1 + '.01.' + date.getFullYear();
 			if (pullsByMonth[dateKey] === undefined) {
-				// eslint-disable-next-line @typescript-eslint/naming-convention
 				pullsByMonth[dateKey] = { '3': 0, '4': 0, '5': 0 };
 			}
 			pullsByMonth[dateKey][d.rarity] = pullsByMonth[dateKey][d.rarity] + 1;
@@ -51,11 +50,8 @@
 				.map((key) => {
 					return {
 						date: new Date(key).getTime(),
-						// eslint-disable-next-line @typescript-eslint/naming-convention
 						'5': pullsByMonth[key]['5'],
-						// eslint-disable-next-line @typescript-eslint/naming-convention
 						'4': pullsByMonth[key]['4'],
-						// eslint-disable-next-line @typescript-eslint/naming-convention
 						'3': pullsByMonth[key]['3']
 					};
 				})

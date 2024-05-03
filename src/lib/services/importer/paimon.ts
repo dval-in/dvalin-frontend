@@ -630,7 +630,6 @@ export class PaimonMoeImporterService implements IImporterService {
 				wishes: {
 					...(data['wish-counter-character-event'] !== undefined
 						? {
-								// eslint-disable-next-line @typescript-eslint/naming-convention
 								CharacterEvent: convertPaimonWishes(
 									data['wish-counter-character-event'].pulls
 								)
@@ -638,23 +637,19 @@ export class PaimonMoeImporterService implements IImporterService {
 						: undefined),
 					...(data['wish-counter-weapon-event'] !== undefined
 						? {
-								// eslint-disable-next-line @typescript-eslint/naming-convention
 								WeaponEvent: convertPaimonWishes(
 									data['wish-counter-weapon-event'].pulls
 								)
 							}
 						: undefined),
 					...(data['wish-counter-standard'] !== undefined
-						? // eslint-disable-next-line @typescript-eslint/naming-convention
-							{ Standard: convertPaimonWishes(data['wish-counter-standard'].pulls) }
+						? { Standard: convertPaimonWishes(data['wish-counter-standard'].pulls) }
 						: undefined),
 					...(data['wish-counter-beginners'] !== undefined
-						? // eslint-disable-next-line @typescript-eslint/naming-convention
-							{ Beginner: convertPaimonWishes(data['wish-counter-beginners'].pulls) }
+						? { Beginner: convertPaimonWishes(data['wish-counter-beginners'].pulls) }
 						: undefined),
 					...(data['wish-counter-chronicled'] !== undefined
 						? {
-								// eslint-disable-next-line @typescript-eslint/naming-convention
 								Chronicled: convertPaimonWishes(
 									data['wish-counter-chronicled'].pulls
 								)

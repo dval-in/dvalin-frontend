@@ -1,7 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/naming-convention */
-/* eslint-disable no-prototype-builtins */
-/* eslint-disable no-empty */
 
 // TODO: Test the convertor
 export interface GachaRecord {
