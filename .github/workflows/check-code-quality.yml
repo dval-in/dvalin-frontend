@@ -20,8 +20,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: lts/Iron
-      - run: npm install -g pnpm
-      - run: pnpm install
+      - uses: pnpm/action-setup@v3
+        name: Install pnpm
+        with:
+          version: 9
+          run_install: true
       - name: Check TypeScript
         run: pnpm tsc
   check-prettier:
@@ -31,9 +34,13 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: lts/Iron
-      - run: npm install -g pnpm
-      - run: pnpm install
-      - run: pnpm run lint
+      - uses: pnpm/action-setup@v3
+        name: Install pnpm
+        with:
+          version: 9
+          run_install: true
+      - name: Check Prettier & Eslint
+        run: pnpm run lint
   deploy-to-cloudflare:
     needs: [check-typescript, check-prettier]
     if: ${{ github.event_name != 'pull_request' || github.actor != 'dependabot[bot]' }}
@@ -45,15 +52,15 @@ jobs:
     timeout-minutes: 5
     steps:
       - name: Checkout
-        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 #v4.1.1
+        uses: actions/checkout@v4
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: lts/Iron
       - uses: pnpm/action-setup@v3
         name: Install pnpm
         with:
-          version: 8
+          version: 9
           run_install: true
       - name: Build
         run: pnpm run build
