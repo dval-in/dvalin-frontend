@@ -8,7 +8,7 @@
 		xmlns="http://www.w3.org/2000/svg"
 		xml:space="preserve"
 	>
-		<g class="animate-pulse fill-primary">
+		<g class="animate-pulse fill-primary stroke-neutral">
 			<path d="M300,0L299,0C299.21,4.81 300.01,10.01 302,14C302.35,9.06 299.94,4.84 300,0Z" />
 			<path
 				d="M351,0L306,0C299.42,14.83 305.36,33.76 316.75,45.25C328.15,56.73 338.11,67.02 349.25,77.75C360.39,88.48 371.18,99.7 383,109C368.99,73.72 358.75,37.2 351,0Z"

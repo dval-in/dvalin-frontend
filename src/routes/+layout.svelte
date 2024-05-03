@@ -3,55 +3,34 @@
 	import '../app.pcss';
 	import Sidebar from '$lib/components/navigator/Sidebar.svelte';
 	import { get } from 'svelte/store';
-	import { toast, Toaster } from 'svelte-sonner';
+	import { Toaster } from 'svelte-sonner';
 	import { pwaInfo } from 'virtual:pwa-info';
 	import { pwaAssetsHead } from 'virtual:pwa-assets/head';
-	import { QueryClient, QueryClientProvider } from '@tanstack/svelte-query';
-	import { browser } from '$app/environment';
-	import { io } from 'socket.io-client';
-	import i18n from '$lib/services/i18n';
+	import { type QueryClient, QueryClientProvider } from '@tanstack/svelte-query';
+	import { userProfile } from '$lib/store/user_profile';
+	import DefaultLayout from '$lib/components/layout/DefaultLayout.svelte';
+	import { dataIndexStore } from '$lib/store/index_store';
+	import BackendService from '$lib/services/backend';
 
-	const queryClient = new QueryClient({
-		defaultOptions: {
-			queries: {
-				enabled: browser
-			}
-		}
-	});
+	/** @type {import('../../../../.svelte-kit/types/src/routes').PageData} */
+	export let data: { queryClient: QueryClient; isLoading: boolean };
+
 	$: webManifestLink = pwaInfo ? pwaInfo.webManifest.href : '';
 
-	if (browser) {
-		const socket = io(import.meta.env.VITE_BACKEND_URL, { withCredentials: true });
+	const backend = BackendService.getInstance();
+	const fetchDataIndex = backend.data.fetchDataIndex();
+	let isLoading = JSON.stringify(get(dataIndexStore).weapon) === '{}';
 
-		socket.on('authenticationState', (state: boolean) => {
-			applicationState.set({
-				...get(applicationState),
-				isAuthenticated: state
-			});
-		});
-
-		socket.on('invalidateQuery', (queryKey: string[]) => {
-			queryClient.invalidateQueries({ queryKey });
-		});
-
-		socket.on(
-			'toast',
-			(toastMessage: { type: 'success' | 'error' | 'info'; message: string }) => {
-				const message = $i18n.t(toastMessage.message);
-
-				switch (toastMessage.type) {
-					case 'success':
-						return toast.success(message);
-					case 'error':
-						return toast.error(message);
-					case 'info':
-						return toast.info(message);
-				}
-			}
-		);
-	}
+	fetchDataIndex.subscribe((response) => {
+		if (response.status === 'success') {
+			isLoading = false;
+			response.data.weapon['Unknown3Star'] = { name: 'Unknown 3 star', rarity: 3 };
+			dataIndexStore.set(response.data);
+		}
+	});
 
 	console.log(get(applicationState));
+	console.log(get(userProfile));
 </script>
 
 <svelte:head>
@@ -64,15 +43,21 @@
 	{/each}
 </svelte:head>
 
-<QueryClientProvider client={queryClient}>
+<QueryClientProvider client={data.queryClient}>
 	<div class={`${$applicationState.settings.theme} bg-neutral text-text min-h-screen`}>
 		<div class="min-h-screen" id="main">
-			<Sidebar />
-			<!--  Main content-->
-			<div class="sm:pl-20 xl:pl-72 max-sm:pt-16 sm:flex sm:justify-center min-h-screen">
-				<slot />
-			</div>
-			<Toaster richColors />
+			{#if isLoading}
+				<div class="flex flex-1 flex-row justify-center items-center min-h-screen">
+					<DefaultLayout isLoading={true} />
+				</div>
+			{:else}
+				<Sidebar />
+				<!--  Main content-->
+				<div class="sm:pl-20 xl:pl-72 max-sm:pt-16 sm:flex sm:justify-center min-h-screen">
+					<slot />
+				</div>
+				<Toaster richColors />
+			{/if}
 		</div>
 	</div>
 </QueryClientProvider>

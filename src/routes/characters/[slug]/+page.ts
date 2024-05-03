@@ -7,7 +7,7 @@ import type { PageLoadEvent } from '../../../../.svelte-kit/types/src/routes/cha
 /** @type {import('./$types').PageLoad} */
 export async function load({ params, fetch }: PageLoadEvent) {
 	let characterData: Character;
-	const backend = new BackendService();
+	const backend = BackendService.getInstance();
 
 	const key = params.slug;
 

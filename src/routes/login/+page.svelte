@@ -7,10 +7,10 @@
 	import Icon from '$lib/components/ui/icon/icon.svelte';
 	import i18n from '$lib/services/i18n';
 
-	const backend = new BackendService();
+	const backend = BackendService.getInstance();
 
 	const nav = (url: string) => {
-		window.location = url;
+		window.location.href = url;
 	};
 </script>
 

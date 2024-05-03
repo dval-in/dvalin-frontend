@@ -68,7 +68,7 @@
 		isSidebarOpen = false;
 	};
 
-	const backend = new BackendService();
+	const backend = BackendService.getInstance();
 </script>
 
 <div

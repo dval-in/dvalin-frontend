@@ -5,37 +5,39 @@ import { BackendHoyoService } from '$lib/services/backend/hoyo';
 import { goto } from '$app/navigation';
 import { toast } from 'svelte-sonner';
 import { BackendUserService } from '$lib/services/backend/user';
+import type { QueryClient } from '@tanstack/svelte-query';
 
 export type BackendStateResponse = {
 	state: 'AUTHENTICATION_REQUIRED' | 'MAINTENANCE' | 'INITIALIZING' | 'MISSING_USER';
 };
 
-export const checkBackendResponse = async <T>(r: Response): Promise<BackendStateResponse | T> => {
-	const responseObject = await r.json();
+export const checkBackendResponse = async <T extends object>(r: Response): Promise<T> => {
+	const responseObject: BackendStateResponse | T = await r.json();
 
-	switch (responseObject.state) {
-		case 'MAINTENANCE':
-		case 'INITIALIZING':
-			goto('/maintenance');
-			break;
-		case 'AUTHENTICATION_REQUIRED':
-			goto('/login');
-			toast.error('You are not authenticated!', {
-				description: 'Please log in once again'
-			});
-			break;
-		case 'MISSING_USER':
-			goto('/');
-			toast.error('An error occurred while communicating with backend', {
-				description: 'Please send a bugreport on our Discord server'
-			});
-			break;
+	if ('state' in responseObject) {
+		switch (responseObject.state) {
+			case 'MAINTENANCE':
+			case 'INITIALIZING':
+				goto('/maintenance');
+				throw 'BACKEND_NOT_RUNNING';
+			case 'AUTHENTICATION_REQUIRED':
+				toast.error('You are not authenticated!', {
+					description: 'Please log in once again'
+				});
+				throw 'AUTHENTICATION_REQUIRED';
+			case 'MISSING_USER':
+				goto('/');
+				toast.error('An error occurred while communicating with backend', {
+					description: 'Please send a bugreport on our Discord server'
+				});
+				throw 'MISSING_USER';
+		}
 	}
 
 	return responseObject;
 };
 
-export const backendFetch = async <T>(url: string): Promise<BackendStateResponse | T> => {
+export const backendFetch = async <T extends object>(url: string): Promise<T> => {
 	return fetch(url, {
 		credentials: 'include'
 	}).then(checkBackendResponse<T>);
@@ -43,9 +45,31 @@ export const backendFetch = async <T>(url: string): Promise<BackendStateResponse
 
 export default class BackendService {
 	private env: EnvironmentService = EnvironmentService.getInstance();
+	private static instance: BackendService | undefined;
+	public data;
+	public auth;
+	public hoyo;
+	public user;
 
-	public data = new BackendDataService(this.env.variables.backendUrl);
-	public auth = new BackendAuthService(this.env.variables.backendUrl);
-	public hoyo = new BackendHoyoService(this.env.variables.backendUrl);
-	public user = new BackendUserService(this.env.variables.backendUrl);
+	private constructor(private queryClient: QueryClient) {
+		this.data = new BackendDataService(this.env.variables.backendUrl, this.queryClient);
+		this.auth = new BackendAuthService(this.env.variables.backendUrl);
+		this.hoyo = new BackendHoyoService(this.env.variables.backendUrl, this.queryClient);
+		this.user = new BackendUserService(this.env.variables.backendUrl, this.queryClient);
+	}
+
+	public static setupInstance(queryClient: QueryClient): BackendService {
+		if (this.instance === undefined) {
+			this.instance = new BackendService(queryClient);
+		}
+		return this.instance;
+	}
+
+	public static getInstance(): BackendService {
+		if (this.instance) {
+			return this.instance;
+		} else {
+			throw new Error('Initialize BackendService with QueryClient first');
+		}
+	}
 }

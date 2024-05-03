@@ -13,7 +13,7 @@
 
 	let wishURL = '';
 
-	const backend = new BackendService();
+	const backend = BackendService.getInstance();
 	const fetchHoyoWishHistoryStatus = backend.hoyo.fetchHoyoWishHistoryStatus();
 	const mutateHoyoWishHistory = backend.hoyo.mutateHoyoWishHistory();
 	const client = useQueryClient();
@@ -31,11 +31,9 @@
 			return;
 		}
 
-		const testkey = encodeURIComponent(authkey);
+		const encodedAuthKey = encodeURIComponent(authkey);
 
-		console.log(testkey);
-
-		$mutateHoyoWishHistory.mutate(testkey, {
+		$mutateHoyoWishHistory.mutate(encodedAuthKey, {
 			onSuccess: (response) => {
 				if (response.state === 'CREATED') {
 					toast.success('Created');
