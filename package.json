@@ -72,7 +72,7 @@
 		"vite-plugin-pwa": "^0.20.0"
 	},
 	"engines": {
-		"pnpm": ">= 8",
+		"pnpm": ">= 9",
 		"npm": "please-use-pnpm",
 		"yarn": "please-use-pnpm"
 	}
