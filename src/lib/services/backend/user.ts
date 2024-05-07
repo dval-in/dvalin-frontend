@@ -16,6 +16,7 @@ export class BackendUserService {
 		this.baseUrl = baseUrl + '/user';
 
 		applicationState.subscribe((state) => {
+			console.log('application state changed: ' + JSON.stringify(state));
 			this.isAuthenticated = state.isAuthenticated;
 		});
 	}
