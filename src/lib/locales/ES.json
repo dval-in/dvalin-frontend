@@ -1,0 +1,20 @@
+{
+	"translation": {
+		"navigation.category.collection": "Tu colección",
+		"navigation.category.trackers": "Seguimiento",
+		"navigation.category.tools": "Herramientas",
+		"navigation.languageswitcher.title": "Elige tu idioma",
+		"navigation.login": "Iniciar sesión o registrarse",
+		"navigation.logout": "Cerrar sesión",
+		"dashboard.title": "Inicio",
+		"wish.overview.title": "Contador de deseos",
+		"wish.overview.import_wish_button": "Importar deseos",
+		"wish.overview.global_statistic_button": "Estadísticas globales",
+		"characters.overview.title": "Personajes",
+		"settings.overview.title": "Configuración",
+		"map.title": "Mapa interactivo",
+		"todo.title": "Tareas pendientes",
+		"inventory.title": "Inventorio",
+		"weapons.title": "Armas"
+	}
+}

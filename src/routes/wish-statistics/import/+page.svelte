@@ -52,20 +52,20 @@
 	isLoading={$fetchHoyoWishHistoryStatus.isPending || $fetchHoyoWishHistoryStatus.isLoading}
 >
 	{#if $fetchHoyoWishHistoryStatus.isError}
-		<Text type="p">Something went wrong. Please try again later.</Text>
+		<Text type="p">{$i18n.t('wish.import.state.error.title')}</Text>
 	{/if}
 
 	{#if $fetchHoyoWishHistoryStatus.isSuccess}
 		{#if $fetchHoyoWishHistoryStatus.data.state === 'NO_JOB'}
 			<Text type="p">
-				Navigate to folder "C:\Games\Genshin Impact\GenshinImpact_Data\webCaches\%latest
-				version%\Cache\Cache_Data"
+				{$i18n.t('wish.import.instructions.step1')}
 			</Text>
-			<Text type="p">Open file "data_2"</Text>
+			<Text type="p">{$i18n.t('wish.import.instructions.step2')}</Text>
 			<Text type="p">
-				Search for the latest entry of "e20190909gacha-v3" (without the quote)
+				{$i18n.t('wish.import.instructions.step3')}
 			</Text>
-			<Text type="p">Copy the link and paste it into the text field</Text>
+			<Text type="p">{$i18n.t('wish.import.instructions.step4')}</Text>
+			<Text type="p">{$i18n.t('wish.import.instructions.step5')}</Text>
 			<Label for="wishurl">Wish URL</Label>
 			<Input
 				id="wishurl"
@@ -81,25 +81,29 @@
 		{:else if $fetchHoyoWishHistoryStatus.data.state === 'QUEUED'}
 			<div class="flex flex-1 flex-col justify-center items-center gap-6">
 				<Icon path={mdiHumanQueue} size={2} />
-				<Text type="h2">Your request is waiting to be processed</Text>
+				<Text type="h2">{$i18n.t('wish.import.state.queued.title')}</Text>
 				<Text type="p">
-					Currently {$fetchHoyoWishHistoryStatus.data.data.count} requests are waiting in queue
+					{$i18n.t('wish.import.state.queued.description', {
+						count: $fetchHoyoWishHistoryStatus.data.data.count
+					})}
 				</Text>
 			</div>
 		{:else if $fetchHoyoWishHistoryStatus.data.state === 'ACTIVE'}
 			<div class="flex flex-1 flex-col justify-center items-center gap-6">
 				<Icon path={mdiHumanQueue} size={2} />
-				<Text type="h2">Your request is being processed</Text>
+				<Text type="h2">{$i18n.t('wish.import.state.active.title')}</Text>
 			</div>
 		{:else if $fetchHoyoWishHistoryStatus.data.state === 'COMPLETED_RATE_LIMIT'}
 			<div class="flex flex-1 flex-col justify-center items-center gap-6">
 				<Icon path={mdiCheck} size={2} />
-				<Text type="h2">Your request was completed and your wishes were imported</Text>
+				<Text type="h2">{$i18n.t('wish.import.state.completed.title')}</Text>
 				<Text type="p">
-					You will be able to import wishes again on {new Date(
-						$fetchHoyoWishHistoryStatus.data.data.completedTimestamp +
-							$fetchHoyoWishHistoryStatus.data.data.rateLimitDuration
-					).toLocaleString()}
+					{$i18n.t('wish.import.state.completed.description', {
+						date: new Date(
+							$fetchHoyoWishHistoryStatus.data.data.completedTimestamp +
+								$fetchHoyoWishHistoryStatus.data.data.rateLimitDuration
+						).toLocaleString()
+					})}
 				</Text>
 			</div>
 		{/if}

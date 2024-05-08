@@ -4,6 +4,7 @@ import { applicationState } from '$lib/store/application_state';
 import { get } from 'svelte/store';
 import DE from '$lib/locales/DE.json';
 import EN from '$lib/locales/EN.json';
+import ES from '$lib/locales/ES.json';
 import FR from '$lib/locales/FR.json';
 import IT from '$lib/locales/IT.json';
 import PL from '$lib/locales/PL.json';
@@ -26,6 +27,7 @@ i18next
 		resources: {
 			DE,
 			EN,
+			ES,
 			FR,
 			IT,
 			PL,

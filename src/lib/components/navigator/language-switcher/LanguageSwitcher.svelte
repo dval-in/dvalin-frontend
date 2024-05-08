@@ -2,6 +2,7 @@
 	import i18n from '$lib/services/i18n/index.js';
 	import langFlagDE from '$lib/assets/languages/DE.svg';
 	import langFlagEN from '$lib/assets/languages/EN.svg';
+	import langFlagES from '$lib/assets/languages/ES.svg';
 	import langFlagFR from '$lib/assets/languages/FR.svg';
 	import langFlagIT from '$lib/assets/languages/IT.svg';
 	import langFlagPT from '$lib/assets/languages/PT.svg';
@@ -33,6 +34,8 @@
 				return langFlagDE;
 			case 'EN':
 				return langFlagEN;
+			case 'ES':
+				return langFlagES;
 			case 'FR':
 				return langFlagFR;
 			case 'IT':
@@ -81,21 +84,22 @@
 		<DialogHeader>
 			<DialogTitle>{$i18n.t('navigation.languageswitcher.title')}</DialogTitle>
 		</DialogHeader>
-		{#each languages as language}
-			<Button
-				variant="ghost"
-				on:click={() => setSelectedLanguage(language)}
-				class="flex gap-2"
-			>
-				<img
-					src={matchLocaleToFlag(language)}
-					alt="language switcher"
-					class={`flex rounded-full w-10 h-10 object-cover ${selectedLanguage === language ? 'border-primary border-4' : 'border-0'} transition-all`}
-				/>
-				<Text type="p">{$i18n.t('language.' + language)}</Text>
-			</Button>
-		{/each}
-
+		<div class="grid-cols-2 grid gap-4">
+			{#each languages as language}
+				<Button
+					variant="ghost"
+					on:click={() => setSelectedLanguage(language)}
+					class="flex justify-start gap-2"
+				>
+					<img
+						src={matchLocaleToFlag(language)}
+						alt="language switcher"
+						class={`flex rounded-full w-10 h-10 object-cover ${selectedLanguage === language ? 'border-primary border-4' : 'border-0'} transition-all`}
+					/>
+					<Text type="p">{$i18n.t('language.' + language)}</Text>
+				</Button>
+			{/each}
+		</div>
 		<DialogFooter>
 			<Button on:click={saveLanguage}>Save changes</Button>
 		</DialogFooter>
