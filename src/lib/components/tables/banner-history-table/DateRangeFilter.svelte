@@ -4,7 +4,7 @@
 	import { cn } from '$lib/utils';
 	import { Button } from '$lib/components/ui/button';
 	import { RangeCalendar } from '$lib/components/ui/range-calendar';
-	import { Popover, PopoverTrigger, PopoverContent } from '$lib/components/ui/popover';
+	import { Popover, PopoverContent, PopoverTrigger } from '$lib/components/ui/popover';
 	import { mdiChevronDown, mdiFilter, mdiFilterRemove } from '@mdi/js';
 	import Icon from '$lib/components/ui/icon/icon.svelte';
 	import IconButton from '$lib/components/ui/icon-button/IconButton.svelte';
@@ -30,18 +30,20 @@
 					})
 				);
 
-	let value: DateRange | undefined = undefined;
+	let value: DateRange = { start: undefined, end: undefined };
 
-	const onValueChange = (value: DateRange) => {
-		$filterValue[0] = value.start ? value.start.toDate(getLocalTimeZone()).getTime() : null;
-		$filterValue[1] = value.end
-			? value.end.add({ days: 1 }).toDate(getLocalTimeZone()).getTime()
+	const onValueChange = (changedValue: DateRange) => {
+		$filterValue[0] = changedValue.start
+			? changedValue.start.toDate(getLocalTimeZone()).getTime()
+			: null;
+		$filterValue[1] = changedValue.end
+			? changedValue.end.add({ days: 1 }).toDate(getLocalTimeZone()).getTime()
 			: null;
 	};
 
 	const clearFilter = () => {
 		$filterValue = [null, null];
-		value = undefined;
+		value = { start: undefined, end: undefined };
 	};
 </script>
 
@@ -50,28 +52,18 @@
 		<PopoverTrigger asChild let:builder>
 			<Button
 				builders={[builder]}
-				class={cn('justify-start text-left font-normal', !value && 'text-muted-foreground')}
+				class={cn('justify-start text-left font-normal')}
 				variant="ghost"
 			>
 				Date
-				{#if $filterValue[0] !== null && $filterValue[1] !== null}
-					<Icon path={mdiFilter} />
-				{:else}
+				{#if value.start === undefined || value.end === undefined}
 					<Icon path={mdiChevronDown} />
+				{:else}
+					<Icon path={mdiFilter} />
 				{/if}
 			</Button>
 		</PopoverTrigger>
 		<PopoverContent align="start" class="w-auto p-0">
-			<div class="p-3 pb-0">
-				<IconButton
-					class="w-full"
-					disabled={value === undefined}
-					icon={mdiFilterRemove}
-					on:click={clearFilter}
-				>
-					Clear Filter
-				</IconButton>
-			</div>
 			<RangeCalendar
 				bind:value
 				initialFocus
@@ -80,7 +72,18 @@
 				numberOfMonths={1}
 				{onValueChange}
 				placeholder={fromDate(new Date(max), getLocalTimeZone())}
+				weekStartsOn={1}
 			/>
+			<div class="p-3">
+				<IconButton
+					class="w-full"
+					disabled={value.start === undefined || value.end === undefined}
+					icon={mdiFilterRemove}
+					on:click={clearFilter}
+				>
+					Clear Filter
+				</IconButton>
+			</div>
 		</PopoverContent>
 	</Popover>
 </div>

@@ -98,7 +98,7 @@
 				</CardContent>
 			</Card>
 		</div>
-		<Card class="flex flex-1 flex-row overflow-x-auto">
+		<Card class="flex flex-1 flex-col overflow-x-auto">
 			<BannerHistoryTable data={wishData} />
 		</Card>
 	</div>
