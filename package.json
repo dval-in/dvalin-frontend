@@ -33,7 +33,7 @@
 		"tailwind-merge": "^2.3.0",
 		"tailwind-variants": "^0.2.1",
 		"tw-colors": "^3.3.1",
-		"zod": "^3.23.6"
+		"zod": "^3.23.7"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "^19.3.0",
