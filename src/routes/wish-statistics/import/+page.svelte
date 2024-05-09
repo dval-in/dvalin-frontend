@@ -102,7 +102,8 @@
 						date: new Date(
 							$fetchHoyoWishHistoryStatus.data.data.completedTimestamp +
 								$fetchHoyoWishHistoryStatus.data.data.rateLimitDuration
-						).toLocaleString()
+						).toLocaleString(),
+						interpolation: { escapeValue: false }
 					})}
 				</Text>
 			</div>
