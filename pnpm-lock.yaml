@@ -34,7 +34,7 @@ importers:
         version: 3.2.0
       formsnap:
         specifier: ^0.4.4
-        version: 0.4.4(svelte@4.2.16)(sveltekit-superforms@1.13.4(@sveltejs/kit@2.5.7(@sveltejs/vite-plugin-svelte@3.1.0(svelte@4.2.16)(vite@5.2.11(@types/node@20.11.30)(sass@1.77.0)(terser@5.30.0)))(svelte@4.2.16)(vite@5.2.11(@types/node@20.11.30)(sass@1.77.0)(terser@5.30.0)))(svelte@4.2.16)(zod@3.23.7))(zod@3.23.7)
+        version: 0.4.4(svelte@4.2.16)(sveltekit-superforms@1.13.4(@sveltejs/kit@2.5.7(@sveltejs/vite-plugin-svelte@3.1.0(svelte@4.2.16)(vite@5.2.11(@types/node@20.11.30)(sass@1.77.0)(terser@5.30.0)))(svelte@4.2.16)(vite@5.2.11(@types/node@20.11.30)(sass@1.77.0)(terser@5.30.0)))(svelte@4.2.16)(zod@3.23.8))(zod@3.23.8)
       i18next:
         specifier: ^23.11.3
         version: 23.11.3
@@ -67,7 +67,7 @@ importers:
         version: 0.62.12(@babel/core@7.24.3)(postcss-load-config@4.0.2(postcss@8.4.38))(postcss@8.4.38)(sass@1.77.0)(svelte@4.2.16)
       sveltekit-superforms:
         specifier: ^1.13.4
-        version: 1.13.4(@sveltejs/kit@2.5.7(@sveltejs/vite-plugin-svelte@3.1.0(svelte@4.2.16)(vite@5.2.11(@types/node@20.11.30)(sass@1.77.0)(terser@5.30.0)))(svelte@4.2.16)(vite@5.2.11(@types/node@20.11.30)(sass@1.77.0)(terser@5.30.0)))(svelte@4.2.16)(zod@3.23.7)
+        version: 1.13.4(@sveltejs/kit@2.5.7(@sveltejs/vite-plugin-svelte@3.1.0(svelte@4.2.16)(vite@5.2.11(@types/node@20.11.30)(sass@1.77.0)(terser@5.30.0)))(svelte@4.2.16)(vite@5.2.11(@types/node@20.11.30)(sass@1.77.0)(terser@5.30.0)))(svelte@4.2.16)(zod@3.23.8)
       tailwind-merge:
         specifier: ^2.3.0
         version: 2.3.0
@@ -78,8 +78,8 @@ importers:
         specifier: ^3.3.1
         version: 3.3.1(tailwindcss@3.4.3)
       zod:
-        specifier: ^3.23.7
-        version: 3.23.7
+        specifier: ^3.23.8
+        version: 3.23.8
     devDependencies:
       '@commitlint/cli':
         specifier: ^19.3.0
@@ -3943,8 +3943,8 @@ packages:
     resolution: {integrity: sha512-9bnSc/HEW2uRy67wc+T8UwauLuPJVn28jb+GtJY16iiKWyvmYJRXVT4UamsAEGQfPohgr2q4Tq0sQbQlxTfi1g==}
     engines: {node: '>=12.20'}
 
-  zod@3.23.7:
-    resolution: {integrity: sha512-NBeIoqbtOiUMomACV/y+V3Qfs9+Okr18vR5c/5pHClPpufWOrsx8TENboDPe265lFdfewX2yBtNTLPvnmCxwog==}
+  zod@3.23.8:
+    resolution: {integrity: sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g==}
 
 snapshots:
 
@@ -6242,11 +6242,11 @@ snapshots:
       cross-spawn: 7.0.3
       signal-exit: 4.1.0
 
-  formsnap@0.4.4(svelte@4.2.16)(sveltekit-superforms@1.13.4(@sveltejs/kit@2.5.7(@sveltejs/vite-plugin-svelte@3.1.0(svelte@4.2.16)(vite@5.2.11(@types/node@20.11.30)(sass@1.77.0)(terser@5.30.0)))(svelte@4.2.16)(vite@5.2.11(@types/node@20.11.30)(sass@1.77.0)(terser@5.30.0)))(svelte@4.2.16)(zod@3.23.7))(zod@3.23.7):
+  formsnap@0.4.4(svelte@4.2.16)(sveltekit-superforms@1.13.4(@sveltejs/kit@2.5.7(@sveltejs/vite-plugin-svelte@3.1.0(svelte@4.2.16)(vite@5.2.11(@types/node@20.11.30)(sass@1.77.0)(terser@5.30.0)))(svelte@4.2.16)(vite@5.2.11(@types/node@20.11.30)(sass@1.77.0)(terser@5.30.0)))(svelte@4.2.16)(zod@3.23.8))(zod@3.23.8):
     dependencies:
       svelte: 4.2.16
-      sveltekit-superforms: 1.13.4(@sveltejs/kit@2.5.7(@sveltejs/vite-plugin-svelte@3.1.0(svelte@4.2.16)(vite@5.2.11(@types/node@20.11.30)(sass@1.77.0)(terser@5.30.0)))(svelte@4.2.16)(vite@5.2.11(@types/node@20.11.30)(sass@1.77.0)(terser@5.30.0)))(svelte@4.2.16)(zod@3.23.7)
-      zod: 3.23.7
+      sveltekit-superforms: 1.13.4(@sveltejs/kit@2.5.7(@sveltejs/vite-plugin-svelte@3.1.0(svelte@4.2.16)(vite@5.2.11(@types/node@20.11.30)(sass@1.77.0)(terser@5.30.0)))(svelte@4.2.16)(vite@5.2.11(@types/node@20.11.30)(sass@1.77.0)(terser@5.30.0)))(svelte@4.2.16)(zod@3.23.8)
+      zod: 3.23.8
 
   fraction.js@4.3.7: {}
 
@@ -7613,7 +7613,7 @@ snapshots:
       sveld: 0.19.1(@babel/core@7.24.3)(postcss-load-config@4.0.2(postcss@8.4.38))(postcss@8.4.38)(sass@1.77.0)
       svelte: 4.2.16
       tailwind-merge: 2.3.0
-      zod: 3.23.7
+      zod: 3.23.8
     transitivePeerDependencies:
       - '@babel/core'
       - coffeescript
@@ -7642,13 +7642,13 @@ snapshots:
       magic-string: 0.30.9
       periscopic: 3.1.0
 
-  sveltekit-superforms@1.13.4(@sveltejs/kit@2.5.7(@sveltejs/vite-plugin-svelte@3.1.0(svelte@4.2.16)(vite@5.2.11(@types/node@20.11.30)(sass@1.77.0)(terser@5.30.0)))(svelte@4.2.16)(vite@5.2.11(@types/node@20.11.30)(sass@1.77.0)(terser@5.30.0)))(svelte@4.2.16)(zod@3.23.7):
+  sveltekit-superforms@1.13.4(@sveltejs/kit@2.5.7(@sveltejs/vite-plugin-svelte@3.1.0(svelte@4.2.16)(vite@5.2.11(@types/node@20.11.30)(sass@1.77.0)(terser@5.30.0)))(svelte@4.2.16)(vite@5.2.11(@types/node@20.11.30)(sass@1.77.0)(terser@5.30.0)))(svelte@4.2.16)(zod@3.23.8):
     dependencies:
       '@sveltejs/kit': 2.5.7(@sveltejs/vite-plugin-svelte@3.1.0(svelte@4.2.16)(vite@5.2.11(@types/node@20.11.30)(sass@1.77.0)(terser@5.30.0)))(svelte@4.2.16)(vite@5.2.11(@types/node@20.11.30)(sass@1.77.0)(terser@5.30.0))
       devalue: 4.3.2
       klona: 2.0.6
       svelte: 4.2.16
-      zod: 3.23.7
+      zod: 3.23.8
 
   synckit@0.8.8:
     dependencies:
@@ -8104,4 +8104,4 @@ snapshots:
 
   yocto-queue@1.0.0: {}
 
-  zod@3.23.7: {}
+  zod@3.23.8: {}
