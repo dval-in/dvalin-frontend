@@ -51,8 +51,8 @@ dependencies:
     specifier: ^0.3.24
     version: 0.3.24(svelte@4.2.16)
   svelte-ux:
-    specifier: ^0.62.12
-    version: 0.62.12(@babel/core@7.24.5)(postcss@8.4.38)(sass@1.77.0)(svelte@4.2.16)
+    specifier: ^0.63.0
+    version: 0.63.0(@babel/core@7.24.5)(postcss@8.4.38)(sass@1.77.0)(svelte@4.2.16)
   sveltekit-superforms:
     specifier: ^1.13.4
     version: 1.13.4(@sveltejs/kit@2.5.7)(svelte@4.2.16)(zod@3.23.8)
@@ -6040,6 +6040,40 @@ packages:
 
   /svelte-ux@0.62.12(@babel/core@7.24.5)(postcss@8.4.38)(sass@1.77.0)(svelte@4.2.16):
     resolution: {integrity: sha512-lkcEEulsqjtJS2a9Vs8aPMqA/vBfSgjnEnkCYl2glbJTjfcfc9pnj6VkrOYvlUHntJF5m6MMKqQTMwe9P7w7kA==}
+    peerDependencies:
+      svelte: ^3.56.0 || ^4.0.0
+    dependencies:
+      '@floating-ui/dom': 1.6.3
+      '@fortawesome/fontawesome-common-types': 6.5.1
+      '@mdi/js': 7.4.47
+      clsx: 2.1.1
+      culori: 4.0.1
+      d3-array: 3.2.4
+      d3-scale: 4.0.2
+      date-fns: 3.6.0
+      immer: 10.0.4
+      lodash-es: 4.17.21
+      prism-svelte: 0.5.0
+      prism-themes: 1.9.0
+      prismjs: 1.29.0
+      sveld: 0.19.1(@babel/core@7.24.5)(postcss@8.4.38)(sass@1.77.0)
+      svelte: 4.2.16
+      tailwind-merge: 2.3.0
+      zod: 3.23.8
+    transitivePeerDependencies:
+      - '@babel/core'
+      - coffeescript
+      - less
+      - postcss
+      - postcss-load-config
+      - pug
+      - sass
+      - stylus
+      - sugarss
+    dev: false
+
+  /svelte-ux@0.63.0(@babel/core@7.24.5)(postcss@8.4.38)(sass@1.77.0)(svelte@4.2.16):
+    resolution: {integrity: sha512-fG/iF66rzMRZexZCZqql8f4kBzjD8sYKh+qMXY3V/1swMrs7y/W44w1f3rNXl72BsgkBmHjQgvctaeQv34X7zA==}
     peerDependencies:
       svelte: ^3.56.0 || ^4.0.0
     dependencies:
