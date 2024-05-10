@@ -72,13 +72,13 @@
 
 		<div class="flex flex-row gap-4">
 			{#if !$applicationState.isAuthenticated}
-				<IconButton href="/settings/import" icon={mdiImport}
-					>{$i18n.t('settings.category.data.import_data_button')}</IconButton
-				>
+				<IconButton href="/settings/import" icon={mdiImport}>
+					{$i18n.t('settings.category.data.import_data_button')}
+				</IconButton>
 			{/if}
-			<IconButton icon={mdiExport} on:click={handleSettingsExport}
-				>{$i18n.t('settings.category.data.export_data_button')}</IconButton
-			>
+			<IconButton icon={mdiExport} on:click={handleSettingsExport}>
+				{$i18n.t('settings.category.data.export_data_button')}
+			</IconButton>
 		</div>
 	</div>
 </DefaultLayout>

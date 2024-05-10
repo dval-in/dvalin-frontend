@@ -6,6 +6,7 @@
 	"endOfLine": "lf",
 	"tabWidth": 4,
 	"plugins": ["prettier-plugin-svelte"],
+	"htmlWhitespaceSensitivity": "ignore",
 	"overrides": [
 		{
 			"files": "*.svelte",
