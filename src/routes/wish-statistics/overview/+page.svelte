@@ -62,36 +62,28 @@
 			<BannerOverviewCard
 				data={wishData.CharacterEvent}
 				icon={mdiAccount}
-				title={$i18n.t('wish.overview.card.title.CharacterEvent')}
+				key={'CharacterEvent'}
 			/>
 		{/if}
 		{#if wishData?.WeaponEvent !== undefined}
 			<BannerOverviewCard
 				data={wishData.WeaponEvent}
 				icon={mdiSwordCross}
-				title={$i18n.t('wish.overview.card.title.WeaponEvent')}
+				key={'WeaponEvent'}
 			/>
 		{/if}
 		{#if wishData?.Standard !== undefined}
 			<BannerOverviewCard
 				data={wishData.Standard}
 				icon={mdiTrashCanOutline}
-				title={$i18n.t('wish.overview.card.title.Standard')}
+				key={'Standard'}
 			/>
 		{/if}
 		{#if wishData?.Chronicled !== undefined}
-			<BannerOverviewCard
-				data={wishData.Chronicled}
-				icon={mdiBook}
-				title={$i18n.t('wish.overview.card.title.Chronicled')}
-			/>
+			<BannerOverviewCard data={wishData.Chronicled} icon={mdiBook} key={'Chronicled'} />
 		{/if}
 		{#if wishData?.Beginner !== undefined}
-			<BannerOverviewCard
-				data={wishData.Beginner}
-				icon={mdiBaby}
-				title={$i18n.t('wish.overview.card.title.Beginner')}
-			/>
+			<BannerOverviewCard data={wishData.Beginner} icon={mdiBaby} key={'Beginner'} />
 		{/if}
 	</div>
 	{#if wishes}

@@ -10,9 +10,10 @@
 	import { mdiCloseCircle, mdiMoonWaningCrescent } from '@mdi/js';
 	import { Alert, AlertDescription, AlertTitle } from '$lib/components/ui/alert';
 	import i18n from '$lib/services/i18n';
+	import type { WishBannerKey } from '$lib/types/keys/WishBannerKey';
 
 	export let icon: string;
-	export let title: string;
+	export let key: WishBannerKey;
 	export let data: IMappedWish[];
 
 	const fiveStars = data
@@ -32,9 +33,9 @@
 	<CardHeader class="flex flex-row flex-wrap justify-between">
 		<div class="flex items-center gap-1">
 			<Icon path={icon} />
-			<Text type="h3">{title}</Text>
+			<Text type="h3">{$i18n.t(`wish.overview.card.title.${key}`)}</Text>
 		</div>
-		<Button href={'/wish-statistics/' + title.toLowerCase()}>{$i18n.t('action.more')}</Button>
+		<Button href={'/wish-statistics/' + key}>{$i18n.t('action.more')}</Button>
 	</CardHeader>
 	<CardContent class="flex flex-col gap-2">
 		<div class="flex flex-row gap-2">
