@@ -33,8 +33,8 @@ dependencies:
     specifier: ^23.11.4
     version: 23.11.4
   layerchart:
-    specifier: ^0.36.2
-    version: 0.36.2(@babel/core@7.24.5)(postcss@8.4.38)(sass@1.77.1)(svelte@4.2.16)(typescript@5.4.5)(vite@5.2.11)
+    specifier: ^0.36.3
+    version: 0.36.3(@babel/core@7.24.5)(postcss@8.4.38)(sass@1.77.1)(svelte@4.2.16)(typescript@5.4.5)(vite@5.2.11)
   lucide-svelte:
     specifier: ^0.378.0
     version: 0.378.0(svelte@4.2.16)
@@ -4531,8 +4531,8 @@ packages:
       typescript: 5.4.5
     dev: false
 
-  /layerchart@0.36.2(@babel/core@7.24.5)(postcss@8.4.38)(sass@1.77.1)(svelte@4.2.16)(typescript@5.4.5)(vite@5.2.11):
-    resolution: {integrity: sha512-/a261NBVVTuxmuv2wa79BUtFWFZ+nWqtzAWJeffW5fNSd4NVrB6UbWvfTHrTBD6dK9Ka9CAGXUFJtvynoXpH3A==}
+  /layerchart@0.36.3(@babel/core@7.24.5)(postcss@8.4.38)(sass@1.77.1)(svelte@4.2.16)(typescript@5.4.5)(vite@5.2.11):
+    resolution: {integrity: sha512-9aJH5FOZJrOT/KdhNGngC25Y/dYt8Eq45VcaES83BcdG2+37Ol9GZjc/QcSLFxG8HD6+LHOknTJSwK+/1VfPAw==}
     peerDependencies:
       svelte: ^3.56.0 || ^4.0.0
     dependencies:
@@ -5154,6 +5154,7 @@ packages:
 
   /posthog-js@1.116.6:
     resolution: {integrity: sha512-rvt8HxzJD4c2B/xsUa4jle8ApdqljeBI2Qqjp4XJMohQf18DXRyM6b96H5/UMs8jxYuZG14Er0h/kEIWeU6Fmw==}
+    deprecated: This version of posthog-js is deprecated, please update posthog-js, and do not use this version! Check out our JS docs at https://posthog.com/docs/libraries/js
     dependencies:
       fflate: 0.4.8
       preact: 10.19.5
