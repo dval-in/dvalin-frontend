@@ -1,5 +1,7 @@
 import { createMutation, createQuery, type QueryClient } from '@tanstack/svelte-query';
 import { backendFetch, type BackendStateResponse } from '$lib/services/backend/index';
+import { derived } from 'svelte/store';
+import { applicationState } from '$lib/store/application_state';
 
 type FetchHoyoWishHistoryResponse = {
 	state: 'MISSING_AUTHKEY' | 'AUTHKEY_INVALID' | 'CREATED';
@@ -43,14 +45,15 @@ export class BackendHoyoService {
 
 	fetchHoyoWishHistoryStatus() {
 		return createQuery<BackendStateResponse | FetchHoyoWishHistoryStatusResponse>(
-			{
-				queryKey: ['fetchHoyoWishhistoryStatus'],
+			derived(applicationState, (appState) => ({
+				queryKey: ['fetchHoyoWishhistoryStatus', appState],
 				staleTime: 60 * 60 * 1000, //1h
 				queryFn: async () =>
 					await backendFetch<FetchHoyoWishHistoryStatusResponse>(
 						`${this.baseUrl}/wishhistory/status`
-					)
-			},
+					),
+				enabled: appState.isAuthenticated
+			})),
 			this.queryClient
 		);
 	}

@@ -1,3 +1,5 @@
+import { applicationState } from '$lib/store/application_state';
+
 export class BackendAuthService {
 	private readonly baseUrl: string;
 
@@ -10,7 +12,11 @@ export class BackendAuthService {
 	}
 
 	logout() {
-		return this.baseUrl + '/logout';
+		applicationState.update((state) => {
+			state.isAuthenticated = false;
+			return state;
+		});
+		window.location.href = `${this.baseUrl}/logout`;
 	}
 
 	getProviders() {

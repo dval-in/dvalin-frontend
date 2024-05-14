@@ -9,13 +9,6 @@ type FetchUserProfileResponse = { state: 'SUCCESS'; data: UserProfile };
 export class BackendUserService {
 	private readonly baseUrl: string;
 
-	private queryOptions = derived(applicationState, (appState) => ({
-		queryKey: ['fetchUserProfile', appState],
-		staleTime: 60 * 60 * 1000, //1h
-		enabled: appState.isAuthenticated,
-		queryFn: async () => await backendFetch<FetchUserProfileResponse>(`${this.baseUrl}`)
-	}));
-
 	public constructor(
 		baseUrl: string,
 		private queryClient: QueryClient
@@ -24,6 +17,14 @@ export class BackendUserService {
 	}
 
 	fetchUserProfile() {
-		return createQuery(this.queryOptions, this.queryClient);
+		return createQuery(
+			derived(applicationState, (appState) => ({
+				queryKey: ['fetchUserProfile', appState],
+				staleTime: 60 * 60 * 1000, //1h
+				enabled: appState.isAuthenticated,
+				queryFn: async () => await backendFetch<FetchUserProfileResponse>(`${this.baseUrl}`)
+			})),
+			this.queryClient
+		);
 	}
 }
