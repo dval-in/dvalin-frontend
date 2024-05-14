@@ -8,8 +8,10 @@
 	import Text from '$lib/components/typography/Text.svelte';
 	import { useQueryClient } from '@tanstack/svelte-query';
 	import { toast } from 'svelte-sonner';
-	import { mdiCheck, mdiHumanQueue } from '@mdi/js';
+	import { mdiCheck, mdiHumanQueue, mdiLogin } from '@mdi/js';
 	import Icon from '$lib/components/ui/icon/icon.svelte';
+	import IconButton from '$lib/components/ui/icon-button/IconButton.svelte';
+	import { applicationState } from '$lib/store/application_state';
 
 	let wishURL = '';
 
@@ -55,7 +57,13 @@
 <DefaultLayout
 	title={$i18n.t('wish.import.title')}
 	isLoading={$fetchHoyoWishHistoryStatus.isPending || $fetchHoyoWishHistoryStatus.isLoading}
+	showRequirements={!$applicationState.isAuthenticated}
 >
+	<svelte:fragment slot="requirements">
+		<Text type="p">You need to login in order to use this feature</Text>
+		<IconButton icon={mdiLogin} href="/login">Login</IconButton>
+	</svelte:fragment>
+
 	{#if $fetchHoyoWishHistoryStatus.isError}
 		<Text type="p">{$i18n.t('wish.import.state.error.title')}</Text>
 	{/if}

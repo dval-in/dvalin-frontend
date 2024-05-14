@@ -4,6 +4,7 @@
 
 	export let title: string = '';
 	export let isLoading: boolean = false;
+	export let showRequirements: boolean = false;
 </script>
 
 <svelte:head>
@@ -19,7 +20,7 @@
 				{#if title !== ''}
 					<Text class="text-primary" type="h1">{title}</Text>
 				{/if}
-				{#if $$slots.titlebarActions}
+				{#if $$slots.titlebarActions && !showRequirements}
 					<div
 						class="flex max-sm:flex-col max-sm:flex-1 flex-row flex-wrap gap-2 justify-end"
 					>
@@ -28,12 +29,17 @@
 				{/if}
 			</div>
 		{/if}
-		{#if isLoading}
-			<div class="flex flex-1 flex-col justify-center items-center">
-				<Loading />
-			</div>
+
+		{#if !showRequirements}
+			{#if isLoading}
+				<div class="flex flex-1 flex-col justify-center items-center">
+					<Loading />
+				</div>
+			{:else}
+				<slot />
+			{/if}
 		{:else}
-			<slot />
+			<slot name="requirements" />
 		{/if}
 	</div>
 </div>

@@ -6,8 +6,10 @@
 		mdiAccount,
 		mdiBaby,
 		mdiBook,
+		mdiFileCloud,
 		mdiGlobeModel,
 		mdiImport,
+		mdiLogin,
 		mdiSwordCross,
 		mdiTrashCanOutline
 	} from '@mdi/js';
@@ -42,16 +44,32 @@
 				});
 			}
 		});
+		console.log(wishData);
 	}
 </script>
 
-<DefaultLayout title={$i18n.t('wish.overview.title')}>
+<DefaultLayout title={$i18n.t('wish.overview.title')} showRequirements={wishes === undefined}>
 	<svelte:fragment slot="titlebarActions">
 		<IconButton icon={mdiImport} href="/wish-statistics/import">
 			{$i18n.t('wish.overview.import_wish_button')}
 		</IconButton>
 		<IconButton icon={mdiGlobeModel}>
 			{$i18n.t('wish.overview.global_statistic_button')}
+		</IconButton>
+	</svelte:fragment>
+
+	<svelte:fragment slot="requirements">
+		{#if !$applicationState.isAuthenticated}
+			<IconButton icon={mdiLogin} href="/login">
+				{'Login to retrieve your wishes'}
+			</IconButton>
+		{:else}
+			<IconButton icon={mdiImport} href="/wish-statistics/import">
+				{$i18n.t('wish.overview.import_wish_button')}
+			</IconButton>
+		{/if}
+		<IconButton icon={mdiFileCloud} href="/settings/import">
+			{'Import data from external sites'}
 		</IconButton>
 	</svelte:fragment>
 
