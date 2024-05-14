@@ -47,11 +47,9 @@
 
 <DefaultLayout title={$i18n.t('wish.overview.title')}>
 	<svelte:fragment slot="titlebarActions">
-		{#if $applicationState.isAuthenticated}
-			<IconButton icon={mdiImport} href="/wish-statistics/import">
-				{$i18n.t('wish.overview.import_wish_button')}
-			</IconButton>
-		{/if}
+		<IconButton icon={mdiImport} href="/wish-statistics/import">
+			{$i18n.t('wish.overview.import_wish_button')}
+		</IconButton>
 		<IconButton icon={mdiGlobeModel}>
 			{$i18n.t('wish.overview.global_statistic_button')}
 		</IconButton>
