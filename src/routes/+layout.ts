@@ -28,10 +28,10 @@ export async function load() {
 
 		const socket = io(import.meta.env.VITE_BACKEND_URL, { withCredentials: true });
 
-		socket.on('authenticationState', (state: boolean) => {
-			applicationState.set({
-				...get(applicationState),
-				isAuthenticated: state
+		socket.on('authenticationState', (authenticationState: boolean) => {
+			applicationState.update((state) => {
+				state.isAuthenticated = authenticationState;
+				return state;
 			});
 		});
 

@@ -7,7 +7,6 @@ import { toast } from 'svelte-sonner';
 import { BackendUserService } from '$lib/services/backend/user';
 import type { QueryClient } from '@tanstack/svelte-query';
 import { applicationState } from '$lib/store/application_state';
-import { get } from 'svelte/store';
 
 export type BackendStateResponse = {
 	state: 'AUTHENTICATION_REQUIRED' | 'MAINTENANCE' | 'INITIALIZING' | 'MISSING_USER';
@@ -26,7 +25,10 @@ export const checkBackendResponse = async <T extends object>(r: Response): Promi
 				toast.error('You are not authenticated!', {
 					description: 'Please log in once again'
 				});
-				applicationState.set({ ...get(applicationState), isAuthenticated: false });
+				applicationState.update((state) => {
+					state.isAuthenticated = false;
+					return state;
+				});
 				throw 'AUTHENTICATION_REQUIRED';
 			case 'MISSING_USER':
 				goto('/');

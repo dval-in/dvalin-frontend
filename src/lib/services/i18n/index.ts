@@ -41,13 +41,10 @@ i18next
 	.then(() => {
 		i18next.on('languageChanged', function (lng) {
 			if (isLocale(lng)) {
-				applicationState.update((state) => ({
-					...state,
-					settings: {
-						...state.settings,
-						locale: lng
-					}
-				}));
+				applicationState.update((state) => {
+					state.settings.locale = lng;
+					return state;
+				});
 			}
 			if (browser) {
 				goto(get(page).url.pathname, { invalidateAll: true });
