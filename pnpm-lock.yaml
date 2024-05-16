@@ -51,8 +51,8 @@ dependencies:
     specifier: ^0.3.24
     version: 0.3.24(svelte@4.2.17)
   svelte-ux:
-    specifier: ^0.63.0
-    version: 0.63.0(@babel/core@7.24.5)(postcss@8.4.38)(sass@1.77.1)(svelte@4.2.17)
+    specifier: ^0.63.1
+    version: 0.63.1(@babel/core@7.24.5)(postcss@8.4.38)(sass@1.77.1)(svelte@4.2.17)
   sveltekit-superforms:
     specifier: ^1.13.4
     version: 1.13.4(@sveltejs/kit@2.5.8)(svelte@4.2.17)(zod@3.23.8)
@@ -6073,8 +6073,8 @@ packages:
       - sugarss
     dev: false
 
-  /svelte-ux@0.63.0(@babel/core@7.24.5)(postcss@8.4.38)(sass@1.77.1)(svelte@4.2.17):
-    resolution: {integrity: sha512-fG/iF66rzMRZexZCZqql8f4kBzjD8sYKh+qMXY3V/1swMrs7y/W44w1f3rNXl72BsgkBmHjQgvctaeQv34X7zA==}
+  /svelte-ux@0.63.1(@babel/core@7.24.5)(postcss@8.4.38)(sass@1.77.1)(svelte@4.2.17):
+    resolution: {integrity: sha512-ETevmqN9zCuvIEHL7k1o2TFIoNnJXPzSbsdTjbBplRtrU+BmSyOGgLMgsJs1qbX30yV//GG3ehG8VoaKgR3ZwA==}
     peerDependencies:
       svelte: ^3.56.0 || ^4.0.0
     dependencies:
