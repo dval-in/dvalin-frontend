@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { scaleOrdinal, scaleTime } from 'd3-scale';
-	import { format, formatDate, PeriodType } from 'svelte-ux';
 	import {
 		Area,
 		AreaStack,
@@ -19,6 +18,7 @@
 	import { mdiStar } from '@mdi/js';
 	import Icon from '$lib/components/ui/icon/icon.svelte';
 	import Text from '$lib/components/typography/Text.svelte';
+	import { applicationState } from '$lib/store/application_state';
 
 	export let data: IMappedWishes;
 
@@ -60,7 +60,10 @@
 	};
 
 	const formatDateLabel = (d: string) =>
-		formatDate(d, PeriodType.MonthYear, { variant: 'short' });
+		new Date(d).toLocaleDateString($applicationState.settings.locale, {
+			month: 'short',
+			year: '2-digit'
+		});
 </script>
 
 <div class="h-[350px] w-full">
@@ -83,13 +86,19 @@
 		yNice
 	>
 		<Svg>
-			<Axis grid labelProps={{ class: 'fill-text' }} placement="left" rule />
+			<Axis
+				labelProps={{ class: 'fill-text' }}
+				placement="left"
+				rule
+				grid={{ style: 'stroke-dasharray: 2; stroke: white' }}
+			/>
 			<Axis
 				format={formatDateLabel}
 				labelProps={{ class: 'fill-text' }}
 				placement="bottom"
 				rule
 			/>
+
 			<AreaStack let:data>
 				{#each data as seriesData}
 					<Area
@@ -162,7 +171,10 @@
 			x="data"
 			y={height + padding.top + 2}
 		>
-			{format(data.data.date, PeriodType.MonthYear)}
+			{new Date(data.data.date).toLocaleDateString($applicationState.settings.locale, {
+				month: 'long',
+				year: 'numeric'
+			})}
 		</Tooltip>
 	</Chart>
 </div>
