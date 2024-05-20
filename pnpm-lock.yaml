@@ -51,8 +51,8 @@ dependencies:
     specifier: ^0.3.24
     version: 0.3.24(svelte@4.2.17)
   svelte-ux:
-    specifier: ^0.63.2
-    version: 0.63.2(@babel/core@7.24.5)(postcss@8.4.38)(sass@1.77.2)(svelte@4.2.17)
+    specifier: ^0.63.4
+    version: 0.63.4(@babel/core@7.24.5)(postcss@8.4.38)(sass@1.77.2)(svelte@4.2.17)
   sveltekit-superforms:
     specifier: ^1.13.4
     version: 1.13.4(@sveltejs/kit@2.5.8)(svelte@4.2.17)(zod@3.23.8)
@@ -1739,13 +1739,6 @@ packages:
       '@floating-ui/utils': 0.2.1
     dev: false
 
-  /@floating-ui/dom@1.6.3:
-    resolution: {integrity: sha512-RnDthu3mzPlQ31Ss/BTwQ1zjzIhr3lk1gZB1OC56h/1vEtaXkESrOqL5fQVMfXpwGtRwX+YsZBdyHtJMQnkArw==}
-    dependencies:
-      '@floating-ui/core': 1.6.0
-      '@floating-ui/utils': 0.2.1
-    dev: false
-
   /@floating-ui/dom@1.6.5:
     resolution: {integrity: sha512-Nsdud2X65Dz+1RHjAIP0t8z5e2ff/IRbei6BqFrl1urT8sDVzM1HMQ+R0XcU5ceRfyO3I6ayeqIfh+6Wb8LGTw==}
     dependencies:
@@ -1842,7 +1835,7 @@ packages:
       svelte: '>=3 <5'
     dependencies:
       '@floating-ui/core': 1.6.0
-      '@floating-ui/dom': 1.6.3
+      '@floating-ui/dom': 1.6.5
       '@internationalized/date': 3.5.3
       dequal: 2.0.3
       focus-trap: 7.5.4
@@ -1856,7 +1849,7 @@ packages:
       svelte: '>=3 <5'
     dependencies:
       '@floating-ui/core': 1.6.0
-      '@floating-ui/dom': 1.6.3
+      '@floating-ui/dom': 1.6.5
       '@internationalized/date': 3.5.3
       dequal: 2.0.3
       focus-trap: 7.5.4
@@ -4569,7 +4562,7 @@ packages:
       posthog-js: 1.131.4
       shapefile: 0.6.6
       svelte: 4.2.17
-      svelte-ux: 0.63.2(@babel/core@7.24.5)(postcss@8.4.38)(sass@1.77.2)(svelte@4.2.17)
+      svelte-ux: 0.63.4(@babel/core@7.24.5)(postcss@8.4.38)(sass@1.77.2)(svelte@4.2.17)
       topojson-client: 3.1.0
     transitivePeerDependencies:
       - '@babel/core'
@@ -6045,8 +6038,8 @@ packages:
       svelte: 4.2.17
     dev: true
 
-  /svelte-ux@0.63.2(@babel/core@7.24.5)(postcss@8.4.38)(sass@1.77.2)(svelte@4.2.17):
-    resolution: {integrity: sha512-SfW/IxysVIx/WjieKSPravSkhXL5c25d5kYYnZpzHF8Xgv3K9Qp9aepy/Wjn56puNLoHDcrvLQVxCej/AulFkA==}
+  /svelte-ux@0.63.4(@babel/core@7.24.5)(postcss@8.4.38)(sass@1.77.2)(svelte@4.2.17):
+    resolution: {integrity: sha512-5dLokmdCj/K3MRQ+QBZh+1nUnqmF7yCsLWZ9KorFSESBpcpw9d1eJ3H+5px+I1FmcZtTpvv5EqciYf/TN6opmg==}
     peerDependencies:
       svelte: ^3.56.0 || ^4.0.0
     dependencies:
