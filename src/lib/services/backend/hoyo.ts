@@ -46,15 +46,19 @@ export class BackendHoyoService {
 	fetchHoyoWishHistoryStatus() {
 		return createQuery<BackendStateResponse | FetchHoyoWishHistoryStatusResponse>(
 			derived(applicationState, (appState) => ({
-				queryKey: ['fetchHoyoWishhistoryStatus', appState],
+				queryKey: ['fetchHoyoWishhistoryStatus', appState.isAuthenticated],
 				staleTime: 60 * 60 * 1000, //1h
 				queryFn: async () =>
 					await backendFetch<FetchHoyoWishHistoryStatusResponse>(
-						`${this.baseUrl}/wishhistory/status`
+						this.getHoyoWishHistoryStatusUrl()
 					),
 				enabled: appState.isAuthenticated
 			})),
 			this.queryClient
 		);
+	}
+
+	getHoyoWishHistoryStatusUrl() {
+		return `${this.baseUrl}/wishhistory/status`;
 	}
 }

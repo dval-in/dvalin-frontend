@@ -6,6 +6,8 @@ import { createQuery, type QueryClient } from '@tanstack/svelte-query';
 import { backendFetch } from '$lib/services/backend/index';
 import type { CharacterIndex } from '$lib/types/index/character';
 import type { WeaponIndex } from '$lib/types/index/weapon';
+import type { Character } from '$lib/types/data/Character';
+import type { Weapon } from '$lib/types/data/Weapon';
 
 interface FetchDataIndexResponse {
 	character: CharacterIndex;
@@ -45,11 +47,34 @@ export class BackendDataService {
 		);
 	}
 
-	getCharacter(character: CharacterKey) {
-		return this.baseUrl + '/Character/' + character + '?lang=' + get(i18n).language;
+	fetchCharacterData(character: CharacterKey) {
+		return createQuery<Character>(
+			{
+				queryKey: ['fetchCharacterData', character],
+				staleTime: 6 * 60 * 60 * 1000, //6h
+				queryFn: async () =>
+					await backendFetch<Character>(this.getCharacterDataUrl(character))
+			},
+			this.queryClient
+		);
 	}
 
-	getWeapon(weapon: WeaponKey) {
-		return this.baseUrl + '/Weapon/' + weapon + '?lang=' + get(i18n).language;
+	getCharacterDataUrl(character: CharacterKey) {
+		return `${this.baseUrl}/Character/${character}?lang=${get(i18n).language}`;
+	}
+
+	fetchWeaponData(weapon: WeaponKey) {
+		return createQuery<Weapon>(
+			{
+				queryKey: ['fetchWeaponData', weapon],
+				staleTime: 6 * 60 * 60 * 1000, //6h
+				queryFn: async () => await backendFetch<Weapon>(this.getWeaponDataUrl(weapon))
+			},
+			this.queryClient
+		);
+	}
+
+	getWeaponDataUrl(weapon: WeaponKey) {
+		return `${this.baseUrl}/Weapon/${weapon}?lang=${get(i18n).language}`;
 	}
 }

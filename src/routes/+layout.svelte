@@ -6,19 +6,18 @@
 	import { Toaster } from 'svelte-sonner';
 	import { pwaInfo } from 'virtual:pwa-info';
 	import { pwaAssetsHead } from 'virtual:pwa-assets/head';
-	import { type QueryClient, QueryClientProvider } from '@tanstack/svelte-query';
+	import { QueryClientProvider } from '@tanstack/svelte-query';
 	import { userProfile } from '$lib/store/user_profile';
 	import DefaultLayout from '$lib/components/layout/DefaultLayout.svelte';
 	import { dataIndexStore } from '$lib/store/index_store';
-	import BackendService from '$lib/services/backend';
+	import type { LayoutData } from '../../.svelte-kit/types/src/routes/$types';
 
-	/** @type {import('../../../../.svelte-kit/types/src/routes').PageData} */
-	export let data: { queryClient: QueryClient; isLoading: boolean };
+	/** @type {import('../../.svelte-kit/types/src/routes/$types').LayoutData} */
+	export let data: LayoutData;
 
 	$: webManifestLink = pwaInfo ? pwaInfo.webManifest.href : '';
 
-	const backend = BackendService.getInstance();
-	const fetchDataIndex = backend.data.fetchDataIndex();
+	const fetchDataIndex = data.backend.data.fetchDataIndex();
 	let isLoading = JSON.stringify(get(dataIndexStore).weapon) === '{}';
 
 	fetchDataIndex.subscribe((response) => {

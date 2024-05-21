@@ -3,7 +3,6 @@
 	import RaretyDistributionByBanner from '$lib/components/graphs/RaretyDistributionByBanner.svelte';
 	import type { IMappedWish, IWish } from '$lib/types/wish';
 	import DefaultLayout from '$lib/components/layout/DefaultLayout.svelte';
-	import type { WishBannerKey } from '$lib/types/keys/WishBannerKey';
 	import { isCharacterKey } from '$lib/types/keys/CharacterKey';
 	import BannerHistoryTable from '$lib/components/tables/banner-history-table/BannerHistoryTable.svelte';
 	import { Card } from '$lib/components/ui/card';
@@ -14,11 +13,10 @@
 	import { dataIndexStore } from '$lib/store/index_store';
 	import i18n from '$lib/services/i18n';
 	import { userProfile } from '$lib/store/user_profile';
+	import type { PageData } from '../../../../.svelte-kit/types/src/routes/wish-statistics/[slug]/$types';
 
-	/** @type {import('../../../../.svelte-kit/types/src/routes').PageData} */
-	export let data: {
-		pageType: WishBannerKey;
-	};
+	/** @type {import('../../../../.svelte-kit/types/src/routes/wish-statistics/[slug]/$types').PageData} */
+	export let data: PageData;
 	let wishData: IMappedWish[] = [];
 	const wishes: IWish[] | undefined = $userProfile.wishes?.[data.pageType];
 	let fiveStars = [];

@@ -8,7 +8,7 @@ import { toast } from 'svelte-sonner';
 import { userProfile } from '$lib/store/user_profile';
 import i18n from '$lib/services/i18n';
 
-/** @type {import('./$types').LayoutServerLoad} */
+/** @type {import('../../.svelte-kit/types/src/routes/$types').LayoutServerLoad} */
 export async function load() {
 	const queryClient = new QueryClient({
 		defaultOptions: {
@@ -56,5 +56,5 @@ export async function load() {
 		);
 	}
 
-	return { queryClient };
+	return { queryClient, backend };
 }

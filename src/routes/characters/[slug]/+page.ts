@@ -1,23 +1,20 @@
 import { isCharacterKey } from '$lib/types/keys/CharacterKey';
 import { error } from '@sveltejs/kit';
-import type { Character } from '$lib/types/data/Character';
-import BackendService from '$lib/services/backend';
 import type { PageLoadEvent } from '../../../../.svelte-kit/types/src/routes/characters/[slug]/$types';
 
 /** @type {import('./$types').PageLoad} */
-export async function load({ params, fetch }: PageLoadEvent) {
-	let characterData: Character;
-	const backend = BackendService.getInstance();
-
+export async function load({ params, parent, fetch }: PageLoadEvent) {
+	const { queryClient, backend } = await parent();
 	const key = params.slug;
 
-	if (isCharacterKey(key)) {
-		const characterDataResponse = await fetch(backend.data.getCharacter(key));
-		if (characterDataResponse.ok) {
-			characterData = await characterDataResponse.json();
-			return { character: key, characterData };
-		}
+	if (!isCharacterKey(key)) {
+		return error(404, 'Not found');
 	}
 
-	error(500, 'Internal error');
+	await queryClient.prefetchQuery({
+		queryKey: ['fetchCharacterData', key],
+		queryFn: async () => (await fetch(backend.data.getCharacterDataUrl(key))).json()
+	});
+
+	return { characterKey: key };
 }
