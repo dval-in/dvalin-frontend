@@ -13,7 +13,7 @@
 		"generate-pwa-assets": "pwa-assets-generator"
 	},
 	"dependencies": {
-		"@internationalized/date": "^3.5.3",
+		"@internationalized/date": "^3.5.4",
 		"@mdi/js": "^7.4.47",
 		"bits-ui": "^0.21.7",
 		"clsx": "^2.1.1",
