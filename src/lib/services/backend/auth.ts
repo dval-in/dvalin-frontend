@@ -1,5 +1,4 @@
-import { browser } from '$app/environment';
-import { getCookie } from '$lib/utils';
+import { applicationState } from '$lib/store/application_state';
 
 export class BackendAuthService {
 	private readonly baseUrl: string;
@@ -13,19 +12,14 @@ export class BackendAuthService {
 	}
 
 	logout() {
-		return this.baseUrl + '/logout';
+		applicationState.update((state) => {
+			state.isAuthenticated = false;
+			return state;
+		});
+		window.location.href = `${this.baseUrl}/logout`;
 	}
 
 	getProviders() {
 		return this.baseUrl;
-	}
-
-	isAuthenticated() {
-		if (browser) {
-			const isAuthenticatedCookie = getCookie('isAuthenticated');
-			return isAuthenticatedCookie !== null && isAuthenticatedCookie !== 'false';
-		}
-
-		return false;
 	}
 }

@@ -19,10 +19,11 @@
 	import { Separator } from '$lib/components/ui/separator';
 	import SidebarCategory from '$lib/components/navigator/category/SidebarCategory.svelte';
 	import SidebarEntry from '$lib/components/navigator/entry/SidebarEntry.svelte';
-	import logo from '$lib/assets/logo.svg';
+	import logo from '$lib/assets/logo.webp';
 	import BackendService from '$lib/services/backend';
 	import i18n from '$lib/services/i18n/index';
 	import LanguageSwitcher from '$lib/components/navigator/language-switcher/LanguageSwitcher.svelte';
+	import { applicationState } from '$lib/store/application_state';
 
 	const paths = {
 		collection: [
@@ -67,7 +68,7 @@
 		isSidebarOpen = false;
 	};
 
-	const backend = new BackendService();
+	const backend = BackendService.getInstance();
 </script>
 
 <div
@@ -152,12 +153,12 @@
 	<div
 		class={`flex ${isSidebarOpen ? 'flex-row' : 'sm:max-xl:flex-col xl:flex-row'} gap-2.5 items-center sm:max-xl:mr-2.5 ${isSidebarOpen ? '' : 'max-sm:max-h-0 max-sm:overflow-hidden'}`}
 	>
-		{#if backend.auth.isAuthenticated()}
+		{#if $applicationState.isAuthenticated}
 			<SidebarEntry
 				icon={mdiLogout}
 				{isSidebarOpen}
-				link={backend.auth.logout()}
-				on:click={closeSidebar}
+				link=""
+				on:click={() => backend.auth.logout()}
 				title={$i18n.t('navigation.logout')}
 			/>
 		{:else}

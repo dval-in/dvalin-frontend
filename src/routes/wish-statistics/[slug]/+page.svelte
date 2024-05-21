@@ -1,10 +1,8 @@
 <script lang="ts">
-	import { applicationState } from '$lib/store/global_state';
 	import Text from '$lib/components/typography/Text.svelte';
 	import RaretyDistributionByBanner from '$lib/components/graphs/RaretyDistributionByBanner.svelte';
 	import type { IMappedWish, IWish } from '$lib/types/wish';
 	import DefaultLayout from '$lib/components/layout/DefaultLayout.svelte';
-	import type { WishBannerKey } from '$lib/types/keys/WishBannerKey';
 	import { isCharacterKey } from '$lib/types/keys/CharacterKey';
 	import BannerHistoryTable from '$lib/components/tables/banner-history-table/BannerHistoryTable.svelte';
 	import { Card } from '$lib/components/ui/card';
@@ -13,16 +11,19 @@
 	import { mdiMoonWaningCrescent } from '@mdi/js';
 	import Icon from '$lib/components/ui/icon/icon.svelte';
 	import { dataIndexStore } from '$lib/store/index_store';
+	import i18n from '$lib/services/i18n';
+	import { userProfile } from '$lib/store/user_profile';
+	import type { PageData } from '../../../../.svelte-kit/types/src/routes/wish-statistics/[slug]/$types';
 
-	/** @type {import('../../../../.svelte-kit/types/src/routes').PageData} */
-	export let data: {
-		pageType: WishBannerKey;
-	};
+	/** @type {import('../../../../.svelte-kit/types/src/routes/wish-statistics/[slug]/$types').PageData} */
+	export let data: PageData;
 	let wishData: IMappedWish[] = [];
-	const wishes: IWish[] | undefined = $applicationState.wishes?.[data.pageType];
+	const wishes: IWish[] | undefined = $userProfile.wishes?.[data.pageType];
 	let fiveStars = [];
 	let fourStars = [];
 	let threeStars = [];
+	let fiveStarPity = 0;
+	let fourStarPity = 0;
 
 	if (wishes !== undefined) {
 		wishData = wishes.map((wish: IWish) => {
@@ -42,18 +43,26 @@
 			.sort((a, b) => b.number - a.number);
 
 		fourStars = wishData.filter((wish: IMappedWish) => wish.rarity === 4);
-
 		threeStars = wishData.filter((wish: IMappedWish) => wish.rarity === 3);
+		fiveStarPity =
+			wishData.findIndex((wish) => wish.rarity === 5) === -1
+				? wishData.length
+				: wishData.findIndex((wish) => wish.rarity === 5);
+		fourStarPity =
+			wishData.findIndex((wish) => wish.rarity === 4) === -1
+				? wishData.length
+				: wishData.findIndex((wish) => wish.rarity === 4);
 	}
 </script>
 
-<DefaultLayout
-	title={data.pageType.at(0)?.toUpperCase() + data.pageType.slice(1) + ' banner history'}
->
+<DefaultLayout title={$i18n.t('wish.detailed.title.' + data.pageType)}>
 	<div class="flex flex-1 flex-col sm:flex-row sm:flex-wrap gap-4">
 		<div class="flex flex-col gap-4">
 			<div class="flex flex-row gap-2">
-				<InfoCell class="bg-tertiary" title="Total pulls">
+				<InfoCell
+					class="bg-tertiary"
+					title={$i18n.t('wish.detailed.info.total_pull_count')}
+				>
 					<Text type="h4">{wishData.length}</Text>
 
 					<svelte:fragment slot="tooltip">
@@ -61,7 +70,10 @@
 						<Text type="h4">{wishData.length * 160}</Text>
 					</svelte:fragment>
 				</InfoCell>
-				<InfoCell class="bg-tertiary" title="% of total pulls">
+				<InfoCell
+					class="bg-tertiary"
+					title={$i18n.t('wish.detailed.info.total_pull_percentage')}
+				>
 					{#if fiveStars.length > 0}
 						<Text class="text-fivestar" type="h4">
 							{((fiveStars.length / wishData.length) * 100).toFixed(1)}
@@ -78,22 +90,22 @@
 						</Text>
 					{/if}
 				</InfoCell>
-				<InfoCell class="bg-tertiary" title="Pity">
-					<Text type="h4">{0}</Text>
-					<Text type="h4">{0}</Text>
+				<InfoCell class="bg-tertiary" title={$i18n.t('wish.detailed.info.pity')}>
+					<Text type="h4">{fiveStarPity}</Text>
+					<Text type="h4">{fourStarPity}</Text>
 				</InfoCell>
 			</div>
 
 			<Card class="flex flex-col">
 				<CardHeader>
-					<Text type="h3">Rarity distribution</Text>
+					<Text type="h3">{$i18n.t('chart.rarity_distribution.title')}</Text>
 				</CardHeader>
 				<CardContent>
 					<RaretyDistributionByBanner {wishData} />
 				</CardContent>
 			</Card>
 		</div>
-		<Card class="flex flex-1 flex-row overflow-x-auto">
+		<Card class="flex flex-1 flex-col overflow-x-auto">
 			<BannerHistoryTable data={wishData} />
 		</Card>
 	</div>

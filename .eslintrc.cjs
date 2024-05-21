@@ -13,33 +13,12 @@ module.exports = {
 		'plugin:prettier/recommended'
 	],
 	rules: {
-		'no-unused-vars': 'off',
 		'@typescript-eslint/no-unused-vars': [
 			'error',
 			{
 				argsIgnorePattern: '^_',
 				varsIgnorePattern: '^_',
 				caughtErrorsIgnorePattern: '^_'
-			}
-		],
-		'@typescript-eslint/naming-convention': [
-			'error',
-			{
-				selector: ['default'],
-				format: ['camelCase', 'PascalCase'],
-				leadingUnderscore: 'allow'
-			},
-			{
-				selector: ['variable'],
-				format: ['camelCase', 'UPPER_CASE']
-			},
-			{
-				selector: ['objectLiteralProperty'],
-				format: ['camelCase', 'UPPER_CASE']
-			},
-			{
-				selector: ['typeLike'],
-				format: ['PascalCase']
 			}
 		]
 	},

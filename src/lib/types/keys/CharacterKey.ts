@@ -2,6 +2,7 @@ export const characterKeyList = [
 	'Albedo',
 	'Alhaitham',
 	'Aloy',
+	'Arlecchino',
 	'Amber',
 	'AratakiItto',
 	'Baizhu',

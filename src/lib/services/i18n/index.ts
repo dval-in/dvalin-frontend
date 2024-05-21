@@ -1,9 +1,10 @@
 import i18next from 'i18next';
 import { createI18nStore } from 'svelte-i18next';
-import { applicationState } from '$lib/store/global_state';
+import { applicationState } from '$lib/store/application_state';
 import { get } from 'svelte/store';
 import DE from '$lib/locales/DE.json';
 import EN from '$lib/locales/EN.json';
+import ES from '$lib/locales/ES.json';
 import FR from '$lib/locales/FR.json';
 import IT from '$lib/locales/IT.json';
 import PL from '$lib/locales/PL.json';
@@ -26,6 +27,7 @@ i18next
 		resources: {
 			DE,
 			EN,
+			ES,
 			FR,
 			IT,
 			PL,
@@ -39,13 +41,10 @@ i18next
 	.then(() => {
 		i18next.on('languageChanged', function (lng) {
 			if (isLocale(lng)) {
-				applicationState.update((state) => ({
-					...state,
-					settings: {
-						...state.settings,
-						locale: lng
-					}
-				}));
+				applicationState.update((state) => {
+					state.settings.locale = lng;
+					return state;
+				});
 			}
 			if (browser) {
 				goto(get(page).url.pathname, { invalidateAll: true });

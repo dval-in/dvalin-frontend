@@ -76,8 +76,10 @@
 				class="hover:bg-neutral"
 				on:click={() => {
 					detailOpen = false;
-				}}><Icon path={mdiClose}></Icon></Button
+				}}
 			>
+				<Icon path={mdiClose} />
+			</Button>
 		</span>
 		<Text type="p">{skillTypes[currentSkill]}</Text>
 	</div>

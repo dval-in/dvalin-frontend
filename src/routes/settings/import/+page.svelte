@@ -1,9 +1,8 @@
 <script lang="ts">
 	import DefaultLayout from '$lib/components/layout/DefaultLayout.svelte';
-	import { applicationState } from '$lib/store/global_state.js';
 	import { toast } from 'svelte-sonner';
 	import IconButton from '$lib/components/ui/icon-button/IconButton.svelte';
-	import { mdiAlert, mdiImport } from '@mdi/js';
+	import { mdiAlert, mdiFile, mdiImport } from '@mdi/js';
 	import { Tabs, TabsList, TabsTrigger } from '$lib/components/ui/tabs';
 	import ImporterService, { type ImporterServices } from '$lib/services/importer';
 	import { Button } from '$lib/components/ui/button';
@@ -19,6 +18,8 @@
 	import Icon from '$lib/components/ui/icon/icon.svelte';
 	import { goto } from '$app/navigation';
 	import Text from '$lib/components/typography/Text.svelte';
+	import i18n from '$lib/services/i18n';
+	import { userProfile } from '$lib/store/user_profile';
 
 	let value: ImporterServices = 'dvalin';
 	const importerService = new ImporterService();
@@ -47,11 +48,11 @@
 			file.text().then((fileContent) => {
 				try {
 					let data = JSON.parse(fileContent);
-					const newApplicationState = importerService
+					const importedUserProfile = importerService
 						.getImporterService(value)
-						.import(data, $applicationState.settings);
+						.import(data);
 
-					applicationState.set(newApplicationState);
+					userProfile.set(importedUserProfile);
 					toast.success('Imported successfully!', {
 						description:
 							'Your data has been imported successfully and stored locally in your Browser'
@@ -59,7 +60,7 @@
 					goto('/settings');
 				} catch (e) {
 					toast.error('An error happened!', {
-						description: 'Make sure you upload the right file format'
+						description: e.message
 					});
 				}
 			});
@@ -67,7 +68,7 @@
 	};
 </script>
 
-<DefaultLayout title="Import account data">
+<DefaultLayout title={$i18n.t('settings.import.title')}>
 	<Tabs bind:value>
 		<TabsList>
 			<TabsTrigger value="dvalin">Dval.in</TabsTrigger>
@@ -76,19 +77,21 @@
 	</Tabs>
 
 	<div class="flex items-center gap-2">
-		<IconButton icon={mdiImport} on:click={selectFile}>Select file</IconButton>
+		<IconButton icon={mdiFile} on:click={selectFile}>
+			{$i18n.t('action.select_file')}
+		</IconButton>
 		{#if file !== undefined}
 			{file?.name}
 		{:else}
-			<Text type="p">No file selected</Text>
+			<Text type="p">{$i18n.t('settings.import.no_file_selected')}</Text>
 		{/if}
 	</div>
 
 	<div class="flex flex-col gap-2">
 		<Alert class="gap-6">
 			<Icon class="fill-red-500" path={mdiAlert} />
-			<AlertTitle>Watch out!</AlertTitle>
-			<AlertDescription>This will overwrite your existing data</AlertDescription>
+			<AlertTitle>{$i18n.t('settings.import.warning.title')}</AlertTitle>
+			<AlertDescription>{$i18n.t('settings.import.warning.description')}</AlertDescription>
 		</Alert>
 		<IconButton
 			disabled={file === undefined}
@@ -97,7 +100,7 @@
 				dialogOpen = true;
 			}}
 		>
-			Start import
+			{$i18n.t('settings.import.start_import_button')}
 		</IconButton>
 	</div>
 </DefaultLayout>
@@ -105,8 +108,12 @@
 <AlertDialog bind:open={dialogOpen}>
 	<AlertDialogContent class="sm:max-w-[425px]">
 		<AlertDialogHeader>
-			<AlertDialogTitle>Are you sure?</AlertDialogTitle>
-			<AlertDialogDescription></AlertDialogDescription>
+			<AlertDialogTitle>
+				{$i18n.t('settings.import.confirmation_dialog.title')}
+			</AlertDialogTitle>
+			<AlertDialogDescription>
+				{$i18n.t('settings.import.confirmation_dialog.description')}
+			</AlertDialogDescription>
 		</AlertDialogHeader>
 
 		<AlertDialogFooter>
@@ -116,9 +123,9 @@
 				}}
 				variant="outline"
 			>
-				No
+				{$i18n.t('action.no')}
 			</Button>
-			<Button on:click={handleSettingsImport}>Yes</Button>
+			<Button on:click={handleSettingsImport}>{$i18n.t('action.yes')}</Button>
 		</AlertDialogFooter>
 	</AlertDialogContent>
 </AlertDialog>

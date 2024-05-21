@@ -25,7 +25,7 @@
 		mdiArrowUp,
 		mdiChevronLeft,
 		mdiChevronRight,
-		mdiStar,
+		mdiCloseCircle,
 		mdiSwordCross
 	} from '@mdi/js';
 	import Icon from '$lib/components/ui/icon/icon.svelte';
@@ -41,6 +41,8 @@
 	import DateRangeFilter from '$lib/components/tables/banner-history-table/DateRangeFilter.svelte';
 	import NameCell from '$lib/components/tables/banner-history-table/NameCell.svelte';
 	import DateCell from '$lib/components/tables/banner-history-table/DateCell.svelte';
+	import i18n from '$lib/services/i18n';
+	import { Alert, AlertDescription, AlertTitle } from '$lib/components/ui/alert';
 
 	const PAGE_SIZE = 25;
 
@@ -87,7 +89,7 @@
 		}),
 		table.column({
 			accessor: 'date',
-			header: 'Date',
+			header: $i18n.t('table.banner_history.date'),
 			cell: ({ value }) => {
 				return createRender(DateCell, { value: value.toString() });
 			},
@@ -108,7 +110,7 @@
 		}),
 		table.column({
 			accessor: 'type',
-			header: 'Type',
+			header: $i18n.t('table.banner_history.type'),
 			cell: ({ value }) => {
 				return createRender(Icon, {
 					path: value === 'Character' ? mdiAccount : mdiSwordCross
@@ -124,7 +126,7 @@
 					render: ({ filterValue, preFilteredValues }) =>
 						createRender(SelectFilter, {
 							filterValue,
-							title: 'Type',
+							title: $i18n.t('table.banner_history.type'),
 							preFilteredValues
 						})
 				},
@@ -135,7 +137,7 @@
 		}),
 		table.column({
 			accessor: 'key',
-			header: 'Name',
+			header: $i18n.t('table.banner_history.name'),
 			cell: ({ value }) => {
 				return createRender(NameCell, {
 					name: value
@@ -144,7 +146,7 @@
 		}),
 		table.column({
 			accessor: 'rarity',
-			header: createRender(Icon, { path: mdiStar }),
+			header: $i18n.t('table.banner_history.rarity'),
 			plugins: {
 				sort: {
 					disable: true
@@ -155,7 +157,7 @@
 					render: ({ filterValue, preFilteredValues }) =>
 						createRender(SelectFilter, {
 							filterValue,
-							title: 'Rarity',
+							title: $i18n.t('table.banner_history.rarity'),
 							preFilteredValues
 						})
 				},
@@ -166,7 +168,7 @@
 		}),
 		table.column({
 			accessor: 'pity',
-			header: 'Pity',
+			header: $i18n.t('table.banner_history.pity'),
 			plugins: {
 				resize: {
 					initialWidth: 84
@@ -175,7 +177,7 @@
 		})
 	]);
 
-	const { headerRows, pageRows, tableAttrs, tableBodyAttrs, pluginStates } =
+	const { headerRows, pageRows, tableAttrs, tableBodyAttrs, pluginStates, rows } =
 		table.createViewModel(columns);
 
 	const { pageIndex } = pluginStates.page;
@@ -183,7 +185,7 @@
 	$: $sortKeys;
 </script>
 
-<div class="flex flex-1 flex-col gap-2">
+<div class="flex flex-1 flex-col gap-2 justify-between overflow-x-auto">
 	<TableRoot {...$tableAttrs}>
 		<TableHeader>
 			{#each $headerRows as headerRow (headerRow.id)}
@@ -222,35 +224,53 @@
 			{/each}
 		</TableHeader>
 		<TableBody {...$tableBodyAttrs}>
-			{#each $pageRows as row (row.id)}
-				<Subscribe rowAttrs={row.attrs()} let:rowAttrs>
-					<TableRow
-						{...rowAttrs}
-						class={`${row.cellForId.rarity.value === 5 ? 'bg-fivestar' : 0} ${row.cellForId.rarity.value === 4 ? 'bg-fourstar' : 0}`}
-					>
-						{#each row.cells as cell (cell.id)}
-							<Subscribe attrs={cell.attrs()} let:attrs>
-								<TableCell
-									{...attrs}
-									class={`p-2  ${cell.id === 'key' ? 'text-start' : 'text-center'} `}
-								>
-									<Render of={cell.render()} />
-								</TableCell>
-							</Subscribe>
-						{/each}
-					</TableRow>
-				</Subscribe>
-			{/each}
+			{#if $pageRows.length > 0}
+				{#each $pageRows as row (row.id)}
+					<Subscribe rowAttrs={row.attrs()} let:rowAttrs>
+						<TableRow
+							{...rowAttrs}
+							class={`hover:bg-tertiaryHover ${row.cellForId.rarity.value === 5 ? 'bg-fivestar' : 0} ${row.cellForId.rarity.value === 4 ? 'bg-fourstar' : 0}`}
+						>
+							{#each row.cells as cell (cell.id)}
+								<Subscribe attrs={cell.attrs()} let:attrs>
+									<TableCell
+										{...attrs}
+										class={`p-2  ${cell.id === 'key' ? 'text-start' : 'text-center'} `}
+									>
+										{#if cell.id === 'number'}
+											{data.length - parseInt(cell.row.id)}
+										{:else}
+											<Render of={cell.render()} />
+										{/if}
+									</TableCell>
+								</Subscribe>
+							{/each}
+						</TableRow>
+					</Subscribe>
+				{/each}
+			{:else}
+				<TableRow>
+					<Alert class="gap-6">
+						<Icon path={mdiCloseCircle} />
+						<AlertTitle>No wishes for selection</AlertTitle>
+						<AlertDescription>No wishes for selection</AlertDescription>
+					</Alert>
+				</TableRow>
+			{/if}
 		</TableBody>
 	</TableRoot>
-	<PaginationRoot count={data.length} let:currentPage let:pages perPage={PAGE_SIZE}>
+	<PaginationRoot
+		count={$rows.length}
+		let:currentPage
+		let:pages
+		perPage={PAGE_SIZE}
+		siblingCount={0}
+	>
 		<PaginationContent>
 			<PaginationItem>
 				<PaginationPrevButton on:click={() => ($pageIndex = $pageIndex - 1)}>
 					<Icon path={mdiChevronLeft} />
-					<div class="max-sm:hidden">
-						<Text type="p">Previous</Text>
-					</div>
+					<Text type="p" class="max-sm:hidden">{$i18n.t('action.previous')}</Text>
 				</PaginationPrevButton>
 			</PaginationItem>
 			{#each pages as page (page.key)}
@@ -272,9 +292,7 @@
 			{/each}
 			<PaginationItem>
 				<PaginationNextButton on:click={() => ($pageIndex = $pageIndex + 1)}>
-					<div class="max-sm:hidden">
-						<Text type="p">Next</Text>
-					</div>
+					<Text type="p" class="max-sm:hidden">{$i18n.t('action.next')}</Text>
 					<Icon path={mdiChevronRight} />
 				</PaginationNextButton>
 			</PaginationItem>
