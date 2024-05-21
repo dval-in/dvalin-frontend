@@ -27,6 +27,14 @@
 	const filterFiveStars = (): IMappedWish[] => {
 		return fiveStars.slice(0, 10);
 	};
+	const fiveStarPity =
+		data.findIndex((wish) => wish.rarity === 5) === -1
+			? data.length
+			: data.findIndex((wish) => wish.rarity === 5);
+	const fourStarPity =
+		data.findIndex((wish) => wish.rarity === 4) === -1
+			? data.length
+			: data.findIndex((wish) => wish.rarity === 4);
 </script>
 
 <Card class="flex flex-1 flex-col bg-tertiary rounded-md gap-3">
@@ -68,8 +76,8 @@
 				{/if}
 			</InfoCell>
 			<InfoCell class="bg-neutral" title={$i18n.t('wish.overview.info.pity')}>
-				<Text class="text-fivestar" type="h4">{0}</Text>
-				<Text class="text-fourstar" type="h4">{0}</Text>
+				<Text class="text-fivestar" type="h4">{fiveStarPity}</Text>
+				<Text class="text-fourstar" type="h4">{fourStarPity}</Text>
 			</InfoCell>
 		</div>
 		<div class="flex flex-col gap-2">

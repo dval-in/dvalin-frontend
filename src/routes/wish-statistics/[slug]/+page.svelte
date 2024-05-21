@@ -22,6 +22,8 @@
 	let fiveStars = [];
 	let fourStars = [];
 	let threeStars = [];
+	let fiveStarPity = 0;
+	let fourStarPity = 0;
 
 	if (wishes !== undefined) {
 		wishData = wishes.map((wish: IWish) => {
@@ -41,8 +43,15 @@
 			.sort((a, b) => b.number - a.number);
 
 		fourStars = wishData.filter((wish: IMappedWish) => wish.rarity === 4);
-
 		threeStars = wishData.filter((wish: IMappedWish) => wish.rarity === 3);
+		fiveStarPity =
+			wishData.findIndex((wish) => wish.rarity === 5) === -1
+				? wishData.length
+				: wishData.findIndex((wish) => wish.rarity === 5);
+		fourStarPity =
+			wishData.findIndex((wish) => wish.rarity === 4) === -1
+				? wishData.length
+				: wishData.findIndex((wish) => wish.rarity === 4);
 	}
 </script>
 
@@ -82,8 +91,8 @@
 					{/if}
 				</InfoCell>
 				<InfoCell class="bg-tertiary" title={$i18n.t('wish.detailed.info.pity')}>
-					<Text type="h4">{0}</Text>
-					<Text type="h4">{0}</Text>
+					<Text type="h4">{fiveStarPity}</Text>
+					<Text type="h4">{fourStarPity}</Text>
 				</InfoCell>
 			</div>
 
