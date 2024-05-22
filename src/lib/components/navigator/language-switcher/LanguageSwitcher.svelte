@@ -21,6 +21,10 @@
 	import { Button } from '$lib/components/ui/button';
 	import { get } from 'svelte/store';
 	import Text from '$lib/components/typography/Text.svelte';
+	import { Alert } from '$lib/components/ui/alert';
+	import { AlertDescription, AlertTitle } from '$lib/components/ui/alert/index.js';
+	import Icon from '$lib/components/ui/icon/icon.svelte';
+	import { mdiTranslate } from '@mdi/js';
 
 	let selectedLanguage = get(i18n).language;
 
@@ -84,6 +88,17 @@
 		<DialogHeader>
 			<DialogTitle>{$i18n.t('navigation.languageswitcher.title')}</DialogTitle>
 		</DialogHeader>
+
+		<a
+			href="https://crowdin.com/project/dvalin/invite?h=6095df94b0e8f4b9171e4457b4d168002094188"
+		>
+			<Alert>
+				<Icon path={mdiTranslate} />
+				<AlertTitle>Want to help with translation?</AlertTitle>
+				<AlertDescription>Join our Crowdin Project</AlertDescription>
+			</Alert>
+		</a>
+
 		<div class="grid-cols-2 grid gap-4">
 			{#each languages as language}
 				<Button
@@ -100,6 +115,7 @@
 				</Button>
 			{/each}
 		</div>
+
 		<DialogFooter>
 			<Button on:click={saveLanguage}>Save changes</Button>
 		</DialogFooter>

@@ -20,6 +20,7 @@
 	import Text from '$lib/components/typography/Text.svelte';
 	import i18n from '$lib/services/i18n';
 	import { userProfile } from '$lib/store/user_profile';
+	import { applicationState } from '$lib/store/application_state';
 
 	let value: ImporterServices = 'dvalin';
 	const importerService = new ImporterService();
@@ -68,7 +69,14 @@
 	};
 </script>
 
-<DefaultLayout title={$i18n.t('settings.import.title')}>
+<DefaultLayout
+	title={$i18n.t('settings.import.title')}
+	showRequirements={$applicationState.isAuthenticated}
+>
+	<svelte:fragment slot="requirements">
+		<Text type="h3">Imports are temporarily disabled while being logged in</Text>
+	</svelte:fragment>
+
 	<Tabs bind:value>
 		<TabsList>
 			<TabsTrigger value="dvalin">Dval.in</TabsTrigger>
