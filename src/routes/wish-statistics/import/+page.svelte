@@ -21,7 +21,7 @@
 	const client = useQueryClient();
 
 	const fetchHoyoWishHistory = () => {
-		if (!wishURL.includes('gatcha_id')) {
+		if (!wishURL.includes('gacha_id')) {
 			toast.error('Wrong url');
 			return;
 		}
