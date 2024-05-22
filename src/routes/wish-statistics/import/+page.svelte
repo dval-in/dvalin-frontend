@@ -8,10 +8,11 @@
 	import Text from '$lib/components/typography/Text.svelte';
 	import { useQueryClient } from '@tanstack/svelte-query';
 	import { toast } from 'svelte-sonner';
-	import { mdiCheck, mdiHumanQueue, mdiLogin } from '@mdi/js';
+	import { mdiCheck, mdiHumanQueue, mdiLink, mdiLogin } from '@mdi/js';
 	import Icon from '$lib/components/ui/icon/icon.svelte';
 	import IconButton from '$lib/components/ui/icon-button/IconButton.svelte';
 	import { applicationState } from '$lib/store/application_state';
+	import { Tabs, TabsContent, TabsList, TabsTrigger } from '$lib/components/ui/tabs';
 
 	let wishURL = '';
 
@@ -70,15 +71,45 @@
 
 	{#if $fetchHoyoWishHistoryStatus.isSuccess}
 		{#if $fetchHoyoWishHistoryStatus.data.state === 'NO_JOB'}
-			<Text type="p">
-				{$i18n.t('wish.import.instructions.step1')}
-			</Text>
-			<Text type="p">{$i18n.t('wish.import.instructions.step2')}</Text>
-			<Text type="p">
-				{$i18n.t('wish.import.instructions.step3')}
-			</Text>
-			<Text type="p">{$i18n.t('wish.import.instructions.step4')}</Text>
-			<Text type="p">{$i18n.t('wish.import.instructions.step5')}</Text>
+			<Tabs>
+				<TabsList>
+					<TabsTrigger value="pc">PC</TabsTrigger>
+					<TabsTrigger value="android">Android</TabsTrigger>
+					<TabsTrigger value="ios">iOS</TabsTrigger>
+					<TabsTrigger value="ps">Playstation</TabsTrigger>
+					<TabsTrigger value="nswitch">Nintendo Switch</TabsTrigger>
+				</TabsList>
+				<TabsContent value="pc">
+					<Text type="p">
+						{$i18n.t('wish.import.instructions.step1')}
+					</Text>
+					<Text type="p">{$i18n.t('wish.import.instructions.step2')}</Text>
+					<Text type="p">
+						{$i18n.t('wish.import.instructions.step3')}
+					</Text>
+					<Text type="p">{$i18n.t('wish.import.instructions.step4')}</Text>
+					<Text type="p">{$i18n.t('wish.import.instructions.step5')}</Text>
+				</TabsContent>
+				<TabsContent value="android">
+					<Text type="p">Use Ascent by 403f</Text>
+					<IconButton icon={mdiLink} href="https://github.com/4o3F/Ascent">
+						Github
+					</IconButton>
+				</TabsContent>
+				<TabsContent value="ios">
+					<Text type="p"></Text>
+				</TabsContent>
+				<TabsContent value="ps">
+					<Text type="p">Follow this guide:</Text>
+					<IconButton icon={mdiLink} href="https://www.youtube.com/watch?v=ly10r6m_-n8">
+						Guide
+					</IconButton>
+				</TabsContent>
+				<TabsContent value="nswitch">
+					<Text type="p">💀💀💀💀💀💀</Text>
+				</TabsContent>
+			</Tabs>
+
 			<Label for="wishurl">Wish URL</Label>
 			<Input
 				id="wishurl"
