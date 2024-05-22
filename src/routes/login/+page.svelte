@@ -3,9 +3,18 @@
 	import BackendService from '$lib/services/backend';
 	import Text from '$lib/components/typography/Text.svelte';
 	import IconButton from '$lib/components/ui/icon-button/IconButton.svelte';
-	import { mdiAccount, mdiDevices, mdiGithub, mdiGoogle, mdiMicrosoft, mdiServer } from '@mdi/js';
+	import {
+		mdiAccount,
+		mdiAlert,
+		mdiDevices,
+		mdiGithub,
+		mdiGoogle,
+		mdiMicrosoft,
+		mdiServer
+	} from '@mdi/js';
 	import Icon from '$lib/components/ui/icon/icon.svelte';
 	import i18n from '$lib/services/i18n';
+	import { Alert, AlertDescription, AlertTitle } from '$lib/components/ui/alert';
 
 	const backend = BackendService.getInstance();
 
@@ -46,6 +55,11 @@
 			</div>
 		</div>
 		<div class="flex flex-1 flex-col gap-6">
+			<Alert>
+				<Icon path={mdiAlert} />
+				<AlertTitle>Local data will be overwritten once you log in</AlertTitle>
+				<AlertDescription>Please backup your data before continuing</AlertDescription>
+			</Alert>
 			<IconButton
 				icon={mdiGoogle}
 				variant="ghost"
