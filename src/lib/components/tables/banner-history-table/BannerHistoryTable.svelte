@@ -140,7 +140,7 @@
 			header: $i18n.t('table.banner_history.name'),
 			cell: ({ value }) => {
 				return createRender(NameCell, {
-					name: value
+					key: value
 				});
 			}
 		}),
