@@ -21,7 +21,7 @@
 	const client = useQueryClient();
 
 	const fetchHoyoWishHistory = () => {
-		if (!wishURL.includes('e20190909gacha-v3')) {
+		if (!wishURL.includes('gatcha_id')) {
 			toast.error('Wrong url');
 			return;
 		}
@@ -34,7 +34,7 @@
 		const authkey = new URL(wishURL).searchParams.get('authkey');
 
 		if (authkey === null) {
-			toast.error('Url no auth key');
+			toast.error('Wrong url, missing authkey');
 			return;
 		}
 
