@@ -577,10 +577,10 @@ function convertWishDateToBanner(): BannerKey {
 }
 
 function convertPaimonWishes(paimonWish: PaimonPulls[]): IWish[] {
-	return paimonWish.flatMap((pull, count) => {
+	return paimonWish.toReversed().flatMap((pull, count) => {
 		return {
 			type: convertPaimonType(pull.type),
-			number: count,
+			number: paimonWish.length - count,
 			key: convertPaimonId(pull.id, pull.type),
 			date: new Date(pull.time),
 			pity: pull.pity,
