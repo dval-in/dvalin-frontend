@@ -97,6 +97,17 @@
 		"theme.light.title": "Clair",
 		"server.wish_history.active": "Traitement de l'historique de voeux en cours",
 		"server.wish_history.success": "Importation de l'historique de voeux réussie",
-		"server.wish_history.error": "Echec de l'importation de l'historique de voeux"
+		"server.wish_history.error": "Echec de l'importation de l'historique de voeux",
+		"language.DE": "Deutsch",
+		"language.EN": "English",
+		"language.ES": "Espanõl",
+		"language.FR": "Français",
+		"language.IT": "Italiano",
+		"language.PL": "Polski",
+		"language.PT": "Português",
+		"language.RU": "Русский",
+		"language.TH": "แบบไทย",
+		"language.ZHS": "简体中文",
+		"language.ZHT": "繁體中文"
 	}
 }

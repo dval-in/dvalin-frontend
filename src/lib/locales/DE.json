@@ -97,6 +97,17 @@
 		"theme.light.title": "Hell",
 		"server.wish_history.active": "Dein Gebetsverlauf wird nun importiert",
 		"server.wish_history.success": "Dein Gebetsverlauf wurde erfolgreich importiert",
-		"server.wish_history.error": "Dein Gebetsverlauf konnte nicht importiert werden"
+		"server.wish_history.error": "Dein Gebetsverlauf konnte nicht importiert werden",
+		"language.DE": "Deutsch",
+		"language.EN": "English",
+		"language.ES": "Espanõl",
+		"language.FR": "Français",
+		"language.IT": "Italiano",
+		"language.PL": "Polski",
+		"language.PT": "Português",
+		"language.RU": "Русский",
+		"language.TH": "แบบไทย",
+		"language.ZHS": "简体中文",
+		"language.ZHT": "繁體中文"
 	}
 }
