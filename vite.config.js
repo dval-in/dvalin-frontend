@@ -17,7 +17,6 @@ export default defineConfig({
 			manifest: {
 				name: 'Dval.in',
 				description: 'Dval.in description',
-				// eslint-disable-next-line @typescript-eslint/naming-convention
 				theme_color: '#D3BC8E',
 				icons: [
 					{
