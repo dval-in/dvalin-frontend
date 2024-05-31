@@ -1,6 +1,6 @@
 import { fontFamily } from 'tailwindcss/defaultTheme';
 import { createThemes } from 'tw-colors';
-/* eslint-disable @typescript-eslint/naming-convention */
+
 /** @type {import('tailwindcss').Config} */
 const config = {
 	darkMode: ['class'],
