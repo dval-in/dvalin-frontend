@@ -39,7 +39,7 @@
 		"wish.overview.card.title.Chronicled": "集錄",
 		"wish.overview.card.latest_pulls.title": "最新5星",
 		"wish.overview.card.latest_pulls.no_pulls.title": "請稍後再來",
-		"wish.overview.card.latest_pulls.no_pulls.description": "You haven't pulled a 5* on this banner yet",
+		"wish.overview.card.latest_pulls.no_pulls.description": "您未抽过该卡池的五星",
 		"wish.import.title": "匯入祈願記錄",
 		"wish.import.instructions.step1": "請在資料夾裡找到 \"C:\\Games\\Genshin Impact\\Genshin Impact game\\GenshinImpact_Data\\webCaches\\%latest\n\t\t\t\tversion%\\Cache\\Cache_Data\"",
 		"wish.import.instructions.step2": "請刪除檔案 \"data_2\" 並開啟遊戲進入到祈願歷史記錄",
@@ -107,7 +107,7 @@
 		"language.PT": "Português",
 		"language.RU": "Русский",
 		"language.TH": "แบบไทย",
-		"language.ZHS": "簡體中文",
+		"language.ZHS": "简体中文",
 		"language.ZHT": "繁體中文"
 	}
 }
