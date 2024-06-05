@@ -4,22 +4,18 @@
 	import CharCard from '$lib/components/ui/card/CharCard.svelte';
 	import Searchbar from '$lib/components/ui/searchbar/Searchbar.svelte';
 	import S3Service from '$lib/services/s3';
-	import {
-		type CharacterKey,
-		characterKeyList,
-		isCharacterKey
-	} from '$lib/types/keys/CharacterKey';
 	import DefaultLayout from '$lib/components/layout/DefaultLayout.svelte';
 	import type { WeaponTypes } from '$lib/types/weapon';
 	import type { Elements } from '$lib/types/elements';
 	import { dataIndexStore } from '$lib/store/index_store';
 	import i18n from '$lib/services/i18n';
 	import { userProfile } from '$lib/store/user_profile';
+	import { get } from 'svelte/store';
 
 	let view = true;
 	let charData: {
 		link: string;
-		name: CharacterKey;
+		name: string;
 		element: Elements;
 		weapon: WeaponTypes;
 		img: string;
@@ -29,22 +25,19 @@
 
 	const userCharData = $userProfile.characters;
 
-	charData = characterKeyList
-		.filter((key) => isCharacterKey(key))
-		.map((key: CharacterKey) => {
-			const index = $dataIndexStore.character[key];
+	charData = Object.keys($dataIndexStore.character).map((key) => {
+		const index = get(dataIndexStore).character[key];
 
-			return {
-				obtained:
-					userCharData !== undefined ? Object.keys(userCharData).includes(key) : false,
-				link: '/characters/' + key,
-				name: index !== undefined ? index.name : key,
-				element: 'geo',
-				weapon: 'bow',
-				img: S3Service.getCharacter(key).icon,
-				rarity: index !== undefined ? index.rarity : 0
-			};
-		});
+		return {
+			obtained: userCharData !== undefined ? Object.keys(userCharData).includes(key) : false,
+			link: '/characters/' + key,
+			name: index.name,
+			element: 'geo',
+			weapon: 'bow',
+			img: S3Service.getCharacter(key).icon,
+			rarity: index.rarity
+		};
+	});
 
 	const toggleViewType = () => {
 		view = !view;
