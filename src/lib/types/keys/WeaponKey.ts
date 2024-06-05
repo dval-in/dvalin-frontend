@@ -1,5 +1,6 @@
 const weaponKeyList = [
 	'Unknown3Star',
+	'Absolution',
 	'AThousandFloatingDreams',
 	'Akuoumaru',
 	'AlleyHunter',
@@ -21,6 +22,7 @@ const weaponKeyList = [
 	'BloodtaintedGreatsword',
 	'CalamityQueller',
 	'CashflowSupervision',
+	'Cloudforged',
 	'CinnabarSpindle',
 	'CompoundBow',
 	'CoolSteel',
@@ -127,6 +129,7 @@ const weaponKeyList = [
 	'SeasonedHuntersBow',
 	'SerpentSpine',
 	'SharpshootersOath',
+	'SilvershowerHeartstrings',
 	'SilverSword',
 	'SkyriderGreatsword',
 	'SkyriderSword',
