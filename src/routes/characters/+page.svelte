@@ -1,6 +1,6 @@
 <script lang="ts">
 	import IconButton from '$lib/components/ui/icon-button/IconButton.svelte';
-	import { mdiFilterOutline, mdiSort, mdiViewGrid, mdiViewList } from '@mdi/js';
+	import { mdiFilterOutline, mdiSort } from '@mdi/js';
 	import CharCard from '$lib/components/ui/card/CharCard.svelte';
 	import Searchbar from '$lib/components/ui/searchbar/Searchbar.svelte';
 	import S3Service from '$lib/services/s3';
@@ -12,7 +12,6 @@
 	import { userProfile } from '$lib/store/user_profile';
 	import { get } from 'svelte/store';
 
-	let view = true;
 	let charData: {
 		link: string;
 		name: string;
@@ -38,10 +37,6 @@
 			rarity: index.rarity
 		};
 	});
-
-	const toggleViewType = () => {
-		view = !view;
-	};
 </script>
 
 <DefaultLayout title={$i18n.t('characters.overview.title')}>
@@ -49,7 +44,6 @@
 		<Searchbar searchGroup="Characters" searchableDataList={charData} />
 		<IconButton icon={mdiSort}>{$i18n.t('action.sort_by')}</IconButton>
 		<IconButton icon={mdiFilterOutline}>{$i18n.t('action.filter_by')}</IconButton>
-		<IconButton icon={view ? mdiViewList : mdiViewGrid} on:click={toggleViewType} />
 	</svelte:fragment>
 	<div class="flex flex-wrap gap-4 justify-center">
 		{#each charData as character}
