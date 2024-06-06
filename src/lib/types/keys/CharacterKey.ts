@@ -14,6 +14,7 @@ export const characterKeyList = [
 	'Chevreuse',
 	'Chiori',
 	'Chongyun',
+	'Clorinde',
 	'Collei',
 	'Cyno',
 	'Dehya',
@@ -58,8 +59,10 @@ export const characterKeyList = [
 	'Rosaria', // Rosaria
 	'SangonomiyaKokomi', // Sangonomiya Kokomi
 	'Sayu', // Sayu
+	'Sethos',
 	'Shenhe', // Shenhe
 	'ShikanoinHeizou', // Shikanoin Heizou
+	'Sigewinne',
 	'Sucrose', // Sucrose
 	'Tartaglia', // Tartaglia
 	'Thoma', // Thoma
