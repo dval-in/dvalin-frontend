@@ -4,5 +4,7 @@ export type CharacterIndex = {
 	[key in CharacterKey]: {
 		name: string;
 		rarity: number;
+		element: string;
+		weaponType: string;
 	};
 };
