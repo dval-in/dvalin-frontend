@@ -1,6 +1,12 @@
 <script lang="ts">
 	import IconButton from '$lib/components/ui/icon-button/IconButton.svelte';
-	import { mdiFilter, mdiFilterOutline, mdiSortAscending, mdiSortDescending } from '@mdi/js';
+	import {
+		mdiFilter,
+		mdiFilterOutline,
+		mdiSortAscending,
+		mdiSortDescending,
+		mdiFilterRemove
+	} from '@mdi/js';
 	import CharCard from '$lib/components/ui/card/CharCard.svelte';
 	import Searchbar from '$lib/components/ui/searchbar/Searchbar.svelte';
 	import S3Service from '$lib/services/s3';
@@ -18,17 +24,34 @@
 		DropdownMenuLabel,
 		DropdownMenuSeparator
 	} from '$lib/components/ui/dropdown-menu/index';
+	import Card from '$lib/components/ui/card/card.svelte';
+	import { Checkbox } from '$lib/components/ui/checkbox';
 	import type { WeaponTypes } from '$lib/types/weapon';
 	import type { Elements } from '$lib/types/elements';
+	import IconAnemo from '$lib/assets/Icon_Anemo_Element.png';
+	import IconCryo from '$lib/assets/Icon_Cryo_Element.png';
+	import IconDendro from '$lib/assets/Icon_Dendro_Element.png';
+	import IconElectro from '$lib/assets/Icon_Electro_Element.png';
+	import IconGeo from '$lib/assets/Icon_Geo_Element.png';
+	import IconHydro from '$lib/assets/Icon_Hydro_Element.png';
+	import IconPyro from '$lib/assets/Icon_Pyro_Element.png';
+	import IconBow from '$lib/assets/Icon_Weapon_Bow.png';
+	import IconCatalyst from '$lib/assets/Icon_Weapon_Catalyst.png';
+	import IconClaymore from '$lib/assets/Icon_Weapon_Claymore.png';
+	import IconPolearm from '$lib/assets/Icon_Weapon_Polearm.png';
+	import IconSword from '$lib/assets/Icon_Weapon_Sword.png';
+	import IconGoldStar from '$lib/assets/Icon_Gold_Star.png';
+	import IconPurpleStar from '$lib/assets/Icon_Purple_Star.png';
 
-	type Sorts = 'name' | 'date' | 'constellation';
+	type Sorts = 'Name' | 'Date' | 'Constellation';
 	type Filters = 'element' | 'weapon' | 'rarity' | 'owned';
 
 	// Stores for sorting and filtering
 	const sortStore = writable<{ sortFn: Sorts; order: 'asc' | 'desc' }>({
-		sortFn: 'name',
+		sortFn: 'Name',
 		order: 'asc'
 	});
+
 	const filterStore = writable<{ filterFn: Filters; value: any }[]>([]);
 
 	// Helper functions
@@ -126,7 +149,7 @@
 			});
 
 			return filteredCharacters.sort((a, b) => {
-				if (sortStore.sortFn === 'name') {
+				if (sortStore.sortFn === 'Name') {
 					return sortStore.order === 'asc'
 						? a.name.localeCompare(b.name)
 						: b.name.localeCompare(a.name);
@@ -167,6 +190,8 @@
 	};
 </script>
 
+<!-- svelte-ignore a11y-no-noninteractive-element-to-interactive-role -->
+<!-- svelte-ignore a11y-label-has-associated-control -->
 <DefaultLayout title={$i18n.t('characters.overview.title')}>
 	<svelte:fragment slot="titlebarActions">
 		<Searchbar searchGroup="Characters" searchableDataList={$transformedCharacterStore} />
@@ -179,13 +204,27 @@
 				</IconButton>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent>
-				<DropdownMenuItem on:click={() => setSortStore('name')}>Name</DropdownMenuItem>
-				<DropdownMenuItem on:click={() => setSortStore('date')}>Date</DropdownMenuItem>
-				<DropdownMenuItem on:click={() => setSortStore('constellation')}>
+				<DropdownMenuItem
+					class="flex hover:bg-primary"
+					on:click={() => setSortStore('Name')}
+				>
+					Name
+				</DropdownMenuItem>
+				<DropdownMenuItem
+					class="flex hover:bg-primary"
+					on:click={() => setSortStore('Date')}
+				>
+					Date
+				</DropdownMenuItem>
+				<DropdownMenuItem
+					class="flex hover:bg-primary"
+					on:click={() => setSortStore('Constellation')}
+				>
 					Constellation
 				</DropdownMenuItem>
 			</DropdownMenuContent>
 		</DropdownMenu>
+
 		<DropdownMenu>
 			<DropdownMenuTrigger>
 				<IconButton icon={$filterStore.length === 0 ? mdiFilterOutline : mdiFilter}>
@@ -193,120 +232,191 @@
 				</IconButton>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent>
-				<DropdownMenuGroup>
-					<DropdownMenuItem on:click={() => resetFilters()}>
-						Reset Filters
-					</DropdownMenuItem>
+				<IconButton icon={mdiFilterRemove} class="flex justify-center w-full">
+					Reset Filters
+				</IconButton>
+				<DropdownMenuGroup class="flex justify-left">
 					<DropdownMenuLabel>Element</DropdownMenuLabel>
+				</DropdownMenuGroup>
+				<DropdownMenuGroup class="grid grid-cols-3 grid-rows-3">
 					<DropdownMenuItem
 						on:click={() => setFilterStore('element', 'pyro')}
 						checked={isFilterActive('element', 'pyro')}
 					>
-						Pyro
+						<img
+							src={IconPyro}
+							alt="Pyro"
+							class={`flex rounded-full size-10 object-cover hover:bg-primary`}
+							role="button"
+						/>
 					</DropdownMenuItem>
 					<DropdownMenuItem
 						on:click={() => setFilterStore('element', 'hydro')}
 						checked={isFilterActive('element', 'hydro')}
 					>
-						Hydro
+						<img
+							src={IconHydro}
+							alt="Hydro"
+							class={`flex rounded-full size-10 object-cover hover:bg-primary`}
+							role="button"
+						/>
 					</DropdownMenuItem>
 					<DropdownMenuItem
 						on:click={() => setFilterStore('element', 'anemo')}
 						checked={isFilterActive('element', 'anemo')}
 					>
-						Anemo
+						<img
+							src={IconAnemo}
+							alt="Anemo"
+							class={`flex rounded-full size-10 object-cover hover:bg-primary`}
+							role="button"
+						/>
 					</DropdownMenuItem>
 					<DropdownMenuItem
 						on:click={() => setFilterStore('element', 'electro')}
 						checked={isFilterActive('element', 'electro')}
 					>
-						Electro
+						<img
+							src={IconElectro}
+							alt="Electro"
+							class={`flex rounded-full size-10 object-cover hover:bg-primary`}
+							role="button"
+						/>
 					</DropdownMenuItem>
 					<DropdownMenuItem
 						on:click={() => setFilterStore('element', 'dendro')}
 						checked={isFilterActive('element', 'dendro')}
 					>
-						Dendro
+						<img
+							src={IconDendro}
+							alt="Dendro"
+							class={`flex rounded-full size-10 object-cover hover:bg-primary`}
+							role="button"
+						/>
 					</DropdownMenuItem>
 					<DropdownMenuItem
 						on:click={() => setFilterStore('element', 'cryo')}
 						checked={isFilterActive('element', 'cryo')}
 					>
-						Cryo
+						<img
+							src={IconCryo}
+							alt="Cryo"
+							class={`flex rounded-full size-10 object-cover hover:bg-primary`}
+							role="button"
+						/>
 					</DropdownMenuItem>
 					<DropdownMenuItem
 						on:click={() => setFilterStore('element', 'geo')}
 						checked={isFilterActive('element', 'geo')}
 					>
-						Geo
+						<img
+							src={IconGeo}
+							alt="Geo"
+							class={`flex rounded-full size-10 object-cover hover:bg-primary`}
+							role="button"
+						/>
 					</DropdownMenuItem>
-					<DropdownMenuSeparator />
 				</DropdownMenuGroup>
-				<DropdownMenuGroup>
+				<DropdownMenuSeparator />
+
+				<DropdownMenuGroup class="flex justify-left">
 					<DropdownMenuLabel>Weapon</DropdownMenuLabel>
+				</DropdownMenuGroup>
+				<DropdownMenuGroup class="grid grid-cols-3">
 					<DropdownMenuItem
 						on:click={() => setFilterStore('weapon', 'sword')}
 						checked={isFilterActive('weapon', 'sword')}
 					>
-						Sword
+						<img
+							src={IconSword}
+							alt="Sword"
+							class={'flex rounded-full size-12 object-cover hover:bg-primary'}
+							role="button"
+						/>
 					</DropdownMenuItem>
 					<DropdownMenuItem
 						on:click={() => setFilterStore('weapon', 'claymore')}
 						checked={isFilterActive('weapon', 'claymore')}
 					>
-						Claymore
+						<img
+							src={IconClaymore}
+							alt="Claymore"
+							class={'flex rounded-full size-12 object-cover hover:bg-primary'}
+							role="button"
+						/>
 					</DropdownMenuItem>
 					<DropdownMenuItem
 						on:click={() => setFilterStore('weapon', 'polearm')}
 						checked={isFilterActive('weapon', 'polearm')}
 					>
-						Polearm
+						<img
+							src={IconPolearm}
+							alt="Polearm"
+							class={'flex rounded-full size-12 object-cover hover:bg-primary'}
+							role="button"
+						/>
 					</DropdownMenuItem>
 					<DropdownMenuItem
 						on:click={() => setFilterStore('weapon', 'catalyst')}
 						checked={isFilterActive('weapon', 'catalyst')}
 					>
-						Catalyst
+						<img
+							src={IconCatalyst}
+							alt="Catalyst"
+							class={'flex rounded-full size-12 object-cover hover:bg-primary'}
+							role="button"
+						/>
 					</DropdownMenuItem>
 					<DropdownMenuItem
 						on:click={() => setFilterStore('weapon', 'bow')}
 						checked={isFilterActive('weapon', 'bow')}
 					>
-						Bow
+						<img
+							src={IconBow}
+							alt="Bow"
+							class={'flex rounded-full size-12 object-cover hover:bg-primary'}
+							role="button"
+						/>
 					</DropdownMenuItem>
-					<DropdownMenuSeparator />
 				</DropdownMenuGroup>
-				<DropdownMenuGroup>
+				<DropdownMenuSeparator />
+
+				<DropdownMenuGroup class="flex justify-left">
 					<DropdownMenuLabel>Rarity</DropdownMenuLabel>
+				</DropdownMenuGroup>
+				<DropdownMenuGroup class="flex justify-center">
 					<DropdownMenuItem
 						on:click={() => setFilterStore('rarity', 5)}
 						checked={isFilterActive('rarity', 5)}
 					>
-						5
+						<img
+							src={IconGoldStar}
+							alt="5 Star"
+							class={'flex rounded-full size-10 object-cover hover:bg-primary'}
+							role="button"
+						/>
 					</DropdownMenuItem>
 					<DropdownMenuItem
 						on:click={() => setFilterStore('rarity', 4)}
 						checked={isFilterActive('rarity', 4)}
 					>
-						4
-					</DropdownMenuItem>
-					<DropdownMenuSeparator />
-				</DropdownMenuGroup>
-				<DropdownMenuGroup>
-					<DropdownMenuLabel>Owned</DropdownMenuLabel>
-					<DropdownMenuItem
-						on:click={() => setFilterStore('owned', true)}
-						checked={isFilterActive('owned', true)}
-					>
-						Yes
-					</DropdownMenuItem>
-					<DropdownMenuItem
-						on:click={() => setFilterStore('owned', false)}
-						checked={isFilterActive('owned', false)}
-					>
-						No
+						<img
+							src={IconPurpleStar}
+							alt="4 Star"
+							class={'flex rounded-full size-10 object-cover hover:bg-primary'}
+							role="button"
+						/>
 					</DropdownMenuItem>
 				</DropdownMenuGroup>
+				<DropdownMenuSeparator />
+
+				<Checkbox
+					id="owned"
+					class="rounded-full size-6"
+					on:click={() => setFilterStore('owned', true)}
+					checked={isFilterActive('owned', true)}
+				/>
+				<label class="text-sm font-medium">Owned</label>
 				<DropdownMenuSeparator />
 			</DropdownMenuContent>
 		</DropdownMenu>

@@ -7,6 +7,7 @@
 		inset?: boolean;
 		checked?: boolean;
 	};
+
 	type $$Events = DropdownMenuPrimitive.ItemEvents;
 
 	let className: $$Props['class'] = undefined;

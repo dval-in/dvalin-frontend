@@ -75,6 +75,8 @@
 	};
 </script>
 
+<!-- svelte-ignore a11y-no-noninteractive-element-to-interactive-role -->
+<!-- svelte-ignore a11y-click-events-have-key-events -->
 <img
 	src={matchLocaleToFlag($i18n.language)}
 	alt="language switcher"
