@@ -24,7 +24,7 @@
 		DropdownMenuLabel,
 		DropdownMenuSeparator
 	} from '$lib/components/ui/dropdown-menu/index';
-	import Card from '$lib/components/ui/card/card.svelte';
+	// import Card from '$lib/components/ui/card/card.svelte';
 	import { Checkbox } from '$lib/components/ui/checkbox';
 	import type { WeaponTypes } from '$lib/types/weapon';
 	import type { Elements } from '$lib/types/elements';
@@ -232,7 +232,11 @@
 				</IconButton>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent>
-				<IconButton icon={mdiFilterRemove} class="flex justify-center w-full">
+				<IconButton
+					icon={mdiFilterRemove}
+					class="flex justify-center w-full"
+					on:click={() => resetFilters()}
+				>
 					Reset Filters
 				</IconButton>
 				<DropdownMenuGroup class="flex justify-left">
