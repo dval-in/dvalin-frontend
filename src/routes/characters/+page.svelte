@@ -213,12 +213,12 @@
 <!-- svelte-ignore a11y-label-has-associated-control -->
 <DefaultLayout title={$i18n.t('characters.overview.title')}>
 	<svelte:fragment slot="titlebarActions">
-		<div class="flex items-center gap-4 sm:gap-6">
 			<Searchbar searchGroup="Characters" searchableDataList={$transformedCharacterStore} />
 			<DropdownMenu>
 				<DropdownMenuTrigger>
 					<IconButton
 						icon={$sortStore.order === 'asc' ? mdiSortAscending : mdiSortDescending}
+						class={`flex w-full`}
 					>
 						{$i18n.t('action.sort_by', { sortFN: $sortStore.sortFn })}
 					</IconButton>
@@ -247,15 +247,28 @@
 
 			<DropdownMenu closeOnItemClick={false} closeOnEscape>
 				<DropdownMenuTrigger>
-					<IconButton icon={$filterStore.length === 0 ? mdiFilterOutline : mdiFilter}>
+					<IconButton 
+						icon={$filterStore.length === 0 ? mdiFilterOutline : mdiFilter}
+						class={`flex w-full`}
+					>
 						{$i18n.t('action.filter_by')}
 					</IconButton>
 				</DropdownMenuTrigger>
 				<DropdownMenuContent class="p-4">
+					<IconButton
+						icon={mdiFilterRemove}
+						class={`flex justify-center w-full`}
+						disabled={$filterStore.length === 0}
+						on:click={() => resetFilters()}
+					>
+						Reset Filters
+					</IconButton>
+					<DropdownMenuSeparator />
+
 					<DropdownMenuGroup class="flex justify-left">
 						<DropdownMenuLabel>Element</DropdownMenuLabel>
 					</DropdownMenuGroup>
-					<DropdownMenuGroup class="grid grid-cols-4">
+					<DropdownMenuGroup class="grid grid-cols-7 gap-1">
 						{#each elements as { name, icon, label }}
 							<DropdownMenuItem
 								on:click={() => {
@@ -263,10 +276,11 @@
 									toggleChecked(name);
 								}}
 								class={`p-0 rounded-lg border cursor-pointer bg-tertiary text-text shadow-sm justify-center sm:p-2 gap-2 hover:border-primary ${
-									$checkedStore[name] ? 'bg-primary' : ''
-								}`}
-							>
-								<img src={icon} alt={label} class="size-10" role="button" />
+                                    $checkedStore[name] ? 'bg-primary' : ''}
+									after:content-[''] after:absolute after:top-1/2 after:left-1/2 after:transform after:-translate-x-1/2 after:-translate-y-1/2 after:w-9 after:aspect-square after:rounded-full after:bg-white after:blur after:opacity-0 hover:after:opacity-50 after:transition-opacity after:duration-300
+								`}
+								>
+								<img src={icon} alt={label} class="size-10" role="button" />	
 							</DropdownMenuItem>
 						{/each}
 					</DropdownMenuGroup>
@@ -275,7 +289,7 @@
 					<DropdownMenuGroup class="flex justify-left">
 						<DropdownMenuLabel>Weapon</DropdownMenuLabel>
 					</DropdownMenuGroup>
-					<DropdownMenuGroup class="grid grid-cols-3">
+					<DropdownMenuGroup class="grid grid-cols-5 gap-1">
 						{#each weapons as { name, icon, label }}
 							<DropdownMenuItem
 								on:click={() => {
@@ -283,8 +297,9 @@
 									toggleChecked(name);
 								}}
 								class={`p-0 rounded-lg border cursor-pointer bg-tertiary text-text shadow-sm justify-center sm:p-2 gap-2 hover:border-primary ${
-									$checkedStore[name] ? 'bg-primary' : ''
-								}`}
+									$checkedStore[name] ? 'bg-primary' : ''}
+									after:content-[''] after:absolute after:top-1/2 after:left-1/2 after:transform after:-translate-x-1/2 after:-translate-y-1/2 after:w-9 after:aspect-square after:rounded-full after:bg-white after:blur after:opacity-0 hover:after:opacity-50 after:transition-opacity after:duration-300
+								`}
 							>
 								<img
 									src={icon}
@@ -300,7 +315,7 @@
 					<DropdownMenuGroup class="flex justify-left">
 						<DropdownMenuLabel>Rarity</DropdownMenuLabel>
 					</DropdownMenuGroup>
-					<DropdownMenuGroup class="grid grid-cols-2 justify-center">
+					<DropdownMenuGroup class="grid grid-cols-2 justify-center gap-2">
 						<DropdownMenuItem
 							on:click={() => {
 								setFilterStore('rarity', 5);
@@ -338,17 +353,9 @@
 							<h1 class="text-sm font-medium">Owned</h1>
 						</DropdownMenuItem>
 					</DropdownMenuGroup>
-					<DropdownMenuSeparator />
-					<IconButton
-						icon={mdiFilterRemove}
-						class="flex justify-center w-full"
-						on:click={() => resetFilters()}
-					>
-						Reset Filters
-					</IconButton>
 				</DropdownMenuContent>
 			</DropdownMenu>
-		</div>
+
 	</svelte:fragment>
 	<div class="flex flex-wrap gap-4 justify-center">
 		{#each $transformedCharacterStore as character}
