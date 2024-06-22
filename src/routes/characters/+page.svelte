@@ -198,6 +198,7 @@
 
 	const resetFilters = () => {
 		filterStore.set([]);
+		checkedStore.set({});
 	};
 
 	const toggleChecked = (name: string) => {
