@@ -18,7 +18,7 @@
 
 <DropdownMenuPrimitive.Item
 	class={cn(
-		'relative flex cursor-default select-none items-center rounded-sm px-2 ml-2 py-1.5 text-sm outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-accent data-[highlighted]:text-accent-foreground data-[disabled]:opacity-50',
+		'relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-accent data-[highlighted]:text-accent-foreground data-[disabled]:opacity-50',
 		inset && 'pl-8',
 		className
 	)}
@@ -33,6 +33,7 @@
 >
 	<slot />
 	{#if checked}
+		{console.log('checked', checked)}
 		<Check class="ml-2 w-4 text-primary" />
 	{/if}
 </DropdownMenuPrimitive.Item>
