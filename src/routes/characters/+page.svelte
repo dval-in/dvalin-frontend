@@ -50,7 +50,7 @@
 		order: 'asc'
 	});
 
-	const filterStore = writable<{ filterFn: Filters; value: any }[]>([]);
+	const filterStore = writable<{ filterFn: Filters; value: string }[]>([]);
 
 	const elements = [
 		{ name: 'pyro', icon: IconPyro, label: 'Pyro' },
