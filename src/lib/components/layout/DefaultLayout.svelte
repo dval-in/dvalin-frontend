@@ -22,7 +22,7 @@
 				{/if}
 				{#if $$slots.titlebarActions && !showRequirements}
 					<div
-						class="flex max-sm:flex-col max-sm:flex-1 flex-row flex-wrap gap-2 justify-end"
+						class="flex max-sm:flex-col max-sm:flex-1 flex-row flex-wrap gap-2 justify-end sm:items-center"
 					>
 						<slot name="titlebarActions" />
 					</div>

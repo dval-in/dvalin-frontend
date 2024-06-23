@@ -26,22 +26,13 @@
 	} from '$lib/components/ui/dropdown-menu/index';
 	import type { WeaponTypes } from '$lib/types/weapon';
 	import type { Elements } from '$lib/types/elements';
-
-	import IconAnemo from '$lib/assets/Element Icons/Anemo_no-outline.png';
-	import IconAnemoOutline from '$lib/assets/Element Icons/Anemo_outline.png';
-	import IconCryo from '$lib/assets/Element Icons/Cryo_no-outline.png';
-	import IconCryoOutline from '$lib/assets/Element Icons/Cryo_outline.png';
-	import IconDendro from '$lib/assets/Element Icons/Dendro_no-outline.png';
-	import IconDendroOutline from '$lib/assets/Element Icons/Dendro_outline.png';
-	import IconElectro from '$lib/assets/Element Icons/Electro_no-outline.png';
-	import IconElectroOutline from '$lib/assets/Element Icons/Electro_outline.png';
-	import IconGeo from '$lib/assets/Element Icons/Geo_no-outline.png';
-	import IconGeoOutline from '$lib/assets/Element Icons/Geo_outline.png';
-	import IconHydro from '$lib/assets/Element Icons/Hydro_no-outline.png';
-	import IconHydroOutline from '$lib/assets/Element Icons/Hydro_outline.png';
-	import IconPyro from '$lib/assets/Element Icons/Pyro_no-outline.png';
-	import IconPyroOutline from '$lib/assets/Element Icons/Pyro_outline.png';
-
+	import IconAnemo from '$lib/assets/icons/Element_Anemo.svg';
+	import IconCryo from '$lib/assets/icons/Element_Cryo.svg';
+	import IconDendro from '$lib/assets/icons/Element_Dendro.svg';
+	import IconElectro from '$lib/assets/icons/Element_Electro.svg';
+	import IconGeo from '$lib/assets/icons/Element_Geo.svg';
+	import IconHydro from '$lib/assets/icons/Element_Hydro.svg';
+	import IconPyro from '$lib/assets/icons/Element_Pyro.svg';
 	import IconBow from '$lib/assets/Icon_Weapon_Bow.png';
 	import IconCatalyst from '$lib/assets/Icon_Weapon_Catalyst.png';
 	import IconClaymore from '$lib/assets/Icon_Weapon_Claymore.png';
@@ -62,13 +53,13 @@
 	const filterStore = writable<{ filterFn: Filters; value: string }[]>([]);
 
 	const elements = [
-		{ name: 'pyro', icon: IconPyro, outline: IconPyroOutline, label: 'Pyro' },
-		{ name: 'hydro', icon: IconHydro, outline: IconHydroOutline, label: 'Hydro' },
-		{ name: 'anemo', icon: IconAnemo, outline: IconAnemoOutline, label: 'Anemo' },
-		{ name: 'electro', icon: IconElectro, outline: IconElectroOutline, label: 'Electro' },
-		{ name: 'dendro', icon: IconDendro, outline: IconDendroOutline, label: 'Dendro' },
-		{ name: 'cryo', icon: IconCryo, outline: IconCryoOutline, label: 'Cryo' },
-		{ name: 'geo', icon: IconGeo, outline: IconGeoOutline, label: 'Geo' }
+		{ name: 'pyro', icon: IconPyro, label: 'Pyro', color: '#ff6640' },
+		{ name: 'hydro', icon: IconHydro, label: 'Hydro', color: '#00c0ff' },
+		{ name: 'anemo', icon: IconAnemo, label: 'Anemo', color: '#32d7a0' },
+		{ name: 'electro', icon: IconElectro, label: 'Electro', color: '#cc80ff' },
+		{ name: 'dendro', icon: IconDendro, label: 'Dendro', color: '#90cc00' },
+		{ name: 'cryo', icon: IconCryo, label: 'Cryo', color: '#81fffe' },
+		{ name: 'geo', icon: IconGeo, label: 'Geo', color: '#ffac00' }
 	];
 
 	const weapons = [
@@ -278,16 +269,17 @@
 					<DropdownMenuLabel>Element</DropdownMenuLabel>
 				</DropdownMenuGroup>
 				<DropdownMenuGroup class="grid grid-cols-7 gap-1">
-					{#each elements as { name, icon, label }}
+					{#each elements as { name, icon, label, color }}
 						<DropdownMenuItem
 							on:click={() => {
 								setFilterStore('element', name);
 								toggleChecked(name);
 							}}
-							class={`p-0 rounded-lg border cursor-pointer bg-tertiary text-text shadow-sm justify-center sm:p-2 gap-2 hover:border-primary ${
+							style="--bg-color: {color}"
+							class={`p-0 rounded-lg border cursor-pointer bg-tertiary text-text shadow-sm justify-center sm:p-2 gap-2 hover:border-primary transition duration-300 ${
 								$checkedStore[name] ? 'bg-primary' : ''
 							}
-									after:content-[''] after:absolute after:top-1/2 after:left-1/2 after:transform after:-translate-x-1/2 after:-translate-y-1/2 after:w-9 after:aspect-square after:rounded-full after:bg-white after:blur after:opacity-0 hover:after:opacity-50 after:transition-opacity after:duration-300
+									after:content-[''] after:absolute after:top-1/2 after:left-1/2 after:transform after:-translate-x-1/2 after:-translate-y-1/2 after:w-9 after:aspect-square after:rounded-full after:bg-[--bg-color] after:blur after:opacity-0 hover:after:opacity-50 after:transition-opacity after:duration-300
 								`}
 						>
 							<img src={icon} alt={label} class="size-10" role="button" />
@@ -306,7 +298,7 @@
 								setFilterStore('weapon', name);
 								toggleChecked(name);
 							}}
-							class={`p-0 rounded-lg border cursor-pointer bg-tertiary text-text shadow-sm justify-center sm:p-2 gap-2 hover:border-primary ${
+							class={`p-0 rounded-lg border cursor-pointer bg-tertiary text-text shadow-sm justify-center sm:p-2 gap-2 hover:border-primary transition duration-300 ${
 								$checkedStore[name] ? 'bg-primary' : ''
 							}
 									after:content-[''] after:absolute after:top-1/2 after:left-1/2 after:transform after:-translate-x-1/2 after:-translate-y-1/2 after:w-9 after:aspect-square after:rounded-full after:bg-white after:blur after:opacity-0 hover:after:opacity-50 after:transition-opacity after:duration-300
@@ -332,7 +324,7 @@
 							setFilterStore('rarity', 5);
 							toggleChecked('rarity5');
 						}}
-						class={`p-0 rounded-lg border cursor-pointer bg-tertiary text-text shadow-sm justify-center sm:p-2 gap-2 hover:border-primary w-full ${
+						class={`p-0 rounded-lg border cursor-pointer bg-tertiary text-text shadow-sm justify-center sm:p-2 gap-2 hover:border-primary w-full transition duration-300 ${
 							$checkedStore['rarity5'] ? 'bg-primary' : ''
 						}`}
 					>
@@ -343,7 +335,7 @@
 							setFilterStore('rarity', 4);
 							toggleChecked('rarity4');
 						}}
-						class={`p-0 rounded-lg border cursor-pointer bg-tertiary text-text shadow-sm justify-center sm:p-2 gap-2 hover:border-primary w-full ${
+						class={`p-0 rounded-lg border cursor-pointer bg-tertiary text-text shadow-sm justify-center sm:p-2 gap-2 hover:border-primary w-full transition duration-300 ${
 							$checkedStore['rarity4'] ? 'bg-primary' : ''
 						}`}
 					>
@@ -357,7 +349,7 @@
 							setFilterStore('owned', true);
 							toggleChecked('owned');
 						}}
-						class={`p-0 rounded-lg border cursor-pointer bg-tertiary text-text shadow-sm justify-center sm:p-2 gap-2 hover:border-primary w-full ${
+						class={`p-0 rounded-lg border cursor-pointer bg-tertiary text-text shadow-sm justify-center sm:p-2 gap-2 hover:border-primary w-full transition duration-300 ${
 							$checkedStore['owned'] ? 'bg-primary' : ''
 						}`}
 					>

@@ -14,7 +14,10 @@
 	export let obtained: boolean;
 </script>
 
-<a class="flex flex-col w-24 xl:w-36 rounded-md overflow-hidden" href={link}>
+<a
+	class="flex flex-col w-24 xl:w-36 rounded-md overflow-hidden hover:scale-105 transition-transform duration-300 ease-in-out"
+	href={link}
+>
 	<div
 		class={`flex justify-center ${rarity === 5 ? 'bg-fivestar' : 'bg-fourstar'} ${obtained ? '' : 'opacity-50'}`}
 	>
