@@ -26,13 +26,22 @@
 	} from '$lib/components/ui/dropdown-menu/index';
 	import type { WeaponTypes } from '$lib/types/weapon';
 	import type { Elements } from '$lib/types/elements';
-	import IconAnemo from '$lib/assets/Icon_Anemo_Element.png';
-	import IconCryo from '$lib/assets/Icon_Cryo_Element.png';
-	import IconDendro from '$lib/assets/Icon_Dendro_Element.png';
-	import IconElectro from '$lib/assets/Icon_Electro_Element.png';
-	import IconGeo from '$lib/assets/Icon_Geo_Element.png';
-	import IconHydro from '$lib/assets/Icon_Hydro_Element.png';
-	import IconPyro from '$lib/assets/Icon_Pyro_Element.png';
+
+	import IconAnemo from '$lib/assets/Element Icons/Anemo_no-outline.png';
+	import IconAnemoOutline from '$lib/assets/Element Icons/Anemo_outline.png';
+	import IconCryo from '$lib/assets/Element Icons/Cryo_no-outline.png';
+	import IconCryoOutline from '$lib/assets/Element Icons/Cryo_outline.png';
+	import IconDendro from '$lib/assets/Element Icons/Dendro_no-outline.png';
+	import IconDendroOutline from '$lib/assets/Element Icons/Dendro_outline.png';
+	import IconElectro from '$lib/assets/Element Icons/Electro_no-outline.png';
+	import IconElectroOutline from '$lib/assets/Element Icons/Electro_outline.png';
+	import IconGeo from '$lib/assets/Element Icons/Geo_no-outline.png';
+	import IconGeoOutline from '$lib/assets/Element Icons/Geo_outline.png';
+	import IconHydro from '$lib/assets/Element Icons/Hydro_no-outline.png';
+	import IconHydroOutline from '$lib/assets/Element Icons/Hydro_outline.png';
+	import IconPyro from '$lib/assets/Element Icons/Pyro_no-outline.png';
+	import IconPyroOutline from '$lib/assets/Element Icons/Pyro_outline.png';
+
 	import IconBow from '$lib/assets/Icon_Weapon_Bow.png';
 	import IconCatalyst from '$lib/assets/Icon_Weapon_Catalyst.png';
 	import IconClaymore from '$lib/assets/Icon_Weapon_Claymore.png';
@@ -53,13 +62,13 @@
 	const filterStore = writable<{ filterFn: Filters; value: string }[]>([]);
 
 	const elements = [
-		{ name: 'pyro', icon: IconPyro, label: 'Pyro' },
-		{ name: 'hydro', icon: IconHydro, label: 'Hydro' },
-		{ name: 'anemo', icon: IconAnemo, label: 'Anemo' },
-		{ name: 'electro', icon: IconElectro, label: 'Electro' },
-		{ name: 'dendro', icon: IconDendro, label: 'Dendro' },
-		{ name: 'cryo', icon: IconCryo, label: 'Cryo' },
-		{ name: 'geo', icon: IconGeo, label: 'Geo' }
+		{ name: 'pyro', icon: IconPyro, outline: IconPyroOutline, label: 'Pyro' },
+		{ name: 'hydro', icon: IconHydro, outline: IconHydroOutline, label: 'Hydro' },
+		{ name: 'anemo', icon: IconAnemo, outline: IconAnemoOutline, label: 'Anemo' },
+		{ name: 'electro', icon: IconElectro, outline: IconElectroOutline, label: 'Electro' },
+		{ name: 'dendro', icon: IconDendro, outline: IconDendroOutline, label: 'Dendro' },
+		{ name: 'cryo', icon: IconCryo, outline: IconCryoOutline, label: 'Cryo' },
+		{ name: 'geo', icon: IconGeo, outline: IconGeoOutline, label: 'Geo' }
 	];
 
 	const weapons = [
