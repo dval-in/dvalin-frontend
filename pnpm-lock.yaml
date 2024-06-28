@@ -45,8 +45,8 @@ importers:
         specifier: ^0.381.0
         version: 0.381.0(svelte@4.2.18)
       mode-watcher:
-        specifier: ^0.3.0
-        version: 0.3.0(svelte@4.2.18)
+        specifier: ^0.3.1
+        version: 0.3.1(svelte@4.2.18)
       socket.io:
         specifier: ^4.7.5
         version: 4.7.5
@@ -2803,10 +2803,10 @@ packages:
   mlly@1.6.1:
     resolution: {integrity: sha512-vLgaHvaeunuOXHSmEbZ9izxPx3USsk8KCQ8iC+aTlp5sKRSoZvwhHh5L9VbKSaVC6sJDqbyohIS76E2VmHIPAA==}
 
-  mode-watcher@0.3.0:
-    resolution: {integrity: sha512-k8jjuTx94HaaRKWO6JDf8wL761hFatrTIHJKl+E+3JWcnv+GnMBH062zcLsy0lbCI3n7RZxxHaWi66auFnUO4g==}
+  mode-watcher@0.3.1:
+    resolution: {integrity: sha512-inghSVSXpEENV0SHM98+AvjDmTOjh9EJIrJXMScK42GNkDm5QJL7a/nZQ8M8i8RK7loFHqsQKBKdlXfw5e5C4w==}
     peerDependencies:
-      svelte: ^4.0.0
+      svelte: ^4.0.0 || ^5.0.0-next.1
 
   mri@1.2.0:
     resolution: {integrity: sha512-tzzskb3bG8LvYGFF/mDTpq3jpI6Q9wc3LEmBaghu+DdCssd1FakN7Bc0hVNmEyGq1bq3RgfkCb3cmQLpNPOroA==}
@@ -6800,7 +6800,7 @@ snapshots:
       pkg-types: 1.0.3
       ufo: 1.4.0
 
-  mode-watcher@0.3.0(svelte@4.2.18):
+  mode-watcher@0.3.1(svelte@4.2.18):
     dependencies:
       svelte: 4.2.18
 
