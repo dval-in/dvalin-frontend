@@ -4,7 +4,6 @@
 	import IconButton from '$lib/components/ui/icon-button/IconButton.svelte';
 	import { mdiAlert, mdiFile, mdiImport } from '@mdi/js';
 	import { Tabs, TabsList, TabsTrigger } from '$lib/components/ui/tabs';
-	import ImporterService, { type ImporterServices } from '$lib/services/importer';
 	import { Button } from '$lib/components/ui/button';
 	import {
 		AlertDialog,
@@ -19,11 +18,10 @@
 	import { goto } from '$app/navigation';
 	import Text from '$lib/components/typography/Text.svelte';
 	import i18n from '$lib/services/i18n';
-	import { userProfile } from '$lib/store/user_profile';
-	import { applicationState } from '$lib/store/application_state';
+	import BackendService from '$lib/services/backend';
 
-	let value: ImporterServices = 'dvalin';
-	const importerService = new ImporterService();
+	let value: 'dvalin' | 'paimon' = 'dvalin';
+	const backendService = BackendService.getInstance();
 	let file: File | undefined = undefined;
 	let dialogOpen = false;
 
@@ -31,7 +29,7 @@
 		let element = document.createElement('input');
 		element.type = 'file';
 		element.style.display = 'none';
-		element.onchange = (event) => {
+		element.onchange = (event: Event) => {
 			const target = event.target as HTMLInputElement;
 			if (target.files && target.files.length === 1) {
 				file = target.files[0];
@@ -49,17 +47,13 @@
 			file.text().then((fileContent) => {
 				try {
 					let data = JSON.parse(fileContent);
-					const importedUserProfile = importerService
-						.getImporterService(value)
-						.import(data);
-
-					userProfile.set(importedUserProfile);
+					backendService.user.syncUserProfile(data, value);
 					toast.success('Imported successfully!', {
 						description:
 							'Your data has been imported successfully and stored locally in your Browser'
 					});
 					goto('/settings');
-				} catch (e) {
+				} catch (e: any) {
 					toast.error('An error happened!', {
 						description: e.message
 					});
@@ -69,14 +63,7 @@
 	};
 </script>
 
-<DefaultLayout
-	title={$i18n.t('settings.import.title')}
-	showRequirements={$applicationState.isAuthenticated}
->
-	<svelte:fragment slot="requirements">
-		<Text type="h3">Imports are temporarily disabled while being logged in</Text>
-	</svelte:fragment>
-
+<DefaultLayout title={$i18n.t('settings.import.title')}>
 	<Tabs bind:value>
 		<TabsList>
 			<TabsTrigger value="dvalin">Dval.in</TabsTrigger>

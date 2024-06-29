@@ -47,6 +47,9 @@ importers:
       mode-watcher:
         specifier: ^0.3.1
         version: 0.3.1(svelte@4.2.18)
+      simple-icons:
+        specifier: ^12.4.0
+        version: 12.4.0
       socket.io:
         specifier: ^4.7.5
         version: 4.7.5
@@ -3301,6 +3304,10 @@ packages:
 
   simple-get@4.0.1:
     resolution: {integrity: sha512-brv7p5WgH0jmQJr1ZDDfKDOSeWWg+OVypG99A/5vYGPqJ6pxiaHLy8nxtFjBA7oMa01ebA9gfh1uMCFqOuXxvA==}
+
+  simple-icons@12.4.0:
+    resolution: {integrity: sha512-2uL8PHFDyBLQGhZsAvYcaHqm5KjNzIepPshTLZky9Dc6HgPFI83SAVC8of3KYtr+7O8zJggrGYTxyUu/9hyYgA==}
+    engines: {node: '>=0.12.18'}
 
   simple-swizzle@0.2.2:
     resolution: {integrity: sha512-JA//kQgZtbuY83m+xT+tXJkmJncGMTFT+C+g2h2R9uxkYIrE2yy9sgmcLhCnw57/WSD+Eh3J97FPEDFnbXnDUg==}
@@ -7292,6 +7299,8 @@ snapshots:
       decompress-response: 6.0.0
       once: 1.4.0
       simple-concat: 1.0.1
+
+  simple-icons@12.4.0: {}
 
   simple-swizzle@0.2.2:
     dependencies:

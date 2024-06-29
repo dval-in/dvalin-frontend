@@ -109,7 +109,6 @@
 				return 'sword';
 		}
 	};
-
 	// Derived store to transform character data based on sorting and filtering
 	const transformedCharacterStore = derived(
 		[userProfile, dataIndexStore, sortStore, filterStore],
@@ -119,7 +118,6 @@
 				const obtained = userProfile.characters
 					? Object.keys(userProfile.characters).includes(key)
 					: false;
-
 				return {
 					obtained,
 					link: `/characters/${key}`,
