@@ -37,12 +37,13 @@
 	<CommandInput placeholder={'Search for ' + searchGroup + '...'} />
 	<CommandList>
 		<CommandEmpty>Search Not Found</CommandEmpty>
-		<CommandGroup heading={searchGroup}>
+		<CommandGroup>
 			{#each searchableDataList as data}
 				<CommandItem
 					onSelect={(value) => {
 						redirectToPage(data.link);
 					}}
+					class="cursor-pointer hover:bg-primary hover:text-black"
 				>
 					<img
 						src={data.img}
