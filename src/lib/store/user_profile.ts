@@ -1,7 +1,7 @@
 import { persisted } from 'svelte-persisted-store';
 import type { UserProfile } from '$lib/types/user_profile';
 
-const defaultValues: UserProfile = {
+export const defaultValues: UserProfile = {
 	format: 'dvalin',
 	version: 0,
 	config: {
@@ -10,14 +10,15 @@ const defaultValues: UserProfile = {
 		autoRefine5: false,
 		preferedLanguage: 'en'
 	},
-	user: {
+	account: {
 		ar: 0,
 		uid: 0,
 		wl: 0,
 		name: '',
 		server: '',
 		namecard: ''
-	}
+	},
+	auth: []
 };
 
 export const userProfile = persisted('userProfile', defaultValues, {

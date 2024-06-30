@@ -4,6 +4,20 @@
 	import DefaultLayout from '$lib/components/layout/DefaultLayout.svelte';
 	import { Card, CardContent, CardFooter, CardHeader } from '$lib/components/ui/card';
 	import i18n from '$lib/services/i18n';
+	import { userProfile } from '$lib/store/user_profile';
+	import BackendService from '$lib/services/backend';
+	import { get } from 'svelte/store';
+	const backend = BackendService.getInstance();
+	backend.user.fetchUserProfile().subscribe((response) => {
+		if (response.status === 'success' && response.data.state === 'SUCCESS') {
+			userProfile.update((currentProfile) => ({
+				...currentProfile,
+				...response.data.data,
+				lastUpdated: new Date()
+			}));
+		}
+	});
+	console.log(get(userProfile));
 </script>
 
 <DefaultLayout title={$i18n.t('dashboard.title')}>

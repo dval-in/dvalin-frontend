@@ -19,11 +19,14 @@
 	import Text from '$lib/components/typography/Text.svelte';
 	import i18n from '$lib/services/i18n';
 	import BackendService from '$lib/services/backend';
+	import { userProfile } from '$lib/store/user_profile';
 
 	let value: 'dvalin' | 'paimon' = 'dvalin';
-	const backendService = BackendService.getInstance();
+	const backend = BackendService.getInstance();
+	const syncUserProfile = backend.user.syncUserProfile();
 	let file: File | undefined = undefined;
 	let dialogOpen = false;
+	const userWishes = $userProfile.wishes;
 
 	const selectFile = () => {
 		let element = document.createElement('input');
@@ -47,10 +50,26 @@
 			file.text().then((fileContent) => {
 				try {
 					let data = JSON.parse(fileContent);
-					backendService.user.syncUserProfile(data, value);
+					if (!userWishes) {
+						throw new Error('No wishes found, please import from dvalin first');
+					}
+					if (!userWishes) {
+						throw new Error('No wishes found, please import from dvalin first');
+					}
+					Object.entries(userWishes).forEach(([key, array]) => {
+						if (!array || array.length === 0) {
+							throw new Error(
+								'No wishes found, please import from dvalin first' + key
+							);
+						}
+					});
+					$syncUserProfile.mutateAsync({
+						file: data,
+						format: value
+					});
 					toast.success('Imported successfully!', {
 						description:
-							'Your data has been imported successfully and stored locally in your Browser'
+							'Your data has been send to the server and will be processed soon. You will be redirected to the settings page.'
 					});
 					goto('/settings');
 				} catch (e: any) {

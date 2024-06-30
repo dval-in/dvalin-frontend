@@ -6,6 +6,7 @@
 	import { Alert, AlertDescription, AlertTitle } from '$lib/components/ui/alert';
 	import { goto } from '$app/navigation';
 	import { toast } from 'svelte-sonner';
+	import { userProfile } from '$lib/store/user_profile';
 
 	interface UserData {
 		uid: number;
@@ -18,12 +19,12 @@
 		preferedLanguage: string;
 	}
 
-	const backendService = BackendService.getInstance();
+	const backend = BackendService.getInstance();
 
-	$: createProfileMutation = backendService.user.createUserProfile();
+	const createProfileMutation = backend.user.createUserProfile();
 
+	$userProfile.account.uid !== 0 && goto('/');
 	let error: string | null = null;
-
 	const handleProfileSubmit = async ({
 		user,
 		config
@@ -37,7 +38,6 @@
 		const result = await $createProfileMutation.mutateAsync(data);
 		if (result.state === 'SUCCESS') {
 			toast.success('Profile created successfully');
-			goto('/');
 		} else {
 			toast.error('Error creating profile:' + result.state);
 		}
@@ -47,15 +47,17 @@
 </script>
 
 <DefaultLayout title="Welcome Traveller !">
-	<div class="grid grid-cols-3 items-center">
-		<div class="p-5">
-			<H2>Complete your profile to access our features !</H2>
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore quos modi non excepturi
-			incidunt unde? Ratione reprehenderit asperiores excepturi eos ut odio sequi officiis molestiae
-			impedit!
+	{#if !$createProfileMutation.isPending}
+		<div class="grid grid-cols-3 items-center">
+			<div class="p-5">
+				<H2>Complete your profile to access our features !</H2>
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore quos modi non excepturi
+				incidunt unde? Ratione reprehenderit asperiores excepturi eos ut odio sequi officiis
+				molestiae impedit!
+			</div>
+			<NewAccountForm onSubmit={handleProfileSubmit} />
 		</div>
-		<NewAccountForm onSubmit={handleProfileSubmit} />
-	</div>
+	{/if}
 
 	{#if $createProfileMutation.isPending}
 		<Alert>

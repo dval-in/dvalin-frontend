@@ -59,6 +59,13 @@ export const backendPost = async <T extends object>(url: string, body: object): 
 	}).then(checkBackendResponse<T>);
 };
 
+export const backendDelete = async <T extends object>(url: string): Promise<T> => {
+	return fetch(url, {
+		method: 'DELETE',
+		credentials: 'include'
+	}).then(checkBackendResponse<T>);
+};
+
 export default class BackendService {
 	private env: EnvironmentService = EnvironmentService.getInstance();
 	private static instance: BackendService | undefined;

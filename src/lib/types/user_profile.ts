@@ -14,6 +14,7 @@ export interface UserProfile {
 	config: Config;
 	account: IUser;
 	auth: string[];
+	lastUpdated?: Date;
 	achievements?: IAchievements;
 	artifacts?: IArtifact[];
 	characters?: ICharacters;

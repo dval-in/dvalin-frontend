@@ -1,5 +1,5 @@
 import { createMutation, createQuery, type QueryClient } from '@tanstack/svelte-query';
-import { backendFetch, backendPost } from '$lib/services/backend/index';
+import { backendDelete, backendFetch, backendPost } from '$lib/services/backend/index';
 import type { UserProfile } from '$lib/types/user_profile';
 import { applicationState } from '$lib/store/application_state';
 import { derived } from 'svelte/store';
@@ -42,18 +42,31 @@ export class BackendUserService {
 		});
 	}
 
-	syncUserProfile(data: object, format: 'paimon' | 'dvalin') {
-		return createQuery(
-			derived(applicationState, (appState) => ({
-				queryKey: ['syncUserProfile', appState],
-				enabled: appState.isAuthenticated,
-				queryFn: async () =>
-					await backendPost<FetchUserProfileResponse>(`${this.baseUrl}/sync`, {
-						...data,
-						format
-					})
-			})),
-			this.queryClient
-		);
+	syncUserProfile() {
+		return createMutation({
+			mutationFn: async (data: { file: object; format: 'paimon' | 'dvalin' }) =>
+				await backendPost<FetchUserProfileResponse>(`${this.baseUrl}/sync`, {
+					...data.file,
+					format: data.format
+				})
+		});
+	}
+
+	deleteUserProfile() {
+		return createMutation({
+			mutationFn: async () => {
+				const response = await backendDelete<{ state: 'SUCCESS' }>(`${this.baseUrl}`);
+				if (response.state === 'SUCCESS') {
+					this.queryClient.invalidateQueries({ queryKey: ['fetchUserProfile'] });
+					return response;
+				}
+				throw new Error('Failed to delete user profile');
+			},
+			onSuccess: () => {
+				// Optionally, you can perform additional actions on successful deletion
+				// For example, updating the application state
+				applicationState.update((state) => ({ ...state, isAuthenticated: false }));
+			}
+		});
 	}
 }
