@@ -48,6 +48,24 @@ export const backendFetch = async <T extends object>(url: string): Promise<T> =>
 	}).then(checkBackendResponse<T>);
 };
 
+export const backendPost = async <T extends object>(url: string, body: object): Promise<T> => {
+	return fetch(url, {
+		method: 'POST',
+		credentials: 'include',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(body)
+	}).then(checkBackendResponse<T>);
+};
+
+export const backendDelete = async <T extends object>(url: string): Promise<T> => {
+	return fetch(url, {
+		method: 'DELETE',
+		credentials: 'include'
+	}).then(checkBackendResponse<T>);
+};
+
 export default class BackendService {
 	private env: EnvironmentService = EnvironmentService.getInstance();
 	private static instance: BackendService | undefined;

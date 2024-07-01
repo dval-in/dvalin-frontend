@@ -158,7 +158,9 @@
 				icon={mdiLogout}
 				{isSidebarOpen}
 				link=""
-				on:click={() => backend.auth.logout()}
+				on:click={() => {
+					backend.auth.logout();
+				}}
 				title={$i18n.t('navigation.logout')}
 			/>
 		{:else}

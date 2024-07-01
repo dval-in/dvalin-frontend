@@ -25,9 +25,11 @@
 	import { AlertDescription, AlertTitle } from '$lib/components/ui/alert/index.js';
 	import Icon from '$lib/components/ui/icon/icon.svelte';
 	import { mdiTranslate } from '@mdi/js';
+	import BackendService from '$lib/services/backend';
 
 	let selectedLanguage = get(i18n).language;
-
+	const backend = BackendService.getInstance();
+	$: createConfigMutation = backend.user.updateConfig();
 	let isDialogOpen = false;
 
 	const languages = Object.keys(get(i18n).options.resources ?? {});
@@ -68,6 +70,9 @@
 	const saveLanguage = () => {
 		$i18n.changeLanguage(selectedLanguage);
 		isDialogOpen = false;
+		$createConfigMutation.mutate({
+			config: { preferedLanguage: selectedLanguage.toLowerCase() }
+		});
 	};
 
 	const openDialog = () => {

@@ -1,7 +1,7 @@
-import type { CharacterKey } from '$lib/types/keys/CharacterKey';
+import type { CharacterKey } from './keys/CharacterKey';
 
 export type ICharacters = {
-	[key in CharacterKey]?: ICharacter;
+	[key in CharacterKey]: ICharacter; // E.g. "Rosaria"
 };
 
 export type ICharacter = {
@@ -9,9 +9,10 @@ export type ICharacter = {
 	constellation: number; // 0-6 inclusive
 	ascension: number; // 0-6 inclusive. need to disambiguate 80/90 or 80/80
 	talent: {
-		// Does not include boost from constellations. 1-15 inclusive
+		// Does not include boost from constellations.
 		auto: number;
 		skill: number;
 		burst: number;
 	};
+	manualConstellations: number; // constellation added by the user
 };

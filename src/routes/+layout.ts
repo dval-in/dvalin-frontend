@@ -9,7 +9,7 @@ import { userProfile } from '$lib/store/user_profile';
 import i18n from '$lib/services/i18n';
 
 /** @type {import('../../.svelte-kit/types/src/routes/$types').LayoutServerLoad} */
-export async function load() {
+export const load = async () => {
 	const queryClient = new QueryClient({
 		defaultOptions: {
 			queries: {
@@ -20,41 +20,50 @@ export async function load() {
 	const backend = BackendService.setupInstance(queryClient);
 
 	if (browser) {
-		backend.user.fetchUserProfile().subscribe((response) => {
-			if (response.status === 'success' && response.data.state === 'SUCCESS') {
-				userProfile.set(response.data.data);
-			}
-		});
+		const fetchUserProfile = () => {
+			backend.user.fetchUserProfile().subscribe((response) => {
+				if (response.status === 'success' && response.data.state === 'SUCCESS') {
+					userProfile.update((currentProfile) => ({
+						...currentProfile,
+						...response.data.data,
+						lastUpdated: new Date()
+					}));
+				}
+			});
+		};
+
+		// Fetch user profile immediately
+		fetchUserProfile();
+
+		// Set up interval to fetch user profile
+		setInterval(fetchUserProfile, 5 * 60 * 1000);
 
 		const socket = io(import.meta.env.VITE_BACKEND_URL, { withCredentials: true });
 
-		socket.on('authenticationState', (authenticationState: boolean) => {
-			applicationState.update((state) => {
-				state.isAuthenticated = authenticationState;
-				return state;
-			});
+		socket.on('authenticationState', (authenticationState) => {
+			applicationState.update((state) => ({
+				...state,
+				isAuthenticated: authenticationState
+			}));
 		});
 
-		socket.on('invalidateQuery', (queryKey: string[]) => {
+		socket.on('invalidateQuery', (queryKey) => {
 			queryClient.invalidateQueries({ queryKey });
 		});
 
-		socket.on(
-			'toast',
-			(toastMessage: { type: 'success' | 'error' | 'info'; message: string }) => {
-				const message = get(i18n).t(toastMessage.message);
+		socket.on('toast', (toastMessage) => {
+			const message = get(i18n).t(toastMessage.message);
 
-				switch (toastMessage.type) {
-					case 'success':
-						return toast.success(message);
-					case 'error':
-						return toast.error(message);
-					case 'info':
-						return toast.info(message);
-				}
+			switch (toastMessage.type) {
+				case 'success':
+					return toast.success(message);
+				case 'error':
+					return toast.error(message);
+				case 'info':
+					return toast.info(message);
 			}
-		);
+		});
 	}
 
 	return { queryClient, backend };
-}
+};

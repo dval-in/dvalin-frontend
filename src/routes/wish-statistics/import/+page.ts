@@ -7,7 +7,7 @@ export async function load({ parent, fetch }: PageLoadEvent) {
 	const { queryClient, backend } = await parent();
 
 	await queryClient.prefetchQuery({
-		queryKey: ['fetchHoyoWishhistoryStatus', get(applicationState).isAuthenticated],
+		queryKey: ['fetchHoyoWishStatus', get(applicationState).isAuthenticated],
 		queryFn: async () =>
 			(
 				await fetch(backend.hoyo.getHoyoWishHistoryStatusUrl(), {
