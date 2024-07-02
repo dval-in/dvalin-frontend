@@ -374,7 +374,7 @@
 								: false}
 							on:click={() => console.log($checkedStore['rarity4'])}
 						>
-							<img src={IconPurpleStar} alt="4 Star" class={'size-7'} />
+							<img src={IconPurpleStar} alt="4 Star" class={'size-8'} />
 						</Toggle>
 					</DropdownMenuItem>
 				</DropdownMenuGroup>
@@ -390,7 +390,7 @@
 							setFilterStore('owned', true);
 							toggleChecked('owned');
 						}}
-						class="gap-1"
+						class="gap-2"
 					>
 						<Checkbox
 							id="owned"
