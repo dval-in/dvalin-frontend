@@ -31,7 +31,7 @@
 		"svelte-i18next": "^2.2.2",
 		"svelte-persisted-store": "^0.9.4",
 		"svelte-sonner": "^0.3.24",
-		"svelte-ux": "^0.66.0",
+		"svelte-ux": "^0.72.0",
 		"sveltekit-superforms": "^1.13.4",
 		"tailwind-merge": "^2.3.0",
 		"tailwind-variants": "^0.2.1",
