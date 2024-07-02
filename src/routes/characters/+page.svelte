@@ -230,7 +230,7 @@
 <DefaultLayout title={$i18n.t('characters.overview.title')}>
 	<svelte:fragment slot="titlebarActions">
 		<Searchbar searchGroup="Characters" searchableDataList={$sortedCharacterStore} />
-		<DropdownMenu>
+		<DropdownMenu closeOnEscape preventScroll={false}>
 			<DropdownMenuTrigger>
 				<IconButton
 					icon={$sortStore.order === 'asc' ? mdiSortAscending : mdiSortDescending}
@@ -267,7 +267,7 @@
 			</DropdownMenuContent>
 		</DropdownMenu>
 
-		<DropdownMenu closeOnItemClick={false} closeOnEscape>
+		<DropdownMenu closeOnItemClick={false} closeOnEscape preventScroll={false}>
 			<DropdownMenuTrigger>
 				<IconButton
 					icon={$filterStore.length === 0 ? mdiFilterOutline : mdiFilter}
