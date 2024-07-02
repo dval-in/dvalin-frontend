@@ -307,7 +307,7 @@
 									: false}
 								on:click={() => console.log($checkedStore[name])}
 							>
-								<img src={icon} alt={label} class="size-7" />
+								<img src={icon} alt={label} class="size-9" />
 							</Toggle>
 						</DropdownMenuItem>
 					{/each}
@@ -333,7 +333,7 @@
 									: false}
 								on:click={() => console.log($checkedStore[name])}
 							>
-								<img src={icon} alt={label} class={`size-7`} />
+								<img src={icon} alt={label} class={`size-9 rounded-full`} />
 							</Toggle>
 						</DropdownMenuItem>
 					{/each}
@@ -358,7 +358,7 @@
 								: false}
 							on:click={() => console.log($checkedStore['rarity5'])}
 						>
-							<img src={IconGoldStar} alt="5 Star" class={'size-7'} />
+							<img src={IconGoldStar} alt="5 Star" class={'size-8'} />
 						</Toggle>
 					</DropdownMenuItem>
 					<DropdownMenuItem
