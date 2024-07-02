@@ -39,8 +39,8 @@ importers:
         specifier: ^23.11.5
         version: 23.11.5
       layerchart:
-        specifier: ^0.38.0
-        version: 0.38.0(@babel/core@7.24.3)(postcss-load-config@4.0.2(postcss@8.4.38))(postcss@8.4.38)(sass@1.77.4)(svelte@4.2.18)(typescript@5.5.2)(vite@5.3.2(@types/node@20.11.30)(sass@1.77.4)(terser@5.30.0))
+        specifier: ^0.43.6
+        version: 0.43.6(@babel/core@7.24.3)(postcss-load-config@4.0.2(postcss@8.4.38))(postcss@8.4.38)(sass@1.77.4)(svelte@4.2.18)(typescript@5.5.2)
       lucide-svelte:
         specifier: ^0.399.0
         version: 0.399.0(svelte@4.2.18)
@@ -2614,14 +2614,14 @@ packages:
   kolorist@1.8.0:
     resolution: {integrity: sha512-Y+60/zizpJ3HRH8DCss+q95yr6145JXZo46OTpFvDZWLfRCE4qChOyk1b26nMaNpfHHgxagk9dXT5OP0Tfe+dQ==}
 
-  layercake@8.2.0:
-    resolution: {integrity: sha512-CjQMT/nKdEkw7J2QLoB70UOr6b9tJPEnfA9G+unmuEJteJdfCSbjkzhzjN2MngX4YvR8VBG4H7x9sx5qO8aN6g==}
+  layercake@8.3.4:
+    resolution: {integrity: sha512-r5OrzTxpDp0BQm9m5kJTIzsD5o9nbOkxXTaMzce1LPTigs9PnQfvfjnsAdj/tXpe15BJaP1RVWFgnMDSghJhXw==}
     peerDependencies:
       svelte: 3 - 5 || >=5.0.0-next.120
       typescript: ^5.0.2
 
-  layerchart@0.38.0:
-    resolution: {integrity: sha512-4Ae1u4TYTPsKEQIu6YD8/xVvoAQriczheS1oIVod89iy/DKCIjcKPW/q4f7DnE4QNr779E6grlq5WgE0IL89kw==}
+  layerchart@0.43.6:
+    resolution: {integrity: sha512-NjixniD2QKYMwnI1FUvTjn1P6PhbWiTm/xtLCxVZUBS7g3S4HZbXZSS1R4zvb0/PhlfkkYWae1giURESv47H3Q==}
     peerDependencies:
       svelte: ^3.56.0 || ^4.0.0 || ^5.0.0-next.120
 
@@ -3040,8 +3040,8 @@ packages:
     resolution: {integrity: sha512-Wglpdk03BSfXkHoQa3b/oulrotAkwrlLDRSOb9D0bN86FdRyE9lppSp33aHNPgBa0JKCoB+drFLZkQoRRYae5A==}
     engines: {node: ^10 || ^12 || >=14}
 
-  posthog-js@1.136.2:
-    resolution: {integrity: sha512-9oTUB/JDayzV+hB4f7u+ZNUbfnkGHLxyZw+FOE59pCgmbWHcJxhpGbu2Xlyv027/iHIjQbn1mtm2wJmBI2BuqA==}
+  posthog-js@1.142.1:
+    resolution: {integrity: sha512-yqeWTWitlb0sCaH5v6s7UJ+pPspzf/lkzPaSE5pMMXRM2i2KNsMoZEAZqbPCW8fQ8QL6lHs6d8PLjHrvbR288w==}
 
   preact@10.19.5:
     resolution: {integrity: sha512-OPELkDmSVbKjbFqF9tgvOowiiQ9TmsJljIzXRyNE8nGiis94pwv1siF78rQkAP1Q1738Ce6pellRg/Ns/CtHqQ==}
@@ -3542,8 +3542,8 @@ packages:
     peerDependencies:
       svelte: ^4.0.0
 
-  svelte-ux@0.66.0:
-    resolution: {integrity: sha512-6zkazF3qezXsPQUfCcMX86yvisojOUNWQQkPtYPCfsT1sHfNt44NzOwudC91FWWWRLSRxtkmypWbHK/KRl0xHw==}
+  svelte-ux@0.71.3:
+    resolution: {integrity: sha512-6WQE0ifmIYSC9+R3tuYBbv9v2kAiBuubknUGFmGTvx64kaUTNyZ2mZirNCip8e2J1eocP3URzW8UnA8KJBG3TA==}
     peerDependencies:
       svelte: ^3.56.0 || ^4.0.0 || ^5.0.0-next.120
 
@@ -3822,6 +3822,9 @@ packages:
     peerDependenciesMeta:
       vite:
         optional: true
+
+  web-vitals@4.2.1:
+    resolution: {integrity: sha512-U6bAxeudnhDqcXNl50JC4hLlqox9DZnngxfISZm3DMZnonW35xtJOVUc091L+DOY+6hVZVpKXoiCP0RiT6339Q==}
 
   webidl-conversions@4.0.2:
     resolution: {integrity: sha512-YQ+BmxuTgd6UXZW3+ICGfyqRyHXVlD5GtQr5+qjiNW7bF0cqrzX500HVXPBOvgXb5YnzDd+h0zqyv61KUD7+Sg==}
@@ -6592,7 +6595,7 @@ snapshots:
 
   kolorist@1.8.0: {}
 
-  layercake@8.2.0(svelte@4.2.18)(typescript@5.5.2):
+  layercake@8.3.4(svelte@4.2.18)(typescript@5.5.2):
     dependencies:
       d3-array: 3.2.4
       d3-color: 3.1.0
@@ -6601,9 +6604,8 @@ snapshots:
       svelte: 4.2.18
       typescript: 5.5.2
 
-  layerchart@0.38.0(@babel/core@7.24.3)(postcss-load-config@4.0.2(postcss@8.4.38))(postcss@8.4.38)(sass@1.77.4)(svelte@4.2.18)(typescript@5.5.2)(vite@5.3.2(@types/node@20.11.30)(sass@1.77.4)(terser@5.30.0)):
+  layerchart@0.43.6(@babel/core@7.24.3)(postcss-load-config@4.0.2(postcss@8.4.38))(postcss@8.4.38)(sass@1.77.4)(svelte@4.2.18)(typescript@5.5.2):
     dependencies:
-      '@sveltejs/vite-plugin-svelte': 3.1.1(svelte@4.2.18)(vite@5.3.2(@types/node@20.11.30)(sass@1.77.4)(terser@5.30.0))
       d3-array: 3.2.4
       d3-color: 3.1.0
       d3-delaunay: 6.0.4
@@ -6624,12 +6626,12 @@ snapshots:
       d3-tile: 1.0.0
       d3-time: 3.1.0
       date-fns: 3.6.0
-      layercake: 8.2.0(svelte@4.2.18)(typescript@5.5.2)
+      layercake: 8.3.4(svelte@4.2.18)(typescript@5.5.2)
       lodash-es: 4.17.21
-      posthog-js: 1.136.2
+      posthog-js: 1.142.1
       shapefile: 0.6.6
       svelte: 4.2.18
-      svelte-ux: 0.66.0(@babel/core@7.24.3)(postcss-load-config@4.0.2(postcss@8.4.38))(postcss@8.4.38)(sass@1.77.4)(svelte@4.2.18)
+      svelte-ux: 0.71.3(@babel/core@7.24.3)(postcss-load-config@4.0.2(postcss@8.4.38))(postcss@8.4.38)(sass@1.77.4)(svelte@4.2.18)
       topojson-client: 3.1.0
     transitivePeerDependencies:
       - '@babel/core'
@@ -6641,9 +6643,7 @@ snapshots:
       - sass
       - stylus
       - sugarss
-      - supports-color
       - typescript
-      - vite
 
   leven@3.1.0: {}
 
@@ -6984,10 +6984,11 @@ snapshots:
       picocolors: 1.0.0
       source-map-js: 1.2.0
 
-  posthog-js@1.136.2:
+  posthog-js@1.142.1:
     dependencies:
       fflate: 0.4.8
       preact: 10.19.5
+      web-vitals: 4.2.1
 
   preact@10.19.5: {}
 
@@ -7575,7 +7576,7 @@ snapshots:
     dependencies:
       svelte: 4.2.18
 
-  svelte-ux@0.66.0(@babel/core@7.24.3)(postcss-load-config@4.0.2(postcss@8.4.38))(postcss@8.4.38)(sass@1.77.4)(svelte@4.2.18):
+  svelte-ux@0.71.3(@babel/core@7.24.3)(postcss-load-config@4.0.2(postcss@8.4.38))(postcss@8.4.38)(sass@1.77.4)(svelte@4.2.18):
     dependencies:
       '@floating-ui/dom': 1.6.5
       '@fortawesome/fontawesome-common-types': 6.5.2
@@ -7937,6 +7938,8 @@ snapshots:
   vitefu@0.2.5(vite@5.3.2(@types/node@20.11.30)(sass@1.77.4)(terser@5.30.0)):
     optionalDependencies:
       vite: 5.3.2(@types/node@20.11.30)(sass@1.77.4)(terser@5.30.0)
+
+  web-vitals@4.2.1: {}
 
   webidl-conversions@4.0.2: {}
 
