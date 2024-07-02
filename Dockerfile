@@ -14,6 +14,10 @@ RUN pnpm install --frozen-lockfile
 # Copy the rest of the application code
 COPY . .
 
+
+ARG VITE_BACKEND_URL
+ENV VITE_BACKEND_URL=$VITE_BACKEND_URL
+
 # Build the application
 RUN pnpm run build
 
