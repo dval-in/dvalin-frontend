@@ -1,11 +1,15 @@
 <script lang="ts">
 	import IconButton from '$lib/components/ui/icon-button/IconButton.svelte';
 	import {
+		mdiAlphabetical,
+		mdiCalendar,
+		mdiCreation,
 		mdiFilter,
 		mdiFilterOutline,
+		mdiFilterRemove,
 		mdiSortAscending,
 		mdiSortDescending,
-		mdiFilterRemove
+		mdiStar
 	} from '@mdi/js';
 	import CharCard from '$lib/components/ui/card/CharCard.svelte';
 	import Searchbar from '$lib/components/ui/searchbar/Searchbar.svelte';
@@ -20,28 +24,32 @@
 		DropdownMenuContent,
 		DropdownMenuGroup,
 		DropdownMenuItem,
-		DropdownMenuTrigger,
 		DropdownMenuLabel,
-		DropdownMenuSeparator
+		DropdownMenuSeparator,
+		DropdownMenuTrigger
 	} from '$lib/components/ui/dropdown-menu/index';
+	import Icon from '$lib/components/ui/icon/icon.svelte';
 	import type { WeaponTypes } from '$lib/types/weapon';
 	import type { Elements } from '$lib/types/elements';
-	import IconAnemo from '$lib/assets/icons/Element_Anemo.svg';
-	import IconCryo from '$lib/assets/icons/Element_Cryo.svg';
-	import IconDendro from '$lib/assets/icons/Element_Dendro.svg';
-	import IconElectro from '$lib/assets/icons/Element_Electro.svg';
-	import IconGeo from '$lib/assets/icons/Element_Geo.svg';
-	import IconHydro from '$lib/assets/icons/Element_Hydro.svg';
-	import IconPyro from '$lib/assets/icons/Element_Pyro.svg';
-	import IconBow from '$lib/assets/Icon_Weapon_Bow.png';
-	import IconCatalyst from '$lib/assets/Icon_Weapon_Catalyst.png';
-	import IconClaymore from '$lib/assets/Icon_Weapon_Claymore.png';
-	import IconPolearm from '$lib/assets/Icon_Weapon_Polearm.png';
-	import IconSword from '$lib/assets/Icon_Weapon_Sword.png';
+	import IconAnemo from '$lib/assets/icons/elements/Element_Anemo.svg';
+	import IconCryo from '$lib/assets/icons/elements/Element_Cryo.svg';
+	import IconDendro from '$lib/assets/icons/elements/Element_Dendro.svg';
+	import IconElectro from '$lib/assets/icons/elements/Element_Electro.svg';
+	import IconGeo from '$lib/assets/icons/elements/Element_Geo.svg';
+	import IconHydro from '$lib/assets/icons/elements/Element_Hydro.svg';
+	import IconPyro from '$lib/assets/icons/elements/Element_Pyro.svg';
+	import IconBow from '$lib/assets/icons/weapons/bow.png';
+	import IconCatalyst from '$lib/assets/icons/weapons/catalyst.png';
+	import IconClaymore from '$lib/assets/icons/weapons/claymore.png';
+	import IconPolearm from '$lib/assets/icons/weapons/polearm.png';
+	import IconSword from '$lib/assets/icons/weapons/sword.png';
 	import IconGoldStar from '$lib/assets/Icon_Gold_Star.png';
 	import IconPurpleStar from '$lib/assets/Icon_Purple_Star.png';
+	import { Toggle } from '$lib/components/ui/toggle';
+	import { Checkbox } from '$lib/components/ui/checkbox';
+	import { Label } from '$lib/components/ui/label';
 
-	type Sorts = 'Name' | 'Date' | 'Constellation';
+	type Sorts = 'Name' | 'Date' | 'Rarity' | 'Constellation';
 	type Filters = 'element' | 'weapon' | 'rarity' | 'owned';
 
 	// Stores for sorting and filtering
@@ -110,11 +118,10 @@
 		}
 	};
 
-	// Derived store to transform character data based on sorting and filtering
 	const transformedCharacterStore = derived(
-		[userProfile, dataIndexStore, sortStore, filterStore],
-		([userProfile, dataIndexStore, sortStore, filterStore]) => {
-			const characters = Object.keys(dataIndexStore.character).map((key) => {
+		[userProfile, dataIndexStore],
+		([userProfile, dataIndexStore]) => {
+			return Object.keys(dataIndexStore.character).map((key) => {
 				const character = dataIndexStore.character[key];
 				const obtained = userProfile.characters
 					? Object.keys(userProfile.characters).includes(key)
@@ -130,7 +137,13 @@
 					rarity: character.rarity
 				};
 			});
+		}
+	);
 
+	// Derived store to transform character data based on sorting and filtering
+	const sortedCharacterStore = derived(
+		[transformedCharacterStore, sortStore, filterStore],
+		([transformedCharacterStore, sortStore, filterStore]) => {
 			const filterGroups = filterStore.reduce(
 				(groups, filter) => {
 					if (!groups[filter.filterFn]) {
@@ -142,7 +155,7 @@
 				{} as Record<Filters, Set<any>>
 			);
 
-			const filteredCharacters = characters.filter((character) => {
+			const filteredCharacters = transformedCharacterStore.filter((character) => {
 				for (const [filterFn, values] of Object.entries(filterGroups)) {
 					if (filterFn === 'element' && !values.has(character.element)) {
 						return false;
@@ -165,6 +178,9 @@
 					return sortStore.order === 'asc'
 						? a.name.localeCompare(b.name)
 						: b.name.localeCompare(a.name);
+				}
+				if (sortStore.sortFn === 'Rarity') {
+					return sortStore.order === 'asc' ? a.rarity - b.rarity : b.rarity - a.rarity;
 				}
 				return 0;
 			});
@@ -213,7 +229,7 @@
 <!-- svelte-ignore a11y-label-has-associated-control -->
 <DefaultLayout title={$i18n.t('characters.overview.title')}>
 	<svelte:fragment slot="titlebarActions">
-		<Searchbar searchGroup="Characters" searchableDataList={$transformedCharacterStore} />
+		<Searchbar searchGroup="Characters" searchableDataList={$sortedCharacterStore} />
 		<DropdownMenu>
 			<DropdownMenuTrigger>
 				<IconButton
@@ -223,24 +239,30 @@
 					{$i18n.t('action.sort_by', { sortFN: $sortStore.sortFn })}
 				</IconButton>
 			</DropdownMenuTrigger>
-			<DropdownMenuContent>
+			<DropdownMenuContent class="p-3">
 				<DropdownMenuItem
-					class="flex hover:bg-primary"
+					class="flex hover:bg-tertiary gap-2"
 					on:click={() => setSortStore('Name')}
 				>
-					Name
+					<Icon path={mdiAlphabetical} /> Name
 				</DropdownMenuItem>
 				<DropdownMenuItem
-					class="flex hover:bg-primary"
+					class="flex hover:bg-tertiary gap-2"
 					on:click={() => setSortStore('Date')}
 				>
-					Date
+					<Icon path={mdiCalendar} /> Date
 				</DropdownMenuItem>
 				<DropdownMenuItem
-					class="flex hover:bg-primary"
+					class="flex hover:bg-tertiary gap-2"
+					on:click={() => setSortStore('Rarity')}
+				>
+					<Icon path={mdiStar} /> Rarity
+				</DropdownMenuItem>
+				<DropdownMenuItem
+					class="flex hover:bg-tertiary gap-2"
 					on:click={() => setSortStore('Constellation')}
 				>
-					Constellation
+					<Icon path={mdiCreation} /> Constellation
 				</DropdownMenuItem>
 			</DropdownMenuContent>
 		</DropdownMenu>
@@ -254,113 +276,136 @@
 					{$i18n.t('action.filter_by')}
 				</IconButton>
 			</DropdownMenuTrigger>
-			<DropdownMenuContent class="p-4">
+
+			<DropdownMenuContent class="flex flex-col p-3">
 				<IconButton
 					icon={mdiFilterRemove}
-					class={`flex justify-center w-full`}
+					class={`flex flex-1`}
 					disabled={$filterStore.length === 0}
 					on:click={() => resetFilters()}
 				>
 					Reset Filters
 				</IconButton>
+
 				<DropdownMenuSeparator />
 
-				<DropdownMenuGroup class="flex justify-left">
+				<DropdownMenuGroup class="flex">
 					<DropdownMenuLabel>Element</DropdownMenuLabel>
 				</DropdownMenuGroup>
-				<DropdownMenuGroup class="grid grid-cols-7 gap-1">
-					{#each elements as { name, icon, label, color }}
+				<DropdownMenuGroup class="grid grid-cols-3 flex-wrap">
+					{#each elements as { name, icon, label }}
 						<DropdownMenuItem
 							on:click={() => {
 								setFilterStore('element', name);
 								toggleChecked(name);
 							}}
-							style="--bg-color: {color}"
-							class={`p-0 rounded-lg border cursor-pointer bg-tertiary text-text shadow-sm justify-center sm:p-2 gap-2 hover:border-primary transition duration-300 ${
-								$checkedStore[name] ? 'bg-primary' : ''
-							}
-									after:content-[''] after:absolute after:top-1/2 after:left-1/2 after:transform after:-translate-x-1/2 after:-translate-y-1/2 after:w-9 after:aspect-square after:rounded-full after:bg-[--bg-color] after:blur after:opacity-0 hover:after:opacity-50 after:transition-opacity after:duration-300
-								`}
 						>
-							<img src={icon} alt={label} class="size-10" role="button" />
+							<Toggle
+								class="py-2"
+								pressed={$checkedStore[name] !== undefined
+									? $checkedStore[name]
+									: false}
+								on:click={() => console.log($checkedStore[name])}
+							>
+								<img src={icon} alt={label} class="size-7" />
+							</Toggle>
 						</DropdownMenuItem>
 					{/each}
 				</DropdownMenuGroup>
+
 				<DropdownMenuSeparator />
 
-				<DropdownMenuGroup class="flex justify-left">
+				<DropdownMenuGroup class="flex">
 					<DropdownMenuLabel>Weapon</DropdownMenuLabel>
 				</DropdownMenuGroup>
-				<DropdownMenuGroup class="grid grid-cols-5 gap-1">
+				<DropdownMenuGroup class="grid grid-cols-3">
 					{#each weapons as { name, icon, label }}
 						<DropdownMenuItem
 							on:click={() => {
 								setFilterStore('weapon', name);
 								toggleChecked(name);
 							}}
-							class={`p-0 rounded-lg border cursor-pointer bg-tertiary text-text shadow-sm justify-center sm:p-2 gap-2 hover:border-primary transition duration-300 ${
-								$checkedStore[name] ? 'bg-primary' : ''
-							}
-									after:content-[''] after:absolute after:top-1/2 after:left-1/2 after:transform after:-translate-x-1/2 after:-translate-y-1/2 after:w-9 after:aspect-square after:rounded-full after:bg-white after:blur after:opacity-0 hover:after:opacity-50 after:transition-opacity after:duration-300
-								`}
 						>
-							<img
-								src={icon}
-								alt={label}
-								class={`size-10  ${$checkedStore[name] ? 'brightness-50' : 'brightness-150'}`}
-								role="button"
-							/>
+							<Toggle
+								class="py-2"
+								pressed={$checkedStore[name] !== undefined
+									? $checkedStore[name]
+									: false}
+								on:click={() => console.log($checkedStore[name])}
+							>
+								<img src={icon} alt={label} class={`size-7`} />
+							</Toggle>
 						</DropdownMenuItem>
 					{/each}
 				</DropdownMenuGroup>
+
 				<DropdownMenuSeparator />
 
-				<DropdownMenuGroup class="flex justify-left">
+				<DropdownMenuGroup class="flex">
 					<DropdownMenuLabel>Rarity</DropdownMenuLabel>
 				</DropdownMenuGroup>
-				<DropdownMenuGroup class="grid grid-cols-2 justify-center gap-2">
+				<DropdownMenuGroup class="flex">
 					<DropdownMenuItem
 						on:click={() => {
 							setFilterStore('rarity', 5);
 							toggleChecked('rarity5');
 						}}
-						class={`p-0 rounded-lg border cursor-pointer bg-tertiary text-text shadow-sm justify-center sm:p-2 gap-2 hover:border-primary w-full transition duration-300 ${
-							$checkedStore['rarity5'] ? 'bg-primary' : ''
-						}`}
 					>
-						<img src={IconGoldStar} alt="5 Star" class={'size-6'} role="button" />
+						<Toggle
+							class="py-2"
+							pressed={$checkedStore['rarity5'] !== undefined
+								? $checkedStore['rarity5']
+								: false}
+							on:click={() => console.log($checkedStore['rarity5'])}
+						>
+							<img src={IconGoldStar} alt="5 Star" class={'size-7'} />
+						</Toggle>
 					</DropdownMenuItem>
 					<DropdownMenuItem
 						on:click={() => {
 							setFilterStore('rarity', 4);
 							toggleChecked('rarity4');
 						}}
-						class={`p-0 rounded-lg border cursor-pointer bg-tertiary text-text shadow-sm justify-center sm:p-2 gap-2 hover:border-primary w-full transition duration-300 ${
-							$checkedStore['rarity4'] ? 'bg-primary' : ''
-						}`}
 					>
-						<img src={IconPurpleStar} alt="4 Star" class={'size-6'} role="button" />
+						<Toggle
+							class="py-2"
+							pressed={$checkedStore['rarity4'] !== undefined
+								? $checkedStore['rarity4']
+								: false}
+							on:click={() => console.log($checkedStore['rarity4'])}
+						>
+							<img src={IconPurpleStar} alt="4 Star" class={'size-7'} />
+						</Toggle>
 					</DropdownMenuItem>
 				</DropdownMenuGroup>
+
 				<DropdownMenuSeparator />
-				<DropdownMenuGroup class="grid grid-cols-1">
+
+				<DropdownMenuGroup class="flex">
+					<DropdownMenuLabel>Ownership</DropdownMenuLabel>
+				</DropdownMenuGroup>
+				<DropdownMenuGroup>
 					<DropdownMenuItem
 						on:click={() => {
 							setFilterStore('owned', true);
 							toggleChecked('owned');
 						}}
-						class={`p-0 rounded-lg border cursor-pointer bg-tertiary text-text shadow-sm justify-center sm:p-2 gap-2 hover:border-primary w-full transition duration-300 ${
-							$checkedStore['owned'] ? 'bg-primary' : ''
-						}`}
+						class="gap-1"
 					>
-						<h1 class="text-sm font-medium">Owned</h1>
+						<Checkbox
+							id="owned"
+							checked={$checkedStore['owned'] !== undefined
+								? $checkedStore['owned']
+								: false}
+						/>
+						<Label id="owned-label" for="owned">Owned</Label>
 					</DropdownMenuItem>
 				</DropdownMenuGroup>
 			</DropdownMenuContent>
 		</DropdownMenu>
 	</svelte:fragment>
 	<div class="flex flex-wrap gap-4 justify-center">
-		{#each $transformedCharacterStore as character}
+		{#each $sortedCharacterStore as character}
 			<CharCard
 				link={character.link}
 				name={character.name}
