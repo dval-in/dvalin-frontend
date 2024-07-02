@@ -23,7 +23,7 @@
 		"d3-shape": "^3.2.0",
 		"formsnap": "^0.4.4",
 		"i18next": "^23.11.5",
-		"layerchart": "^0.38.0",
+		"layerchart": "^0.43.6",
 		"lucide-svelte": "^0.399.0",
 		"mode-watcher": "^0.3.1",
 		"socket.io": "^4.7.5",
