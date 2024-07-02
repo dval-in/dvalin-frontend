@@ -145,8 +145,8 @@ importers:
         specifier: ^4.2.18
         version: 4.2.18
       svelte-check:
-        specifier: ^3.8.0
-        version: 3.8.0(@babel/core@7.24.3)(postcss-load-config@4.0.2(postcss@8.4.38))(postcss@8.4.38)(sass@1.77.4)(svelte@4.2.18)
+        specifier: ^3.8.4
+        version: 3.8.4(@babel/core@7.24.3)(postcss-load-config@4.0.2(postcss@8.4.38))(postcss@8.4.38)(sass@1.77.4)(svelte@4.2.18)
       svelte-eslint-parser:
         specifier: ^0.39.2
         version: 0.39.2(svelte@4.2.18)
@@ -3445,8 +3445,8 @@ packages:
     resolution: {integrity: sha512-PQRs0evdOjsFzjHuPu8B/flqbJX2osN2D0++6nl77jhwriQazaEF0pkQAMwPRaSn/kMivvUdWkkPKi1NmHLosg==}
     hasBin: true
 
-  svelte-check@3.8.0:
-    resolution: {integrity: sha512-7Nxn+3X97oIvMzYJ7t27w00qUf1Y52irE2RU2dQAd5PyvfGp4E7NLhFKVhb6PV2fx7dCRMpNKDIuazmGthjpSQ==}
+  svelte-check@3.8.4:
+    resolution: {integrity: sha512-61aHMkdinWyH8BkkTX9jPLYxYzaAAz/FK/VQqdr2FiCQQ/q04WCwDlpGbHff1GdrMYTmW8chlTFvRWL9k0A8vg==}
     hasBin: true
     peerDependencies:
       svelte: ^3.55.0 || ^4.0.0-next.0 || ^4.0.0 || ^5.0.0-next.0
@@ -7492,12 +7492,10 @@ snapshots:
       - stylus
       - sugarss
 
-  svelte-check@3.8.0(@babel/core@7.24.3)(postcss-load-config@4.0.2(postcss@8.4.38))(postcss@8.4.38)(sass@1.77.4)(svelte@4.2.18):
+  svelte-check@3.8.4(@babel/core@7.24.3)(postcss-load-config@4.0.2(postcss@8.4.38))(postcss@8.4.38)(sass@1.77.4)(svelte@4.2.18):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.25
       chokidar: 3.5.3
-      fast-glob: 3.3.2
-      import-fresh: 3.3.0
       picocolors: 1.0.0
       sade: 1.8.1
       svelte: 4.2.18
