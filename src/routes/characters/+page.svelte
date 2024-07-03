@@ -9,7 +9,9 @@
 		mdiFilterRemove,
 		mdiSortAscending,
 		mdiSortDescending,
-		mdiStar
+		mdiStar,
+		mdiTagCheck,
+		mdiTagHidden
 	} from '@mdi/js';
 	import CharCard from '$lib/components/ui/card/CharCard.svelte';
 	import Searchbar from '$lib/components/ui/searchbar/Searchbar.svelte';
@@ -20,13 +22,10 @@
 	import { userProfile } from '$lib/store/user_profile';
 	import { derived, get, writable } from 'svelte/store';
 	import {
-		DropdownMenu,
-		DropdownMenuContent,
 		DropdownMenuGroup,
 		DropdownMenuItem,
 		DropdownMenuLabel,
-		DropdownMenuSeparator,
-		DropdownMenuTrigger
+		DropdownMenuSeparator
 	} from '$lib/components/ui/dropdown-menu/index';
 	import Icon from '$lib/components/ui/icon/icon.svelte';
 	import type { WeaponTypes } from '$lib/types/weapon';
@@ -46,8 +45,9 @@
 	import IconGoldStar from '$lib/assets/Icon_Gold_Star.png';
 	import IconPurpleStar from '$lib/assets/Icon_Purple_Star.png';
 	import { Toggle } from '$lib/components/ui/toggle';
-	import { Checkbox } from '$lib/components/ui/checkbox';
-	import { Label } from '$lib/components/ui/label';
+	import DrawerDropdown from '$lib/components/ui/drawer-dropdown/DrawerDropdown.svelte';
+	import { DrawerClose } from '$lib/components/ui/drawer';
+	import Text from '$lib/components/typography/Text.svelte';
 
 	type Sorts = 'Name' | 'Date' | 'Rarity' | 'Constellation';
 	type Filters = 'element' | 'weapon' | 'rarity' | 'owned';
@@ -230,16 +230,16 @@
 <DefaultLayout title={$i18n.t('characters.overview.title')}>
 	<svelte:fragment slot="titlebarActions">
 		<Searchbar searchGroup="Characters" searchableDataList={$sortedCharacterStore} />
-		<DropdownMenu closeOnEscape preventScroll={false}>
-			<DropdownMenuTrigger>
+		<DrawerDropdown>
+			<svelte:fragment slot="trigger">
 				<IconButton
 					icon={$sortStore.order === 'asc' ? mdiSortAscending : mdiSortDescending}
 					class={`flex w-full`}
 				>
 					{$i18n.t('action.sort_by', { sortFN: $sortStore.sortFn })}
 				</IconButton>
-			</DropdownMenuTrigger>
-			<DropdownMenuContent class="p-3">
+			</svelte:fragment>
+			<svelte:fragment slot="dropdown-content">
 				<DropdownMenuItem
 					class="flex hover:bg-tertiary gap-2"
 					on:click={() => setSortStore('Name')}
@@ -264,20 +264,45 @@
 				>
 					<Icon path={mdiCreation} /> Constellation
 				</DropdownMenuItem>
-			</DropdownMenuContent>
-		</DropdownMenu>
+			</svelte:fragment>
+			<svelte:fragment slot="drawer-content">
+				<DrawerClose
+					class="flex hover:bg-tertiary gap-2"
+					on:click={() => setSortStore('Name')}
+				>
+					<Icon path={mdiAlphabetical} /> Name
+				</DrawerClose>
+				<DrawerClose
+					class="flex hover:bg-tertiary gap-2"
+					on:click={() => setSortStore('Date')}
+				>
+					<Icon path={mdiCalendar} /> Date
+				</DrawerClose>
+				<DrawerClose
+					class="flex hover:bg-tertiary gap-2"
+					on:click={() => setSortStore('Rarity')}
+				>
+					<Icon path={mdiStar} /> Rarity
+				</DrawerClose>
+				<DrawerClose
+					class="flex hover:bg-tertiary gap-2"
+					on:click={() => setSortStore('Constellation')}
+				>
+					<Icon path={mdiCreation} /> Constellation
+				</DrawerClose>
+			</svelte:fragment>
+		</DrawerDropdown>
 
-		<DropdownMenu closeOnItemClick={false} closeOnEscape preventScroll={false}>
-			<DropdownMenuTrigger>
+		<DrawerDropdown>
+			<svelte:fragment slot="trigger">
 				<IconButton
 					icon={$filterStore.length === 0 ? mdiFilterOutline : mdiFilter}
 					class={`flex w-full`}
 				>
 					{$i18n.t('action.filter_by')}
 				</IconButton>
-			</DropdownMenuTrigger>
-
-			<DropdownMenuContent class="flex flex-col p-3">
+			</svelte:fragment>
+			<svelte:fragment slot="dropdown-content">
 				<IconButton
 					icon={mdiFilterRemove}
 					class={`flex flex-1`}
@@ -307,7 +332,7 @@
 									: false}
 								on:click={() => console.log($checkedStore[name])}
 							>
-								<img src={icon} alt={label} class="size-9" />
+								<img src={icon} alt={label} class="size-7" />
 							</Toggle>
 						</DropdownMenuItem>
 					{/each}
@@ -333,7 +358,7 @@
 									: false}
 								on:click={() => console.log($checkedStore[name])}
 							>
-								<img src={icon} alt={label} class={`size-9 rounded-full`} />
+								<img src={icon} alt={label} class={`size-7 rounded-full`} />
 							</Toggle>
 						</DropdownMenuItem>
 					{/each}
@@ -358,7 +383,7 @@
 								: false}
 							on:click={() => console.log($checkedStore['rarity5'])}
 						>
-							<img src={IconGoldStar} alt="5 Star" class={'size-8'} />
+							<img src={IconGoldStar} alt="5 Star" class={'size-7'} />
 						</Toggle>
 					</DropdownMenuItem>
 					<DropdownMenuItem
@@ -374,7 +399,7 @@
 								: false}
 							on:click={() => console.log($checkedStore['rarity4'])}
 						>
-							<img src={IconPurpleStar} alt="4 Star" class={'size-8'} />
+							<img src={IconPurpleStar} alt="4 Star" class={'size-7'} />
 						</Toggle>
 					</DropdownMenuItem>
 				</DropdownMenuGroup>
@@ -384,7 +409,7 @@
 				<DropdownMenuGroup class="flex">
 					<DropdownMenuLabel>Ownership</DropdownMenuLabel>
 				</DropdownMenuGroup>
-				<DropdownMenuGroup>
+				<DropdownMenuGroup class="flex">
 					<DropdownMenuItem
 						on:click={() => {
 							setFilterStore('owned', true);
@@ -392,17 +417,180 @@
 						}}
 						class="gap-2"
 					>
-						<Checkbox
-							id="owned"
-							checked={$checkedStore['owned'] !== undefined
+						<Toggle
+							class="py-2"
+							pressed={$checkedStore['owned'] !== undefined
 								? $checkedStore['owned']
 								: false}
-						/>
-						<Label id="owned-label" for="owned">Owned</Label>
+							on:click={() => console.log($checkedStore['owned'])}
+						>
+							<Icon path={mdiTagCheck} />
+						</Toggle>
+					</DropdownMenuItem>
+					<DropdownMenuItem
+						on:click={() => {
+							setFilterStore('owned', false);
+							toggleChecked('notowned');
+						}}
+						class="gap-2"
+					>
+						<Toggle
+							class="py-2"
+							pressed={$checkedStore['notowned'] !== undefined
+								? $checkedStore['notowned']
+								: false}
+							on:click={() => console.log($checkedStore['notowned'])}
+						>
+							<Icon path={mdiTagHidden} />
+						</Toggle>
 					</DropdownMenuItem>
 				</DropdownMenuGroup>
-			</DropdownMenuContent>
-		</DropdownMenu>
+			</svelte:fragment>
+			<svelte:fragment slot="drawer-content">
+				<div class="flex flex-col gap-3 py-3">
+					<IconButton
+						icon={mdiFilterRemove}
+						class={`flex flex-1`}
+						disabled={$filterStore.length === 0}
+						on:click={() => resetFilters()}
+					>
+						Reset Filters
+					</IconButton>
+
+					<div>
+						<div class="flex">
+							<Text type="small">Element</Text>
+						</div>
+						<div class="flex flex-wrap gap-2">
+							{#each elements as { name, icon, label }}
+								<div
+									on:click={() => {
+										setFilterStore('element', name);
+										toggleChecked(name);
+									}}
+								>
+									<Toggle
+										class="py-2"
+										pressed={$checkedStore[name] !== undefined
+											? $checkedStore[name]
+											: false}
+										on:click={() => console.log($checkedStore[name])}
+									>
+										<img src={icon} alt={label} class="size-7" />
+									</Toggle>
+								</div>
+							{/each}
+						</div>
+					</div>
+
+					<div>
+						<div class="flex">
+							<Text type="small">Weapon</Text>
+						</div>
+						<div class="flex flex-wrap gap-2">
+							{#each weapons as { name, icon, label }}
+								<div
+									on:click={() => {
+										setFilterStore('weapon', name);
+										toggleChecked(name);
+									}}
+								>
+									<Toggle
+										class="py-2"
+										pressed={$checkedStore[name] !== undefined
+											? $checkedStore[name]
+											: false}
+										on:click={() => console.log($checkedStore[name])}
+									>
+										<img src={icon} alt={label} class={`size-7 rounded-full`} />
+									</Toggle>
+								</div>
+							{/each}
+						</div>
+					</div>
+
+					<div>
+						<div class="flex">
+							<Text type="small">Rarity</Text>
+						</div>
+						<div class="flex gap-2">
+							<div
+								on:click={() => {
+									setFilterStore('rarity', 5);
+									toggleChecked('rarity5');
+								}}
+							>
+								<Toggle
+									class="py-2"
+									pressed={$checkedStore['rarity5'] !== undefined
+										? $checkedStore['rarity5']
+										: false}
+									on:click={() => console.log($checkedStore['rarity5'])}
+								>
+									<img src={IconGoldStar} alt="5 Star" class={'size-7'} />
+								</Toggle>
+							</div>
+							<div
+								on:click={() => {
+									setFilterStore('rarity', 4);
+									toggleChecked('rarity4');
+								}}
+							>
+								<Toggle
+									class="py-2"
+									pressed={$checkedStore['rarity4'] !== undefined
+										? $checkedStore['rarity4']
+										: false}
+									on:click={() => console.log($checkedStore['rarity4'])}
+								>
+									<img src={IconPurpleStar} alt="4 Star" class={'size-7'} />
+								</Toggle>
+							</div>
+						</div>
+					</div>
+
+					<div>
+						<div class="flex">
+							<Text type="small">Ownership</Text>
+						</div>
+						<div class="flex gap-2">
+							<div
+								on:click={() => {
+									setFilterStore('owned', true);
+									toggleChecked('owned');
+								}}
+							>
+								<Toggle
+									class="py-2"
+									pressed={$checkedStore['owned'] !== undefined
+										? $checkedStore['owned']
+										: false}
+									on:click={() => console.log($checkedStore['owned'])}
+								>
+									<Icon path={mdiTagCheck} size={1.2} />
+								</Toggle>
+							</div>
+							<div
+								on:click={() => {
+									setFilterStore('owned', false);
+									toggleChecked('notowned');
+								}}
+								class="gap-2"
+							>
+								<Toggle
+									class="py-2"
+									pressed={$checkedStore['notowned'] !== undefined
+										? $checkedStore['notowned']
+										: false}
+								>
+									<Icon path={mdiTagHidden} size={1.2} />
+								</Toggle>
+							</div>
+						</div>
+					</div>
+				</div>
+			</svelte:fragment>
+		</DrawerDropdown>
 	</svelte:fragment>
 	<div class="flex flex-wrap gap-4 justify-center">
 		{#each $sortedCharacterStore as character}

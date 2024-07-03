@@ -56,6 +56,9 @@ importers:
       svelte-i18next:
         specifier: ^2.2.2
         version: 2.2.2(i18next@23.11.5)(svelte@4.2.18)
+      svelte-legos:
+        specifier: ^0.2.3
+        version: 0.2.3(svelte@4.2.18)
       svelte-persisted-store:
         specifier: ^0.11.0
         version: 0.11.0(svelte@4.2.18)
@@ -77,6 +80,9 @@ importers:
       tw-colors:
         specifier: ^3.3.1
         version: 3.3.1(tailwindcss@3.4.4)
+      vaul-svelte:
+        specifier: ^0.3.2
+        version: 0.3.2(svelte@4.2.18)
       zod:
         specifier: ^3.23.8
         version: 3.23.8
@@ -1633,6 +1639,9 @@ packages:
 
   caniuse-lite@1.0.30001600:
     resolution: {integrity: sha512-+2S9/2JFhYmYaDpZvo0lKkfvuKIglrx68MwOBqMGHhQsNkLjB5xtc/TGoEPs+MxjSyN/72qer2g97nzR641mOQ==}
+
+  canvas-confetti@1.9.3:
+    resolution: {integrity: sha512-rFfTURMvmVEX1gyXFgn5QMn81bYk70qa0HLzcIOSVEyl57n6o9ItHeBtUSWdvKAPY0xlvBHno4/v3QPrT83q9g==}
 
   chalk@2.4.2:
     resolution: {integrity: sha512-Mti+f9lpJNcwF4tWV8/OrTTtF1gZi+f8FqlyAdouralcFWFQWF2+NgCHShjkCb+IFBLq9buZwE1xckQU4peSuQ==}
@@ -3559,6 +3568,11 @@ packages:
     peerDependencies:
       svelte: ^4.0.0
 
+  svelte-legos@0.2.3:
+    resolution: {integrity: sha512-HuFzPC7of2ZErJaIoxFRu2Z5Rk7VUhlkAfqWoXpO1S9CNSByMakzTLVsM0/VDE6jmCG5JXLqvjND+rsV6nkOHQ==}
+    peerDependencies:
+      svelte: ^4.0.0
+
   svelte-lucide@1.0.5:
     resolution: {integrity: sha512-gEkzTR2ZslWPz7A77L6z7KCXit12dT5VV/8ELGizxP00uyFcKV2nQaew/zhFRjlUyol/yrtaKS+F/BeASM4Ijw==}
     peerDependencies:
@@ -3883,6 +3897,11 @@ packages:
   vary@1.1.2:
     resolution: {integrity: sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==}
     engines: {node: '>= 0.8'}
+
+  vaul-svelte@0.3.2:
+    resolution: {integrity: sha512-X4OGWttSTVUl417qGDsSFgOvIx24DoiMRY/jaP9z0v9FL8LQQJ0RQ1ZM0QpdyQPRlNd24ewjNQHh5EgYDtfNpw==}
+    peerDependencies:
+      svelte: ^4.0.0 || ^5.0.0-next.1
 
   vite-plugin-pwa@0.20.0:
     resolution: {integrity: sha512-/kDZyqF8KqoXRpMUQtR5Atri/7BWayW8Gp7Kz/4bfstsV6zSFTxjREbXZYL7zSuRL40HGA+o2hvUAFRmC+bL7g==}
@@ -5707,6 +5726,8 @@ snapshots:
     optional: true
 
   caniuse-lite@1.0.30001600: {}
+
+  canvas-confetti@1.9.3: {}
 
   chalk@2.4.2:
     dependencies:
@@ -7765,6 +7786,13 @@ snapshots:
     dependencies:
       svelte: 4.2.18
 
+  svelte-legos@0.2.3(svelte@4.2.18):
+    dependencies:
+      canvas-confetti: 1.9.3
+      prism-svelte: 0.5.0
+      prismjs: 1.29.0
+      svelte: 4.2.18
+
   svelte-lucide@1.0.5(svelte@4.2.18):
     dependencies:
       svelte: 4.2.18
@@ -8176,6 +8204,11 @@ snapshots:
     optional: true
 
   vary@1.1.2: {}
+
+  vaul-svelte@0.3.2(svelte@4.2.18):
+    dependencies:
+      bits-ui: 0.21.11(svelte@4.2.18)
+      svelte: 4.2.18
 
   vite-plugin-pwa@0.20.0(@vite-pwa/assets-generator@0.2.4)(vite@5.3.2(@types/node@20.11.30)(sass@1.77.6)(terser@5.30.0))(workbox-build@7.0.0)(workbox-window@7.0.0):
     dependencies:
