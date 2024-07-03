@@ -22,9 +22,39 @@ import DrawerDropdown from '$lib/components/ui/drawer-dropdown/DrawerDropdown.sv
 import { DrawerClose } from '$lib/components/ui/drawer';
 import Text from '$lib/components/typography/Text.svelte';
 
-import { elements, weapons } from '$lib/data/gameData';
 import IconGoldStar from '$lib/assets/Icon_Gold_Star.png';
 import IconPurpleStar from '$lib/assets/Icon_Purple_Star.png';
+
+import IconAnemo from '$lib/assets/icons/elements/Element_Anemo.svg';
+import IconCryo from '$lib/assets/icons/elements/Element_Cryo.svg';
+import IconDendro from '$lib/assets/icons/elements/Element_Dendro.svg';
+import IconElectro from '$lib/assets/icons/elements/Element_Electro.svg';
+import IconGeo from '$lib/assets/icons/elements/Element_Geo.svg';
+import IconHydro from '$lib/assets/icons/elements/Element_Hydro.svg';
+import IconPyro from '$lib/assets/icons/elements/Element_Pyro.svg';
+import IconBow from '$lib/assets/icons/weapons/bow.png';
+import IconCatalyst from '$lib/assets/icons/weapons/catalyst.png';
+import IconClaymore from '$lib/assets/icons/weapons/claymore.png';
+import IconPolearm from '$lib/assets/icons/weapons/polearm.png';
+import IconSword from '$lib/assets/icons/weapons/sword.png';
+
+export const elements = [
+    { name: 'pyro', icon: IconPyro, label: 'Pyro', color: '#ff6640' },
+    { name: 'hydro', icon: IconHydro, label: 'Hydro', color: '#00c0ff' },
+    { name: 'anemo', icon: IconAnemo, label: 'Anemo', color: '#32d7a0' },
+    { name: 'electro', icon: IconElectro, label: 'Electro', color: '#cc80ff' },
+    { name: 'dendro', icon: IconDendro, label: 'Dendro', color: '#90cc00' },
+    { name: 'cryo', icon: IconCryo, label: 'Cryo', color: '#81fffe' },
+    { name: 'geo', icon: IconGeo, label: 'Geo', color: '#ffac00' }
+];
+
+export const weapons = [
+    { name: 'sword', icon: IconSword, label: 'Sword' },
+    { name: 'claymore', icon: IconClaymore, label: 'Claymore' },
+    { name: 'polearm', icon: IconPolearm, label: 'Polearm' },
+    { name: 'catalyst', icon: IconCatalyst, label: 'Catalyst' },
+    { name: 'bow', icon: IconBow, label: 'Bow' }
+];
 
 type Sorts = 'Name' | 'Date' | 'Rarity' | 'Constellation';
 type Filters = 'element' | 'weapon' | 'rarity' | 'owned';
