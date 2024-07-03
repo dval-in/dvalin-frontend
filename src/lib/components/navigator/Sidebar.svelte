@@ -176,6 +176,8 @@
 	</div>
 </div>
 
+<!-- svelte-ignore a11y-interactive-supports-focus -->
+<!-- svelte-ignore a11y-click-events-have-key-events -->
 <div
 	role="button"
 	class={`bg-black/80 z-40 transition-all fixed top-0 left-0 right-0 bottom-0 ${isSidebarOpen ? '' : 'hidden'}`}
