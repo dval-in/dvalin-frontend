@@ -44,7 +44,6 @@
 				});
 			}
 		});
-		console.log(wishData);
 	}
 </script>
 

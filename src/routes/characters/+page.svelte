@@ -330,7 +330,6 @@
 								pressed={$checkedStore[name] !== undefined
 									? $checkedStore[name]
 									: false}
-								on:click={() => console.log($checkedStore[name])}
 							>
 								<img src={icon} alt={label} class="size-7" />
 							</Toggle>
@@ -356,7 +355,6 @@
 								pressed={$checkedStore[name] !== undefined
 									? $checkedStore[name]
 									: false}
-								on:click={() => console.log($checkedStore[name])}
 							>
 								<img src={icon} alt={label} class={`size-7 rounded-full`} />
 							</Toggle>
@@ -381,7 +379,6 @@
 							pressed={$checkedStore['rarity5'] !== undefined
 								? $checkedStore['rarity5']
 								: false}
-							on:click={() => console.log($checkedStore['rarity5'])}
 						>
 							<img src={IconGoldStar} alt="5 Star" class={'size-7'} />
 						</Toggle>
@@ -397,7 +394,6 @@
 							pressed={$checkedStore['rarity4'] !== undefined
 								? $checkedStore['rarity4']
 								: false}
-							on:click={() => console.log($checkedStore['rarity4'])}
 						>
 							<img src={IconPurpleStar} alt="4 Star" class={'size-7'} />
 						</Toggle>
@@ -422,7 +418,6 @@
 							pressed={$checkedStore['owned'] !== undefined
 								? $checkedStore['owned']
 								: false}
-							on:click={() => console.log($checkedStore['owned'])}
 						>
 							<Icon path={mdiTagCheck} />
 						</Toggle>
@@ -439,7 +434,6 @@
 							pressed={$checkedStore['notowned'] !== undefined
 								? $checkedStore['notowned']
 								: false}
-							on:click={() => console.log($checkedStore['notowned'])}
 						>
 							<Icon path={mdiTagHidden} />
 						</Toggle>
@@ -474,7 +468,6 @@
 										pressed={$checkedStore[name] !== undefined
 											? $checkedStore[name]
 											: false}
-										on:click={() => console.log($checkedStore[name])}
 									>
 										<img src={icon} alt={label} class="size-7" />
 									</Toggle>
@@ -500,7 +493,6 @@
 										pressed={$checkedStore[name] !== undefined
 											? $checkedStore[name]
 											: false}
-										on:click={() => console.log($checkedStore[name])}
 									>
 										<img src={icon} alt={label} class={`size-7 rounded-full`} />
 									</Toggle>
@@ -525,7 +517,6 @@
 									pressed={$checkedStore['rarity5'] !== undefined
 										? $checkedStore['rarity5']
 										: false}
-									on:click={() => console.log($checkedStore['rarity5'])}
 								>
 									<img src={IconGoldStar} alt="5 Star" class={'size-7'} />
 								</Toggle>
@@ -541,7 +532,6 @@
 									pressed={$checkedStore['rarity4'] !== undefined
 										? $checkedStore['rarity4']
 										: false}
-									on:click={() => console.log($checkedStore['rarity4'])}
 								>
 									<img src={IconPurpleStar} alt="4 Star" class={'size-7'} />
 								</Toggle>
@@ -565,7 +555,6 @@
 									pressed={$checkedStore['owned'] !== undefined
 										? $checkedStore['owned']
 										: false}
-									on:click={() => console.log($checkedStore['owned'])}
 								>
 									<Icon path={mdiTagCheck} size={1.2} />
 								</Toggle>
