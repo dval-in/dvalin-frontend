@@ -8,7 +8,7 @@
 		"action.yes": "Tak",
 		"action.no": "Nie",
 		"action.confirm": "Potwierdź",
-		"action.sort_by": "Sort By",
+		"action.sort_by": "Sortuj według: {{sortFN}}",
 		"action.filter_by": "Filtruj według",
 		"navigation.category.collection": "Twoja kolekcja",
 		"navigation.category.trackers": "Trackery",
