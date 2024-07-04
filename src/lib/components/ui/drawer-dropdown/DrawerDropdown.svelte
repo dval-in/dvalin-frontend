@@ -11,7 +11,7 @@
 </script>
 
 {#if $isDesktop}
-	<DropdownMenu closeOnEscape preventScroll={false}>
+	<DropdownMenu closeOnEscape preventScroll={false} {...$$restProps}>
 		<DropdownMenuTrigger>
 			<slot name="trigger" />
 		</DropdownMenuTrigger>
@@ -20,7 +20,7 @@
 		</DropdownMenuContent>
 	</DropdownMenu>
 {:else}
-	<Drawer>
+	<Drawer {...$$restProps}>
 		<DrawerTrigger>
 			<slot name="trigger" />
 		</DrawerTrigger>

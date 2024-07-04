@@ -293,7 +293,7 @@
 			</svelte:fragment>
 		</DrawerDropdown>
 
-		<DrawerDropdown>
+		<DrawerDropdown closeOnItemClick={false}>
 			<svelte:fragment slot="trigger">
 				<IconButton
 					icon={$filterStore.length === 0 ? mdiFilterOutline : mdiFilter}
@@ -317,7 +317,7 @@
 				<DropdownMenuGroup class="flex">
 					<DropdownMenuLabel>Element</DropdownMenuLabel>
 				</DropdownMenuGroup>
-				<DropdownMenuGroup class="grid grid-cols-3 flex-wrap">
+				<DropdownMenuGroup class="flex flex-wrap">
 					{#each elements as { name, icon, label }}
 						<DropdownMenuItem
 							on:click={() => {
@@ -342,7 +342,7 @@
 				<DropdownMenuGroup class="flex">
 					<DropdownMenuLabel>Weapon</DropdownMenuLabel>
 				</DropdownMenuGroup>
-				<DropdownMenuGroup class="grid grid-cols-3">
+				<DropdownMenuGroup class="flex flex-wrap">
 					{#each weapons as { name, icon, label }}
 						<DropdownMenuItem
 							on:click={() => {
