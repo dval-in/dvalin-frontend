@@ -11,6 +11,7 @@
 	import DefaultLayout from '$lib/components/layout/DefaultLayout.svelte';
 	import { dataIndexStore } from '$lib/store/index_store';
 	import type { LayoutData } from '../../.svelte-kit/types/src/routes/$types';
+	import { goto } from '$app/navigation';
 
 	/** @type {import('../../.svelte-kit/types/src/routes/$types').LayoutData} */
 	export let data: LayoutData;
@@ -27,6 +28,9 @@
 			dataIndexStore.set(response.data);
 		}
 	});
+	if ($applicationState.isAuthenticated && $userProfile.account.uid < 10000) {
+		goto('/settings/firslogin');
+	}
 
 	console.log(get(applicationState));
 	console.log(get(userProfile));
