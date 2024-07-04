@@ -29,7 +29,7 @@
 		}
 	});
 	if ($applicationState.isAuthenticated && $userProfile.account.uid < 10000) {
-		goto('/settings/firslogin');
+		goto('/settings/firstlogin');
 	}
 
 	console.log(get(applicationState));
