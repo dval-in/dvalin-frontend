@@ -15,7 +15,7 @@
 	"dependencies": {
 		"@internationalized/date": "^3.5.4",
 		"@mdi/js": "^7.4.47",
-		"@tanstack/svelte-query": "^5.49.1",
+		"@tanstack/svelte-query": "^5.50.1",
 		"bits-ui": "^0.21.11",
 		"clsx": "^2.1.1",
 		"cmdk-sv": "^0.0.17",
