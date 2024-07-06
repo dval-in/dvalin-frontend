@@ -2,6 +2,8 @@
 	import IconButton from '$lib/components/ui/icon-button/IconButton.svelte';
 	import {
 		mdiAlphabetical,
+		mdiBookOpenPageVariant,
+		mdiBowArrow,
 		mdiCalendar,
 		mdiCreation,
 		mdiFilter,
@@ -9,7 +11,10 @@
 		mdiFilterRemove,
 		mdiSortAscending,
 		mdiSortDescending,
+		mdiSpear,
 		mdiStar,
+		mdiSword,
+		mdiSwordCross,
 		mdiTagCheck,
 		mdiTagHidden
 	} from '@mdi/js';
@@ -37,13 +42,6 @@
 	import IconGeo from '$lib/assets/icons/elements/Element_Geo.svg';
 	import IconHydro from '$lib/assets/icons/elements/Element_Hydro.svg';
 	import IconPyro from '$lib/assets/icons/elements/Element_Pyro.svg';
-	import IconBow from '$lib/assets/icons/weapons/bow.png';
-	import IconCatalyst from '$lib/assets/icons/weapons/catalyst.png';
-	import IconClaymore from '$lib/assets/icons/weapons/claymore.png';
-	import IconPolearm from '$lib/assets/icons/weapons/polearm.png';
-	import IconSword from '$lib/assets/icons/weapons/sword.png';
-	import IconGoldStar from '$lib/assets/Icon_Gold_Star.png';
-	import IconPurpleStar from '$lib/assets/Icon_Purple_Star.png';
 	import { Toggle } from '$lib/components/ui/toggle';
 	import DrawerDropdown from '$lib/components/ui/drawer-dropdown/DrawerDropdown.svelte';
 	import { DrawerClose } from '$lib/components/ui/drawer';
@@ -71,11 +69,11 @@
 	];
 
 	const weapons = [
-		{ name: 'sword', icon: IconSword, label: 'Sword' },
-		{ name: 'claymore', icon: IconClaymore, label: 'Claymore' },
-		{ name: 'polearm', icon: IconPolearm, label: 'Polearm' },
-		{ name: 'catalyst', icon: IconCatalyst, label: 'Catalyst' },
-		{ name: 'bow', icon: IconBow, label: 'Bow' }
+		{ name: 'sword', icon: mdiSwordCross, label: 'Sword' },
+		{ name: 'claymore', icon: mdiSword, label: 'Claymore' },
+		{ name: 'polearm', icon: mdiSpear, label: 'Polearm' },
+		{ name: 'catalyst', icon: mdiBookOpenPageVariant, label: 'Catalyst' },
+		{ name: 'bow', icon: mdiBowArrow, label: 'Bow' }
 	];
 
 	const checkedStore = writable<{ [key: string]: boolean }>({});
@@ -343,7 +341,7 @@
 					<DropdownMenuLabel>Weapon</DropdownMenuLabel>
 				</DropdownMenuGroup>
 				<DropdownMenuGroup class="flex flex-wrap">
-					{#each weapons as { name, icon, label }}
+					{#each weapons as { name, icon }}
 						<DropdownMenuItem
 							on:click={() => {
 								setFilterStore('weapon', name);
@@ -356,7 +354,7 @@
 									? $checkedStore[name]
 									: false}
 							>
-								<img src={icon} alt={label} class={`size-7 rounded-full`} />
+								<Icon path={icon} class={`!size-7`} />
 							</Toggle>
 						</DropdownMenuItem>
 					{/each}
@@ -380,7 +378,7 @@
 								? $checkedStore['rarity5']
 								: false}
 						>
-							<img src={IconGoldStar} alt="5 Star" class={'size-7'} />
+							<Icon path={mdiStar} class={`!size-7 !fill-staticFivestar`} />
 						</Toggle>
 					</DropdownMenuItem>
 					<DropdownMenuItem
@@ -395,7 +393,7 @@
 								? $checkedStore['rarity4']
 								: false}
 						>
-							<img src={IconPurpleStar} alt="4 Star" class={'size-7'} />
+							<Icon path={mdiStar} class={`!size-7 !fill-fourstar`} />
 						</Toggle>
 					</DropdownMenuItem>
 				</DropdownMenuGroup>
@@ -419,7 +417,7 @@
 								? $checkedStore['owned']
 								: false}
 						>
-							<Icon path={mdiTagCheck} />
+							<Icon path={mdiTagCheck} class="!size-7" />
 						</Toggle>
 					</DropdownMenuItem>
 					<DropdownMenuItem
@@ -435,7 +433,7 @@
 								? $checkedStore['notowned']
 								: false}
 						>
-							<Icon path={mdiTagHidden} />
+							<Icon path={mdiTagHidden} class="!size-7" />
 						</Toggle>
 					</DropdownMenuItem>
 				</DropdownMenuGroup>
@@ -481,7 +479,7 @@
 							<Text type="small">Weapon</Text>
 						</div>
 						<div class="flex flex-wrap gap-2">
-							{#each weapons as { name, icon, label }}
+							{#each weapons as { name, icon }}
 								<div
 									on:click={() => {
 										setFilterStore('weapon', name);
@@ -494,7 +492,7 @@
 											? $checkedStore[name]
 											: false}
 									>
-										<img src={icon} alt={label} class={`size-7 rounded-full`} />
+										<Icon path={icon} class={`!size-7`} />
 									</Toggle>
 								</div>
 							{/each}
@@ -518,7 +516,7 @@
 										? $checkedStore['rarity5']
 										: false}
 								>
-									<img src={IconGoldStar} alt="5 Star" class={'size-7'} />
+									<Icon path={mdiStar} class={`!size-7 !fill-staticFivestar`} />
 								</Toggle>
 							</div>
 							<div
@@ -533,7 +531,7 @@
 										? $checkedStore['rarity4']
 										: false}
 								>
-									<img src={IconPurpleStar} alt="4 Star" class={'size-7'} />
+									<Icon path={mdiStar} class={`!size-7 !fill-fourstar`} />
 								</Toggle>
 							</div>
 						</div>
@@ -556,7 +554,7 @@
 										? $checkedStore['owned']
 										: false}
 								>
-									<Icon path={mdiTagCheck} size={1.2} />
+									<Icon path={mdiTagCheck} class="size-7" />
 								</Toggle>
 							</div>
 							<div
@@ -572,7 +570,7 @@
 										? $checkedStore['notowned']
 										: false}
 								>
-									<Icon path={mdiTagHidden} size={1.2} />
+									<Icon path={mdiTagHidden} class="!size-7" />
 								</Toggle>
 							</div>
 						</div>
