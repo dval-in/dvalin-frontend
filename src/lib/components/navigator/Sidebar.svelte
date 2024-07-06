@@ -13,7 +13,13 @@
 		mdiMap,
 		mdiMenu,
 		mdiStar,
-		mdiSwordCross
+		mdiSwordCross,
+		mdiFish,
+		mdiBedKing,
+		mdiPartyPopper,
+		mdiBookshelf,
+		mdiFood,
+		mdiDisc
 	} from '@mdi/js';
 	import Text from '$lib/components/typography/Text.svelte';
 	import { Separator } from '$lib/components/ui/separator';
@@ -36,14 +42,14 @@
 			{ title: 'inventory.title', link: '/inventory', icon: mdiBagPersonal }
 		],
 		tracker: [
-			{ title: 'todo.title', link: '/todo', icon: mdiClipboardTextOutline }
-			/*{ title: 'Ascension', link: '/ascension', icon: mdiStar },
+			{ title: 'todo.title', link: '/todo', icon: mdiClipboardTextOutline },
+			{ title: 'Ascension', link: '/ascension', icon: mdiStar },
 			{ title: 'Fishing', link: '/fishing', icon: mdiFish },
 			{ title: 'Furnishing', link: '/furnishing', icon: mdiBedKing },
 			{ title: 'Achievement', link: '/achievement', icon: mdiPartyPopper },
 			{ title: 'Books', link: '/books', icon: mdiBookshelf },
 			{ title: 'Recipes', link: '/recipes', icon: mdiFood },
-			{ title: 'Spin Crystals', link: '/spin-crystals', icon: mdiDisc }*/
+			{ title: 'Spin Crystals', link: '/spin-crystals', icon: mdiDisc }
 		],
 		tools: [
 			/*	{ title: 'Reminder', link: '/reminder', icon: mdiAlarm },
