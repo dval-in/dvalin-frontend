@@ -19,7 +19,10 @@
 		mdiPartyPopper,
 		mdiBookshelf,
 		mdiFood,
-		mdiDisc
+		mdiDisc,
+		mdiAlarm,
+		mdiChartTimeline,
+		mdiCards
 	} from '@mdi/js';
 	import Text from '$lib/components/typography/Text.svelte';
 	import { Separator } from '$lib/components/ui/separator';
@@ -52,9 +55,9 @@
 			{ title: 'Spin Crystals', link: '/spin-crystals', icon: mdiDisc }
 		],
 		tools: [
-			/*	{ title: 'Reminder', link: '/reminder', icon: mdiAlarm },
+			{ title: 'Reminder', link: '/reminder', icon: mdiAlarm },
 			{ title: 'Timeline', link: '/timeline', icon: mdiChartTimeline },
-			{ title: 'TCG', link: '/tcg', icon: mdiCards }*/
+			{ title: 'TCG', link: '/tcg', icon: mdiCards },
 			{
 				title: 'map.title',
 				link: 'https://act.hoyolab.com/ys/app/interactive-map/index.html',
