@@ -43,7 +43,6 @@ export class BackendDataService {
 					const achievementCategoryIndex = await backendFetch<AchievementCategoryIndex>(
 						`${this.baseUrl}/AchievementCategory/index?lang=${get(i18n).language}`
 					);
-					console.log(achievementCategoryIndex);
 					return {
 						character: charIndex,
 						weapon: weaponIndex,
