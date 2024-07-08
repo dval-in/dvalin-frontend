@@ -10,9 +10,6 @@ on:
     branches:
       - '**'
 
-env:
-  VITE_BACKEND_URL: ${{ vars.BACKEND_URL }}
-
 jobs:
   check-typescript:
     runs-on: ubuntu-latest
@@ -45,6 +42,9 @@ jobs:
   deploy-to-cloudflare:
     needs: [check-typescript, check-prettier]
     if: ${{ github.event_name != 'pull_request' || github.actor != 'dependabot[bot]' }}
+    environment: ${{ vars.CLOUDFLARE_PROJECT_NAME }} ${{ (github.ref == 'refs/heads/main' && '(Production)') || '(Preview)' }}
+    env:
+      VITE_BACKEND_URL: ${{ vars.BACKEND_URL }}
     permissions:
       contents: read
       deployments: write
