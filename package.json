@@ -30,7 +30,7 @@
 		"socket.io-client": "^4.7.5",
 		"svelte-i18next": "^2.2.2",
 		"svelte-persisted-store": "^0.11.0",
-		"svelte-sonner": "^0.3.24",
+		"svelte-sonner": "^0.3.25",
 		"svelte-ux": "^0.72.1",
 		"sveltekit-superforms": "^2.15.2",
 		"tailwind-merge": "^2.3.0",
