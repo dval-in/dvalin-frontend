@@ -1,4 +1,4 @@
 files:
-    - source: /src/lib/locales/EN.json
-      translation: /src/lib/locales/%two_letters_code%.json
-      update_option: 'update_as_unapproved'
+  - source: /src/lib/locales/EN.json
+    translation: /src/lib/locales/%two_letters_code%.json
+    update_option: update_as_unapproved
