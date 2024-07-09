@@ -15,8 +15,8 @@
 	"dependencies": {
 		"@internationalized/date": "^3.5.4",
 		"@mdi/js": "^7.4.47",
-		"@tanstack/svelte-query": "^5.50.1",
-		"bits-ui": "^0.21.11",
+		"@tanstack/svelte-query": "^5.50.3",
+		"bits-ui": "^0.21.12",
 		"clsx": "^2.1.1",
 		"cmdk-sv": "^0.0.17",
 		"d3-scale": "^4.0.2",
@@ -30,10 +30,10 @@
 		"socket.io-client": "^4.7.5",
 		"svelte-i18next": "^2.2.2",
 		"svelte-persisted-store": "^0.11.0",
-		"svelte-sonner": "^0.3.24",
+		"svelte-sonner": "^0.3.25",
 		"svelte-ux": "^0.72.1",
 		"sveltekit-superforms": "^2.15.2",
-		"tailwind-merge": "^2.3.0",
+		"tailwind-merge": "^2.4.0",
 		"tailwind-variants": "^0.2.1",
 		"tw-colors": "^3.3.1",
 		"zod": "^3.23.8"
