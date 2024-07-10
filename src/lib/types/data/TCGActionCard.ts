@@ -32,7 +32,6 @@ export type TCGActionCard = {
 	name: string;
 	title: string;
 	desc: string;
-	// eslint-disable-next-line @typescript-eslint/naming-convention
 	in_play_description: string;
 	attributes: {
 		cost: number;

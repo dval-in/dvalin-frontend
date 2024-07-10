@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - main
+      - staging
   pull_request:
     branches:
       - '**'
@@ -17,8 +18,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: lts/Iron
-      - run: npm install -g pnpm
-      - run: pnpm install
+      - uses: pnpm/action-setup@v3
+        name: Install pnpm
+        with:
+          version: 9
+          run_install: true
       - name: Check TypeScript
         run: pnpm tsc
   check-prettier:
@@ -28,6 +32,47 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: lts/Iron
-      - run: npm install -g pnpm
-      - run: pnpm install
-      - run: pnpm run lint
+      - uses: pnpm/action-setup@v3
+        name: Install pnpm
+        with:
+          version: 9
+          run_install: true
+      - name: Check Prettier & Eslint
+        run: pnpm run lint
+  deploy-to-cloudflare:
+    needs: [check-typescript, check-prettier]
+    if: ${{ github.event_name != 'pull_request' || github.actor != 'dependabot[bot]' }}
+    environment: ${{ vars.CLOUDFLARE_PROJECT_NAME }} ${{ (github.ref == 'refs/heads/main' && '(Production)') || '(Preview)' }}
+    env:
+      VITE_BACKEND_URL: ${{ vars.BACKEND_URL }}
+    permissions:
+      contents: read
+      deployments: write
+      pull-requests: write
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/Iron
+      - uses: pnpm/action-setup@v3
+        name: Install pnpm
+        with:
+          version: 9
+          run_install: true
+      - name: Build
+        run: pnpm run build
+      - name: Publish to Cloudflare Pages
+        uses: unlike-ltd/github-actions-cloudflare-pages@fb5958dd486c5c2cb38b3a843e1efb160878060d #v1.3.2
+        id: pages
+        with:
+          cloudflare-api-token: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          cloudflare-account-id: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          cloudflare-project-name: ${{ vars.CLOUDFLARE_PROJECT_NAME }}
+          directory: 'build'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-environment: ${{ vars.CLOUDFLARE_PROJECT_NAME }} ${{ (github.ref == 'refs/heads/main' && '(Production)') || '(Preview)' }}
+

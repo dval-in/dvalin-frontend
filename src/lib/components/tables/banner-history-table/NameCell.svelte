@@ -2,12 +2,15 @@
 	import S3Service from '$lib/services/s3';
 	import { type CharacterKey, isCharacterKey } from '$lib/types/keys/CharacterKey';
 	import type { WeaponKey } from '$lib/types/keys/WeaponKey';
+	import { dataIndexStore } from '$lib/store/index_store';
 
-	export let name: CharacterKey | WeaponKey;
+	export let key: CharacterKey | WeaponKey;
 
-	const imgUrl = isCharacterKey(name)
-		? S3Service.getCharacterLink(name) + '/icon.webp'
-		: S3Service.getWeaponLink(name) + '/icon.png';
+	const isCharacter = isCharacterKey(key);
+
+	const imgUrl = (isCharacter ? S3Service.getCharacter(key) : S3Service.getWeapon(key)).icon;
+
+	const name = (isCharacter ? $dataIndexStore.character : $dataIndexStore.weapon)[key].name;
 </script>
 
 <div class="flex flex-1 items-center gap-2">

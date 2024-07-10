@@ -1,7 +1,6 @@
 import { PaimonMoeImporterService } from '$lib/services/importer/paimon';
 import { DvalinImporterService } from '$lib/services/importer/dvalin';
-import type { ISettings } from '$lib/types/settings';
-import type { ApplicationState } from '$lib/types/application_state';
+import type { UserProfile } from '$lib/types/user_profile';
 
 const importerServices: { [key: string]: IImporterService } = {
 	dvalin: new DvalinImporterService(),
@@ -11,7 +10,7 @@ const importerServices: { [key: string]: IImporterService } = {
 export type ImporterServices = keyof typeof importerServices;
 
 export interface IImporterService {
-	import(data: unknown, applicationSettings: ISettings): ApplicationState;
+	import(data: unknown): UserProfile;
 }
 
 export default class ImporterService {

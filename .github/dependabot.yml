@@ -6,8 +6,10 @@ updates:
     directory: /.github/
     schedule:
       interval: daily
+    target-branch: staging
   - package-ecosystem: npm
     directory: /
     schedule:
       interval: daily
     versioning-strategy: increase
+    target-branch: staging

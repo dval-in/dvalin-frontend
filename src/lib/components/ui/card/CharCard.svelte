@@ -11,10 +11,16 @@
 	export let level: number;
 	export let constellation: number;
 	export let rarity: number;
+	export let obtained: boolean;
 </script>
 
-<a class="flex flex-col w-24 xl:w-36 rounded-md overflow-hidden" href={link}>
-	<div class={`flex justify-center ${rarity === 5 ? 'bg-fivestar' : 'bg-fourstar'}`}>
+<a
+	class="flex flex-col w-24 xl:w-36 rounded-md overflow-hidden hover:scale-105 transition-transform duration-300 ease-in-out"
+	href={link}
+>
+	<div
+		class={`flex justify-center ${rarity === 5 ? 'bg-fivestar' : 'bg-fourstar'} ${obtained ? '' : 'opacity-50'}`}
+	>
 		<img alt={name} class="w-24 h-24 xl:w-36 xl:h-36" src={img} />
 	</div>
 	<div class="flex flex-1 justify-center p-2 text-center bg-tertiary items-center">

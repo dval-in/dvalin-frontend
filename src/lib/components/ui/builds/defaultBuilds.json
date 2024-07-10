@@ -9,7 +9,12 @@
 		"talentPriority": ["Elemental Skill", "Normal Attack", "ELemental Burst"],
 		"weapons": {
 			"signatureWeapon": "CinnabarSpindle",
-			"altWeapons": ["CinnabarSpindle", "CinnabarSpindle", "CinnabarSpindle", "CinnabarSpindle"]
+			"altWeapons": [
+				"AThousandFloatingDreams",
+				"CinnabarSpindle",
+				"CinnabarSpindle",
+				"CinnabarSpindle"
+			]
 		},
 		"artifacts": {
 			"signatureSet": {
@@ -33,7 +38,11 @@
 					"key": "HuskOfOpulentDreams",
 					"quantity": 4
 				}
-			]
+			],
+			"stats": {
+				"main": ["DEF %", "GEO DMG", "CRIT Rate"],
+				"sub": ["CRIT Rate or DMG", "DEF%", "ATK%"]
+			}
 		}
 	},
 	{
@@ -46,7 +55,12 @@
 		"talentPriority": ["Elemental Skill", "Normal Attack", "ELemental Burst"],
 		"weapons": {
 			"signatureWeapon": "CinnabarSpindle",
-			"altWeapons": ["CinnabarSpindle", "CinnabarSpindle", "CinnabarSpindle", "CinnabarSpindle"]
+			"altWeapons": [
+				"CinnabarSpindle",
+				"CinnabarSpindle",
+				"CinnabarSpindle",
+				"CinnabarSpindle"
+			]
 		},
 		"artifacts": {
 			"signatureSet": {
@@ -70,7 +84,11 @@
 					"key": "HuskOfOpulentDreams",
 					"quantity": 4
 				}
-			]
+			],
+			"stats": {
+				"main": ["DEF %", "GEO DMG", "CRIT Rate"],
+				"sub": ["CRIT Rate or DMG", "DEF%", "ATK%"]
+			}
 		}
 	},
 	{
@@ -83,7 +101,12 @@
 		"talentPriority": ["Elemental Skill", "Normal Attack", "ELemental Burst"],
 		"weapons": {
 			"signatureWeapon": "CinnabarSpindle",
-			"altWeapons": ["CinnabarSpindle", "CinnabarSpindle", "CinnabarSpindle", "CinnabarSpindle"]
+			"altWeapons": [
+				"CinnabarSpindle",
+				"CinnabarSpindle",
+				"CinnabarSpindle",
+				"CinnabarSpindle"
+			]
 		},
 		"artifacts": {
 			"signatureSet": {
@@ -107,7 +130,11 @@
 					"key": "HuskOfOpulentDreams",
 					"quantity": 4
 				}
-			]
+			],
+			"stats": {
+				"main": ["DEF %", "GEO DMG", "CRIT Rate"],
+				"sub": ["CRIT Rate or DMG", "DEF%", "ATK%"]
+			}
 		}
 	}
 ]

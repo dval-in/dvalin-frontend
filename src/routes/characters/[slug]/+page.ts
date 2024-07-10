@@ -1,30 +1,20 @@
-import { type CharacterKey } from '$lib/types/keys/CharacterKey';
+import { isCharacterKey } from '$lib/types/keys/CharacterKey';
 import { error } from '@sveltejs/kit';
-import type { RouteParams } from '../../characters/[slug]/$types';
-import type { Character } from '$lib/types/data/Character';
-import type { WeaponIndex } from '$lib/types/index/weapon';
+import type { PageLoadEvent } from '../../../../.svelte-kit/types/src/routes/characters/[slug]/$types';
 
 /** @type {import('./$types').PageLoad} */
-export async function load({ params }: { params: RouteParams }) {
-	let characterData: Character;
-	let weaponIndex: WeaponIndex;
+export async function load({ params, parent, fetch }: PageLoadEvent) {
+	const { queryClient, backend } = await parent();
+	const key = params.slug;
 
-	const character: CharacterKey = params.slug.charAt(0).toUpperCase() + params.slug.substring(1);
-
-	const characterDataResponse = await fetch(
-		`https://raw.githubusercontent.com/dval-in/dvalin-data/main/data/EN/Character/${character}.json`
-	);
-
-	const weaponIndexResponse = await fetch(
-		'https://raw.githubusercontent.com/dval-in/dvalin-data/main/data/EN/Weapon/index.json'
-	);
-
-	if (characterDataResponse.ok && weaponIndexResponse.ok) {
-		characterData = await characterDataResponse.json();
-		weaponIndex = await weaponIndexResponse.json();
-	} else {
-		error(500, 'Internal error');
+	if (!isCharacterKey(key)) {
+		return error(404, 'Not found');
 	}
 
-	return { character, characterData, weaponIndex };
+	await queryClient.prefetchQuery({
+		queryKey: ['fetchCharacterData', key],
+		queryFn: async () => (await fetch(backend.data.getCharacterDataUrl(key))).json()
+	});
+
+	return { characterKey: key };
 }

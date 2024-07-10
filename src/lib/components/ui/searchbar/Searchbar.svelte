@@ -2,11 +2,11 @@
 	import { goto } from '$app/navigation';
 	import {
 		Dialog as CommandRoot,
-		List as CommandList,
-		Input as CommandInput,
 		Empty as CommandEmpty,
 		Group as CommandGroup,
-		Item as CommandItem
+		Input as CommandInput,
+		Item as CommandItem,
+		List as CommandList
 	} from '$lib/components/ui/command';
 	import IconButton from '../icon-button/IconButton.svelte';
 	import { mdiMagnify } from '@mdi/js';
@@ -37,14 +37,19 @@
 	<CommandInput placeholder={'Search for ' + searchGroup + '...'} />
 	<CommandList>
 		<CommandEmpty>Search Not Found</CommandEmpty>
-		<CommandGroup heading={searchGroup}>
+		<CommandGroup>
 			{#each searchableDataList as data}
 				<CommandItem
 					onSelect={(value) => {
 						redirectToPage(data.link);
 					}}
+					class="cursor-pointer hover:bg-primary hover:text-black"
 				>
-					<img src={data.img} alt={'Image of ' + data.name} class="w-8 h-8 mr-2 rounded-full" />
+					<img
+						src={data.img}
+						alt={'Image of ' + data.name}
+						class="w-8 h-8 mr-2 rounded-full"
+					/>
 					{data.name}
 				</CommandItem>
 			{/each}

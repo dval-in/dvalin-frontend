@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { scaleOrdinal, scaleTime } from 'd3-scale';
-	import { format, formatDate, PeriodType } from 'svelte-ux';
 	import {
 		Area,
 		AreaStack,
@@ -19,6 +18,7 @@
 	import { mdiStar } from '@mdi/js';
 	import Icon from '$lib/components/ui/icon/icon.svelte';
 	import Text from '$lib/components/typography/Text.svelte';
+	import { applicationState } from '$lib/store/application_state';
 
 	export let data: IMappedWishes;
 
@@ -40,7 +40,6 @@
 			const date = new Date(d.date);
 			const dateKey = date.getMonth() + 1 + '.01.' + date.getFullYear();
 			if (pullsByMonth[dateKey] === undefined) {
-				// eslint-disable-next-line @typescript-eslint/naming-convention
 				pullsByMonth[dateKey] = { '3': 0, '4': 0, '5': 0 };
 			}
 			pullsByMonth[dateKey][d.rarity] = pullsByMonth[dateKey][d.rarity] + 1;
@@ -51,11 +50,8 @@
 				.map((key) => {
 					return {
 						date: new Date(key).getTime(),
-						// eslint-disable-next-line @typescript-eslint/naming-convention
 						'5': pullsByMonth[key]['5'],
-						// eslint-disable-next-line @typescript-eslint/naming-convention
 						'4': pullsByMonth[key]['4'],
-						// eslint-disable-next-line @typescript-eslint/naming-convention
 						'3': pullsByMonth[key]['3']
 					};
 				})
@@ -63,7 +59,11 @@
 		);
 	};
 
-	const formatDateLabel = (d: string) => formatDate(d, PeriodType.MonthYear, { variant: 'short' });
+	const formatDateLabel = (d: string) =>
+		new Date(d).toLocaleDateString($applicationState.settings.locale, {
+			month: 'short',
+			year: '2-digit'
+		});
 </script>
 
 <div class="h-[350px] w-full">
@@ -86,8 +86,19 @@
 		yNice
 	>
 		<Svg>
-			<Axis grid labelProps={{ class: 'fill-text' }} placement="left" rule />
-			<Axis format={formatDateLabel} labelProps={{ class: 'fill-text' }} placement="bottom" rule />
+			<Axis
+				labelProps={{ class: 'fill-text' }}
+				placement="left"
+				rule
+				grid={{ style: 'stroke-dasharray: 2; stroke: white' }}
+			/>
+			<Axis
+				format={formatDateLabel}
+				labelProps={{ class: 'fill-text' }}
+				placement="bottom"
+				rule
+			/>
+
 			<AreaStack let:data>
 				{#each data as seriesData}
 					<Area
@@ -97,7 +108,13 @@
 						fill={colorKeys.at(seriesData.key - 3)}
 						fill-opacity={0.5}
 					/>
-					<RectClipPath x={0} y={0} width={tooltip.data ? tooltip.x : width} {height} spring>
+					<RectClipPath
+						x={0}
+						y={0}
+						width={tooltip.data ? tooltip.x : width}
+						{height}
+						spring
+					>
 						<Area
 							data={seriesData}
 							y0={(d) => d[0]}
@@ -137,7 +154,10 @@
 			<div class="flex flex-col gap-2 justify-center items-start">
 				{#each keys as key}
 					<div class="flex gap-1 justify-center items-center">
-						<Icon path={mdiStar} class={`fill-[${colorKeys.at(Number.parseInt(key) - 3)}]`} />
+						<Icon
+							path={mdiStar}
+							class={`fill-[${colorKeys.at(Number.parseInt(key) - 3)}]`}
+						/>
 						<Text type="p">{key}: {data.data[key]}</Text>
 					</div>
 				{/each}
@@ -151,7 +171,10 @@
 			x="data"
 			y={height + padding.top + 2}
 		>
-			{format(data.data.date, PeriodType.MonthYear)}
+			{new Date(data.data.date).toLocaleDateString($applicationState.settings.locale, {
+				month: 'long',
+				year: 'numeric'
+			})}
 		</Tooltip>
 	</Chart>
 </div>

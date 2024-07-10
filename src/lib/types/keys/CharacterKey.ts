@@ -1,7 +1,8 @@
-const characterKeyList = [
+export const characterKeyList = [
 	'Albedo',
 	'Alhaitham',
 	'Aloy',
+	'Arlecchino',
 	'Amber',
 	'AratakiItto',
 	'Baizhu',
@@ -13,6 +14,7 @@ const characterKeyList = [
 	'Chevreuse',
 	'Chiori',
 	'Chongyun',
+	'Clorinde',
 	'Collei',
 	'Cyno',
 	'Dehya',
@@ -57,9 +59,10 @@ const characterKeyList = [
 	'Rosaria', // Rosaria
 	'SangonomiyaKokomi', // Sangonomiya Kokomi
 	'Sayu', // Sayu
+	'Sethos',
 	'Shenhe', // Shenhe
 	'ShikanoinHeizou', // Shikanoin Heizou
-	'Somnia', // Somnia
+	'Sigewinne',
 	'Sucrose', // Sucrose
 	'Tartaglia', // Tartaglia
 	'Thoma', // Thoma

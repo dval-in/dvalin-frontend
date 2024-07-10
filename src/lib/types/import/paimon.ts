@@ -1,4 +1,3 @@
-/* eslint @typescript-eslint/naming-convention: 0 */
 export interface PaimonData {
 	achievement?: {
 		[key: string]: {

@@ -1,16 +1,9 @@
 <script lang="ts">
-	import CalendarIcon from 'lucide-svelte/icons/calendar';
 	import type { DateRange } from 'bits-ui';
-	import {
-		CalendarDate,
-		DateFormatter,
-		getLocalTimeZone,
-		type DateValue
-	} from '@internationalized/date';
+	import { DateFormatter, getLocalTimeZone } from '@internationalized/date';
 	import { cn } from '$lib/utils';
 	import { Button } from '$lib/components/ui/button';
 	import { RangeCalendar } from '$lib/components/ui/range-calendar';
-	import * as Popover from '$lib/components/ui/popover';
 
 	const df = new DateFormatter('en-US', {
 		dateStyle: 'medium'
@@ -25,7 +18,10 @@
 		<Popover.Trigger asChild let:builder>
 			<Button
 				builders={[builder]}
-				class={cn(' justify-start text-left font-normal', !value && 'text-muted-foreground')}
+				class={cn(
+					' justify-start text-left font-normal',
+					!value && 'text-muted-foreground'
+				)}
 				variant="ghost"
 			>
 				{#if value && value.start}
