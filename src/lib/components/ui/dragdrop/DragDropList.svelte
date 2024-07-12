@@ -5,8 +5,9 @@
 	import Text from '$lib/components/typography/Text.svelte';
 
 	class DatumType {
-		id?: number;
+		id!: number;
 		check?: string;
+		checked?: boolean;
 		html?: string;
 		text?: string;
 	}
@@ -78,6 +79,10 @@
 
 	function removeDatum(index: number) {
 		data = [...data.slice(0, index), ...data.slice(index + 1)];
+	}
+
+	function check(index: number) {
+		data[index].checked = !data[index].checked;
 	}
 </script>
 
@@ -196,6 +201,7 @@
 								</Text>
 							</Label>
 							<Checkbox
+								on:click={(e) => check(i)}
 								class=""
 								id={datum.check
 									.replace(/[^a-zA-Z]/g, '')
@@ -203,7 +209,7 @@
 										index === 0 ? match.toLowerCase() : match.toUpperCase()
 									)
 									.concat('Check')}
-								checked
+								checked={data[i].checked}
 							/>
 						</div>
 					{:else}
