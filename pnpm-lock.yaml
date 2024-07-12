@@ -42,8 +42,8 @@ importers:
         specifier: ^0.43.6
         version: 0.43.6(@babel/core@7.24.3)(postcss-load-config@4.0.2(postcss@8.4.39))(postcss@8.4.39)(sass@1.77.6)(svelte@4.2.18)(typescript@5.5.3)
       lucide-svelte:
-        specifier: ^0.399.0
-        version: 0.399.0(svelte@4.2.18)
+        specifier: ^0.408.0
+        version: 0.408.0(svelte@4.2.18)
       mode-watcher:
         specifier: ^0.3.1
         version: 0.3.1(svelte@4.2.18)
@@ -2841,8 +2841,8 @@ packages:
     resolution: {integrity: sha512-Jo6dJ04CmSjuznwJSS3pUeWmd/H0ffTlkXXgwZi+eq1UCmqQwCh+eLsYOYCwY991i2Fah4h1BEMCx4qThGbsiA==}
     engines: {node: '>=10'}
 
-  lucide-svelte@0.399.0:
-    resolution: {integrity: sha512-NQ8AxNMKbIJsx7HV//gnAsIY1wJfb3rbXSK2S/ZDjIldvAEdzGngpUT8T8Q8zHYUuii0bavAmVARN8giR4vvpA==}
+  lucide-svelte@0.408.0:
+    resolution: {integrity: sha512-5rJvcnHvE+K/2ebff/tKvG1FmIut01hDUaibMk6pG2Je+82TCPflVvhMvgCjP0fkM0ztj5t/ma1s5WYyketOSA==}
     peerDependencies:
       svelte: ^3 || ^4 || ^5.0.0-next.42
 
@@ -7108,7 +7108,7 @@ snapshots:
     dependencies:
       yallist: 4.0.0
 
-  lucide-svelte@0.399.0(svelte@4.2.18):
+  lucide-svelte@0.408.0(svelte@4.2.18):
     dependencies:
       svelte: 4.2.18
 

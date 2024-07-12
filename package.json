@@ -24,7 +24,7 @@
 		"formsnap": "^1.0.1",
 		"i18next": "^23.11.5",
 		"layerchart": "^0.43.6",
-		"lucide-svelte": "^0.399.0",
+		"lucide-svelte": "^0.408.0",
 		"mode-watcher": "^0.3.1",
 		"socket.io": "^4.7.5",
 		"socket.io-client": "^4.7.5",
