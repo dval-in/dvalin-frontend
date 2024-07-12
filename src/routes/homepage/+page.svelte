@@ -3,7 +3,7 @@
 	import { Button } from '$lib/components/ui/button';
 	import Text from '$lib/components/typography/Text.svelte';
 	import S3Service from '$lib/services/s3';
-	import i18n from '$lib/services/i18n';
+	// import i18n from '$lib/services/i18n';
 	import { Progress } from '$lib/components/ui/progress';
 	import * as Dialog from '$lib/components/ui/dialog';
 	import DragDropList from '$lib/components/ui/dragdrop/DragDropList.svelte';
@@ -14,7 +14,6 @@
 	import PullChip from '$lib/components/ui/pull-chip/PullChip.svelte';
 	import { Checkbox } from '$lib/components/ui/checkbox';
 	import { Label } from '$lib/components/ui/label';
-	import * as Accordion from '$lib/components/ui/accordion';
 
 	import { mdiPencil, mdiImport, mdiAccount, mdiSwordCross, mdiTrashCanOutline } from '@mdi/js';
 
@@ -643,7 +642,7 @@
 								<Text type="p">full in 40 minutes (12:00)</Text>
 							</div>
 						</Card.Content>
-				   <!-- <Card.Footer class="flex justify-end">
+						<!-- <Card.Footer class="flex justify-end">
 							<Button class="w-full">View more</Button>
 						</Card.Footer> -->
 					</Card.Root>
