@@ -39,8 +39,8 @@ importers:
         specifier: ^23.11.5
         version: 23.11.5
       layerchart:
-        specifier: ^0.43.6
-        version: 0.43.6(@babel/core@7.24.3)(postcss-load-config@4.0.2(postcss@8.4.39))(postcss@8.4.39)(sass@1.77.8)(svelte@4.2.18)(typescript@5.5.3)
+        specifier: ^0.43.7
+        version: 0.43.7(@babel/core@7.24.3)(postcss-load-config@4.0.2(postcss@8.4.39))(postcss@8.4.39)(sass@1.77.8)(svelte@4.2.18)(typescript@5.5.3)
       lucide-svelte:
         specifier: ^0.408.0
         version: 0.408.0(svelte@4.2.18)
@@ -2742,8 +2742,8 @@ packages:
       svelte: 3 - 5 || >=5.0.0-next.120
       typescript: ^5.0.2
 
-  layerchart@0.43.6:
-    resolution: {integrity: sha512-NjixniD2QKYMwnI1FUvTjn1P6PhbWiTm/xtLCxVZUBS7g3S4HZbXZSS1R4zvb0/PhlfkkYWae1giURESv47H3Q==}
+  layerchart@0.43.7:
+    resolution: {integrity: sha512-YfVRWJtx+wgcfUn5uDmIscbHZ2LcEaxu0FU4dVeUnIufCRk+6KbIDbpkbe8yjPlHya2AFxULG3Usx1CuDdJB3Q==}
     peerDependencies:
       svelte: ^3.56.0 || ^4.0.0 || ^5.0.0-next.120
 
@@ -3194,8 +3194,8 @@ packages:
     resolution: {integrity: sha512-0vzE+lAiG7hZl1/9I8yzKLx3aR9Xbof3fBHKunvMfOCYAtMhrsnccJY2iTURb9EZd5+pLuiNV9/c/GZJOHsgIw==}
     engines: {node: ^10 || ^12 || >=14}
 
-  posthog-js@1.142.1:
-    resolution: {integrity: sha512-yqeWTWitlb0sCaH5v6s7UJ+pPspzf/lkzPaSE5pMMXRM2i2KNsMoZEAZqbPCW8fQ8QL6lHs6d8PLjHrvbR288w==}
+  posthog-js@1.147.0:
+    resolution: {integrity: sha512-cALKIcix1W9xMsfUUI/QUFhtBeabDGsQCb3lpZEFd7WCPNLOcGmpeomm4xMX7MO2OnfK6Ov91/HNyfK1wncjSA==}
 
   preact@10.19.5:
     resolution: {integrity: sha512-OPELkDmSVbKjbFqF9tgvOowiiQ9TmsJljIzXRyNE8nGiis94pwv1siF78rQkAP1Q1738Ce6pellRg/Ns/CtHqQ==}
@@ -3733,8 +3733,8 @@ packages:
     peerDependencies:
       svelte: ^4.0.0
 
-  svelte-ux@0.71.3:
-    resolution: {integrity: sha512-6WQE0ifmIYSC9+R3tuYBbv9v2kAiBuubknUGFmGTvx64kaUTNyZ2mZirNCip8e2J1eocP3URzW8UnA8KJBG3TA==}
+  svelte-ux@0.72.4:
+    resolution: {integrity: sha512-P0wFF/vIdq7VMdAt/ajZpwU0p0Y9oNcZc1hJuPrdcv5F2o5VKqO3bbpUTdh3WIMeHPDjBI8FKfKHQK4t7TdTHg==}
     peerDependencies:
       svelte: ^3.56.0 || ^4.0.0 || ^5.0.0-next.120
 
@@ -5221,7 +5221,7 @@ snapshots:
   '@melt-ui/svelte@0.61.2(svelte@4.2.18)':
     dependencies:
       '@floating-ui/core': 1.6.0
-      '@floating-ui/dom': 1.6.5
+      '@floating-ui/dom': 1.6.7
       '@internationalized/date': 3.5.4
       dequal: 2.0.3
       focus-trap: 7.5.4
@@ -6982,7 +6982,7 @@ snapshots:
       svelte: 4.2.18
       typescript: 5.5.3
 
-  layerchart@0.43.6(@babel/core@7.24.3)(postcss-load-config@4.0.2(postcss@8.4.39))(postcss@8.4.39)(sass@1.77.8)(svelte@4.2.18)(typescript@5.5.3):
+  layerchart@0.43.7(@babel/core@7.24.3)(postcss-load-config@4.0.2(postcss@8.4.39))(postcss@8.4.39)(sass@1.77.8)(svelte@4.2.18)(typescript@5.5.3):
     dependencies:
       d3-array: 3.2.4
       d3-color: 3.1.0
@@ -7006,10 +7006,10 @@ snapshots:
       date-fns: 3.6.0
       layercake: 8.3.4(svelte@4.2.18)(typescript@5.5.3)
       lodash-es: 4.17.21
-      posthog-js: 1.142.1
+      posthog-js: 1.147.0
       shapefile: 0.6.6
       svelte: 4.2.18
-      svelte-ux: 0.71.3(@babel/core@7.24.3)(postcss-load-config@4.0.2(postcss@8.4.39))(postcss@8.4.39)(sass@1.77.8)(svelte@4.2.18)
+      svelte-ux: 0.72.4(@babel/core@7.24.3)(postcss-load-config@4.0.2(postcss@8.4.39))(postcss@8.4.39)(sass@1.77.8)(svelte@4.2.18)
       topojson-client: 3.1.0
     transitivePeerDependencies:
       - '@babel/core'
@@ -7403,7 +7403,7 @@ snapshots:
       picocolors: 1.0.1
       source-map-js: 1.2.0
 
-  posthog-js@1.142.1:
+  posthog-js@1.147.0:
     dependencies:
       fflate: 0.4.8
       preact: 10.19.5
@@ -8034,9 +8034,9 @@ snapshots:
     dependencies:
       svelte: 4.2.18
 
-  svelte-ux@0.71.3(@babel/core@7.24.3)(postcss-load-config@4.0.2(postcss@8.4.39))(postcss@8.4.39)(sass@1.77.8)(svelte@4.2.18):
+  svelte-ux@0.72.4(@babel/core@7.24.3)(postcss-load-config@4.0.2(postcss@8.4.39))(postcss@8.4.39)(sass@1.77.8)(svelte@4.2.18):
     dependencies:
-      '@floating-ui/dom': 1.6.5
+      '@floating-ui/dom': 1.6.7
       '@fortawesome/fontawesome-common-types': 6.5.2
       '@mdi/js': 7.4.47
       clsx: 2.1.1
