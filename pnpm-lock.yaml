@@ -63,8 +63,8 @@ importers:
         specifier: ^0.3.27
         version: 0.3.27(svelte@4.2.18)
       svelte-ux:
-        specifier: ^0.73.0
-        version: 0.73.0(@babel/core@7.24.3)(postcss-load-config@4.0.2(postcss@8.4.39))(postcss@8.4.39)(sass@1.77.8)(svelte@4.2.18)
+        specifier: ^0.73.2
+        version: 0.73.2(@babel/core@7.24.3)(postcss-load-config@4.0.2(postcss@8.4.39))(postcss@8.4.39)(sass@1.77.8)(svelte@4.2.18)
       sveltekit-superforms:
         specifier: ^2.16.0
         version: 2.16.0(@sveltejs/kit@2.5.18(@sveltejs/vite-plugin-svelte@3.1.1(svelte@4.2.18)(vite@5.3.3(@types/node@20.11.30)(sass@1.77.8)(terser@5.30.0)))(svelte@4.2.18)(vite@5.3.3(@types/node@20.11.30)(sass@1.77.8)(terser@5.30.0)))(svelte@4.2.18)
@@ -1023,14 +1023,8 @@ packages:
   '@floating-ui/core@1.6.0':
     resolution: {integrity: sha512-PcF++MykgmTj3CIyOQbKA/hDzOAiqI3mhuoN44WRCopIs1sgoDoU4oty4Jtqaj/y3oDU6fnVSm4QG0a3t5i0+g==}
 
-  '@floating-ui/dom@1.6.5':
-    resolution: {integrity: sha512-Nsdud2X65Dz+1RHjAIP0t8z5e2ff/IRbei6BqFrl1urT8sDVzM1HMQ+R0XcU5ceRfyO3I6ayeqIfh+6Wb8LGTw==}
-
   '@floating-ui/dom@1.6.7':
     resolution: {integrity: sha512-wmVfPG5o2xnKDU4jx/m4w5qva9FWHcnZ8BvzEe90D/RpwsJaTAVYPEPdQ8sbr/N8zZTAHlZUTQdqg8ZUbzHmng==}
-
-  '@floating-ui/utils@0.2.1':
-    resolution: {integrity: sha512-9TANp6GPoMtYzQdt54kfAyMmz1+osLlXdg2ENroU7zzrtflTLrrC/lgrIfaSe+Wu0b89GKccT7vxXA0MoAIO+Q==}
 
   '@floating-ui/utils@0.2.4':
     resolution: {integrity: sha512-dWO2pw8hhi+WrXq1YJy2yCuWoL20PddgGaqTgVe4cOS9Q6qklXCiA1tJEqX6BEwRNSCP84/afac9hd4MS+zEUA==}
@@ -3732,8 +3726,8 @@ packages:
     peerDependencies:
       svelte: ^3.56.0 || ^4.0.0 || ^5.0.0-next.120
 
-  svelte-ux@0.73.0:
-    resolution: {integrity: sha512-gIrCR8Z9CfAhDPY2Kkp3udTM5xAHJwvhnlehMEycaWIH030KaZZOccYcQWJr0MC2H8H3PH8tZ+AI9wqkoQcn1Q==}
+  svelte-ux@0.73.2:
+    resolution: {integrity: sha512-JaLj0qh+KEeH3Yyd/YoWyAlo1lozDzz+jjLpjLV81Ni1/ya1QJFAgQasTl0TPHfJdFtSsv2yel/bo3Sy4TCmHA==}
     peerDependencies:
       svelte: ^3.56.0 || ^4.0.0 || ^5.0.0-next.120
 
@@ -5140,17 +5134,10 @@ snapshots:
     dependencies:
       '@floating-ui/utils': 0.2.4
 
-  '@floating-ui/dom@1.6.5':
-    dependencies:
-      '@floating-ui/core': 1.6.0
-      '@floating-ui/utils': 0.2.1
-
   '@floating-ui/dom@1.6.7':
     dependencies:
       '@floating-ui/core': 1.6.0
       '@floating-ui/utils': 0.2.4
-
-  '@floating-ui/utils@0.2.1': {}
 
   '@floating-ui/utils@0.2.4': {}
 
@@ -5217,7 +5204,7 @@ snapshots:
   '@melt-ui/svelte@0.76.2(svelte@4.2.18)':
     dependencies:
       '@floating-ui/core': 1.6.0
-      '@floating-ui/dom': 1.6.5
+      '@floating-ui/dom': 1.6.7
       '@internationalized/date': 3.5.4
       dequal: 2.0.3
       focus-trap: 7.5.4
@@ -8044,7 +8031,7 @@ snapshots:
       - stylus
       - sugarss
 
-  svelte-ux@0.73.0(@babel/core@7.24.3)(postcss-load-config@4.0.2(postcss@8.4.39))(postcss@8.4.39)(sass@1.77.8)(svelte@4.2.18):
+  svelte-ux@0.73.2(@babel/core@7.24.3)(postcss-load-config@4.0.2(postcss@8.4.39))(postcss@8.4.39)(sass@1.77.8)(svelte@4.2.18):
     dependencies:
       '@floating-ui/dom': 1.6.7
       '@fortawesome/fontawesome-common-types': 6.5.2
