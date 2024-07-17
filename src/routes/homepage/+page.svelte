@@ -3,7 +3,7 @@
 	import { Button } from '$lib/components/ui/button';
 	import Text from '$lib/components/typography/Text.svelte';
 	import S3Service from '$lib/services/s3';
-	// import i18n from '$lib/services/i18n';
+	import i18n from '$lib/services/i18n';
 	import { Progress } from '$lib/components/ui/progress';
 	import * as Dialog from '$lib/components/ui/dialog';
 	import DragDropList from '$lib/components/ui/dragdrop/DragDropList.svelte';
@@ -14,13 +14,18 @@
 	import PullChip from '$lib/components/ui/pull-chip/PullChip.svelte';
 	import { Checkbox } from '$lib/components/ui/checkbox';
 	import { Label } from '$lib/components/ui/label';
+	import { Input } from '$lib/components/ui/input';
 
 	import { mdiPencil, mdiImport, mdiAccount, mdiSwordCross, mdiTrashCanOutline } from '@mdi/js';
+	import CharCard from '$lib/components/ui/card/CharCard.svelte';
+	import type { Elements } from '$lib/types/elements';
+	import type { WeaponTypes } from '$lib/types/weapon';
+	import { onMount } from 'svelte';
 
 	let changeLog = `
 `;
 
-	let currVer = '4.5';
+	let currentVer = '4.5';
 
 	$: dragDropList = [
 		{ id: 0, check: 'ChangeLog', checked: true },
@@ -70,6 +75,64 @@
 		end: new Date(2024, 3, 18, 5, 59)
 	};
 
+	type character = {
+		obtained: boolean;
+		link: string;
+		name: string;
+		element: Elements;
+		weapon: WeaponTypes;
+		img: string;
+		rarity: number;
+	};
+
+	const transformIntoElements = (element: string): Elements => {
+		switch (element) {
+			case 'Pyro':
+				return 'pyro';
+			case 'Hydro':
+				return 'hydro';
+			case 'Anemo':
+				return 'anemo';
+			case 'Electro':
+				return 'electro';
+			case 'Dendro':
+				return 'dendro';
+			case 'Cryo':
+				return 'cryo';
+			case 'Geo':
+				return 'geo';
+			default:
+				return 'anemo';
+		}
+	};
+
+	const transformIntoWeapons = (weapon: string): WeaponTypes => {
+		switch (weapon) {
+			case 'Sword':
+				return 'sword';
+			case 'Claymore':
+				return 'claymore';
+			case 'Polearm':
+				return 'polearm';
+			case 'Catalyst':
+				return 'catalyst';
+			case 'Bow':
+				return 'bow';
+			default:
+				return 'sword';
+		}
+	};
+
+	const displayed_character: character = {
+		obtained: true,
+		link: `/characters/${'Amber'}`,
+		name: 'David',
+		element: transformIntoElements('Anemo'),
+		weapon: transformIntoWeapons('Catalyst'),
+		img: S3Service.getCharacter('Amber').icon,
+		rarity: 5
+	};
+
 	let achievementsDone = 998;
 	let achievementsTotal = 1143;
 
@@ -82,6 +145,99 @@
 	const card = S3Service.getCharacter('Amber').gachaCard;
 
 	let firstTimeUser = false;
+
+	type GachaCharacterWishingData = {
+		name: string;
+		pulls: number;
+		percentage: number;
+		average: number;
+	};
+
+	let currentGachaFirst: GachaCharacterWishingData = {
+		name: 'Amber',
+		pulls: 13994,
+		percentage: 23,
+		average: 25
+	};
+
+	let currentGachaSecond: GachaCharacterWishingData = {
+		name: 'Amber',
+		pulls: 1994,
+		percentage: 12,
+		average: 55
+	};
+
+	let submissions: number = 69420;
+
+	let currentResin: number = 12;
+	let maxResin: number = 200;
+
+	let resinRegenTime = 8;
+
+	let currentDate = new Date();
+	
+	$: currentTime = currentDate.getTime();
+
+	onMount(() => {
+		const interval = setInterval(() => {
+			currentDate = new Date();
+		}, 5000);
+
+		return () => {
+			clearInterval(interval);
+		};
+	});
+
+	$: ResinCounter = {
+		HandleInput(): void {
+			let temp = currentResin.toString();
+			temp = temp.replace(/[.e]/g, '');
+			currentResin = parseInt(temp);
+			if (currentResin > 2000) currentResin = maxResin;
+			else if (currentResin < 1 || !currentResin) currentResin = 0;
+		},
+
+		increaseResin(n: number): void {
+			currentResin += n;
+		},
+
+		decreaseResin(n: number): void {
+			currentResin -= n;
+			if (currentResin < 0) currentResin = 0;
+		},
+
+		countTimeLeft(goal: number): string {
+			let output: string;
+
+			let minutesTillRegen = (goal - currentResin) * resinRegenTime;
+			let hoursTillRegen = Math.floor(minutesTillRegen / 60);
+			minutesTillRegen -= hoursTillRegen * 60;
+
+			if (hoursTillRegen == 0) output = `${minutesTillRegen} min`;
+			else if (minutesTillRegen > 0) output = `${hoursTillRegen} h ${minutesTillRegen} min`;
+			else output = `${hoursTillRegen} h`;
+
+			return output;
+		},
+
+		countEndTime(goal: number): string {
+			let output: string;
+
+			let currentMins = currentDate.getMinutes();
+			let currentHours = currentDate.getHours();
+
+			let minutesTillRegen = currentMins + (goal - currentResin) * resinRegenTime;
+			let hoursTillRegen = Math.floor(minutesTillRegen / 60);
+			minutesTillRegen -= hoursTillRegen * 60;
+
+			let endHours = ((currentHours + hoursTillRegen) % 24).toString().padStart(2, '0');
+			let endMins = minutesTillRegen.toString().padStart(2, '0');
+
+			output = `${endHours}:${endMins}`;
+
+			return output;
+		}
+	};
 </script>
 
 <AlertDialog.Root open={firstTimeUser}>
@@ -100,7 +256,7 @@
 	</AlertDialog.Content>
 </AlertDialog.Root>
 
-<DefaultLayout title="Homepage">
+<DefaultLayout title="Dashboard">
 	<svelte:fragment slot="titlebarActions">
 		<Dialog.Root>
 			<Dialog.Trigger>
@@ -257,7 +413,7 @@
 							</Card.Title>
 						</Card.Header>
 						<Card.Content>
-							<Text type="large">For version {currVer}</Text>
+							<Text type="large">For version {currentVer}</Text>
 							<div class="flex flex-col gap-1.5 mt-2">
 								<div
 									class="flex flex-row justify-between bg-neutral rounded-md py-3 px-2"
@@ -265,18 +421,14 @@
 									<Text type="p">{mockEvent.name}</Text>
 									<Text type="p">
 										{Math.floor(
-											(mockEvent.end.getTime() - new Date().getTime()) /
-												3600000 /
-												24
+											(mockEvent.end.getTime() - currentTime) / 3600000 / 24
 										)}d
 										{Math.floor(
-											(mockEvent.end.getTime() - new Date().getTime()) /
-												3600000
+											(mockEvent.end.getTime() - currentTime) / 3600000
 										) -
 											24 *
 												Math.floor(
-													(mockEvent.end.getTime() -
-														new Date().getTime()) /
+													(mockEvent.end.getTime() - currentTime) /
 														3600000 /
 														24
 												)}h
@@ -288,18 +440,14 @@
 									<Text type="p">{mockEvent.name}</Text>
 									<Text type="p">
 										{Math.floor(
-											(mockEvent.end.getTime() - new Date().getTime()) /
-												3600000 /
-												24
+											(mockEvent.end.getTime() - currentTime) / 3600000 / 24
 										)}d
 										{Math.floor(
-											(mockEvent.end.getTime() - new Date().getTime()) /
-												3600000
+											(mockEvent.end.getTime() - currentTime) / 3600000
 										) -
 											24 *
 												Math.floor(
-													(mockEvent.end.getTime() -
-														new Date().getTime()) /
+													(mockEvent.end.getTime() - currentTime) /
 														3600000 /
 														24
 												)}h
@@ -311,18 +459,14 @@
 									<Text type="p">{mockEvent.name}</Text>
 									<Text type="p">
 										{Math.floor(
-											(mockEvent.end.getTime() - new Date().getTime()) /
-												3600000 /
-												24
+											(mockEvent.end.getTime() - currentTime) / 3600000 / 24
 										)}d
 										{Math.floor(
-											(mockEvent.end.getTime() - new Date().getTime()) /
-												3600000
+											(mockEvent.end.getTime() - currentTime) / 3600000
 										) -
 											24 *
 												Math.floor(
-													(mockEvent.end.getTime() -
-														new Date().getTime()) /
+													(mockEvent.end.getTime() - currentTime) /
 														3600000 /
 														24
 												)}h
@@ -334,18 +478,14 @@
 									<Text type="p">{mockEvent.name}</Text>
 									<Text type="p">
 										{Math.floor(
-											(mockEvent.end.getTime() - new Date().getTime()) /
-												3600000 /
-												24
+											(mockEvent.end.getTime() - currentTime) / 3600000 / 24
 										)}d
 										{Math.floor(
-											(mockEvent.end.getTime() - new Date().getTime()) /
-												3600000
+											(mockEvent.end.getTime() - currentTime) / 3600000
 										) -
 											24 *
 												Math.floor(
-													(mockEvent.end.getTime() -
-														new Date().getTime()) /
+													(mockEvent.end.getTime() - currentTime) /
 														3600000 /
 														24
 												)}h
@@ -357,7 +497,8 @@
 							<Button class="w-full">View timeline</Button>
 						</Card.Footer>
 					</Card.Root>{/if}
-				{#if Widget.check === 'To-do List' && Widget.checked == true}<!-- To-do card -->
+				{#if Widget.check === 'To-do List' && Widget.checked == true}
+					<!-- To-do card -->
 					<Card.Root class="text-white flex flex-col">
 						<Card.Header>
 							<!--TODO: Replace this with i18n key-->
@@ -433,7 +574,7 @@
 						<Card.Header>
 							<!--TODO: Replace this with i18n key-->
 							<Card.Title>
-								<Text type="h4">Pity v2</Text>
+								<Text type="h4">Pity</Text>
 							</Card.Title>
 						</Card.Header>
 						<Card.Content>
@@ -481,7 +622,7 @@
 							</div>
 						</Card.Content>
 						<Card.Footer class="flex justify-end">
-							<Button>Wish Counter</Button>
+							<Button href="wish-statistics/overview">Wish Counter</Button>
 						</Card.Footer>
 					</Card.Root>{/if}
 				{#if Widget.check === 'Wishing' && Widget.checked == true}
@@ -491,7 +632,9 @@
 							<!--TODO: Replace this with i18n key-->
 							<Card.Title class="flex justify-between items-center">
 								<Text type="h4">Wishing stats</Text>
-								<IconButton icon={mdiImport}>Import</IconButton>
+								<IconButton icon={mdiImport} href="/settings/import">
+									Import
+								</IconButton>
 							</Card.Title>
 						</Card.Header>
 						<Card.Content class="flex flex-col gap-3">
@@ -525,7 +668,9 @@
 								>
 									<Icon path={mdiSwordCross} />
 									<div class="flex gap-4 font-semibold">
-										<Text type="p" class="text-amber-500">{weaponPity[0]}</Text>
+										<Text type="p" class="text-amber-500">
+											{weaponPity[0]}
+										</Text>
 										<Text type="p" class="text-violet-400">
 											{weaponPity[1]}
 										</Text>
@@ -562,7 +707,7 @@
 							</div>
 						</Card.Content>
 						<Card.Footer class="flex justify-end">
-							<Button>View more</Button>
+							<Button href="wish-statistics/overview">View more</Button>
 						</Card.Footer>
 					</Card.Root>
 				{/if}
@@ -576,7 +721,33 @@
 							</Card.Title>
 						</Card.Header>
 						<Card.Content>
-							<Text type="p">char or weapon icon name info</Text>
+							<div class="flex flex-row justify-around mt-2">
+								<CharCard
+									link={displayed_character.link}
+									name={displayed_character.name}
+									img={displayed_character.img}
+									level={0}
+									constellation={0}
+									element={displayed_character.element}
+									weapon={displayed_character.weapon}
+									rarity={displayed_character.rarity}
+									obtained={displayed_character.obtained}
+								/>
+								<CharCard
+									link={displayed_character.link}
+									name={displayed_character.name}
+									img={displayed_character.img}
+									level={0}
+									constellation={0}
+									element={displayed_character.element}
+									weapon={displayed_character.weapon}
+									rarity={displayed_character.rarity}
+									obtained={displayed_character.obtained}
+								/>
+							</div>
+							<!-- <Text type="p">char or weapon icon name info</Text> -->
+
+							<!-- Display setup will be in character/weapon tabs -->
 						</Card.Content>
 					</Card.Root>
 				{/if}
@@ -586,27 +757,39 @@
 						<Card.Header>
 							<!--TODO: Replace this with i18n key-->
 							<Card.Title class="flex justify-between items-center">
-								<Text type="h4">Global wishing stats</Text>
+								<Text type="h4">
+									Global wishing stats{$i18n.t('dashboard.global_whishing')}
+								</Text>
 							</Card.Title>
 						</Card.Header>
 						<Card.Content class="flex flex-col gap-3">
 							<div class="flex flex-row justify-around">
 								<div class="flex flex-col items-center">
-									<img class="w-32 h-44" src={card} />
-									<Text type="large">Amber</Text>
-									<Text type="large">21.3k</Text>
-									<Text type="p">23% of all 5*</Text>
-									<Text type="p">Pity average 67</Text>
+									<img class="w-32 h-44" src={card} alt="Amber Gacha Card" />
+									<Text type="large">{currentGachaFirst.name}</Text>
+									<Text type="large">
+										{Math.round(
+											(currentGachaFirst.pulls / 1000 + Number.EPSILON) * 10
+										) / 10}k
+									</Text>
+									<Text type="p">{currentGachaFirst.percentage}% of all 5*</Text>
+									<Text type="p">Pity average {currentGachaFirst.average}</Text>
 								</div>
 								<div class="flex flex-col items-center">
-									<img class="w-32 h-44" src={card} />
-									<Text type="large">Amber</Text>
-									<Text type="large">21.3k</Text>
-									<Text type="p">23% of all 5*</Text>
-									<Text type="p">Pity average 67</Text>
+									<img class="w-32 h-44" src={card} alt="Amber Gacha Card" />
+									<Text type="large">{currentGachaSecond.name}</Text>
+									<Text type="large">
+										{Math.round(
+											(currentGachaSecond.pulls / 1000 + Number.EPSILON) * 10
+										) / 10}k
+									</Text>
+									<Text type="p">{currentGachaSecond.percentage}% of all 5*</Text>
+									<Text type="p">Pity average {currentGachaSecond.average}</Text>
 								</div>
 							</div>
-							<Text type="p" class="self-center">based on 69420 submissions</Text>
+							<Text type="p" class="self-center">
+								based on {submissions} submissions
+							</Text>
 						</Card.Content>
 						<Card.Footer class="flex justify-end">
 							<Button class="w-full">View more</Button>
@@ -624,23 +807,84 @@
 						</Card.Header>
 						<Card.Content class="flex flex-col gap-3">
 							<div class="flex flex-row items-center justify-center gap-4">
-								<img class="w-8 h-8" src="" />
-								<Text type="large">160/160</Text>
+								<img class="w-8 h-8" src="" alt="Resin Icon" />
+
+								<Text type="large">
+									<Input
+										type="number"
+										class="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none
+										w-12 h-4 border-none text-lg font-semibold inline text-right p-0 pl-1 
+										focus-visible:border-spacing-1 focus-visible:border-2 focus-visible:border-red-500 focus-visible:ring-0 focus-visible:ring-offset-0"
+										bind:value={currentResin}
+										on:input={() => ResinCounter.HandleInput()}
+									/>/{maxResin}
+								</Text>
 							</div>
 							<div class="flex flex-row justify-center">
-								<Button class="rounded-l-md rounded-r-none">-20</Button>
-								<Button class="rounded-none">-30</Button>
-								<Button class="rounded-none">-40</Button>
-								<Button class="rounded-none">-60</Button>
-								<Button class="rounded-r-md rounded-l-none">+60</Button>
+								<Button
+									on:click={() => ResinCounter.decreaseResin(20)}
+									class="rounded-l-md rounded-r-none"
+								>
+									-20
+								</Button>
+								<Button
+									on:click={() => ResinCounter.decreaseResin(30)}
+									class="rounded-none"
+								>
+									-30
+								</Button>
+								<Button
+									on:click={() => ResinCounter.decreaseResin(40)}
+									class="rounded-none"
+								>
+									-40
+								</Button>
+								<Button
+									on:click={() => ResinCounter.decreaseResin(60)}
+									class="rounded-none"
+								>
+									-60
+								</Button>
+								<Button
+									on:click={() => ResinCounter.increaseResin(60)}
+									class="rounded-r-md rounded-l-none"
+								>
+									+60
+								</Button>
 							</div>
-							<div class="flex flex-col items-center">
-								<Text type="p">20 in 40 minutes (12:00)</Text>
-								<Text type="p">30 in 40 minutes (12:00)</Text>
-								<Text type="p">40 in 40 minutes (12:00)</Text>
-								<Text type="p">60 in 40 minutes (12:00)</Text>
-								<Text type="p">full in 40 minutes (12:00)</Text>
-							</div>
+
+							{#if currentResin < maxResin}
+								<div class="flex flex-col items-center">
+									{#if currentResin < 20}
+										<Text type="p">
+											20 in {ResinCounter.countTimeLeft(20)}
+											({ResinCounter.countEndTime(20)})
+										</Text>
+									{/if}
+									{#if currentResin < 30}
+										<Text type="p">
+											30 in {ResinCounter.countTimeLeft(30)}
+											({ResinCounter.countEndTime(30)})
+										</Text>
+									{/if}
+									{#if currentResin < 40}
+										<Text type="p">
+											40 in {ResinCounter.countTimeLeft(40)}
+											({ResinCounter.countEndTime(40)})
+										</Text>
+									{/if}
+									{#if currentResin < 60}
+										<Text type="p">
+											60 in {ResinCounter.countTimeLeft(60)}
+											({ResinCounter.countEndTime(60)})
+										</Text>
+									{/if}
+									<Text type="p">
+										{maxResin} in {ResinCounter.countTimeLeft(maxResin)}
+										({ResinCounter.countEndTime(maxResin)})
+									</Text>
+								</div>
+							{/if}
 						</Card.Content>
 						<!-- <Card.Footer class="flex justify-end">
 							<Button class="w-full">View more</Button>
