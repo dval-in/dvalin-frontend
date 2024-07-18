@@ -47,7 +47,7 @@ export class BackendHoyoService {
 		return createQuery<BackendStateResponse | FetchHoyoWishHistoryStatusResponse>(
 			derived(applicationState, (appState) => ({
 				queryKey: ['fetchHoyoWishStatus', appState.isAuthenticated],
-				//staleTime: 60 * 60 * 1000, //1h
+				staleTime: 60 * 60 * 1000, //1h
 				queryFn: async () =>
 					await backendFetch<FetchHoyoWishHistoryStatusResponse>(
 						this.getHoyoWishHistoryStatusUrl()

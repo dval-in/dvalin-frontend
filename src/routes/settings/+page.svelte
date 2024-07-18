@@ -25,13 +25,10 @@
 		DialogTitle,
 		DialogTrigger
 	} from '$lib/components/ui/dialog';
+	import { nav } from '$lib/utils/nav_helper';
 	const backend = BackendService.getInstance();
 	const createConfigMutation = backend.user.updateConfig();
 	const deleteProfileMutation = backend.user.deleteUserProfile();
-
-	const nav = (url: string) => {
-		window.location.href = url;
-	};
 
 	const loginOptions = [
 		{ name: 'Google', icon: siGoogle, action: () => nav(backend.auth.login('google')) },
@@ -57,7 +54,7 @@
 		element.click();
 		document.body.removeChild(element);
 	};
-	const userProfil = get(userProfile);
+	const userProfil = $userProfile;
 	const user = userProfil.account;
 	const settings = userProfil.config;
 	// Function to change theme to selected
@@ -75,10 +72,11 @@
 
 	function handleSave() {
 		$createConfigMutation.mutate({
-			config: { ...settings }
+			config: { ...get(userProfile).config }
 		});
 	}
-	const bgImageUrl = '/xiao_temp.png';
+	// TODO : fix this once we have image on s3
+	const bgImageUrl = get(userProfile).account.namecard;
 
 	function handleDelete(): void {
 		$deleteProfileMutation.mutate();

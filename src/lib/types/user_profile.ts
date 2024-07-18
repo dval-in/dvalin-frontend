@@ -4,7 +4,7 @@ import type { IArtifact } from '$lib/types/artifact';
 import type { IAchievements } from '$lib/types/achievement';
 import type { IFurnishings } from '$lib/types/furnishing';
 import type { IMaterials } from '$lib/types/material';
-import type { IWeapons } from '$lib/types/weapon';
+import type { IWeapon } from '$lib/types/weapon';
 import type { IWishes } from '$lib/types/wish';
 import type { Config } from './config';
 
@@ -20,7 +20,7 @@ export interface UserProfile {
 	characters?: ICharacters;
 	furnishing?: IFurnishings;
 	materials?: IMaterials;
-	weapons?: IWeapons;
+	weapons?: IWeapon[];
 	wishes?: IWishes;
 }
 

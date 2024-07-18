@@ -1,3 +1,5 @@
+import type { ServerKey } from './server';
+
 export interface IUser {
 	server: ServerKey;
 	ar: number;
@@ -7,11 +9,3 @@ export interface IUser {
 	namecard: string;
 	signature?: string;
 }
-
-const serverKeys = ['Europe', 'America', 'Asia', 'HK-TW', 'China'];
-
-export type ServerKey = (typeof serverKeys)[number];
-
-export const isServerKey = (key: string): key is ServerKey => {
-	return serverKeys.includes(key);
-};

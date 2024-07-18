@@ -27,6 +27,7 @@
 	import { get } from 'svelte/store';
 
 	let wishData: IMappedWishes = {};
+	// TODO : to refactor
 	const wishes: IWishes | undefined = get(userProfile).wishes;
 	if (wishes !== undefined) {
 		Object.keys(wishes).forEach((key: string) => {

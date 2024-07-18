@@ -6,7 +6,6 @@
 	import { Alert, AlertDescription, AlertTitle } from '$lib/components/ui/alert';
 	import { goto } from '$app/navigation';
 	import { toast } from 'svelte-sonner';
-	import { userProfile } from '$lib/store/user_profile';
 
 	interface UserData {
 		uid: number;
@@ -23,7 +22,6 @@
 
 	const createProfileMutation = backend.user.createUserProfile();
 
-	$userProfile.account.uid !== 0 && goto('/');
 	let error: string | null = null;
 	const handleProfileSubmit = async ({
 		user,
@@ -35,19 +33,22 @@
 		const data = { ...user, config };
 		console.log(data);
 
-		const result = await $createProfileMutation.mutateAsync(data);
-		if (result.state === 'SUCCESS') {
-			toast.success('Profile created successfully');
-		} else {
-			toast.error('Error creating profile:' + result.state);
-		}
+		const result = await $createProfileMutation.mutateAsync(data, {
+			onError: () => {
+				toast.error('Error creating profile:' + result.state);
+			},
+			onSuccess: () => {
+				toast.success('Profile created successfully');
+				goto('/');
+			}
+		});
 
 		goto('/');
 	};
 </script>
 
 <DefaultLayout title="Welcome Traveller !">
-	{#if !$createProfileMutation.isPending}
+	{#if $createProfileMutation.isIdle}
 		<div class="grid grid-cols-3 items-center">
 			<div class="p-5">
 				<H2>Complete your profile to access our features !</H2>
@@ -66,7 +67,7 @@
 		</Alert>
 	{/if}
 
-	{#if error}
+	{#if $createProfileMutation.isError}
 		<Alert variant="destructive">
 			<AlertTitle>Error</AlertTitle>
 			<AlertDescription>{error}</AlertDescription>
