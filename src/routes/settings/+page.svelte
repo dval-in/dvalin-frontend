@@ -140,7 +140,7 @@
 			</div>
 		</div>
 		<div class="flex flex-col gap-2">
-			<Text type="h3">Login providers</Text>
+			<Text type="h3">{$i18n.t('settings.login_providers')}</Text>
 			<div class="grid grid-cols-2 gap-4">
 				{#each loginOptions as option}
 					<Button
@@ -158,19 +158,25 @@
 		<div class="mt-6">
 			<form on:submit|preventDefault={handleSave} class="space-y-4">
 				<div class="flex flex-col gap-2">
-					<Text type="h3">Auto Refine Settings</Text>
+					<Text type="h3">{$i18n.t('settings.auto_refine_settings')}</Text>
 					<div class="flex flex-row gap-4">
 						<div class="flex items-center space-x-2">
 							<Checkbox id={'autoRefine3'} bind:checked={settings.autoRefine3} />
-							<Label for={'autoRefine3'}>Auto Refine 3-star weapons</Label>
+							<Label for={'autoRefine3'}>
+								{$i18n.t('settings.auto_refine_3_star')}
+							</Label>
 						</div>
 						<div class="flex items-center space-x-2">
 							<Checkbox id={'autoRefine4'} bind:checked={settings.autoRefine4} />
-							<Label for={'autoRefine4'}>Auto Refine 4-star weapons</Label>
+							<Label for={'autoRefine4'}>
+								{$i18n.t('settings.auto_refine_4_star')}
+							</Label>
 						</div>
 						<div class="flex items-center space-x-2">
 							<Checkbox id={'autoRefine5'} bind:checked={settings.autoRefine5} />
-							<Label for={'autoRefine5'}>Auto Refine 5-star weapons</Label>
+							<Label for={'autoRefine5'}>
+								{$i18n.t('settings.auto_refine_5_star')}
+							</Label>
 						</div>
 					</div>
 				</div>
@@ -179,7 +185,7 @@
 					variant="outline"
 					class="w-full justify-center hover:border-primary"
 				>
-					Save Settings
+					{$i18n.t('settings.save_settings')}
 				</Button>
 			</form>
 		</div>

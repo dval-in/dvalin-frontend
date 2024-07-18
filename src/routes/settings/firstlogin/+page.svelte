@@ -6,6 +6,7 @@
 	import { Alert, AlertDescription, AlertTitle } from '$lib/components/ui/alert';
 	import { goto } from '$app/navigation';
 	import { toast } from 'svelte-sonner';
+	import i18n from '$lib/services/i18n';
 
 	interface UserData {
 		uid: number;
@@ -32,29 +33,24 @@
 	}) => {
 		const data = { ...user, config };
 		console.log(data);
-
-		const result = await $createProfileMutation.mutateAsync(data, {
-			onError: () => {
-				toast.error('Error creating profile:' + result.state);
+		await $createProfileMutation.mutateAsync(data, {
+			onError: (error) => {
+				toast.error($i18n.t('profile.create.error', { error: error.message }));
 			},
 			onSuccess: () => {
-				toast.success('Profile created successfully');
+				toast.success($i18n.t('profile.create.success'));
 				goto('/');
 			}
 		});
-
-		goto('/');
 	};
 </script>
 
-<DefaultLayout title="Welcome Traveller !">
+<DefaultLayout title={$i18n.t('welcome.title')}>
 	{#if $createProfileMutation.isIdle}
 		<div class="grid grid-cols-3 items-center">
 			<div class="p-5">
-				<H2>Complete your profile to access our features !</H2>
-				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore quos modi non excepturi
-				incidunt unde? Ratione reprehenderit asperiores excepturi eos ut odio sequi officiis
-				molestiae impedit!
+				<H2>{$i18n.t('profile.complete.title')}</H2>
+				<p>{$i18n.t('profile.complete.description')}</p>
 			</div>
 			<NewAccountForm onSubmit={handleProfileSubmit} />
 		</div>
@@ -62,14 +58,14 @@
 
 	{#if $createProfileMutation.isPending}
 		<Alert>
-			<AlertTitle>Creating Profile</AlertTitle>
-			<AlertDescription>Please wait while we create your profile...</AlertDescription>
+			<AlertTitle>{$i18n.t('profile.create.pending.title')}</AlertTitle>
+			<AlertDescription>{$i18n.t('profile.create.pending.description')}</AlertDescription>
 		</Alert>
 	{/if}
 
 	{#if $createProfileMutation.isError}
 		<Alert variant="destructive">
-			<AlertTitle>Error</AlertTitle>
+			<AlertTitle>{$i18n.t('profile.create.error.title')}</AlertTitle>
 			<AlertDescription>{error}</AlertDescription>
 		</Alert>
 	{/if}

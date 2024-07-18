@@ -53,21 +53,21 @@
 	const filterStore = writable<{ filterFn: Filters; value: string }[]>([]);
 
 	const elements = [
-		{ name: 'pyro', icon: IconPyro, label: 'Pyro', color: '#ff6640' },
-		{ name: 'hydro', icon: IconHydro, label: 'Hydro', color: '#00c0ff' },
-		{ name: 'anemo', icon: IconAnemo, label: 'Anemo', color: '#32d7a0' },
-		{ name: 'electro', icon: IconElectro, label: 'Electro', color: '#cc80ff' },
-		{ name: 'dendro', icon: IconDendro, label: 'Dendro', color: '#90cc00' },
-		{ name: 'cryo', icon: IconCryo, label: 'Cryo', color: '#81fffe' },
-		{ name: 'geo', icon: IconGeo, label: 'Geo', color: '#ffac00' }
+		{ name: 'pyro', icon: IconPyro, label: $i18n.t('element.pyro'), color: '#ff6640' },
+		{ name: 'hydro', icon: IconHydro, label: $i18n.t('element.hydro'), color: '#00c0ff' },
+		{ name: 'anemo', icon: IconAnemo, label: $i18n.t('element.anemo'), color: '#32d7a0' },
+		{ name: 'electro', icon: IconElectro, label: $i18n.t('element.electro'), color: '#cc80ff' },
+		{ name: 'dendro', icon: IconDendro, label: $i18n.t('element.dendro'), color: '#90cc00' },
+		{ name: 'cryo', icon: IconCryo, label: $i18n.t('element.cryo'), color: '#81fffe' },
+		{ name: 'geo', icon: IconGeo, label: $i18n.t('element.geo'), color: '#ffac00' }
 	];
 
 	const weapons = [
-		{ name: 'sword', icon: IconSword, label: 'Sword' },
-		{ name: 'claymore', icon: IconClaymore, label: 'Claymore' },
-		{ name: 'polearm', icon: IconPolearm, label: 'Polearm' },
-		{ name: 'catalyst', icon: IconCatalyst, label: 'Catalyst' },
-		{ name: 'bow', icon: IconBow, label: 'Bow' }
+		{ name: 'sword', icon: IconSword, label: $i18n.t('weapon.sword') },
+		{ name: 'claymore', icon: IconClaymore, label: $i18n.t('weapon.claymore') },
+		{ name: 'polearm', icon: IconPolearm, label: $i18n.t('weapon.polearm') },
+		{ name: 'catalyst', icon: IconCatalyst, label: $i18n.t('weapon.catalyst') },
+		{ name: 'bow', icon: IconBow, label: $i18n.t('weapon.bow') }
 	];
 
 	const checkedStore = writable<{ [key: string]: boolean }>({});
@@ -218,7 +218,9 @@
 					icon={$sortStore.order === 'asc' ? mdiSortAscending : mdiSortDescending}
 					class={`flex w-full`}
 				>
-					{$i18n.t('action.sort_by', { sortFN: $sortStore.sortFn })}
+					{$i18n.t('action.sort_by', {
+						sortFN: $i18n.t(`sort.${$sortStore.sortFn.toLowerCase()}`)
+					})}
 				</IconButton>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent>
@@ -226,19 +228,19 @@
 					class="flex hover:bg-primary"
 					on:click={() => setSortStore('Name')}
 				>
-					Name
+					{$i18n.t('sort.name')}
 				</DropdownMenuItem>
 				<DropdownMenuItem
 					class="flex hover:bg-primary"
 					on:click={() => setSortStore('Date')}
 				>
-					Date
+					{$i18n.t('sort.date')}
 				</DropdownMenuItem>
 				<DropdownMenuItem
 					class="flex hover:bg-primary"
 					on:click={() => setSortStore('Constellation')}
 				>
-					Constellation
+					{$i18n.t('sort.constellation')}
 				</DropdownMenuItem>
 			</DropdownMenuContent>
 		</DropdownMenu>
@@ -259,12 +261,12 @@
 					disabled={$filterStore.length === 0}
 					on:click={() => resetFilters()}
 				>
-					Reset Filters
+					{$i18n.t('action.reset_filters')}
 				</IconButton>
 				<DropdownMenuSeparator />
 
 				<DropdownMenuGroup class="flex justify-left">
-					<DropdownMenuLabel>Element</DropdownMenuLabel>
+					<DropdownMenuLabel>{$i18n.t('filter.element')}</DropdownMenuLabel>
 				</DropdownMenuGroup>
 				<DropdownMenuGroup class="grid grid-cols-7 gap-1">
 					{#each elements as { name, icon, label, color }}
@@ -287,7 +289,7 @@
 				<DropdownMenuSeparator />
 
 				<DropdownMenuGroup class="flex justify-left">
-					<DropdownMenuLabel>Weapon</DropdownMenuLabel>
+					<DropdownMenuLabel>{$i18n.t('filter.weapon')}</DropdownMenuLabel>
 				</DropdownMenuGroup>
 				<DropdownMenuGroup class="grid grid-cols-5 gap-1">
 					{#each weapons as { name, icon, label }}
@@ -314,7 +316,7 @@
 				<DropdownMenuSeparator />
 
 				<DropdownMenuGroup class="flex justify-left">
-					<DropdownMenuLabel>Rarity</DropdownMenuLabel>
+					<DropdownMenuLabel>{$i18n.t('filter.rarity')}</DropdownMenuLabel>
 				</DropdownMenuGroup>
 				<DropdownMenuGroup class="grid grid-cols-2 justify-center gap-2">
 					<DropdownMenuItem
@@ -351,7 +353,7 @@
 							$checkedStore['owned'] ? 'bg-primary' : ''
 						}`}
 					>
-						<h1 class="text-sm font-medium">Owned</h1>
+						<h1 class="text-sm font-medium">{$i18n.t('filter.owned')}</h1>
 					</DropdownMenuItem>
 				</DropdownMenuGroup>
 			</DropdownMenuContent>

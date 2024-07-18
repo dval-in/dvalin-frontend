@@ -60,8 +60,8 @@
 		<div class="flex-1 space-y-6">
 			<Alert variant="destructive">
 				<Icon path={mdiAlert} />
-				<AlertTitle>Local data will be overwritten</AlertTitle>
-				<AlertDescription>Please backup your data before logging in.</AlertDescription>
+				<AlertTitle>{$i18n.t('login.alert.title')}</AlertTitle>
+				<AlertDescription>{$i18n.t('login.alert.description')}</AlertDescription>
 			</Alert>
 			{#each loginOptions as option}
 				<Button variant="outline" class="w-full justify-center" on:click={option.action}>
