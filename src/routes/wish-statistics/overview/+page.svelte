@@ -24,10 +24,11 @@
 	import i18n from '$lib/services/i18n';
 	import { userProfile } from '$lib/store/user_profile';
 	import { applicationState } from '$lib/store/application_state';
+	import { get } from 'svelte/store';
 
 	let wishData: IMappedWishes = {};
-	const wishes: IWishes | undefined = $userProfile.wishes;
-
+	// TODO : to refactor
+	const wishes: IWishes | undefined = get(userProfile).wishes;
 	if (wishes !== undefined) {
 		Object.keys(wishes).forEach((key: string) => {
 			if (isWishBannerKey(key)) {
