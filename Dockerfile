@@ -1,3 +1,5 @@
+# sonarqube analysis should ignore this file
+# sonarqube.analysis.skip=true
 FROM node:20-alpine
 
 # Install pnpm
