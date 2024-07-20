@@ -23,23 +23,33 @@
 	import { onMount } from 'svelte';
 	import { userProfile } from '$lib/store/user_profile';
 
-	let changeLog = `
-`;
+	let changeLog = ` `;
+	let currentVer = `4.5`;
 
-	let currentVer = '4.5';
+	$: changeLogWidget = $i18n.t('dashboard.widget.changelog.title');
+	$: reminderWidget = $i18n.t('dashboard.widget.reminder.title');
+	$: eventsWidget = $i18n.t('dashboard.widget.events.title');
+	$: todoWidget = $i18n.t('dashboard.widget.todo.title');
+	$: domainWidget = $i18n.t('dashboard.widget.domain.title');
+	$: achievementsWidget = $i18n.t('dashboard.widget.achievements.title');
+	$: pityWidget = $i18n.t('dashboard.widget.pity.title');
+	$: wishingWidget = $i18n.t('dashboard.widget.wishing.title');
+	$: displayWidget = $i18n.t('dashboard.widget.display.title');
+	$: globalWishingWidget = $i18n.t('dashboard.widget.global_wishing.title');
+	$: resinWidget = $i18n.t('dashboard.widget.resin.title');
 
 	$: dragDropList = [
-		{ id: 0, check: 'ChangeLog', checked: true },
-		{ id: 1, check: 'Reminder', checked: true },
-		{ id: 2, check: 'Events', checked: true },
-		{ id: 3, check: 'To-do List', checked: true },
-		{ id: 4, check: 'Domain Rotation', checked: true },
-		{ id: 5, check: 'Achievements', checked: true },
-		{ id: 6, check: 'Pity', checked: true },
-		{ id: 7, check: 'Wishing', checked: true },
-		{ id: 8, check: 'Display', checked: true },
-		{ id: 9, check: 'Global wishing stats', checked: true },
-		{ id: 10, check: 'Resin tracker', checked: true }
+		{ id: 0, check: changeLogWidget, checked: true },
+		{ id: 1, check: reminderWidget, checked: true },
+		{ id: 2, check: eventsWidget, checked: true },
+		{ id: 3, check: todoWidget, checked: true },
+		{ id: 4, check: domainWidget, checked: true },
+		{ id: 5, check: achievementsWidget, checked: true },
+		{ id: 6, check: pityWidget, checked: true },
+		{ id: 7, check: wishingWidget, checked: true },
+		{ id: 8, check: displayWidget, checked: true },
+		{ id: 9, check: globalWishingWidget, checked: true },
+		{ id: 10, check: resinWidget, checked: true }
 	];
 
 	type Achievement = {
@@ -213,9 +223,11 @@
 			let hoursTillRegen = Math.floor(minutesTillRegen / 60);
 			minutesTillRegen -= hoursTillRegen * 60;
 
-			if (hoursTillRegen == 0) output = `${minutesTillRegen} min`;
-			else if (minutesTillRegen > 0) output = `${hoursTillRegen} h ${minutesTillRegen} min`;
-			else output = `${hoursTillRegen} h`;
+			if (hoursTillRegen == 0)
+				output = `${minutesTillRegen}${$i18n.t('dashboard.widget.resin.hour')}`;
+			else if (minutesTillRegen > 0)
+				output = `${hoursTillRegen}${$i18n.t('dashboard.widget.resin.hour')} ${minutesTillRegen}${$i18n.t('dashboard.widget.resin.minute')}`;
+			else output = `${hoursTillRegen}${$i18n.t('dashboard.widget.resin.hour')}`;
 
 			return output;
 		},
@@ -243,32 +255,30 @@
 <AlertDialog.Root open={firstTimeUser}>
 	<AlertDialog.Content>
 		<AlertDialog.Header>
-			<AlertDialog.Title>Welcome to Dval.in!</AlertDialog.Title>
+			<AlertDialog.Title>{$i18n.t('dashboard.welcome.title')}</AlertDialog.Title>
 			<AlertDialog.Description>
-				Your best Genshin Impact companion! Dval.in helps you plan what to farm with an
-				ascension calculator, and it also tracks your progress with a todo list and a wish
-				counter.
+				{$i18n.t('dashboard.welcome.message')}
 			</AlertDialog.Description>
 		</AlertDialog.Header>
 		<AlertDialog.Footer>
-			<AlertDialog.Cancel>Cancel</AlertDialog.Cancel>
+			<AlertDialog.Cancel>{$i18n.t('action.cancel')}</AlertDialog.Cancel>
 		</AlertDialog.Footer>
 	</AlertDialog.Content>
 </AlertDialog.Root>
 
-<DefaultLayout title="Dashboard">
+<DefaultLayout title={$i18n.t('dashboard.title')}>
 	<svelte:fragment slot="titlebarActions">
 		<Dialog.Root>
 			<Dialog.Trigger>
-				<IconButton icon={mdiPencil}>Edit</IconButton>
+				<IconButton icon={mdiPencil}>{$i18n.t('dashboard.edit_layout.button')}</IconButton>
 			</Dialog.Trigger>
 			<Dialog.Content>
 				<Dialog.Header>
 					<Dialog.Title>
-						<Text type="h3">Edit the layout</Text>
+						<Text type="h3">{$i18n.t('dashboard.edit_layout.title')}</Text>
 					</Dialog.Title>
 					<Dialog.Description>
-						<Text type="p">Edit your homepage layout to fit your needs.</Text>
+						<Text type="p">{$i18n.t('dashboard.edit_layout.description')}</Text>
 					</Dialog.Description>
 				</Dialog.Header>
 				<div>
@@ -282,139 +292,182 @@
 			class="h-fit [column-count:auto] [column-width:370px] gap-2 [&>div:not(:first-child)]:mt-2 [&>div]:break-inside-avoid"
 		>
 			{#each dragDropList as Widget}
-				{#if Widget.check === 'ChangeLog' && Widget.checked == true}
+				{#if Widget.check === `${$i18n.t('dashboard.widget.changelog.title')}` && Widget.checked == true}
 					<!-- Changelog card -->
 					<Card.Root class=" flex flex-col">
 						<Card.Header>
-							<!--TODO: Replace this with i18n key-->
 							<Card.Title>
-								<Text type="h4">Changelog:</Text>
+								<Text type="h4">
+									{$i18n.t('dashboard.widget.changelog.title')}:
+								</Text>
 							</Card.Title>
 						</Card.Header>
 						<Card.Content class="whitespace-pre-line">
 							<Text type="p">{changeLog}</Text>
 						</Card.Content>
 						<Card.Footer class="items-end justify-end mt-2.5">
-							<Button>View more</Button>
+							<Button>{$i18n.t('action.more')}</Button>
 						</Card.Footer>
 					</Card.Root>
 				{/if}
-				{#if Widget.check === 'Reminder' && Widget.checked == true}
+				{#if Widget.check === `${$i18n.t('dashboard.widget.reminder.title')}` && Widget.checked == true}
 					<!-- Reminder card -->
 					<Card.Root class=" flex flex-col">
 						<Card.Header>
-							<!--TODO: Replace this with i18n key-->
 							<Card.Title>
-								<Text type="h4">Reminder</Text>
+								<Text type="h4">{$i18n.t('dashboard.widget.reminder.title')}</Text>
 							</Card.Title>
 						</Card.Header>
 						<Card.Content>
 							<!-- The checks will uncheck themselves after N server resets -->
 
 							<!-- Daily -->
-							<Text type="large">Daily</Text>
+							<Text type="large">{$i18n.t('dashboard.widget.reminder.daily')}</Text>
 							<div class="flex flex-row items-center">
 								<Checkbox id="reminder_teapot" class="mr-3" />
 								<Label for="reminder_teapot" class="text-base font-normal">
-									<Text type="p">Teapot currency and friendship</Text>
+									<Text type="p">
+										{$i18n.t('dashboard.widget.reminder.daily.teapot_currency')}
+									</Text>
 								</Label>
 							</div>
 							<div class="flex flex-row items-center">
 								<Checkbox id="reminder_commissions" class="mr-3" />
 								<Label for="reminder_commissions" class="text-base font-normal">
-									<Text type="p">Daily commissions</Text>
+									<Text type="p">
+										{$i18n.t('dashboard.widget.reminder.daily.commissions')}
+									</Text>
 								</Label>
 							</div>
 							<div class="flex flex-row items-center">
 								<Checkbox id="reminder_resin" class="mr-3" />
 								<Label for="reminder_resin" class="text-base font-normal">
-									<Text type="p">Spend resin</Text>
+									<Text type="p">
+										{$i18n.t('dashboard.widget.reminder.daily.resin')}
+									</Text>
 								</Label>
 							</div>
 							<div class="flex flex-row items-center">
 								<Checkbox id="reminder_welkin" class="mr-3" />
 								<Label for="reminder_welkin" class="text-base font-normal">
-									<Text type="p">Welkin moon</Text>
+									<Text type="p">
+										{$i18n.t('dashboard.widget.reminder.daily.welkin')}
+									</Text>
 								</Label>
 							</div>
 
 							<!-- Every 2 days -->
-							<Text type="large">2 day</Text>
+							<Text type="large">
+								{$i18n.t('dashboard.widget.reminder.two_day.title')}
+							</Text>
 							<div class="flex flex-row items-center">
 								<Checkbox id="reminder_local" class="mr-3" />
 								<Label for="reminder_local" class="text-base font-normal">
-									<Text type="p">Local specialties</Text>
+									<Text type="p">
+										{$i18n.t(
+											'dashboard.widget.reminder.two_day.local_specialties'
+										)}
+									</Text>
 								</Label>
 							</div>
 							<div class="flex flex-row items-center">
 								<Checkbox id="reminder_ore" class="mr-3" />
 								<Label for="reminder_ore" class="text-base font-normal">
-									<Text type="p">Ores</Text>
+									<Text type="p">
+										{$i18n.t('dashboard.widget.reminder.two_day.ores')}
+									</Text>
 								</Label>
 							</div>
 
 							<!-- Every 3 days -->
-							<Text type="large">3 day</Text>
+							<Text type="large">
+								{$i18n.t('dashboard.widget.reminder.three_day.title')}
+							</Text>
 							<div class="flex flex-row items-center">
 								<Checkbox id="reminder_chunks" class="mr-3" />
 								<Label for="reminder_chunks" class="text-base font-normal">
-									<Text type="p">Crystal chuncks</Text>
+									<Text type="p">
+										{$i18n.t('dashboard.widget.reminder.three_day.crystals')}
+									</Text>
 								</Label>
 							</div>
 							<div class="flex flex-row items-center">
 								<Checkbox id="reminder_teapotFarm" class="mr-3" />
 								<Label for="reminder_teapotFarm" class="text-base font-normal">
-									<Text type="p">Teapot farms</Text>
+									<Text type="p">
+										{$i18n.t('dashboard.widget.reminder.three_day.teapot_farm')}
+									</Text>
 								</Label>
 							</div>
 							<div class="flex flex-row items-center">
 								<Checkbox id="reminder_fish" class="mr-3" />
 								<Label for="reminder_fish" class="text-base font-normal">
-									<Text type="p">Fishing</Text>
+									<Text type="p">
+										{$i18n.t('dashboard.widget.reminder.three_day.fishing')}
+									</Text>
 								</Label>
 							</div>
 
 							<!-- Weekly -->
-							<Text type="large">Weekly</Text>
+							<Text type="large">
+								{$i18n.t('dashboard.widget.reminder.weekly.title')}
+							</Text>
 							<div class="flex flex-row items-center">
 								<Checkbox id="reminder_parametric" class="mr-3" />
 								<Label for="reminder_parametric" class="text-base font-normal">
-									<Text type="p">Parametric transformer</Text>
+									<Text type="p">
+										{$i18n.t(
+											'dashboard.widget.reminder.weekly.parametric_transformer'
+										)}
+									</Text>
 								</Label>
 							</div>
 							<div class="flex flex-row items-center">
 								<Checkbox id="reminder_trap" class="mr-3" />
 								<Label for="reminder_trap" class="text-base font-normal">
-									<Text type="p">Crystalfly trap</Text>
+									<Text type="p">
+										{$i18n.t(
+											'dashboard.widget.reminder.weekly.crystalfly_trap'
+										)}
+									</Text>
 								</Label>
 							</div>
 							<div class="flex flex-row items-center">
 								<Checkbox id="reminder_boss" class="mr-3" />
 								<Label for="reminder_boss" class="text-base font-normal">
-									<Text type="p">Weekly bosses</Text>
+									<Text type="p">
+										{$i18n.t('dashboard.widget.reminder.weekly.bosses')}
+									</Text>
 								</Label>
 							</div>
 							<div class="flex flex-row items-center">
 								<Checkbox id="reminder_reputation" class="mr-3" />
 								<Label for="reminder_reputation" class="text-base font-normal">
-									<Text type="p">Reputation bounties</Text>
+									<Text type="p">
+										{$i18n.t('dashboard.widget.reminder.weekly.reputation')}
+									</Text>
 								</Label>
 							</div>
 						</Card.Content>
 					</Card.Root>
 				{/if}
-				{#if Widget.check === 'Events' && Widget.checked == true}
+				{#if Widget.check === `${$i18n.t('dashboard.widget.events.title')}` && Widget.checked == true}
 					<!-- Events card -->
 					<Card.Root class=" flex flex-col">
 						<Card.Header>
-							<!--TODO: Replace this with i18n key-->
 							<Card.Title>
-								<Text type="h4">Current Events</Text>
+								<Text type="h4">
+									{$i18n.t('dashboard.widget.events.title')} Current Events
+								</Text>
 							</Card.Title>
 						</Card.Header>
 						<Card.Content>
-							<Text type="large">For version {currentVer}</Text>
+							<Text type="large">
+								{$i18n.t('dashboard.widget.events.version')}
+								{currentVer}
+							</Text>
 							<div class="flex flex-col gap-1.5 mt-2">
+								<!-- TODO: get localized event names -->
 								<div
 									class="flex flex-row justify-between bg-neutral rounded-md py-3 px-2"
 								>
@@ -494,16 +547,17 @@
 							</div>
 						</Card.Content>
 						<Card.Footer class="mt-2.5">
-							<Button class="w-full">View timeline</Button>
+							<Button class="w-full">
+								{$i18n.t('dashboard.widget.events.timeline.button')}
+							</Button>
 						</Card.Footer>
 					</Card.Root>{/if}
-				{#if Widget.check === 'To-do List' && Widget.checked == true}
+				{#if Widget.check === `${$i18n.t('dashboard.widget.todo.title')}` && Widget.checked == true}
 					<!-- To-do card -->
 					<Card.Root class=" flex flex-col">
 						<Card.Header>
-							<!--TODO: Replace this with i18n key-->
 							<Card.Title>
-								<Text type="h4">To-do List</Text>
+								<Text type="h4">{$i18n.t('dashboard.widget.todo.title')}</Text>
 							</Card.Title>
 						</Card.Header>
 						<Card.Content>
@@ -513,13 +567,12 @@
 							</Text>
 						</Card.Content>
 					</Card.Root>{/if}
-				{#if Widget.check === 'Domain Rotation' && Widget.checked == true}
+				{#if Widget.check === `${$i18n.t('dashboard.widget.domain.title')}` && Widget.checked == true}
 					<!-- Domain rotation card -->
 					<Card.Root class=" flex flex-col">
 						<Card.Header>
-							<!--TODO: Replace this with i18n key-->
 							<Card.Title>
-								<Text type="h4">Domain Rotation</Text>
+								<Text type="h4">{$i18n.t('dashboard.widget.domain.title')}</Text>
 							</Card.Title>
 						</Card.Header>
 						<Card.Content>
@@ -528,18 +581,21 @@
 							</Text>
 						</Card.Content>
 					</Card.Root>{/if}
-				{#if Widget.check === 'Achievements' && Widget.checked == true}
+				{#if Widget.check === `${$i18n.t('dashboard.widget.achievements.title')}` && Widget.checked == true}
 					<!-- Achievements card -->
 					<Card.Root class=" flex flex-col">
 						<Card.Header>
-							<!--TODO: Replace this with i18n key-->
 							<Card.Title>
-								<Text type="h4">Achievements</Text>
+								<Text type="h4">
+									{$i18n.t('dashboard.widget.achievements.title')}
+								</Text>
 							</Card.Title>
 						</Card.Header>
 						<Card.Content>
 							<div class="flex flex-row justify-between">
-								<Text type="p">Overall progress:</Text>
+								<Text type="p">
+									{$i18n.t('dashboard.widget.achievements.progress')}:
+								</Text>
 								<Text type="p">
 									<!-- TODO: check if that works, when we have achievement data -->
 
@@ -565,7 +621,9 @@
 								class="mt-1.5"
 							></Progress>
 							<div class="flex flex-col gap-1.5 justify-between">
-								<Text type="p">Latest achievements:</Text>
+								<Text type="p">
+									{$i18n.t('dashboard.widget.achievements.latest')}:
+								</Text>
 								<div class="bg-neutral rounded-md py-3 px-2">
 									<Text type="p">{mockAchievement.name}</Text>
 								</div>
@@ -584,16 +642,19 @@
 							</div>
 						</Card.Content>
 						<Card.Footer class="mt-2.5">
-							<Button class="w-full">View more achievements</Button>
+							<Button class="w-full">
+								{$i18n.t('dashboard.widget.achievements.more')}
+							</Button>
 						</Card.Footer>
 					</Card.Root>{/if}
-				{#if Widget.check === 'Pity' && Widget.checked == true}<!-- Pity card -->
+				{#if Widget.check === `${$i18n.t('dashboard.widget.pity.title')}` && Widget.checked == true}<!-- Pity card -->
 					<Card.Root class=" flex flex-col gap-5">
 						<Card.Header>
-							<!--TODO: Replace this with i18n key-->
 							<Card.Title class="flex flex-row justify-between items-center">
-								<Text type="h4">Pity</Text>
-								<Button href="wish-statistics/overview">Wish Counter</Button>
+								<Text type="h4">{$i18n.t('dashboard.widget.pity.title')}</Text>
+								<Button href="wish-statistics/overview">
+									{$i18n.t('wish.overview.title')}
+								</Button>
 							</Card.Title>
 						</Card.Header>
 						<Card.Content>
@@ -641,19 +702,20 @@
 							</div>
 						</Card.Content>
 					</Card.Root>{/if}
-				{#if Widget.check === 'Wishing' && Widget.checked == true}
+				{#if Widget.check === `${$i18n.t('dashboard.widget.wishing.title')}` && Widget.checked == true}
 					<!-- Wish card -->
 					<Card.Root class=" flex flex-col gap-5">
 						<Card.Header>
-							<!--TODO: Replace this with i18n key-->
 							<Card.Title class="flex justify-between items-center">
-								<Text type="h4">Wishing stats</Text>
-								<Button href="wish-statistics/overview">View more</Button>
+								<Text type="h4">{$i18n.t('dashboard.widget.wishing.title')}</Text>
+								<Button href="wish-statistics/overview">
+									{$i18n.t('action.more')}
+								</Button>
 							</Card.Title>
 						</Card.Header>
 						<Card.Content class="flex flex-col gap-3">
 							<!-- pity -->
-							<Text type="large">Pity</Text>
+							<Text type="large">{$i18n.t('dashboard.widget.wishing.pity')}</Text>
 							<div class="flex justify-between *:py-[5%] *:px-[8%] *:bg-neutral">
 								<!-- char -->
 								<div
@@ -702,7 +764,9 @@
 							<div
 								class="flex justify-between items-center bg-neutral pl-3 rounded-md"
 							>
-								<Text type="large">Total wishes</Text>
+								<Text type="large">
+									{$i18n.t('dashboard.widget.wishing.total')}
+								</Text>
 								<Text type="large" class="bg-neutral rounded-md p-3">
 									{($userProfile.wishes?.WeaponEvent?.length ?? 0) +
 										($userProfile.wishes?.CharacterEvent?.length ?? 0) +
@@ -713,7 +777,9 @@
 							</div>
 							<!-- latest pulls -->
 							<div>
-								<Text type="large">Latest pulls</Text>
+								<Text type="large">
+									{$i18n.t('dashboard.widget.wishing.latest')}
+								</Text>
 								<div class="flex flex-row flex-wrap gap-1">
 									<PullChip name="Xiao" key="Xiao" counter={20}></PullChip>
 									<PullChip name="Xiao" key="Xiao" counter={20}></PullChip>
@@ -727,17 +793,18 @@
 							</div>
 						</Card.Content>
 						<Card.Footer class="flex justify-end">
-							<IconButton icon={mdiImport} href="/settings/import">Import</IconButton>
+							<IconButton icon={mdiImport} href="/settings/import">
+								{$i18n.t('wish.overview.import_wish_button')}
+							</IconButton>
 						</Card.Footer>
 					</Card.Root>
 				{/if}
-				{#if Widget.check === 'Display' && Widget.checked == true}
+				{#if Widget.check === `${$i18n.t('dashboard.widget.display.title')}` && Widget.checked == true}
 					<!-- Display card -->
 					<Card.Root class=" flex flex-col">
 						<Card.Header>
-							<!--TODO: Replace this with i18n key-->
 							<Card.Title>
-								<Text type="h4">Display</Text>
+								<Text type="h4">{$i18n.t('dashboard.widget.display.title')}</Text>
 							</Card.Title>
 						</Card.Header>
 						<Card.Content>
@@ -769,64 +836,85 @@
 						</Card.Content>
 					</Card.Root>
 				{/if}
-				{#if Widget.check === 'Global wishing stats' && Widget.checked == true}
+				{#if Widget.check === `${$i18n.t('dashboard.widget.global_wishing.title')}` && Widget.checked == true}
 					<!-- Global wishing stats -->
 					<Card.Root class=" flex flex-col gap-5">
 						<Card.Header>
-							<!--TODO: Replace this with i18n key-->
 							<Card.Title class="flex justify-between items-center">
 								<Text type="h4">
-									Global wishing stats{$i18n.t('dashboard.global_whishing')}
+									{$i18n.t('dashboard.widget.global_wishing.title')}
 								</Text>
 							</Card.Title>
 						</Card.Header>
 						<Card.Content class="flex flex-col gap-3">
 							<div class="flex flex-row justify-around">
 								<div class="flex flex-col items-center">
-									<img class="w-32 h-44" src={card} alt="Amber Gacha Card" />
+									<img
+										class="w-32 h-44"
+										src={card}
+										alt="{currentGachaFirst.name} Gacha Card"
+									/>
 									<Text type="large">{currentGachaFirst.name}</Text>
 									<Text type="large">
 										{Math.round(
 											(currentGachaFirst.pulls / 1000 + Number.EPSILON) * 10
 										) / 10}k
 									</Text>
-									<Text type="p">{currentGachaFirst.percentage}% of all 5*</Text>
-									<Text type="p">Pity average {currentGachaFirst.average}</Text>
+									<Text type="p">
+										{currentGachaFirst.percentage}% {$i18n.t(
+											'dashboard.widget.global_wishing.percentage'
+										)} 5*
+									</Text>
+									<Text type="p">
+										{$i18n.t('dashboard.widget.global_wishing.pity_average')}
+										{currentGachaFirst.average}
+									</Text>
 								</div>
 								<div class="flex flex-col items-center">
-									<img class="w-32 h-44" src={card} alt="Amber Gacha Card" />
+									<img
+										class="w-32 h-44"
+										src={card}
+										alt="{currentGachaSecond.name} Gacha Card"
+									/>
 									<Text type="large">{currentGachaSecond.name}</Text>
 									<Text type="large">
 										{Math.round(
 											(currentGachaSecond.pulls / 1000 + Number.EPSILON) * 10
 										) / 10}k
 									</Text>
-									<Text type="p">{currentGachaSecond.percentage}% of all 5*</Text>
-									<Text type="p">Pity average {currentGachaSecond.average}</Text>
+									<Text type="p">
+										{currentGachaSecond.percentage}% {$i18n.t(
+											'dashboard.widget.global_wishing.percentage'
+										)} 5*
+									</Text>
+									<Text type="p">
+										{$i18n.t('dashboard.widget.global_wishing.pity_average')}
+										{currentGachaSecond.average}
+									</Text>
 								</div>
 							</div>
 							<Text type="p" class="self-center">
-								based on {submissions} submissions
+								{$i18n.t('dashboard.widget.global_wishing.based_on', {
+									number: submissions
+								})}
 							</Text>
 						</Card.Content>
 						<Card.Footer class="flex justify-end">
-							<Button class="w-full">View more</Button>
+							<Button class="w-full">{$i18n.t('action.more')}</Button>
 						</Card.Footer>
 					</Card.Root>
 				{/if}
-				{#if Widget.check === 'Resin tracker' && Widget.checked == true}
+				{#if Widget.check === `${$i18n.t('dashboard.widget.resin.title')}` && Widget.checked == true}
 					<!-- Resin tracker  -->
 					<Card.Root class=" flex flex-col gap-5">
 						<Card.Header>
-							<!--TODO: Replace this with i18n key-->
 							<Card.Title class="flex justify-between items-center">
-								<Text type="h4">Resin tracker</Text>
+								<Text type="h4">{$i18n.t('dashboard.widget.resin.title')}</Text>
 							</Card.Title>
 						</Card.Header>
 						<Card.Content class="flex flex-col gap-3">
 							<div class="flex flex-row items-center justify-center gap-4">
 								<img class="w-8 h-8" src="" alt="Resin Icon" />
-
 								<Text type="large">
 									<Input
 										type="number"
