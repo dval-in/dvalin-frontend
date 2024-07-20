@@ -3,7 +3,7 @@ import { createThemes } from 'tw-colors';
 
 /** @type {import('tailwindcss').Config} */
 const config = {
-	darkMode: ['class'],
+	darkMode: ['selector'],
 	content: [
 		'./src/**/*.{html,js,svelte,ts}',
 		'./node_modules/svelte-ux/**/*.{svelte,js}',

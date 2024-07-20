@@ -9,9 +9,9 @@
 		mdiFileCloud,
 		mdiGlobeModel,
 		mdiImport,
+		mdiInfinity,
 		mdiLogin,
-		mdiSwordCross,
-		mdiTrashCanOutline
+		mdiSwordCross
 	} from '@mdi/js';
 	import PullDistributionByMonth from '$lib/components/graphs/PullDistributionByMonth.svelte';
 	import DefaultLayout from '$lib/components/layout/DefaultLayout.svelte';
@@ -44,7 +44,6 @@
 				});
 			}
 		});
-		console.log(wishData);
 	}
 </script>
 
@@ -89,11 +88,7 @@
 			/>
 		{/if}
 		{#if wishData?.Standard !== undefined}
-			<BannerOverviewCard
-				data={wishData.Standard}
-				icon={mdiTrashCanOutline}
-				key={'Standard'}
-			/>
+			<BannerOverviewCard data={wishData.Standard} icon={mdiInfinity} key={'Standard'} />
 		{/if}
 		{#if wishData?.Chronicled !== undefined}
 			<BannerOverviewCard data={wishData.Chronicled} icon={mdiBook} key={'Chronicled'} />
