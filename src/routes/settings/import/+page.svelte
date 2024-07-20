@@ -49,13 +49,18 @@
 			file.text().then((fileContent) => {
 				let data = JSON.parse(fileContent);
 				if (!$userProfile.wishes) {
+					toast.error('No wishes found, please import from dvalin first');
 					throw new Error('No wishes found, please import from dvalin first');
 				}
-				Object.entries($userProfile.wishes).forEach(([key, array]) => {
-					if (!array || array.length === 0) {
-						throw new Error('No wishes found, please import from dvalin first' + key);
-					}
+				let totalWishes: number = 0;
+				Object.entries($userProfile.wishes).forEach(([_key, array]) => {
+					totalWishes += array?.length ?? 0;
 				});
+				if (totalWishes < 0) {
+					toast.error('No wishes found, please import from dvalin first');
+					throw new Error('No wishes found, please import from dvalin first');
+				}
+				toast.info('Importing data, please wait...');
 				$syncUserProfile.mutateAsync(
 					{
 						file: data,
@@ -64,6 +69,7 @@
 					{
 						onError: (error) => {
 							console.error(error);
+							toast.error('An error occurred while importing the data');
 						},
 						onSuccess: () => {
 							toast.success('Imported successfully!', {
