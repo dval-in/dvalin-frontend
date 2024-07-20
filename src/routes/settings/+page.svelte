@@ -3,14 +3,14 @@
 	import Text from '$lib/components/typography/Text.svelte';
 	import { applicationState } from '$lib/store/application_state';
 	import IconButton from '$lib/components/ui/icon-button/IconButton.svelte';
-	import { mdiDelete, mdiExport, mdiImport, mdiAlert } from '@mdi/js';
+	import { mdiDelete, mdiExport, mdiImport, mdiAlert, mdiMicrosoft } from '@mdi/js';
 	import type { Theme } from '$lib/types/theme';
 	import { Button } from '$lib/components/ui/button';
 	import DefaultLayout from '$lib/components/layout/DefaultLayout.svelte';
 	import i18n from '$lib/services/i18n';
 	import { defaultValues, userProfile } from '$lib/store/user_profile';
 	import BackendService from '$lib/services/backend';
-	import { siGoogle, siDiscord, siMicrosoft, siGithub } from 'simple-icons';
+	import { siGoogle, siDiscord, siGithub, type SimpleIcon } from 'simple-icons';
 	import Icon from '$lib/components/ui/icon/icon.svelte';
 	import Card from '$lib/components/ui/card/card.svelte';
 	import { CardHeader, CardTitle, CardContent } from '$lib/components/ui/card';
@@ -35,11 +35,15 @@
 		{ name: 'Discord', icon: siDiscord, action: () => nav(backend.auth.login('discord')) },
 		{
 			name: 'Microsoft',
-			icon: siMicrosoft,
+			icon: mdiMicrosoft,
 			action: () => nav(backend.auth.login('microsoft'))
 		},
 		{ name: 'Github', icon: siGithub, action: () => nav(backend.auth.login('github')) }
 	];
+
+	const isSimpleIcon = (icon: string | SimpleIcon): icon is SimpleIcon => {
+		return typeof icon === 'object' && 'path' in icon;
+	};
 
 	const handleSettingsExport = () => {
 		let element = document.createElement('a');
@@ -149,7 +153,10 @@
 						on:click={option.action}
 						disabled={userProfil?.auth?.includes(option.name)}
 					>
-						<Icon path={option.icon.path} class="mr-2" />
+						<Icon
+							path={isSimpleIcon(option.icon) ? option.icon.path : option.icon}
+							class="mr-2"
+						/>
 						{option.name}
 					</Button>
 				{/each}
