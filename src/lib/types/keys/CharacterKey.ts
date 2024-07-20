@@ -21,6 +21,7 @@ export const characterKeyList = [
 	'Diluc',
 	'Diona',
 	'Dori',
+	'Emilie',
 	'Eula',
 	'Faruzan',
 	'Fischl',
