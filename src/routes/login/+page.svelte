@@ -1,8 +1,8 @@
 <script lang="ts">
 	import DefaultLayout from '$lib/components/layout/DefaultLayout.svelte';
 	import BackendService from '$lib/services/backend';
-	import { mdiAccount, mdiAlert, mdiDevices, mdiServer } from '@mdi/js';
-	import { siDiscord, siGoogle, siMicrosoft, siGithub } from 'simple-icons';
+	import { mdiAccount, mdiAlert, mdiDevices, mdiServer, mdiMicrosoft } from '@mdi/js';
+	import { siDiscord, siGoogle, siGithub, type SimpleIcon } from 'simple-icons';
 	import Icon from '$lib/components/ui/icon/icon.svelte';
 	import i18n from '$lib/services/i18n';
 	import { Alert, AlertDescription, AlertTitle } from '$lib/components/ui/alert';
@@ -19,11 +19,15 @@
 		{ name: 'Discord', icon: siDiscord, action: () => nav(backend.auth.login('discord')) },
 		{
 			name: 'Microsoft',
-			icon: siMicrosoft,
+			icon: mdiMicrosoft,
 			action: () => nav(backend.auth.login('microsoft'))
 		},
 		{ name: 'Github', icon: siGithub, action: () => nav(backend.auth.login('github')) }
 	];
+
+	const isSimpleIcon = (icon: string | SimpleIcon): icon is SimpleIcon => {
+		return typeof icon === 'object' && 'path' in icon;
+	};
 
 	const perks = [
 		{
@@ -65,7 +69,10 @@
 			</Alert>
 			{#each loginOptions as option}
 				<Button variant="outline" class="w-full justify-center" on:click={option.action}>
-					<Icon path={option.icon.path} class="mr-2" />
+					<Icon
+						path={isSimpleIcon(option.icon) ? option.icon.path : option.icon}
+						class="mr-2"
+					/>
 					{option.name}
 				</Button>
 			{/each}
