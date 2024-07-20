@@ -243,13 +243,15 @@
 					class="flex hover:bg-tertiary gap-2"
 					on:click={() => setSortStore('Name')}
 				>
-					<Icon path={mdiAlphabetical} /> {$i18n.t('sort.name')}
+					<Icon path={mdiAlphabetical} />
+					{$i18n.t('sort.name')}
 				</DropdownMenuItem>
 				<DropdownMenuItem
 					class="flex hover:bg-tertiary gap-2"
 					on:click={() => setSortStore('Date')}
 				>
-					<Icon path={mdiCalendar} /> {$i18n.t('sort.date')}
+					<Icon path={mdiCalendar} />
+					{$i18n.t('sort.date')}
 				</DropdownMenuItem>
 				<DropdownMenuItem
 					class="flex hover:bg-tertiary gap-2"
@@ -261,7 +263,8 @@
 					class="flex hover:bg-tertiary gap-2"
 					on:click={() => setSortStore('Constellation')}
 				>
-					<Icon path={mdiCreation} /> {$i18n.t('sort.constellation')}
+					<Icon path={mdiCreation} />
+					{$i18n.t('sort.constellation')}
 				</DropdownMenuItem>
 			</svelte:fragment>
 			<svelte:fragment slot="drawer-content">
@@ -364,7 +367,6 @@
 
 				<DropdownMenuGroup class="flex">
 					<DropdownMenuLabel>{$i18n.t('filter.rarity')}</DropdownMenuLabel>
-
 				</DropdownMenuGroup>
 				<DropdownMenuGroup class="flex">
 					<DropdownMenuItem
@@ -450,130 +452,157 @@
 						Reset Filters
 					</IconButton>
 
+					<!-- Element filter -->
 					<div>
 						<div class="flex">
 							<Text type="small">Element</Text>
 						</div>
-						<div class="flex flex-wrap gap-2">
+						<div class="flex flex-wrap gap-2" role="group" aria-label="Element filters">
 							{#each elements as { name, icon, label }}
-								<div
+								<button
+									type="button"
+									class="p-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+									aria-pressed={$checkedStore[name] || false}
 									on:click={() => {
 										setFilterStore('element', name);
 										toggleChecked(name);
 									}}
+									on:keydown={(e) => {
+										if (e.key === 'Enter' || e.key === ' ') {
+											setFilterStore('element', name);
+											toggleChecked(name);
+										}
+									}}
 								>
-									<Toggle
-										class="py-2"
-										pressed={$checkedStore[name] !== undefined
-											? $checkedStore[name]
-											: false}
-									>
+									<Toggle pressed={$checkedStore[name] || false}>
 										<img src={icon} alt={label} class="size-7" />
 									</Toggle>
-								</div>
+								</button>
 							{/each}
 						</div>
 					</div>
 
+					<!-- Weapon filter -->
 					<div>
 						<div class="flex">
 							<Text type="small">Weapon</Text>
 						</div>
-						<div class="flex flex-wrap gap-2">
+						<div class="flex flex-wrap gap-2" role="group" aria-label="Weapon filters">
 							{#each weapons as { name, icon }}
-								<div
+								<button
+									type="button"
+									class="p-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+									aria-pressed={$checkedStore[name] || false}
 									on:click={() => {
 										setFilterStore('weapon', name);
 										toggleChecked(name);
 									}}
+									on:keydown={(e) => {
+										if (e.key === 'Enter' || e.key === ' ') {
+											setFilterStore('weapon', name);
+											toggleChecked(name);
+										}
+									}}
 								>
-									<Toggle
-										class="py-2"
-										pressed={$checkedStore[name] !== undefined
-											? $checkedStore[name]
-											: false}
-									>
+									<Toggle pressed={$checkedStore[name] || false}>
 										<Icon path={icon} class={`!size-7`} />
 									</Toggle>
-								</div>
+								</button>
 							{/each}
 						</div>
 					</div>
 
+					<!-- Rarity filter -->
 					<div>
 						<div class="flex">
 							<Text type="small">Rarity</Text>
 						</div>
-						<div class="flex gap-2">
-							<div
+						<div class="flex gap-2" role="group" aria-label="Rarity filters">
+							<button
+								type="button"
+								class="p-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+								aria-pressed={$checkedStore['rarity5'] || false}
 								on:click={() => {
 									setFilterStore('rarity', 5);
 									toggleChecked('rarity5');
 								}}
+								on:keydown={(e) => {
+									if (e.key === 'Enter' || e.key === ' ') {
+										setFilterStore('rarity', 5);
+										toggleChecked('rarity5');
+									}
+								}}
 							>
-								<Toggle
-									class="py-2"
-									pressed={$checkedStore['rarity5'] !== undefined
-										? $checkedStore['rarity5']
-										: false}
-								>
+								<Toggle pressed={$checkedStore['rarity5'] || false}>
 									<Icon path={mdiStar} class={`!size-7 !fill-staticFivestar`} />
 								</Toggle>
-							</div>
-							<div
+							</button>
+							<button
+								type="button"
+								class="p-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+								aria-pressed={$checkedStore['rarity4'] || false}
 								on:click={() => {
 									setFilterStore('rarity', 4);
 									toggleChecked('rarity4');
 								}}
+								on:keydown={(e) => {
+									if (e.key === 'Enter' || e.key === ' ') {
+										setFilterStore('rarity', 4);
+										toggleChecked('rarity4');
+									}
+								}}
 							>
-								<Toggle
-									class="py-2"
-									pressed={$checkedStore['rarity4'] !== undefined
-										? $checkedStore['rarity4']
-										: false}
-								>
+								<Toggle pressed={$checkedStore['rarity4'] || false}>
 									<Icon path={mdiStar} class={`!size-7 !fill-fourstar`} />
 								</Toggle>
-							</div>
+							</button>
 						</div>
 					</div>
 
+					<!-- Ownership filter -->
 					<div>
 						<div class="flex">
 							<Text type="small">Ownership</Text>
 						</div>
-						<div class="flex gap-2">
-							<div
+						<div class="flex gap-2" role="group" aria-label="Ownership filters">
+							<button
+								type="button"
+								class="p-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+								aria-pressed={$checkedStore['owned'] || false}
 								on:click={() => {
 									setFilterStore('owned', true);
 									toggleChecked('owned');
 								}}
+								on:keydown={(e) => {
+									if (e.key === 'Enter' || e.key === ' ') {
+										setFilterStore('owned', true);
+										toggleChecked('owned');
+									}
+								}}
 							>
-								<Toggle
-									class="py-2"
-									pressed={$checkedStore['owned'] !== undefined
-										? $checkedStore['owned']
-										: false}
-								>
+								<Toggle pressed={$checkedStore['owned'] || false}>
 									<Icon path={mdiTagCheck} class="size-7" />
 								</Toggle>
-							</div>
-							<div
+							</button>
+							<button
+								type="button"
+								class="p-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+								aria-pressed={$checkedStore['notowned'] || false}
 								on:click={() => {
 									setFilterStore('owned', false);
 									toggleChecked('notowned');
 								}}
-								class="gap-2"
+								on:keydown={(e) => {
+									if (e.key === 'Enter' || e.key === ' ') {
+										setFilterStore('owned', false);
+										toggleChecked('notowned');
+									}
+								}}
 							>
-								<Toggle
-									class="py-2"
-									pressed={$checkedStore['notowned'] !== undefined
-										? $checkedStore['notowned']
-										: false}
-								>
+								<Toggle pressed={$checkedStore['notowned'] || false}>
 									<Icon path={mdiTagHidden} class="!size-7" />
 								</Toggle>
-							</div>
+							</button>
 						</div>
 					</div>
 				</div>
