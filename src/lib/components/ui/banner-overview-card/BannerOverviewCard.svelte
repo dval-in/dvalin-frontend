@@ -7,10 +7,11 @@
 	import { Card, CardHeader } from '$lib/components/ui/card';
 	import { CardContent } from '$lib/components/ui/card/index.js';
 	import InfoCell from '$lib/components/ui/info-cell/InfoCell.svelte';
-	import { mdiCloseCircle, mdiMoonWaningCrescent } from '@mdi/js';
+	import { mdiCloseCircle } from '@mdi/js';
 	import { Alert, AlertDescription, AlertTitle } from '$lib/components/ui/alert';
 	import i18n from '$lib/services/i18n';
 	import type { WishBannerKey } from '$lib/types/keys/WishBannerKey';
+	import PrimogemIcon from '$lib/assets/icons/primogem.webp';
 
 	export let icon: string;
 	export let key: WishBannerKey;
@@ -51,7 +52,7 @@
 				<Text type="h4">{data.length}</Text>
 
 				<svelte:fragment slot="tooltip">
-					<Icon path={mdiMoonWaningCrescent} />
+					<img src={PrimogemIcon} class="size-7" />
 					<Text type="h4">{data.length * 160}</Text>
 				</svelte:fragment>
 			</InfoCell>

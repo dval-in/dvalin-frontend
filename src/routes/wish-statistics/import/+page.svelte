@@ -124,7 +124,7 @@
 			</Button>
 		{:else if $fetchHoyoWishHistoryStatus.data.state === 'QUEUED'}
 			<div class="flex flex-1 flex-col justify-center items-center gap-6">
-				<Icon path={mdiHumanQueue} size={2} />
+				<Icon path={mdiHumanQueue} class="size-56" />
 				<Text type="h2">{$i18n.t('wish.import.state.queued.title')}</Text>
 				<Text type="p">
 					{$i18n.t('wish.import.state.queued.description', {
@@ -134,12 +134,12 @@
 			</div>
 		{:else if $fetchHoyoWishHistoryStatus.data.state === 'ACTIVE'}
 			<div class="flex flex-1 flex-col justify-center items-center gap-6">
-				<Icon path={mdiHumanQueue} size={2} />
+				<Icon path={mdiHumanQueue} class="size-56" />
 				<Text type="h2">{$i18n.t('wish.import.state.active.title')}</Text>
 			</div>
 		{:else if $fetchHoyoWishHistoryStatus.data.state === 'COMPLETED_RATE_LIMIT'}
 			<div class="flex flex-1 flex-col justify-center items-center gap-6">
-				<Icon path={mdiCheck} size={2} />
+				<Icon path={mdiCheck} class="size-56" />
 				<Text type="h2">{$i18n.t('wish.import.state.completed.title')}</Text>
 				<Text type="p">
 					{$i18n.t('wish.import.state.completed.description', {
