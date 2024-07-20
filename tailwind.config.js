@@ -50,7 +50,7 @@ const config = {
 					tertiaryActive: '#1C1C22',
 					neutral: '#1C1C22',
 					text: '#FFFFFF',
-					fivestar: '#805920'
+					fivestar: '#FFB13F'
 				},
 				light: {
 					border: '#000000',

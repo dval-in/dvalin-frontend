@@ -21,6 +21,7 @@
 	import type { Elements } from '$lib/types/elements';
 	import type { WeaponTypes } from '$lib/types/weapon';
 	import { onMount } from 'svelte';
+	import { userProfile } from '$lib/store/user_profile';
 
 	let changeLog = `
 `;
@@ -138,9 +139,7 @@
 
 	let characterPity: [number, number] = [76, 8];
 	let weaponPity: [number, number] = [23, 2];
-	let standartPity: [number, number] = [53, 5];
-
-	let wishCount = 399;
+	let standardPity: [number, number] = [53, 5];
 
 	const card = S3Service.getCharacter('Amber').gachaCard;
 
@@ -175,7 +174,7 @@
 	let resinRegenTime = 8;
 
 	let currentDate = new Date();
-	
+
 	$: currentTime = currentDate.getTime();
 
 	onMount(() => {
@@ -199,6 +198,7 @@
 
 		increaseResin(n: number): void {
 			currentResin += n;
+			if (currentResin > 2000) currentResin = maxResin;
 		},
 
 		decreaseResin(n: number): void {
@@ -284,7 +284,7 @@
 			{#each dragDropList as Widget}
 				{#if Widget.check === 'ChangeLog' && Widget.checked == true}
 					<!-- Changelog card -->
-					<Card.Root class="text-white flex flex-col">
+					<Card.Root class=" flex flex-col">
 						<Card.Header>
 							<!--TODO: Replace this with i18n key-->
 							<Card.Title>
@@ -295,13 +295,13 @@
 							<Text type="p">{changeLog}</Text>
 						</Card.Content>
 						<Card.Footer class="items-end justify-end mt-2.5">
-							<Button>More</Button>
+							<Button>View more</Button>
 						</Card.Footer>
 					</Card.Root>
 				{/if}
 				{#if Widget.check === 'Reminder' && Widget.checked == true}
 					<!-- Reminder card -->
-					<Card.Root class="text-white flex flex-col">
+					<Card.Root class=" flex flex-col">
 						<Card.Header>
 							<!--TODO: Replace this with i18n key-->
 							<Card.Title>
@@ -405,7 +405,7 @@
 				{/if}
 				{#if Widget.check === 'Events' && Widget.checked == true}
 					<!-- Events card -->
-					<Card.Root class="text-white flex flex-col">
+					<Card.Root class=" flex flex-col">
 						<Card.Header>
 							<!--TODO: Replace this with i18n key-->
 							<Card.Title>
@@ -499,7 +499,7 @@
 					</Card.Root>{/if}
 				{#if Widget.check === 'To-do List' && Widget.checked == true}
 					<!-- To-do card -->
-					<Card.Root class="text-white flex flex-col">
+					<Card.Root class=" flex flex-col">
 						<Card.Header>
 							<!--TODO: Replace this with i18n key-->
 							<Card.Title>
@@ -515,7 +515,7 @@
 					</Card.Root>{/if}
 				{#if Widget.check === 'Domain Rotation' && Widget.checked == true}
 					<!-- Domain rotation card -->
-					<Card.Root class="text-white flex flex-col">
+					<Card.Root class=" flex flex-col">
 						<Card.Header>
 							<!--TODO: Replace this with i18n key-->
 							<Card.Title>
@@ -530,7 +530,7 @@
 					</Card.Root>{/if}
 				{#if Widget.check === 'Achievements' && Widget.checked == true}
 					<!-- Achievements card -->
-					<Card.Root class="text-white flex flex-col">
+					<Card.Root class=" flex flex-col">
 						<Card.Header>
 							<!--TODO: Replace this with i18n key-->
 							<Card.Title>
@@ -570,11 +570,12 @@
 						</Card.Footer>
 					</Card.Root>{/if}
 				{#if Widget.check === 'Pity' && Widget.checked == true}<!-- Pity card -->
-					<Card.Root class="text-white flex flex-col gap-5">
+					<Card.Root class=" flex flex-col gap-5">
 						<Card.Header>
 							<!--TODO: Replace this with i18n key-->
-							<Card.Title>
+							<Card.Title class="flex flex-row justify-between items-center">
 								<Text type="h4">Pity</Text>
+								<Button href="wish-statistics/overview">Wish Counter</Button>
 							</Card.Title>
 						</Card.Header>
 						<Card.Content>
@@ -585,10 +586,10 @@
 								>
 									<Icon path={mdiAccount} />
 									<div class="flex gap-4 font-semibold">
-										<Text type="p" class="text-amber-500">
+										<Text type="p" class="text-fivestar">
 											{characterPity[0]}
 										</Text>
-										<Text type="p" class="text-violet-400">
+										<Text type="p" class="text-fourstar">
 											{characterPity[1]}
 										</Text>
 									</div>
@@ -599,52 +600,40 @@
 								>
 									<Icon path={mdiSwordCross} />
 									<div class="flex gap-4 font-semibold">
-										<Text type="p" class="text-amber-500">{weaponPity[0]}</Text>
-										<Text type="p" class="text-violet-400">
+										<Text type="p" class="text-fivestar">{weaponPity[0]}</Text>
+										<Text type="p" class="text-fourstar">
 											{weaponPity[1]}
 										</Text>
 									</div>
 								</div>
-								<!-- standart -->
+								<!-- standard -->
 								<div
 									class="flex flex-col gap-3 justify-center items-center rounded-md"
 								>
 									<Icon path={mdiTrashCanOutline} />
 									<div class="flex gap-4 font-semibold">
-										<Text type="p" class="text-amber-500">
-											{standartPity[0]}
+										<Text type="p" class="text-fivestar">
+											{standardPity[0]}
 										</Text>
-										<Text type="p" class="text-violet-400">
-											{standartPity[1]}
+										<Text type="p" class="text-fourstar">
+											{standardPity[1]}
 										</Text>
 									</div>
 								</div>
 							</div>
 						</Card.Content>
-						<Card.Footer class="flex justify-end">
-							<Button href="wish-statistics/overview">Wish Counter</Button>
-						</Card.Footer>
 					</Card.Root>{/if}
 				{#if Widget.check === 'Wishing' && Widget.checked == true}
 					<!-- Wish card -->
-					<Card.Root class="text-white flex flex-col gap-5">
+					<Card.Root class=" flex flex-col gap-5">
 						<Card.Header>
 							<!--TODO: Replace this with i18n key-->
 							<Card.Title class="flex justify-between items-center">
 								<Text type="h4">Wishing stats</Text>
-								<IconButton icon={mdiImport} href="/settings/import">
-									Import
-								</IconButton>
+								<Button href="wish-statistics/overview">View more</Button>
 							</Card.Title>
 						</Card.Header>
 						<Card.Content class="flex flex-col gap-3">
-							<!-- total pulls -->
-							<div class="flex justify-between items-center">
-								<Text type="large">Total wishes</Text>
-								<Text type="large" class="bg-neutral rounded-md p-3">
-									{wishCount}
-								</Text>
-							</div>
 							<!-- pity -->
 							<Text type="large">Pity</Text>
 							<div class="flex justify-between *:py-[5%] *:px-[8%] *:bg-neutral">
@@ -654,10 +643,10 @@
 								>
 									<Icon path={mdiAccount} />
 									<div class="flex gap-4 font-semibold">
-										<Text type="p" class="text-amber-500">
+										<Text type="p" class="text-fivestar">
 											{characterPity[0]}
 										</Text>
-										<Text type="p" class="text-violet-400">
+										<Text type="p" class="text-fourstar">
 											{characterPity[1]}
 										</Text>
 									</div>
@@ -668,28 +657,51 @@
 								>
 									<Icon path={mdiSwordCross} />
 									<div class="flex gap-4 font-semibold">
-										<Text type="p" class="text-amber-500">
+										<Text type="p" class="text-fivestar">
 											{weaponPity[0]}
 										</Text>
-										<Text type="p" class="text-violet-400">
+										<Text type="p" class="text-fourstar">
 											{weaponPity[1]}
 										</Text>
 									</div>
 								</div>
-								<!-- standart -->
+								<!-- standard -->
 								<div
 									class="flex flex-col gap-3 justify-center items-center rounded-md"
 								>
 									<Icon path={mdiTrashCanOutline} />
 									<div class="flex gap-4 font-semibold">
-										<Text type="p" class="text-amber-500">
-											{standartPity[0]}
+										<Text type="p" class="text-fivestar">
+											{standardPity[0]}
 										</Text>
-										<Text type="p" class="text-violet-400">
-											{standartPity[1]}
+										<Text type="p" class="text-fourstar">
+											{standardPity[1]}
 										</Text>
 									</div>
 								</div>
+							</div>
+							<!-- total pulls -->
+							<div
+								class="flex justify-between items-center bg-neutral pl-3 rounded-md"
+							>
+								<Text type="large">Total wishes</Text>
+								<Text type="large" class="bg-neutral rounded-md p-3">
+									{($userProfile.wishes?.WeaponEvent != undefined
+										? $userProfile.wishes.WeaponEvent.length
+										: 0) +
+										($userProfile.wishes?.CharacterEvent != undefined
+											? $userProfile.wishes.CharacterEvent.length
+											: 0) +
+										($userProfile.wishes?.Beginner != undefined
+											? $userProfile.wishes.Beginner.length
+											: 0) +
+										($userProfile.wishes?.Chronicled != undefined
+											? $userProfile.wishes.Chronicled.length
+											: 0) +
+										($userProfile.wishes?.Standard != undefined
+											? $userProfile.wishes.Standard.length
+											: 0)}
+								</Text>
 							</div>
 							<!-- latest pulls -->
 							<div>
@@ -707,13 +719,13 @@
 							</div>
 						</Card.Content>
 						<Card.Footer class="flex justify-end">
-							<Button href="wish-statistics/overview">View more</Button>
+							<IconButton icon={mdiImport} href="/settings/import">Import</IconButton>
 						</Card.Footer>
 					</Card.Root>
 				{/if}
 				{#if Widget.check === 'Display' && Widget.checked == true}
 					<!-- Display card -->
-					<Card.Root class="text-white flex flex-col">
+					<Card.Root class=" flex flex-col">
 						<Card.Header>
 							<!--TODO: Replace this with i18n key-->
 							<Card.Title>
@@ -745,15 +757,13 @@
 									obtained={displayed_character.obtained}
 								/>
 							</div>
-							<!-- <Text type="p">char or weapon icon name info</Text> -->
-
 							<!-- Display setup will be in character/weapon tabs -->
 						</Card.Content>
 					</Card.Root>
 				{/if}
 				{#if Widget.check === 'Global wishing stats' && Widget.checked == true}
 					<!-- Global wishing stats -->
-					<Card.Root class="text-white flex flex-col gap-5">
+					<Card.Root class=" flex flex-col gap-5">
 						<Card.Header>
 							<!--TODO: Replace this with i18n key-->
 							<Card.Title class="flex justify-between items-center">
@@ -798,7 +808,7 @@
 				{/if}
 				{#if Widget.check === 'Resin tracker' && Widget.checked == true}
 					<!-- Resin tracker  -->
-					<Card.Root class="text-white flex flex-col gap-5">
+					<Card.Root class=" flex flex-col gap-5">
 						<Card.Header>
 							<!--TODO: Replace this with i18n key-->
 							<Card.Title class="flex justify-between items-center">
@@ -813,8 +823,10 @@
 									<Input
 										type="number"
 										class="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none
-										w-12 h-4 border-none text-lg font-semibold inline text-right p-0 pl-1 
-										focus-visible:border-spacing-1 focus-visible:border-2 focus-visible:border-red-500 focus-visible:ring-0 focus-visible:ring-offset-0"
+										w-12 h-5 border-none text-lg font-semibold inline text-right p-0 pl-1 rounded-none pb-1
+										hover:border-solid hover:border-0 hover:border-b-2 hover:border-text/30
+										focus-visible:border-solid focus-visible:border-0 focus-visible:border-b-2 focus-visible:border-text/30
+										focus-visible:ring-0 focus-visible:ring-offset-0"
 										bind:value={currentResin}
 										on:input={() => ResinCounter.HandleInput()}
 									/>/{maxResin}
