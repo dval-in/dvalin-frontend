@@ -540,7 +540,25 @@
 						<Card.Content>
 							<div class="flex flex-row justify-between">
 								<Text type="p">Overall progress:</Text>
-								<Text type="p">{achievementsDone}/{achievementsTotal}</Text>
+								<Text type="p">
+									<!-- TODO: check if that works, when we have achievement data -->
+
+									<!-- {Object.values($userProfile.achievements ?? {}).reduce(
+										(count, achievements) =>
+											count +
+											Object.values(achievements).filter(
+												(achievement) => achievement.achieved
+											).length,
+										0
+									)}/
+									{Object.values($userProfile.achievements ?? {}).reduce(
+										(count, achievements) =>
+											count + Object.values(achievements).length,
+										0
+									)} -->
+
+									{achievementsDone}/{achievementsTotal}
+								</Text>
 							</div>
 							<Progress
 								value={(achievementsDone / achievementsTotal) * 100}
@@ -686,21 +704,11 @@
 							>
 								<Text type="large">Total wishes</Text>
 								<Text type="large" class="bg-neutral rounded-md p-3">
-									{($userProfile.wishes?.WeaponEvent != undefined
-										? $userProfile.wishes.WeaponEvent.length
-										: 0) +
-										($userProfile.wishes?.CharacterEvent != undefined
-											? $userProfile.wishes.CharacterEvent.length
-											: 0) +
-										($userProfile.wishes?.Beginner != undefined
-											? $userProfile.wishes.Beginner.length
-											: 0) +
-										($userProfile.wishes?.Chronicled != undefined
-											? $userProfile.wishes.Chronicled.length
-											: 0) +
-										($userProfile.wishes?.Standard != undefined
-											? $userProfile.wishes.Standard.length
-											: 0)}
+									{($userProfile.wishes?.WeaponEvent?.length ?? 0) +
+										($userProfile.wishes?.CharacterEvent?.length ?? 0) +
+										($userProfile.wishes?.Beginner?.length ?? 0) +
+										($userProfile.wishes?.Chronicled?.length ?? 0) +
+										($userProfile.wishes?.Standard?.length ?? 0)}
 								</Text>
 							</div>
 							<!-- latest pulls -->
