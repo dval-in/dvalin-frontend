@@ -7,9 +7,10 @@ import { get } from 'svelte/store';
 import { toast } from 'svelte-sonner';
 import { userProfile } from '$lib/store/user_profile';
 import i18n from '$lib/services/i18n';
+import { goto } from '$app/navigation';
 
 /** @type {import('../../.svelte-kit/types/src/routes/$types').LayoutServerLoad} */
-export async function load() {
+export const load = async () => {
 	const queryClient = new QueryClient({
 		defaultOptions: {
 			queries: {
@@ -22,17 +23,24 @@ export async function load() {
 	if (browser) {
 		backend.user.fetchUserProfile().subscribe((response) => {
 			if (response.status === 'success' && response.data.state === 'SUCCESS') {
-				userProfile.set(response.data.data);
+				userProfile.update((currentProfile) => ({
+					...currentProfile,
+					...response.data.data,
+					lastUpdated: new Date()
+				}));
 			}
 		});
 
 		const socket = io(import.meta.env.VITE_BACKEND_URL, { withCredentials: true });
 
 		socket.on('authenticationState', (authenticationState: boolean) => {
-			applicationState.update((state) => {
-				state.isAuthenticated = authenticationState;
-				return state;
-			});
+			if (authenticationState && get(userProfile).account.uid < 10000) {
+				goto('/settings/firstlogin');
+			}
+			applicationState.update((state) => ({
+				...state,
+				isAuthenticated: authenticationState
+			}));
 		});
 
 		socket.on('invalidateQuery', (queryKey: string[]) => {
@@ -57,4 +65,4 @@ export async function load() {
 	}
 
 	return { queryClient, backend };
-}
+};

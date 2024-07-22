@@ -7,6 +7,7 @@
 		Chart,
 		Highlight,
 		Legend,
+		LinearGradient,
 		RectClipPath,
 		Svg,
 		Tooltip
@@ -58,7 +59,44 @@
 				.sort((a, b) => new Date(a.date).valueOf() - new Date(b.date).valueOf())
 		);
 	};
+	const hexToHSL = (hex: string) => {
+		// Remove the # if present
+		hex = hex.replace(/^#/, '');
 
+		// Convert hex to RGB
+		let r = parseInt(hex.slice(0, 2), 16) / 255;
+		let g = parseInt(hex.slice(2, 4), 16) / 255;
+		let b = parseInt(hex.slice(4, 6), 16) / 255;
+
+		// Find greatest and smallest channel values
+		let cmin = Math.min(r, g, b),
+			cmax = Math.max(r, g, b),
+			delta = cmax - cmin,
+			h = 0,
+			s = 0,
+			l = 0;
+
+		// Calculate hue
+		if (delta === 0) h = 0;
+		else if (cmax === r) h = ((g - b) / delta) % 6;
+		else if (cmax === g) h = (b - r) / delta + 2;
+		else h = (r - g) / delta + 4;
+
+		h = Math.round(h * 60);
+		if (h < 0) h += 360;
+
+		// Calculate lightness
+		l = (cmax + cmin) / 2;
+
+		// Calculate saturation
+		s = delta === 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
+
+		// Convert to percentages
+		s = +(s * 100).toFixed(1);
+		l = +(l * 100).toFixed(1);
+
+		return `${h}, ${s}%, ${l}%`;
+	};
 	const formatDateLabel = (d: string) =>
 		new Date(d).toLocaleDateString($applicationState.settings.locale, {
 			month: 'short',
@@ -74,7 +112,7 @@
 		let:padding
 		let:tooltip
 		let:width
-		padding={{ left: 16, bottom: 48 }}
+		padding={{ left: 16, bottom: 62 }}
 		r="key"
 		rDomain={keys}
 		rRange={colorKeys}
@@ -87,41 +125,62 @@
 	>
 		<Svg>
 			<Axis
-				labelProps={{ class: 'fill-text' }}
+				tickLabelProps={{
+					textAnchor: 'end',
+					class: 'fill-text font-semibold'
+				}}
+				ticks={5}
 				placement="left"
 				rule
 				grid={{ style: 'stroke-dasharray: 2; stroke: white' }}
 			/>
 			<Axis
 				format={formatDateLabel}
-				labelProps={{ class: 'fill-text' }}
+				tickLabelProps={{
+					class: 'fill-text font-semibold'
+				}}
 				placement="bottom"
 				rule
 			/>
-
 			<AreaStack let:data>
-				{#each data as seriesData}
-					<Area
-						data={seriesData}
-						y0={(d) => d[0]}
-						y1={(d) => d[1]}
-						fill={colorKeys.at(seriesData.key - 3)}
-						fill-opacity={0.5}
-					/>
-					<RectClipPath
-						x={0}
-						y={0}
-						width={tooltip.data ? tooltip.x : width}
-						{height}
-						spring
-					>
+				{@const primaryColorScale = scaleOrdinal([
+					colorKeys[2],
+					colorKeys[1],
+					colorKeys[0]
+				])}
+				{@const secondaryColorScale = scaleOrdinal([
+					`hsl(${hexToHSL(colorKeys[2])}, 0.2)`,
+					`hsl(${hexToHSL(colorKeys[1])}, 0.2)`,
+					`hsl(${hexToHSL(colorKeys[0])}, 0.2)`
+				])}
+				{#each data as seriesData, index}
+					{@const primaryColor = primaryColorScale(String(index))}
+					{@const secondaryColor = secondaryColorScale(String(index))}
+					<LinearGradient stops={[primaryColor, secondaryColor]} vertical let:url>
 						<Area
 							data={seriesData}
 							y0={(d) => d[0]}
 							y1={(d) => d[1]}
-							fill={colorKeys.at(seriesData.key - 3)}
+							fill={url}
+							fill-opacity={0.5}
+							line={{ stroke: primaryColor, 'stroke-width': 2 }}
 						/>
-					</RectClipPath>
+						<RectClipPath
+							x={0}
+							y={0}
+							width={tooltip.data ? tooltip.x : width}
+							{height}
+							spring
+						>
+							<Area
+								data={seriesData}
+								y0={(d) => d[0]}
+								y1={(d) => d[1]}
+								fill={url}
+								line={{ stroke: primaryColor, 'stroke-width': 2 }}
+							/>
+						</RectClipPath>
+					</LinearGradient>
 				{/each}
 			</AreaStack>
 

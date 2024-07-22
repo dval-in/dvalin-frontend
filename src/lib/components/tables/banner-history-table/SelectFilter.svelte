@@ -1,14 +1,13 @@
 <script lang="ts">
 	import {
-		Root as DropdownMenuRoot,
-		Trigger as DropdownMenuTrigger,
+		CheckboxItem as DropdownMenuCheckboxItem,
 		Content as DropdownMenuContent,
-		CheckboxItem as DropdownMenuCheckboxItem
+		Root as DropdownMenuRoot,
+		Trigger as DropdownMenuTrigger
 	} from '$lib/components/ui/dropdown-menu';
 	import { Button } from '$lib/components/ui/button';
 	import Icon from '$lib/components/ui/icon/icon.svelte';
-	import { mdiFilter } from '@mdi/js';
-	import { mdiChevronDown } from '@mdi/js';
+	import { mdiChevronDown, mdiFilter } from '@mdi/js';
 	import { Separator } from '$lib/components/ui/separator';
 
 	export let filterValue;
@@ -39,7 +38,7 @@
 	};
 </script>
 
-<DropdownMenuRoot>
+<DropdownMenuRoot closeOnItemClick={false}>
 	<DropdownMenuTrigger asChild let:builder>
 		<Button builders={[builder]} variant="ghost">
 			{title}

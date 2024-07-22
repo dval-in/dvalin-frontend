@@ -47,13 +47,20 @@
 	const PAGE_SIZE = 25;
 
 	export let data: IMappedWish[];
-
+	data.forEach((wish) => {
+		wish.date = new Date(wish.date);
+	});
+	data.sort((a, b) => b.date.getTime() - a.date.getTime());
+	// once sorted rebuild ids
+	data.forEach((wish, index) => {
+		wish.number = data.length - index;
+	});
 	const table = createTable(readable(data), {
 		page: addPagination({ initialPageSize: PAGE_SIZE }),
 		filter: addColumnFilters(),
 		sort: addSortBy({
-			initialSortKeys: [{ id: 'number', order: 'desc' }],
-			toggleOrder: ['asc', 'desc']
+			initialSortKeys: [{ id: 'date', order: 'desc' }],
+			toggleOrder: ['desc', 'asc']
 		}),
 		resize: addResizedColumns()
 	});
