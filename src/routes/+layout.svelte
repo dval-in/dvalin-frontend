@@ -2,7 +2,7 @@
 	import { applicationState } from '$lib/store/application_state';
 	import '../app.pcss';
 	import Sidebar from '$lib/components/navigator/Sidebar.svelte';
-	import { derived, get } from 'svelte/store';
+	import { get } from 'svelte/store';
 	import { Toaster } from 'svelte-sonner';
 	import { pwaInfo } from 'virtual:pwa-info';
 	import { pwaAssetsHead } from 'virtual:pwa-assets/head';
@@ -16,34 +16,16 @@
 	export let data: LayoutData;
 
 	$: webManifestLink = pwaInfo ? pwaInfo.webManifest.href : '';
-
-	const fetchCharacterDataIndex = data.backend.data.fetchCharacterDataIndex();
-	const fetchWeaponDataIndex = data.backend.data.fetchWeaponDataIndex();
-	const fetchAchievementCategoryDataIndex = data.backend.data.fetchAchievementCategoryDataIndex();
+	const fetchDataIndex = data.backend.data.fetchDataIndex();
 	let isLoading = JSON.stringify(get(dataIndexStore).weapon) === '{}';
 
-	derived(
-		[fetchCharacterDataIndex, fetchWeaponDataIndex, fetchAchievementCategoryDataIndex],
-		async ([characterResponse, weaponResponse, achievementCategoryResponse]) => {
-			if (
-				characterResponse.status === 'success' &&
-				weaponResponse.status === 'success' &&
-				achievementCategoryResponse.status === 'success'
-			) {
-				isLoading = false;
-
-				const combinedData = {
-					character: characterResponse.data,
-					weapon: weaponResponse.data,
-					achievementCategory: achievementCategoryResponse.data
-				};
-				combinedData.weapon['Unknown3Star'] = { name: 'Unknown 3 star', rarity: 3 };
-				dataIndexStore.set(combinedData);
-			} else {
-				console.error('Failed to fetch data');
-			}
+	fetchDataIndex.subscribe((response) => {
+		if (response.status === 'success') {
+			isLoading = false;
+			response.data.weapon['Unknown3Star'] = { name: 'Unknown 3 star', rarity: 3 };
+			dataIndexStore.set(response.data);
 		}
-	);
+	});
 
 	console.log(get(applicationState));
 	console.log(get(userProfile));

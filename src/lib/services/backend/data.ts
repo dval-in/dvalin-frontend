@@ -12,9 +12,11 @@ import type { AchievementCategoryIndex } from '$lib/types/index/achievementcateg
 import type { AchievementCategoryKey } from '$lib/types/keys/AchievementCategoryKey';
 import type { AchievementCategory } from '$lib/types/data/AchievementCategory';
 
-type FetchCharacterDataIndexResponse = CharacterIndex;
-type FetchWeaponDataIndexResponse = WeaponIndex;
-type FetchAchievementCategoryDataIndexResponse = AchievementCategoryIndex;
+interface FetchDataIndexResponse {
+	character: CharacterIndex;
+	weapon: WeaponIndex;
+	achievementCategory: AchievementCategoryIndex;
+}
 
 export class BackendDataService {
 	private readonly baseUrl: string;
@@ -25,44 +27,27 @@ export class BackendDataService {
 	) {
 		this.baseUrl = baseUrl + '/data';
 	}
-
-	fetchCharacterDataIndex() {
-		return createQuery<FetchCharacterDataIndexResponse>(
+	fetchDataIndex() {
+		return createQuery<FetchDataIndexResponse>(
 			{
 				queryKey: ['fetchDataIndex'],
 				staleTime: 6 * 60 * 60 * 1000, //6h
-				queryFn: async () =>
-					await backendFetch<CharacterIndex>(
+				queryFn: async () => {
+					const charIndex = await backendFetch<CharacterIndex>(
 						`${this.baseUrl}/Character/index?lang=${get(i18n).language}`
-					)
-			},
-			this.queryClient
-		);
-	}
-
-	fetchWeaponDataIndex() {
-		return createQuery<FetchWeaponDataIndexResponse>(
-			{
-				queryKey: ['fetchDataIndex'],
-				staleTime: 6 * 60 * 60 * 1000, //6h
-				queryFn: async () =>
-					await backendFetch<WeaponIndex>(
+					);
+					const weaponIndex = await backendFetch<WeaponIndex>(
 						`${this.baseUrl}/Weapon/index?lang=${get(i18n).language}`
-					)
-			},
-			this.queryClient
-		);
-	}
-
-	fetchAchievementCategoryDataIndex() {
-		return createQuery<FetchAchievementCategoryDataIndexResponse>(
-			{
-				queryKey: ['fetchDataIndex'],
-				staleTime: 6 * 60 * 60 * 1000, //6h
-				queryFn: async () =>
-					await backendFetch<AchievementCategoryIndex>(
+					);
+					const achievementIndex = await backendFetch<AchievementCategoryIndex>(
 						`${this.baseUrl}/AchievementCategory/index?lang=${get(i18n).language}`
-					)
+					);
+					return {
+						character: charIndex,
+						weapon: weaponIndex,
+						achievementCategory: achievementIndex
+					};
+				}
 			},
 			this.queryClient
 		);
