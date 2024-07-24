@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@internationalized/date':
-        specifier: ^3.5.4
-        version: 3.5.4
+        specifier: ^3.5.5
+        version: 3.5.5
       '@mdi/js':
         specifier: ^7.4.47
         version: 7.4.47
@@ -1056,8 +1056,8 @@ packages:
     resolution: {integrity: sha512-d2CGZR2o7fS6sWB7DG/3a95bGKQyHMACZ5aW8qGkkqQpUoZV6C0X7Pc7l4ZNMZkfNBf4VWNe9E1jRsf0G146Ew==}
     engines: {node: '>=18.18'}
 
-  '@internationalized/date@3.5.4':
-    resolution: {integrity: sha512-qoVJVro+O0rBaw+8HPjUB1iH8Ihf8oziEnqMnvhJUSuVIrHOuZ6eNLHNvzXJKUvAtaDiqMnRlg8Z2mgh09BlUw==}
+  '@internationalized/date@3.5.5':
+    resolution: {integrity: sha512-H+CfYvOZ0LTJeeLOqm19E3uj/4YjrmOFtBufDHPfvtI80hFAMqtrp7oCACpe4Cil5l8S0Qu/9dYfZc/5lY8WQQ==}
 
   '@isaacs/cliui@8.0.2':
     resolution: {integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==}
@@ -5159,7 +5159,7 @@ snapshots:
 
   '@humanwhocodes/retry@0.3.0': {}
 
-  '@internationalized/date@3.5.4':
+  '@internationalized/date@3.5.5':
     dependencies:
       '@swc/helpers': 0.5.3
 
@@ -5200,7 +5200,7 @@ snapshots:
     dependencies:
       '@floating-ui/core': 1.6.0
       '@floating-ui/dom': 1.6.7
-      '@internationalized/date': 3.5.4
+      '@internationalized/date': 3.5.5
       dequal: 2.0.3
       focus-trap: 7.5.4
       nanoid: 5.0.6
@@ -5731,7 +5731,7 @@ snapshots:
 
   bits-ui@0.21.12(svelte@4.2.18):
     dependencies:
-      '@internationalized/date': 3.5.4
+      '@internationalized/date': 3.5.5
       '@melt-ui/svelte': 0.76.2(svelte@4.2.18)
       nanoid: 5.0.6
       svelte: 4.2.18
