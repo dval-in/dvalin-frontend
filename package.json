@@ -13,7 +13,7 @@
 		"generate-pwa-assets": "pwa-assets-generator"
 	},
 	"dependencies": {
-		"@internationalized/date": "^3.5.4",
+		"@internationalized/date": "^3.5.5",
 		"@mdi/js": "^7.4.47",
 		"@tanstack/svelte-query": "^5.51.11",
 		"bits-ui": "^0.21.12",
