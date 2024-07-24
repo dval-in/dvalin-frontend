@@ -7,25 +7,42 @@
 	import { Card, CardHeader } from '$lib/components/ui/card';
 	import { CardContent } from '$lib/components/ui/card/index.js';
 	import InfoCell from '$lib/components/ui/info-cell/InfoCell.svelte';
-	import { mdiCloseCircle, mdiMoonWaningCrescent } from '@mdi/js';
+	import { mdiCloseCircle } from '@mdi/js';
 	import { Alert, AlertDescription, AlertTitle } from '$lib/components/ui/alert';
 	import i18n from '$lib/services/i18n';
 	import type { WishBannerKey } from '$lib/types/keys/WishBannerKey';
+	import PrimogemIcon from '$lib/assets/icons/primogem.webp';
 
 	export let icon: string;
 	export let key: WishBannerKey;
 	export let data: IMappedWish[];
-
-	const fiveStars = data
-		.filter((wish: IMappedWish) => wish.rarity === 5)
-		.sort((a, b) => b.number - a.number);
+	data.forEach((wish) => {
+		wish.date = new Date(wish.date);
+	});
+	data.sort((a, b) => b.date.getTime() - a.date.getTime());
+	const MAX_CHARACTER_LENGTH = 200;
+	const PICTURE_AND_PITY_LENGTH = 6;
+	const fiveStars = data.filter((wish: IMappedWish) => wish.rarity === 5);
 
 	const fourStars = data.filter((wish: IMappedWish) => wish.rarity === 4);
 
 	const threeStars = data.filter((wish: IMappedWish) => wish.rarity === 3);
 
-	const filterFiveStars = (): IMappedWish[] => {
-		return fiveStars.slice(0, 10);
+	const fiveStarToDisplay = (): IMappedWish[] => {
+		let charLength = 0;
+		let char: IMappedWish[] = [];
+		for (let i = 0; i < fiveStars.length; i++) {
+			if (
+				charLength + fiveStars[i].name.length + PICTURE_AND_PITY_LENGTH <
+				MAX_CHARACTER_LENGTH
+			) {
+				char.push(fiveStars[i]);
+				charLength += fiveStars[i].name.length + PICTURE_AND_PITY_LENGTH;
+			} else {
+				break;
+			}
+		}
+		return char;
 	};
 	const fiveStarPity =
 		data.findIndex((wish) => wish.rarity === 5) === -1
@@ -51,7 +68,7 @@
 				<Text type="h4">{data.length}</Text>
 
 				<svelte:fragment slot="tooltip">
-					<Icon path={mdiMoonWaningCrescent} />
+					<img src={PrimogemIcon} class="size-7" alt="primogem icon" />
 					<Text type="h4">{data.length * 160}</Text>
 				</svelte:fragment>
 			</InfoCell>
@@ -81,10 +98,10 @@
 			</InfoCell>
 		</div>
 		<div class="flex flex-col gap-2">
-			{#if filterFiveStars().length > 0}
+			{#if fiveStarToDisplay().length > 0}
 				<Text type="h4">{$i18n.t('wish.overview.card.latest_pulls.title')}</Text>
 				<div class="flex flex-wrap gap-2">
-					{#each filterFiveStars() as pull}
+					{#each fiveStarToDisplay() as pull}
 						<PullChip name={pull.name} key={pull.key} counter={pull.pity} />
 					{/each}
 				</div>

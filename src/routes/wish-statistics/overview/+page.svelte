@@ -9,9 +9,9 @@
 		mdiFileCloud,
 		mdiGlobeModel,
 		mdiImport,
+		mdiInfinity,
 		mdiLogin,
-		mdiSwordCross,
-		mdiTrashCanOutline
+		mdiSwordCross
 	} from '@mdi/js';
 	import PullDistributionByMonth from '$lib/components/graphs/PullDistributionByMonth.svelte';
 	import DefaultLayout from '$lib/components/layout/DefaultLayout.svelte';
@@ -24,10 +24,11 @@
 	import i18n from '$lib/services/i18n';
 	import { userProfile } from '$lib/store/user_profile';
 	import { applicationState } from '$lib/store/application_state';
+	import { get } from 'svelte/store';
 
 	let wishData: IMappedWishes = {};
-	const wishes: IWishes | undefined = $userProfile.wishes;
-
+	// TODO : to refactor
+	const wishes: IWishes | undefined = get(userProfile).wishes;
 	if (wishes !== undefined) {
 		Object.keys(wishes).forEach((key: string) => {
 			if (isWishBannerKey(key)) {
@@ -44,7 +45,6 @@
 				});
 			}
 		});
-		console.log(wishData);
 	}
 </script>
 
@@ -89,11 +89,7 @@
 			/>
 		{/if}
 		{#if wishData?.Standard !== undefined}
-			<BannerOverviewCard
-				data={wishData.Standard}
-				icon={mdiTrashCanOutline}
-				key={'Standard'}
-			/>
+			<BannerOverviewCard data={wishData.Standard} icon={mdiInfinity} key={'Standard'} />
 		{/if}
 		{#if wishData?.Chronicled !== undefined}
 			<BannerOverviewCard data={wishData.Chronicled} icon={mdiBook} key={'Chronicled'} />

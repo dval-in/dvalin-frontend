@@ -64,6 +64,16 @@
 			</Button>
 		</PopoverTrigger>
 		<PopoverContent align="start" class="w-auto p-0">
+			<div class="px-3 pt-3">
+				<IconButton
+					class="w-full"
+					disabled={value.start === undefined || value.end === undefined}
+					icon={mdiFilterRemove}
+					on:click={clearFilter}
+				>
+					Clear Filter
+				</IconButton>
+			</div>
 			<RangeCalendar
 				bind:value
 				initialFocus
@@ -74,16 +84,6 @@
 				placeholder={fromDate(new Date(max), getLocalTimeZone())}
 				weekStartsOn={1}
 			/>
-			<div class="p-3">
-				<IconButton
-					class="w-full"
-					disabled={value.start === undefined || value.end === undefined}
-					icon={mdiFilterRemove}
-					on:click={clearFilter}
-				>
-					Clear Filter
-				</IconButton>
-			</div>
 		</PopoverContent>
 	</Popover>
 </div>

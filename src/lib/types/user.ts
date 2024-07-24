@@ -1,8 +1,11 @@
-import type { ServerKey } from '$lib/types/keys/ServerKey';
+import type { ServerKey } from './server';
 
 export interface IUser {
-	server?: ServerKey;
+	server: ServerKey;
 	ar: number;
-	uid?: number;
+	uid: number;
 	wl: number;
+	name: string;
+	namecard: string;
+	signature?: string;
 }

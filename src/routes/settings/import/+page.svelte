@@ -4,7 +4,6 @@
 	import IconButton from '$lib/components/ui/icon-button/IconButton.svelte';
 	import { mdiAlert, mdiFile, mdiImport } from '@mdi/js';
 	import { Tabs, TabsList, TabsTrigger } from '$lib/components/ui/tabs';
-	import ImporterService, { type ImporterServices } from '$lib/services/importer';
 	import { Button } from '$lib/components/ui/button';
 	import {
 		AlertDialog,
@@ -19,11 +18,12 @@
 	import { goto } from '$app/navigation';
 	import Text from '$lib/components/typography/Text.svelte';
 	import i18n from '$lib/services/i18n';
+	import BackendService from '$lib/services/backend';
 	import { userProfile } from '$lib/store/user_profile';
-	import { applicationState } from '$lib/store/application_state';
 
-	let value: ImporterServices = 'dvalin';
-	const importerService = new ImporterService();
+	let value: 'dvalin' | 'paimon' = 'dvalin';
+	const backend = BackendService.getInstance();
+	const syncUserProfile = backend.user.syncUserProfile();
 	let file: File | undefined = undefined;
 	let dialogOpen = false;
 
@@ -31,7 +31,7 @@
 		let element = document.createElement('input');
 		element.type = 'file';
 		element.style.display = 'none';
-		element.onchange = (event) => {
+		element.onchange = (event: Event) => {
 			const target = event.target as HTMLInputElement;
 			if (target.files && target.files.length === 1) {
 				file = target.files[0];
@@ -47,36 +47,45 @@
 		dialogOpen = false;
 		if (file !== undefined) {
 			file.text().then((fileContent) => {
-				try {
-					let data = JSON.parse(fileContent);
-					const importedUserProfile = importerService
-						.getImporterService(value)
-						.import(data);
-
-					userProfile.set(importedUserProfile);
-					toast.success('Imported successfully!', {
-						description:
-							'Your data has been imported successfully and stored locally in your Browser'
-					});
-					goto('/settings');
-				} catch (e) {
-					toast.error('An error happened!', {
-						description: e.message
-					});
+				let data = JSON.parse(fileContent);
+				if (!$userProfile.wishes) {
+					toast.error('No wishes found, please import from dvalin first');
+					throw new Error('No wishes found, please import from dvalin first');
 				}
+				let totalWishes: number = 0;
+				Object.entries($userProfile.wishes).forEach(([_key, array]) => {
+					totalWishes += array?.length ?? 0;
+				});
+				if (totalWishes < 0) {
+					toast.error('No wishes found, please import from dvalin first');
+					throw new Error('No wishes found, please import from dvalin first');
+				}
+				toast.info('Importing data, please wait...');
+				$syncUserProfile.mutateAsync(
+					{
+						file: data,
+						format: value
+					},
+					{
+						onError: (error) => {
+							console.error(error);
+							toast.error('An error occurred while importing the data');
+						},
+						onSuccess: () => {
+							toast.success('Imported successfully!', {
+								description:
+									'Your data has been send to the server and will be processed soon. You will be redirected to the settings page.'
+							});
+							goto('/settings');
+						}
+					}
+				);
 			});
 		}
 	};
 </script>
 
-<DefaultLayout
-	title={$i18n.t('settings.import.title')}
-	showRequirements={$applicationState.isAuthenticated}
->
-	<svelte:fragment slot="requirements">
-		<Text type="h3">Imports are temporarily disabled while being logged in</Text>
-	</svelte:fragment>
-
+<DefaultLayout title={$i18n.t('settings.import.title')}>
 	<Tabs bind:value>
 		<TabsList>
 			<TabsTrigger value="dvalin">Dval.in</TabsTrigger>
