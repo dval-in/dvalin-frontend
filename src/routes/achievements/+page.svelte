@@ -12,7 +12,7 @@
 		const achievements = Object.keys(dataIndexStore.achievementCategory).map((key) => {
 			const achievement = dataIndexStore.achievementCategory[key as AchievementCategoryKey];
 			return {
-				link: `/achievement/${key}`,
+				link: `/achievements/${key}`,
 				name: achievement!.name,
 				order: achievement!.order,
 				total: achievement!.total
