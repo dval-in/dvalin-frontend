@@ -11,6 +11,7 @@
 	import DefaultLayout from '$lib/components/layout/DefaultLayout.svelte';
 	import { dataIndexStore } from '$lib/store/index_store';
 	import type { LayoutData } from '../../.svelte-kit/types/src/routes/$types';
+	import { onMount } from 'svelte';
 
 	/** @type {import('../../.svelte-kit/types/src/routes/$types').LayoutData} */
 	export let data: LayoutData;
@@ -25,6 +26,15 @@
 			response.data.weapon['Unknown3Star'] = { name: 'Unknown 3 star', rarity: 3 };
 			dataIndexStore.set(response.data);
 		}
+	});
+
+	onMount(() => {
+		document.body.classList.add(get(applicationState).settings.theme);
+
+		applicationState.subscribe((a) => {
+			document.body.classList.remove(...['light', 'dark']);
+			document.body.classList.add(a.settings.theme);
+		});
 	});
 
 	console.log(get(applicationState));
@@ -42,7 +52,7 @@
 </svelte:head>
 
 <QueryClientProvider client={data.queryClient}>
-	<div class={`${$applicationState.settings.theme} bg-neutral text-text min-h-screen`}>
+	<div class={`bg-neutral text-text min-h-screen`}>
 		<div class="min-h-screen" id="main">
 			{#if isLoading}
 				<div class="flex flex-1 flex-row justify-center items-center min-h-screen">
