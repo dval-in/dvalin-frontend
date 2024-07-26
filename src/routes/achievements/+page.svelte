@@ -7,6 +7,7 @@
 	import i18n from '$lib/services/i18n';
 	import type { AchievementCategoryKey } from '$lib/types/keys/AchievementCategoryKey';
 	import AchievementCategoryCard from '$lib/components/ui/card/AchievementCategoryCard.svelte';
+	import S3Service from '$lib/services/s3';
 
 	const transformedAchievements = derived([dataIndexStore], ([dataIndexStore]) => {
 		const achievements = Object.keys(dataIndexStore.achievementCategory).map((key) => {
@@ -15,12 +16,12 @@
 				link: `/achievements/${key}`,
 				name: achievement!.name,
 				order: achievement!.order,
+				img: S3Service.getAchievementCategory(key as AchievementCategoryKey).icon,
 				total: achievement!.total
 			};
 		});
 		return achievements.sort((a, b) => a.order - b.order);
 	});
-
 	console.log(get(applicationState));
 	console.log(get(userProfile));
 </script>
@@ -34,7 +35,7 @@
 			<AchievementCategoryCard
 				link={achievement.link}
 				name={achievement.name}
-				img=""
+				img={achievement.img}
 				total={achievement.total}
 				achieved={achievement.total}
 			/>
