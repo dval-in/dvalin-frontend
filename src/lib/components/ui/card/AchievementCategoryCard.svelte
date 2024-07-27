@@ -7,6 +7,7 @@
 	export let img: string;
 	export let total: number;
 	export let achieved: number;
+	export let inSidebar: boolean = false;
 	let percent = (achieved / total) * 100;
 </script>
 
