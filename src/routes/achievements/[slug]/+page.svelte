@@ -17,7 +17,7 @@
 		<div class="grid grid-cols-1 gap-3">
 			{#each $fetchAchievementCategoryData.data.achievements as achievement}
 				<Card
-					class="flex flex-row bg-primary/15 justify-between h-full w-full lg:overflow-auto sm:p-0 p-3 border-0"
+					class="flex flex-row bg-tertiary/80 justify-between h-full w-full lg:overflow-auto sm:p-0 p-3 border-0"
 				>
 					<div class="flex flex-col p-3">
 						<Text type="h4" class="font-bold text-lg w-full">
