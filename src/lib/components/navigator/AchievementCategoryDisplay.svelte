@@ -28,6 +28,7 @@
 	<div class="flex flex-col justify-center">
 		{#each $transformedAchievements as achievement}
 			<AchievementCategoryCard
+				inSidebar={true}
 				link={achievement.link}
 				name={achievement.name}
 				img={achievement.img}
