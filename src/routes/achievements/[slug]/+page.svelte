@@ -5,6 +5,7 @@
 	import Card from '../../../lib/components/ui/card/card.svelte';
 	import Text from '$lib/components/typography/Text.svelte';
 	import AchievementCheckbox from '$lib/components/ui/checkbox/AchievementCheckbox.svelte';
+	import AchievementCategoryDisplay from '$lib/components/navigator/AchievementCategoryDisplay.svelte';
 	export let data: PageData;
 
 	const fetchAchievementCategoryData = data.backend.data.fetchAchievementCategoryData(
@@ -12,26 +13,32 @@
 	);
 </script>
 
-<DefaultLayout isLoading={$fetchAchievementCategoryData.status === 'pending'}>
+<DefaultLayout
+	isLoading={$fetchAchievementCategoryData.status === 'pending'}
+	title={$fetchAchievementCategoryData.data.name}
+>
 	{#if $fetchAchievementCategoryData.status === 'success'}
-		<div class="grid grid-cols-1 gap-3">
-			{#each $fetchAchievementCategoryData.data.achievements as achievement}
-				<Card
-					class="flex flex-row bg-tertiary/80 justify-between h-full w-full lg:overflow-auto sm:p-0 p-3 border-0"
-				>
-					<div class="flex flex-col p-3">
-						<Text type="h4" class="font-bold text-lg w-full">
-							{achievement.name}
-						</Text>
-						<Text type="p" class="w-full">
-							{achievement.desc}
-						</Text>
-					</div>
-					<div class="p-3 flex justify-evenly h-full">
-						<AchievementCheckbox size="7" />
-					</div>
-				</Card>
-			{/each}
+		<div class="flex flex-row w-full">
+			<AchievementCategoryDisplay asSidebar="true" />
+			<div class="max-h-svh overflow-y-scroll flex-col flex gap-3 w-full">
+				{#each $fetchAchievementCategoryData.data.achievements as achievement}
+					<Card
+						class="flex flex-row bg-tertiary/80 justify-between w-full sm:p-0 px-2 border-0"
+					>
+						<div class="flex flex-col p-3">
+							<Text type="h4" class="font-bold text-lg w-full">
+								{achievement.name}
+							</Text>
+							<Text type="p" class="w-full">
+								{achievement.desc}
+							</Text>
+						</div>
+						<div class="p-3 flex justify-evenly h-full">
+							<AchievementCheckbox size="7" />
+						</div>
+					</Card>
+				{/each}
+			</div>
 		</div>
 	{/if}
 </DefaultLayout>
