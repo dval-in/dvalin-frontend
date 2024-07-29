@@ -6,9 +6,11 @@
 	import Text from '$lib/components/typography/Text.svelte';
 	import AchievementCheckbox from '$lib/components/ui/checkbox/AchievementCheckbox.svelte';
 	import AchievementCategoryDisplay from '$lib/components/navigator/AchievementCategoryDisplay.svelte';
+
+	/** @type {import('../../../../.svelte-kit/types/src/routes/achievements/[slug]').PageData} */
 	export let data: PageData;
 
-	const fetchAchievementCategoryData = data.backend.data.fetchAchievementCategoryData(
+	$: fetchAchievementCategoryData = data.backend.data.fetchAchievementCategoryData(
 		data.achievementCategoryKey as AchievementCategoryKey
 	);
 </script>

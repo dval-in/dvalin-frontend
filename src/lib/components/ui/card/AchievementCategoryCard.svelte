@@ -24,7 +24,6 @@
 	<a
 		class="flex flex-row w-auto mx-3 h-50 xl:h-50 rounded-md py-3 bg-tertiary/30 hover:scale-105 transition-transform duration-300 ease-in-out"
 		href={link}
-		data-sveltekit-reload
 	>
 		<div class="flex flex-col p-2 text-center">
 			<div class={`flex justify-center`}>
