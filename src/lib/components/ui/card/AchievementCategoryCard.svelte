@@ -1,7 +1,6 @@
 <script lang="ts">
 	import Text from '$lib/components/typography/Text.svelte';
 	import { Progress } from 'svelte-ux';
-	import IconButton from '$lib/components/ui/icon-button/IconButton.svelte';
 
 	export let link: string;
 	export let name: string;
@@ -13,21 +12,13 @@
 </script>
 
 {#if inSidebar}
-	<!--	<IconButton-->
-	<!--		{...$$restProps}-->
-	<!--		href={link}-->
-	<!--		icon={img}-->
-	<!--		on:click-->
-	<!--	>-->
-	<!--		{name}-->
-	<!--	</IconButton>-->
 	<a
-		class="flex flex-row w-auto mx-3 h-50 xl:h-50 rounded-md py-3 bg-tertiary/30 hover:scale-105 transition-transform duration-300 ease-in-out"
+		class="flex flex-row w-auto justify-between h-30 mx-3 rounded-md py-3 bg-tertiary/30 hover:scale-105 transition-transform duration-300 ease-in-out"
 		href={link}
 	>
-		<div class="flex flex-col p-2 text-center">
+		<div class="flex w-fit p-2 text-center">
 			<div class={`flex justify-center`}>
-				<img alt={name} class="w-20 h-20 xl:w-26 xl:h-26" src={img} />
+				<img alt={name} class="w-auto" src={img} />
 			</div>
 			<div class="hidden">{link} {name} {total} {achieved}</div>
 		</div>
@@ -48,7 +39,7 @@
 	>
 		<div class="flex flex-col p-2 text-center">
 			<div class={`flex justify-center`}>
-				<img alt={name} class="w-24 h-24 xl:w-36 xl:h-36" src={img} />
+				<img alt={name} class="xl:w-36 xl:h-36" src={img} />
 			</div>
 			<div class="hidden">{link} {name} {total} {achieved}</div>
 		</div>

@@ -55,7 +55,7 @@ class S3AchievementCategoryBucket {
 	public icon: string;
 	public constructor(achievementCategory: AchievementCategoryKey) {
 		this.baseUrl = S3Service.baseUrl + '/achievements/categories/' + achievementCategory;
-		this.icon = this.baseUrl + '/icon.webp';
+		this.icon = this.baseUrl + '.webp';
 	}
 }
 
