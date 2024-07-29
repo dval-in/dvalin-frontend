@@ -7,11 +7,11 @@
 		mdiSortAscending,
 		mdiSortDescending
 	} from '@mdi/js';
-	import CharCard from '$lib/components/ui/card/CharCard.svelte';
+	import WeapCard from '$lib/components/ui/card/WeapCard.svelte';
 	import Searchbar from '$lib/components/ui/searchbar/Searchbar.svelte';
 	import S3Service from '$lib/services/s3';
 	import DefaultLayout from '$lib/components/layout/DefaultLayout.svelte';
-	import type { WeaponTypes } from '$lib/types/weapon';
+	// import type { WeaponTypes } from '$lib/types/weapon';
 	import { dataIndexStore } from '$lib/store/index_store';
 	import i18n from '$lib/services/i18n';
 	import { userProfile } from '$lib/store/user_profile';
@@ -54,22 +54,22 @@
 
 	const checkedStore = writable<{ [key: string]: boolean }>({});
 
-	const transformIntoWeapons = (weapon: string): WeaponTypes => {
-		switch (weapon) {
-			case 'Sword':
-				return 'sword';
-			case 'Claymore':
-				return 'claymore';
-			case 'Polearm':
-				return 'polearm';
-			case 'Catalyst':
-				return 'catalyst';
-			case 'Bow':
-				return 'bow';
-			default:
-				return 'sword';
-		}
-	};
+	// const transformIntoWeapons = (weapon: string): WeaponTypes => {
+	// 	switch (weapon) {
+	// 		case 'Sword':
+	// 			return 'sword';
+	// 		case 'Claymore':
+	// 			return 'claymore';
+	// 		case 'Polearm':
+	// 			return 'polearm';
+	// 		case 'Catalyst':
+	// 			return 'catalyst';
+	// 		case 'Bow':
+	// 			return 'bow';
+	// 		default:
+	// 			return 'sword';
+	// 	}
+	// };
 
 	// Derived store to transform weapon data based on sorting and filtering
 	const transformedWeaponStore = derived(
@@ -85,7 +85,7 @@
 					obtained,
 					link: `/weapons/${key}`,
 					name: weapon.name,
-					weapon: transformIntoWeapons(weapon.weaponType),
+					// type: transformIntoWeapons(weapon.),
 					img: S3Service.getWeapon(key).icon,
 					rarity: weapon.rarity
 				};
@@ -284,18 +284,20 @@
 			</DropdownMenuContent>
 		</DropdownMenu>
 	</svelte:fragment>
-	<div class="flex flex-wrap gap-4 justify-center">
+	<div class="flex flex-wrap gap-4 justify-center mt-1">
 		{#each $transformedWeaponStore as weapon}
-			<CharCard
+			<!-- Need to decide on different img depending on ascencion -->
+			<WeapCard
 				link={weapon.link}
 				name={weapon.name}
 				img={weapon.img}
-				level={0}
-				constellation={0}
-				element={weapon.element}
-				weapon={weapon.weapon}
+				level={1}
+				ascencion={0}
+				refinement={5}
+				type={'sword'}
 				rarity={weapon.rarity}
-				obtained={weapon.obtained}
+				obtained={true}
+				location={'Xiao'}
 			/>
 		{/each}
 	</div>
