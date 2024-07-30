@@ -6,7 +6,7 @@
 	import AchievementCategoryCard from '$lib/components/ui/card/AchievementCategoryCard.svelte';
 
 	export let asSidebar: boolean = false;
-	export const transformedAchievements = derived([dataIndexStore], ([dataIndexStore]) => {
+	const transformedAchievements = derived([dataIndexStore], ([dataIndexStore]) => {
 		const achievements = Object.keys(dataIndexStore.achievementCategory).map((key) => {
 			const achievement = dataIndexStore.achievementCategory[key as AchievementCategoryKey];
 			return {

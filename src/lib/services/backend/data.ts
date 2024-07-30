@@ -12,11 +12,9 @@ import type { AchievementCategoryIndex } from '$lib/types/index/achievementcateg
 import type { AchievementCategoryKey } from '$lib/types/keys/AchievementCategoryKey';
 import type { AchievementCategory } from '$lib/types/data/AchievementCategory';
 
-interface FetchDataIndexResponse {
-	character: CharacterIndex;
-	weapon: WeaponIndex;
-	achievementCategory: AchievementCategoryIndex;
-}
+type FetchAchievementCategoryDataIndexResponse = AchievementCategoryIndex;
+type FetchCharacterDataIndexResponse = CharacterIndex;
+type FetchWeaponDataIndexResponse = WeaponIndex;
 
 export class BackendDataService {
 	private readonly baseUrl: string;
@@ -27,27 +25,43 @@ export class BackendDataService {
 	) {
 		this.baseUrl = baseUrl + '/data';
 	}
-	fetchDataIndex() {
-		return createQuery<FetchDataIndexResponse>(
+	fetchCharacterDataIndex() {
+		return createQuery<FetchCharacterDataIndexResponse>(
 			{
-				queryKey: ['fetchDataIndex'],
+				queryKey: ['fetchDataIndex', 'character'],
 				staleTime: 6 * 60 * 60 * 1000, //6h
-				queryFn: async () => {
-					const charIndex = await backendFetch<CharacterIndex>(
+				queryFn: async () =>
+					await backendFetch<CharacterIndex>(
 						`${this.baseUrl}/Character/index?lang=${get(i18n).language}`
-					);
-					const weaponIndex = await backendFetch<WeaponIndex>(
+					)
+			},
+			this.queryClient
+		);
+	}
+
+	fetchWeaponDataIndex() {
+		return createQuery<FetchWeaponDataIndexResponse>(
+			{
+				queryKey: ['fetchDataIndex', 'weapon'],
+				staleTime: 6 * 60 * 60 * 1000, //6h
+				queryFn: async () =>
+					await backendFetch<WeaponIndex>(
 						`${this.baseUrl}/Weapon/index?lang=${get(i18n).language}`
-					);
-					const achievementIndex = await backendFetch<AchievementCategoryIndex>(
+					)
+			},
+			this.queryClient
+		);
+	}
+
+	fetchAchievementCategoryDataIndex() {
+		return createQuery<FetchAchievementCategoryDataIndexResponse>(
+			{
+				queryKey: ['fetchDataIndex', 'achievementCategory'],
+				staleTime: 6 * 60 * 60 * 1000, //6h
+				queryFn: async () =>
+					await backendFetch<AchievementCategoryIndex>(
 						`${this.baseUrl}/AchievementCategory/index?lang=${get(i18n).language}`
-					);
-					return {
-						character: charIndex,
-						weapon: weaponIndex,
-						achievementCategory: achievementIndex
-					};
-				}
+					)
 			},
 			this.queryClient
 		);
