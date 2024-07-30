@@ -6,6 +6,8 @@
 	import Text from '$lib/components/typography/Text.svelte';
 	import AchievementCheckbox from '$lib/components/ui/checkbox/AchievementCheckbox.svelte';
 	import AchievementCategoryDisplay from '$lib/components/navigator/AchievementCategoryDisplay.svelte';
+	import { Icon } from 'svelte-ux';
+	import { mdiOpenInNew } from '@mdi/js/commonjs/mdi';
 
 	/** @type {import('../../../../.svelte-kit/types/src/routes/achievements/[slug]').PageData} */
 	export let data: PageData;
@@ -22,15 +24,29 @@
 	{#if $fetchAchievementCategoryData.status === 'success'}
 		<div class="flex flex-row w-full">
 			<AchievementCategoryDisplay asSidebar="true" />
-			<div class="max-h-svh overflow-y-scroll flex-col flex gap-3 w-full">
+			<div class="max-h-svh overflow-y-scroll flex-col flex gap-3 ml-1 w-full">
 				{#each $fetchAchievementCategoryData.data.achievements as achievement}
 					<Card
 						class="flex flex-row bg-tertiary/80 justify-between w-full sm:p-0 px-2 border-0"
 					>
 						<div class="flex flex-col p-3">
-							<Text type="h4" class="font-bold text-lg w-full">
-								{achievement.name}
-							</Text>
+							<a
+								href="https://genshin-impact.fandom.com/wiki/{achievement.name.replace(
+									' ',
+									'_'
+								)}"
+								target="_blank"
+							>
+								<Text
+									type="h4"
+									class="font-bold text-lg w-full hover:scale-105 transition-transform duration-300 ease-in-out"
+								>
+									{achievement.name}
+									<span class="inline-flex items-start">
+										<Icon path={mdiOpenInNew} class="h-4" />
+									</span>
+								</Text>
+							</a>
 							<Text type="p" class="w-full">
 								{achievement.desc}
 							</Text>

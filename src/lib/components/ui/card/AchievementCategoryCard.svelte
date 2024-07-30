@@ -13,17 +13,15 @@
 
 {#if inSidebar}
 	<a
-		class="flex flex-row w-auto justify-between h-30 mx-3 rounded-md py-3 bg-tertiary/30 hover:scale-105 transition-transform duration-300 ease-in-out"
+		class="flex flex-row h-auto w-auto justify-between rounded-md py-3 bg-tertiary/30 hover:scale-105 transition-transform duration-300 ease-in-out"
 		href={link}
 	>
-		<div class="flex w-fit p-2 text-center">
-			<div class={`flex justify-center`}>
-				<img alt={name} class="w-auto" src={img} />
-			</div>
+		<div class="flex p-2 h-full justify-center">
+			<img alt={name} class="object-contain h-20" src={img} />
 			<div class="hidden">{link} {name} {total} {achieved}</div>
 		</div>
 		<div class={'text-left w-full content-end mx-3 my-3'}>
-			<Text type="h4">
+			<Text type="p" class="font-bold">
 				{name}
 			</Text>
 			<Text type="small">

@@ -8,11 +8,12 @@
 	import Text from '$lib/components/typography/Text.svelte';
 	import { useQueryClient } from '@tanstack/svelte-query';
 	import { toast } from 'svelte-sonner';
-	import { mdiCheck, mdiHumanQueue, mdiLink, mdiLogin } from '@mdi/js';
+	import { mdiCheck, mdiHumanQueue, mdiLogin } from '@mdi/js';
 	import Icon from '$lib/components/ui/icon/icon.svelte';
 	import IconButton from '$lib/components/ui/icon-button/IconButton.svelte';
 	import { applicationState } from '$lib/store/application_state';
 	import { Tabs, TabsContent, TabsList, TabsTrigger } from '$lib/components/ui/tabs';
+	import { mdiOpenInNew } from '@mdi/js/commonjs/mdi';
 
 	let wishURL = '';
 
@@ -92,7 +93,7 @@
 				</TabsContent>
 				<TabsContent value="android">
 					<Text type="p">Use Ascent by 403f</Text>
-					<IconButton icon={mdiLink} href="https://github.com/4o3F/Ascent">
+					<IconButton icon={mdiOpenInNew} href="https://github.com/4o3F/Ascent">
 						Github
 					</IconButton>
 				</TabsContent>
@@ -101,7 +102,10 @@
 				</TabsContent>
 				<TabsContent value="ps">
 					<Text type="p">Follow this guide:</Text>
-					<IconButton icon={mdiLink} href="https://www.youtube.com/watch?v=ly10r6m_-n8">
+					<IconButton
+						icon={mdiOpenInNew}
+						href="https://www.youtube.com/watch?v=ly10r6m_-n8"
+					>
 						Guide
 					</IconButton>
 				</TabsContent>

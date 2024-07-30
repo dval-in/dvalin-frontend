@@ -25,10 +25,10 @@
 <!-- svelte-ignore a11y-label-has-associated-control -->
 
 {#if asSidebar}
-	<div
-		class="flex sticky max-h-screen sm:w-75 xl:w-100 h-full pr-2 gap-1 sm:rounded-r-xl transition-all"
-	>
-		<div class={`overflow-y-scroll flex flex-col flex-1 gap-5 max-sm:h-full scrollbar-gutter`}>
+	<div class="flex sticky max-h-screen xl:w-100 h-full pr-2 sm:rounded-r-xl transition-all">
+		<div
+			class={`overflow-y-scroll flex flex-col max-sm:flex-row flex-1 gap-5 max-sm:h-full scrollbar-gutter`}
+		>
 			{#each $transformedAchievements as achievement}
 				<AchievementCategoryCard
 					inSidebar={true}
