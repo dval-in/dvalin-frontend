@@ -17,17 +17,26 @@
 	export let data: LayoutData;
 
 	$: webManifestLink = pwaInfo ? pwaInfo.webManifest.href : '';
-
-	const fetchDataIndex = data.backend.data.fetchDataIndex();
+	const fetchCharacterDataIndex = data.backend.data.fetchCharacterDataIndex();
+	const fetchWeaponDataIndex = data.backend.data.fetchWeaponDataIndex();
+	const fetchAchievementCategoryDataIndex = data.backend.data.fetchAchievementCategoryDataIndex();
 	let isLoading = JSON.stringify(get(dataIndexStore).weapon) === '{}';
 
-	fetchDataIndex.subscribe((response) => {
-		if (response.status === 'success') {
+	$: {
+		let a = $fetchCharacterDataIndex;
+		let b = $fetchWeaponDataIndex;
+		let c = $fetchAchievementCategoryDataIndex;
+		if (a.status === 'success' && b.status === 'success' && c.status === 'success') {
 			isLoading = false;
-			response.data.weapon['Unknown3Star'] = { name: 'Unknown 3 star', rarity: 3 };
-			dataIndexStore.set(response.data);
+			b.data['Unknown3Star'] = { name: 'Unknown 3 star', rarity: 3 };
+
+			dataIndexStore.set({
+				character: a.data,
+				weapon: b.data,
+				achievementCategory: c.data
+			});
 		}
-	});
+	}
 
 	onMount(() => {
 		document.body.classList.add(get(applicationState).settings.theme);

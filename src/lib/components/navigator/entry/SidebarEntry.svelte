@@ -2,8 +2,8 @@
 	import IconButton from '$lib/components/ui/icon-button/IconButton.svelte';
 	import { page } from '$app/stores';
 	import Icon from '$lib/components/ui/icon/icon.svelte';
-	import { mdiLink } from '@mdi/js';
 	import i18n from '$lib/services/i18n';
+	import { mdiOpenInNew } from '@mdi/js/commonjs/mdi';
 
 	export let icon: string;
 	export let link: string;
@@ -26,6 +26,6 @@
 >
 	{$i18n.t(title)}
 	{#if external}
-		<Icon path={mdiLink} />
+		<Icon path={mdiOpenInNew} />
 	{/if}
 </IconButton>

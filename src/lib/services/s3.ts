@@ -1,6 +1,7 @@
 import type { CharacterKey } from '$lib/types/keys/CharacterKey';
 import type { WeaponKey } from '$lib/types/keys/WeaponKey';
 import type { ArtifactSetKey } from '$lib/types/keys/ArtifactSetKey';
+import type { AchievementCategoryKey } from '$lib/types/keys/AchievementCategoryKey';
 
 export default class S3Service {
 	static baseUrl: string = 'https://s3-api.dval.in';
@@ -15,6 +16,10 @@ export default class S3Service {
 
 	public static getArtifact(artifact: ArtifactSetKey) {
 		return new S3ArtifactBucket(artifact);
+	}
+
+	public static getAchievementCategory(achievementCategory: AchievementCategoryKey) {
+		return new S3AchievementCategoryBucket(achievementCategory);
 	}
 }
 
@@ -41,6 +46,16 @@ class S3WeaponBucket {
 	public constructor(weapon: WeaponKey) {
 		this.baseUrl = S3Service.baseUrl + '/weapons/' + weapon;
 		this.icon = this.baseUrl + '/icon.webp';
+	}
+}
+
+class S3AchievementCategoryBucket {
+	private readonly baseUrl: string;
+
+	public icon: string;
+	public constructor(achievementCategory: AchievementCategoryKey) {
+		this.baseUrl = S3Service.baseUrl + '/achievements/categories/' + achievementCategory;
+		this.icon = this.baseUrl + '.webp';
 	}
 }
 
