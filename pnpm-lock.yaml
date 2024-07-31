@@ -69,8 +69,8 @@ importers:
         specifier: ^0.3.27
         version: 0.3.27(svelte@4.2.18)
       svelte-ux:
-        specifier: ^0.73.3
-        version: 0.73.3(@babel/core@7.24.3)(postcss-load-config@4.0.2(postcss@8.4.40))(postcss@8.4.40)(sass@1.77.8)(svelte@4.2.18)
+        specifier: ^0.74.0
+        version: 0.74.0(@babel/core@7.24.3)(postcss-load-config@4.0.2(postcss@8.4.40))(postcss@8.4.40)(sass@1.77.8)(svelte@4.2.18)
       sveltekit-superforms:
         specifier: ^2.16.1
         version: 2.16.1(@sveltejs/kit@2.5.18(@sveltejs/vite-plugin-svelte@3.1.1(svelte@4.2.18)(vite@5.3.5(@types/node@20.11.30)(sass@1.77.8)(terser@5.30.0)))(svelte@4.2.18)(vite@5.3.5(@types/node@20.11.30)(sass@1.77.8)(terser@5.30.0)))(svelte@4.2.18)
@@ -3730,8 +3730,8 @@ packages:
     peerDependencies:
       svelte: ^3.56.0 || ^4.0.0 || ^5.0.0-next.120
 
-  svelte-ux@0.73.3:
-    resolution: {integrity: sha512-XwFC6xF99gCjW10rcgOQk7XWSFM/e+A4VOFW+YygSXZvEFlhCzRZzdBCD6Dc5oY3e7++f+y0EoqCWR4PaeiC4Q==}
+  svelte-ux@0.74.0:
+    resolution: {integrity: sha512-VvdkyELwRM7ZHv1ELFK6ynR6KlAKUBB3cQ8PJzMYTiaYRd5qgJOVqVwboYg+UUqRjqmrji0UeevNJj/X4wDnlA==}
     peerDependencies:
       svelte: ^3.56.0 || ^4.0.0 || ^5.0.0-next.120
 
@@ -8026,7 +8026,7 @@ snapshots:
       - stylus
       - sugarss
 
-  svelte-ux@0.73.3(@babel/core@7.24.3)(postcss-load-config@4.0.2(postcss@8.4.40))(postcss@8.4.40)(sass@1.77.8)(svelte@4.2.18):
+  svelte-ux@0.74.0(@babel/core@7.24.3)(postcss-load-config@4.0.2(postcss@8.4.40))(postcss@8.4.40)(sass@1.77.8)(svelte@4.2.18):
     dependencies:
       '@floating-ui/dom': 1.6.7
       '@fortawesome/fontawesome-common-types': 6.5.2
