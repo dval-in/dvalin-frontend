@@ -3,7 +3,7 @@ import type { WeaponKey } from '$lib/types/keys/WeaponKey';
 import type { ArtifactSetKey } from '$lib/types/keys/ArtifactSetKey';
 
 export default class S3Service {
-	static baseUrl: string = 'https://s3-api.dval.in';
+	static readonly baseUrl: string = 'https://s3-api.dval.in';
 
 	public static getCharacter(character: CharacterKey) {
 		return new S3CharacterBucket(character);
@@ -15,6 +15,18 @@ export default class S3Service {
 
 	public static getArtifact(artifact: ArtifactSetKey) {
 		return new S3ArtifactBucket(artifact);
+	}
+
+	public static getNamecard(key: string) {
+		return new S3NamecardBucket(key);
+	}
+}
+
+class S3NamecardBucket {
+	private readonly baseUrl: string;
+
+	public constructor(key: string) {
+		this.baseUrl = S3Service.baseUrl + '/namecards/' + key + '.webp';
 	}
 }
 

@@ -9,6 +9,7 @@
 	import DefaultLayout from '$lib/components/layout/DefaultLayout.svelte';
 	import i18n from '$lib/services/i18n';
 	import { userProfile } from '$lib/store/user_profile';
+	import S3Service from '$lib/services/s3';
 	import BackendService from '$lib/services/backend';
 	import { siGoogle, siDiscord, siGithub, type SimpleIcon } from 'simple-icons';
 	import Icon from '$lib/components/ui/icon/icon.svelte';
@@ -79,7 +80,7 @@
 		});
 	}
 	// TODO : fix this once we have image on s3
-	const bgImageUrl = get(userProfile).account.namecard;
+	const bgImageUrl = S3Service.getNamecard(get(userProfile).account.namecard);
 
 	async function handleDelete(): Promise<void> {
 		const result = await $deleteProfileMutation.mutateAsync();
