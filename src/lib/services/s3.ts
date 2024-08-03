@@ -23,10 +23,10 @@ export default class S3Service {
 }
 
 class S3NamecardBucket {
-	private readonly baseUrl: string;
+	public url: string;
 
 	public constructor(key: string) {
-		this.baseUrl = S3Service.baseUrl + '/namecards/' + key + '.webp';
+		this.url = S3Service.baseUrl + '/namecards/' + key + '.webp';
 	}
 }
 
