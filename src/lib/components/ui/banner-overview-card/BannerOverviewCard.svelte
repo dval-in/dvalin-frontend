@@ -3,7 +3,7 @@
 	import Text from '$lib/components/typography/Text.svelte';
 	import Icon from '$lib/components/ui/icon/icon.svelte';
 	import PullChip from '$lib/components/ui/pull-chip/PullChip.svelte';
-	import type { IMappedWish } from '$lib/types/wish.js';
+	import type { IWish } from '$lib/types/wish.js';
 	import { Card, CardHeader } from '$lib/components/ui/card';
 	import { CardContent } from '$lib/components/ui/card/index.js';
 	import InfoCell from '$lib/components/ui/info-cell/InfoCell.svelte';
@@ -15,22 +15,19 @@
 
 	export let icon: string;
 	export let key: WishBannerKey;
-	export let data: IMappedWish[];
-	data.forEach((wish) => {
-		wish.date = new Date(wish.date);
-	});
-	data.sort((a, b) => b.date.getTime() - a.date.getTime());
+	export let data: (IWish & { name: string })[];
+	data.sort((a, b) => b.order - a.order);
 	const MAX_CHARACTER_LENGTH = 200;
 	const PICTURE_AND_PITY_LENGTH = 6;
-	const fiveStars = data.filter((wish: IMappedWish) => wish.rarity === 5);
+	const fiveStars = data.filter((wish) => wish.rarity === 5);
 
-	const fourStars = data.filter((wish: IMappedWish) => wish.rarity === 4);
+	const fourStars = data.filter((wish) => wish.rarity === 4);
 
-	const threeStars = data.filter((wish: IMappedWish) => wish.rarity === 3);
+	const threeStars = data.filter((wish) => wish.rarity === 3);
 
-	const fiveStarToDisplay = (): IMappedWish[] => {
+	const fiveStarToDisplay = () => {
 		let charLength = 0;
-		let char: IMappedWish[] = [];
+		let char = [];
 		for (let i = 0; i < fiveStars.length; i++) {
 			if (
 				charLength + fiveStars[i].name.length + PICTURE_AND_PITY_LENGTH <

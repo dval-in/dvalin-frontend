@@ -15,7 +15,7 @@
 	} from '@mdi/js';
 	import PullDistributionByMonth from '$lib/components/graphs/PullDistributionByMonth.svelte';
 	import DefaultLayout from '$lib/components/layout/DefaultLayout.svelte';
-	import type { IMappedWishes, IWish, IWishes } from '$lib/types/wish';
+	import type { IWish, IWishes } from '$lib/types/wish';
 	import { isWishBannerKey } from '$lib/types/keys/WishBannerKey';
 	import { isCharacterKey } from '$lib/types/keys/CharacterKey';
 	import { Card } from '$lib/components/ui/card';
@@ -26,21 +26,29 @@
 	import { applicationState } from '$lib/store/application_state';
 	import { get } from 'svelte/store';
 
-	let wishData: IMappedWishes = {};
-	// TODO : to refactor
+	interface IProcessedWish extends IWish {
+		name: string;
+	}
+
+	interface IProcessedWishes {
+		[key: string]: IProcessedWish[] | undefined;
+	}
+
+	let wishData: IProcessedWishes = {};
+
 	const wishes: IWishes | undefined = get(userProfile).wishes;
+
 	if (wishes !== undefined) {
 		Object.keys(wishes).forEach((key: string) => {
 			if (isWishBannerKey(key)) {
-				wishData[key] = wishes[key]?.map((wish: IWish) => {
+				wishData[key] = wishes[key]?.map((wish: IWish): IProcessedWish => {
 					const index = isCharacterKey(wish.key)
 						? $dataIndexStore.character[wish.key]
 						: $dataIndexStore.weapon[wish.key];
 
 					return {
 						...wish,
-						name: index !== undefined ? index.name : key,
-						rarity: index !== undefined ? index.rarity : 0
+						name: index !== undefined ? index.name : key
 					};
 				});
 			}
@@ -74,27 +82,27 @@
 	</svelte:fragment>
 
 	<div class="flex flex-wrap gap-4">
-		{#if wishData?.CharacterEvent !== undefined}
+		{#if wishData?.CharacterEvent && wishData.CharacterEvent.length > 0}
 			<BannerOverviewCard
 				data={wishData.CharacterEvent}
 				icon={mdiAccount}
 				key={'CharacterEvent'}
 			/>
 		{/if}
-		{#if wishData?.WeaponEvent !== undefined}
+		{#if wishData?.WeaponEvent && wishData.WeaponEvent.length > 0}
 			<BannerOverviewCard
 				data={wishData.WeaponEvent}
 				icon={mdiSwordCross}
 				key={'WeaponEvent'}
 			/>
 		{/if}
-		{#if wishData?.Standard !== undefined}
+		{#if wishData?.Standard && wishData.Standard.length > 0}
 			<BannerOverviewCard data={wishData.Standard} icon={mdiInfinity} key={'Standard'} />
 		{/if}
-		{#if wishData?.Chronicled !== undefined}
+		{#if wishData?.Chronicled && wishData.Chronicled.length > 0}
 			<BannerOverviewCard data={wishData.Chronicled} icon={mdiBook} key={'Chronicled'} />
 		{/if}
-		{#if wishData?.Beginner !== undefined}
+		{#if wishData?.Beginner && wishData.Beginner.length > 0}
 			<BannerOverviewCard data={wishData.Beginner} icon={mdiBaby} key={'Beginner'} />
 		{/if}
 	</div>
