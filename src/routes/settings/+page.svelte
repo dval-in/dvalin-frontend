@@ -8,7 +8,7 @@
 	import { Button } from '$lib/components/ui/button';
 	import DefaultLayout from '$lib/components/layout/DefaultLayout.svelte';
 	import i18n from '$lib/services/i18n';
-	import { defaultValues, userProfile } from '$lib/store/user_profile';
+	import { userProfile } from '$lib/store/user_profile';
 	import BackendService from '$lib/services/backend';
 	import { siGoogle, siDiscord, siGithub, type SimpleIcon } from 'simple-icons';
 	import Icon from '$lib/components/ui/icon/icon.svelte';
@@ -16,7 +16,6 @@
 	import { CardHeader, CardTitle, CardContent } from '$lib/components/ui/card';
 	import { Checkbox } from '$lib/components/ui/checkbox';
 	import { Label } from '$lib/components/ui/label';
-	import { goto } from '$app/navigation';
 	import {
 		Dialog,
 		DialogContent,
@@ -82,18 +81,11 @@
 	// TODO : fix this once we have image on s3
 	const bgImageUrl = get(userProfile).account.namecard;
 
-	function handleDelete(): void {
-		$deleteProfileMutation.mutate();
-		applicationState.update((state) => {
-			return {
-				...state,
-				isAuthenticated: false
-			};
-		});
-		userProfile.update(() => {
-			return defaultValues;
-		});
-		goto('/');
+	async function handleDelete(): Promise<void> {
+		const result = await $deleteProfileMutation.mutateAsync();
+		if (result.state === 'SUCCESS') {
+			backend.auth.logout();
+		}
 	}
 </script>
 
