@@ -4,6 +4,7 @@
 		mdiFilter,
 		mdiFilterOutline,
 		mdiFilterRemove,
+		mdiStar,
 		mdiSortAscending,
 		mdiSortDescending
 	} from '@mdi/js';
@@ -30,8 +31,7 @@
 	import IconClaymore from '$lib/assets/Icon_Weapon_Claymore.png';
 	import IconPolearm from '$lib/assets/Icon_Weapon_Polearm.png';
 	import IconSword from '$lib/assets/Icon_Weapon_Sword.png';
-	import IconGoldStar from '$lib/assets/Icon_Gold_Star.png';
-	import IconPurpleStar from '$lib/assets/Icon_Purple_Star.png';
+	import Icon from '$lib/components/ui/icon/icon.svelte';
 
 	type Sorts = 'Name' | 'Refinement';
 	type Filters = 'weapon' | 'rarity' | 'owned';
@@ -243,7 +243,7 @@
 				<DropdownMenuGroup class="flex justify-left">
 					<DropdownMenuLabel>Rarity</DropdownMenuLabel>
 				</DropdownMenuGroup>
-				<DropdownMenuGroup class="grid grid-cols-2 justify-center gap-2">
+				<DropdownMenuGroup class="grid grid-cols-3 justify-center gap-2">
 					<DropdownMenuItem
 						on:click={() => {
 							setFilterStore('rarity', 5);
@@ -253,7 +253,7 @@
 							$checkedStore['rarity5'] ? 'bg-primary' : ''
 						}`}
 					>
-						<img src={IconGoldStar} alt="5 Star" class={'size-6'} role="button" />
+						<Icon path={mdiStar} class="size-6 *:fill-fivestar" />
 					</DropdownMenuItem>
 					<DropdownMenuItem
 						on:click={() => {
@@ -264,7 +264,18 @@
 							$checkedStore['rarity4'] ? 'bg-primary' : ''
 						}`}
 					>
-						<img src={IconPurpleStar} alt="4 Star" class={'size-6'} role="button" />
+						<Icon path={mdiStar} class="size-6 *:fill-fourstar" />
+					</DropdownMenuItem>
+					<DropdownMenuItem
+						on:click={() => {
+							setFilterStore('rarity', 3);
+							toggleChecked('rarity3');
+						}}
+						class={`p-0 rounded-lg border cursor-pointer bg-tertiary text-text shadow-sm justify-center sm:p-2 gap-2 hover:border-primary w-full transition duration-300 ${
+							$checkedStore['rarity3'] ? 'bg-primary' : ''
+						}`}
+					>
+						<Icon path={mdiStar} class="size-6 *:fill-threestar" />
 					</DropdownMenuItem>
 				</DropdownMenuGroup>
 				<DropdownMenuSeparator />
