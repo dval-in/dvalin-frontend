@@ -19,7 +19,6 @@
 	import Text from '$lib/components/typography/Text.svelte';
 	import i18n from '$lib/services/i18n';
 	import BackendService from '$lib/services/backend';
-	import { userProfile } from '$lib/store/user_profile';
 
 	let value: 'dvalin' | 'paimon' = 'dvalin';
 	const backend = BackendService.getInstance();
@@ -48,19 +47,7 @@
 		if (file !== undefined) {
 			file.text().then((fileContent) => {
 				let data = JSON.parse(fileContent);
-				if (!$userProfile.wishes) {
-					toast.error('No wishes found, please import from dvalin first');
-					throw new Error('No wishes found, please import from dvalin first');
-				}
-				let totalWishes: number = 0;
-				Object.entries($userProfile.wishes).forEach(([_key, array]) => {
-					totalWishes += array?.length ?? 0;
-				});
-				if (totalWishes < 0) {
-					toast.error('No wishes found, please import from dvalin first');
-					throw new Error('No wishes found, please import from dvalin first');
-				}
-				toast.info('Importing data, please wait...');
+				toast.info($i18n.t('settings.import.pending'));
 				$syncUserProfile.mutateAsync(
 					{
 						file: data,
@@ -72,9 +59,8 @@
 							toast.error('An error occurred while importing the data');
 						},
 						onSuccess: () => {
-							toast.success('Imported successfully!', {
-								description:
-									'Your data has been send to the server and will be processed soon. You will be redirected to the settings page.'
+							toast.success($i18n.t('settings.import.success.title'), {
+								description: $i18n.t('settings.import.success.description')
 							});
 							goto('/settings');
 						}

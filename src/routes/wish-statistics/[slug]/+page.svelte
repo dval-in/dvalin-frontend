@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Text from '$lib/components/typography/Text.svelte';
 	import RaretyDistributionByBanner from '$lib/components/graphs/RaretyDistributionByBanner.svelte';
-	import type { IMappedWish, IWish } from '$lib/types/wish';
+	import type { IWish } from '$lib/types/wish';
 	import DefaultLayout from '$lib/components/layout/DefaultLayout.svelte';
 	import { isCharacterKey } from '$lib/types/keys/CharacterKey';
 	import BannerHistoryTable from '$lib/components/tables/banner-history-table/BannerHistoryTable.svelte';
@@ -17,7 +17,7 @@
 
 	/** @type {import('../../../../.svelte-kit/types/src/routes/wish-statistics/[slug]/$types').PageData} */
 	export let data: PageData;
-	let wishData: IMappedWish[] = [];
+	let wishData: IWish[] = [];
 	const wishes: IWish[] | undefined = $userProfile.wishes?.[data.pageType];
 	let fiveStars = [];
 	let fourStars = [];
@@ -39,11 +39,11 @@
 		});
 
 		fiveStars = wishData
-			.filter((wish: IMappedWish) => wish.rarity === 5)
-			.sort((a, b) => b.number - a.number);
+			.filter((wish: IWish) => wish.rarity === 5)
+			.sort((a: IWish, b: IWish) => b.order - a.order);
 
-		fourStars = wishData.filter((wish: IMappedWish) => wish.rarity === 4);
-		threeStars = wishData.filter((wish: IMappedWish) => wish.rarity === 3);
+		fourStars = wishData.filter((wish: IWish) => wish.rarity === 4);
+		threeStars = wishData.filter((wish: IWish) => wish.rarity === 3);
 		fiveStarPity =
 			wishData.findIndex((wish) => wish.rarity === 5) === -1
 				? wishData.length
