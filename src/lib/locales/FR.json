@@ -94,7 +94,7 @@
 		"settings.import.warning.description": "Cette action va supprimer les données existantes",
 		"settings.import.start_import_button": "Commencer l'importation",
 		"settings.import.confirmation_dialog.title": "Êtes-vous sûr(e)?",
-		"settings.import.confirmation_dialog.description": "Dvalin will try to merge your imported data with the current data. If you see any error please report it on the discord channel",
+		"settings.import.confirmation_dialog.description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae deserunt velit autem veniam doloribus nulla. Culpa fugiat nemo accusantium cumque soluta tenetur tempora veritatis magnam nulla aliquid. Similique, perspiciatis unde?",
 		"login.title": "Plus de fonctionnalités disponibles avec un compte !",
 		"login.alert.title": "Important: Local Data Notice",
 		"login.alert.description": "Logging in will overwrite your local data. Please ensure you've backed up any important information before proceeding.",
