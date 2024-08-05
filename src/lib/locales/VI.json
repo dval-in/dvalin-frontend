@@ -44,7 +44,7 @@
 		"wish.import.instructions.step1": "Mở thư mục \"C:\\Games\\Genshin Impact\\GenshinImpact_Data\\webCaches\\%phiên bản mới nhất%\\Cache\\Cache_Data\"",
 		"wish.import.instructions.step2": "Xóa tập tin \"data_2\", sau đó mở trò chơi và vào giao diện lịch sử cầu nguyện",
 		"wish.import.instructions.step3": "Mở tập tin \"data_2\"",
-		"wish.import.instructions.step4": "Search for the last entry of \"e20190909gacha-v3\" (without quotes)",
+		"wish.import.instructions.step4": "Tìm văn bản \"e20190909gacha-v3\" (không tính ngoặc kép) xuất hiện ở dưới cùng",
 		"wish.import.instructions.step5": "Sao chép liên kết và dán vào ô văn bản dưới đây",
 		"wish.import.state.error.title": "Đã xảy ra lỗi. Vui lòng thử lại sau.",
 		"wish.import.state.queued.title": "Yêu cầu của bạn đang chờ được xử lý",
