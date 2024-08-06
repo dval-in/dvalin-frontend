@@ -37,7 +37,7 @@
 	} from 'svelte-headless-table/plugins';
 	import { Button } from '$lib/components/ui/button';
 	import SelectFilter from './SelectFilter.svelte';
-	import type { IMappedWish } from '$lib/types/wish';
+	import type { IWish } from '$lib/types/wish';
 	import DateRangeFilter from '$lib/components/tables/banner-history-table/DateRangeFilter.svelte';
 	import NameCell from '$lib/components/tables/banner-history-table/NameCell.svelte';
 	import DateCell from '$lib/components/tables/banner-history-table/DateCell.svelte';
@@ -46,20 +46,13 @@
 
 	const PAGE_SIZE = 25;
 
-	export let data: IMappedWish[];
-	data.forEach((wish) => {
-		wish.date = new Date(wish.date);
-	});
-	data.sort((a, b) => b.date.getTime() - a.date.getTime());
-	// once sorted rebuild ids
-	data.forEach((wish, index) => {
-		wish.number = data.length - index;
-	});
+	export let data: IWish[];
+	data.sort((a, b) => b.order - a.order);
 	const table = createTable(readable(data), {
 		page: addPagination({ initialPageSize: PAGE_SIZE }),
 		filter: addColumnFilters(),
 		sort: addSortBy({
-			initialSortKeys: [{ id: 'date', order: 'desc' }],
+			initialSortKeys: [{ id: 'order', order: 'desc' }],
 			toggleOrder: ['desc', 'asc']
 		}),
 		resize: addResizedColumns()
@@ -86,11 +79,11 @@
 
 	const columns = table.createColumns([
 		table.column({
-			accessor: 'number',
-			header: '#',
+			accessor: 'order',
+			header: 'Order',
 			plugins: {
 				resize: {
-					initialWidth: 64
+					initialWidth: 80
 				}
 			}
 		}),
