@@ -17,7 +17,7 @@
 	/** @type {import('../../../../.svelte-kit/types/src/routes/characters/[slug]').PageData} */
 	export let data: PageData;
 
-	const fetchCharacterData = data.backend.data.fetchCharacterData(data.characterKey);
+	$: fetchCharacterData = data.backend.data.fetchCharacterData($i18n.language, data.characterKey);
 
 	const card = S3Service.getCharacter(data.characterKey).gachaCard;
 	const splash = S3Service.getCharacter(data.characterKey).gachaSplash;
