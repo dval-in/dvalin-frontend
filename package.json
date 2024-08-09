@@ -33,7 +33,7 @@
 		"svelte-legos": "^0.2.3",
 		"svelte-persisted-store": "^0.11.0",
 		"svelte-sonner": "^0.3.27",
-		"svelte-ux": "^0.74.0",
+		"svelte-ux": "^0.74.3",
 		"sveltekit-superforms": "^2.16.1",
 		"tailwind-merge": "^2.4.0",
 		"tailwind-variants": "^0.2.1",
