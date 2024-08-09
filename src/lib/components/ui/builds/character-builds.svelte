@@ -8,7 +8,7 @@
 	import IconCirclet from '$lib/assets/Icon_Circlet_of_Logos.png';
 	import IconGoblet from '$lib/assets/Icon_Goblet_of_Eonothem.png';
 	import IconSands from '$lib/assets/Icon_Sands_of_Eon.png';
-	import { dataIndexStore } from '$lib/store/index_store.js';
+	import { dataIndex } from '$lib/store/index_store.js';
 	import { Tabs, TabsContent, TabsList, TabsTrigger } from '$lib/components/ui/tabs';
 	import i18n from '$lib/services/i18n';
 
@@ -81,8 +81,7 @@
 						</Text>
 						<WeaponItem
 							signature={true}
-							rarity={$dataIndexStore.weapon[getKey(build.weapons.signatureWeapon)]
-								.rarity}
+							rarity={$dataIndex.weapon[getKey(build.weapons.signatureWeapon)].rarity}
 							refine={1}
 							key={getKey(build.weapons.signatureWeapon)}
 						/>
@@ -90,7 +89,7 @@
 							{#each build.weapons.altWeapons as alt}
 								<WeaponItem
 									signature={false}
-									rarity={$dataIndexStore.weapon[getKey(alt)].rarity}
+									rarity={$dataIndex.weapon[getKey(alt)].rarity}
 									key={getKey(alt)}
 								/>
 							{/each}

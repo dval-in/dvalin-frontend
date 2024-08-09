@@ -16,47 +16,53 @@
 	import PullDistributionByMonth from '$lib/components/graphs/PullDistributionByMonth.svelte';
 	import DefaultLayout from '$lib/components/layout/DefaultLayout.svelte';
 	import type { IWish, IWishes } from '$lib/types/wish';
-	import { isWishBannerKey } from '$lib/types/keys/WishBannerKey';
+	import { isWishBannerKey, type WishBannerKey } from '$lib/types/keys/WishBannerKey';
 	import { isCharacterKey } from '$lib/types/keys/CharacterKey';
 	import { Card } from '$lib/components/ui/card';
 	import { CardContent, CardHeader } from '$lib/components/ui/card/index.js';
-	import { dataIndexStore } from '$lib/store/index_store';
+	import { dataIndex } from '$lib/store/index_store';
 	import i18n from '$lib/services/i18n';
 	import { userProfile } from '$lib/store/user_profile';
 	import { applicationState } from '$lib/store/application_state';
-	import { get } from 'svelte/store';
+	import { derived } from 'svelte/store';
 
 	interface IProcessedWish extends IWish {
 		name: string;
 	}
 
-	interface IProcessedWishes {
-		[key: string]: IProcessedWish[] | undefined;
-	}
+	type IProcessedWishes = {
+		[key in WishBannerKey]?: IProcessedWish[];
+	};
 
-	let wishData: IProcessedWishes = {};
+	const wishData = derived([userProfile, dataIndex], ([userProfileStore, dataIndexStore]) => {
+		const wishes: IWishes | undefined = userProfileStore.wishes;
+		const processedWishes: IProcessedWishes = {};
 
-	const wishes: IWishes | undefined = get(userProfile).wishes;
+		if (wishes !== undefined) {
+			Object.keys(wishes).forEach((key: string) => {
+				if (isWishBannerKey(key)) {
+					processedWishes[key] = wishes[key]?.map((wish: IWish): IProcessedWish => {
+						const index = isCharacterKey(wish.key)
+							? dataIndexStore.character[wish.key]
+							: dataIndexStore.weapon[wish.key];
 
-	if (wishes !== undefined) {
-		Object.keys(wishes).forEach((key: string) => {
-			if (isWishBannerKey(key)) {
-				wishData[key] = wishes[key]?.map((wish: IWish): IProcessedWish => {
-					const index = isCharacterKey(wish.key)
-						? $dataIndexStore.character[wish.key]
-						: $dataIndexStore.weapon[wish.key];
+						return {
+							...wish,
+							name: index !== undefined ? index.name : wish.key
+						};
+					});
+				}
+			});
+		}
 
-					return {
-						...wish,
-						name: index !== undefined ? index.name : key
-					};
-				});
-			}
-		});
-	}
+		return processedWishes;
+	});
 </script>
 
-<DefaultLayout title={$i18n.t('wish.overview.title')} showRequirements={wishes === undefined}>
+<DefaultLayout
+	title={$i18n.t('wish.overview.title')}
+	showRequirements={$userProfile.wishes === undefined}
+>
 	<svelte:fragment slot="titlebarActions">
 		<IconButton icon={mdiImport} href="/wish-statistics/import">
 			{$i18n.t('wish.overview.import_wish_button')}
@@ -82,31 +88,31 @@
 	</svelte:fragment>
 
 	<div class="flex flex-wrap gap-4">
-		{#if wishData?.CharacterEvent && wishData.CharacterEvent.length > 0}
+		{#if $wishData?.CharacterEvent && $wishData.CharacterEvent.length > 0}
 			<BannerOverviewCard
-				data={wishData.CharacterEvent}
+				data={$wishData.CharacterEvent}
 				icon={mdiAccount}
 				key={'CharacterEvent'}
 			/>
 		{/if}
-		{#if wishData?.WeaponEvent && wishData.WeaponEvent.length > 0}
+		{#if $wishData?.WeaponEvent && $wishData.WeaponEvent.length > 0}
 			<BannerOverviewCard
-				data={wishData.WeaponEvent}
+				data={$wishData.WeaponEvent}
 				icon={mdiSwordCross}
 				key={'WeaponEvent'}
 			/>
 		{/if}
-		{#if wishData?.Standard && wishData.Standard.length > 0}
-			<BannerOverviewCard data={wishData.Standard} icon={mdiInfinity} key={'Standard'} />
+		{#if $wishData?.Standard && $wishData.Standard.length > 0}
+			<BannerOverviewCard data={$wishData.Standard} icon={mdiInfinity} key={'Standard'} />
 		{/if}
-		{#if wishData?.Chronicled && wishData.Chronicled.length > 0}
-			<BannerOverviewCard data={wishData.Chronicled} icon={mdiBook} key={'Chronicled'} />
+		{#if $wishData?.Chronicled && $wishData.Chronicled.length > 0}
+			<BannerOverviewCard data={$wishData.Chronicled} icon={mdiBook} key={'Chronicled'} />
 		{/if}
-		{#if wishData?.Beginner && wishData.Beginner.length > 0}
-			<BannerOverviewCard data={wishData.Beginner} icon={mdiBaby} key={'Beginner'} />
+		{#if $wishData?.Beginner && $wishData.Beginner.length > 0}
+			<BannerOverviewCard data={$wishData.Beginner} icon={mdiBaby} key={'Beginner'} />
 		{/if}
 	</div>
-	{#if wishes}
+	{#if $userProfile.wishes}
 		<div class="flex flex-wrap gap-4">
 			<Card class="flex flex-1 flex-col gap-2">
 				<CardHeader>
