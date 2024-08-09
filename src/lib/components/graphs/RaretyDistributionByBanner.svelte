@@ -2,13 +2,14 @@
 	import { scaleOrdinal } from 'd3-scale';
 	import { Chart, Pie, Svg, Tooltip, TooltipItem } from 'layerchart';
 	import type { IMappedWish } from '$lib/types/wish';
+	import { derived, type Readable } from 'svelte/store';
 
-	export let wishData: IMappedWish[];
+	export let wishData: Readable<IMappedWish[]>;
 
-	const getData = () => {
+	const getData = derived([wishData], ([wishDataStore]) => {
 		const rarityCount: { [key: number]: number } = {};
 
-		wishData.forEach((wish: IMappedWish) => {
+		wishDataStore.forEach((wish: IMappedWish) => {
 			if (rarityCount[wish.rarity] === undefined) {
 				rarityCount[wish.rarity] = 0;
 			}
@@ -21,7 +22,7 @@
 				return { rarity, value: rarityCount[rarity] };
 			})
 			.sort((a, b) => a.rarity - b.rarity);
-	};
+	});
 
 	const colorKeys = [3, 4, 5];
 	const keyColors = ['#5E93B2', '#7B5C90', '#FFB13F'];
@@ -29,7 +30,7 @@
 
 <div class="h-[300px] min-w-[300px] w-full">
 	<Chart
-		data={getData()}
+		data={$getData}
 		let:tooltip
 		r="rarity"
 		rDomain={colorKeys}
@@ -46,7 +47,7 @@
 			<TooltipItem
 				format="percent"
 				label="percent"
-				value={data.value / wishData.length}
+				value={data.value / $wishData.length}
 				valueAlign="right"
 			/>
 		</Tooltip>

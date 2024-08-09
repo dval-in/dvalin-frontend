@@ -7,7 +7,7 @@ const defaultValues: { character: CharacterIndex; weapon: WeaponIndex } = {
 	weapon: {}
 };
 
-export const dataIndexStore = persisted('dataIndex', defaultValues, {
+export const dataIndex = persisted('dataIndex', defaultValues, {
 	storage: 'local',
 	syncTabs: true
 });

@@ -14,25 +14,26 @@
 	} from 'layerchart';
 	import { stack } from 'd3-shape';
 	import { flatten } from 'svelte-ux/utils/array';
-	import type { IMappedWish, IMappedWishes } from '$lib/types/wish';
+	import type { IMappedWish } from '$lib/types/wish';
 	import type { WishBannerKey } from '$lib/types/keys/WishBannerKey';
 	import { mdiStar } from '@mdi/js';
 	import Icon from '$lib/components/ui/icon/icon.svelte';
 	import Text from '$lib/components/typography/Text.svelte';
 	import { applicationState } from '$lib/store/application_state';
+	import { derived, type Readable } from 'svelte/store';
 
-	export let data: IMappedWishes;
+	export let data: Readable<IProcessedWishes>;
 
 	const keys = ['5', '4', '3'];
 	const colorKeys = ['#5E93B2', '#7B5C90', '#FFB13F'];
 
-	const getMonthlyData = () => {
+	const getMonthlyData = derived([data], ([dataStore]) => {
 		let pullsByMonth: { [key: string]: { [key: string]: number } } = {};
 
 		const bannerHistoryData: IMappedWish[] = [];
 
-		Object.keys(data).forEach((key: string) => {
-			const wishes = data[key as WishBannerKey];
+		Object.keys(dataStore).forEach((key: string) => {
+			const wishes = dataStore[key as WishBannerKey];
 
 			bannerHistoryData.push(...(wishes !== undefined ? wishes : []));
 		});
@@ -58,7 +59,8 @@
 				})
 				.sort((a, b) => new Date(a.date).valueOf() - new Date(b.date).valueOf())
 		);
-	};
+	});
+
 	const hexToHSL = (hex: string) => {
 		// Remove the # if present
 		hex = hex.replace(/^#/, '');
@@ -97,6 +99,7 @@
 
 		return `${h}, ${s}%, ${l}%`;
 	};
+
 	const formatDateLabel = (d: string) =>
 		new Date(d).toLocaleDateString($applicationState.settings.locale, {
 			month: 'short',
@@ -106,8 +109,8 @@
 
 <div class="h-[350px] w-full">
 	<Chart
-		data={getMonthlyData()}
-		flatData={flatten(getMonthlyData())}
+		data={$getMonthlyData}
+		flatData={flatten($getMonthlyData)}
 		let:height
 		let:padding
 		let:tooltip

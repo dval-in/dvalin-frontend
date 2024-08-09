@@ -4,7 +4,9 @@ import type { UserProfile } from '$lib/types/user_profile';
 import { applicationState } from '$lib/store/application_state';
 import { derived } from 'svelte/store';
 
-type FetchUserProfileResponse = { state: 'SUCCESS'; data: UserProfile };
+type FetchUserProfileResponse =
+	| { state: 'NO_GENSHIN_ACCOUNTS' }
+	| { state: 'SUCCESS'; data: UserProfile };
 
 export class BackendUserService {
 	private readonly baseUrl: string;
