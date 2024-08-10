@@ -22,21 +22,26 @@ export const load = async () => {
 
 	if (browser) {
 		backend.user.fetchUserProfile().subscribe((response) => {
-			if (response.status === 'success' && response.data.state === 'SUCCESS') {
-				userProfile.update((currentProfile) => ({
-					...currentProfile,
-					...response.data.data,
-					lastUpdated: new Date()
-				}));
+			if (response.status === 'success') {
+				if (response.data.state === 'NO_GENSHIN_ACCOUNTS') {
+					goto('/settings/firstlogin');
+				}
+
+				if (response.data.state === 'SUCCESS') {
+					const serverProfile = response.data.data;
+
+					userProfile.update((localProfile) => ({
+						...localProfile,
+						...serverProfile,
+						lastUpdated: new Date()
+					}));
+				}
 			}
 		});
 
 		const socket = io(import.meta.env.VITE_BACKEND_URL, { withCredentials: true });
 
 		socket.on('authenticationState', (authenticationState: boolean) => {
-			if (authenticationState && get(userProfile).account.uid < 10000) {
-				goto('/settings/firstlogin');
-			}
 			applicationState.update((state) => ({
 				...state,
 				isAuthenticated: authenticationState

@@ -17,7 +17,7 @@
 		PrevButton as PaginationPrevButton,
 		Root as PaginationRoot
 	} from '$lib/components/ui/pagination';
-	import { readable } from 'svelte/store';
+	import { type Readable } from 'svelte/store';
 	import { createRender, createTable, Render, Subscribe } from 'svelte-headless-table';
 	import {
 		mdiAccount,
@@ -46,9 +46,9 @@
 
 	const PAGE_SIZE = 25;
 
-	export let data: IWish[];
-	data.sort((a, b) => b.order - a.order);
-	const table = createTable(readable(data), {
+	export let data: Readable<IWish[]>;
+
+	const table = createTable(data, {
 		page: addPagination({ initialPageSize: PAGE_SIZE }),
 		filter: addColumnFilters(),
 		sort: addSortBy({
@@ -238,7 +238,7 @@
 										class={`p-2  ${cell.id === 'key' ? 'text-start' : 'text-center'} `}
 									>
 										{#if cell.id === 'number'}
-											{data.length - parseInt(cell.row.id)}
+											{$data.length - parseInt(cell.row.id)}
 										{:else}
 											<Render of={cell.render()} />
 										{/if}
