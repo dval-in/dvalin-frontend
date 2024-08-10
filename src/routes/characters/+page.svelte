@@ -22,7 +22,7 @@
 	import Searchbar from '$lib/components/ui/searchbar/Searchbar.svelte';
 	import S3Service from '$lib/services/s3';
 	import DefaultLayout from '$lib/components/layout/DefaultLayout.svelte';
-	import { dataIndexStore } from '$lib/store/index_store';
+	import { dataIndex } from '$lib/store/index_store';
 	import i18n from '$lib/services/i18n';
 	import { userProfile } from '$lib/store/user_profile';
 	import { derived, get, writable } from 'svelte/store';
@@ -117,7 +117,7 @@
 	};
 
 	const transformedCharacterStore = derived(
-		[userProfile, dataIndexStore],
+		[userProfile, dataIndex],
 		([userProfile, dataIndexStore]) => {
 			return Object.keys(dataIndexStore.character).map((key) => {
 				const character = dataIndexStore.character[key];
