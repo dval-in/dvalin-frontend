@@ -35,7 +35,7 @@
 		"svelte-sonner": "^0.3.27",
 		"svelte-ux": "^0.74.3",
 		"sveltekit-superforms": "^2.16.1",
-		"tailwind-merge": "^2.4.0",
+		"tailwind-merge": "^2.5.0",
 		"tailwind-variants": "^0.2.1",
 		"tw-colors": "^3.3.1",
 		"vaul-svelte": "^0.3.2",
