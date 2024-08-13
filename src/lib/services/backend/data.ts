@@ -47,20 +47,20 @@ export class BackendDataService {
 		);
 	}
 
-	fetchCharacterData(character: CharacterKey) {
+	fetchCharacterData(lang: string, character: CharacterKey) {
 		return createQuery<Character>(
 			{
-				queryKey: ['fetchCharacterData', character],
+				queryKey: ['fetchCharacterData', lang, character],
 				staleTime: 6 * 60 * 60 * 1000, //6h
 				queryFn: async () =>
-					await backendFetch<Character>(this.getCharacterDataUrl(character))
+					await backendFetch<Character>(this.getCharacterDataUrl(lang, character))
 			},
 			this.queryClient
 		);
 	}
 
-	getCharacterDataUrl(character: CharacterKey) {
-		return `${this.baseUrl}/Character/${character}?lang=${get(i18n).language}`;
+	getCharacterDataUrl(lang: string, character: CharacterKey) {
+		return `${this.baseUrl}/Character/${character}?lang=${lang}`;
 	}
 
 	fetchWeaponData(weapon: WeaponKey) {

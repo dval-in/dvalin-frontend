@@ -9,7 +9,7 @@
 	import { QueryClientProvider } from '@tanstack/svelte-query';
 	import { userProfile } from '$lib/store/user_profile';
 	import DefaultLayout from '$lib/components/layout/DefaultLayout.svelte';
-	import { dataIndexStore } from '$lib/store/index_store';
+	import { dataIndex } from '$lib/store/index_store';
 	import type { LayoutData } from '../../.svelte-kit/types/src/routes/$types';
 	import { onMount } from 'svelte';
 
@@ -19,13 +19,13 @@
 	$: webManifestLink = pwaInfo ? pwaInfo.webManifest.href : '';
 
 	const fetchDataIndex = data.backend.data.fetchDataIndex();
-	let isLoading = JSON.stringify(get(dataIndexStore).weapon) === '{}';
+	let isLoading = JSON.stringify(get(dataIndex).weapon) === '{}';
 
 	fetchDataIndex.subscribe((response) => {
 		if (response.status === 'success') {
 			isLoading = false;
 			response.data.weapon['Unknown3Star'] = { name: 'Unknown 3 star', rarity: 3 };
-			dataIndexStore.set(response.data);
+			dataIndex.set(response.data);
 		}
 	});
 

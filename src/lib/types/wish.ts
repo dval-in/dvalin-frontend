@@ -7,10 +7,6 @@ export type IWishes = {
 	[key in WishBannerKey]?: IWish[];
 };
 
-export type IMappedWishes = {
-	[key in WishBannerKey]?: IMappedWish[];
-};
-
 export type IWish = {
 	type: 'Weapon' | 'Character';
 	number: number;
@@ -19,15 +15,5 @@ export type IWish = {
 	pity: number;
 	banner: BannerKey;
 	rarity: number;
-};
-
-export type IMappedWish = {
-	type: 'Weapon' | 'Character';
-	number: number;
-	key: WeaponKey | CharacterKey;
-	date: Date;
-	pity: number;
-	banner: BannerKey;
-	name: string;
-	rarity: number;
+	order: number;
 };

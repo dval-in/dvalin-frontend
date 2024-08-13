@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Text from '$lib/components/typography/Text.svelte';
 	import RaretyDistributionByBanner from '$lib/components/graphs/RaretyDistributionByBanner.svelte';
-	import type { IMappedWish, IWish } from '$lib/types/wish';
+	import type { IWish } from '$lib/types/wish';
 	import DefaultLayout from '$lib/components/layout/DefaultLayout.svelte';
 	import { isCharacterKey } from '$lib/types/keys/CharacterKey';
 	import BannerHistoryTable from '$lib/components/tables/banner-history-table/BannerHistoryTable.svelte';
@@ -10,49 +10,59 @@
 	import InfoCell from '$lib/components/ui/info-cell/InfoCell.svelte';
 	import { mdiMoonWaningCrescent } from '@mdi/js';
 	import Icon from '$lib/components/ui/icon/icon.svelte';
-	import { dataIndexStore } from '$lib/store/index_store';
 	import i18n from '$lib/services/i18n';
 	import { userProfile } from '$lib/store/user_profile';
 	import type { PageData } from '../../../../.svelte-kit/types/src/routes/wish-statistics/[slug]/$types';
+	import { dataIndex } from '$lib/store/index_store';
+	import { derived } from 'svelte/store';
 
-	/** @type {import('../../../../.svelte-kit/types/src/routes/wish-statistics/[slug]/$types').PageData} */
 	export let data: PageData;
-	let wishData: IMappedWish[] = [];
-	const wishes: IWish[] | undefined = $userProfile.wishes?.[data.pageType];
-	let fiveStars = [];
-	let fourStars = [];
-	let threeStars = [];
-	let fiveStarPity = 0;
-	let fourStarPity = 0;
 
-	if (wishes !== undefined) {
-		wishData = wishes.map((wish: IWish) => {
-			const index = isCharacterKey(wish.key)
-				? $dataIndexStore.character[wish.key]
-				: $dataIndexStore.weapon[wish.key];
+	const wishData = derived([userProfile], ([userProfileStore]) => {
+		const wishes: IWish[] | undefined = userProfileStore.wishes?.[data.pageType];
 
-			return {
-				...wish,
-				name: index !== undefined ? index.name : wish.key,
-				rarity: index !== undefined ? index.rarity : 0
-			};
-		});
+		if (wishes !== undefined) {
+			return wishes.map((wish: IWish) => {
+				const index = isCharacterKey(wish.key)
+					? $dataIndex.character[wish.key]
+					: $dataIndex.weapon[wish.key];
 
-		fiveStars = wishData
-			.filter((wish: IMappedWish) => wish.rarity === 5)
-			.sort((a, b) => b.number - a.number);
+				return {
+					...wish,
+					name: index !== undefined ? index.name : wish.key,
+					rarity: index !== undefined ? index.rarity : 0
+				};
+			});
+		} else {
+			return [];
+		}
+	});
 
-		fourStars = wishData.filter((wish: IMappedWish) => wish.rarity === 4);
-		threeStars = wishData.filter((wish: IMappedWish) => wish.rarity === 3);
-		fiveStarPity =
-			wishData.findIndex((wish) => wish.rarity === 5) === -1
-				? wishData.length
-				: wishData.findIndex((wish) => wish.rarity === 5);
-		fourStarPity =
-			wishData.findIndex((wish) => wish.rarity === 4) === -1
-				? wishData.length
-				: wishData.findIndex((wish) => wish.rarity === 4);
-	}
+	const fiveStars = derived([wishData], ([wishDataStore]) => {
+		return wishDataStore
+			.filter((wish: IWish) => wish.rarity === 5)
+			.sort((a: IWish, b: IWish) => b.order - a.order);
+	});
+
+	const fourStars = derived([wishData], ([wishDataStore]) => {
+		return wishDataStore.filter((wish: IWish) => wish.rarity === 4);
+	});
+
+	const threeStars = derived([wishData], ([wishDataStore]) => {
+		return wishDataStore.filter((wish: IWish) => wish.rarity === 3);
+	});
+
+	const fiveStarPity = derived([wishData], ([wishDataStore]) => {
+		return wishDataStore.findIndex((wish) => wish.rarity === 5) === -1
+			? wishDataStore.length
+			: wishDataStore.findIndex((wish) => wish.rarity === 5);
+	});
+
+	const fourStarPity = derived([wishData], ([wishDataStore]) => {
+		return wishDataStore.findIndex((wish) => wish.rarity === 4) === -1
+			? wishDataStore.length
+			: wishDataStore.findIndex((wish) => wish.rarity === 4);
+	});
 </script>
 
 <DefaultLayout title={$i18n.t('wish.detailed.title.' + data.pageType)}>
@@ -63,36 +73,36 @@
 					class="bg-tertiary"
 					title={$i18n.t('wish.detailed.info.total_pull_count')}
 				>
-					<Text type="h4">{wishData.length}</Text>
+					<Text type="h4">{$wishData.length}</Text>
 
 					<svelte:fragment slot="tooltip">
 						<Icon path={mdiMoonWaningCrescent} />
-						<Text type="h4">{wishData.length * 160}</Text>
+						<Text type="h4">{$wishData.length * 160}</Text>
 					</svelte:fragment>
 				</InfoCell>
 				<InfoCell
 					class="bg-tertiary"
 					title={$i18n.t('wish.detailed.info.total_pull_percentage')}
 				>
-					{#if fiveStars.length > 0}
+					{#if $fiveStars.length > 0}
 						<Text class="text-fivestar" type="h4">
-							{((fiveStars.length / wishData.length) * 100).toFixed(1)}
+							{(($fiveStars.length / $wishData.length) * 100).toFixed(1)}
 						</Text>
 					{/if}
-					{#if fourStars.length > 0}
+					{#if $fourStars.length > 0}
 						<Text class="text-fourstar" type="h4">
-							{((fourStars.length / wishData.length) * 100).toFixed(1)}
+							{(($fourStars.length / $wishData.length) * 100).toFixed(1)}
 						</Text>
 					{/if}
-					{#if threeStars.length > 0}
+					{#if $threeStars.length > 0}
 						<Text class="text-threestar" type="h4">
-							{((threeStars.length / wishData.length) * 100).toFixed(1)}
+							{(($threeStars.length / $wishData.length) * 100).toFixed(1)}
 						</Text>
 					{/if}
 				</InfoCell>
 				<InfoCell class="bg-tertiary" title={$i18n.t('wish.detailed.info.pity')}>
-					<Text type="h4">{fiveStarPity}</Text>
-					<Text type="h4">{fourStarPity}</Text>
+					<Text type="h4">{$fiveStarPity}</Text>
+					<Text type="h4">{$fourStarPity}</Text>
 				</InfoCell>
 			</div>
 
