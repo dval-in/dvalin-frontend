@@ -22,7 +22,7 @@
 	const client = useQueryClient();
 
 	const fetchHoyoWishHistory = () => {
-		if (!wishURL.includes('e20190909gacha-v3')) {
+		if (!wishURL.includes('gacha_id')) {
 			toast.error('Wrong url');
 			return;
 		}
