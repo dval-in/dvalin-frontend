@@ -60,8 +60,8 @@ importers:
         specifier: ^2.2.2
         version: 2.2.2(i18next@23.12.2)(svelte@4.2.18)
       svelte-legos:
-        specifier: ^0.2.3
-        version: 0.2.3(svelte@4.2.18)
+        specifier: ^0.2.4
+        version: 0.2.4(svelte@4.2.18)
       svelte-persisted-store:
         specifier: ^0.11.0
         version: 0.11.0(svelte@4.2.18)
@@ -3674,8 +3674,8 @@ packages:
     peerDependencies:
       svelte: ^4.0.0
 
-  svelte-legos@0.2.3:
-    resolution: {integrity: sha512-HuFzPC7of2ZErJaIoxFRu2Z5Rk7VUhlkAfqWoXpO1S9CNSByMakzTLVsM0/VDE6jmCG5JXLqvjND+rsV6nkOHQ==}
+  svelte-legos@0.2.4:
+    resolution: {integrity: sha512-9L6Y29Z+b9qxcEdfTEDOZ97XeXPu/vdPP01XllCeP6AngjgY+39Y4jwtP62HWZAbm3nkyP0bkkweFoEElwrWgQ==}
     peerDependencies:
       svelte: ^4.0.0
 
@@ -7980,7 +7980,7 @@ snapshots:
     dependencies:
       svelte: 4.2.18
 
-  svelte-legos@0.2.3(svelte@4.2.18):
+  svelte-legos@0.2.4(svelte@4.2.18):
     dependencies:
       canvas-confetti: 1.9.3
       prism-svelte: 0.5.0
