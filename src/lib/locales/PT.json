@@ -9,7 +9,7 @@
 		"action.no": "Não",
 		"action.confirm": "Confirmar",
 		"action.cancel": "Cancel",
-		"action.sort_by": "Organizar por",
+		"action.sort_by": "Organizar por {{sortFN}}",
 		"action.filter_by": "Filtrar por",
 		"navigation.category.collection": "Sua coleção",
 		"navigation.category.trackers": "Progresso",
