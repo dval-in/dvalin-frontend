@@ -69,8 +69,8 @@ importers:
         specifier: ^0.3.27
         version: 0.3.27(svelte@4.2.18)
       svelte-ux:
-        specifier: ^0.74.4
-        version: 0.74.4(@babel/core@7.24.3)(postcss-load-config@4.0.2(postcss@8.4.41))(postcss@8.4.41)(sass@1.77.8)(svelte@4.2.18)
+        specifier: ^0.74.6
+        version: 0.74.6(@babel/core@7.24.3)(postcss-load-config@4.0.2(postcss@8.4.41))(postcss@8.4.41)(sass@1.77.8)(svelte@4.2.18)
       sveltekit-superforms:
         specifier: ^2.17.0
         version: 2.17.0(@sveltejs/kit@2.5.22(@sveltejs/vite-plugin-svelte@3.1.1(svelte@4.2.18)(vite@5.4.1(@types/node@20.11.30)(sass@1.77.8)(terser@5.30.0)))(svelte@4.2.18)(vite@5.4.1(@types/node@20.11.30)(sass@1.77.8)(terser@5.30.0)))(svelte@4.2.18)
@@ -3736,8 +3736,8 @@ packages:
     peerDependencies:
       svelte: ^4.0.0
 
-  svelte-ux@0.74.4:
-    resolution: {integrity: sha512-LQ4sCIL0VNqIOHAAvAQr3X8mt0w826+izPYGkQupZ/Qcuaw/6DtlMf7S/pCctrrMNCga1dGAi6Bxz5KDJ4j3dQ==}
+  svelte-ux@0.74.6:
+    resolution: {integrity: sha512-F8q5uvM9gdVJJu4GKQ91ODPukPiY+935gVrA1897q8T/9X4xejNJ6GjsU24n8d0tThrx96S1NBKvQZNk9G4DBg==}
     peerDependencies:
       svelte: ^3.56.0 || ^4.0.0 || ^5.0.0-next.120
 
@@ -6995,7 +6995,7 @@ snapshots:
       posthog-js: 1.157.1
       shapefile: 0.6.6
       svelte: 4.2.18
-      svelte-ux: 0.74.4(@babel/core@7.24.3)(postcss-load-config@4.0.2(postcss@8.4.41))(postcss@8.4.41)(sass@1.77.8)(svelte@4.2.18)
+      svelte-ux: 0.74.6(@babel/core@7.24.3)(postcss-load-config@4.0.2(postcss@8.4.41))(postcss@8.4.41)(sass@1.77.8)(svelte@4.2.18)
       topojson-client: 3.1.0
     transitivePeerDependencies:
       - '@babel/core'
@@ -8010,7 +8010,7 @@ snapshots:
     dependencies:
       svelte: 4.2.18
 
-  svelte-ux@0.74.4(@babel/core@7.24.3)(postcss-load-config@4.0.2(postcss@8.4.41))(postcss@8.4.41)(sass@1.77.8)(svelte@4.2.18):
+  svelte-ux@0.74.6(@babel/core@7.24.3)(postcss-load-config@4.0.2(postcss@8.4.41))(postcss@8.4.41)(sass@1.77.8)(svelte@4.2.18):
     dependencies:
       '@floating-ui/dom': 1.6.10
       '@fortawesome/fontawesome-common-types': 6.6.0
