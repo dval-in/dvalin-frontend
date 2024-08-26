@@ -12,7 +12,7 @@
 	import Searchbar from '$lib/components/ui/searchbar/Searchbar.svelte';
 	import S3Service from '$lib/services/s3';
 	import DefaultLayout from '$lib/components/layout/DefaultLayout.svelte';
-	// import type { WeaponTypes } from '$lib/types/weapon';
+	import type { WeaponTypes } from '$lib/types/weapon';
 	import { dataIndexStore } from '$lib/store/index_store';
 	import i18n from '$lib/services/i18n';
 	import { userProfile } from '$lib/store/user_profile';
@@ -34,7 +34,7 @@
 	import Icon from '$lib/components/ui/icon/icon.svelte';
 
 	type Sorts = 'Name' | 'Refinement';
-	type Filters = 'weapon' | 'rarity' | 'owned';
+	type Filters = 'type' | 'rarity' | 'owned';
 
 	// Stores for sorting and filtering
 	const sortStore = writable<{ sortFn: Sorts; order: 'asc' | 'desc' }>({
@@ -54,22 +54,22 @@
 
 	const checkedStore = writable<{ [key: string]: boolean }>({});
 
-	// const transformIntoWeapons = (weapon: string): WeaponTypes => {
-	// 	switch (weapon) {
-	// 		case 'Sword':
-	// 			return 'sword';
-	// 		case 'Claymore':
-	// 			return 'claymore';
-	// 		case 'Polearm':
-	// 			return 'polearm';
-	// 		case 'Catalyst':
-	// 			return 'catalyst';
-	// 		case 'Bow':
-	// 			return 'bow';
-	// 		default:
-	// 			return 'sword';
-	// 	}
-	// };
+	const transformIntoWeapons = (weapon: string): WeaponTypes => {
+		switch (weapon) {
+			case 'Sword':
+				return 'sword';
+			case 'Claymore':
+				return 'claymore';
+			case 'Polearm':
+				return 'polearm';
+			case 'Catalyst':
+				return 'catalyst';
+			case 'Bow':
+				return 'bow';
+			default:
+				return 'sword';
+		}
+	};
 
 	// Derived store to transform weapon data based on sorting and filtering
 	const transformedWeaponStore = derived(
@@ -85,7 +85,7 @@
 					obtained,
 					link: `/weapons/${key}`,
 					name: weapon.name,
-					// type: transformIntoWeapons(weapon.),
+					type: transformIntoWeapons(weapon.type),
 					img: S3Service.getWeapon(key).icon,
 					rarity: weapon.rarity
 				};
@@ -104,6 +104,9 @@
 
 			const filteredWeapons = weapons.filter((weapon) => {
 				for (const [filterFn, values] of Object.entries(filterGroups)) {
+					if (filterFn === 'type' && !values.has(weapon.type)) {
+						return false;
+					}
 					if (filterFn === 'rarity' && !values.has(weapon.rarity)) {
 						return false;
 					}
@@ -220,7 +223,7 @@
 					{#each weapons as { name, icon, label }}
 						<DropdownMenuItem
 							on:click={() => {
-								setFilterStore('weapon', name);
+								setFilterStore('type', name);
 								toggleChecked(name);
 							}}
 							class={`p-0 rounded-lg border cursor-pointer bg-tertiary text-text shadow-sm justify-center sm:p-2 gap-2 hover:border-primary transition duration-300 ${
@@ -305,7 +308,7 @@
 				level={1}
 				ascencion={0}
 				refinement={5}
-				type={'sword'}
+				type={weapon.type}
 				rarity={weapon.rarity}
 				obtained={true}
 				location={'Xiao'}

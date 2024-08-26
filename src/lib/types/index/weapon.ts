@@ -4,5 +4,6 @@ export type WeaponIndex = {
 	[key in WeaponKey]: {
 		name: string;
 		rarity: number;
+		type: string;
 	};
 };
