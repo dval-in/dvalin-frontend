@@ -1,15 +1,15 @@
 <script lang="ts">
 	import { scaleOrdinal } from 'd3-scale';
 	import { Chart, Pie, Svg, Tooltip, TooltipItem } from 'layerchart';
-	import type { IMappedWish } from '$lib/types/wish';
+	import type { IWish } from '$lib/types/wish';
 	import { derived, type Readable } from 'svelte/store';
 
-	export let wishData: Readable<IMappedWish[]>;
+	export let wishData: Readable<IWish[]>;
 
 	const getData = derived([wishData], ([wishDataStore]) => {
 		const rarityCount: { [key: number]: number } = {};
 
-		wishDataStore.forEach((wish: IMappedWish) => {
+		wishDataStore.forEach((wish: IWish) => {
 			if (rarityCount[wish.rarity] === undefined) {
 				rarityCount[wish.rarity] = 0;
 			}

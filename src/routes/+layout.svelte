@@ -18,16 +18,25 @@
 
 	$: webManifestLink = pwaInfo ? pwaInfo.webManifest.href : '';
 
-	const fetchDataIndex = data.backend.data.fetchDataIndex();
-	let isLoading = JSON.stringify(get(dataIndex).weapon) === '{}';
+	const fetchCharacterDataIndex = data.backend.data.fetchCharacterDataIndex();
+	const fetchWeaponDataIndex = data.backend.data.fetchWeaponDataIndex();
+	let isLoading =
+		JSON.stringify(get(dataIndex).character) === '{}' ||
+		JSON.stringify(get(dataIndex).weapon) === '{}';
 
-	fetchDataIndex.subscribe((response) => {
-		if (response.status === 'success') {
+	$: {
+		let characterIndex = $fetchCharacterDataIndex;
+		let weaponIndex = $fetchWeaponDataIndex;
+		if (characterIndex.status === 'success' && weaponIndex.status === 'success') {
+			weaponIndex.data['Unknown3Star'] = { name: 'Unknown 3 star', rarity: 3 };
+
+			dataIndex.set({
+				character: characterIndex.data,
+				weapon: weaponIndex.data
+			});
 			isLoading = false;
-			response.data.weapon['Unknown3Star'] = { name: 'Unknown 3 star', rarity: 3 };
-			dataIndex.set(response.data);
 		}
-	});
+	}
 
 	onMount(() => {
 		document.body.classList.add(get(applicationState).settings.theme);

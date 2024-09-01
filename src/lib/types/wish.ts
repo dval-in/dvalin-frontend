@@ -17,3 +17,11 @@ export type IWish = {
 	rarity: number;
 	order: number;
 };
+
+export type INamedWishes = {
+	[key in WishBannerKey]?: INamedWish[];
+};
+
+export interface INamedWish extends IWish {
+	name: string;
+}
