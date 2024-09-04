@@ -4,6 +4,7 @@
 	import { cn } from '$lib/utils';
 	import { Button } from '$lib/components/ui/button';
 	import { RangeCalendar } from '$lib/components/ui/range-calendar';
+	import { Popover, PopoverContent, PopoverTrigger } from '$lib/components/ui/popover';
 
 	const df = new DateFormatter('en-US', {
 		dateStyle: 'medium'
@@ -14,8 +15,8 @@
 </script>
 
 <div class="grid gap-2">
-	<Popover.Root openFocus>
-		<Popover.Trigger asChild let:builder>
+	<Popover openFocus>
+		<PopoverTrigger asChild let:builder>
 			<Button
 				builders={[builder]}
 				class={cn(
@@ -36,9 +37,9 @@
 					Date
 				{/if}
 			</Button>
-		</Popover.Trigger>
-		<Popover.Content align="start" class="w-auto p-0">
+		</PopoverTrigger>
+		<PopoverContent align="start" class="w-auto p-0">
 			<RangeCalendar bind:value initialFocus numberOfMonths={1} {onValueChange} />
-		</Popover.Content>
-	</Popover.Root>
+		</PopoverContent>
+	</Popover>
 </div>

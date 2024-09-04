@@ -19,3 +19,11 @@ export type IWish = {
 	isFeatured: boolean;
 	wonFiftyFifty: boolean;
 };
+
+export type INamedWishes = {
+	[key in WishBannerKey]?: INamedWish[];
+};
+
+export interface INamedWish extends IWish {
+	name: string;
+}

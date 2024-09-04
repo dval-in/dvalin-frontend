@@ -3,7 +3,14 @@
 	import Text from '$lib/components/typography/Text.svelte';
 	import { applicationState } from '$lib/store/application_state';
 	import IconButton from '$lib/components/ui/icon-button/IconButton.svelte';
-	import { mdiDelete, mdiExport, mdiImport, mdiAlert, mdiMicrosoft } from '@mdi/js';
+	import {
+		mdiAlert,
+		mdiContentSave,
+		mdiDelete,
+		mdiExport,
+		mdiImport,
+		mdiMicrosoft
+	} from '@mdi/js';
 	import type { Theme } from '$lib/types/theme';
 	import { Button } from '$lib/components/ui/button';
 	import DefaultLayout from '$lib/components/layout/DefaultLayout.svelte';
@@ -11,11 +18,9 @@
 	import { userProfile } from '$lib/store/user_profile';
 	import S3Service from '$lib/services/s3';
 	import BackendService from '$lib/services/backend';
-	import { siGoogle, siDiscord, siGithub, type SimpleIcon } from 'simple-icons';
+	import { siDiscord, siGithub, siGoogle, type SimpleIcon } from 'simple-icons';
 	import Icon from '$lib/components/ui/icon/icon.svelte';
 	import Card from '$lib/components/ui/card/card.svelte';
-	import { CardHeader, CardTitle, CardContent } from '$lib/components/ui/card';
-	import { Checkbox } from '$lib/components/ui/checkbox';
 	import { Label } from '$lib/components/ui/label';
 	import {
 		Dialog,
@@ -26,6 +31,8 @@
 		DialogTrigger
 	} from '$lib/components/ui/dialog';
 	import { nav } from '$lib/utils/nav_helper';
+	import { Switch } from '$lib/components/ui/switch';
+
 	const backend = BackendService.getInstance();
 	const createConfigMutation = backend.user.updateConfig();
 	const deleteProfileMutation = backend.user.deleteUserProfile();
@@ -58,9 +65,7 @@
 		element.click();
 		document.body.removeChild(element);
 	};
-	const userProfil = $userProfile;
-	const user = userProfil.account;
-	const settings = userProfil.config;
+
 	// Function to change theme to selected
 	function changeThemeTo(themeName: Theme) {
 		applicationState.update((state) => {
@@ -91,67 +96,71 @@
 </script>
 
 <DefaultLayout title={$i18n.t('settings.overview.title')}>
+	<svelte:fragment slot="titlebarActions">
+		<IconButton icon={mdiContentSave} on:click={handleSave}>
+			{$i18n.t('settings.save_settings')}
+		</IconButton>
+	</svelte:fragment>
+
 	{#if $applicationState.isAuthenticated}
-		<div class="grid grid-cols-3 gap-4">
-			<Card class=" col-span-2 overflow-hidden relative">
+		<div class="flex flex-1 gap-4 flex-wrap max-sm:flex-col">
+			<Card
+				class="p-0 sm:p-0 flex flex-1 relative flex-wrap object-cover bg-no-repeat bg-cover bg-center"
+				style={`background-image: url('${bgImageUrl}');`}
+			>
 				<div
-					class="absolute inset-0 bg-cover bg-center z-0"
-					style="background-image: url('{bgImageUrl}');"
-				></div>
-				<div
-					class="relative z-10 h-full grid grid-cols-2 items-center bg-black bg-opacity-50 text-white p-6"
+					class="flex flex-1 flex-col z-10 items-center text-white p-2 sm:p-4 gap-6 bg-neutral bg-opacity-40"
 				>
-					<CardHeader>
-						<CardTitle class="text-5xl font-bold">{user.name}</CardTitle>
-						<p class="text-sm opacity-75">UID: {user.uid}</p>
-					</CardHeader>
-					<CardContent class="space-y-2">
-						<p>
-							<span class="font-semibold">Server:</span>
-							{user.server}
-						</p>
-						<p>
-							<span class="font-semibold">Adventure Rank:</span>
-							{user.ar}
-						</p>
-						<p>
-							<span class="font-semibold">World Level:</span>
-							{user.wl}
-						</p>
-						<p class="italic">"{user.signature}"</p>
-					</CardContent>
+					<div class="flex">
+						<img src={bgImageUrl} class="size-52 rounded-full object-cover" />
+					</div>
+					<div class="flex gap-6">
+						<div class="flex flex-col gap-2">
+							<div>
+								<Text type="h1">{$userProfile.account.name}</Text>
+								<Text type="small">UID: {$userProfile.account.uid}</Text>
+							</div>
+							<Text type="p">"{$userProfile.account.signature}"</Text>
+						</div>
+						<div class="flex gap-2 flex-col">
+							<div>
+								<Text type="h4">Server:</Text>
+								<Text type="p">{$userProfile.account.server}</Text>
+							</div>
+							<div>
+								<Text type="h4">Adventure Rank:</Text>
+								<Text type="p">{$userProfile.account.ar}</Text>
+							</div>
+							<div>
+								<Text type="h4">World Level:</Text>
+								<Text type="p">{$userProfile.account.wl}</Text>
+							</div>
+						</div>
+					</div>
 				</div>
 			</Card>
-			<div>
-				<Text
-					class={`${$applicationState.settings.theme === 'dark' ? 'text-text' : 'text-neutral'}`}
-					type="h3"
-				>
-					Profiles
-				</Text>
-				<div class="flex flex-col">
-					<Button>
-						<Text type="p">{`${user.name} - ${user.uid}`}</Text>
-					</Button>
-				</div>
+			<div class="flex flex-1 flex-col">
+				<Text type="h3">Profiles</Text>
+				<Button>
+					<Text type="p">
+						{`${$userProfile.account.name} - ${$userProfile.account.uid}`}
+					</Text>
+				</Button>
 			</div>
 		</div>
 		<div class="flex flex-col gap-2">
 			<Text type="h3">{$i18n.t('settings.login_providers')}</Text>
-			<div class="grid grid-cols-2 gap-4">
+			<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
 				{#each loginOptions as option}
-					<Button
+					<IconButton
+						icon={isSimpleIcon(option.icon) ? option.icon.path : option.icon}
 						variant="outline"
 						class="w-full justify-center hover:border-primary"
 						on:click={option.action}
-						disabled={userProfil?.auth?.includes(option.name)}
+						disabled={$userProfile.auth.includes(option.name)}
 					>
-						<Icon
-							path={isSimpleIcon(option.icon) ? option.icon.path : option.icon}
-							class="mr-2"
-						/>
 						{option.name}
-					</Button>
+					</IconButton>
 				{/each}
 			</div>
 		</div>
@@ -159,34 +168,36 @@
 			<form on:submit|preventDefault={handleSave} class="space-y-4">
 				<div class="flex flex-col gap-2">
 					<Text type="h3">{$i18n.t('settings.auto_refine_settings')}</Text>
-					<div class="flex flex-row gap-4">
+					<div class="flex flex-col gap-4">
 						<div class="flex items-center space-x-2">
-							<Checkbox id={'autoRefine3'} bind:checked={settings.autoRefine3} />
+							<Switch
+								id="autoRefine3"
+								bind:checked={$userProfile.config.autoRefine3}
+							/>
 							<Label for={'autoRefine3'}>
 								{$i18n.t('settings.auto_refine_3_star')}
 							</Label>
 						</div>
 						<div class="flex items-center space-x-2">
-							<Checkbox id={'autoRefine4'} bind:checked={settings.autoRefine4} />
+							<Switch
+								id="autoRefine4"
+								bind:checked={$userProfile.config.autoRefine4}
+							/>
 							<Label for={'autoRefine4'}>
 								{$i18n.t('settings.auto_refine_4_star')}
 							</Label>
 						</div>
 						<div class="flex items-center space-x-2">
-							<Checkbox id={'autoRefine5'} bind:checked={settings.autoRefine5} />
+							<Switch
+								id="autoRefine5"
+								bind:checked={$userProfile.config.autoRefine5}
+							/>
 							<Label for={'autoRefine5'}>
 								{$i18n.t('settings.auto_refine_5_star')}
 							</Label>
 						</div>
 					</div>
 				</div>
-				<Button
-					type="submit"
-					variant="outline"
-					class="w-full justify-center hover:border-primary"
-				>
-					{$i18n.t('settings.save_settings')}
-				</Button>
 			</form>
 		</div>
 	{/if}
@@ -229,6 +240,13 @@
 				<IconButton icon={mdiExport} on:click={handleSettingsExport}>
 					{$i18n.t('settings.category.data.export_data_button')}
 				</IconButton>
+			</div>
+		</div>
+
+		<div class="flex flex-col gap-2">
+			<Text type="h3">{$i18n.t('settings.category.danger_zone.title')}</Text>
+
+			<div class="flex flex-row gap-4">
 				<Dialog>
 					<DialogTrigger>
 						<IconButton icon={mdiDelete} class="bg-red-500 hover:bg-red-600">

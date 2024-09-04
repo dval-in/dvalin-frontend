@@ -15,8 +15,8 @@
 	} from '@mdi/js';
 	import PullDistributionByMonth from '$lib/components/graphs/PullDistributionByMonth.svelte';
 	import DefaultLayout from '$lib/components/layout/DefaultLayout.svelte';
-	import type { IWish, IWishes } from '$lib/types/wish';
-	import { isWishBannerKey, type WishBannerKey } from '$lib/types/keys/WishBannerKey';
+	import type { INamedWish, INamedWishes, IWish, IWishes } from '$lib/types/wish';
+	import { isWishBannerKey } from '$lib/types/keys/WishBannerKey';
 	import { isCharacterKey } from '$lib/types/keys/CharacterKey';
 	import { Card } from '$lib/components/ui/card';
 	import { CardContent, CardHeader } from '$lib/components/ui/card/index.js';
@@ -26,22 +26,14 @@
 	import { applicationState } from '$lib/store/application_state';
 	import { derived } from 'svelte/store';
 
-	interface IProcessedWish extends IWish {
-		name: string;
-	}
-
-	type IProcessedWishes = {
-		[key in WishBannerKey]?: IProcessedWish[];
-	};
-
 	const wishData = derived([userProfile, dataIndex], ([userProfileStore, dataIndexStore]) => {
 		const wishes: IWishes | undefined = userProfileStore.wishes;
-		const processedWishes: IProcessedWishes = {};
+		const processedWishes: INamedWishes = {};
 
 		if (wishes !== undefined) {
 			Object.keys(wishes).forEach((key: string) => {
 				if (isWishBannerKey(key)) {
-					processedWishes[key] = wishes[key]?.map((wish: IWish): IProcessedWish => {
+					processedWishes[key] = wishes[key]?.map((wish: IWish): INamedWish => {
 						const index = isCharacterKey(wish.key)
 							? dataIndexStore.character[wish.key]
 							: dataIndexStore.weapon[wish.key];
