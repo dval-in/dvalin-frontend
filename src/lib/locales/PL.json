@@ -142,6 +142,7 @@
 		"settings.import.start_import_button": "Rozpocznij importowanie",
 		"settings.import.confirmation_dialog.title": "Czy jesteś pewny?",
 		"settings.import.confirmation_dialog.description": "Dvalin spróbuje scalić importowane dane z bieżącymi danymi. Jeśli widzisz jakiś błąd, zgłoś je na kanale Discord",
+		"settings.category.danger_zone.title": "Dangerzone",
 		"login.title": "Możesz zrobić więcej z kontem!",
 		"login.alert.title": "Ważne: lokalna informacja o danych",
 		"login.alert.description": "Logowanie nadpisze Twoje dane lokalne. Upewnij się, że zrobiłeś kopię zapasową wszystkich ważnych informacji, zanim przejdziesz dalej.",
