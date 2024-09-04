@@ -142,6 +142,7 @@
 		"settings.import.start_import_button": "Начать импорт",
 		"settings.import.confirmation_dialog.title": "Вы уверены?",
 		"settings.import.confirmation_dialog.description": "Dvalin will try to merge your imported data with the current data. If you see any error please report it on the discord channel",
+		"settings.category.danger_zone.title": "Dangerzone",
 		"login.title": "Больше возможностей с аккаунтом!",
 		"login.alert.title": "Important: Local Data Notice",
 		"login.alert.description": "Logging in will overwrite your local data. Please ensure you've backed up any important information before proceeding.",
