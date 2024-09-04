@@ -142,6 +142,7 @@
 		"settings.import.start_import_button": "Commencer l'importation",
 		"settings.import.confirmation_dialog.title": "Êtes-vous sûr(e) ?",
 		"settings.import.confirmation_dialog.description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae deserunt velit autem veniam doloribus nulla. Culpa fugiat nemo accusantium cumque soluta tenetur tempora veritatis magnam nulla aliquid. Similique, perspiciatis unde?",
+		"settings.category.danger_zone.title": "Dangerzone",
 		"login.title": "Plus de fonctionnalités disponibles avec un compte !",
 		"login.alert.title": "Important : Information sur les données locales",
 		"login.alert.description": "La connexion écrasera vos données locales. Veuillez vous assurer que vous avez sauvegardé toutes les informations importantes avant de continuer.",
