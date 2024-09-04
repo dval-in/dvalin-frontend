@@ -142,6 +142,7 @@
 		"settings.import.start_import_button": "Bắt đầu nhập",
 		"settings.import.confirmation_dialog.title": "Bạn có chắc không?",
 		"settings.import.confirmation_dialog.description": "Dvalin sẽ hợp nhất dữ liệu đã nhập với dữ liệu có sẵn của bạn. Nếu bạn phát hiện bất kỳ lỗi gì, hãy báo cáo lại trong kênh Discord",
+		"settings.category.danger_zone.title": "Dangerzone",
 		"login.title": "Be able to do more with an account!",
 		"login.alert.title": "Quan trọng: Nhắc nhở về dữ liệu cục bộ",
 		"login.alert.description": "Logging in will overwrite your local data. Please ensure you've backed up any important information before proceeding.",
