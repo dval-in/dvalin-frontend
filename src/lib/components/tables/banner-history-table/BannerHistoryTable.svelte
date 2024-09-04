@@ -229,7 +229,7 @@
 					<Subscribe rowAttrs={row.attrs()} let:rowAttrs>
 						<TableRow
 							{...rowAttrs}
-							class={`hover:bg-tertiaryHover ${row.cellForId.rarity.value === 5 ? 'bg-fivestar' : 0} ${row.cellForId.rarity.value === 4 ? 'bg-fourstar' : 0}`}
+							class={`hover:bg-tertiaryHover ${row.cellForId.rarity.value === 5 ? 'bg-fivestar/50' : 0} ${row.cellForId.rarity.value === 4 ? 'bg-fourstar' : 0}`}
 						>
 							{#each row.cells as cell (cell.id)}
 								<Subscribe attrs={cell.attrs()} let:attrs>

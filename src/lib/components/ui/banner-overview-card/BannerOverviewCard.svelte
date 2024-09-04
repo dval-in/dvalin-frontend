@@ -99,7 +99,12 @@
 				<Text type="h4">{$i18n.t('wish.overview.card.latest_pulls.title')}</Text>
 				<div class="flex flex-wrap gap-2">
 					{#each fiveStarToDisplay() as pull}
-						<PullChip name={pull.name} key={pull.key} counter={pull.pity} />
+						<PullChip
+							name={pull.name}
+							key={pull.key}
+							counter={pull.pity}
+							wonFiftyFifty={pull.wonFiftyFifty}
+						/>
 					{/each}
 				</div>
 			{:else}
