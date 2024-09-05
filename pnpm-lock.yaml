@@ -115,11 +115,11 @@ importers:
         specifier: 9.6.1
         version: 9.6.1
       '@vite-pwa/assets-generator':
-        specifier: ^0.2.4
-        version: 0.2.4
+        specifier: ^0.2.6
+        version: 0.2.6
       '@vite-pwa/sveltekit':
         specifier: ^0.6.2
-        version: 0.6.2(@sveltejs/kit@2.5.25(@sveltejs/vite-plugin-svelte@3.1.1(svelte@4.2.18)(vite@5.4.2(@types/node@20.11.30)(sass@1.77.8)(terser@5.30.0)))(svelte@4.2.18)(vite@5.4.2(@types/node@20.11.30)(sass@1.77.8)(terser@5.30.0)))(@vite-pwa/assets-generator@0.2.4)(vite-plugin-pwa@0.20.3(@vite-pwa/assets-generator@0.2.4)(vite@5.4.2(@types/node@20.11.30)(sass@1.77.8)(terser@5.30.0))(workbox-build@7.0.0)(workbox-window@7.0.0))
+        version: 0.6.2(@sveltejs/kit@2.5.25(@sveltejs/vite-plugin-svelte@3.1.1(svelte@4.2.18)(vite@5.4.2(@types/node@20.11.30)(sass@1.77.8)(terser@5.30.0)))(svelte@4.2.18)(vite@5.4.2(@types/node@20.11.30)(sass@1.77.8)(terser@5.30.0)))(@vite-pwa/assets-generator@0.2.6)(vite-plugin-pwa@0.20.3(@vite-pwa/assets-generator@0.2.6)(vite@5.4.2(@types/node@20.11.30)(sass@1.77.8)(terser@5.30.0))(workbox-build@7.0.0)(workbox-window@7.0.0))
       autoprefixer:
         specifier: ^10.4.20
         version: 10.4.20(postcss@8.4.41)
@@ -185,7 +185,7 @@ importers:
         version: 5.4.2(@types/node@20.11.30)(sass@1.77.8)(terser@5.30.0)
       vite-plugin-pwa:
         specifier: ^0.20.3
-        version: 0.20.3(@vite-pwa/assets-generator@0.2.4)(vite@5.4.2(@types/node@20.11.30)(sass@1.77.8)(terser@5.30.0))(workbox-build@7.0.0)(workbox-window@7.0.0)
+        version: 0.20.3(@vite-pwa/assets-generator@0.2.6)(vite@5.4.2(@types/node@20.11.30)(sass@1.77.8)(terser@5.30.0))(workbox-build@7.0.0)(workbox-window@7.0.0)
 
 packages:
 
@@ -1414,8 +1414,8 @@ packages:
     resolution: {integrity: sha512-Qq3XxbA26jzqS9ICifkqzT399lMQZ2fWtqeV3luI2as+UIK7qDifJFU2Q4W3q3IB5VXoWxgwAZSZEO0em9I/qQ==}
     engines: {node: '>=18.16.0'}
 
-  '@vite-pwa/assets-generator@0.2.4':
-    resolution: {integrity: sha512-DXyPLPR/IpbZPSpo1amZEPghY/ziIwpTUKNaz0v1xG+ELzCXmrVQhVzEMqr2JLSqRxjc+UzKfGJA/YdUuaao3w==}
+  '@vite-pwa/assets-generator@0.2.6':
+    resolution: {integrity: sha512-kK44dXltvoubEo5B+6tCGjUrOWOE1+dA4DForbFpO1rKy2wSkAVGrs8tyfN6DzTig89/QKyV8XYodgmaKyrYng==}
     engines: {node: '>=16.14.0'}
     hasBin: true
 
@@ -5558,7 +5558,7 @@ snapshots:
       validator: 13.12.0
     optional: true
 
-  '@vite-pwa/assets-generator@0.2.4':
+  '@vite-pwa/assets-generator@0.2.6':
     dependencies:
       cac: 6.7.14
       colorette: 2.0.20
@@ -5567,13 +5567,13 @@ snapshots:
       sharp-ico: 0.1.5
       unconfig: 0.3.11
 
-  '@vite-pwa/sveltekit@0.6.2(@sveltejs/kit@2.5.25(@sveltejs/vite-plugin-svelte@3.1.1(svelte@4.2.18)(vite@5.4.2(@types/node@20.11.30)(sass@1.77.8)(terser@5.30.0)))(svelte@4.2.18)(vite@5.4.2(@types/node@20.11.30)(sass@1.77.8)(terser@5.30.0)))(@vite-pwa/assets-generator@0.2.4)(vite-plugin-pwa@0.20.3(@vite-pwa/assets-generator@0.2.4)(vite@5.4.2(@types/node@20.11.30)(sass@1.77.8)(terser@5.30.0))(workbox-build@7.0.0)(workbox-window@7.0.0))':
+  '@vite-pwa/sveltekit@0.6.2(@sveltejs/kit@2.5.25(@sveltejs/vite-plugin-svelte@3.1.1(svelte@4.2.18)(vite@5.4.2(@types/node@20.11.30)(sass@1.77.8)(terser@5.30.0)))(svelte@4.2.18)(vite@5.4.2(@types/node@20.11.30)(sass@1.77.8)(terser@5.30.0)))(@vite-pwa/assets-generator@0.2.6)(vite-plugin-pwa@0.20.3(@vite-pwa/assets-generator@0.2.6)(vite@5.4.2(@types/node@20.11.30)(sass@1.77.8)(terser@5.30.0))(workbox-build@7.0.0)(workbox-window@7.0.0))':
     dependencies:
       '@sveltejs/kit': 2.5.25(@sveltejs/vite-plugin-svelte@3.1.1(svelte@4.2.18)(vite@5.4.2(@types/node@20.11.30)(sass@1.77.8)(terser@5.30.0)))(svelte@4.2.18)(vite@5.4.2(@types/node@20.11.30)(sass@1.77.8)(terser@5.30.0))
       kolorist: 1.8.0
-      vite-plugin-pwa: 0.20.3(@vite-pwa/assets-generator@0.2.4)(vite@5.4.2(@types/node@20.11.30)(sass@1.77.8)(terser@5.30.0))(workbox-build@7.0.0)(workbox-window@7.0.0)
+      vite-plugin-pwa: 0.20.3(@vite-pwa/assets-generator@0.2.6)(vite@5.4.2(@types/node@20.11.30)(sass@1.77.8)(terser@5.30.0))(workbox-build@7.0.0)(workbox-window@7.0.0)
     optionalDependencies:
-      '@vite-pwa/assets-generator': 0.2.4
+      '@vite-pwa/assets-generator': 0.2.6
 
   JSONStream@1.3.5:
     dependencies:
@@ -8343,7 +8343,7 @@ snapshots:
       bits-ui: 0.21.13(svelte@4.2.18)
       svelte: 4.2.18
 
-  vite-plugin-pwa@0.20.3(@vite-pwa/assets-generator@0.2.4)(vite@5.4.2(@types/node@20.11.30)(sass@1.77.8)(terser@5.30.0))(workbox-build@7.0.0)(workbox-window@7.0.0):
+  vite-plugin-pwa@0.20.3(@vite-pwa/assets-generator@0.2.6)(vite@5.4.2(@types/node@20.11.30)(sass@1.77.8)(terser@5.30.0))(workbox-build@7.0.0)(workbox-window@7.0.0):
     dependencies:
       debug: 4.3.6
       pretty-bytes: 6.1.1
@@ -8352,7 +8352,7 @@ snapshots:
       workbox-build: 7.0.0
       workbox-window: 7.0.0
     optionalDependencies:
-      '@vite-pwa/assets-generator': 0.2.4
+      '@vite-pwa/assets-generator': 0.2.6
     transitivePeerDependencies:
       - supports-color
 
