@@ -51,7 +51,7 @@
 		"@types/d3-shape": "^3.1.6",
 		"@types/eslint": "9.6.1",
 		"@vite-pwa/assets-generator": "^0.2.4",
-		"@vite-pwa/sveltekit": "^0.6.0",
+		"@vite-pwa/sveltekit": "^0.6.2",
 		"autoprefixer": "^10.4.20",
 		"eslint": "^9.9.1",
 		"eslint-config-prettier": "^9.1.0",
