@@ -142,6 +142,7 @@
 		"settings.import.start_import_button": "开始导入",
 		"settings.import.confirmation_dialog.title": "确认继续吗",
 		"settings.import.confirmation_dialog.description": "Dvalin 将尝试将您的导入的数据与当前数据合并。如果出现任何错误，请在 Discord 频道上报告",
+		"settings.category.danger_zone.title": "Dangerzone",
 		"login.title": "拥有账号可以做更多！",
 		"login.alert.title": "重要：本地数据通知",
 		"login.alert.description": "登录将覆盖您的本地数据。请确保您在继续之前已备份所有重要信息。",

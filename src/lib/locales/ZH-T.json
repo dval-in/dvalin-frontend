@@ -142,6 +142,7 @@
 		"settings.import.start_import_button": "開始匯入",
 		"settings.import.confirmation_dialog.title": "確認繼續嗎",
 		"settings.import.confirmation_dialog.description": "Dvalin 將嘗試將您匯入的資料與目前的資料合併。如果出現任何問題，請在 Discord 頻道上報告",
+		"settings.category.danger_zone.title": "Dangerzone",
 		"login.title": "擁有帳號可以做更多！",
 		"login.alert.title": "重要：本機資料通知",
 		"login.alert.description": "登入將覆蓋您的本機資料。請確保在繼續之前已備份所有重要資訊。",
