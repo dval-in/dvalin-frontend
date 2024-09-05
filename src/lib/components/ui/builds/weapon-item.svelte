@@ -23,11 +23,7 @@
 		<div class="flex-grow flex flex-col gap-1 text-md min-h-0">
 			<div class="flex w-full justify-start">
 				{#each { length: rarity } as _}
-					<Icon
-						size={0.8}
-						path={mdiStar}
-						class={rarity === 5 ? 'fill-fivestar' : 'fill-fourstar'}
-					/>
+					<Icon path={mdiStar} class={rarity === 5 ? 'fill-fivestar' : 'fill-fourstar'} />
 				{/each}
 			</div>
 			<Text type="h4">{$dataIndex.weapon[key].name}</Text>
@@ -42,11 +38,7 @@
 			alt={key}
 		/>
 		<div class="flex w-full gap-2 items-center">
-			<Icon
-				size=".7"
-				path={mdiStar}
-				class={rarity === 5 ? 'fill-fivestar' : 'fill-fourstar'}
-			/>
+			<Icon path={mdiStar} class={rarity === 5 ? 'fill-fivestar' : 'fill-fourstar'} />
 			<div class="flex flex-1 flex-wrap w-full">
 				<p class="leading-7">{key.replace(/([A-Z])/g, ' $1').trim()}</p>
 			</div>

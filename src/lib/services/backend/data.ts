@@ -9,10 +9,8 @@ import type { WeaponIndex } from '$lib/types/index/weapon';
 import type { Character } from '$lib/types/data/Character';
 import type { Weapon } from '$lib/types/data/Weapon';
 
-interface FetchDataIndexResponse {
-	character: CharacterIndex;
-	weapon: WeaponIndex;
-}
+type FetchCharacterDataIndexResponse = CharacterIndex;
+type FetchWeaponDataIndexResponse = WeaponIndex;
 
 export class BackendDataService {
 	private readonly baseUrl: string;
@@ -24,24 +22,29 @@ export class BackendDataService {
 		this.baseUrl = baseUrl + '/data';
 	}
 
-	fetchDataIndex() {
-		return createQuery<FetchDataIndexResponse>(
+	fetchCharacterDataIndex() {
+		return createQuery<FetchCharacterDataIndexResponse>(
 			{
-				queryKey: ['fetchDataIndex'],
+				queryKey: ['fetchDataIndex', 'character'],
 				staleTime: 6 * 60 * 60 * 1000, //6h
-				queryFn: async () => {
-					const charIndex = await backendFetch<CharacterIndex>(
+				queryFn: async () =>
+					await backendFetch<CharacterIndex>(
 						`${this.baseUrl}/Character/index?lang=${get(i18n).language}`
-					);
-					const weaponIndex = await backendFetch<WeaponIndex>(
-						`${this.baseUrl}/Weapon/index?lang=${get(i18n).language}`
-					);
+					)
+			},
+			this.queryClient
+		);
+	}
 
-					return {
-						character: charIndex,
-						weapon: weaponIndex
-					};
-				}
+	fetchWeaponDataIndex() {
+		return createQuery<FetchWeaponDataIndexResponse>(
+			{
+				queryKey: ['fetchDataIndex', 'weapon'],
+				staleTime: 6 * 60 * 60 * 1000, //6h
+				queryFn: async () =>
+					await backendFetch<WeaponIndex>(
+						`${this.baseUrl}/Weapon/index?lang=${get(i18n).language}`
+					)
 			},
 			this.queryClient
 		);

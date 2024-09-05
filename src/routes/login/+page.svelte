@@ -1,8 +1,8 @@
 <script lang="ts">
 	import DefaultLayout from '$lib/components/layout/DefaultLayout.svelte';
 	import BackendService from '$lib/services/backend';
-	import { mdiAccount, mdiAlert, mdiDevices, mdiServer, mdiMicrosoft } from '@mdi/js';
-	import { siDiscord, siGoogle, siGithub, type SimpleIcon } from 'simple-icons';
+	import { mdiAccount, mdiAlert, mdiDevices, mdiMicrosoft, mdiServer } from '@mdi/js';
+	import { siDiscord, siGithub, siGoogle, type SimpleIcon } from 'simple-icons';
 	import Icon from '$lib/components/ui/icon/icon.svelte';
 	import i18n from '$lib/services/i18n';
 	import { Alert, AlertDescription, AlertTitle } from '$lib/components/ui/alert';
@@ -53,7 +53,7 @@
 		<div class="flex-1 space-y-6">
 			{#each perks as perk}
 				<div class="flex items-center gap-4">
-					<Icon size={4} path={perk.icon} />
+					<Icon class="size-32" path={perk.icon} />
 					<div>
 						<h4 class="text-lg font-semibold">{$i18n.t(perk.title)}</h4>
 						<p class="text-sm text-muted-foreground">{$i18n.t(perk.description)}</p>

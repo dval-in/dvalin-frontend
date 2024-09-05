@@ -54,7 +54,7 @@ export const load = async () => {
 
 		socket.on(
 			'toast',
-			(toastMessage: { type: 'success' | 'error' | 'info'; message: string }) => {
+			(toastMessage: { type: 'success' | 'error' | 'info' | 'loading'; message: string }) => {
 				const message = get(i18n).t(toastMessage.message);
 
 				switch (toastMessage.type) {
@@ -64,6 +64,8 @@ export const load = async () => {
 						return toast.error(message);
 					case 'info':
 						return toast.info(message);
+					case 'loading':
+						return toast.loading(message);
 				}
 			}
 		);

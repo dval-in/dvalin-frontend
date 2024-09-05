@@ -1,6 +1,6 @@
 <script lang="ts"></script>
 
-<div class="size-2/3">
+<div class="h-96">
 	<svg
 		width="100%"
 		height="100%"

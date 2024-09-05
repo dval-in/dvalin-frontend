@@ -14,15 +14,15 @@
 	} from 'layerchart';
 	import { stack } from 'd3-shape';
 	import { flatten } from 'svelte-ux/utils/array';
-	import type { IMappedWish } from '$lib/types/wish';
 	import type { WishBannerKey } from '$lib/types/keys/WishBannerKey';
 	import { mdiStar } from '@mdi/js';
 	import Icon from '$lib/components/ui/icon/icon.svelte';
 	import Text from '$lib/components/typography/Text.svelte';
 	import { applicationState } from '$lib/store/application_state';
 	import { derived, type Readable } from 'svelte/store';
+	import type { INamedWishes, IWish } from '$lib/types/wish';
 
-	export let data: Readable<IProcessedWishes>;
+	export let data: Readable<INamedWishes>;
 
 	const keys = ['5', '4', '3'];
 	const colorKeys = ['#5E93B2', '#7B5C90', '#FFB13F'];
@@ -30,7 +30,7 @@
 	const getMonthlyData = derived([data], ([dataStore]) => {
 		let pullsByMonth: { [key: string]: { [key: string]: number } } = {};
 
-		const bannerHistoryData: IMappedWish[] = [];
+		const bannerHistoryData: IWish[] = [];
 
 		Object.keys(dataStore).forEach((key: string) => {
 			const wishes = dataStore[key as WishBannerKey];
