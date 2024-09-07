@@ -30,7 +30,7 @@
 		"socket.io": "^4.7.5",
 		"socket.io-client": "^4.7.5",
 		"svelte-i18next": "^2.2.2",
-		"svelte-legos": "^0.2.4",
+		"svelte-legos": "^0.2.5",
 		"svelte-persisted-store": "^0.11.0",
 		"svelte-sonner": "^0.3.27",
 		"svelte-ux": "^0.74.7",
