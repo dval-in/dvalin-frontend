@@ -36,8 +36,8 @@ importers:
         specifier: ^1.0.1
         version: 1.0.1(svelte@4.2.19)(sveltekit-superforms@2.17.0(@sveltejs/kit@2.5.26(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.2(@types/node@20.11.30)(sass@1.78.0)(terser@5.30.0)))(svelte@4.2.19)(vite@5.4.2(@types/node@20.11.30)(sass@1.78.0)(terser@5.30.0)))(svelte@4.2.19))
       i18next:
-        specifier: ^23.14.0
-        version: 23.14.0
+        specifier: ^23.15.1
+        version: 23.15.1
       layerchart:
         specifier: ^0.44.0
         version: 0.44.0(@babel/core@7.24.3)(postcss-load-config@4.0.2(postcss@8.4.41))(postcss@8.4.41)(sass@1.78.0)(svelte@4.2.19)(typescript@5.5.4)
@@ -58,7 +58,7 @@ importers:
         version: 4.7.5
       svelte-i18next:
         specifier: ^2.2.2
-        version: 2.2.2(i18next@23.14.0)(svelte@4.2.19)
+        version: 2.2.2(i18next@23.15.1)(svelte@4.2.19)
       svelte-legos:
         specifier: ^0.2.5
         version: 0.2.5(svelte@4.2.19)
@@ -2447,8 +2447,8 @@ packages:
     engines: {node: '>=18'}
     hasBin: true
 
-  i18next@23.14.0:
-    resolution: {integrity: sha512-Y5GL4OdA8IU2geRrt2+Uc1iIhsjICdHZzT9tNwQ3TVqdNzgxHToGCKf/TPRP80vTCAP6svg2WbbJL+Gx5MFQVA==}
+  i18next@23.15.1:
+    resolution: {integrity: sha512-wB4abZ3uK7EWodYisHl/asf8UYEhrI/vj/8aoSsrj/ZDxj4/UXPOa1KvFt1Fq5hkUHquNqwFlDprmjZ8iySgYA==}
 
   ico-endec@0.1.6:
     resolution: {integrity: sha512-ZdLU38ZoED3g1j3iEyzcQj+wAkY2xfWNkymszfJPoxucIUhK7NayQ+/C4Kv0nDFMIsbtbEHldv3V8PU494/ueQ==}
@@ -6684,7 +6684,7 @@ snapshots:
 
   husky@9.1.5: {}
 
-  i18next@23.14.0:
+  i18next@23.15.1:
     dependencies:
       '@babel/runtime': 7.24.1
 
@@ -7924,9 +7924,9 @@ snapshots:
     dependencies:
       svelte: 4.2.19
 
-  svelte-i18next@2.2.2(i18next@23.14.0)(svelte@4.2.19):
+  svelte-i18next@2.2.2(i18next@23.15.1)(svelte@4.2.19):
     dependencies:
-      i18next: 23.14.0
+      i18next: 23.15.1
       svelte: 4.2.19
 
   svelte-keyed@2.0.0(svelte@4.2.19):
