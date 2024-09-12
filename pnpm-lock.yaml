@@ -81,8 +81,8 @@ importers:
         specifier: ^0.2.1
         version: 0.2.1(tailwindcss@3.4.10)
       tw-colors:
-        specifier: ^3.3.1
-        version: 3.3.1(tailwindcss@3.4.10)
+        specifier: ^3.3.2
+        version: 3.3.2(tailwindcss@3.4.10)
       vaul-svelte:
         specifier: ^0.3.2
         version: 0.3.2(svelte@4.2.19)
@@ -3865,8 +3865,8 @@ packages:
   tunnel-agent@0.6.0:
     resolution: {integrity: sha512-McnNiV1l8RYeY8tBgEpuodCC1mLUdbSN+CYBL7kJsJNInOP8UjDDEwdk6Mw60vdLLrr5NHKZhMAOSrR2NZuQ+w==}
 
-  tw-colors@3.3.1:
-    resolution: {integrity: sha512-PH6NShNtDzPCm6zjl0SZe3kmdYSfDS7Sk4mWa9+KzaeSH1ZmpLRrBjZoBJKaFcDB3o7iuFPPg9+HtW05pGPQyQ==}
+  tw-colors@3.3.2:
+    resolution: {integrity: sha512-TosYI43Jec/KO4NPzDoBlccPPtPMYholoRUSVYGmzCGa1Zek9exDQIQ+6UViHqqK6Nti/4wBzEGyRTxMSNnSXQ==}
     peerDependencies:
       tailwindcss: '>=3.0.0'
 
@@ -8202,7 +8202,7 @@ snapshots:
     dependencies:
       safe-buffer: 5.2.1
 
-  tw-colors@3.3.1(tailwindcss@3.4.10):
+  tw-colors@3.3.2(tailwindcss@3.4.10):
     dependencies:
       color: 4.2.3
       flat: 5.0.2
