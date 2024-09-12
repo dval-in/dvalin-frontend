@@ -8,11 +8,14 @@
 	import Text from '$lib/components/typography/Text.svelte';
 	import { useQueryClient } from '@tanstack/svelte-query';
 	import { toast } from 'svelte-sonner';
-	import { mdiCheck, mdiHumanQueue, mdiLink, mdiLogin } from '@mdi/js';
+	import { mdiCheck, mdiCloudSync, mdiFile, mdiHumanQueue, mdiLink, mdiLogin } from '@mdi/js';
 	import Icon from '$lib/components/ui/icon/icon.svelte';
 	import IconButton from '$lib/components/ui/icon-button/IconButton.svelte';
 	import { applicationState } from '$lib/store/application_state';
 	import { Tabs, TabsContent, TabsList, TabsTrigger } from '$lib/components/ui/tabs';
+	import { openFileDialog } from '$lib/utils';
+	import dayjs from 'dayjs';
+	import relativeTime from 'dayjs/plugin/relativeTime';
 
 	let wishURL = '';
 
@@ -20,6 +23,31 @@
 	const fetchHoyoWishHistoryStatus = backend.hoyo.fetchHoyoWishHistoryStatus();
 	const mutateHoyoWishHistory = backend.hoyo.mutateHoyoWishHistory();
 	const client = useQueryClient();
+
+	dayjs.extend(relativeTime);
+
+	const processFile = (event: Event) => {
+		const target = event.target as HTMLInputElement;
+		if (target.files && target.files.length === 1) {
+			target.files[0].text().then((streamResult) => {
+				const regex =
+					/(https:\/\/www.|http:\/\/www.|https:\/\/|http:\/\/)?gs.hoyoverse.com\/genshin\/event\/e20190909gacha-v3\/index.html(.*?)&game_biz=hk4e_global/g;
+				const matchResult = streamResult.match(regex);
+
+				if (matchResult === null || matchResult.length === 0) {
+					toast.error(
+						'File does not contain wish url. Please make sure to select the right file.'
+					);
+
+					return;
+				}
+
+				matchResult.forEach((r) => console.log(r));
+
+				wishURL = matchResult[0];
+			});
+		}
+	};
 
 	const fetchHoyoWishHistory = () => {
 		if (!wishURL.includes('gacha_id')) {
@@ -41,7 +69,7 @@
 
 		const encodedAuthKey = encodeURIComponent(authkey);
 
-		$mutateHoyoWishHistory.mutate(encodedAuthKey, {
+		$mutateHoyoWishHistory.mutateAsync(encodedAuthKey, {
 			onSuccess: (response) => {
 				if (response.state === 'CREATED') {
 					toast.success('Created');
@@ -49,6 +77,7 @@
 				}
 			},
 			onError: (error) => {
+				console.log('abc');
 				toast.error(error.message);
 			}
 		});
@@ -76,8 +105,6 @@
 					<TabsTrigger value="pc">PC</TabsTrigger>
 					<TabsTrigger value="android">Android</TabsTrigger>
 					<TabsTrigger value="ios">iOS</TabsTrigger>
-					<TabsTrigger value="ps">Playstation</TabsTrigger>
-					<TabsTrigger value="nswitch">Nintendo Switch</TabsTrigger>
 				</TabsList>
 				<TabsContent value="pc">
 					<Text type="p">
@@ -89,6 +116,9 @@
 					</Text>
 					<Text type="p">{$i18n.t('wish.import.instructions.step4')}</Text>
 					<Text type="p">{$i18n.t('wish.import.instructions.step5')}</Text>
+					<IconButton icon={mdiFile} on:click={() => openFileDialog(processFile)}>
+						{$i18n.t('action.select_file')}
+					</IconButton>
 				</TabsContent>
 				<TabsContent value="android">
 					<Text type="p">Use Ascent by 403f</Text>
@@ -98,15 +128,6 @@
 				</TabsContent>
 				<TabsContent value="ios">
 					<Text type="p"></Text>
-				</TabsContent>
-				<TabsContent value="ps">
-					<Text type="p">Follow this guide:</Text>
-					<IconButton icon={mdiLink} href="https://www.youtube.com/watch?v=ly10r6m_-n8">
-						Guide
-					</IconButton>
-				</TabsContent>
-				<TabsContent value="nswitch">
-					<Text type="p">💀💀💀💀💀💀</Text>
 				</TabsContent>
 			</Tabs>
 
@@ -124,7 +145,7 @@
 			</Button>
 		{:else if $fetchHoyoWishHistoryStatus.data.state === 'QUEUED'}
 			<div class="flex flex-1 flex-col justify-center items-center gap-6">
-				<Icon path={mdiHumanQueue} class="size-56" />
+				<Icon path={mdiHumanQueue} class="size-52" />
 				<Text type="h2">{$i18n.t('wish.import.state.queued.title')}</Text>
 				<Text type="p">
 					{$i18n.t('wish.import.state.queued.description', {
@@ -134,19 +155,19 @@
 			</div>
 		{:else if $fetchHoyoWishHistoryStatus.data.state === 'ACTIVE'}
 			<div class="flex flex-1 flex-col justify-center items-center gap-6">
-				<Icon path={mdiHumanQueue} class="size-56" />
+				<Icon path={mdiCloudSync} class="size-52" />
 				<Text type="h2">{$i18n.t('wish.import.state.active.title')}</Text>
 			</div>
 		{:else if $fetchHoyoWishHistoryStatus.data.state === 'COMPLETED_RATE_LIMIT'}
 			<div class="flex flex-1 flex-col justify-center items-center gap-6">
-				<Icon path={mdiCheck} class="size-56" />
+				<Icon path={mdiCheck} class="size-52" />
 				<Text type="h2">{$i18n.t('wish.import.state.completed.title')}</Text>
 				<Text type="p">
 					{$i18n.t('wish.import.state.completed.description', {
-						date: new Date(
+						date: dayjs(
 							$fetchHoyoWishHistoryStatus.data.data.completedTimestamp +
 								$fetchHoyoWishHistoryStatus.data.data.rateLimitDuration
-						).toLocaleString(),
+						).fromNow(true),
 						interpolation: { escapeValue: false }
 					})}
 				</Text>

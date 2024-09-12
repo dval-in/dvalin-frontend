@@ -19,6 +19,7 @@
 	import Text from '$lib/components/typography/Text.svelte';
 	import i18n from '$lib/services/i18n';
 	import BackendService from '$lib/services/backend';
+	import { openFileDialog } from '$lib/utils';
 
 	let value: 'dvalin' | 'paimon' = 'dvalin';
 	const backend = BackendService.getInstance();
@@ -26,20 +27,11 @@
 	let file: File | undefined = undefined;
 	let dialogOpen = false;
 
-	const selectFile = () => {
-		let element = document.createElement('input');
-		element.type = 'file';
-		element.style.display = 'none';
-		element.onchange = (event: Event) => {
-			const target = event.target as HTMLInputElement;
-			if (target.files && target.files.length === 1) {
-				file = target.files[0];
-			}
-		};
-
-		document.body.appendChild(element);
-		element.click();
-		document.body.removeChild(element);
+	const processFile = (event: Event) => {
+		const target = event.target as HTMLInputElement;
+		if (target.files && target.files.length === 1) {
+			file = target.files[0];
+		}
 	};
 
 	const handleSettingsImport = () => {
@@ -80,7 +72,7 @@
 	</Tabs>
 
 	<div class="flex items-center gap-2">
-		<IconButton icon={mdiFile} on:click={selectFile}>
+		<IconButton icon={mdiFile} on:click={() => openFileDialog(processFile)}>
 			{$i18n.t('action.select_file')}
 		</IconButton>
 		{#if file !== undefined}

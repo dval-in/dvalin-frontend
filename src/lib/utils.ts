@@ -58,3 +58,14 @@ export const flyAndScale = (
 		easing: cubicOut
 	};
 };
+
+export const openFileDialog = (callback: (event: Event) => void) => {
+	let element = document.createElement('input');
+	element.type = 'file';
+	element.style.display = 'none';
+	element.onchange = callback;
+
+	document.body.appendChild(element);
+	element.click();
+	document.body.removeChild(element);
+};

@@ -53,6 +53,7 @@
 		"@vite-pwa/assets-generator": "^0.2.6",
 		"@vite-pwa/sveltekit": "^0.6.5",
 		"autoprefixer": "^10.4.20",
+		"dayjs": "^1.11.13",
 		"eslint": "^9.9.1",
 		"eslint-config-prettier": "^9.1.0",
 		"eslint-plugin-prettier": "^5.2.1",
