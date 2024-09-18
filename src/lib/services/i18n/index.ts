@@ -11,6 +11,7 @@ import PL from '$lib/locales/PL.json';
 import PT from '$lib/locales/PT.json';
 import RU from '$lib/locales/RU.json';
 import TH from '$lib/locales/TH.json';
+import VI from '$lib/locales/VI.json';
 import ZHS from '$lib/locales/ZH-S.json';
 import ZHT from '$lib/locales/ZH-T.json';
 import { goto } from '$app/navigation';
@@ -34,6 +35,7 @@ i18next
 			PT,
 			RU,
 			TH,
+			VI,
 			ZHS,
 			ZHT
 		}

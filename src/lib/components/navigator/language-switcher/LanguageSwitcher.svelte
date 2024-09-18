@@ -9,6 +9,7 @@
 	import langFlagPL from '$lib/assets/languages/PL.svg';
 	import langFlagRU from '$lib/assets/languages/RU.svg';
 	import langFlagTH from '$lib/assets/languages/TH.svg';
+	import langFlagVI from '$lib/assets/languages/VI.svg';
 	import langFlagZHS from '$lib/assets/languages/ZHS.svg';
 	import langFlagZHT from '$lib/assets/languages/ZHT.svg';
 	import {
@@ -54,12 +55,12 @@
 				return langFlagRU;
 			case 'TH':
 				return langFlagTH;
+			case 'VI':
+				return langFlagVI;
 			case 'ZHS':
 				return langFlagZHS;
 			case 'ZHT':
 				return langFlagZHT;
-			default:
-				return langFlagEN;
 		}
 	};
 
