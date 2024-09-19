@@ -66,8 +66,8 @@ importers:
         specifier: ^0.11.0
         version: 0.11.0(svelte@4.2.19)
       svelte-sonner:
-        specifier: ^0.3.27
-        version: 0.3.27(svelte@4.2.19)
+        specifier: ^0.3.28
+        version: 0.3.28(svelte@4.2.19)
       svelte-ux:
         specifier: ^0.74.8
         version: 0.74.8(@babel/core@7.24.3)(postcss-load-config@4.0.2(postcss@8.4.41))(postcss@8.4.41)(sass@1.78.0)(svelte@4.2.19)
@@ -3712,8 +3712,8 @@ packages:
     peerDependencies:
       svelte: ^4.0.0
 
-  svelte-sonner@0.3.27:
-    resolution: {integrity: sha512-+PvbuePNTyTNCepCWqKcFeu+Lo27yYuwfSc7zJvrWjCRMJrWAmccPg3j7jO1W13QoN3TySXU5Trb956VBQiM5Q==}
+  svelte-sonner@0.3.28:
+    resolution: {integrity: sha512-K3AmlySeFifF/cKgsYNv5uXqMVNln0NBAacOYgmkQStLa/UoU0LhfAACU6Gr+YYC8bOCHdVmFNoKuDbMEsppJg==}
     peerDependencies:
       svelte: ^3.0.0 || ^4.0.0 || ^5.0.0-next.1
 
@@ -7967,7 +7967,7 @@ snapshots:
       svelte: 4.2.19
       svelte-subscribe: 2.0.1(svelte@4.2.19)
 
-  svelte-sonner@0.3.27(svelte@4.2.19):
+  svelte-sonner@0.3.28(svelte@4.2.19):
     dependencies:
       svelte: 4.2.19
 
