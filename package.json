@@ -26,7 +26,7 @@
 		"layerchart": "^0.44.0",
 		"lucide-svelte": "^0.438.0",
 		"mode-watcher": "^0.4.1",
-		"simple-icons": "^13.9.0",
+		"simple-icons": "^13.10.0",
 		"socket.io": "^4.7.5",
 		"socket.io-client": "^4.7.5",
 		"svelte-i18next": "^2.2.2",
