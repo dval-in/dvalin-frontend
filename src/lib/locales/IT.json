@@ -142,7 +142,7 @@
 		"settings.import.start_import_button": "Inizio importazione",
 		"settings.import.confirmation_dialog.title": "Sei sicuro?",
 		"settings.import.confirmation_dialog.description": "Dvalin tenterà ad unire i dati importati con i tuoi dati attuali. Se noti qualche errore, per favore segnalalo sul canale Discord",
-		"settings.category.danger_zone.title": "Dangerzone",
+		"settings.category.danger_zone.title": "Zona Pericolosa",
 		"login.title": "Sii capace di fare di più col tuo account!",
 		"login.alert.title": "Importante: Avviso Dati Locali",
 		"login.alert.description": "L'accesso sovrascriverà i tuoi dati locali. Assicurati di aver eseguito il backup di tutte le informazioni importanti prima di procedere.",
@@ -185,7 +185,7 @@
 		"language.PT": "Português",
 		"language.RU": "Русский",
 		"language.TH": "แบบไทย",
-		"language.VI": "Tiếng Việt",
+		"language.VI": "Vietnamita",
 		"language.ZHS": "简体中文",
 		"language.ZHT": "繁體中文"
 	}
