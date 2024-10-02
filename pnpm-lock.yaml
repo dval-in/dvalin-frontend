@@ -39,8 +39,8 @@ importers:
         specifier: ^23.15.1
         version: 23.15.1
       layerchart:
-        specifier: ^0.44.0
-        version: 0.44.0(@babel/core@7.24.3)(postcss-load-config@4.0.2(postcss@8.4.47))(postcss@8.4.47)(sass@1.79.3)(svelte@4.2.19)(typescript@5.6.2)
+        specifier: ^0.52.1
+        version: 0.52.1(svelte@4.2.19)(typescript@5.6.2)
       lucide-svelte:
         specifier: ^0.446.0
         version: 0.446.0(svelte@4.2.19)
@@ -1091,6 +1091,18 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
+
+  '@layerstack/svelte-actions@0.0.4':
+    resolution: {integrity: sha512-tC6+KfqU0t/ugj222sPljb9qkmIpZljaXh2YVKKhsyHGmTS5FRSinr3GFOONOJbQxCQjA7XhIgcSGkFHypaJig==}
+
+  '@layerstack/svelte-stores@0.0.4':
+    resolution: {integrity: sha512-pO5N+5XtSlGn1a7BhNgQJj/KQQ6IEYZImlGZbIboKJ5nlnvHpSywwqJaUvzPP7yRNGQQEDje/mnIm0m1Rbxrwg==}
+
+  '@layerstack/tailwind@0.0.6':
+    resolution: {integrity: sha512-gmBwg3JYddylrodNd6Y4cz0xT/3HVWKsu/QEi5u2fps7hCsYMuI/gr3sil/zDCeuUXm2OOxerWosRBYfX7YqWA==}
+
+  '@layerstack/utils@0.0.4':
+    resolution: {integrity: sha512-EjN9SoJlOo9GAX0KMy+3D3Tpw63n46owHwmo1vK4niZFpQA0gdoDfwHTw6yVkxe71mcHDKKyV62Yc/buezWXwg==}
 
   '@mdi/js@7.4.47':
     resolution: {integrity: sha512-KPnNOtm5i2pMabqZxpUz7iQf+mfrYZyKCZ8QNz85czgEt7cuHcGorWfdzUMWYA0SD+a6Hn4FmJ+YhzzzjkTZrQ==}
@@ -2771,8 +2783,8 @@ packages:
       svelte: 3 - 5 || >=5.0.0-next.120
       typescript: ^5.0.2
 
-  layerchart@0.44.0:
-    resolution: {integrity: sha512-x5k2w3byuDm1pV5OPlmw1J2z4DTa5DrBDRlUv8xvH9tEsvJ/FSpr1EZBd9UUPimSU8uuU3Gm2wV9RSpjlISPJA==}
+  layerchart@0.52.1:
+    resolution: {integrity: sha512-f6W7iUoesvOBZA1xpox8eYx06iHONkLTGPPxVh0kcQJCykUNx8mUXxp5ATYALft5GA/s19G+bZv7jbMSaqpe9A==}
     peerDependencies:
       svelte: ^3.56.0 || ^4.0.0 || ^5.0.0-next.120
 
@@ -5263,6 +5275,43 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.4.15
 
+  '@layerstack/svelte-actions@0.0.4':
+    dependencies:
+      '@floating-ui/dom': 1.6.10
+      '@layerstack/utils': 0.0.4
+      d3-array: 3.2.4
+      d3-scale: 4.0.2
+      date-fns: 3.6.0
+      lodash-es: 4.17.21
+
+  '@layerstack/svelte-stores@0.0.4':
+    dependencies:
+      '@layerstack/utils': 0.0.4
+      d3-array: 3.2.4
+      date-fns: 3.6.0
+      immer: 10.1.1
+      lodash-es: 4.17.21
+      zod: 3.23.8
+
+  '@layerstack/tailwind@0.0.6':
+    dependencies:
+      '@layerstack/utils': 0.0.4
+      clsx: 2.1.1
+      culori: 4.0.1
+      d3-array: 3.2.4
+      date-fns: 3.6.0
+      lodash-es: 4.17.21
+      tailwind-merge: 2.5.2
+      tailwindcss: 3.4.11
+    transitivePeerDependencies:
+      - ts-node
+
+  '@layerstack/utils@0.0.4':
+    dependencies:
+      d3-array: 3.2.4
+      date-fns: 3.6.0
+      lodash-es: 4.17.21
+
   '@mdi/js@7.4.47': {}
 
   '@melt-ui/svelte@0.76.2(svelte@4.2.19)':
@@ -7031,8 +7080,12 @@ snapshots:
       svelte: 4.2.19
       typescript: 5.6.2
 
-  layerchart@0.44.0(@babel/core@7.24.3)(postcss-load-config@4.0.2(postcss@8.4.47))(postcss@8.4.47)(sass@1.79.3)(svelte@4.2.19)(typescript@5.6.2):
+  layerchart@0.52.1(svelte@4.2.19)(typescript@5.6.2):
     dependencies:
+      '@layerstack/svelte-actions': 0.0.4
+      '@layerstack/svelte-stores': 0.0.4
+      '@layerstack/tailwind': 0.0.6
+      '@layerstack/utils': 0.0.4
       d3-array: 3.2.4
       d3-color: 3.1.0
       d3-delaunay: 6.0.4
@@ -7058,18 +7111,9 @@ snapshots:
       posthog-js: 1.157.1
       shapefile: 0.6.6
       svelte: 4.2.19
-      svelte-ux: 0.74.9(@babel/core@7.24.3)(postcss-load-config@4.0.2(postcss@8.4.47))(postcss@8.4.47)(sass@1.79.3)(svelte@4.2.19)
       topojson-client: 3.1.0
     transitivePeerDependencies:
-      - '@babel/core'
-      - coffeescript
-      - less
-      - postcss
-      - postcss-load-config
-      - pug
-      - sass
-      - stylus
-      - sugarss
+      - ts-node
       - typescript
 
   leven@3.1.0: {}
