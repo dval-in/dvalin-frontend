@@ -8,7 +8,17 @@
 	import Text from '$lib/components/typography/Text.svelte';
 	import { useQueryClient } from '@tanstack/svelte-query';
 	import { toast } from 'svelte-sonner';
-	import { mdiCheck, mdiCloudSync, mdiFile, mdiHumanQueue, mdiLink, mdiLogin } from '@mdi/js';
+	import {
+		mdiAndroid,
+		mdiApple,
+		mdiCheck,
+		mdiCloudSync,
+		mdiFileUpload,
+		mdiHumanQueue,
+		mdiLaptop,
+		mdiLink,
+		mdiLogin
+	} from '@mdi/js';
 	import Icon from '$lib/components/ui/icon/icon.svelte';
 	import IconButton from '$lib/components/ui/icon-button/IconButton.svelte';
 	import { applicationState } from '$lib/store/application_state';
@@ -16,6 +26,8 @@
 	import { openFileDialog } from '$lib/utils';
 	import dayjs from 'dayjs';
 	import relativeTime from 'dayjs/plugin/relativeTime';
+	import { get } from 'svelte/store';
+	import { Step, Steps } from 'svelte-ux';
 
 	let wishURL = '';
 
@@ -31,14 +43,11 @@
 		if (target.files && target.files.length === 1) {
 			target.files[0].text().then((streamResult) => {
 				const regex =
-					/(https:\/\/www.|http:\/\/www.|https:\/\/|http:\/\/)?gs.hoyoverse.com\/genshin\/event\/e20190909gacha-v3\/index.html(.*?)&game_biz=hk4e_global/g;
+					/(https:\/\/www.|http:\/\/www.|https:\/\/|http:\/\/)?(.*?)(hoyoverse.com|mihoyo.com)(.*?)\/e20190909gacha-v3(.*?)&game_biz=hk4e_global/g;
 				const matchResult = streamResult.match(regex);
 
 				if (matchResult === null || matchResult.length === 0) {
-					toast.error(
-						'File does not contain wish url. Please make sure to select the right file.'
-					);
-
+					toast.error(get(i18n).t('wish.import.file_empty'));
 					return;
 				}
 
@@ -50,20 +59,20 @@
 	};
 
 	const fetchHoyoWishHistory = () => {
-		if (!wishURL.includes('gacha_id')) {
-			toast.error('Wrong url');
+		if (!URL.canParse(wishURL)) {
+			toast.error(get(i18n).t('wish.import.invalid_text'));
 			return;
 		}
 
-		if (!URL.canParse(wishURL)) {
-			toast.error('Url brokey');
+		if (!wishURL.includes('e20190909gacha-v3') && !wishURL.includes('getGachaLog')) {
+			toast.error(get(i18n).t('wish.import.invalid_url'));
 			return;
 		}
 
 		const authkey = new URL(wishURL).searchParams.get('authkey');
 
 		if (authkey === null) {
-			toast.error('Wrong url, missing authkey');
+			toast.error(get(i18n).t('wish.import.no_authkey'));
 			return;
 		}
 
@@ -72,12 +81,10 @@
 		$mutateHoyoWishHistory.mutateAsync(encodedAuthKey, {
 			onSuccess: (response) => {
 				if (response.state === 'CREATED') {
-					toast.success('Created');
 					client.invalidateQueries({ queryKey: ['fetchHoyoWishhistoryStatus'] });
 				}
 			},
 			onError: (error) => {
-				console.log('abc');
 				toast.error(error.message);
 			}
 		});
@@ -100,49 +107,95 @@
 
 	{#if $fetchHoyoWishHistoryStatus.isSuccess}
 		{#if $fetchHoyoWishHistoryStatus.data.state === 'NO_JOB'}
-			<Tabs>
-				<TabsList>
-					<TabsTrigger value="pc">PC</TabsTrigger>
-					<TabsTrigger value="android">Android</TabsTrigger>
-					<TabsTrigger value="ios">iOS</TabsTrigger>
-				</TabsList>
-				<TabsContent value="pc">
-					<Text type="p">
-						{$i18n.t('wish.import.instructions.step1')}
-					</Text>
-					<Text type="p">{$i18n.t('wish.import.instructions.step2')}</Text>
-					<Text type="p">
-						{$i18n.t('wish.import.instructions.step3')}
-					</Text>
-					<Text type="p">{$i18n.t('wish.import.instructions.step4')}</Text>
-					<Text type="p">{$i18n.t('wish.import.instructions.step5')}</Text>
-					<IconButton icon={mdiFile} on:click={() => openFileDialog(processFile)}>
-						{$i18n.t('action.select_file')}
-					</IconButton>
-				</TabsContent>
-				<TabsContent value="android">
-					<Text type="p">Use Ascent by 403f</Text>
-					<IconButton icon={mdiLink} href="https://github.com/4o3F/Ascent">
-						Github
-					</IconButton>
-				</TabsContent>
-				<TabsContent value="ios">
-					<Text type="p"></Text>
-				</TabsContent>
-			</Tabs>
+			<div class="flex flex-col gap-2 justify-start">
+				<Steps
+					vertical
+					classes={{
+						item: { point: 'size-6 text-xs bg-primary', line: 'h-1 bg-primary' }
+					}}
+				>
+					<Step completed><Text type="h4">Select your platform</Text></Step>
+					<Step completed><Text type="h4">Select your platform</Text></Step>
+					<Tabs>
+						<Step completed>
+							<Text type="h4">Select your platform</Text>
 
-			<Label for="wishurl">Wish URL</Label>
-			<Input
-				id="wishurl"
-				bind:value={wishURL}
-				placeholder="https://webstatic-sea.hoyoverse.com/genshin/event/e20190909gacha-v3/index.html?authkey=.......&game_biz=hk4e_global"
-			/>
-			<Button
-				on:click={fetchHoyoWishHistory}
-				disabled={$mutateHoyoWishHistory.isPending || wishURL === ''}
-			>
-				Import History
-			</Button>
+							<TabsList>
+								<TabsTrigger value="pc">
+									<Icon path={mdiLaptop} class="mr-2" />PC
+								</TabsTrigger>
+								<TabsTrigger value="android">
+									<Icon path={mdiAndroid} class="mr-2" />Android
+								</TabsTrigger>
+								<TabsTrigger value="ios">
+									<Icon path={mdiApple} class="mr-2" />iOS
+								</TabsTrigger>
+							</TabsList>
+						</Step>
+						<TabsContent value="pc">
+							<Step completed>
+								<Text type="p">
+									{$i18n.t('wish.import.instructions.pc.step1')}
+								</Text>
+								<Text type="p">
+									{$i18n.t('wish.import.instructions.pc.step2')}
+								</Text>
+								<Text type="p">
+									{$i18n.t('wish.import.instructions.pc.step3')}
+								</Text>
+								<Text type="p">
+									{$i18n.t('wish.import.instructions.pc.step4')}
+								</Text>
+								<Text type="p">
+									{$i18n.t('wish.import.instructions.pc.step5')}
+								</Text>
+							</Step>
+							<Step completed>
+								<Text type="h4">Upload your file</Text>
+								<IconButton
+									icon={mdiFileUpload}
+									on:click={() => openFileDialog(processFile)}
+								>
+									{$i18n.t('action.select_file')}
+								</IconButton>
+							</Step>
+						</TabsContent>
+						<TabsContent value="android">
+							<div class="flex flex-col">
+								<Text type="p">Use Ascent by 403f</Text>
+								<IconButton icon={mdiLink} href="https://github.com/4o3F/Ascent">
+									Github
+								</IconButton>
+								<Label for="wishurl">Wish URL</Label>
+								<Input
+									id="wishurl"
+									bind:value={wishURL}
+									placeholder="https://webstatic-sea.hoyoverse.com/genshin/event/e20190909gacha-v3/index.html?authkey=.......&game_biz=hk4e_global"
+								/>
+							</div>
+						</TabsContent>
+						<TabsContent value="ios">
+							<Text type="p"></Text>
+							<Label for="wishurl">Wish URL</Label>
+							<Input
+								id="wishurl"
+								bind:value={wishURL}
+								placeholder="https://webstatic-sea.hoyoverse.com/genshin/event/e20190909gacha-v3/index.html?authkey=.......&game_biz=hk4e_global"
+							/>
+						</TabsContent>
+					</Tabs>
+
+					<Step completed>
+						<Text type="h4">Import your wishes</Text>
+						<Button
+							on:click={fetchHoyoWishHistory}
+							disabled={$mutateHoyoWishHistory.isPending || wishURL === ''}
+						>
+							Import wishes
+						</Button>
+					</Step>
+				</Steps>
+			</div>
 		{:else if $fetchHoyoWishHistoryStatus.data.state === 'QUEUED'}
 			<div class="flex flex-1 flex-col justify-center items-center gap-6">
 				<Icon path={mdiHumanQueue} class="size-52" />
