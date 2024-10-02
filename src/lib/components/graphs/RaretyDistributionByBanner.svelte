@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { scaleOrdinal } from 'd3-scale';
-	import { Chart, Pie, Svg, Tooltip, TooltipItem } from 'layerchart';
+	import { Chart, Pie, Svg, Tooltip } from 'layerchart';
 	import type { IWish } from '$lib/types/wish';
 	import { derived, type Readable } from 'svelte/store';
 
@@ -41,15 +41,27 @@
 		<Svg>
 			<Pie {tooltip} />
 		</Svg>
-		<Tooltip class="bg-neutral" let:data>
-			<TooltipItem format="integer" label="Star" value={data.rarity} valueAlign="right" />
-			<TooltipItem format="integer" label="value" value={data.value} valueAlign="right" />
-			<TooltipItem
-				format="percent"
-				label="percent"
-				value={data.value / $wishData.length}
-				valueAlign="right"
-			/>
-		</Tooltip>
+		<Tooltip.Root class="bg-neutral" let:data>
+			<Tooltip.List>
+				<Tooltip.Item
+					format="integer"
+					label="Star"
+					value={data.rarity}
+					valueAlign="right"
+				/>
+				<Tooltip.Item
+					format="integer"
+					label="value"
+					value={data.value}
+					valueAlign="right"
+				/>
+				<Tooltip.Item
+					format="percent"
+					label="percent"
+					value={data.value / $wishData.length}
+					valueAlign="right"
+				/>
+			</Tooltip.List>
+		</Tooltip.Root>
 	</Chart>
 </div>

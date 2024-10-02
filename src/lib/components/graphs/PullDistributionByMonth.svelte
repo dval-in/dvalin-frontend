@@ -1,17 +1,5 @@
 <script lang="ts">
 	import { scaleOrdinal, scaleTime } from 'd3-scale';
-	import {
-		Area,
-		AreaStack,
-		Axis,
-		Chart,
-		Highlight,
-		Legend,
-		LinearGradient,
-		RectClipPath,
-		Svg,
-		Tooltip
-	} from 'layerchart';
 	import { stack } from 'd3-shape';
 	import { flatten } from 'svelte-ux/utils/array';
 	import type { WishBannerKey } from '$lib/types/keys/WishBannerKey';
@@ -21,6 +9,18 @@
 	import { applicationState } from '$lib/store/application_state';
 	import { derived, type Readable } from 'svelte/store';
 	import type { INamedWishes, IWish } from '$lib/types/wish';
+	import {
+		Area,
+		Axis,
+		Chart,
+		chartDataArray,
+		Highlight,
+		Legend,
+		LinearGradient,
+		RectClipPath,
+		Svg,
+		Tooltip
+	} from 'layerchart';
 
 	export let data: Readable<INamedWishes>;
 
@@ -119,7 +119,7 @@
 		r="key"
 		rDomain={keys}
 		rRange={colorKeys}
-		rScale={scaleOrdinal()}
+		cScale={scaleOrdinal()}
 		tooltip={{ mode: 'bisect-x' }}
 		x={(d) => d.data.date}
 		xScale={scaleTime()}
@@ -145,47 +145,41 @@
 				placement="bottom"
 				rule
 			/>
-			<AreaStack let:data>
-				{@const primaryColorScale = scaleOrdinal([
-					colorKeys[2],
-					colorKeys[1],
-					colorKeys[0]
-				])}
-				{@const secondaryColorScale = scaleOrdinal([
-					`hsl(${hexToHSL(colorKeys[2])}, 0.2)`,
-					`hsl(${hexToHSL(colorKeys[1])}, 0.2)`,
-					`hsl(${hexToHSL(colorKeys[0])}, 0.2)`
-				])}
-				{#each data as seriesData, index}
-					{@const primaryColor = primaryColorScale(String(index))}
-					{@const secondaryColor = secondaryColorScale(String(index))}
-					<LinearGradient stops={[primaryColor, secondaryColor]} vertical let:url>
+			{@const primaryColorScale = scaleOrdinal([colorKeys[2], colorKeys[1], colorKeys[0]])}
+			{@const secondaryColorScale = scaleOrdinal([
+				`hsl(${hexToHSL(colorKeys[2])}, 0.2)`,
+				`hsl(${hexToHSL(colorKeys[1])}, 0.2)`,
+				`hsl(${hexToHSL(colorKeys[0])}, 0.2)`
+			])}
+			{#each chartDataArray($getMonthlyData) as seriesData, index}
+				{@const primaryColor = primaryColorScale(String(index))}
+				{@const secondaryColor = secondaryColorScale(String(index))}
+				<LinearGradient stops={[primaryColor, secondaryColor]} vertical let:url>
+					<Area
+						data={seriesData}
+						y0={(d) => d[0]}
+						y1={(d) => d[1]}
+						fill={url}
+						fill-opacity={0.5}
+						line={{ stroke: primaryColor, 'stroke-width': 2 }}
+					/>
+					<RectClipPath
+						x={0}
+						y={0}
+						width={tooltip.data ? tooltip.x : width}
+						{height}
+						spring
+					>
 						<Area
 							data={seriesData}
 							y0={(d) => d[0]}
 							y1={(d) => d[1]}
 							fill={url}
-							fill-opacity={0.5}
 							line={{ stroke: primaryColor, 'stroke-width': 2 }}
 						/>
-						<RectClipPath
-							x={0}
-							y={0}
-							width={tooltip.data ? tooltip.x : width}
-							{height}
-							spring
-						>
-							<Area
-								data={seriesData}
-								y0={(d) => d[0]}
-								y1={(d) => d[1]}
-								fill={url}
-								line={{ stroke: primaryColor, 'stroke-width': 2 }}
-							/>
-						</RectClipPath>
-					</LinearGradient>
-				{/each}
-			</AreaStack>
+					</RectClipPath>
+				</LinearGradient>
+			{/each}
 
 			<Highlight lines={{ class: 'stroke-text [stroke-dasharray:unset]' }} />
 		</Svg>
@@ -206,13 +200,10 @@
 			{/if}
 		</Legend>
 
-		<Tooltip
-			class="bg-neutral"
-			header={(data) => 'Total pulls: ' + (data.data['3'] + data.data['4'] + data.data['5'])}
-			let:data
-			x="data"
-			y={0}
-		>
+		<Tooltip.Root class="bg-neutral" let:data x="data" y={0}>
+			<Tooltip.Header>
+				{'Total pulls: ' + (data.data['3'] + data.data['4'] + data.data['5'])}
+			</Tooltip.Header>
 			<div class="flex flex-col gap-2 justify-center items-start">
 				{#each keys as key}
 					<div class="flex gap-1 justify-center items-center">
@@ -224,8 +215,8 @@
 					</div>
 				{/each}
 			</div>
-		</Tooltip>
-		<Tooltip
+		</Tooltip.Root>
+		<Tooltip.Root
 			anchor="top"
 			class="text-sm font-semibold bg-primary text-text-content leading-3 px-2 py-1 rounded whitespace-nowrap"
 			let:data
@@ -237,6 +228,6 @@
 				month: 'long',
 				year: 'numeric'
 			})}
-		</Tooltip>
+		</Tooltip.Root>
 	</Chart>
 </div>
