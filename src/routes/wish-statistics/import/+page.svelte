@@ -80,15 +80,15 @@
 					<TabsTrigger value="nswitch">Nintendo Switch</TabsTrigger>
 				</TabsList>
 				<TabsContent value="pc">
-					<Text type="p">
-						{$i18n.t('wish.import.instructions.step1')}
-					</Text>
+					<Text type="p">{$i18n.t('wish.import.instructions.step1')}</Text>
 					<Text type="p">{$i18n.t('wish.import.instructions.step2')}</Text>
-					<Text type="p">
-						{$i18n.t('wish.import.instructions.step3')}
-					</Text>
+					<Text type="p">{$i18n.t('wish.import.instructions.step3')}</Text>
 					<Text type="p">{$i18n.t('wish.import.instructions.step4')}</Text>
 					<Text type="p">{$i18n.t('wish.import.instructions.step5')}</Text>
+					<Text type="p">{$i18n.t('wish.import.instructions.step6')}</Text>
+					<Text type="p">{$i18n.t('wish.import.instructions.step7')}</Text>
+					<Text type="p">{$i18n.t('wish.import.instructions.step8')}</Text>
+					<Text type="p">{$i18n.t('wish.import.instructions.step9')}</Text>
 				</TabsContent>
 				<TabsContent value="android">
 					<Text type="p">Use Ascent by 403f</Text>
