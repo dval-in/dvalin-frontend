@@ -114,7 +114,7 @@
 			<Input
 				id="wishurl"
 				bind:value={wishURL}
-				placeholder="https://webstatic-sea.hoyoverse.com/genshin/event/e20190909gacha-v3/index.html?authkey=.......&game_biz=hk4e_global"
+				placeholder="https://public-operation-hk4e-sg.hoyoverse.com/genshin/event/e20190909gacha-v3/index.html?authkey=....&game_biz=hk4e_global"
 			/>
 			<Button
 				on:click={fetchHoyoWishHistory}
