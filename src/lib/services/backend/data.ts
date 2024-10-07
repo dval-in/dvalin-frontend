@@ -2,12 +2,13 @@ import { get } from 'svelte/store';
 import i18n from '$lib/services/i18n/index';
 import type { CharacterKey } from '$lib/types/keys/CharacterKey';
 import type { WeaponKey } from '$lib/types/keys/WeaponKey';
-import { createQuery, type QueryClient } from '@tanstack/svelte-query';
+import { createQuery, type CreateQueryResult, type QueryClient } from '@tanstack/svelte-query';
 import { backendFetch } from '$lib/services/backend/index';
 import type { CharacterIndex } from '$lib/types/index/character';
 import type { WeaponIndex } from '$lib/types/index/weapon';
 import type { Character } from '$lib/types/data/Character';
 import type { Weapon } from '$lib/types/data/Weapon';
+import type { mergedAchievements } from '$lib/types/achievement';
 
 type FetchCharacterDataIndexResponse = CharacterIndex;
 type FetchWeaponDataIndexResponse = WeaponIndex;
@@ -79,5 +80,33 @@ export class BackendDataService {
 
 	getWeaponDataUrl(weapon: WeaponKey) {
 		return `${this.baseUrl}/Weapon/${weapon}?lang=${get(i18n).language}`;
+	}
+
+	fetchAchievementCategoryList(lang: string): CreateQueryResult<string[]> {
+		return createQuery(
+			{
+				queryKey: ['fetchAchievementCategoryList', lang],
+				queryFn: async () => await backendFetch(this.getAchievementCategoryListUrl(lang))
+			},
+			this.queryClient
+		);
+	}
+
+	getAchievementCategoryListUrl(lang: string): string {
+		return `${this.baseUrl}/Achievement/index?lang=${lang}`;
+	}
+
+	fetchAchievements(lang: string, category: string): CreateQueryResult<mergedAchievements> {
+		return createQuery(
+			{
+				queryKey: ['fetchAchievement', lang, category],
+				queryFn: async () => await backendFetch(this.getAchievementListUrl(lang, category))
+			},
+			this.queryClient
+		);
+	}
+
+	getAchievementListUrl(lang: string, category: string): string {
+		return `${this.baseUrl}/Achievement/${category}?lang=${lang}`;
 	}
 }
