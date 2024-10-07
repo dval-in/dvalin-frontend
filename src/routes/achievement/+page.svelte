@@ -8,6 +8,8 @@
 	import AchievementCategoryCard from '$lib/components/achievement/AchievementCategoryCard.svelte';
 	import AchievementList from '$lib/components/achievement/AchievementList.svelte';
 	import { X } from 'lucide-svelte';
+	import Button from '$lib/components/ui/button/button.svelte';
+	import ScrollArea from '$lib/components/ui/scroll-area/scroll-area.svelte';
 
 	const lang = $i18n.language;
 	const backend = BackendService.getInstance();
@@ -67,18 +69,23 @@
 	function closeAchievementList() {
 		selectedCategory = null;
 	}
+
+	function randomInt(min: number, max: number) {
+		return Math.floor(Math.random() * (max - min + 1)) + min;
+	}
 </script>
 
 <div class="flex">
 	{#if selectedCategory}
-		<div class="w-1/4 p-4">
+		<ScrollArea class="w-1/3 p-4 h-screen">
 			{#each Object.entries($achievements) as [category, achievementData]}
 				{#if achievementData}
 					<div class="mb-4">
 						<AchievementCategoryCard
-							name={category}
+							name={achievementData.name}
 							img={achievementData.image || ''}
 							total={achievementData.achievements.length}
+							isSelected={category === selectedCategory}
 							achieved={0}
 							inSidebar={true}
 							on:click={() => handleCategoryClick(category)}
@@ -86,14 +93,13 @@
 					</div>
 				{/if}
 			{/each}
-		</div>
-		<div class="w-3/4 p-4 relative">
-			<button
-				class="absolute top-2 right-2 p-2 rounded-full transition-colors duration-200"
-				on:click={closeAchievementList}
-			>
-				<X size={24} />
-			</button>
+		</ScrollArea>
+		<div class="w-3/4 p-4">
+			<div class="w-full flex flex-row-reverse">
+				<Button class="p-2 bg-transparent" on:click={closeAchievementList}>
+					<X size={24} />
+				</Button>
+			</div>
 			<AchievementList achievements={$achievements[selectedCategory]?.achievements || []} />
 		</div>
 	{:else}
@@ -101,7 +107,7 @@
 			{#if isLoading}
 				<p>Loading achievements...</p>
 			{:else}
-				<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+				<div class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
 					{#each Object.entries($achievements) as [category, achievementData]}
 						{#if achievementData}
 							<div class="achievement-category">
@@ -109,7 +115,7 @@
 									name={achievementData.name}
 									img={achievementData.image || ''}
 									total={achievementData.achievements.length}
-									achieved={0}
+									achieved={randomInt(0, achievementData.achievements.length)}
 									inSidebar={false}
 									on:click={() => handleCategoryClick(category)}
 								/>

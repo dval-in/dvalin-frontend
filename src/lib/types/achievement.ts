@@ -22,4 +22,5 @@ export type achievementData = {
 	desc: string;
 	reward: number;
 	order: number;
+	preStage?: number;
 };
