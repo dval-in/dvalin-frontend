@@ -1,5 +1,8 @@
 export type IAchievements = {
-	[key in number]: boolean;
+	[key in number]: {
+		achieved: boolean;
+		progression: string;
+	};
 };
 
 export type mergedAchievements = {
@@ -23,4 +26,6 @@ export type achievementData = {
 	reward: number;
 	order: number;
 	preStage?: number;
+	achieved?: boolean;
+	progression?: string;
 };

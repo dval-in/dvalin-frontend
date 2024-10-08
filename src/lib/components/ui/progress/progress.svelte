@@ -15,7 +15,7 @@
 	{...$$restProps}
 >
 	<div
-		class="h-full w-full flex-1 bg-primary transition-all"
+		class="h-full w-full flex-1 bg-primary/80 transition-all"
 		style={`transform: translateX(-${100 - percent}%)`}
 	/>
 	<p class="h-full absolute left-1/2 top-0 -translate-x-1/2 text-xs">
