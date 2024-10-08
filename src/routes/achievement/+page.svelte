@@ -40,23 +40,8 @@
 
 	async function fetchAchievementsAndImages() {
 		if ($categoriesQuery.isSuccess && $categoriesQuery.data) {
-			const specialOrder = ['WondersOfTheWorld', 'MemoriesOfTheHeart'];
-
-			const sortedCategories = $categoriesQuery.data.sort((a, b) => {
-				const indexA = specialOrder.indexOf(a);
-				const indexB = specialOrder.indexOf(b);
-
-				if (indexA !== -1 || indexB !== -1) {
-					// If either is a special category, sort based on the special order
-					return (
-						(indexA === -1 ? specialOrder.length : indexA) -
-						(indexB === -1 ? specialOrder.length : indexB)
-					);
-				}
-
-				// For all other categories, sort alphabetically
-				return a.localeCompare(b);
-			});
+			const sortedCategories = ['WondersOfTheWorld', 'MemoriesOfTheHeart'];
+			sortedCategories.push(...$categoriesQuery.data.sort((a, b) => a.localeCompare(b)));
 			const categoryPromises = sortedCategories.map(async (category) => {
 				const query = backend.data.fetchAchievements(lang, category);
 				$achievementsQueries[category] = query;
@@ -82,7 +67,9 @@
 							progression: userAchievement?.progression ?? '',
 							version: achievement.version
 								? achievement.version
-								: achievementData.version
+								: achievementData.id === 'WondersOfTheWorld'
+									? '0.0'
+									: achievementData.version
 						};
 					});
 
