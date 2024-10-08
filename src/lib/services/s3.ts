@@ -20,6 +20,10 @@ export default class S3Service {
 	public static getNamecard(key: string) {
 		return new S3NamecardBucket(key);
 	}
+
+	public static getAchievementCategory(achievementCategory: string) {
+		return new S3AchievementBucket(achievementCategory);
+	}
 }
 
 class S3NamecardBucket {
@@ -73,5 +77,16 @@ class S3ArtifactBucket {
 		this.goblet = this.baseUrl + '/goblet.webp';
 		this.plume = this.baseUrl + '/plume.webp';
 		this.sands = this.baseUrl + '/sands.webp';
+	}
+}
+
+class S3AchievementBucket {
+	private readonly baseUrl: string;
+
+	public icon;
+
+	public constructor(achievementCategory: string) {
+		this.baseUrl = S3Service.baseUrl + '/achievements/categories/' + achievementCategory;
+		this.icon = this.baseUrl + '.webp';
 	}
 }
