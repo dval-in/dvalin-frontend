@@ -18,6 +18,8 @@
 	import IconButton from '$lib/components/ui/icon-button/IconButton.svelte';
 	import { DropdownMenuItem } from '$lib/components/ui/dropdown-menu';
 	import Icon from '$lib/components/ui/icon/icon.svelte';
+	import * as Tabs from '$lib/components/ui/tabs';
+	import Badge from '$lib/components/ui/badge/badge.svelte';
 
 	const lang = $i18n.language;
 	const backend = BackendService.getInstance();
@@ -38,13 +40,21 @@
 
 	async function fetchAchievementsAndImages() {
 		if ($categoriesQuery.isSuccess && $categoriesQuery.data) {
-			const sortedCategories = $categoriesQuery.data.sort((a, b) => {
-				// Special cases: these two categories should come first
-				if (a === 'WondersOfTheWorld') return -1;
-				if (b === 'WondersOfTheWorld') return 1;
-				if (a === 'MemoriesOfTheHeart') return -1;
-				if (b === 'MemoriesOfTheHeart') return 1;
+			const specialOrder = ['WondersOfTheWorld', 'MemoriesOfTheHeart'];
 
+			const sortedCategories = $categoriesQuery.data.sort((a, b) => {
+				const indexA = specialOrder.indexOf(a);
+				const indexB = specialOrder.indexOf(b);
+
+				if (indexA !== -1 || indexB !== -1) {
+					// If either is a special category, sort based on the special order
+					return (
+						(indexA === -1 ? specialOrder.length : indexA) -
+						(indexB === -1 ? specialOrder.length : indexB)
+					);
+				}
+
+				// For all other categories, sort alphabetically
 				return a.localeCompare(b);
 			});
 			const categoryPromises = sortedCategories.map(async (category) => {
@@ -102,14 +112,25 @@
 	}
 
 	let showUnDoneFirst = false;
-	let selectedFilters = {
+	let selectedFilters: { [key: string]: string | null } = {
 		hidden: null,
 		type: null,
 		version: null
 	};
 
+	$: dynamicBadge = Object.entries(selectedFilters).reduce(
+		(acc, [key, value]) => {
+			if (value !== null) {
+				acc[key] = value;
+			}
+			return acc;
+		},
+		{} as { [key: string]: string }
+	);
+
 	function handleFilterChange(filterType: string, value: any) {
 		selectedFilters[filterType as 'hidden' | 'type' | 'version'] = value;
+		console.log(selectedFilters);
 	}
 
 	$: filteredAchievements =
@@ -117,14 +138,14 @@
 			? $achievements[selectedCategory]!.achievements.filter((achievement) => {
 					if (
 						selectedFilters.hidden !== null &&
-						achievement.hidden !== selectedFilters.hidden
+						(!selectedFilters.hidden || achievement.hidden !== selectedFilters.hidden)
 					)
 						return false;
 					if (selectedFilters.type !== null && achievement.type !== selectedFilters.type)
 						return false;
 					if (
 						selectedFilters.version !== null &&
-						achievement.version !== selectedFilters.version
+						!achievement.version.startsWith(selectedFilters.version)
 					)
 						return false;
 					return true;
@@ -134,7 +155,13 @@
 	$: filterOptions =
 		selectedCategory && $achievements[selectedCategory]
 			? {
-					hidden: [true, false],
+					hidden: Array.from(
+						new Set(
+							$achievements[selectedCategory]!.achievements.map(
+								(a) => a.hidden
+							).filter(Boolean)
+						)
+					),
 					type: Array.from(
 						new Set(
 							$achievements[selectedCategory]!.achievements.map((a) => a.type).filter(
@@ -145,8 +172,12 @@
 					version: Array.from(
 						new Set(
 							$achievements[selectedCategory]!.achievements.map(
-								(a) => a.version
-							).filter(Boolean)
+								(a) => a.version.split('.')[0] + '.X'
+							)
+								.filter(Boolean)
+								.sort((a, b) => {
+									return Number(a[0]) - Number(b[0]);
+								})
 						)
 					)
 				}
@@ -164,47 +195,62 @@
 				return mdiFilter;
 		}
 	}
+
+	function getVersionSubmenu(majorVersion: string) {
+		return $achievements[selectedCategory!]!.achievements.map((a) => a.version)
+			.filter((v) => v.startsWith(majorVersion.split('.')[0]))
+			.reduce((acc, curr) => {
+				const minorVersion = curr.split('.')[1];
+				if (!acc.includes(minorVersion)) {
+					acc.push(minorVersion);
+				}
+				return acc;
+			}, [] as string[])
+			.sort((a, b) => parseInt(a) - parseInt(b));
+	}
 </script>
 
-<DefaultLayout title={'Achievement'}>
-	<div class="flex">
+<DefaultLayout title={$i18n.t('achievement.title')}>
+	<div class="flex flex-col md:flex-row">
 		{#if selectedCategory}
-			<ScrollArea class="w-1/3 p-4 pl-0 h-screen">
-				{#each Object.entries($achievements) as [category, achievementData]}
-					{#if achievementData}
-						<div class="mb-4">
-							<AchievementCategoryCard
-								name={achievementData.name}
-								img={achievementData.image || ''}
-								total={achievementData.achievements.length}
-								isSelected={category === selectedCategory}
-								achieved={achievementData.achievements.filter((a) => a.achieved)
-									.length}
-								inSidebar={true}
-								on:click={() => handleCategoryClick(category)}
-							/>
-						</div>
-					{/if}
-				{/each}
+			<ScrollArea class="md:w-1/3 p-4 w-full pl-0 md:h-screen" orientation="both">
+				<div class="flex flex-row md:flex-col gap-2">
+					{#each Object.entries($achievements) as [category, achievementData]}
+						{#if achievementData}
+							<div class="md:mb-4 w-full">
+								<AchievementCategoryCard
+									name={achievementData.name}
+									img={achievementData.image || ''}
+									total={achievementData.achievements.length}
+									isSelected={category === selectedCategory}
+									achieved={achievementData.achievements.filter((a) => a.achieved)
+										.length}
+									inSidebar={true}
+									on:click={() => handleCategoryClick(category)}
+								/>
+							</div>
+						{/if}
+					{/each}
+				</div>
 			</ScrollArea>
-			<div class="w-3/4 p-4">
-				<div class="w-full flex flex-row-reverse gap-4 mb-4">
+			<div class="md:w-3/4 p-4">
+				<div class="w-full flex flex-row-reverse flex-wrap gap-4 mb-4">
 					<Button class="p-2 bg-transparent" on:click={closeAchievementList}>
 						<X size={24} />
 					</Button>
 					<div class="flex flex-row items-center gap-2">
 						<Checkbox bind:checked={showUnDoneFirst} />
-						<p>Show unachieved first</p>
+						<p>{$i18n.t('achievement.unachieved')}</p>
 					</div>
+
 					{#each Object.entries(filterOptions) as [filterType, options]}
 						<DrawerDropdown>
 							<svelte:fragment slot="trigger">
 								<IconButton icon={getFilterIcon(filterType)} class={`flex w-full`}>
-									{$i18n.t(`filter.${filterType}`, {
-										value:
-											selectedFilters[filterType] !== null
-												? selectedFilters[filterType]
-												: $i18n.t('filter.all')
+									{$i18n.t(`achievement.filter.${filterType}`, {
+										value: selectedFilters[filterType]
+											? selectedFilters[filterType]
+											: $i18n.t('achievement.filter.all')
 									})}
 								</IconButton>
 							</svelte:fragment>
@@ -214,19 +260,64 @@
 									on:click={() => handleFilterChange(filterType, null)}
 								>
 									<Icon path={mdiFilter} />
-									{$i18n.t('filter.all')}
+									{$i18n.t('achievement.filter.all')}
 								</DropdownMenuItem>
-								{#each options as option}
-									<DropdownMenuItem
-										class="flex hover:bg-tertiary gap-2"
-										on:click={() => handleFilterChange(filterType, option)}
-									>
-										<Icon path={getFilterIcon(filterType)} />
-										{$i18n.t(`filter.${filterType}_${option}`)}
-									</DropdownMenuItem>
-								{/each}
+								{#if filterType === 'version'}
+									<Tabs.Root value="1.X" class="min-w-[200px]">
+										<Tabs.List>
+											{#each options as majorVersion}
+												<Tabs.Trigger value={majorVersion}>
+													{majorVersion}
+												</Tabs.Trigger>
+											{/each}
+										</Tabs.List>
+										{#each options as majorVersion}
+											<Tabs.Content value={majorVersion}>
+												<div
+													class="grid grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-3"
+												>
+													{#each getVersionSubmenu(majorVersion) as minorVersion}
+														<Button
+															on:click={() =>
+																handleFilterChange(
+																	filterType,
+																	`${majorVersion.split('.')[0]}.${minorVersion}`
+																)}
+															class="bg-tertiary"
+														>
+															{`${majorVersion.split('.')[0]}.${minorVersion}`}
+														</Button>
+													{/each}
+												</div>
+											</Tabs.Content>
+										{/each}
+									</Tabs.Root>
+								{:else}
+									{#each options as option}
+										<DropdownMenuItem
+											class="flex hover:bg-tertiary gap-2"
+											on:click={() => handleFilterChange(filterType, option)}
+										>
+											<Icon path={getFilterIcon(filterType)} />
+											{option}
+										</DropdownMenuItem>
+									{/each}
+								{/if}
 							</svelte:fragment>
 						</DrawerDropdown>
+					{/each}
+				</div>
+				<div class="flex flex-row items-center">
+					{#each Object.entries(dynamicBadge) as [filter, value]}
+						<Badge
+							class="flex flex-row items-center justify-between"
+							isClosing
+							onClose={() => {
+								handleFilterChange(filter, null);
+							}}
+						>
+							{value}
+						</Badge>
 					{/each}
 				</div>
 

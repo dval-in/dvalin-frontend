@@ -40,11 +40,11 @@
 	aria-label={`${name} - ${achieved} out of ${total} achieved`}
 >
 	{#if inSidebar}
-		<div class="flex p-2 h-full justify-center">
-			<img alt={name} class="object-contain h-20" src={img} />
+		<div class="flex p-2 md:h-full justify-center">
+			<img alt={name} class="object-contain w-20 max-w-none md:w-auto md:h-20" src={img} />
 		</div>
 		<div class={'text-left w-full content-end mx-3 my-3'}>
-			<Text type="p" class="font-bold">
+			<Text type="p" class="font-bold line-clamp-2 text-ellipsis overflow-hidden min-w-28">
 				{name}
 			</Text>
 			<Progress value={achieved} max={total} class="left" />

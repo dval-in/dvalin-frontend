@@ -12,6 +12,9 @@
 	import { debounce } from 'lodash-es';
 	import { socketStore } from '$lib/services/socketServer';
 	import type { Socket } from 'socket.io-client';
+	import i18n from '$lib/services/i18n';
+	import Icon from '$lib/components/ui/icon/icon.svelte';
+	import { mdiStarFourPoints } from '@mdi/js';
 
 	export let achievements: achievementData[];
 	export let showUnDoneFirst: boolean = false;
@@ -134,8 +137,8 @@
 						<Text type="h4">{achievement.name}</Text>
 						<Text type="p">{achievement.desc}</Text>
 						<div class="flex flex-row gap-2">
-							{#if achievement.hidden}
-								<Badge variant="secondary">Hidden</Badge>
+							{#if achievement.hidden === 'Yes'}
+								<Badge variant="secondary">Hidden {achievement.hidden}</Badge>
 							{/if}
 							{#if achievement.type}
 								<Badge variant="secondary">{achievement.type}</Badge>
@@ -145,8 +148,11 @@
 							{/if}
 						</div>
 					</div>
-					<div class="flex flex-col">
-						<Text type="p">{achievement.reward}</Text>
+					<div class="flex flex-col items-center justify-center gap-2">
+						<Text type="p" class="flex flex-row items-center">
+							{achievement.reward}
+							<Icon path={mdiStarFourPoints} class="w-4" />
+						</Text>
 						<Checkbox
 							checked={achievementsState[achievement.id]?.achieved ||
 								achievement.achieved}
@@ -158,7 +164,9 @@
 				{#if achievement.requirements || achievement.steps}
 					<Collapsible>
 						<div class="flex flex-row items-center gap-2">
-							<CollapsibleTrigger>More info</CollapsibleTrigger>
+							<CollapsibleTrigger>
+								{$i18n.t('achievement.more_info')}
+							</CollapsibleTrigger>
 							<Separator class="w-2/3" />
 						</div>
 						<CollapsibleContent>
