@@ -10,10 +10,6 @@ export async function load({ params, parent, fetch }: PageLoadEvent) {
 	const lang = get(i18n).language;
 	const key = params.slug;
 
-	if (!isCharacterKey(key)) {
-		return error(404, 'Not found');
-	}
-
 	await queryClient.prefetchQuery({
 		queryKey: ['fetchCharacterData', lang, key],
 		queryFn: async () => (await fetch(backend.data.getCharacterDataUrl(lang, key))).json()

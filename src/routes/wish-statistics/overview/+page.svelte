@@ -17,7 +17,6 @@
 	import DefaultLayout from '$lib/components/layout/DefaultLayout.svelte';
 	import type { INamedWish, INamedWishes, IWish, IWishes } from '$lib/types/wish';
 	import { isWishBannerKey } from '$lib/types/keys/WishBannerKey';
-	import { isCharacterKey } from '$lib/types/keys/CharacterKey';
 	import { Card } from '$lib/components/ui/card';
 	import { CardContent, CardHeader } from '$lib/components/ui/card/index.js';
 	import { dataIndex } from '$lib/store/index_store';
@@ -29,12 +28,12 @@
 	const wishData = derived([userProfile, dataIndex], ([userProfileStore, dataIndexStore]) => {
 		const wishes: IWishes | undefined = userProfileStore.wishes;
 		const processedWishes: INamedWishes = {};
-
+		console.log(dataIndexStore);
 		if (wishes !== undefined) {
 			Object.keys(wishes).forEach((key: string) => {
 				if (isWishBannerKey(key)) {
 					processedWishes[key] = wishes[key]?.map((wish: IWish): INamedWish => {
-						const index = isCharacterKey(wish.key)
+						const index = dataIndexStore.character[wish.key]
 							? dataIndexStore.character[wish.key]
 							: dataIndexStore.weapon[wish.key];
 

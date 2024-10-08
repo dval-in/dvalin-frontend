@@ -1,7 +1,8 @@
 <script lang="ts">
 	import Text from '$lib/components/typography/Text.svelte';
 	import S3Service from '$lib/services/s3';
-	import { type CharacterKey, isCharacterKey } from '$lib/types/keys/CharacterKey';
+	import { dataIndex } from '$lib/store/index_store';
+	import { type CharacterKey } from '$lib/types/keys/CharacterKey';
 	import type { WeaponKey } from '$lib/types/keys/WeaponKey';
 
 	export let name: string;
@@ -9,7 +10,7 @@
 	export let counter: number;
 	export let wonFiftyFifty: boolean;
 
-	const imgUrl = isCharacterKey(key)
+	const imgUrl = $dataIndex.character[key]
 		? S3Service.getCharacter(key).icon
 		: S3Service.getWeapon(key).icon;
 </script>
