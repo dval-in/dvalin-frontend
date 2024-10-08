@@ -28,7 +28,6 @@
 	const wishData = derived([userProfile, dataIndex], ([userProfileStore, dataIndexStore]) => {
 		const wishes: IWishes | undefined = userProfileStore.wishes;
 		const processedWishes: INamedWishes = {};
-		console.log(dataIndexStore);
 		if (wishes !== undefined) {
 			Object.keys(wishes).forEach((key: string) => {
 				if (isWishBannerKey(key)) {
