@@ -23,6 +23,7 @@
 
 	let socket: Socket | null;
 	let achievementsState: { [key: number]: { achieved: boolean; progression: string } } = {};
+	let checkAllState: boolean = false;
 
 	$: sortedAchievements = showUnDoneFirst
 		? [...achievements].sort((a, b) => (a.achieved === b.achieved ? 0 : a.achieved ? 1 : -1))
@@ -124,6 +125,16 @@
 		);
 	}
 
+	function handleCheckAll(checked: boolean | 'indeterminate') {
+		if (checked === 'indeterminate') {
+			checked = false;
+		}
+		checkAllState = checked;
+		achievements.forEach((achievement) => {
+			updateAchievement(achievement.id, checked, checked ? '-1' : '0');
+		});
+	}
+
 	onMount(() => {
 		const unsubscribe = socketStore.subscribe((value) => {
 			socket = value;
@@ -137,6 +148,12 @@
 
 <ScrollArea class="h-screen">
 	<div class="flex flex-col">
+		<Card class="p-4 mb-4">
+			<div class="flex items-center gap-2">
+				<Checkbox checked={checkAllState} onCheckedChange={handleCheckAll} id="check-all" />
+				<Text type="h4">{$i18n.t('achievement.check_all')}</Text>
+			</div>
+		</Card>
 		{#each sortedAchievements as achievement}
 			<Card class={`${achievement.preStage ? '' : 'mt-4'} p-4`}>
 				<div class={`flex flex-row justify-between `}>
