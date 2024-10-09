@@ -143,7 +143,6 @@
 
 	function handleFilterChange(filterType: string, value: any) {
 		selectedFilters[filterType as 'hidden' | 'type' | 'version'] = value;
-		console.log(selectedFilters);
 	}
 
 	$: filteredAchievements =

@@ -32,7 +32,6 @@
 		config: ConfigData;
 	}) => {
 		const data = { ...user, config };
-		console.log(data);
 		await $createProfileMutation.mutateAsync(data, {
 			onError: (error) => {
 				toast.error($i18n.t('profile.create.error', { error: error.message }));

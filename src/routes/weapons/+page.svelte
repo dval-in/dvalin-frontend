@@ -91,22 +91,23 @@
 					},
 					{} as { [key: string]: IWeapon[] }
 				) || {};
-
-			return Object.keys(dataIndexStore.weapon).map((key) => {
-				const weapon = dataIndexStore.weapon[key];
-				const obtainedWeapons = obtainedWeaponsMap[key] || [];
-				const isObtained = obtainedWeapons.length > 0;
-				return {
-					obtained: isObtained,
-					link: `/weapons/${key}`,
-					name: weapon.name,
-					type: transformIntoWeapons(weapon.type),
-					img: S3Service.getWeapon(key).icon,
-					rarity: weapon.rarity,
-					owned: obtainedWeapons,
-					count: obtainedWeapons.length
-				};
-			});
+			return Object.keys(dataIndexStore.weapon)
+				.filter((key) => key !== 'Unknown3Star')
+				.map((key) => {
+					const weapon = dataIndexStore.weapon[key];
+					const obtainedWeapons = obtainedWeaponsMap[key] || [];
+					const isObtained = obtainedWeapons.length > 0;
+					return {
+						obtained: isObtained,
+						link: `/weapons/${key}`,
+						name: weapon.name,
+						type: transformIntoWeapons(weapon.type),
+						img: S3Service.getWeapon(key).icon,
+						rarity: weapon.rarity,
+						owned: obtainedWeapons,
+						count: obtainedWeapons.length
+					};
+				});
 		}
 	);
 

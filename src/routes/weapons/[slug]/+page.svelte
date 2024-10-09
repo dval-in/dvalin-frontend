@@ -36,7 +36,6 @@
 
 	$: if (slug && $userProfile && $userProfile.weapons) {
 		ownedWeapon = $userProfile.weapons.filter((weapon) => weapon.key === slug);
-		console.log($fetchWeaponData.data, slug, ownedWeapon);
 	}
 </script>
 
