@@ -15,6 +15,7 @@
 	import i18n from '$lib/services/i18n';
 	import Icon from '$lib/components/ui/icon/icon.svelte';
 	import { mdiStarFourPoints } from '@mdi/js';
+	import { userProfile } from '$lib/store/user_profile';
 
 	export let achievements: achievementData[];
 	export let showUnDoneFirst: boolean = false;
@@ -54,6 +55,12 @@
 		if (socket && socket.connected) {
 			socket.emit('updateAchievements', { achievements: achievementsState, uid });
 		}
+		const updatedAchievements = {
+			...($userProfile.achievements ?? {}),
+			...achievementsState
+		};
+
+		$userProfile.achievements = updatedAchievements;
 	}, 1000);
 
 	function handleAchievedChange(
