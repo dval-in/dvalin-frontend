@@ -8,7 +8,6 @@
 	export let value: $$Props['value'] = undefined;
 	export { className as class };
 	const percent = Math.round(((Number(value) ?? 0) / (Number(max) ?? 1)) * 100);
-	console.log(percent);
 </script>
 
 <ProgressPrimitive.Root
