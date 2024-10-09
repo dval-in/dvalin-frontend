@@ -3,7 +3,6 @@
 	import RaretyDistributionByBanner from '$lib/components/graphs/RaretyDistributionByBanner.svelte';
 	import type { IWish } from '$lib/types/wish';
 	import DefaultLayout from '$lib/components/layout/DefaultLayout.svelte';
-	import { isCharacterKey } from '$lib/types/keys/CharacterKey';
 	import BannerHistoryTable from '$lib/components/tables/banner-history-table/BannerHistoryTable.svelte';
 	import { Card } from '$lib/components/ui/card';
 	import { CardContent, CardHeader } from '$lib/components/ui/card/index.js';
@@ -23,7 +22,7 @@
 
 		if (wishes !== undefined) {
 			return wishes.map((wish: IWish) => {
-				const index = isCharacterKey(wish.key)
+				const index = $dataIndex.character[wish.key]
 					? $dataIndex.character[wish.key]
 					: $dataIndex.weapon[wish.key];
 

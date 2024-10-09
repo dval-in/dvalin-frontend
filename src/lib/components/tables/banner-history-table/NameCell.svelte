@@ -1,12 +1,12 @@
 <script lang="ts">
 	import S3Service from '$lib/services/s3';
-	import { type CharacterKey, isCharacterKey } from '$lib/types/keys/CharacterKey';
+	import { type CharacterKey } from '$lib/types/keys/CharacterKey';
 	import type { WeaponKey } from '$lib/types/keys/WeaponKey';
 	import { dataIndex } from '$lib/store/index_store';
 
 	export let key: CharacterKey | WeaponKey;
 
-	const isCharacter = isCharacterKey(key);
+	const isCharacter = $dataIndex.character[key];
 
 	const imgUrl = (isCharacter ? S3Service.getCharacter(key) : S3Service.getWeapon(key)).icon;
 
