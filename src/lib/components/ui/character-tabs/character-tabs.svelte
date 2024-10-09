@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Tabs, TabsContent, TabsList, TabsTrigger } from '$lib/components/ui/character-tabs';
-	import { type Character } from '$lib/types/data/Character';
+	import type { Character } from 'dvalin-data';
 	import Card from '$lib/components/ui/card/card.svelte';
 	import Text from '$lib/components/typography/Text.svelte';
 	import StatTable from '$lib/components/tables/character-tab-table/StatTable.svelte';

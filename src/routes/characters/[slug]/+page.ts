@@ -1,5 +1,3 @@
-import { isCharacterKey } from '$lib/types/keys/CharacterKey';
-import { error } from '@sveltejs/kit';
 import type { PageLoadEvent } from '../../../../.svelte-kit/types/src/routes/characters/[slug]/$types';
 import { get } from 'svelte/store';
 import i18n from '$lib/services/i18n';

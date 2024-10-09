@@ -17,7 +17,7 @@
 	import { Input } from '$lib/components/ui/input';
 
 	import { mdiPencil, mdiImport, mdiAccount, mdiSwordCross, mdiTrashCanOutline } from '@mdi/js';
-	import CharCard from '$lib/components/ui/card/CharCard.svelte';
+	import CharCard from '$lib/components/ui/card/WeapCard.svelte';
 	import type { Elements } from '$lib/types/elements';
 	import type { WeaponTypes } from '$lib/types/weapon';
 	import { onMount } from 'svelte';

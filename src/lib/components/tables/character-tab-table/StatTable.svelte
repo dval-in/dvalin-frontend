@@ -1,6 +1,6 @@
 <script lang="ts">
 	import * as Table from '$lib/components/ui/table';
-	import type { Ascension } from '$lib/types/data/Character';
+	import type { Ascension } from 'dvalin-data';
 
 	export let ascensions: Ascension[];
 </script>
