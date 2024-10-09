@@ -20,6 +20,7 @@
 	import Icon from '$lib/components/ui/icon/icon.svelte';
 	import * as Tabs from '$lib/components/ui/tabs';
 	import Badge from '$lib/components/ui/badge/badge.svelte';
+	import Progress from '$lib/components/ui/progress/progress.svelte';
 
 	const lang = $i18n.language;
 	const backend = BackendService.getInstance();
@@ -38,10 +39,34 @@
 	let selectedCategory: string | null = null;
 	$userProfile.achievements;
 
+	const customSortAchievements = (achievements: {
+		[category: string]:
+			| (mergedAchievements & {
+					image?: string;
+			  })
+			| undefined;
+	}) => {
+		const priorityItems = ['WondersOfTheWorld', 'MemoriesOfTheHeart'];
+
+		return Object.entries(achievements).sort(([categoryA], [categoryB]) => {
+			const indexA = priorityItems.indexOf(categoryA);
+			const indexB = priorityItems.indexOf(categoryB);
+
+			if (indexA !== -1 && indexB !== -1) {
+				return indexA - indexB;
+			} else if (indexA !== -1) {
+				return -1;
+			} else if (indexB !== -1) {
+				return 1;
+			} else {
+				return categoryA.localeCompare(categoryB);
+			}
+		});
+	};
+
 	async function fetchAchievementsAndImages() {
 		if ($categoriesQuery.isSuccess && $categoriesQuery.data) {
-			const sortedCategories = ['WondersOfTheWorld', 'MemoriesOfTheHeart'];
-			sortedCategories.push(...$categoriesQuery.data.sort((a, b) => a.localeCompare(b)));
+			const sortedCategories = $categoriesQuery.data.sort((a, b) => a.localeCompare(b));
 			const categoryPromises = sortedCategories.map(async (category) => {
 				const query = backend.data.fetchAchievements(lang, category);
 				$achievementsQueries[category] = query;
@@ -82,6 +107,7 @@
 			});
 
 			await Promise.all(categoryPromises);
+			$achievements = Object.fromEntries(customSortAchievements($achievements));
 			isLoading = false;
 		}
 	}
@@ -117,7 +143,6 @@
 
 	function handleFilterChange(filterType: string, value: any) {
 		selectedFilters[filterType as 'hidden' | 'type' | 'version'] = value;
-		console.log(selectedFilters);
 	}
 
 	$: filteredAchievements =
@@ -195,9 +220,20 @@
 			}, [] as string[])
 			.sort((a, b) => parseInt(a) - parseInt(b));
 	}
+
+	$: totalAchievements = Object.values($achievements).reduce(
+		(acc, category) => (category ? acc + category.achievements.length : acc),
+		0
+	);
+	$: totalAchieved = Object.values($achievements).reduce(
+		(acc, category) =>
+			category ? acc + category.achievements.filter((a) => a.achieved).length : acc,
+		0
+	);
 </script>
 
 <DefaultLayout title={$i18n.t('achievement.title')}>
+	<Progress value={totalAchieved} max={totalAchievements} />
 	<div class="flex flex-col md:flex-row">
 		{#if selectedCategory}
 			<ScrollArea class="md:w-1/3 p-4 w-full pl-0 md:h-screen" orientation="both">

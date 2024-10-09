@@ -138,7 +138,7 @@
 						<Text type="p">{achievement.desc}</Text>
 						<div class="flex flex-row gap-2">
 							{#if achievement.hidden === 'Yes'}
-								<Badge variant="secondary">Hidden {achievement.hidden}</Badge>
+								<Badge variant="secondary">Hidden</Badge>
 							{/if}
 							{#if achievement.type}
 								<Badge variant="secondary">{achievement.type}</Badge>

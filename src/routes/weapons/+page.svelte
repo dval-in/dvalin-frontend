@@ -4,8 +4,6 @@
 		mdiAlphabetical,
 		mdiBookOpenPageVariant,
 		mdiBowArrow,
-		mdiCalendar,
-		mdiCreation,
 		mdiFilter,
 		mdiFilterOutline,
 		mdiFilterRemove,
@@ -16,9 +14,9 @@
 		mdiSword,
 		mdiSwordCross,
 		mdiTagCheck,
-		mdiTagHidden
+		mdiTagHidden,
+		mdiNumeric
 	} from '@mdi/js';
-	import CharCard from '$lib/components/ui/card/CharCard.svelte';
 	import Searchbar from '$lib/components/ui/searchbar/Searchbar.svelte';
 	import S3Service from '$lib/services/s3';
 	import DefaultLayout from '$lib/components/layout/DefaultLayout.svelte';
@@ -33,21 +31,14 @@
 		DropdownMenuSeparator
 	} from '$lib/components/ui/dropdown-menu/index';
 	import Icon from '$lib/components/ui/icon/icon.svelte';
-	import type { WeaponTypes } from '$lib/types/weapon';
-	import type { Elements } from '$lib/types/elements';
-	import IconAnemo from '$lib/assets/icons/elements/Element_Anemo.svg';
-	import IconCryo from '$lib/assets/icons/elements/Element_Cryo.svg';
-	import IconDendro from '$lib/assets/icons/elements/Element_Dendro.svg';
-	import IconElectro from '$lib/assets/icons/elements/Element_Electro.svg';
-	import IconGeo from '$lib/assets/icons/elements/Element_Geo.svg';
-	import IconHydro from '$lib/assets/icons/elements/Element_Hydro.svg';
-	import IconPyro from '$lib/assets/icons/elements/Element_Pyro.svg';
+	import type { IWeapon, WeaponTypes } from '$lib/types/weapon';
 	import { Toggle } from '$lib/components/ui/toggle';
 	import DrawerDropdown from '$lib/components/ui/drawer-dropdown/DrawerDropdown.svelte';
 	import { DrawerClose } from '$lib/components/ui/drawer';
 	import Text from '$lib/components/typography/Text.svelte';
+	import WeapCard from '$lib/components/ui/card/WeapCard.svelte';
 
-	type Sorts = 'Name' | 'Date' | 'Rarity' | 'Constellation';
+	type Sorts = 'Name' | 'Count' | 'Rarity' | 'refinement';
 	type Filters = 'element' | 'weapon' | 'rarity' | 'owned';
 
 	// Stores for sorting and filtering
@@ -58,16 +49,6 @@
 
 	const filterStore = writable<{ filterFn: Filters; value: string }[]>([]);
 
-	const elements = [
-		{ name: 'pyro', icon: IconPyro, label: $i18n.t('element.pyro'), color: '#ff6640' },
-		{ name: 'hydro', icon: IconHydro, label: $i18n.t('element.hydro'), color: '#00c0ff' },
-		{ name: 'anemo', icon: IconAnemo, label: $i18n.t('element.anemo'), color: '#32d7a0' },
-		{ name: 'electro', icon: IconElectro, label: $i18n.t('element.electro'), color: '#cc80ff' },
-		{ name: 'dendro', icon: IconDendro, label: $i18n.t('element.dendro'), color: '#90cc00' },
-		{ name: 'cryo', icon: IconCryo, label: $i18n.t('element.cryo'), color: '#81fffe' },
-		{ name: 'geo', icon: IconGeo, label: $i18n.t('element.geo'), color: '#ffac00' }
-	];
-
 	const weapons = [
 		{ name: 'sword', icon: mdiSwordCross, label: $i18n.t('weapon.sword') },
 		{ name: 'claymore', icon: mdiSword, label: $i18n.t('weapon.claymore') },
@@ -77,27 +58,6 @@
 	];
 
 	const checkedStore = writable<{ [key: string]: boolean }>({});
-
-	const transformIntoElements = (element: string): Elements => {
-		switch (element) {
-			case 'Pyro':
-				return 'pyro';
-			case 'Hydro':
-				return 'hydro';
-			case 'Anemo':
-				return 'anemo';
-			case 'Electro':
-				return 'electro';
-			case 'Dendro':
-				return 'dendro';
-			case 'Cryo':
-				return 'cryo';
-			case 'Geo':
-				return 'geo';
-			default:
-				return 'anemo';
-		}
-	};
 
 	const transformIntoWeapons = (weapon: string): WeaponTypes => {
 		switch (weapon) {
@@ -116,31 +76,45 @@
 		}
 	};
 
-	const transformedCharacterStore = derived(
+	const transformedWeaponStore = derived(
 		[userProfile, dataIndex],
-		([userProfile, dataIndexStore]) => {
-			return Object.keys(dataIndexStore.character).map((key) => {
-				const character = dataIndexStore.character[key];
-				const obtained = userProfile.characters
-					? Object.keys(userProfile.characters).includes(key)
-					: false;
-				return {
-					obtained,
-					link: `/characters/${key}`,
-					name: character.name,
-					element: transformIntoElements(character.element),
-					weapon: transformIntoWeapons(character.weaponType),
-					img: S3Service.getCharacter(key).icon,
-					rarity: character.rarity
-				};
-			});
+		([$userProfile, dataIndexStore]) => {
+			// Group obtained weapons by key
+			const obtainedWeaponsMap: { [key: string]: IWeapon[] } =
+				$userProfile.weapons?.reduce(
+					(acc, weapon) => {
+						if (!acc[weapon.key]) {
+							acc[weapon.key] = [];
+						}
+						acc[weapon.key].push(weapon);
+						return acc;
+					},
+					{} as { [key: string]: IWeapon[] }
+				) || {};
+			return Object.keys(dataIndexStore.weapon)
+				.filter((key) => key !== 'Unknown3Star')
+				.map((key) => {
+					const weapon = dataIndexStore.weapon[key];
+					const obtainedWeapons = obtainedWeaponsMap[key] || [];
+					const isObtained = obtainedWeapons.length > 0;
+					return {
+						obtained: isObtained,
+						link: `/weapons/${key}`,
+						name: weapon.name,
+						type: transformIntoWeapons(weapon.type),
+						img: S3Service.getWeapon(key).icon,
+						rarity: weapon.rarity,
+						owned: obtainedWeapons,
+						count: obtainedWeapons.length
+					};
+				});
 		}
 	);
 
-	// Derived store to transform character data based on sorting and filtering
-	const sortedCharacterStore = derived(
-		[transformedCharacterStore, sortStore, filterStore],
-		([transformedCharacterStore, sortStore, filterStore]) => {
+	// Derived store to transform weapon data based on sorting and filtering
+	const sortedWeaponStore = derived(
+		[transformedWeaponStore, sortStore, filterStore],
+		([transformedWeaponStore, sortStore, filterStore]) => {
 			const filterGroups = filterStore.reduce(
 				(groups, filter) => {
 					if (!groups[filter.filterFn]) {
@@ -152,25 +126,22 @@
 				{} as Record<Filters, Set<any>>
 			);
 
-			const filteredCharacters = transformedCharacterStore.filter((character) => {
+			const filteredWeapons = transformedWeaponStore.filter((weapon) => {
 				for (const [filterFn, values] of Object.entries(filterGroups)) {
-					if (filterFn === 'element' && !values.has(character.element)) {
+					if (filterFn === 'weapon' && !values.has(weapon.type)) {
 						return false;
 					}
-					if (filterFn === 'weapon' && !values.has(character.weapon)) {
+					if (filterFn === 'rarity' && !values.has(weapon.rarity)) {
 						return false;
 					}
-					if (filterFn === 'rarity' && !values.has(character.rarity)) {
-						return false;
-					}
-					if (filterFn === 'owned' && !values.has(character.obtained)) {
+					if (filterFn === 'owned' && !values.has(weapon.obtained)) {
 						return false;
 					}
 				}
 				return true;
 			});
 
-			return filteredCharacters.sort((a, b) => {
+			return filteredWeapons.sort((a, b) => {
 				if (sortStore.sortFn === 'Name') {
 					return sortStore.order === 'asc'
 						? a.name.localeCompare(b.name)
@@ -179,6 +150,10 @@
 				if (sortStore.sortFn === 'Rarity') {
 					return sortStore.order === 'asc' ? a.rarity - b.rarity : b.rarity - a.rarity;
 				}
+				if (sortStore.sortFn === 'Count') {
+					return sortStore.order === 'asc' ? a.count - b.count : b.count - a.count;
+				}
+
 				return 0;
 			});
 		}
@@ -224,9 +199,9 @@
 
 <!-- svelte-ignore a11y-no-noninteractive-element-to-interactive-role -->
 <!-- svelte-ignore a11y-label-has-associated-control -->
-<DefaultLayout title={$i18n.t('characters.overview.title')}>
+<DefaultLayout title={$i18n.t('weapons.overview.title')}>
 	<svelte:fragment slot="titlebarActions">
-		<Searchbar searchGroup="Characters" searchableDataList={$sortedCharacterStore} />
+		<Searchbar searchGroup="Weapons" searchableDataList={$sortedWeaponStore} />
 		<DrawerDropdown>
 			<svelte:fragment slot="trigger">
 				<IconButton
@@ -248,10 +223,10 @@
 				</DropdownMenuItem>
 				<DropdownMenuItem
 					class="flex hover:bg-tertiary gap-2"
-					on:click={() => setSortStore('Date')}
+					on:click={() => setSortStore('Count')}
 				>
-					<Icon path={mdiCalendar} />
-					{$i18n.t('sort.date')}
+					<Icon path={mdiNumeric} />
+					{$i18n.t('sort.count')}
 				</DropdownMenuItem>
 				<DropdownMenuItem
 					class="flex hover:bg-tertiary gap-2"
@@ -259,13 +234,6 @@
 				>
 					<Icon path={mdiStar} />
 					{$i18n.t('sort.rarity')}
-				</DropdownMenuItem>
-				<DropdownMenuItem
-					class="flex hover:bg-tertiary gap-2"
-					on:click={() => setSortStore('Constellation')}
-				>
-					<Icon path={mdiCreation} />
-					{$i18n.t('sort.constellation')}
 				</DropdownMenuItem>
 			</svelte:fragment>
 			<svelte:fragment slot="drawer-content">
@@ -278,10 +246,10 @@
 				</DrawerClose>
 				<DrawerClose
 					class="flex hover:bg-tertiary gap-2"
-					on:click={() => setSortStore('Date')}
+					on:click={() => setSortStore('Count')}
 				>
-					<Icon path={mdiCalendar} />
-					{$i18n.t('sort.date')}
+					<Icon path={mdiNumeric} />
+					{$i18n.t('sort.count')}
 				</DrawerClose>
 				<DrawerClose
 					class="flex hover:bg-tertiary gap-2"
@@ -289,13 +257,6 @@
 				>
 					<Icon path={mdiStar} />
 					{$i18n.t('sort.rarity')}
-				</DrawerClose>
-				<DrawerClose
-					class="flex hover:bg-tertiary gap-2"
-					on:click={() => setSortStore('Constellation')}
-				>
-					<Icon path={mdiCreation} />
-					{$i18n.t('sort.constellation')}
 				</DrawerClose>
 			</svelte:fragment>
 		</DrawerDropdown>
@@ -318,32 +279,6 @@
 				>
 					{$i18n.t('action.reset_filters')}
 				</IconButton>
-
-				<DropdownMenuSeparator />
-				<DropdownMenuGroup class="flex">
-					<DropdownMenuLabel>{$i18n.t('filter.element')}</DropdownMenuLabel>
-				</DropdownMenuGroup>
-				<DropdownMenuGroup class="flex flex-wrap">
-					{#each elements as { name, icon, label }}
-						<DropdownMenuItem
-							on:click={() => {
-								setFilterStore('element', name);
-								toggleChecked(name);
-							}}
-						>
-							<Toggle
-								class="py-2"
-								pressed={$checkedStore[name] !== undefined
-									? $checkedStore[name]
-									: false}
-							>
-								<img src={icon} alt={label} class="size-7" />
-							</Toggle>
-						</DropdownMenuItem>
-					{/each}
-				</DropdownMenuGroup>
-
-				<DropdownMenuSeparator />
 
 				<DropdownMenuGroup class="flex">
 					<DropdownMenuLabel>{$i18n.t('filter.weapon')}</DropdownMenuLabel>
@@ -404,6 +339,21 @@
 							<Icon path={mdiStar} class={`!size-7 !fill-fourstar`} />
 						</Toggle>
 					</DropdownMenuItem>
+					<DropdownMenuItem
+						on:click={() => {
+							setFilterStore('rarity', 3);
+							toggleChecked('rarity3');
+						}}
+					>
+						<Toggle
+							class="py-2"
+							pressed={$checkedStore['rarity3'] !== undefined
+								? $checkedStore['rarity3']
+								: false}
+						>
+							<Icon path={mdiStar} class={`!size-7 !fill-threestar`} />
+						</Toggle>
+					</DropdownMenuItem>
 				</DropdownMenuGroup>
 
 				<DropdownMenuSeparator />
@@ -461,29 +411,6 @@
 					<div>
 						<div class="flex">
 							<Text type="small">Element</Text>
-						</div>
-						<div class="flex flex-wrap gap-2" role="group" aria-label="Element filters">
-							{#each elements as { name, icon, label }}
-								<button
-									type="button"
-									class="p-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
-									aria-pressed={$checkedStore[name] || false}
-									on:click={() => {
-										setFilterStore('element', name);
-										toggleChecked(name);
-									}}
-									on:keydown={(e) => {
-										if (e.key === 'Enter' || e.key === ' ') {
-											setFilterStore('element', name);
-											toggleChecked(name);
-										}
-									}}
-								>
-									<Toggle pressed={$checkedStore[name] || false}>
-										<img src={icon} alt={label} class="size-7" />
-									</Toggle>
-								</button>
-							{/each}
 						</div>
 					</div>
 
@@ -614,18 +541,18 @@
 			</svelte:fragment>
 		</DrawerDropdown>
 	</svelte:fragment>
-	<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 gap-4">
-		{#each $sortedCharacterStore as character}
-			<CharCard
-				link={character.link}
-				name={character.name}
-				img={character.img}
-				level={0}
-				constellation={0}
-				element={character.element}
-				weapon={character.weapon}
-				rarity={character.rarity}
-				obtained={character.obtained}
+	<div
+		class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 peer-aria-selected: gap-4"
+	>
+		{#each $sortedWeaponStore as weapon}
+			<WeapCard
+				link={weapon.link}
+				name={weapon.name}
+				img={weapon.img}
+				type={weapon.type}
+				rarity={weapon.rarity}
+				obtained={weapon.obtained}
+				count={weapon.count}
 			/>
 		{/each}
 	</div>

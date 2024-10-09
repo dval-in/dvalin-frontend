@@ -7,7 +7,7 @@ import { backendFetch } from '$lib/services/backend/index';
 import type { CharacterIndex } from '$lib/types/index/character';
 import type { WeaponIndex } from '$lib/types/index/weapon';
 import type { Character } from '$lib/types/data/Character';
-import type { Weapon } from '$lib/types/data/Weapon';
+import type { Weapon } from 'dvalin-data';
 import type { mergedAchievements } from '$lib/types/achievement';
 
 type FetchCharacterDataIndexResponse = CharacterIndex;

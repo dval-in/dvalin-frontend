@@ -50,12 +50,12 @@
 			<Progress value={achieved} max={total} class="left" />
 		</div>
 	{:else}
-		<div class="flex flex-col p-2 text-center">
+		<div class="flex flex-col p-3 text-center pb-0">
 			<div class={`flex justify-center`}>
 				<img alt={name} class="xl:w-36 xl:h-36" src={img} />
 			</div>
 		</div>
-		<div class={'text-center justify-center content-end mx-3 my-3'}>
+		<div class={'text-center justify-center content-end mx-3 my-3 mt-0'}>
 			<Progress value={achieved} max={total} class="my-3" />
 			<Text type="h4">
 				{name}
