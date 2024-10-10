@@ -16,12 +16,25 @@
 	import { Label } from '$lib/components/ui/label';
 	import { Input } from '$lib/components/ui/input';
 
-	import { mdiPencil, mdiImport, mdiAccount, mdiSwordCross, mdiTrashCanOutline } from '@mdi/js';
+	import {
+		mdiPencil,
+		mdiImport,
+		mdiAccount,
+		mdiSwordCross,
+		mdiCheckAll,
+		mdiInfinity
+	} from '@mdi/js';
 	import CharCard from '$lib/components/ui/card/WeapCard.svelte';
 	import type { Elements } from '$lib/types/elements';
 	import type { WeaponTypes } from '$lib/types/weapon';
 	import { onMount } from 'svelte';
 	import { userProfile } from '$lib/store/user_profile';
+	import BackendService from '$lib/services/backend';
+	import type { CreateQueryResult } from '@tanstack/svelte-query';
+	import { writable } from 'svelte/store';
+	import type { achievementData, mergedAchievements } from '$lib/types/achievement';
+	import type { UserProfile } from '$lib/types/user_profile';
+	import type { IWish } from '$lib/types/wish';
 
 	let changeLog = ` `;
 	let currentVer = `4.5`;
@@ -51,24 +64,6 @@
 		{ id: 9, check: globalWishingWidget, checked: true },
 		{ id: 10, check: resinWidget, checked: true }
 	];
-
-	type Achievement = {
-		id: number;
-		name: string;
-		desc: string;
-		reward: number;
-		hidden: boolean;
-		order: number;
-	};
-
-	const mockAchievement: Achievement = {
-		id: 0,
-		name: 'Test Achievement',
-		desc: 'lorem ipsum',
-		reward: 1,
-		hidden: false,
-		order: 0
-	};
 
 	type Event = {
 		id: number;
@@ -144,12 +139,145 @@
 		rarity: 5
 	};
 
-	let achievementsDone = 998;
-	let achievementsTotal = 1143;
+	const backend = BackendService.getInstance();
+	const lang = $i18n.language;
+	const categoriesQuery: CreateQueryResult<string[]> =
+		backend.data.fetchAchievementCategoryList(lang);
+	const achievementsQueries = writable<{
+		[category: string]: CreateQueryResult<mergedAchievements>;
+	}>({});
+	const achievements = writable<{
+		[category: string]: (mergedAchievements & { image?: string }) | undefined;
+	}>({});
+	async function fetchAchievementsAndImages() {
+		if ($categoriesQuery.isSuccess && $categoriesQuery.data) {
+			const sortedCategories = $categoriesQuery.data.sort((a, b) => a.localeCompare(b));
+			const categoryPromises = sortedCategories.map(async (category) => {
+				const query = backend.data.fetchAchievements(lang, category);
+				$achievementsQueries[category] = query;
 
-	let characterPity: [number, number] = [76, 8];
-	let weaponPity: [number, number] = [23, 2];
-	let standardPity: [number, number] = [53, 5];
+				const achievementData = await new Promise<mergedAchievements | undefined>(
+					(resolve) => {
+						query.subscribe((result) => {
+							if (result.isSuccess && result.data) {
+								resolve(result.data);
+							}
+						});
+					}
+				);
+				if (achievementData) {
+					const updatedAchievements = achievementData.achievements.map((achievement) => {
+						const userAchievement = $userProfile.achievements?.[achievement.id];
+						return {
+							...achievement,
+							achieved: userAchievement?.achieved ?? false,
+							progression: userAchievement?.progression ?? '',
+							version: achievement.version
+								? achievement.version
+								: achievementData.id === 'WondersOfTheWorld'
+									? '0.0'
+									: achievementData.version
+						};
+					});
+
+					$achievements[category] = {
+						...achievementData,
+						achievements: updatedAchievements
+					};
+				}
+			});
+
+			await Promise.all(categoryPromises);
+		}
+	}
+	$: if ($categoriesQuery.isSuccess) {
+		fetchAchievementsAndImages();
+	}
+
+	$: totalAchievements = Object.values($achievements).reduce(
+		(acc, category) => (category ? acc + category.achievements.length : acc),
+		0
+	);
+	$: totalAchieved = Object.values($achievements).reduce(
+		(acc, category) =>
+			category ? acc + category.achievements.filter((a) => a.achieved).length : acc,
+		0
+	);
+
+	$: topFiveUniqueAchievements = (() => {
+		// Find the category with the highest version
+		const latestCategory = Object.values($achievements).reduce<mergedAchievements | undefined>(
+			(acc, category) => {
+				if (category && (!acc || compareVersions(category.version, acc.version) > 0)) {
+					return category;
+				}
+				return acc;
+			},
+			undefined
+		);
+
+		// If no valid category was found, return an empty array
+		if (!latestCategory) {
+			return [];
+		}
+
+		// Sort achievements by order and filter out duplicates by name
+		const uniqueAchievements: achievementData[] = [];
+		const seenNames = new Set<string>();
+
+		return latestCategory.achievements
+			.sort((a, b) => a.order - b.order)
+			.filter((achievement) => {
+				if (!seenNames.has(achievement.name)) {
+					seenNames.add(achievement.name);
+					uniqueAchievements.push(achievement);
+					return uniqueAchievements.length <= 5;
+				}
+				return false;
+			});
+	})();
+
+	// Helper function to compare version strings
+	function compareVersions(v1: string, v2: string): number {
+		const parts1 = v1.split('.').map(Number);
+		const parts2 = v2.split('.').map(Number);
+
+		for (let i = 0; i < Math.max(parts1.length, parts2.length); i++) {
+			const part1 = parts1[i] || 0;
+			const part2 = parts2[i] || 0;
+
+			if (part1 > part2) return 1;
+			if (part1 < part2) return -1;
+		}
+
+		return 0;
+	}
+
+	function calculateFiveStarPity(wishes: IWish[]): number {
+		let pityCount = 0;
+
+		for (const wish of wishes) {
+			if (wish.rarity === 5) {
+				break;
+			}
+			pityCount++;
+		}
+
+		return pityCount;
+	}
+
+	function calculateFourStarPity(wishes: IWish[]): number {
+		let pityCount = 0;
+
+		for (const wish of wishes) {
+			if (wish.rarity === 4) {
+				break;
+			}
+			pityCount++;
+		}
+
+		return pityCount;
+	}
 
 	const card = S3Service.getCharacter('Amber').gachaCard;
 
@@ -250,6 +378,24 @@
 			return output;
 		}
 	};
+	function getLatestWishes(userProfile: UserProfile, count: number = 6) {
+		// Combine all wishes from different banners
+		const allWishes = [
+			...(userProfile.wishes?.Beginner ?? []),
+			...(userProfile.wishes?.CharacterEvent ?? []),
+			...(userProfile.wishes?.Chronicled ?? []),
+			...(userProfile.wishes?.Standard ?? []),
+			...(userProfile.wishes?.WeaponEvent ?? [])
+		];
+
+		// Sort wishes by date in descending order (most recent first)
+		const sortedWishes = allWishes
+			.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+			.filter((wish) => wish.rarity === 5);
+
+		// Return the specified number of latest wishes
+		return sortedWishes.slice(0, count);
+	}
 </script>
 
 <AlertDialog.Root open={firstTimeUser}>
@@ -597,54 +743,41 @@
 									{$i18n.t('dashboard.widget.achievements.progress')}:
 								</Text>
 								<Text type="p">
-									<!-- TODO: check if that works, when we have achievement data -->
-
-									<!-- {Object.values($userProfile.achievements ?? {}).reduce(
-										(count, achievements) =>
-											count +
-											Object.values(achievements).filter(
-												(achievement) => achievement.achieved
-											).length,
-										0
-									)}/
-									{Object.values($userProfile.achievements ?? {}).reduce(
-										(count, achievements) =>
-											count + Object.values(achievements).length,
-										0
-									)} -->
-
-									{achievementsDone}/{achievementsTotal}
+									{totalAchieved}/{totalAchievements}
 								</Text>
 							</div>
-							<Progress
-								value={(achievementsDone / achievementsTotal) * 100}
-								class="mt-1.5"
+							<Progress value={totalAchieved} max={totalAchievements} class="mt-1.5"
 							></Progress>
 							<div class="flex flex-col gap-1.5 justify-between">
 								<Text type="p">
 									{$i18n.t('dashboard.widget.achievements.latest')}:
 								</Text>
-								<div class="bg-neutral rounded-md py-3 px-2">
-									<Text type="p">{mockAchievement.name}</Text>
-								</div>
-								<div class="bg-neutral rounded-md py-3 px-2">
-									<Text type="p">{mockAchievement.name}</Text>
-								</div>
-								<div class="bg-neutral rounded-md py-3 px-2">
-									<Text type="p">{mockAchievement.name}</Text>
-								</div>
-								<div class="bg-neutral rounded-md py-3 px-2">
-									<Text type="p">{mockAchievement.name}</Text>
-								</div>
-								<div class="bg-neutral rounded-md py-3 px-2">
-									<Text type="p">{mockAchievement.name}</Text>
+								<div class="flex flex-col gap-2">
+									{#each topFiveUniqueAchievements as achievement}
+										<div
+											class="flex flex-col justify-between bg-neutral rounded-md py-3 px-2 relative"
+										>
+											<Icon
+												path={mdiCheckAll}
+												class={`absolute ${
+													achievement.achieved ? '!fill-primary' : ''
+												}  right-2 top-2`}
+											/>
+											<Text type="h4">
+												{achievement.name}
+											</Text>
+											<Text type="p">{achievement.desc}</Text>
+										</div>
+									{/each}
 								</div>
 							</div>
 						</Card.Content>
 						<Card.Footer class="mt-2.5">
-							<Button class="w-full">
-								{$i18n.t('dashboard.widget.achievements.more')}
-							</Button>
+							<a href="/achievement">
+								<Button class="w-full">
+									{$i18n.t('dashboard.widget.achievements.more')}
+								</Button>
+							</a>
 						</Card.Footer>
 					</Card.Root>{/if}
 				{#if Widget.check === `${$i18n.t('dashboard.widget.pity.title')}` && Widget.checked == true}<!-- Pity card -->
@@ -666,10 +799,14 @@
 									<Icon path={mdiAccount} />
 									<div class="flex gap-4 font-semibold">
 										<Text type="p" class="text-fivestar">
-											{characterPity[0]}
+											{calculateFiveStarPity(
+												$userProfile.wishes?.CharacterEvent ?? []
+											)}
 										</Text>
 										<Text type="p" class="text-fourstar">
-											{characterPity[1]}
+											{calculateFourStarPity(
+												$userProfile.wishes?.CharacterEvent ?? []
+											)}
 										</Text>
 									</div>
 								</div>
@@ -679,9 +816,15 @@
 								>
 									<Icon path={mdiSwordCross} />
 									<div class="flex gap-4 font-semibold">
-										<Text type="p" class="text-fivestar">{weaponPity[0]}</Text>
+										<Text type="p" class="text-fivestar">
+											{calculateFiveStarPity(
+												$userProfile.wishes?.WeaponEvent ?? []
+											)}
+										</Text>
 										<Text type="p" class="text-fourstar">
-											{weaponPity[1]}
+											{calculateFourStarPity(
+												$userProfile.wishes?.WeaponEvent ?? []
+											)}
 										</Text>
 									</div>
 								</div>
@@ -689,13 +832,17 @@
 								<div
 									class="flex flex-col gap-3 justify-center items-center rounded-md"
 								>
-									<Icon path={mdiTrashCanOutline} />
+									<Icon path={mdiInfinity} />
 									<div class="flex gap-4 font-semibold">
 										<Text type="p" class="text-fivestar">
-											{standardPity[0]}
+											{calculateFiveStarPity(
+												$userProfile.wishes?.Standard ?? []
+											)}
 										</Text>
 										<Text type="p" class="text-fourstar">
-											{standardPity[1]}
+											{calculateFourStarPity(
+												$userProfile.wishes?.Standard ?? []
+											)}
 										</Text>
 									</div>
 								</div>
@@ -724,10 +871,14 @@
 									<Icon path={mdiAccount} />
 									<div class="flex gap-4 font-semibold">
 										<Text type="p" class="text-fivestar">
-											{characterPity[0]}
+											{calculateFiveStarPity(
+												$userProfile.wishes?.CharacterEvent ?? []
+											)}
 										</Text>
 										<Text type="p" class="text-fourstar">
-											{characterPity[1]}
+											{calculateFourStarPity(
+												$userProfile.wishes?.CharacterEvent ?? []
+											)}
 										</Text>
 									</div>
 								</div>
@@ -738,10 +889,14 @@
 									<Icon path={mdiSwordCross} />
 									<div class="flex gap-4 font-semibold">
 										<Text type="p" class="text-fivestar">
-											{weaponPity[0]}
+											{calculateFiveStarPity(
+												$userProfile.wishes?.WeaponEvent ?? []
+											)}
 										</Text>
 										<Text type="p" class="text-fourstar">
-											{weaponPity[1]}
+											{calculateFourStarPity(
+												$userProfile.wishes?.WeaponEvent ?? []
+											)}
 										</Text>
 									</div>
 								</div>
@@ -749,13 +904,17 @@
 								<div
 									class="flex flex-col gap-3 justify-center items-center rounded-md"
 								>
-									<Icon path={mdiTrashCanOutline} />
+									<Icon path={mdiInfinity} />
 									<div class="flex gap-4 font-semibold">
 										<Text type="p" class="text-fivestar">
-											{standardPity[0]}
+											{calculateFiveStarPity(
+												$userProfile.wishes?.Standard ?? []
+											)}
 										</Text>
 										<Text type="p" class="text-fourstar">
-											{standardPity[1]}
+											{calculateFourStarPity(
+												$userProfile.wishes?.Standard ?? []
+											)}
 										</Text>
 									</div>
 								</div>
@@ -780,15 +939,15 @@
 								<Text type="large">
 									{$i18n.t('dashboard.widget.wishing.latest')}
 								</Text>
-								<div class="flex flex-row flex-wrap gap-1">
-									<PullChip name="Xiao" key="Xiao" counter={20}></PullChip>
-									<PullChip name="Xiao" key="Xiao" counter={20}></PullChip>
-									<PullChip
-										name="Ballad of The Boundless Blue"
-										key="BalladOfTheBoundlessBlue"
-										counter={20}
-									></PullChip>
-									<PullChip name="Xiao" key="Xiao" counter={20}></PullChip>
+								<div class="flex flex-row flex-wrap gap-3 mt-2">
+									{#each getLatestWishes($userProfile, 6) as wish}
+										<PullChip
+											name={wish.key}
+											key={wish.key}
+											counter={wish.pity}
+											wonFiftyFifty={wish.wonFiftyFifty}
+										></PullChip>
+									{/each}
 								</div>
 							</div>
 						</Card.Content>

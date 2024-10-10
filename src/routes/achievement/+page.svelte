@@ -37,7 +37,6 @@
 
 	let isLoading = true;
 	let selectedCategory: string | null = null;
-	$userProfile.achievements;
 
 	const customSortAchievements = (achievements: {
 		[category: string]:
