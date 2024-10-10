@@ -237,27 +237,29 @@
 				</DropdownMenuItem>
 			</svelte:fragment>
 			<svelte:fragment slot="drawer-content">
-				<DrawerClose
-					class="flex hover:bg-tertiary gap-2"
-					on:click={() => setSortStore('Name')}
-				>
-					<Icon path={mdiAlphabetical} />
-					{$i18n.t('sort.name')}
-				</DrawerClose>
-				<DrawerClose
-					class="flex hover:bg-tertiary gap-2"
-					on:click={() => setSortStore('Count')}
-				>
-					<Icon path={mdiNumeric} />
-					{$i18n.t('sort.count')}
-				</DrawerClose>
-				<DrawerClose
-					class="flex hover:bg-tertiary gap-2"
-					on:click={() => setSortStore('Rarity')}
-				>
-					<Icon path={mdiStar} />
-					{$i18n.t('sort.rarity')}
-				</DrawerClose>
+				<div class="flex flex-col p-3 text-lg gap-4">
+					<DrawerClose
+						class="flex hover:bg-tertiary gap-2"
+						on:click={() => setSortStore('Name')}
+					>
+						<Icon path={mdiAlphabetical} />
+						{$i18n.t('sort.name')}
+					</DrawerClose>
+					<DrawerClose
+						class="flex hover:bg-tertiary gap-2"
+						on:click={() => setSortStore('Count')}
+					>
+						<Icon path={mdiNumeric} />
+						{$i18n.t('sort.count')}
+					</DrawerClose>
+					<DrawerClose
+						class="flex hover:bg-tertiary gap-2"
+						on:click={() => setSortStore('Rarity')}
+					>
+						<Icon path={mdiStar} />
+						{$i18n.t('sort.rarity')}
+					</DrawerClose>
+				</div>
 			</svelte:fragment>
 		</DrawerDropdown>
 
@@ -321,7 +323,7 @@
 								? $checkedStore['rarity5']
 								: false}
 						>
-							<Icon path={mdiStar} class={`!size-7 !fill-staticFivestar`} />
+							<Icon path={mdiStar} class={`!size-7 !fill-fivestar`} />
 						</Toggle>
 					</DropdownMenuItem>
 					<DropdownMenuItem
@@ -407,13 +409,6 @@
 						Reset Filters
 					</IconButton>
 
-					<!-- Element filter -->
-					<div>
-						<div class="flex">
-							<Text type="small">Element</Text>
-						</div>
-					</div>
-
 					<!-- Weapon filter -->
 					<div>
 						<div class="flex">
@@ -466,7 +461,7 @@
 								}}
 							>
 								<Toggle pressed={$checkedStore['rarity5'] || false}>
-									<Icon path={mdiStar} class={`!size-7 !fill-staticFivestar`} />
+									<Icon path={mdiStar} class={`!size-7 !fill-fivestar`} />
 								</Toggle>
 							</button>
 							<button
