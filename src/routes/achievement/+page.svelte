@@ -37,6 +37,7 @@
 
 	let isLoading = true;
 	let selectedCategory: string | null = null;
+	let showUnachivedCategory = false;
 
 	const customSortAchievements = (achievements: {
 		[category: string]:
@@ -229,15 +230,25 @@
 			category ? acc + category.achievements.filter((a) => a.achieved).length : acc,
 		0
 	);
+	$: filteredAchievementsCat = Object.entries($achievements).filter(([_, categoryData]) => {
+		if (!showUnachivedCategory) return true;
+		return (
+			categoryData && categoryData.achievements.some((achievement) => !achievement.achieved)
+		);
+	});
 </script>
 
 <DefaultLayout title={$i18n.t('achievement.title')}>
 	<Progress value={totalAchieved} max={totalAchievements} />
+	<div class="flex flex-row items-center gap-2">
+		<Checkbox bind:checked={showUnachivedCategory} />
+		{$i18n.t('achievement.show_unachived_category')}
+	</div>
 	<div class="flex flex-col md:flex-row">
 		{#if selectedCategory}
 			<ScrollArea class="md:w-1/3 p-4 w-full pl-0 md:h-screen" orientation="both">
 				<div class="flex flex-row md:flex-col gap-2">
-					{#each Object.entries($achievements) as [category, achievementData]}
+					{#each filteredAchievementsCat as [category, achievementData]}
 						{#if achievementData}
 							<div class="md:mb-4 w-full">
 								<AchievementCategoryCard
@@ -357,7 +368,7 @@
 					<div
 						class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4"
 					>
-						{#each Object.entries($achievements) as [category, achievementData]}
+						{#each filteredAchievementsCat as [category, achievementData]}
 							{#if achievementData}
 								<div class="achievement-category">
 									<AchievementCategoryCard
