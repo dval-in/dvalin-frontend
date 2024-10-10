@@ -28,7 +28,7 @@
 		let characterIndex = $fetchCharacterDataIndex;
 		let weaponIndex = $fetchWeaponDataIndex;
 		if (characterIndex.status === 'success' && weaponIndex.status === 'success') {
-			weaponIndex.data['Unknown3Star'] = { name: 'Unknown 3 star', rarity: 3 };
+			weaponIndex.data['Unknown3Star'] = { name: 'Unknown 3 star', rarity: 3, type: 'sword' };
 
 			dataIndex.set({
 				character: characterIndex.data,
