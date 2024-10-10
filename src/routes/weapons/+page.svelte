@@ -488,6 +488,25 @@
 									<Icon path={mdiStar} class={`!size-7 !fill-fourstar`} />
 								</Toggle>
 							</button>
+							<button
+								type="button"
+								class="p-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+								aria-pressed={$checkedStore['rarity4'] || false}
+								on:click={() => {
+									setFilterStore('rarity', 3);
+									toggleChecked('rarity3');
+								}}
+								on:keydown={(e) => {
+									if (e.key === 'Enter' || e.key === ' ') {
+										setFilterStore('rarity', 3);
+										toggleChecked('rarity3');
+									}
+								}}
+							>
+								<Toggle pressed={$checkedStore['rarity3'] || false}>
+									<Icon path={mdiStar} class={`!size-7 !fill-threestar`} />
+								</Toggle>
+							</button>
 						</div>
 					</div>
 
