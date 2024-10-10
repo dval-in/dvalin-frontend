@@ -34,7 +34,6 @@
 	import type { IWeapon, WeaponTypes } from '$lib/types/weapon';
 	import { Toggle } from '$lib/components/ui/toggle';
 	import DrawerDropdown from '$lib/components/ui/drawer-dropdown/DrawerDropdown.svelte';
-	import { DrawerClose } from '$lib/components/ui/drawer';
 	import Text from '$lib/components/typography/Text.svelte';
 	import WeapCard from '$lib/components/ui/card/WeapCard.svelte';
 
@@ -238,27 +237,27 @@
 			</svelte:fragment>
 			<svelte:fragment slot="drawer-content">
 				<div class="flex flex-col p-3 text-lg gap-4">
-					<DrawerClose
+					<button
 						class="flex hover:bg-tertiary gap-2"
 						on:click={() => setSortStore('Name')}
 					>
 						<Icon path={mdiAlphabetical} />
 						{$i18n.t('sort.name')}
-					</DrawerClose>
-					<DrawerClose
+					</button>
+					<button
 						class="flex hover:bg-tertiary gap-2"
 						on:click={() => setSortStore('Count')}
 					>
 						<Icon path={mdiNumeric} />
 						{$i18n.t('sort.count')}
-					</DrawerClose>
-					<DrawerClose
+					</button>
+					<button
 						class="flex hover:bg-tertiary gap-2"
 						on:click={() => setSortStore('Rarity')}
 					>
 						<Icon path={mdiStar} />
 						{$i18n.t('sort.rarity')}
-					</DrawerClose>
+					</button>
 				</div>
 			</svelte:fragment>
 		</DrawerDropdown>
