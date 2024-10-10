@@ -44,7 +44,6 @@
 	import IconPyro from '$lib/assets/icons/elements/Element_Pyro.svg';
 	import { Toggle } from '$lib/components/ui/toggle';
 	import DrawerDropdown from '$lib/components/ui/drawer-dropdown/DrawerDropdown.svelte';
-	import { DrawerClose } from '$lib/components/ui/drawer';
 	import Text from '$lib/components/typography/Text.svelte';
 
 	type Sorts = 'Name' | 'Date' | 'Rarity' | 'Constellation';
@@ -269,34 +268,36 @@
 				</DropdownMenuItem>
 			</svelte:fragment>
 			<svelte:fragment slot="drawer-content">
-				<DrawerClose
-					class="flex hover:bg-tertiary gap-2"
-					on:click={() => setSortStore('Name')}
-				>
-					<Icon path={mdiAlphabetical} />
-					{$i18n.t('sort.name')}
-				</DrawerClose>
-				<DrawerClose
-					class="flex hover:bg-tertiary gap-2"
-					on:click={() => setSortStore('Date')}
-				>
-					<Icon path={mdiCalendar} />
-					{$i18n.t('sort.date')}
-				</DrawerClose>
-				<DrawerClose
-					class="flex hover:bg-tertiary gap-2"
-					on:click={() => setSortStore('Rarity')}
-				>
-					<Icon path={mdiStar} />
-					{$i18n.t('sort.rarity')}
-				</DrawerClose>
-				<DrawerClose
-					class="flex hover:bg-tertiary gap-2"
-					on:click={() => setSortStore('Constellation')}
-				>
-					<Icon path={mdiCreation} />
-					{$i18n.t('sort.constellation')}
-				</DrawerClose>
+				<div class="flex flex-col p-3 text-lg gap-4">
+					<button
+						class="flex hover:bg-tertiary gap-2"
+						on:click={() => setSortStore('Name')}
+					>
+						<Icon path={mdiAlphabetical} />
+						{$i18n.t('sort.name')}
+					</button>
+					<button
+						class="flex hover:bg-tertiary gap-2"
+						on:click={() => setSortStore('Date')}
+					>
+						<Icon path={mdiCalendar} />
+						{$i18n.t('sort.date')}
+					</button>
+					<button
+						class="flex hover:bg-tertiary gap-2"
+						on:click={() => setSortStore('Rarity')}
+					>
+						<Icon path={mdiStar} />
+						{$i18n.t('sort.rarity')}
+					</button>
+					<button
+						class="flex hover:bg-tertiary gap-2"
+						on:click={() => setSortStore('Constellation')}
+					>
+						<Icon path={mdiCreation} />
+						{$i18n.t('sort.constellation')}
+					</button>
+				</div>
 			</svelte:fragment>
 		</DrawerDropdown>
 
