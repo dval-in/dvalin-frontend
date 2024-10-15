@@ -32,7 +32,7 @@
 <div class="h-[300px] w-full">
 	<PieChart
 		data={$getData}
-		label="rarity"
+		key="rarity"
 		cRange={keyColors}
 		value="value"
 		outerRadius={300 / 2}
