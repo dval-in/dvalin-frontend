@@ -45,8 +45,8 @@ importers:
         specifier: ^23.16.0
         version: 23.16.0
       layerchart:
-        specifier: ^0.53.0
-        version: 0.53.0(svelte@4.2.19)(typescript@5.6.3)
+        specifier: ^0.54.1
+        version: 0.54.1(svelte@4.2.19)(typescript@5.6.3)
       lodash-es:
         specifier: ^4.17.21
         version: 4.17.21
@@ -1120,17 +1120,17 @@ packages:
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
 
-  '@layerstack/svelte-actions@0.0.4':
-    resolution: {integrity: sha512-tC6+KfqU0t/ugj222sPljb9qkmIpZljaXh2YVKKhsyHGmTS5FRSinr3GFOONOJbQxCQjA7XhIgcSGkFHypaJig==}
+  '@layerstack/svelte-actions@0.0.7':
+    resolution: {integrity: sha512-PYG4oocNQxuUKQkhQvrB+nh4SGGzVr2KlqGS8wivXC4lF78BpOnsZfLxv657oVBBE+u3Cx6q9NRq/AG1A7ZiIw==}
 
-  '@layerstack/svelte-stores@0.0.4':
-    resolution: {integrity: sha512-pO5N+5XtSlGn1a7BhNgQJj/KQQ6IEYZImlGZbIboKJ5nlnvHpSywwqJaUvzPP7yRNGQQEDje/mnIm0m1Rbxrwg==}
+  '@layerstack/svelte-stores@0.0.6':
+    resolution: {integrity: sha512-QCYU2QIOGNVcstkyJDkVHPDxBUX1/9Nb5bYt6JuhmFgSrfdYKx8DlZlax3jMEmjdu2htQRmj/qSZe+xK4HFngA==}
 
-  '@layerstack/tailwind@0.0.6':
-    resolution: {integrity: sha512-gmBwg3JYddylrodNd6Y4cz0xT/3HVWKsu/QEi5u2fps7hCsYMuI/gr3sil/zDCeuUXm2OOxerWosRBYfX7YqWA==}
+  '@layerstack/tailwind@0.0.9':
+    resolution: {integrity: sha512-bmv4qEgmJWgAiUqznj7WSQ3vCEoA80iXztEuSO2jsS1nJ2/676VguAQ/6SGiWm2uoxgJ5BCPAP/AYOowZOkI8g==}
 
-  '@layerstack/utils@0.0.4':
-    resolution: {integrity: sha512-EjN9SoJlOo9GAX0KMy+3D3Tpw63n46owHwmo1vK4niZFpQA0gdoDfwHTw6yVkxe71mcHDKKyV62Yc/buezWXwg==}
+  '@layerstack/utils@0.0.5':
+    resolution: {integrity: sha512-Ew84WuCMC3q7Wq0Tb0rBEM/WK2RkkxRBF/RvNcnbaWcj5O+jO6VEZc657Jv73skkIJ4fkciT8FhSIcHoRkhdrQ==}
 
   '@mdi/js@7.4.47':
     resolution: {integrity: sha512-KPnNOtm5i2pMabqZxpUz7iQf+mfrYZyKCZ8QNz85czgEt7cuHcGorWfdzUMWYA0SD+a6Hn4FmJ+YhzzzjkTZrQ==}
@@ -1930,6 +1930,9 @@ packages:
 
   core-js-compat@3.36.1:
     resolution: {integrity: sha512-Dk997v9ZCt3X/npqzyGdTlq6t7lDBhZwGvV94PKzDArjp7BTRm7WlDAXYd/OWdeFHO8OChQYRJNJvUCqCbrtKA==}
+
+  core-js@3.38.1:
+    resolution: {integrity: sha512-OP35aUorbU3Zvlx7pjsFdu1rGNnD4pgw/CWoYzRY3t2EzoVT7shKHY1dlAy3f41cGIO7ZDPQimhGFTlEYkG/Hw==}
 
   cors@2.8.5:
     resolution: {integrity: sha512-KIHbLJqu73RGr/hnbrO9uBeixNGuvSQjul/jdFvS/KFSIH1hWVd1ng7zOHx+YrEfInLG7q4n6GHQ9cDtxv/P6g==}
@@ -2967,16 +2970,16 @@ packages:
   kolorist@1.8.0:
     resolution: {integrity: sha512-Y+60/zizpJ3HRH8DCss+q95yr6145JXZo46OTpFvDZWLfRCE4qChOyk1b26nMaNpfHHgxagk9dXT5OP0Tfe+dQ==}
 
-  layercake@8.3.4:
-    resolution: {integrity: sha512-r5OrzTxpDp0BQm9m5kJTIzsD5o9nbOkxXTaMzce1LPTigs9PnQfvfjnsAdj/tXpe15BJaP1RVWFgnMDSghJhXw==}
+  layercake@8.4.0:
+    resolution: {integrity: sha512-ln8i6445N85jMCVjpW+ktV+It+Cc73uP3osZCHOboMLLFOYb4qARb+XMoX0Y0p7khZkM4dZwCct8BQ0KQWpuKw==}
     peerDependencies:
       svelte: 3 - 5 || >=5.0.0-next.120
       typescript: ^5.0.2
 
-  layerchart@0.53.0:
-    resolution: {integrity: sha512-2LyHeQWPhXCkDVcu1pzuESl48Ugkj/AE6xoO9NU72Uwc/Uh9QRIeQaLRDzF8NxWZrlzBRgKCqGPyyfWNAXT2GA==}
+  layerchart@0.54.1:
+    resolution: {integrity: sha512-e2rb0A9Ca4ZAAmrpxZn85K7JwW0rroBtw9Tth9oloDC4rwpubGb/q28nKc5wplxvADibSSryvOABtcaj1pOqZg==}
     peerDependencies:
-      svelte: ^3.56.0 || ^4.0.0 || ^5.0.0-next.120
+      svelte: ^3.56.0 || ^4.0.0 || ^5.0.0
 
   leven@3.1.0:
     resolution: {integrity: sha512-qsda+H8jTaUaN/x5vzW2rzc+8Rw4TAQ/4KjB46IwK5VH+IlVeeeje/EoZRpiXvIqjFgK84QffqPztGI3VBLG1A==}
@@ -3436,8 +3439,8 @@ packages:
     resolution: {integrity: sha512-56rxCq7G/XfB4EkXq9Egn5GCqugWvDFjafDOThIdMBsI15iqPqR5r15TfSr1YPYeEI19YeaXMCbY6u88Y76GLQ==}
     engines: {node: ^10 || ^12 || >=14}
 
-  posthog-js@1.157.1:
-    resolution: {integrity: sha512-K9TWFrz9PI2e1AMhgfwp1/0eMHdP2DwcHhOsTawlSsj03keUvtybWWiOW36xmrhJzE1HcvlYpfYvpTnbr6MQqA==}
+  posthog-js@1.176.0:
+    resolution: {integrity: sha512-T5XKNtRzp7q6CGb7Vc7wAI76rWap9fiuDUPxPsyPBPDkreKya91x9RIsSapAVFafwD1AEin1QMczCmt9Le9BWw==}
 
   preact@10.19.5:
     resolution: {integrity: sha512-OPELkDmSVbKjbFqF9tgvOowiiQ9TmsJljIzXRyNE8nGiis94pwv1siF78rQkAP1Q1738Ce6pellRg/Ns/CtHqQ==}
@@ -5596,41 +5599,41 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.4.15
 
-  '@layerstack/svelte-actions@0.0.4':
+  '@layerstack/svelte-actions@0.0.7':
     dependencies:
       '@floating-ui/dom': 1.6.11
-      '@layerstack/utils': 0.0.4
+      '@layerstack/utils': 0.0.5
       d3-array: 3.2.4
       d3-scale: 4.0.2
-      date-fns: 3.6.0
+      date-fns: 4.1.0
       lodash-es: 4.17.21
 
-  '@layerstack/svelte-stores@0.0.4':
+  '@layerstack/svelte-stores@0.0.6':
     dependencies:
-      '@layerstack/utils': 0.0.4
+      '@layerstack/utils': 0.0.5
       d3-array: 3.2.4
-      date-fns: 3.6.0
+      date-fns: 4.1.0
       immer: 10.1.1
       lodash-es: 4.17.21
       zod: 3.23.8
 
-  '@layerstack/tailwind@0.0.6':
+  '@layerstack/tailwind@0.0.9':
     dependencies:
-      '@layerstack/utils': 0.0.4
+      '@layerstack/utils': 0.0.5
       clsx: 2.1.1
       culori: 4.0.1
       d3-array: 3.2.4
-      date-fns: 3.6.0
+      date-fns: 4.1.0
       lodash-es: 4.17.21
       tailwind-merge: 2.5.4
       tailwindcss: 3.4.14
     transitivePeerDependencies:
       - ts-node
 
-  '@layerstack/utils@0.0.4':
+  '@layerstack/utils@0.0.5':
     dependencies:
       d3-array: 3.2.4
-      date-fns: 3.6.0
+      date-fns: 4.1.0
       lodash-es: 4.17.21
 
   '@mdi/js@7.4.47': {}
@@ -6462,6 +6465,8 @@ snapshots:
   core-js-compat@3.36.1:
     dependencies:
       browserslist: 4.23.3
+
+  core-js@3.38.1: {}
 
   cors@2.8.5:
     dependencies:
@@ -7571,7 +7576,7 @@ snapshots:
 
   kolorist@1.8.0: {}
 
-  layercake@8.3.4(svelte@4.2.19)(typescript@5.6.3):
+  layercake@8.4.0(svelte@4.2.19)(typescript@5.6.3):
     dependencies:
       d3-array: 3.2.4
       d3-color: 3.1.0
@@ -7580,12 +7585,12 @@ snapshots:
       svelte: 4.2.19
       typescript: 5.6.3
 
-  layerchart@0.53.0(svelte@4.2.19)(typescript@5.6.3):
+  layerchart@0.54.1(svelte@4.2.19)(typescript@5.6.3):
     dependencies:
-      '@layerstack/svelte-actions': 0.0.4
-      '@layerstack/svelte-stores': 0.0.4
-      '@layerstack/tailwind': 0.0.6
-      '@layerstack/utils': 0.0.4
+      '@layerstack/svelte-actions': 0.0.7
+      '@layerstack/svelte-stores': 0.0.6
+      '@layerstack/tailwind': 0.0.9
+      '@layerstack/utils': 0.0.5
       d3-array: 3.2.4
       d3-color: 3.1.0
       d3-delaunay: 6.0.4
@@ -7606,9 +7611,9 @@ snapshots:
       d3-tile: 1.0.0
       d3-time: 3.1.0
       date-fns: 3.6.0
-      layercake: 8.3.4(svelte@4.2.19)(typescript@5.6.3)
+      layercake: 8.4.0(svelte@4.2.19)(typescript@5.6.3)
       lodash-es: 4.17.21
-      posthog-js: 1.157.1
+      posthog-js: 1.176.0
       shapefile: 0.6.6
       svelte: 4.2.19
       topojson-client: 3.1.0
@@ -8007,8 +8012,9 @@ snapshots:
       picocolors: 1.1.0
       source-map-js: 1.2.1
 
-  posthog-js@1.157.1:
+  posthog-js@1.176.0:
     dependencies:
+      core-js: 3.38.1
       fflate: 0.4.8
       preact: 10.19.5
       web-vitals: 4.2.1
