@@ -1,37 +1,39 @@
 <script lang="ts">
 	import { scaleOrdinal, scaleTime } from 'd3-scale';
-	import {
-		Area,
-		AreaStack,
-		Axis,
-		Chart,
-		Highlight,
-		Legend,
-		RectClipPath,
-		Svg,
-		Tooltip
-	} from 'layerchart';
 	import { stack } from 'd3-shape';
 	import { flatten } from 'svelte-ux/utils/array';
-	import type { IMappedWish, IMappedWishes } from '$lib/types/wish';
 	import type { WishBannerKey } from '$lib/types/keys/WishBannerKey';
 	import { mdiStar } from '@mdi/js';
 	import Icon from '$lib/components/ui/icon/icon.svelte';
 	import Text from '$lib/components/typography/Text.svelte';
 	import { applicationState } from '$lib/store/application_state';
+	import { derived, type Readable } from 'svelte/store';
+	import type { INamedWishes, IWish } from '$lib/types/wish';
+	import {
+		Area,
+		Axis,
+		Chart,
+		chartDataArray,
+		Highlight,
+		Legend,
+		LinearGradient,
+		RectClipPath,
+		Svg,
+		Tooltip
+	} from 'layerchart';
 
-	export let data: IMappedWishes;
+	export let data: Readable<INamedWishes>;
 
 	const keys = ['5', '4', '3'];
 	const colorKeys = ['#5E93B2', '#7B5C90', '#FFB13F'];
 
-	const getMonthlyData = () => {
+	const getMonthlyData = derived([data], ([dataStore]) => {
 		let pullsByMonth: { [key: string]: { [key: string]: number } } = {};
 
-		const bannerHistoryData: IMappedWish[] = [];
+		const bannerHistoryData: IWish[] = [];
 
-		Object.keys(data).forEach((key: string) => {
-			const wishes = data[key as WishBannerKey];
+		Object.keys(dataStore).forEach((key: string) => {
+			const wishes = dataStore[key as WishBannerKey];
 
 			bannerHistoryData.push(...(wishes !== undefined ? wishes : []));
 		});
@@ -57,6 +59,45 @@
 				})
 				.sort((a, b) => new Date(a.date).valueOf() - new Date(b.date).valueOf())
 		);
+	});
+
+	const hexToHSL = (hex: string) => {
+		// Remove the # if present
+		hex = hex.replace(/^#/, '');
+
+		// Convert hex to RGB
+		let r = parseInt(hex.slice(0, 2), 16) / 255;
+		let g = parseInt(hex.slice(2, 4), 16) / 255;
+		let b = parseInt(hex.slice(4, 6), 16) / 255;
+
+		// Find greatest and smallest channel values
+		let cmin = Math.min(r, g, b),
+			cmax = Math.max(r, g, b),
+			delta = cmax - cmin,
+			h = 0,
+			s = 0,
+			l = 0;
+
+		// Calculate hue
+		if (delta === 0) h = 0;
+		else if (cmax === r) h = ((g - b) / delta) % 6;
+		else if (cmax === g) h = (b - r) / delta + 2;
+		else h = (r - g) / delta + 4;
+
+		h = Math.round(h * 60);
+		if (h < 0) h += 360;
+
+		// Calculate lightness
+		l = (cmax + cmin) / 2;
+
+		// Calculate saturation
+		s = delta === 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
+
+		// Convert to percentages
+		s = +(s * 100).toFixed(1);
+		l = +(l * 100).toFixed(1);
+
+		return `${h}, ${s}%, ${l}%`;
 	};
 
 	const formatDateLabel = (d: string) =>
@@ -68,17 +109,17 @@
 
 <div class="h-[350px] w-full">
 	<Chart
-		data={getMonthlyData()}
-		flatData={flatten(getMonthlyData())}
+		data={$getMonthlyData}
+		flatData={flatten($getMonthlyData)}
 		let:height
 		let:padding
 		let:tooltip
 		let:width
-		padding={{ left: 16, bottom: 48 }}
+		padding={{ left: 16, bottom: 62 }}
 		r="key"
 		rDomain={keys}
 		rRange={colorKeys}
-		rScale={scaleOrdinal()}
+		cScale={scaleOrdinal()}
 		tooltip={{ mode: 'bisect-x' }}
 		x={(d) => d.data.date}
 		xScale={scaleTime()}
@@ -87,26 +128,40 @@
 	>
 		<Svg>
 			<Axis
-				labelProps={{ class: 'fill-text' }}
+				tickLabelProps={{
+					textAnchor: 'end',
+					class: 'fill-text font-semibold'
+				}}
+				ticks={5}
 				placement="left"
 				rule
 				grid={{ style: 'stroke-dasharray: 2; stroke: white' }}
 			/>
 			<Axis
 				format={formatDateLabel}
-				labelProps={{ class: 'fill-text' }}
+				tickLabelProps={{
+					class: 'fill-text font-semibold'
+				}}
 				placement="bottom"
 				rule
 			/>
-
-			<AreaStack let:data>
-				{#each data as seriesData}
+			{@const primaryColorScale = scaleOrdinal([colorKeys[2], colorKeys[1], colorKeys[0]])}
+			{@const secondaryColorScale = scaleOrdinal([
+				`hsl(${hexToHSL(colorKeys[2])}, 0.2)`,
+				`hsl(${hexToHSL(colorKeys[1])}, 0.2)`,
+				`hsl(${hexToHSL(colorKeys[0])}, 0.2)`
+			])}
+			{#each chartDataArray($getMonthlyData) as seriesData, index}
+				{@const primaryColor = primaryColorScale(String(index))}
+				{@const secondaryColor = secondaryColorScale(String(index))}
+				<LinearGradient stops={[primaryColor, secondaryColor]} vertical let:url>
 					<Area
 						data={seriesData}
 						y0={(d) => d[0]}
 						y1={(d) => d[1]}
-						fill={colorKeys.at(seriesData.key - 3)}
+						fill={url}
 						fill-opacity={0.5}
+						line={{ stroke: primaryColor, 'stroke-width': 2 }}
 					/>
 					<RectClipPath
 						x={0}
@@ -119,11 +174,12 @@
 							data={seriesData}
 							y0={(d) => d[0]}
 							y1={(d) => d[1]}
-							fill={colorKeys.at(seriesData.key - 3)}
+							fill={url}
+							line={{ stroke: primaryColor, 'stroke-width': 2 }}
 						/>
 					</RectClipPath>
-				{/each}
-			</AreaStack>
+				</LinearGradient>
+			{/each}
 
 			<Highlight lines={{ class: 'stroke-text [stroke-dasharray:unset]' }} />
 		</Svg>
@@ -144,13 +200,10 @@
 			{/if}
 		</Legend>
 
-		<Tooltip
-			class="bg-neutral"
-			header={(data) => 'Total pulls: ' + (data.data['3'] + data.data['4'] + data.data['5'])}
-			let:data
-			x="data"
-			y={0}
-		>
+		<Tooltip.Root class="bg-neutral" let:data x="data" y={0}>
+			<Tooltip.Header>
+				{'Total pulls: ' + (data.data['3'] + data.data['4'] + data.data['5'])}
+			</Tooltip.Header>
 			<div class="flex flex-col gap-2 justify-center items-start">
 				{#each keys as key}
 					<div class="flex gap-1 justify-center items-center">
@@ -162,8 +215,8 @@
 					</div>
 				{/each}
 			</div>
-		</Tooltip>
-		<Tooltip
+		</Tooltip.Root>
+		<Tooltip.Root
 			anchor="top"
 			class="text-sm font-semibold bg-primary text-text-content leading-3 px-2 py-1 rounded whitespace-nowrap"
 			let:data
@@ -175,6 +228,6 @@
 				month: 'long',
 				year: 'numeric'
 			})}
-		</Tooltip>
+		</Tooltip.Root>
 	</Chart>
 </div>

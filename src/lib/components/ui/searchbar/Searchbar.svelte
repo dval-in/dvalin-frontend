@@ -22,6 +22,10 @@
 	const opencmd = () => {
 		open = true;
 	};
+
+	const encodeAltText = (name: string) => {
+		return name.replace(/"/g, '&quot;');
+	};
 </script>
 
 <IconButton
@@ -40,17 +44,15 @@
 		<CommandGroup>
 			{#each searchableDataList as data}
 				<CommandItem
-					onSelect={(value) => {
-						redirectToPage(data.link);
-					}}
+					onSelect={() => redirectToPage(data.link)}
 					class="cursor-pointer hover:bg-primary hover:text-black"
 				>
 					<img
 						src={data.img}
-						alt={'Image of ' + data.name}
+						alt={encodeAltText(`Image of ${data.name}`)}
 						class="w-8 h-8 mr-2 rounded-full"
 					/>
-					{data.name}
+					{encodeAltText(data.name)}
 				</CommandItem>
 			{/each}
 		</CommandGroup>

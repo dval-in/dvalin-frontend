@@ -1,7 +1,7 @@
-import type { ArtifactSetKey } from '$lib/types/keys/ArtifactSetKey';
-import type { SlotKey } from '$lib/types/keys/SlotKey';
-import type { StatKey } from '$lib/types/keys/StatKey';
-import type { CharacterKey } from '$lib/types/keys/CharacterKey';
+import type { SlotKey } from './artifact_slot';
+import type { StatKey } from './artifact_stat';
+import type { ArtifactSetKey } from './keys/ArtifactSetKey';
+import type { CharacterKey } from './keys/CharacterKey';
 
 export type IArtifact = {
 	setKey: ArtifactSetKey; // E.g. "GladiatorsFinale"
@@ -9,12 +9,12 @@ export type IArtifact = {
 	level: number; // 0-20 inclusive
 	rarity: number; // 1-5 inclusive
 	mainStatKey: StatKey;
-	location: CharacterKey | ''; // Where "" means not equipped.
+	characterKey: CharacterKey | ''; // Where "" means not equipped.
 	lock: boolean; // Whether the artifact is locked in game.
 	substats: ISubstat[];
 };
 
 export type ISubstat = {
-	key: StatKey; // E.g. "critDMG_"
+	key: StatKey;
 	value: number; // E.g. 19.4
 };

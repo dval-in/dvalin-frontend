@@ -11,7 +11,9 @@
 	<title>{'Dval.in | ' + title}</title>
 </svelte:head>
 
-<div class="flex flex-1 p-2 sm:p-4 sm:pt-14 sm:max-w-[1536px] scrollbar-gutter">
+<div
+	class={`flex flex-1 p-2 ${isLoading ? '' : 'sm:p-4 sm:pt-14'} sm:max-w-[2560px] scrollbar-gutter`}
+>
 	<div class="flex flex-1 flex-col gap-4 sm:gap-6 overflow-x-hidden">
 		{#if title !== '' || $$slots.titlebarActions}
 			<div

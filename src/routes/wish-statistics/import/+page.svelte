@@ -22,7 +22,7 @@
 	const client = useQueryClient();
 
 	const fetchHoyoWishHistory = () => {
-		if (!wishURL.includes('e20190909gacha-v3')) {
+		if (!wishURL.includes('gacha_id')) {
 			toast.error('Wrong url');
 			return;
 		}
@@ -80,15 +80,15 @@
 					<TabsTrigger value="nswitch">Nintendo Switch</TabsTrigger>
 				</TabsList>
 				<TabsContent value="pc">
-					<Text type="p">
-						{$i18n.t('wish.import.instructions.step1')}
-					</Text>
+					<Text type="p">{$i18n.t('wish.import.instructions.step1')}</Text>
 					<Text type="p">{$i18n.t('wish.import.instructions.step2')}</Text>
-					<Text type="p">
-						{$i18n.t('wish.import.instructions.step3')}
-					</Text>
+					<Text type="p">{$i18n.t('wish.import.instructions.step3')}</Text>
 					<Text type="p">{$i18n.t('wish.import.instructions.step4')}</Text>
 					<Text type="p">{$i18n.t('wish.import.instructions.step5')}</Text>
+					<Text type="p">{$i18n.t('wish.import.instructions.step6')}</Text>
+					<Text type="p">{$i18n.t('wish.import.instructions.step7')}</Text>
+					<Text type="p">{$i18n.t('wish.import.instructions.step8')}</Text>
+					<Text type="p">{$i18n.t('wish.import.instructions.step9')}</Text>
 				</TabsContent>
 				<TabsContent value="android">
 					<Text type="p">Use Ascent by 403f</Text>
@@ -114,7 +114,7 @@
 			<Input
 				id="wishurl"
 				bind:value={wishURL}
-				placeholder="https://webstatic-sea.hoyoverse.com/genshin/event/e20190909gacha-v3/index.html?authkey=.......&game_biz=hk4e_global"
+				placeholder="https://public-operation-hk4e-sg.hoyoverse.com/genshin/event/e20190909gacha-v3/index.html?authkey=....&game_biz=hk4e_global"
 			/>
 			<Button
 				on:click={fetchHoyoWishHistory}
@@ -124,7 +124,7 @@
 			</Button>
 		{:else if $fetchHoyoWishHistoryStatus.data.state === 'QUEUED'}
 			<div class="flex flex-1 flex-col justify-center items-center gap-6">
-				<Icon path={mdiHumanQueue} size={2} />
+				<Icon path={mdiHumanQueue} class="size-56" />
 				<Text type="h2">{$i18n.t('wish.import.state.queued.title')}</Text>
 				<Text type="p">
 					{$i18n.t('wish.import.state.queued.description', {
@@ -134,12 +134,12 @@
 			</div>
 		{:else if $fetchHoyoWishHistoryStatus.data.state === 'ACTIVE'}
 			<div class="flex flex-1 flex-col justify-center items-center gap-6">
-				<Icon path={mdiHumanQueue} size={2} />
+				<Icon path={mdiHumanQueue} class="size-56" />
 				<Text type="h2">{$i18n.t('wish.import.state.active.title')}</Text>
 			</div>
 		{:else if $fetchHoyoWishHistoryStatus.data.state === 'COMPLETED_RATE_LIMIT'}
 			<div class="flex flex-1 flex-col justify-center items-center gap-6">
-				<Icon path={mdiCheck} size={2} />
+				<Icon path={mdiCheck} class="size-56" />
 				<Text type="h2">{$i18n.t('wish.import.state.completed.title')}</Text>
 				<Text type="p">
 					{$i18n.t('wish.import.state.completed.description', {

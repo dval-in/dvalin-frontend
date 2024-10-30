@@ -1,14 +1,9 @@
 import type { WishBannerKey } from '$lib/types/keys/WishBannerKey';
 import type { WeaponKey } from '$lib/types/keys/WeaponKey';
 import type { CharacterKey } from '$lib/types/keys/CharacterKey';
-import type { BannerKey } from '$lib/types/keys/BannerKey';
 
 export type IWishes = {
 	[key in WishBannerKey]?: IWish[];
-};
-
-export type IMappedWishes = {
-	[key in WishBannerKey]?: IMappedWish[];
 };
 
 export type IWish = {
@@ -17,16 +12,18 @@ export type IWish = {
 	key: WeaponKey | CharacterKey;
 	date: Date;
 	pity: number;
-	banner: BannerKey;
+	banner: string;
+	bannerId: string;
+	rarity: number;
+	order: number;
+	isFeatured: boolean;
+	wonFiftyFifty: boolean;
 };
 
-export type IMappedWish = {
-	type: 'Weapon' | 'Character';
-	number: number;
-	key: WeaponKey | CharacterKey;
-	date: Date;
-	pity: number;
-	banner: BannerKey;
-	name: string;
-	rarity: number;
+export type INamedWishes = {
+	[key in WishBannerKey]?: INamedWish[];
 };
+
+export interface INamedWish extends IWish {
+	name: string;
+}

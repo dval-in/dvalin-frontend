@@ -9,23 +9,42 @@
 	import { QueryClientProvider } from '@tanstack/svelte-query';
 	import { userProfile } from '$lib/store/user_profile';
 	import DefaultLayout from '$lib/components/layout/DefaultLayout.svelte';
-	import { dataIndexStore } from '$lib/store/index_store';
+	import { dataIndex } from '$lib/store/index_store';
 	import type { LayoutData } from '../../.svelte-kit/types/src/routes/$types';
+	import { onMount } from 'svelte';
 
 	/** @type {import('../../.svelte-kit/types/src/routes/$types').LayoutData} */
 	export let data: LayoutData;
 
 	$: webManifestLink = pwaInfo ? pwaInfo.webManifest.href : '';
 
-	const fetchDataIndex = data.backend.data.fetchDataIndex();
-	let isLoading = JSON.stringify(get(dataIndexStore).weapon) === '{}';
+	const fetchCharacterDataIndex = data.backend.data.fetchCharacterDataIndex();
+	const fetchWeaponDataIndex = data.backend.data.fetchWeaponDataIndex();
+	let isLoading =
+		JSON.stringify(get(dataIndex).character) === '{}' ||
+		JSON.stringify(get(dataIndex).weapon) === '{}';
 
-	fetchDataIndex.subscribe((response) => {
-		if (response.status === 'success') {
+	$: {
+		let characterIndex = $fetchCharacterDataIndex;
+		let weaponIndex = $fetchWeaponDataIndex;
+		if (characterIndex.status === 'success' && weaponIndex.status === 'success') {
+			weaponIndex.data['Unknown3Star'] = { name: 'Unknown 3 star', rarity: 3, type: 'sword' };
+
+			dataIndex.set({
+				character: characterIndex.data,
+				weapon: weaponIndex.data
+			});
 			isLoading = false;
-			response.data.weapon['Unknown3Star'] = { name: 'Unknown 3 star', rarity: 3 };
-			dataIndexStore.set(response.data);
 		}
+	}
+
+	onMount(() => {
+		document.body.classList.add(get(applicationState).settings.theme);
+
+		applicationState.subscribe((a) => {
+			document.body.classList.remove(...['light', 'dark']);
+			document.body.classList.add(a.settings.theme);
+		});
 	});
 
 	console.log(get(applicationState));
@@ -43,7 +62,7 @@
 </svelte:head>
 
 <QueryClientProvider client={data.queryClient}>
-	<div class={`${$applicationState.settings.theme} bg-neutral text-text min-h-screen`}>
+	<div class={`bg-neutral text-text min-h-screen`}>
 		<div class="min-h-screen" id="main">
 			{#if isLoading}
 				<div class="flex flex-1 flex-row justify-center items-center min-h-screen">

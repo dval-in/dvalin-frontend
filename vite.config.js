@@ -1,8 +1,27 @@
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
 import { SvelteKitPWA } from '@vite-pwa/sveltekit';
+import { resolve } from 'path';
 
 export default defineConfig({
+	preview: {
+		host: true,
+		port: 8080
+	},
+	optimizeDeps: {
+		exclude: ['dvalin-data']
+	},
+	build: {
+		commonjsOptions: {
+			include: [/node_modules/]
+		}
+	},
+	resolve: {
+		alias: {
+			'dvalin-data': resolve(__dirname, 'node_modules/dvalin-data/dist/types')
+		}
+	},
+
 	plugins: [
 		sveltekit(),
 		SvelteKitPWA({

@@ -9,6 +9,7 @@
 	import langFlagPL from '$lib/assets/languages/PL.svg';
 	import langFlagRU from '$lib/assets/languages/RU.svg';
 	import langFlagTH from '$lib/assets/languages/TH.svg';
+	import langFlagVI from '$lib/assets/languages/VI.svg';
 	import langFlagZHS from '$lib/assets/languages/ZHS.svg';
 	import langFlagZHT from '$lib/assets/languages/ZHT.svg';
 	import {
@@ -25,9 +26,11 @@
 	import { AlertDescription, AlertTitle } from '$lib/components/ui/alert/index.js';
 	import Icon from '$lib/components/ui/icon/icon.svelte';
 	import { mdiTranslate } from '@mdi/js';
+	import BackendService from '$lib/services/backend';
 
 	let selectedLanguage = get(i18n).language;
-
+	const backend = BackendService.getInstance();
+	$: createConfigMutation = backend.user.updateConfig();
 	let isDialogOpen = false;
 
 	const languages = Object.keys(get(i18n).options.resources ?? {});
@@ -52,12 +55,12 @@
 				return langFlagRU;
 			case 'TH':
 				return langFlagTH;
+			case 'VI':
+				return langFlagVI;
 			case 'ZHS':
 				return langFlagZHS;
 			case 'ZHT':
 				return langFlagZHT;
-			default:
-				return langFlagEN;
 		}
 	};
 
@@ -68,6 +71,9 @@
 	const saveLanguage = () => {
 		$i18n.changeLanguage(selectedLanguage);
 		isDialogOpen = false;
+		$createConfigMutation.mutate({
+			config: { preferedLanguage: selectedLanguage.toLowerCase() }
+		});
 	};
 
 	const openDialog = () => {

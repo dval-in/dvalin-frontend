@@ -17,7 +17,7 @@
 		PrevButton as PaginationPrevButton,
 		Root as PaginationRoot
 	} from '$lib/components/ui/pagination';
-	import { readable } from 'svelte/store';
+	import { type Readable } from 'svelte/store';
 	import { createRender, createTable, Render, Subscribe } from 'svelte-headless-table';
 	import {
 		mdiAccount,
@@ -37,7 +37,7 @@
 	} from 'svelte-headless-table/plugins';
 	import { Button } from '$lib/components/ui/button';
 	import SelectFilter from './SelectFilter.svelte';
-	import type { IMappedWish } from '$lib/types/wish';
+	import type { IWish } from '$lib/types/wish';
 	import DateRangeFilter from '$lib/components/tables/banner-history-table/DateRangeFilter.svelte';
 	import NameCell from '$lib/components/tables/banner-history-table/NameCell.svelte';
 	import DateCell from '$lib/components/tables/banner-history-table/DateCell.svelte';
@@ -46,14 +46,14 @@
 
 	const PAGE_SIZE = 25;
 
-	export let data: IMappedWish[];
+	export let data: Readable<IWish[]>;
 
-	const table = createTable(readable(data), {
+	const table = createTable(data, {
 		page: addPagination({ initialPageSize: PAGE_SIZE }),
 		filter: addColumnFilters(),
 		sort: addSortBy({
-			initialSortKeys: [{ id: 'number', order: 'desc' }],
-			toggleOrder: ['asc', 'desc']
+			initialSortKeys: [{ id: 'order', order: 'desc' }],
+			toggleOrder: ['desc', 'asc']
 		}),
 		resize: addResizedColumns()
 	});
@@ -79,11 +79,11 @@
 
 	const columns = table.createColumns([
 		table.column({
-			accessor: 'number',
-			header: '#',
+			accessor: 'order',
+			header: 'Order',
 			plugins: {
 				resize: {
-					initialWidth: 64
+					initialWidth: 80
 				}
 			}
 		}),
@@ -229,7 +229,7 @@
 					<Subscribe rowAttrs={row.attrs()} let:rowAttrs>
 						<TableRow
 							{...rowAttrs}
-							class={`hover:bg-tertiaryHover ${row.cellForId.rarity.value === 5 ? 'bg-fivestar' : 0} ${row.cellForId.rarity.value === 4 ? 'bg-fourstar' : 0}`}
+							class={`hover:bg-tertiaryHover ${row.cellForId.rarity.value === 5 ? 'bg-fivestar/50' : 0} ${row.cellForId.rarity.value === 4 ? 'bg-fourstar' : 0}`}
 						>
 							{#each row.cells as cell (cell.id)}
 								<Subscribe attrs={cell.attrs()} let:attrs>
@@ -238,7 +238,7 @@
 										class={`p-2  ${cell.id === 'key' ? 'text-start' : 'text-center'} `}
 									>
 										{#if cell.id === 'number'}
-											{data.length - parseInt(cell.row.id)}
+											{$data.length - parseInt(cell.row.id)}
 										{:else}
 											<Render of={cell.render()} />
 										{/if}

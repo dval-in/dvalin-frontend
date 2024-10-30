@@ -3,7 +3,7 @@ import { createThemes } from 'tw-colors';
 
 /** @type {import('tailwindcss').Config} */
 const config = {
-	darkMode: ['class'],
+	darkMode: ['selector'],
 	content: [
 		'./src/**/*.{html,js,svelte,ts}',
 		'./node_modules/svelte-ux/**/*.{svelte,js}',
@@ -50,7 +50,7 @@ const config = {
 					tertiaryActive: '#1C1C22',
 					neutral: '#1C1C22',
 					text: '#FFFFFF',
-					fivestar: '#805920'
+					fivestar: '#FFB13F'
 				},
 				light: {
 					border: '#000000',

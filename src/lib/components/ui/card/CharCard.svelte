@@ -15,7 +15,7 @@
 </script>
 
 <a
-	class="flex flex-col w-24 xl:w-36 rounded-md overflow-hidden hover:scale-105 transition-transform duration-300 ease-in-out"
+	class="flex flex-col w-full rounded-md overflow-hidden hover:scale-105 transition-transform duration-300 ease-in-out"
 	href={link}
 >
 	<div

@@ -1,4 +1,5 @@
 import { applicationState } from '$lib/store/application_state';
+import { userProfile, defaultValues } from '$lib/store/user_profile';
 
 export class BackendAuthService {
 	private readonly baseUrl: string;
@@ -15,6 +16,9 @@ export class BackendAuthService {
 		applicationState.update((state) => {
 			state.isAuthenticated = false;
 			return state;
+		});
+		userProfile.update(() => {
+			return defaultValues;
 		});
 		window.location.href = `${this.baseUrl}/logout`;
 	}
