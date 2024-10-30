@@ -66,6 +66,14 @@
 		document.body.removeChild(element);
 	};
 
+	const config = get(userProfile)?.config ?? {
+		autoRefine3: false,
+		autoRefine4: false,
+		autoRefine5: false,
+		preferedLanguage: 'EN'
+	};
+	$: $userProfile.config = config;
+
 	// Function to change theme to selected
 	function changeThemeTo(themeName: Theme) {
 		applicationState.update((state) => {
@@ -114,28 +122,28 @@
 					class="flex flex-1 flex-col z-10 items-center text-white p-2 sm:p-4 gap-6 bg-neutral bg-opacity-40"
 				>
 					<div class="flex">
-						<img src={bgImageUrl} class="size-52 rounded-full object-cover" />
+						<img src={bgImageUrl} class="size-52 rounded-full object-cover" alt="" />
 					</div>
 					<div class="flex gap-6">
 						<div class="flex flex-col gap-2">
 							<div>
-								<Text type="h1">{$userProfile.account.name}</Text>
-								<Text type="small">UID: {$userProfile.account.uid}</Text>
+								<Text type="h1">{$userProfile.account?.name}</Text>
+								<Text type="small">UID: {$userProfile.account?.uid}</Text>
 							</div>
-							<Text type="p">"{$userProfile.account.signature}"</Text>
+							<Text type="p">"{$userProfile.account?.signature}"</Text>
 						</div>
 						<div class="flex gap-2 flex-col">
 							<div>
 								<Text type="h4">Server:</Text>
-								<Text type="p">{$userProfile.account.server}</Text>
+								<Text type="p">{$userProfile.account?.server}</Text>
 							</div>
 							<div>
 								<Text type="h4">Adventure Rank:</Text>
-								<Text type="p">{$userProfile.account.ar}</Text>
+								<Text type="p">{$userProfile.account?.ar}</Text>
 							</div>
 							<div>
 								<Text type="h4">World Level:</Text>
-								<Text type="p">{$userProfile.account.wl}</Text>
+								<Text type="p">{$userProfile.account?.wl}</Text>
 							</div>
 						</div>
 					</div>
@@ -145,7 +153,7 @@
 				<Text type="h3">Profiles</Text>
 				<Button>
 					<Text type="p">
-						{`${$userProfile.account.name} - ${$userProfile.account.uid}`}
+						{`${$userProfile.account?.name} - ${$userProfile.account?.uid}`}
 					</Text>
 				</Button>
 			</div>
@@ -159,7 +167,7 @@
 						variant="outline"
 						class="w-full justify-center hover:border-primary"
 						on:click={option.action}
-						disabled={$userProfile.auth.includes(option.name)}
+						disabled={$userProfile?.auth.includes(option.name)}
 					>
 						{option.name}
 					</IconButton>
