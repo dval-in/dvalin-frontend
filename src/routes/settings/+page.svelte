@@ -85,7 +85,9 @@
 		});
 	}
 	// TODO : fix this once we have image on s3
-	const bgImageUrl = S3Service.getNamecard(get(userProfile).account.namecard).url;
+	const bgImageUrl = S3Service.getNamecard(
+		get(userProfile).account?.namecard ?? 'Arlecchino'
+	).url;
 
 	async function handleDelete(): Promise<void> {
 		const result = await $deleteProfileMutation.mutateAsync();
