@@ -167,7 +167,7 @@
 						variant="outline"
 						class="w-full justify-center hover:border-primary"
 						on:click={option.action}
-						disabled={$userProfile?.auth.includes(option.name)}
+						disabled={$userProfile?.auth?.includes(option.name) ?? true}
 					>
 						{option.name}
 					</IconButton>
