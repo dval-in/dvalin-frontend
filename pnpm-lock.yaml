@@ -78,8 +78,8 @@ importers:
         specifier: ^0.3.28
         version: 0.3.28(svelte@4.2.19)
       svelte-ux:
-        specifier: ^0.75.1
-        version: 0.75.1(@babel/core@7.24.3)(postcss-load-config@4.0.2(postcss@8.4.47))(postcss@8.4.47)(sass@1.80.5)(svelte@4.2.19)
+        specifier: ^0.75.3
+        version: 0.75.3(@babel/core@7.24.3)(postcss-load-config@4.0.2(postcss@8.4.47))(postcss@8.4.47)(sass@1.80.5)(svelte@4.2.19)
       sveltekit-superforms:
         specifier: ^2.20.0
         version: 2.20.0(@sveltejs/kit@2.7.3(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.10(@types/node@20.11.30)(sass@1.80.5)(terser@5.30.0)))(svelte@4.2.19)(vite@5.4.10(@types/node@20.11.30)(sass@1.80.5)(terser@5.30.0)))(@types/json-schema@7.0.15)(svelte@4.2.19)(typescript@5.6.3)
@@ -1050,14 +1050,8 @@ packages:
   '@floating-ui/core@1.6.0':
     resolution: {integrity: sha512-PcF++MykgmTj3CIyOQbKA/hDzOAiqI3mhuoN44WRCopIs1sgoDoU4oty4Jtqaj/y3oDU6fnVSm4QG0a3t5i0+g==}
 
-  '@floating-ui/dom@1.6.10':
-    resolution: {integrity: sha512-fskgCFv8J8OamCmyun8MfjB1Olfn+uZKjOKZ0vhYF3gRmEUXcGOjxWL8bBr7i4kIuPZ2KD2S3EUIOxnjC8kl2A==}
-
   '@floating-ui/dom@1.6.11':
     resolution: {integrity: sha512-qkMCxSR24v2vGkhYDo/UzxfJN3D4syqSjyuTFz6C7XcpU1pASPRieNI0Kj5VP3/503mOfYiGY891ugBX1GlABQ==}
-
-  '@floating-ui/utils@0.2.7':
-    resolution: {integrity: sha512-X8R8Oj771YRl/w+c1HqAC1szL8zWQRwFvgDwT129k9ACdBoud/+/rX9V0qiMl6LWUdP9voC2nDVZYPMQQsb6eA==}
 
   '@floating-ui/utils@0.2.8':
     resolution: {integrity: sha512-kym7SodPp8/wloecOpcmSnWJsK7M0E5Wg8UcFA+uO4B9s5d0ywXOEro/8HM9x0rW+TljRzul/14UYz3TleT3ig==}
@@ -4007,10 +4001,10 @@ packages:
     peerDependencies:
       svelte: ^4.0.0
 
-  svelte-ux@0.75.1:
-    resolution: {integrity: sha512-aeDwmkM2+Fn4asKtiiMdX79LqLtvikFwFg+4UI4sc7oJSUwC6+9DjLdxyqWfxk2F/VtzeCFI+AJtzhp1wVl7DQ==}
+  svelte-ux@0.75.3:
+    resolution: {integrity: sha512-navqUnlLt8haqHh9ENLc86MXV/tl2/6Shi5zGOZ4uPgnFkdKz+yatcywt0e/sbhPM4J+D4u80wNq2vyTytJ3JA==}
     peerDependencies:
-      svelte: ^3.56.0 || ^4.0.0 || ^5.0.0-next.120
+      svelte: ^3.56.0 || ^4.0.0 || ^5.0.0
 
   svelte@4.2.19:
     resolution: {integrity: sha512-IY1rnGr6izd10B0A8LqsBfmlT5OILVuZ7XsI0vdGPEvuonFV7NYEUK4dAkm9Zg2q0Um92kYjTpS1CAP3Nh/KWw==}
@@ -5520,17 +5514,10 @@ snapshots:
     dependencies:
       '@floating-ui/utils': 0.2.8
 
-  '@floating-ui/dom@1.6.10':
-    dependencies:
-      '@floating-ui/core': 1.6.0
-      '@floating-ui/utils': 0.2.7
-
   '@floating-ui/dom@1.6.11':
     dependencies:
       '@floating-ui/core': 1.6.0
       '@floating-ui/utils': 0.2.8
-
-  '@floating-ui/utils@0.2.7': {}
 
   '@floating-ui/utils@0.2.8': {}
 
@@ -5641,7 +5628,7 @@ snapshots:
   '@melt-ui/svelte@0.76.2(svelte@4.2.19)':
     dependencies:
       '@floating-ui/core': 1.6.0
-      '@floating-ui/dom': 1.6.10
+      '@floating-ui/dom': 1.6.11
       '@internationalized/date': 3.5.6
       dequal: 2.0.3
       focus-trap: 7.5.4
@@ -8657,7 +8644,7 @@ snapshots:
     dependencies:
       svelte: 4.2.19
 
-  svelte-ux@0.75.1(@babel/core@7.24.3)(postcss-load-config@4.0.2(postcss@8.4.47))(postcss@8.4.47)(sass@1.80.5)(svelte@4.2.19):
+  svelte-ux@0.75.3(@babel/core@7.24.3)(postcss-load-config@4.0.2(postcss@8.4.47))(postcss@8.4.47)(sass@1.80.5)(svelte@4.2.19):
     dependencies:
       '@floating-ui/dom': 1.6.11
       '@fortawesome/fontawesome-common-types': 6.6.0
@@ -8667,6 +8654,7 @@ snapshots:
       d3-array: 3.2.4
       d3-scale: 4.0.2
       date-fns: 4.1.0
+      esm-env: 1.0.0
       immer: 10.1.1
       lodash-es: 4.17.21
       prism-svelte: 0.5.0
