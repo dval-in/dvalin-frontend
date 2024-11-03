@@ -45,8 +45,8 @@ importers:
         specifier: ^23.16.4
         version: 23.16.4
       layerchart:
-        specifier: ^0.54.1
-        version: 0.54.1(svelte@4.2.19)(typescript@5.6.3)
+        specifier: ^0.57.0
+        version: 0.57.0(svelte@4.2.19)(typescript@5.6.3)
       lodash-es:
         specifier: ^4.17.21
         version: 4.17.21
@@ -2970,8 +2970,8 @@ packages:
       svelte: 3 - 5 || >=5.0.0-next.120
       typescript: ^5.0.2
 
-  layerchart@0.54.1:
-    resolution: {integrity: sha512-e2rb0A9Ca4ZAAmrpxZn85K7JwW0rroBtw9Tth9oloDC4rwpubGb/q28nKc5wplxvADibSSryvOABtcaj1pOqZg==}
+  layerchart@0.57.0:
+    resolution: {integrity: sha512-Rzt6z6r/fr0fsZy7l7GzRjHDIGpAYRp/mnZaPhVI8xIQCKqOeZlQhNdC8ugP1qnvhtd2s4O8G1HL3XnIZ5qrxw==}
     peerDependencies:
       svelte: ^3.56.0 || ^4.0.0 || ^5.0.0
 
@@ -7572,7 +7572,7 @@ snapshots:
       svelte: 4.2.19
       typescript: 5.6.3
 
-  layerchart@0.54.1(svelte@4.2.19)(typescript@5.6.3):
+  layerchart@0.57.0(svelte@4.2.19)(typescript@5.6.3):
     dependencies:
       '@layerstack/svelte-actions': 0.0.7
       '@layerstack/svelte-stores': 0.0.6
