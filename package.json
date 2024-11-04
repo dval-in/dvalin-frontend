@@ -34,7 +34,7 @@
 		"socket.io-client": "^4.8.1",
 		"svelte-i18next": "^2.2.2",
 		"svelte-legos": "^0.2.5",
-		"svelte-persisted-store": "^0.11.0",
+		"svelte-persisted-store": "^0.12.0",
 		"svelte-sonner": "^0.3.28",
 		"svelte-ux": "^0.75.4",
 		"sveltekit-superforms": "^2.20.0",
