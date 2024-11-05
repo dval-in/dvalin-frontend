@@ -15,8 +15,8 @@ importers:
         specifier: ^7.4.47
         version: 7.4.47
       '@tanstack/svelte-query':
-        specifier: ^5.59.16
-        version: 5.59.16(svelte@4.2.19)
+        specifier: ^5.59.17
+        version: 5.59.17(svelte@4.2.19)
       '@types/lodash-es':
         specifier: ^4.17.12
         version: 4.17.12
@@ -1413,11 +1413,11 @@ packages:
   '@swc/helpers@0.5.3':
     resolution: {integrity: sha512-FaruWX6KdudYloq1AHD/4nU+UsMTdNE8CKyrseXWEcgjDAbvkwJg2QGPAnfIJLIWsjZOSPLOAykK6fuYp4vp4A==}
 
-  '@tanstack/query-core@5.59.16':
-    resolution: {integrity: sha512-crHn+G3ltqb5JG0oUv6q+PMz1m1YkjpASrXTU+sYWW9pLk0t2GybUHNRqYPZWhxgjPaVGC4yp92gSFEJgYEsPw==}
+  '@tanstack/query-core@5.59.17':
+    resolution: {integrity: sha512-jWdDiif8kaqnRGHNXAa9CnudtxY5v9DUxXhodgqX2Rwzj+1UwStDHEbBd9IA5C7VYAaJ2s+BxFR6PUBs8ERorA==}
 
-  '@tanstack/svelte-query@5.59.16':
-    resolution: {integrity: sha512-s0CRtjUK0Lo+uvRU+XFxWjmTRV1hr0fe+Z/R+wDGnTzbMKSyaSKYeC0aZSQKZdAO6R/DvEVrD9tgjof1ojufnQ==}
+  '@tanstack/svelte-query@5.59.17':
+    resolution: {integrity: sha512-1nJw29NyVgTIrlIC3X1PtQsxE4ecBkYNkq/1OOaYKofc7Q3aXbvC8KOdoyzPSk/pUKj0LJl7tKfRRTvB3l+YGA==}
     peerDependencies:
       svelte: ^3.54.0 || ^4.0.0 || ^5.0.0-next.0
 
@@ -5896,11 +5896,11 @@ snapshots:
     dependencies:
       tslib: 2.8.0
 
-  '@tanstack/query-core@5.59.16': {}
+  '@tanstack/query-core@5.59.17': {}
 
-  '@tanstack/svelte-query@5.59.16(svelte@4.2.19)':
+  '@tanstack/svelte-query@5.59.17(svelte@4.2.19)':
     dependencies:
-      '@tanstack/query-core': 5.59.16
+      '@tanstack/query-core': 5.59.17
       svelte: 4.2.19
 
   '@types/conventional-commits-parser@5.0.0':
