@@ -25,7 +25,7 @@
 		"dvalin-data": "^1.0.3",
 		"formsnap": "^1.0.1",
 		"i18next": "^23.16.5",
-		"layerchart": "^0.58.4",
+		"layerchart": "^0.59.1",
 		"lodash-es": "^4.17.21",
 		"lucide-svelte": "^0.456.0",
 		"mode-watcher": "^0.4.1",
