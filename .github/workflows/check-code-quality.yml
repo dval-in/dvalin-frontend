@@ -17,6 +17,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
+          cache: pnpm
           node-version: lts/Iron
       - uses: pnpm/action-setup@v3
         name: Install pnpm
@@ -30,6 +31,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
+          cache: pnpm
           node-version: lts/Iron
       - uses: pnpm/action-setup@v3
         name: Install pnpm
@@ -45,6 +47,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
+          cache: pnpm
           node-version: lts/Iron
       - uses: pnpm/action-setup@v3
         name: Install pnpm
@@ -60,6 +63,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
+          cache: pnpm
           node-version: lts/Iron
       - uses: pnpm/action-setup@v3
         name: Install pnpm
@@ -91,6 +95,7 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
+          cache: pnpm
           node-version: lts/Iron
       - uses: pnpm/action-setup@v3
         name: Install pnpm
