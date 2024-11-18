@@ -18,7 +18,7 @@ jobs:
     timeout-minutes: 5
     steps:
       - name: 'Delete Cloudflare Pages deployments'
-        uses: andykenward/github-actions-cloudflare-pages/delete@v2.1.0
+        uses: andykenward/github-actions-cloudflare-pages/delete@v2.4.1
         with:
           cloudflare-api-token: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           cloudflare-account-id: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

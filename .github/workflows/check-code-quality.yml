@@ -111,7 +111,7 @@ jobs:
           key: website-build
           path: ./build
       - name: Publish to Cloudflare Pages
-        uses: andykenward/github-actions-cloudflare-pages@v2.1.0
+        uses: andykenward/github-actions-cloudflare-pages@v2.4.1
         id: pages
         with:
           cloudflare-api-token: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -120,4 +120,14 @@ jobs:
           directory: 'build'
           github-token: ${{ secrets.GITHUB_TOKEN }}
           github-environment: ${{ vars.CLOUDFLARE_PROJECT_NAME }} ${{ (github.ref == 'refs/heads/main' && '(Production)') || '(Preview)' }}
+      - name: 'Delete old deployments'
+        uses: andykenward/github-actions-cloudflare-pages/delete@v2.4.1
+        with:
+          keep-deployments: 5
+          cloudflare-api-token: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          cloudflare-account-id: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          cloudflare-project-name: ${{ vars.CLOUDFLARE_PROJECT_NAME }}
+          directory: 'build'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-environment: ${{ vars.CLOUDFLARE_PROJECT_NAME }} ${{ (github.event.pull_request.head.ref  == 'refs/heads/main' && '(Production)') || '(Preview)' }}
 
