@@ -31,15 +31,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        with:
+          version: 9
+          run_install: false
       - uses: actions/setup-node@v4
         with:
           cache: 'pnpm'
           node-version: lts/Iron
-      - uses: pnpm/action-setup@v3
-        name: Install pnpm
-        with:
-          version: 9
-          run_install: true
+      - name: Install dependencies
+        run: pnpm install
       - name: Check TypeScript
         run: pnpm tsc
   check-prettier:
@@ -47,15 +49,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        with:
+          version: 9
+          run_install: false
       - uses: actions/setup-node@v4
         with:
           cache: 'pnpm'
           node-version: lts/Iron
-      - uses: pnpm/action-setup@v3
-        name: Install pnpm
-        with:
-          version: 9
-          run_install: true
+      - name: Install dependencies
+        run: pnpm install
       - name: Check Prettier & Eslint
         run: pnpm run lint
   build:
@@ -63,18 +67,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        with:
+          version: 9
+          run_install: false
       - uses: actions/setup-node@v4
         with:
           cache: 'pnpm'
           node-version: lts/Iron
-      - uses: pnpm/action-setup@v3
-        name: Install pnpm
-        with:
-          version: 9
-          run_install: true
+      - name: Install dependencies
+        run: pnpm install
       - name: Build
         run: pnpm run build
-      - name: Retrieve build cache
+      - name: Save build cache
         uses: actions/cache@v3
         with:
           key: website-build
@@ -92,18 +98,18 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Install Node.js
-        uses: actions/setup-node@v4
-        with:
-          cache: 'pnpm'
-          node-version: lts/Iron
-      - uses: pnpm/action-setup@v3
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
         name: Install pnpm
         with:
           version: 9
-          run_install: true
+          run_install: false
+      - uses: actions/setup-node@v4
+        with:
+          cache: 'pnpm'
+          node-version: lts/Iron
+      - name: Install dependencies
+        run: pnpm install
       - name: Retrieve build cache
         uses: actions/cache@v3
         with:
