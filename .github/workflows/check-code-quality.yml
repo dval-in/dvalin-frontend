@@ -80,7 +80,7 @@ jobs:
         uses: actions/cache/save@v4
         with:
           key: website-build
-          path: ~/build
+          path: ./build
   deploy-to-cloudflare:
     needs: [build]
     if: ${{ github.event_name != 'pull_request' || github.actor != 'dependabot[bot]' }}
@@ -109,7 +109,7 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           key: website-build
-          path: ~/build
+          path: ./build
       - name: Publish to Cloudflare Pages
         uses: unlike-ltd/github-actions-cloudflare-pages@fb5958dd486c5c2cb38b3a843e1efb160878060d #v1.3.2
         id: pages
