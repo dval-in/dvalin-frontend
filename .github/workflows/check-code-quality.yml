@@ -111,7 +111,7 @@ jobs:
           key: website-build
           path: ./build
       - name: Publish to Cloudflare Pages
-        uses: unlike-ltd/github-actions-cloudflare-pages@fb5958dd486c5c2cb38b3a843e1efb160878060d #v1.3.2
+        uses: andykenward/github-actions-cloudflare-pages@v2.1.0
         id: pages
         with:
           cloudflare-api-token: ${{ secrets.CLOUDFLARE_API_TOKEN }}
