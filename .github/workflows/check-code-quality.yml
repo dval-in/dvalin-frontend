@@ -45,6 +45,9 @@ jobs:
         run: pnpm run lint
   build:
     needs: [check-typescript, check-prettier]
+    environment: ${{ vars.CLOUDFLARE_PROJECT_NAME }} ${{ (github.ref == 'refs/heads/main' && '(Production)') || '(Preview)' }}
+    env:
+      VITE_BACKEND_URL: ${{ vars.BACKEND_URL }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
