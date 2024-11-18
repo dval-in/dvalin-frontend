@@ -11,22 +11,7 @@ on:
       - '**'
 
 jobs:
-  install-dependencies:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-        name: Install pnpm
-        with:
-          version: 9
-          run_install: false
-      - uses: actions/setup-node@v4
-        with:
-          node-version: lts/Iron
-      - name: Install dependencies
-        run: pnpm install
   check-typescript:
-    needs: [install-dependencies]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -43,7 +28,6 @@ jobs:
       - name: Check TypeScript
         run: pnpm tsc
   check-prettier:
-    needs: [install-dependencies]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
