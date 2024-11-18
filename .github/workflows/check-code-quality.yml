@@ -15,32 +15,58 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: lts/Iron
-      - uses: pnpm/action-setup@v3
+      - uses: pnpm/action-setup@v4
         name: Install pnpm
         with:
           version: 9
-          run_install: true
+          run_install: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/Iron
+      - name: Install dependencies
+        run: pnpm install
       - name: Check TypeScript
         run: pnpm tsc
   check-prettier:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: lts/Iron
-      - uses: pnpm/action-setup@v3
+      - uses: pnpm/action-setup@v4
         name: Install pnpm
         with:
           version: 9
-          run_install: true
+          run_install: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/Iron
+      - name: Install dependencies
+        run: pnpm install
       - name: Check Prettier & Eslint
         run: pnpm run lint
-  deploy-to-cloudflare:
+  build:
     needs: [check-typescript, check-prettier]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        with:
+          version: 9
+          run_install: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/Iron
+      - name: Install dependencies
+        run: pnpm install
+      - name: Build
+        run: pnpm run build
+      - name: Save build cache
+        uses: actions/cache/save@v4
+        with:
+          key: website-build
+          path: ./build
+  deploy-to-cloudflare:
+    needs: [build]
     if: ${{ github.event_name != 'pull_request' || github.actor != 'dependabot[bot]' }}
     environment: ${{ vars.CLOUDFLARE_PROJECT_NAME }} ${{ (github.ref == 'refs/heads/main' && '(Production)') || '(Preview)' }}
     env:
@@ -52,21 +78,24 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Install Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: lts/Iron
-      - uses: pnpm/action-setup@v3
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
         name: Install pnpm
         with:
           version: 9
-          run_install: true
-      - name: Build
-        run: pnpm run build
+          run_install: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/Iron
+      - name: Install dependencies
+        run: pnpm install
+      - name: Retrieve build cache
+        uses: actions/cache/restore@v4
+        with:
+          key: website-build
+          path: ./build
       - name: Publish to Cloudflare Pages
-        uses: unlike-ltd/github-actions-cloudflare-pages@fb5958dd486c5c2cb38b3a843e1efb160878060d #v1.3.2
+        uses: andykenward/github-actions-cloudflare-pages@v2.4.1
         id: pages
         with:
           cloudflare-api-token: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -75,4 +104,13 @@ jobs:
           directory: 'build'
           github-token: ${{ secrets.GITHUB_TOKEN }}
           github-environment: ${{ vars.CLOUDFLARE_PROJECT_NAME }} ${{ (github.ref == 'refs/heads/main' && '(Production)') || '(Preview)' }}
+      - name: 'Delete old deployments'
+        uses: andykenward/github-actions-cloudflare-pages/delete@v2.4.1
+        with:
+          keep-latest: 5
+          cloudflare-api-token: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          cloudflare-account-id: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          cloudflare-project-name: ${{ vars.CLOUDFLARE_PROJECT_NAME }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-environment: ${{ vars.CLOUDFLARE_PROJECT_NAME }} ${{ (github.event.pull_request.head.ref  == 'refs/heads/main' && '(Production)') || '(Preview)' }}
 
