@@ -22,7 +22,6 @@ jobs:
           run_install: false
       - uses: actions/setup-node@v4
         with:
-          cache: 'pnpm'
           node-version: lts/Iron
       - name: Install dependencies
         run: pnpm install
@@ -38,7 +37,6 @@ jobs:
           run_install: false
       - uses: actions/setup-node@v4
         with:
-          cache: 'pnpm'
           node-version: lts/Iron
       - name: Install dependencies
         run: pnpm install
@@ -56,7 +54,6 @@ jobs:
           run_install: false
       - uses: actions/setup-node@v4
         with:
-          cache: 'pnpm'
           node-version: lts/Iron
       - name: Install dependencies
         run: pnpm install
@@ -74,14 +71,13 @@ jobs:
           run_install: false
       - uses: actions/setup-node@v4
         with:
-          cache: 'pnpm'
           node-version: lts/Iron
       - name: Install dependencies
         run: pnpm install
       - name: Build
         run: pnpm run build
       - name: Save build cache
-        uses: actions/cache@v3
+        uses: actions/cache/save@v4
         with:
           key: website-build
           path: ~/build
@@ -106,12 +102,11 @@ jobs:
           run_install: false
       - uses: actions/setup-node@v4
         with:
-          cache: 'pnpm'
           node-version: lts/Iron
       - name: Install dependencies
         run: pnpm install
       - name: Retrieve build cache
-        uses: actions/cache@v3
+        uses: actions/cache/restore@v4
         with:
           key: website-build
           path: ~/build
