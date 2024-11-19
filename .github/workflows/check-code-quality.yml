@@ -10,9 +10,6 @@ on:
     branches:
       - '**'
 
-env:
-  VITE_BACKEND_URL: 'https://staging-backend.dval.in'
-
 jobs:
   check-typescript:
     runs-on: ubuntu-latest
@@ -49,6 +46,9 @@ jobs:
   build:
     needs: [check-typescript, check-prettier]
     runs-on: ubuntu-latest
+    environment: ${{ vars.CLOUDFLARE_PROJECT_NAME }} ${{ (github.ref == 'refs/heads/main' && '(Production)') || '(Preview)' }}
+    env:
+      VITE_BACKEND_URL: ${{ vars.BACKEND_URL }}
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -62,7 +62,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install
       - name: Build
-        run: pnpm run build -d
+        run: pnpm run build
       - name: Save build cache
         uses: actions/cache/save@v4
         with:
