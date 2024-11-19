@@ -28,7 +28,7 @@
 		"layerchart": "^0.59.1",
 		"lodash-es": "^4.17.21",
 		"lucide-svelte": "^0.460.1",
-		"mode-watcher": "^0.4.1",
+		"mode-watcher": "^0.5.0",
 		"simple-icons": "^13.17.0",
 		"socket.io": "^4.8.1",
 		"socket.io-client": "^4.8.1",

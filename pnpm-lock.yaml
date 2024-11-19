@@ -54,8 +54,8 @@ importers:
         specifier: ^0.460.1
         version: 0.460.1(svelte@4.2.19)
       mode-watcher:
-        specifier: ^0.4.1
-        version: 0.4.1(svelte@4.2.19)
+        specifier: ^0.5.0
+        version: 0.5.0(svelte@4.2.19)
       simple-icons:
         specifier: ^13.17.0
         version: 13.17.0
@@ -3176,8 +3176,8 @@ packages:
   mlly@1.6.1:
     resolution: {integrity: sha512-vLgaHvaeunuOXHSmEbZ9izxPx3USsk8KCQ8iC+aTlp5sKRSoZvwhHh5L9VbKSaVC6sJDqbyohIS76E2VmHIPAA==}
 
-  mode-watcher@0.4.1:
-    resolution: {integrity: sha512-bNC+1NXmwEFZtziCdZSgP7HFQTpqJPcQn9GwwJQGSf6SBF3neEPYV1uRwkYuAQwbsvsXIYtzaqgedDzJ7D1mhg==}
+  mode-watcher@0.5.0:
+    resolution: {integrity: sha512-5E6fh/aXhAVv+U+DbeM0hCmskQE9u7WSmvnCRijJB/MJu7HtB73sjiCaZ9n1M8QHmzLrBFo8XBAUcWXkDm8Z9A==}
     peerDependencies:
       svelte: ^4.0.0 || ^5.0.0-next.1
 
@@ -7813,7 +7813,7 @@ snapshots:
       pkg-types: 1.0.3
       ufo: 1.4.0
 
-  mode-watcher@0.4.1(svelte@4.2.19):
+  mode-watcher@0.5.0(svelte@4.2.19):
     dependencies:
       svelte: 4.2.19
 
