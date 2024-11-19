@@ -62,6 +62,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install
       - name: Build
+        env:
+          VITE_BACKEND_URL: ${{ vars.BACKEND_URL }}
         run: pnpm run build
       - name: Save build cache
         uses: actions/cache/save@v4
@@ -81,17 +83,6 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-        name: Install pnpm
-        with:
-          version: 9
-          run_install: false
-      - uses: actions/setup-node@v4
-        with:
-          node-version: lts/Iron
-      - name: Install dependencies
-        run: pnpm install
       - name: Retrieve build cache
         uses: actions/cache/restore@v4
         with:
