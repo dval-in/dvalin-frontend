@@ -62,7 +62,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install
       - name: Build
-        run: pnpm run build -d
+        run: pnpm run build
       - name: Save build cache
         uses: actions/cache/save@v4
         with:
