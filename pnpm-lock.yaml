@@ -45,8 +45,8 @@ importers:
         specifier: ^23.16.5
         version: 23.16.5
       layerchart:
-        specifier: ^0.59.1
-        version: 0.59.1(svelte@4.2.19)(typescript@5.6.3)
+        specifier: ^0.59.4
+        version: 0.59.4(svelte@4.2.19)(typescript@5.6.3)
       lodash-es:
         specifier: ^4.17.21
         version: 4.17.21
@@ -1118,17 +1118,17 @@ packages:
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
 
-  '@layerstack/svelte-actions@0.0.7':
-    resolution: {integrity: sha512-PYG4oocNQxuUKQkhQvrB+nh4SGGzVr2KlqGS8wivXC4lF78BpOnsZfLxv657oVBBE+u3Cx6q9NRq/AG1A7ZiIw==}
+  '@layerstack/svelte-actions@0.0.8':
+    resolution: {integrity: sha512-d5KYPNGMw16mgK5VnshLfC114IGNTsvMQHB29tCXyZqn2keSqFnsUAO1EJBbq5KIWmMBpP0dwnthI7X5g9Rn0w==}
 
-  '@layerstack/svelte-stores@0.0.6':
-    resolution: {integrity: sha512-QCYU2QIOGNVcstkyJDkVHPDxBUX1/9Nb5bYt6JuhmFgSrfdYKx8DlZlax3jMEmjdu2htQRmj/qSZe+xK4HFngA==}
+  '@layerstack/svelte-stores@0.0.8':
+    resolution: {integrity: sha512-2snztoQL6cJtSF+JTQjZM4E4KkUkvvObCcFLGCWNjK4ohU6gbaPplDMnKtD7yv9DLwLwF7CNlJAYlV9LfisQUg==}
 
-  '@layerstack/tailwind@0.0.9':
-    resolution: {integrity: sha512-bmv4qEgmJWgAiUqznj7WSQ3vCEoA80iXztEuSO2jsS1nJ2/676VguAQ/6SGiWm2uoxgJ5BCPAP/AYOowZOkI8g==}
+  '@layerstack/tailwind@0.0.10':
+    resolution: {integrity: sha512-8EMG9dBFHgqgFItmMP9/jytOwD9LjjWux+yHn3sF6au0Vlnw5mqziMltYXBFq3a0GJJwMimAE93gPJgmmWSoqQ==}
 
-  '@layerstack/utils@0.0.5':
-    resolution: {integrity: sha512-Ew84WuCMC3q7Wq0Tb0rBEM/WK2RkkxRBF/RvNcnbaWcj5O+jO6VEZc657Jv73skkIJ4fkciT8FhSIcHoRkhdrQ==}
+  '@layerstack/utils@0.0.6':
+    resolution: {integrity: sha512-aU6KpUq8CF01ZwjXiEGjx7+IfNXZfxQgbdHcZJHs/5DrMcRc7KkHTJYhMbJHQ/27EU0ApMEDswHsNSnFuM9BIg==}
 
   '@mdi/js@7.4.47':
     resolution: {integrity: sha512-KPnNOtm5i2pMabqZxpUz7iQf+mfrYZyKCZ8QNz85czgEt7cuHcGorWfdzUMWYA0SD+a6Hn4FmJ+YhzzzjkTZrQ==}
@@ -2992,8 +2992,8 @@ packages:
       svelte: 3 - 5 || >=5.0.0-next.120
       typescript: ^5.0.2
 
-  layerchart@0.59.1:
-    resolution: {integrity: sha512-XwlPrZ4yC8z+SpQs5iqHcf8J30mSkOmdTxTcoOw1o4T78EqRt/rb7zKSMf8KpQFHIcwGzE97nWWdIQzyjI1TWg==}
+  layerchart@0.59.4:
+    resolution: {integrity: sha512-1TF6Z37CXpYUJaWdL47UoMOUNW+sdEalzgF9Tr6leO3SKOZzztFckkOOE+mCSV1GBZ3S2KTbeFmiQLc57WXAyA==}
     peerDependencies:
       svelte: ^3.56.0 || ^4.0.0 || ^5.0.0
 
@@ -5613,27 +5613,27 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.4.15
 
-  '@layerstack/svelte-actions@0.0.7':
+  '@layerstack/svelte-actions@0.0.8':
     dependencies:
       '@floating-ui/dom': 1.6.11
-      '@layerstack/utils': 0.0.5
+      '@layerstack/utils': 0.0.6
       d3-array: 3.2.4
       d3-scale: 4.0.2
       date-fns: 4.1.0
       lodash-es: 4.17.21
 
-  '@layerstack/svelte-stores@0.0.6':
+  '@layerstack/svelte-stores@0.0.8':
     dependencies:
-      '@layerstack/utils': 0.0.5
+      '@layerstack/utils': 0.0.6
       d3-array: 3.2.4
       date-fns: 4.1.0
       immer: 10.1.1
       lodash-es: 4.17.21
       zod: 3.23.8
 
-  '@layerstack/tailwind@0.0.9':
+  '@layerstack/tailwind@0.0.10':
     dependencies:
-      '@layerstack/utils': 0.0.5
+      '@layerstack/utils': 0.0.6
       clsx: 2.1.1
       culori: 4.0.1
       d3-array: 3.2.4
@@ -5644,7 +5644,7 @@ snapshots:
     transitivePeerDependencies:
       - ts-node
 
-  '@layerstack/utils@0.0.5':
+  '@layerstack/utils@0.0.6':
     dependencies:
       d3-array: 3.2.4
       date-fns: 4.1.0
@@ -7615,12 +7615,12 @@ snapshots:
       svelte: 4.2.19
       typescript: 5.6.3
 
-  layerchart@0.59.1(svelte@4.2.19)(typescript@5.6.3):
+  layerchart@0.59.4(svelte@4.2.19)(typescript@5.6.3):
     dependencies:
-      '@layerstack/svelte-actions': 0.0.7
-      '@layerstack/svelte-stores': 0.0.6
-      '@layerstack/tailwind': 0.0.9
-      '@layerstack/utils': 0.0.5
+      '@layerstack/svelte-actions': 0.0.8
+      '@layerstack/svelte-stores': 0.0.8
+      '@layerstack/tailwind': 0.0.10
+      '@layerstack/utils': 0.0.6
       d3-array: 3.2.4
       d3-color: 3.1.0
       d3-delaunay: 6.0.4
