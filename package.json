@@ -24,7 +24,7 @@
 		"d3-shape": "^3.2.0",
 		"dvalin-data": "^1.0.3",
 		"formsnap": "^1.0.1",
-		"i18next": "^23.16.5",
+		"i18next": "^24.0.0",
 		"layerchart": "^0.59.4",
 		"lodash-es": "^4.17.21",
 		"lucide-svelte": "^0.460.1",
