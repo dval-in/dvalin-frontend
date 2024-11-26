@@ -78,8 +78,8 @@ importers:
         specifier: ^0.3.28
         version: 0.3.28(svelte@4.2.19)
       svelte-ux:
-        specifier: ^0.75.4
-        version: 0.75.4(@babel/core@7.24.3)(postcss-load-config@4.0.2(postcss@8.4.49))(postcss@8.4.49)(sass@1.81.0)(svelte@4.2.19)
+        specifier: ^0.75.5
+        version: 0.75.5(@babel/core@7.24.3)(postcss-load-config@4.0.2(postcss@8.4.49))(postcss@8.4.49)(sass@1.81.0)(svelte@4.2.19)
       sveltekit-superforms:
         specifier: ^2.20.1
         version: 2.20.1(@sveltejs/kit@2.8.1(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.11(@types/node@20.11.30)(sass@1.81.0)(terser@5.30.0)))(svelte@4.2.19)(vite@5.4.11(@types/node@20.11.30)(sass@1.81.0)(terser@5.30.0)))(@types/json-schema@7.0.15)(svelte@4.2.19)(typescript@5.7.2)
@@ -1050,17 +1050,14 @@ packages:
   '@floating-ui/core@1.6.0':
     resolution: {integrity: sha512-PcF++MykgmTj3CIyOQbKA/hDzOAiqI3mhuoN44WRCopIs1sgoDoU4oty4Jtqaj/y3oDU6fnVSm4QG0a3t5i0+g==}
 
-  '@floating-ui/dom@1.6.11':
-    resolution: {integrity: sha512-qkMCxSR24v2vGkhYDo/UzxfJN3D4syqSjyuTFz6C7XcpU1pASPRieNI0Kj5VP3/503mOfYiGY891ugBX1GlABQ==}
-
   '@floating-ui/dom@1.6.12':
     resolution: {integrity: sha512-NP83c0HjokcGVEMeoStg317VD9W7eDlGK7457dMBANbKA6GJZdc7rjujdgqzTaz93jkGgc5P/jeWbaCHnMNc+w==}
 
   '@floating-ui/utils@0.2.8':
     resolution: {integrity: sha512-kym7SodPp8/wloecOpcmSnWJsK7M0E5Wg8UcFA+uO4B9s5d0ywXOEro/8HM9x0rW+TljRzul/14UYz3TleT3ig==}
 
-  '@fortawesome/fontawesome-common-types@6.6.0':
-    resolution: {integrity: sha512-xyX0X9mc0kyz9plIyryrRbl7ngsA9jz77mCZJsUkLl+ZKs0KWObgaEBoSgQiYWAsSmjz/yjl0F++Got0Mdp4Rw==}
+  '@fortawesome/fontawesome-common-types@6.7.1':
+    resolution: {integrity: sha512-gbDz3TwRrIPT3i0cDfujhshnXO9z03IT1UKRIVi/VEjpNHtSBIP2o5XSm+e816FzzCFEzAxPw09Z13n20PaQJQ==}
     engines: {node: '>=6'}
 
   '@gcornut/valibot-json-schema@0.31.0':
@@ -2371,6 +2368,9 @@ packages:
   esm-env@1.0.0:
     resolution: {integrity: sha512-Cf6VksWPsTuW01vU9Mk/3vRue91Zevka5SjyNf3nEpokFRuqt/KjUQoGAwq9qMmhpLTHmXzSIrFRw8zxWzmFBA==}
 
+  esm-env@1.1.4:
+    resolution: {integrity: sha512-oO82nKPHKkzIj/hbtuDYy/JHqBHFlMIW36SDiPCVsj87ntDLcWN+sJ1erdVryd4NxODacFTsdrIE3b7IamqbOg==}
+
   espree@10.3.0:
     resolution: {integrity: sha512-0QYC8b24HWY8zjRnDTL6RiHfDbAWn63qb4LMj1Z4b076A4une81+z03Kg7l7mn/48PUTqoLptSXez8oknU8Clg==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
@@ -3484,11 +3484,6 @@ packages:
       prettier: ^3.0.0
       svelte: ^3.2.0 || ^4.0.0-next.0 || ^5.0.0-next.0
 
-  prettier@2.8.8:
-    resolution: {integrity: sha512-tdN8qQGvNjw4CHbY+XXk0JgCXn9QiF21a55rBe5LJAU+kDyC4WQn4+awm2Xfk2lQMk5fKup9XgzTZtGkjBdP9Q==}
-    engines: {node: '>=10.13.0'}
-    hasBin: true
-
   prettier@3.3.3:
     resolution: {integrity: sha512-i2tDNA0O5IrMO757lfrdQZCc2jPNDVntV0m/+4whiDfWaTKfMNgR7Qz0NAeGz/nRqF4m5/6CLzbP4/liHt12Ew==}
     engines: {node: '>=14'}
@@ -3916,8 +3911,8 @@ packages:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
 
-  sveld@0.20.2:
-    resolution: {integrity: sha512-pd/RZ4TR7oaX6XphE8uhwAjKIVw1lg19aysYM5lYpD97AthlAJD8kSEgtEXHXw6xFYXsfnhrj0XxGHnbKFsnlA==}
+  sveld@0.22.0:
+    resolution: {integrity: sha512-oejfWV7//gqgyFDe09qyInaSKBYCjfJ2xTgZS8oWyYTmpy4Eyi4s0Rh9IJbSHxtlAjcmWpIGKiKwVb6cjxgtfw==}
     hasBin: true
 
   svelte-check@4.0.9:
@@ -4028,8 +4023,8 @@ packages:
     peerDependencies:
       svelte: ^4.0.0
 
-  svelte-ux@0.75.4:
-    resolution: {integrity: sha512-i4E+G2lGQ4mdS/zBQuQHIjKbYgrJ7lGVurZBqwvfcuyMX9EZHggCfYhx+TmD7Awra4h7TctvuQhKGCuElsdHcw==}
+  svelte-ux@0.75.5:
+    resolution: {integrity: sha512-3x555AkxR+Yrs4A8BmYdnvS4LXcgxgiQtu4j/Jc2n4lXwh5OSD/3TgS45wejc23OPn8pfb9RE3oCNkin2VOJdQ==}
     peerDependencies:
       svelte: ^3.56.0 || ^4.0.0 || ^5.0.0
 
@@ -5539,11 +5534,6 @@ snapshots:
     dependencies:
       '@floating-ui/utils': 0.2.8
 
-  '@floating-ui/dom@1.6.11':
-    dependencies:
-      '@floating-ui/core': 1.6.0
-      '@floating-ui/utils': 0.2.8
-
   '@floating-ui/dom@1.6.12':
     dependencies:
       '@floating-ui/core': 1.6.0
@@ -5551,7 +5541,7 @@ snapshots:
 
   '@floating-ui/utils@0.2.8': {}
 
-  '@fortawesome/fontawesome-common-types@6.6.0': {}
+  '@fortawesome/fontawesome-common-types@6.7.1': {}
 
   '@gcornut/valibot-json-schema@0.31.0':
     dependencies:
@@ -5660,7 +5650,7 @@ snapshots:
   '@melt-ui/svelte@0.76.2(svelte@4.2.19)':
     dependencies:
       '@floating-ui/core': 1.6.0
-      '@floating-ui/dom': 1.6.11
+      '@floating-ui/dom': 1.6.12
       '@internationalized/date': 3.6.0
       dequal: 2.0.3
       focus-trap: 7.5.4
@@ -7018,6 +7008,8 @@ snapshots:
 
   esm-env@1.0.0: {}
 
+  esm-env@1.1.4: {}
+
   espree@10.3.0:
     dependencies:
       acorn: 8.14.0
@@ -8086,8 +8078,6 @@ snapshots:
       prettier: 3.3.3
       svelte: 4.2.19
 
-  prettier@2.8.8: {}
-
   prettier@3.3.3: {}
 
   pretty-bytes@5.6.0: {}
@@ -8594,17 +8584,17 @@ snapshots:
 
   supports-preserve-symlinks-flag@1.0.0: {}
 
-  sveld@0.20.2(@babel/core@7.24.3)(postcss-load-config@4.0.2(postcss@8.4.49))(postcss@8.4.49)(sass@1.81.0):
+  sveld@0.22.0(@babel/core@7.24.3)(postcss-load-config@4.0.2(postcss@8.4.49))(postcss@8.4.49)(sass@1.81.0):
     dependencies:
       '@rollup/plugin-node-resolve': 13.3.0(rollup@2.79.1)
       acorn: 8.14.0
       comment-parser: 1.4.1
-      prettier: 2.8.8
+      prettier: 3.3.3
       rollup: 2.79.1
       rollup-plugin-svelte: 7.2.2(rollup@2.79.1)(svelte@4.2.19)
       svelte: 4.2.19
       svelte-preprocess: 6.0.3(@babel/core@7.24.3)(postcss-load-config@4.0.2(postcss@8.4.49))(postcss@8.4.49)(sass@1.81.0)(svelte@4.2.19)(typescript@5.7.2)
-      tinyglobby: 0.2.9
+      tinyglobby: 0.2.10
       typescript: 5.7.2
     transitivePeerDependencies:
       - '@babel/core'
@@ -8697,23 +8687,23 @@ snapshots:
     dependencies:
       svelte: 4.2.19
 
-  svelte-ux@0.75.4(@babel/core@7.24.3)(postcss-load-config@4.0.2(postcss@8.4.49))(postcss@8.4.49)(sass@1.81.0)(svelte@4.2.19):
+  svelte-ux@0.75.5(@babel/core@7.24.3)(postcss-load-config@4.0.2(postcss@8.4.49))(postcss@8.4.49)(sass@1.81.0)(svelte@4.2.19):
     dependencies:
-      '@floating-ui/dom': 1.6.11
-      '@fortawesome/fontawesome-common-types': 6.6.0
+      '@floating-ui/dom': 1.6.12
+      '@fortawesome/fontawesome-common-types': 6.7.1
       '@mdi/js': 7.4.47
       clsx: 2.1.1
       culori: 4.0.1
       d3-array: 3.2.4
       d3-scale: 4.0.2
       date-fns: 4.1.0
-      esm-env: 1.0.0
+      esm-env: 1.1.4
       immer: 10.1.1
       lodash-es: 4.17.21
       prism-svelte: 0.5.0
       prism-themes: 1.9.0
       prismjs: 1.29.0
-      sveld: 0.20.2(@babel/core@7.24.3)(postcss-load-config@4.0.2(postcss@8.4.49))(postcss@8.4.49)(sass@1.81.0)
+      sveld: 0.22.0(@babel/core@7.24.3)(postcss-load-config@4.0.2(postcss@8.4.49))(postcss@8.4.49)(sass@1.81.0)
       svelte: 4.2.19
       tailwind-merge: 2.5.4
       zod: 3.23.8
