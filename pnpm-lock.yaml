@@ -84,8 +84,8 @@ importers:
         specifier: ^2.20.1
         version: 2.20.1(@sveltejs/kit@2.8.4(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.11(@types/node@20.11.30)(sass@1.81.0)(terser@5.30.0)))(svelte@4.2.19)(vite@5.4.11(@types/node@20.11.30)(sass@1.81.0)(terser@5.30.0)))(@types/json-schema@7.0.15)(svelte@4.2.19)(typescript@5.7.2)
       tailwind-merge:
-        specifier: ^2.5.4
-        version: 2.5.4
+        specifier: ^2.5.5
+        version: 2.5.5
       tailwind-variants:
         specifier: ^0.3.0
         version: 0.3.0(tailwindcss@3.4.15)
@@ -4045,8 +4045,8 @@ packages:
   tabbable@6.2.0:
     resolution: {integrity: sha512-Cat63mxsVJlzYvN51JmVXIgNoUokrIaT2zLclCXjRd8boZ0004U4KCs/sToJ75C6sdlByWxpYnb5Boif1VSFew==}
 
-  tailwind-merge@2.5.4:
-    resolution: {integrity: sha512-0q8cfZHMu9nuYP/b5Shb7Y7Sh1B7Nnl5GqNr1U+n2p6+mybvRtayrQ+0042Z5byvTA8ihjlP8Odo8/VnHbZu4Q==}
+  tailwind-merge@2.5.5:
+    resolution: {integrity: sha512-0LXunzzAZzo0tEPxV3I297ffKZPlKDrjj7NXphC8V5ak9yHC5zRmxnOe2m/Rd/7ivsOMJe3JZ2JVocoDdQTRBA==}
 
   tailwind-variants@0.3.0:
     resolution: {integrity: sha512-ho2k5kn+LB1fT5XdNS3Clb96zieWxbStE9wNLK7D0AV64kdZMaYzAKo0fWl6fXLPY99ffF9oBJnIj5escEl/8A==}
@@ -5631,7 +5631,7 @@ snapshots:
       d3-array: 3.2.4
       date-fns: 4.1.0
       lodash-es: 4.17.21
-      tailwind-merge: 2.5.4
+      tailwind-merge: 2.5.5
       tailwindcss: 3.4.15
     transitivePeerDependencies:
       - ts-node
@@ -8700,7 +8700,7 @@ snapshots:
       prismjs: 1.29.0
       sveld: 0.22.0(@babel/core@7.24.3)(postcss-load-config@4.0.2(postcss@8.4.49))(postcss@8.4.49)(sass@1.81.0)
       svelte: 4.2.19
-      tailwind-merge: 2.5.4
+      tailwind-merge: 2.5.5
       zod: 3.23.8
     transitivePeerDependencies:
       - '@babel/core'
@@ -8768,11 +8768,11 @@ snapshots:
 
   tabbable@6.2.0: {}
 
-  tailwind-merge@2.5.4: {}
+  tailwind-merge@2.5.5: {}
 
   tailwind-variants@0.3.0(tailwindcss@3.4.15):
     dependencies:
-      tailwind-merge: 2.5.4
+      tailwind-merge: 2.5.5
       tailwindcss: 3.4.15
 
   tailwindcss@3.4.15:
