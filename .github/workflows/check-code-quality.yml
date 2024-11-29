@@ -5,7 +5,7 @@ on:
   push:
     branches:
       - main
-      - staging
+      - production
   pull_request:
     branches:
       - '**'
@@ -46,7 +46,7 @@ jobs:
   build:
     needs: [check-typescript, check-prettier]
     runs-on: ubuntu-latest
-    environment: ${{ vars.CLOUDFLARE_PROJECT_NAME }} ${{ (github.ref == 'refs/heads/main' && '(Production)') || '(Preview)' }}
+    environment: ${{ vars.CLOUDFLARE_PROJECT_NAME }} ${{ (github.ref == 'refs/heads/production' && '(Production)') || '(Preview)' }}
     env:
       VITE_BACKEND_URL: ${{ vars.BACKEND_URL }}
     steps:
@@ -92,7 +92,7 @@ jobs:
           cloudflare-project-name: ${{ vars.CLOUDFLARE_PROJECT_NAME }}
           directory: 'build'
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          github-environment: ${{ vars.CLOUDFLARE_PROJECT_NAME }} ${{ (github.ref == 'refs/heads/main' && '(Production)') || '(Preview)' }}
+          github-environment: ${{ vars.CLOUDFLARE_PROJECT_NAME }} ${{ (github.ref == 'refs/heads/production' && '(Production)') || '(Preview)' }}
       - name: 'Delete old deployments'
         uses: andykenward/github-actions-cloudflare-pages/delete@v2.4.1
         with:
@@ -101,5 +101,5 @@ jobs:
           cloudflare-account-id: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           cloudflare-project-name: ${{ vars.CLOUDFLARE_PROJECT_NAME }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          github-environment: ${{ vars.CLOUDFLARE_PROJECT_NAME }} ${{ (github.event.pull_request.head.ref  == 'refs/heads/main' && '(Production)') || '(Preview)' }}
+          github-environment: ${{ vars.CLOUDFLARE_PROJECT_NAME }} ${{ (github.event.pull_request.head.ref  == 'refs/heads/production' && '(Production)') || '(Preview)' }}
 

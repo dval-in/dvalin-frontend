@@ -23,4 +23,4 @@ jobs:
           cloudflare-account-id: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           cloudflare-project-name: ${{ vars.CLOUDFLARE_PROJECT_NAME }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          github-environment: ${{ vars.CLOUDFLARE_PROJECT_NAME }} ${{ (github.event.pull_request.head.ref  == 'refs/heads/main' && '(Production)') || '(Preview)' }}
+          github-environment: ${{ vars.CLOUDFLARE_PROJECT_NAME }} ${{ (github.event.pull_request.head.ref  == 'refs/heads/production' && '(Production)') || '(Preview)' }}
