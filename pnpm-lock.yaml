@@ -42,8 +42,8 @@ importers:
         specifier: ^1.0.1
         version: 1.0.1(svelte@4.2.19)(sveltekit-superforms@2.20.1(@sveltejs/kit@2.8.5(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.11(@types/node@20.11.30)(sass@1.81.0)(terser@5.30.0)))(svelte@4.2.19)(vite@5.4.11(@types/node@20.11.30)(sass@1.81.0)(terser@5.30.0)))(@types/json-schema@7.0.15)(svelte@4.2.19)(typescript@5.7.2))
       i18next:
-        specifier: ^23.16.5
-        version: 23.16.5
+        specifier: ^24.0.2
+        version: 24.0.2(typescript@5.7.2)
       layerchart:
         specifier: ^0.59.5
         version: 0.59.5(svelte@4.2.19)(typescript@5.7.2)
@@ -67,7 +67,7 @@ importers:
         version: 4.8.1
       svelte-i18next:
         specifier: ^2.2.2
-        version: 2.2.2(i18next@23.16.5)(svelte@4.2.19)
+        version: 2.2.2(i18next@24.0.2(typescript@5.7.2))(svelte@4.2.19)
       svelte-legos:
         specifier: ^0.2.5
         version: 0.2.5(svelte@4.2.19)
@@ -2674,8 +2674,13 @@ packages:
     engines: {node: '>=18'}
     hasBin: true
 
-  i18next@23.16.5:
-    resolution: {integrity: sha512-KTlhE3EP9x6pPTAW7dy0WKIhoCpfOGhRQlO+jttQLgzVaoOjWwBWramu7Pp0i+8wDNduuzXfe3kkVbzrKyrbTA==}
+  i18next@24.0.2:
+    resolution: {integrity: sha512-D88xyIGcWAKwBTAs4RSqASi8NXR/NhCVSTM4LDbdoU8qb/5dcEZjNCLDhtQBB7Epw/Cp1w2vH/3ujoTbqLSs5g==}
+    peerDependencies:
+      typescript: ^5
+    peerDependenciesMeta:
+      typescript:
+        optional: true
 
   i@0.3.7:
     resolution: {integrity: sha512-FYz4wlXgkQwIPqhzC5TdNMLSE5+GS1IIDJZY/1ZiEPCT2S3COUVZeT5OW4BmW4r5LHLQuOosSwsvnroG9GR59Q==}
@@ -7313,9 +7318,11 @@ snapshots:
 
   husky@9.1.7: {}
 
-  i18next@23.16.5:
+  i18next@24.0.2(typescript@5.7.2):
     dependencies:
       '@babel/runtime': 7.24.1
+    optionalDependencies:
+      typescript: 5.7.2
 
   i@0.3.7: {}
 
@@ -8635,9 +8642,9 @@ snapshots:
     dependencies:
       svelte: 4.2.19
 
-  svelte-i18next@2.2.2(i18next@23.16.5)(svelte@4.2.19):
+  svelte-i18next@2.2.2(i18next@24.0.2(typescript@5.7.2))(svelte@4.2.19):
     dependencies:
-      i18next: 23.16.5
+      i18next: 24.0.2(typescript@5.7.2)
       svelte: 4.2.19
 
   svelte-keyed@2.0.0(svelte@4.2.19):
