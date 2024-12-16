@@ -96,8 +96,8 @@ importers:
         specifier: ^0.3.2
         version: 0.3.2(svelte@4.2.19)
       zod:
-        specifier: ^3.23.8
-        version: 3.23.8
+        specifier: ^3.24.1
+        version: 3.24.1
     devDependencies:
       '@commitlint/cli':
         specifier: ^19.6.0
@@ -4539,8 +4539,8 @@ packages:
     peerDependencies:
       zod: ^3.23.3
 
-  zod@3.23.8:
-    resolution: {integrity: sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g==}
+  zod@3.24.1:
+    resolution: {integrity: sha512-muH7gBL9sI1nciMZV67X5fTKKBLtwpZ5VBp1vsOQzj1MhrBZ4wlVCm3gedKZWLp0Oyel8sIGfeiz54Su+OVT+A==}
 
 snapshots:
 
@@ -5595,7 +5595,7 @@ snapshots:
       date-fns: 4.1.0
       immer: 10.1.1
       lodash-es: 4.17.21
-      zod: 3.23.8
+      zod: 3.24.1
 
   '@layerstack/tailwind@0.0.11':
     dependencies:
@@ -8659,7 +8659,7 @@ snapshots:
       sveld: 0.22.0(@babel/core@7.24.3)(postcss-load-config@4.0.2(postcss@8.4.49))(postcss@8.4.49)(sass@1.83.0)
       svelte: 4.2.19
       tailwind-merge: 2.5.5
-      zod: 3.23.8
+      zod: 3.24.1
     transitivePeerDependencies:
       - '@babel/core'
       - coffeescript
@@ -8711,8 +8711,8 @@ snapshots:
       superstruct: 2.0.2
       valibot: 1.0.0-beta.7(typescript@5.7.2)
       yup: 1.4.0
-      zod: 3.23.8
-      zod-to-json-schema: 3.23.3(zod@3.23.8)
+      zod: 3.24.1
+      zod-to-json-schema: 3.23.3(zod@3.24.1)
     transitivePeerDependencies:
       - '@types/json-schema'
       - typescript
@@ -9288,9 +9288,9 @@ snapshots:
       type-fest: 2.19.0
     optional: true
 
-  zod-to-json-schema@3.23.3(zod@3.23.8):
+  zod-to-json-schema@3.23.3(zod@3.24.1):
     dependencies:
-      zod: 3.23.8
+      zod: 3.24.1
     optional: true
 
-  zod@3.23.8: {}
+  zod@3.24.1: {}
