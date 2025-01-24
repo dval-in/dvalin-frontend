@@ -42,8 +42,8 @@ importers:
         specifier: ^1.0.1
         version: 1.0.1(svelte@4.2.19)(sveltekit-superforms@2.22.1(@sveltejs/kit@2.15.1(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.11(@types/node@20.11.30)(sass@1.83.4)(terser@5.37.0)))(svelte@4.2.19)(vite@5.4.11(@types/node@20.11.30)(sass@1.83.4)(terser@5.37.0)))(@types/json-schema@7.0.15)(svelte@4.2.19)(typescript@5.7.2))
       i18next:
-        specifier: ^23.16.5
-        version: 23.16.5
+        specifier: ^24.2.1
+        version: 24.2.1(typescript@5.7.2)
       layerchart:
         specifier: ^0.60.3
         version: 0.60.3(svelte@4.2.19)(typescript@5.7.2)
@@ -67,7 +67,7 @@ importers:
         version: 4.8.1
       svelte-i18next:
         specifier: ^2.2.2
-        version: 2.2.2(i18next@23.16.5)(svelte@4.2.19)
+        version: 2.2.2(i18next@24.2.1(typescript@5.7.2))(svelte@4.2.19)
       svelte-legos:
         specifier: ^0.2.5
         version: 0.2.5(svelte@4.2.19)
@@ -705,10 +705,6 @@ packages:
     resolution: {integrity: sha512-HrcgcIESLm9aIR842yhJ5RWan/gebQUJ6E/E5+rf0y9o6oj7w0Br+sWuL6kEQ/o/AdfvR1Je9jG18/gnpwjEyA==}
     peerDependencies:
       '@babel/core': ^7.0.0-0 || ^8.0.0-0 <8.0.0
-
-  '@babel/runtime@7.24.1':
-    resolution: {integrity: sha512-+BIznRzyqBf+2wCTxcKE3wDjfGeCoVE61KSHGpkzqrLi8qxqFwBeUFyId2cxkTmm55fzDGnm0+yCxaxygrLUnQ==}
-    engines: {node: '>=6.9.0'}
 
   '@babel/runtime@7.26.0':
     resolution: {integrity: sha512-FDSOghenHTiToteC/QRlv2q3DhPZ/oOXTBoirfWNx1Cx3TMVcGWQtMMmQcSvb/JjpNeGzx8Pq/b4fKEJuWm1sw==}
@@ -2654,8 +2650,13 @@ packages:
     engines: {node: '>=18'}
     hasBin: true
 
-  i18next@23.16.5:
-    resolution: {integrity: sha512-KTlhE3EP9x6pPTAW7dy0WKIhoCpfOGhRQlO+jttQLgzVaoOjWwBWramu7Pp0i+8wDNduuzXfe3kkVbzrKyrbTA==}
+  i18next@24.2.1:
+    resolution: {integrity: sha512-Q2wC1TjWcSikn1VAJg13UGIjc+okpFxQTxjVAymOnSA3RpttBQNMPf2ovcgoFVsV4QNxTfNZMAxorXZXsk4fBA==}
+    peerDependencies:
+      typescript: ^5
+    peerDependenciesMeta:
+      typescript:
+        optional: true
 
   i@0.3.7:
     resolution: {integrity: sha512-FYz4wlXgkQwIPqhzC5TdNMLSE5+GS1IIDJZY/1ZiEPCT2S3COUVZeT5OW4BmW4r5LHLQuOosSwsvnroG9GR59Q==}
@@ -5279,10 +5280,6 @@ snapshots:
       '@babel/types': 7.26.5
       esutils: 2.0.3
 
-  '@babel/runtime@7.24.1':
-    dependencies:
-      regenerator-runtime: 0.14.1
-
   '@babel/runtime@7.26.0':
     dependencies:
       regenerator-runtime: 0.14.1
@@ -7396,9 +7393,11 @@ snapshots:
 
   husky@9.1.7: {}
 
-  i18next@23.16.5:
+  i18next@24.2.1(typescript@5.7.2):
     dependencies:
-      '@babel/runtime': 7.24.1
+      '@babel/runtime': 7.26.0
+    optionalDependencies:
+      typescript: 5.7.2
 
   i@0.3.7: {}
 
@@ -7683,7 +7682,7 @@ snapshots:
 
   json-schema-to-ts@3.1.1:
     dependencies:
-      '@babel/runtime': 7.24.1
+      '@babel/runtime': 7.26.0
       ts-algebra: 2.0.0
     optional: true
 
@@ -8823,9 +8822,9 @@ snapshots:
     dependencies:
       svelte: 4.2.19
 
-  svelte-i18next@2.2.2(i18next@23.16.5)(svelte@4.2.19):
+  svelte-i18next@2.2.2(i18next@24.2.1(typescript@5.7.2))(svelte@4.2.19):
     dependencies:
-      i18next: 23.16.5
+      i18next: 24.2.1(typescript@5.7.2)
       svelte: 4.2.19
 
   svelte-keyed@2.0.0(svelte@4.2.19):
