@@ -410,7 +410,7 @@
 				<DropdownMenuSeparator />
 
 				<DropdownMenuGroup class="flex">
-					<DropdownMenuLabel>Ownership</DropdownMenuLabel>
+					<DropdownMenuLabel>{$i18n.t('filter.ownership')}</DropdownMenuLabel>
 				</DropdownMenuGroup>
 				<DropdownMenuGroup class="flex">
 					<DropdownMenuItem
