@@ -88,10 +88,10 @@ importers:
         version: 2.6.0
       tailwind-variants:
         specifier: ^0.3.0
-        version: 0.3.1(tailwindcss@3.4.17)
+        version: 0.3.1(tailwindcss@4.0.0)
       tw-colors:
         specifier: ^3.3.2
-        version: 3.3.2(tailwindcss@3.4.17)
+        version: 3.3.2(tailwindcss@4.0.0)
       vaul-svelte:
         specifier: ^0.3.2
         version: 0.3.2(svelte@4.2.19)
@@ -175,8 +175,8 @@ importers:
         specifier: ^0.18.3
         version: 0.18.3(svelte@4.2.19)
       tailwindcss:
-        specifier: ^3.4.16
-        version: 3.4.17
+        specifier: ^4.0.0
+        version: 4.0.0
       tslib:
         specifier: ^2.8.1
         version: 2.8.1
@@ -4212,6 +4212,9 @@ packages:
     resolution: {integrity: sha512-w33E2aCvSDP0tW9RZuNXadXlkHXqFzSkQew/aIa2i/Sj8fThxwovwlXHSPXTbAHwEIhBFXAedUhP2tueAKP8Og==}
     engines: {node: '>=14.0.0'}
     hasBin: true
+
+  tailwindcss@4.0.0:
+    resolution: {integrity: sha512-ULRPI3A+e39T7pSaf1xoi58AqqJxVCLg8F/uM5A3FadUbnyDTgltVnXJvdkTjwCOGA6NazqHVcwPJC5h2vRYVQ==}
 
   tar-fs@2.1.2:
     resolution: {integrity: sha512-EsaAXwxmx8UB7FRKqeozqEPop69DXcmYwTQwXvyAPF352HJsPdkVhvTaDPYqfNgruveJIJy3TA2l+2zj8LJIJA==}
@@ -9065,10 +9068,10 @@ snapshots:
 
   tailwind-merge@2.6.0: {}
 
-  tailwind-variants@0.3.1(tailwindcss@3.4.17):
+  tailwind-variants@0.3.1(tailwindcss@4.0.0):
     dependencies:
       tailwind-merge: 2.5.4
-      tailwindcss: 3.4.17
+      tailwindcss: 4.0.0
 
   tailwindcss@3.4.17:
     dependencies:
@@ -9096,6 +9099,8 @@ snapshots:
       sucrase: 3.35.0
     transitivePeerDependencies:
       - ts-node
+
+  tailwindcss@4.0.0: {}
 
   tar-fs@2.1.2:
     dependencies:
@@ -9238,12 +9243,12 @@ snapshots:
     dependencies:
       safe-buffer: 5.2.1
 
-  tw-colors@3.3.2(tailwindcss@3.4.17):
+  tw-colors@3.3.2(tailwindcss@4.0.0):
     dependencies:
       color: 4.2.3
       flat: 5.0.2
       lodash.foreach: 4.5.0
-      tailwindcss: 3.4.17
+      tailwindcss: 4.0.0
 
   type-check@0.4.0:
     dependencies:
