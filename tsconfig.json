@@ -9,7 +9,9 @@
 		"skipLibCheck": true,
 		"sourceMap": true,
 		"strict": true,
+		"module": "esnext",
 		"moduleResolution": "bundler",
+		"noEmit": true,
 		"types": ["vite-plugin-pwa/svelte", "vite-plugin-pwa/info", "vite-plugin-pwa/pwa-assets"]
 	}
 }
