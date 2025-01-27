@@ -71,11 +71,11 @@
 	</TabsList>
 	{#each builds as build}
 		<TabsContent value={build.name}>
-			<div class="flex flex-col lg:flex-row gap-4 pt-2">
+			<div class="flex flex-col gap-4 pt-2 lg:flex-row">
 				<div
-					class="flex flex-col lg:order-2 lg:grid lg:grid-cols-2 lg:grid-rows-2 lg:grid-flow-dense gap-4"
+					class="flex flex-col gap-4 lg:order-2 lg:grid lg:grid-flow-dense lg:grid-cols-2 lg:grid-rows-2"
 				>
-					<Card class="h-min max-w-full flex flex-col gap-4 p-4 lg:h-auto">
+					<Card class="flex h-min max-w-full flex-col gap-4 p-4 lg:h-auto">
 						<Text type="h3">
 							{$i18n.t('characters.detailed.category.builds.weapons.title')}
 						</Text>
@@ -97,7 +97,7 @@
 					</Card>
 					<!--Weapon Recomendation Card-->
 
-					<Card class="h-min max-w-full flex flex-col gap-4 p-4 lg:row-span-2">
+					<Card class="flex h-min max-w-full flex-col gap-4 p-4 lg:row-span-2">
 						<Text type="h3">
 							{$i18n.t('characters.detailed.category.builds.artifacts.title')}
 						</Text>
@@ -118,11 +118,11 @@
 							)}
 						</Text>
 						<div
-							class="grid grid-cols-3 grid-rows-2 grid-flow-col items-center justify-items-center text-center gap-2"
+							class="grid grid-flow-col grid-cols-3 grid-rows-2 items-center justify-items-center gap-2 text-center"
 						>
 							{#each build.artifacts.stats.main as item, i}
 								<img
-									class="w-full min-w-0 object-contain h-fit max-w-12"
+									class="h-fit w-full min-w-0 max-w-12 object-contain"
 									alt={buildItems[i].name}
 									src={buildItems[i].img}
 								/>
@@ -143,25 +143,25 @@
 					</Card>
 					<!--Artifact Recomendation Card-->
 
-					<Card class="h-min max-w-full flex flex-col gap-4 p-4">
+					<Card class="flex h-min max-w-full flex-col gap-4 p-4">
 						<Text type="h3">
 							{$i18n.t('characters.detailed.category.builds.talents.title')}
 						</Text>
-						<div class="flex flex-row flex-1 gap-2 h-16 justify-center items-center">
+						<div class="flex h-16 flex-1 flex-row items-center justify-center gap-2">
 							<img
-								class="w-full min-w-0 object-contain max-w-12"
+								class="w-full min-w-0 max-w-12 object-contain"
 								src={buildItems[0].img}
 								alt={build.talentPriority[0]}
 							/>
 							<p>&gt;</p>
 							<img
-								class="w-full min-w-0 object-contain max-w-12"
+								class="w-full min-w-0 max-w-12 object-contain"
 								src={buildItems[0].img}
 								alt={build.talentPriority[1]}
 							/>
 							<p>&gt;</p>
 							<img
-								class="w-full min-w-0 object-contain max-w-12"
+								class="w-full min-w-0 max-w-12 object-contain"
 								src={buildItems[0].img}
 								alt={build.talentPriority[2]}
 							/>
@@ -169,7 +169,7 @@
 					</Card>
 					<!--Talent Priority Card-->
 				</div>
-				<div class="basis-3/4 flex flex-col gap-2 lg:order-1">
+				<div class="flex basis-3/4 flex-col gap-2 lg:order-1">
 					{#each build.description as p}
 						<Text type="p">
 							{p}

@@ -148,7 +148,7 @@
 
 <ScrollArea class="h-screen">
 	<div class="flex flex-col">
-		<Card class="p-4 mb-4">
+		<Card class="mb-4 p-4">
 			<div class="flex items-center gap-2">
 				<Checkbox checked={checkAllState} onCheckedChange={handleCheckAll} id="check-all" />
 				<Text type="h4">{$i18n.t('achievement.check_all')}</Text>
@@ -204,7 +204,7 @@
 										<a
 											href={'https://genshin-impact.fandom.com' +
 												achievement.requirementQuestLink}
-											class="underline text-primary"
+											class="text-primary underline"
 										>
 											wiki
 										</a>

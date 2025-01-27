@@ -2,6 +2,7 @@ import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
 import { SvelteKitPWA } from '@vite-pwa/sveltekit';
 import { resolve } from 'path';
+import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
 	preview: {
@@ -19,11 +20,13 @@ export default defineConfig({
 	resolve: {
 		alias: {
 			'dvalin-data': resolve(__dirname, 'node_modules/dvalin-data/dist/types')
-		}
+		},
+		extensions: ['.mjs', '.js', '.mts', '.ts', '.json', '.svelte']
 	},
 
 	plugins: [
 		sveltekit(),
+		tailwindcss(),
 		SvelteKitPWA({
 			registerType: 'autoUpdate',
 			includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'mask-icon.svg'],

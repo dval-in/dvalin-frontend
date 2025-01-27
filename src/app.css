@@ -1,0 +1,134 @@
+@import 'tailwindcss';
+
+@config "../tailwind.config.ts";
+
+@theme inline {
+	--color-border: var(--border);
+	--color-foreground: var(--foreground);
+	--color-primary: var(--primary);
+	--color-secondary: var(--secondary);
+	--color-tertiary: var(--tertiary);
+	--color-tertiaryHover: var(--tertiaryhover);
+	--color-tertiaryActive: var(--tertiaryactive);
+	--color-neutral: var(--neutral);
+	--color-text: var(--text);
+
+	--color-fivestar: var(--fivestar);
+	--color-fourstar: #7b5c90;
+	--color-threestar: #5e93b2;
+
+	--radius: 0.5rem;
+
+	--radius-lg: var(--radius);
+	--radius-md: calc(var(--radius) - 2px);
+	--radius-sm: calc(var(--radius) - 4px);
+}
+
+[class='dark'] {
+	--background: 240 10% 3.9%;
+	--foreground: #373743;
+	--muted: 240 3.7% 15.9%;
+	--muted-foreground: 240 5% 64.9%;
+	--popover: 240 10% 3.9%;
+	--popover-foreground: 0 0% 98%;
+	--card: 240 10% 3.9%;
+	--card-foreground: 0 0% 98%;
+	--border: #000000;
+	--input: 240 3.7% 15.9%;
+	--primary-foreground: 240 5.9% 10%;
+	--secondary-foreground: 0 0% 98%;
+	--accent: 240 3.7% 15.9%;
+	--accent-foreground: 0 0% 98%;
+	--destructive: 0 62.8% 30.6%;
+	--destructive-foreground: 0 85.7% 97.3%;
+	--ring: 240 3.7% 15.9%;
+
+	--primary: #d3bc8e;
+	--secondary: #8599a8;
+	--tertiary: #373743;
+	--tertiaryhover: #535365;
+	--tertiaryactive: #1c1c22;
+	--neutral: #1c1c22;
+	--text: #ffffff;
+
+	--fivestar: #ffb13f;
+}
+
+[class='light'] {
+	--background: 0 0% 100%;
+	--foreground: #ffffff;
+	--muted: 240 4.8% 95.9%;
+	--muted-foreground: 240 3.8% 46.1%;
+	--popover: 0 0% 100%;
+	--popover-foreground: 240 10% 3.9%;
+	--card: 0 0% 100%;
+	--card-foreground: 240 10% 3.9%;
+	--border: #000000;
+	--input: 240 5.9% 90%;
+	--primary-foreground: 0 0% 98%;
+	--secondary-foreground: 240 5.9% 10%;
+	--accent: 240 4.8% 95.9%;
+	--accent-foreground: 240 5.9% 10%;
+	--destructive: 0 84.2% 60.2%;
+	--destructive-foreground: 0 0% 98%;
+	--ring: 240 5% 64.9%;
+
+	--primary: #d3bc8e;
+	--secondary: #8599a8;
+	--tertiary: #e9e4da;
+	--tertiaryHover: #d1c7b2;
+	--tertiaryActive: #ffffff;
+	--neutral: #ffffff;
+	--text: #393946;
+
+	--fivestar: #ffd89f;
+}
+
+@layer base {
+	* {
+		@apply border-border;
+	}
+
+	body {
+		@apply bg-neutral text-text;
+	}
+}
+
+.scrollbar-gutter {
+	scrollbar-gutter: stable;
+}
+
+::-webkit-scrollbar {
+	width: 6px;
+	height: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	background: rgba(0, 0, 0, 0);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #888;
+	border-radius: 5px;
+	transition: all;
+	transition-duration: 200ms;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #555;
+	border-radius: 5px;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.hide-scrollbar::-webkit-scrollbar {
+	display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.hide-scrollbar {
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
+}

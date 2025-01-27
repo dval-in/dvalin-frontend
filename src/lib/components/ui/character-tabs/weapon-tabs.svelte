@@ -11,7 +11,7 @@
 	const stats = weaponData.stats;
 </script>
 
-<Tabs value="stats" class="lg:flex lg:flex-col lg:flex-grow">
+<Tabs value="stats" class="lg:flex lg:grow lg:flex-col">
 	<TabsList class="grid w-full grid-cols-2">
 		<TabsTrigger value="stats">{$i18n.t('weapons.detailed.tab.stats.title')}</TabsTrigger>
 		<TabsTrigger value="refinement">
@@ -22,13 +22,13 @@
 			{$i18n.t('weapons.detailed.tab.materials.title')}
 		</TabsTrigger> -->
 	</TabsList>
-	<TabsContent value="stats" class="border border-secondary/50 lg:flex-shrink lg:overflow-auto">
+	<TabsContent value="stats" class="border-secondary/50 border lg:shrink lg:overflow-auto">
 		<StatTable {ascensions} {stats} />
 	</TabsContent>
 	<!--Ascension Table-->
-	<TabsContent value="refinement" class="lg:flex-shrink lg:overflow-auto">
+	<TabsContent value="refinement" class="lg:shrink lg:overflow-auto">
 		{#each weaponData.refinements as refinement}
-			<Card class="flex flex-col gap-2 flex-1">
+			<Card class="flex flex-1 flex-col gap-2">
 				<Text type="h4">{weaponData.passive}. {refinement.refinement}</Text>
 				<Text type="p" class="text-sm">{refinement.desc}</Text>
 			</Card>

@@ -10,7 +10,7 @@
 	<path d={path} />
 </svg>
 
-<style lang="postcss">
+<style>
 	svg {
 		vertical-align: middle;
 		display: inline-block;

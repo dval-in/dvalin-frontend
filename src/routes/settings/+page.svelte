@@ -103,13 +103,13 @@
 	</svelte:fragment>
 
 	{#if $applicationState.isAuthenticated}
-		<div class="flex flex-1 gap-4 flex-wrap max-sm:flex-col">
+		<div class="flex flex-1 flex-wrap gap-4 max-sm:flex-col">
 			<Card
-				class="p-0 sm:p-0 flex flex-1 relative flex-wrap object-cover bg-no-repeat bg-cover bg-center"
+				class="relative flex flex-1 flex-wrap bg-cover bg-center bg-no-repeat object-cover p-0 sm:p-0"
 				style={`background-image: url('${bgImageUrl}');`}
 			>
 				<div
-					class="flex flex-1 flex-col z-10 items-center text-white p-2 sm:p-4 gap-6 bg-neutral bg-opacity-40"
+					class="bg-neutral/40 z-10 flex flex-1 flex-col items-center gap-6 p-2 text-white sm:p-4"
 				>
 					<div class="flex">
 						<img src={bgImageUrl} class="size-52 rounded-full object-cover" />
@@ -122,7 +122,7 @@
 							</div>
 							<Text type="p">"{$userProfile.account.signature}"</Text>
 						</div>
-						<div class="flex gap-2 flex-col">
+						<div class="flex flex-col gap-2">
 							<div>
 								<Text type="h4">Server:</Text>
 								<Text type="p">{$userProfile.account.server}</Text>
@@ -150,12 +150,12 @@
 		</div>
 		<div class="flex flex-col gap-2">
 			<Text type="h3">{$i18n.t('settings.login_providers')}</Text>
-			<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+			<div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
 				{#each loginOptions as option}
 					<IconButton
 						icon={isSimpleIcon(option.icon) ? option.icon.path : option.icon}
 						variant="outline"
-						class="w-full justify-center hover:border-primary"
+						class="hover:border-primary w-full justify-center"
 						on:click={option.action}
 						disabled={$userProfile.auth.includes(option.name)}
 					>
@@ -201,11 +201,11 @@
 			</form>
 		</div>
 	{/if}
-	<div class="flex flex-col gap-2 mb-2">
+	<div class="mb-2 flex flex-col gap-2">
 		<Text type="h3">{$i18n.t('settings.category.theming.title')}</Text>
 		<div class="flex flex-row gap-4">
 			<Button
-				class={`flex w-[150px] h-[200px] ${$applicationState.settings.theme === 'light' ? 'bg-neutral border-primary' : 'bg-text border-text'} justify-start items-end p-2 border-4 rounded-md`}
+				class={`flex h-[200px] w-[150px] ${$applicationState.settings.theme === 'light' ? 'bg-neutral border-primary' : 'bg-text border-text'} items-end justify-start rounded-md border-4 p-2`}
 				on:click={() => changeThemeTo('light')}
 			>
 				<Text
@@ -216,7 +216,7 @@
 				</Text>
 			</Button>
 			<Button
-				class={`flex w-[150px] h-[200px] ${$applicationState.settings.theme === 'dark' ? 'bg-neutral border-primary' : 'bg-text border-text text-neutral'} justify-start items-end p-2 border-4 rounded-md`}
+				class={`flex h-[200px] w-[150px] ${$applicationState.settings.theme === 'dark' ? 'bg-neutral border-primary' : 'bg-text border-text text-neutral'} items-end justify-start rounded-md border-4 p-2`}
 				on:click={() => changeThemeTo('dark')}
 			>
 				<Text

@@ -75,13 +75,13 @@
 </script>
 
 <div
-	class={`fixed flex w-full ${isSidebarOpen ? 'sm:w-72' : 'sm:w-20'} xl:w-72 ${isSidebarOpen ? 'h-full' : 'h-16'} gap-2.5 sm:h-full flex-col z-50 p-2.5 xl:p-5 xl:pl-10 max-sm:px-5 sm:max-xl:pr-0 sm:max-xl:py-5 bg-tertiary ${isSidebarOpen ? '' : 'max-sm:rounded-b-xl'} sm:rounded-r-xl transition-all`}
+	class={`fixed flex w-full ${isSidebarOpen ? 'sm:w-72' : 'sm:w-20'} xl:w-72 ${isSidebarOpen ? 'h-full' : 'h-16'} bg-tertiary z-50 flex-col gap-2.5 p-2.5 max-sm:px-5 sm:h-full sm:max-xl:py-5 sm:max-xl:pr-0 xl:p-5 xl:pl-10 ${isSidebarOpen ? '' : 'max-sm:rounded-b-xl'} transition-all sm:rounded-r-xl`}
 >
 	<div
 		class={`flex ${isSidebarOpen ? 'flex-row' : 'sm:max-xl:flex-col'} items-center justify-between gap-2.5 sm:max-xl:mr-2.5`}
 	>
 		<div class="flex flex-row items-center">
-			<img alt="Stormterror flying" class={`rounded-full w-10 h-10`} src={logo} />
+			<img alt="Stormterror flying" class={`h-10 w-10 rounded-full`} src={logo} />
 			<a class={`ml-2 ${isSidebarOpen ? '' : 'sm:max-xl:hidden'}`} href="/">
 				<Text type="h1">dval.in</Text>
 			</a>
@@ -102,7 +102,7 @@
 	</div>
 
 	<div
-		class={`overflow-y-auto flex flex-col flex-1 gap-1 max-sm:h-full pr-1 ${isSidebarOpen ? '' : 'max-sm:max-h-0 max-sm:overflow-hidden'} scrollbar-gutter`}
+		class={`flex flex-1 flex-col gap-1 overflow-y-auto pr-1 max-sm:h-full ${isSidebarOpen ? '' : 'max-sm:max-h-0 max-sm:overflow-hidden'} scrollbar-gutter`}
 	>
 		<SidebarEntry
 			icon={mdiHome}
@@ -154,7 +154,7 @@
 	</div>
 
 	<div
-		class={`flex ${isSidebarOpen ? 'flex-row' : 'sm:max-xl:flex-col xl:flex-row'} gap-2.5 items-center sm:max-xl:mr-2.5 ${isSidebarOpen ? '' : 'max-sm:max-h-0 max-sm:overflow-hidden'}`}
+		class={`flex ${isSidebarOpen ? 'flex-row' : 'sm:max-xl:flex-col xl:flex-row'} items-center gap-2.5 sm:max-xl:mr-2.5 ${isSidebarOpen ? '' : 'max-sm:max-h-0 max-sm:overflow-hidden'}`}
 	>
 		{#if $applicationState.isAuthenticated}
 			<SidebarEntry
@@ -185,6 +185,6 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div
 	role="button"
-	class={`bg-black/80 z-40 transition-all fixed top-0 left-0 right-0 bottom-0 ${isSidebarOpen ? '' : 'hidden'}`}
+	class={`fixed bottom-0 left-0 right-0 top-0 z-40 bg-black/80 transition-all ${isSidebarOpen ? '' : 'hidden'}`}
 	on:click={closeSidebar}
 />

@@ -15,15 +15,15 @@
 </script>
 
 <a
-	class="flex flex-col w-full rounded-md overflow-hidden hover:scale-105 transition-transform duration-300 ease-in-out"
+	class="flex w-full flex-col overflow-hidden rounded-md transition-transform duration-300 ease-in-out hover:scale-105"
 	href={link}
 >
 	<div
 		class={`flex justify-center ${rarity === 5 ? 'bg-fivestar' : 'bg-fourstar'} ${obtained ? '' : 'opacity-50'}`}
 	>
-		<img alt={name} class="w-24 h-24 xl:w-36 xl:h-36" src={img} />
+		<img alt={name} class="h-24 w-24 xl:h-36 xl:w-36" src={img} />
 	</div>
-	<div class="flex flex-1 justify-center p-2 text-center bg-tertiary items-center">
+	<div class="bg-tertiary flex flex-1 items-center justify-center p-2 text-center">
 		<Text type="h4">
 			{name}
 		</Text>

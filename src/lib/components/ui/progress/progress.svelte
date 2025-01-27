@@ -12,14 +12,14 @@
 </script>
 
 <ProgressPrimitive.Root
-	class={cn('relative h-4 w-full overflow-hidden rounded-full bg-primary/20', className)}
+	class={cn('bg-primary/20 relative h-4 w-full overflow-hidden rounded-full', className)}
 	{...$$restProps}
 >
 	<div
-		class="h-full w-full flex-1 bg-primary/80 transition-all"
+		class="bg-primary/80 h-full w-full flex-1 transition-all"
 		style={`transform: translateX(-${100 - percent}%)`}
 	/>
-	<p class="h-full absolute left-1/2 top-0 -translate-x-1/2 text-xs">
+	<p class="absolute left-1/2 top-0 h-full -translate-x-1/2 text-xs">
 		{value}/{max}
 		{`(${percent}%)`}
 	</p>

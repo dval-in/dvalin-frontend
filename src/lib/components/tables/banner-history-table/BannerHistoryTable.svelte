@@ -185,7 +185,7 @@
 	$: $sortKeys;
 </script>
 
-<div class="flex flex-1 flex-col gap-2 justify-between overflow-x-auto">
+<div class="flex flex-1 flex-col justify-between gap-2 overflow-x-auto">
 	<TableRoot {...$tableAttrs}>
 		<TableHeader>
 			{#each $headerRows as headerRow (headerRow.id)}

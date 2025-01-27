@@ -197,7 +197,7 @@
 					{:else if datum.text}
 						<p>{datum.text}</p>
 					{:else if datum.check}
-						<div class="w-full h-full flex flex-row items-center justify-between px-16">
+						<div class="flex h-full w-full flex-row items-center justify-between px-16">
 							<Label
 								for={datum.check
 									.replace(/[^a-zA-Z]/g, '')
@@ -252,44 +252,3 @@
 		{/each}
 	</div>
 </main>
-
-<style>
-	main {
-		position: relative;
-	}
-
-	.list {
-		@apply cursor-grab z-[5] flex flex-col shrink;
-	}
-	.item {
-		@apply bg-foreground box-border inline-flex w-full min-h-[3em] border select-none mb-[0.5em] rounded-sm border-solid border-black;
-	}
-	.item:last-child {
-		@apply mb-0;
-	}
-	.item:not(#grabbed):not(#ghost) {
-		@apply z-10;
-	}
-	.buttons {
-		@apply w-8 min-w-[32px] flex flex-col mx-0 my-auto;
-	}
-	.buttons button {
-		@apply cursor-pointer w-[18px] h-[18px] border bg-inherit mx-auto my-0 p-0 border-solid border-[rgba(0,0,0,0)] focus:border focus:border-solid focus:border-[black];
-		@apply invert;
-	}
-	.delete {
-		@apply w-8;
-	}
-	#grabbed {
-		@apply opacity-[0.0];
-	}
-	#ghost {
-		@apply pointer-events-none z-[-5] absolute opacity-[0.0] left-0 top-0;
-	}
-	#ghost * {
-		@apply pointer-events-none;
-	}
-	#ghost.haunting {
-		@apply z-20 opacity-[1.0];
-	}
-</style>

@@ -2,12 +2,13 @@
 	"$schema": "https://shadcn-svelte.com/schema.json",
 	"style": "default",
 	"tailwind": {
-		"config": "tailwind.config.js",
-		"css": "src/app.pcss",
+		"config": "tailwind.config.ts",
+		"css": "./src/app.css",
 		"baseColor": "slate"
 	},
 	"aliases": {
 		"components": "$lib/components",
 		"utils": "$lib/utils"
-	}
+	},
+	"typescript": true
 }
