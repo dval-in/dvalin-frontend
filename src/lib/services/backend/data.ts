@@ -9,9 +9,11 @@ import type { WeaponIndex } from '$lib/types/index/weapon';
 import type { Character } from '$lib/types/data/Character';
 import type { Weapon } from 'dvalin-data';
 import type { mergedAchievements } from '$lib/types/achievement';
+import type { AchievementCategoryIndex } from '$lib/types/index/achievement';
 
 type FetchCharacterDataIndexResponse = CharacterIndex;
 type FetchWeaponDataIndexResponse = WeaponIndex;
+type FetchAchievementCategoryDataIndexResponse = AchievementCategoryIndex;
 
 export class BackendDataService {
 	private readonly baseUrl: string;
@@ -23,29 +25,39 @@ export class BackendDataService {
 		this.baseUrl = baseUrl + '/data';
 	}
 
-	fetchCharacterDataIndex() {
+	fetchCharacterDataIndex(lang: string) {
 		return createQuery<FetchCharacterDataIndexResponse>(
 			{
-				queryKey: ['fetchDataIndex', 'character'],
+				queryKey: ['fetchDataIndex', 'character', lang],
 				staleTime: 6 * 60 * 60 * 1000, //6h
 				queryFn: async () =>
 					await backendFetch<CharacterIndex>(
-						`${this.baseUrl}/Character/index?lang=${get(i18n).language}`
+						`${this.baseUrl}/Character/index?lang=${lang}`
 					)
 			},
 			this.queryClient
 		);
 	}
 
-	fetchWeaponDataIndex() {
+	fetchWeaponDataIndex(lang: string) {
 		return createQuery<FetchWeaponDataIndexResponse>(
 			{
-				queryKey: ['fetchDataIndex', 'weapon'],
+				queryKey: ['fetchDataIndex', 'weapon', lang],
 				staleTime: 6 * 60 * 60 * 1000, //6h
 				queryFn: async () =>
-					await backendFetch<WeaponIndex>(
-						`${this.baseUrl}/Weapon/index?lang=${get(i18n).language}`
-					)
+					await backendFetch<WeaponIndex>(`${this.baseUrl}/Weapon/index?lang=${lang}`)
+			},
+			this.queryClient
+		);
+	}
+
+	fetchAchievementCategoryDataIndex(lang: string) {
+		return createQuery<FetchAchievementCategoryDataIndexResponse>(
+			{
+				queryKey: ['fetchDataIndex', 'AchievementCategory', lang],
+				staleTime: 6 * 60 * 60 * 1000, //6h
+				queryFn: async () =>
+					await backendFetch(`${this.baseUrl}/AchievementCategory/index?lang=${lang}`)
 			},
 			this.queryClient
 		);
@@ -82,31 +94,18 @@ export class BackendDataService {
 		return `${this.baseUrl}/Weapon/${weapon}?lang=${get(i18n).language}`;
 	}
 
-	fetchAchievementCategoryList(lang: string): CreateQueryResult<string[]> {
-		return createQuery(
-			{
-				queryKey: ['fetchAchievementCategoryList', lang],
-				queryFn: async () => await backendFetch(this.getAchievementCategoryListUrl(lang))
-			},
-			this.queryClient
-		);
-	}
-
-	getAchievementCategoryListUrl(lang: string): string {
-		return `${this.baseUrl}/Achievement/index?lang=${lang}`;
-	}
-
 	fetchAchievements(lang: string, category: string): CreateQueryResult<mergedAchievements> {
 		return createQuery(
 			{
 				queryKey: ['fetchAchievement', lang, category],
-				queryFn: async () => await backendFetch(this.getAchievementListUrl(lang, category))
+				staleTime: 6 * 60 * 60 * 1000, //6h
+				queryFn: async () => await backendFetch(this.getAchievementDataUrl(lang, category))
 			},
 			this.queryClient
 		);
 	}
 
-	getAchievementListUrl(lang: string, category: string): string {
+	getAchievementDataUrl(lang: string, category: string): string {
 		return `${this.baseUrl}/Achievement/${category}?lang=${lang}`;
 	}
 }

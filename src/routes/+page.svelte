@@ -1,40 +1,52 @@
 <script lang="ts">
-	import * as Card from '$lib/components/ui/card';
 	import { Button } from '$lib/components/ui/button';
 	import Text from '$lib/components/typography/Text.svelte';
 	import S3Service from '$lib/services/s3';
 	import i18n from '$lib/services/i18n';
 	import { Progress } from '$lib/components/ui/progress';
-	import * as Dialog from '$lib/components/ui/dialog';
 	import DragDropList from '$lib/components/ui/dragdrop/DragDropList.svelte';
 	import DefaultLayout from '$lib/components/layout/DefaultLayout.svelte';
 	import IconButton from '$lib/components/ui/icon-button/IconButton.svelte';
-	import * as AlertDialog from '$lib/components/ui/alert-dialog';
 	import Icon from '$lib/components/ui/icon/icon.svelte';
 	import PullChip from '$lib/components/ui/pull-chip/PullChip.svelte';
 	import { Checkbox } from '$lib/components/ui/checkbox';
 	import { Label } from '$lib/components/ui/label';
 	import { Input } from '$lib/components/ui/input';
-
 	import {
-		mdiPencil,
-		mdiImport,
 		mdiAccount,
-		mdiSwordCross,
 		mdiCheckAll,
-		mdiInfinity
+		mdiImport,
+		mdiInfinity,
+		mdiPencil,
+		mdiSwordCross
 	} from '@mdi/js';
 	import CharCard from '$lib/components/ui/card/WeapCard.svelte';
 	import type { Elements } from '$lib/types/elements';
 	import type { WeaponTypes } from '$lib/types/weapon';
 	import { onMount } from 'svelte';
 	import { userProfile } from '$lib/store/user_profile';
-	import BackendService from '$lib/services/backend';
-	import type { CreateQueryResult } from '@tanstack/svelte-query';
 	import { writable } from 'svelte/store';
 	import type { achievementData, mergedAchievements } from '$lib/types/achievement';
 	import type { UserProfile } from '$lib/types/user_profile';
 	import type { IWish } from '$lib/types/wish';
+	import {
+		AlertDialog,
+		AlertDialogCancel,
+		AlertDialogContent,
+		AlertDialogDescription,
+		AlertDialogFooter,
+		AlertDialogHeader,
+		AlertDialogTitle
+	} from '$lib/components/ui/alert-dialog/index';
+	import {
+		Dialog,
+		DialogContent,
+		DialogDescription,
+		DialogHeader,
+		DialogTitle,
+		DialogTrigger
+	} from '$lib/components/ui/dialog';
+	import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '$lib/components/ui/card';
 
 	let changeLog = ` `;
 	let currentVer = `4.5`;
@@ -139,60 +151,9 @@
 		rarity: 5
 	};
 
-	const backend = BackendService.getInstance();
-	const lang = $i18n.language;
-	const categoriesQuery: CreateQueryResult<string[]> =
-		backend.data.fetchAchievementCategoryList(lang);
-	const achievementsQueries = writable<{
-		[category: string]: CreateQueryResult<mergedAchievements>;
-	}>({});
 	const achievements = writable<{
 		[category: string]: (mergedAchievements & { image?: string }) | undefined;
 	}>({});
-	async function fetchAchievementsAndImages() {
-		if ($categoriesQuery.isSuccess && $categoriesQuery.data) {
-			const sortedCategories = $categoriesQuery.data.sort((a, b) => a.localeCompare(b));
-			const categoryPromises = sortedCategories.map(async (category) => {
-				const query = backend.data.fetchAchievements(lang, category);
-				$achievementsQueries[category] = query;
-
-				const achievementData = await new Promise<mergedAchievements | undefined>(
-					(resolve) => {
-						query.subscribe((result) => {
-							if (result.isSuccess && result.data) {
-								resolve(result.data);
-							}
-						});
-					}
-				);
-				if (achievementData) {
-					const updatedAchievements = achievementData.achievements.map((achievement) => {
-						const userAchievement = $userProfile.achievements?.[achievement.id];
-						return {
-							...achievement,
-							achieved: userAchievement?.achieved ?? false,
-							progression: userAchievement?.progression ?? '',
-							version: achievement.version
-								? achievement.version
-								: achievementData.id === 'WondersOfTheWorld'
-									? '0.0'
-									: achievementData.version
-						};
-					});
-
-					$achievements[category] = {
-						...achievementData,
-						achievements: updatedAchievements
-					};
-				}
-			});
-
-			await Promise.all(categoryPromises);
-		}
-	}
-	$: if ($categoriesQuery.isSuccess) {
-		fetchAchievementsAndImages();
-	}
 
 	$: totalAchievements = Object.values($achievements).reduce(
 		(acc, category) => (category ? acc + category.achievements.length : acc),
@@ -398,40 +359,40 @@
 	}
 </script>
 
-<AlertDialog.Root open={firstTimeUser}>
-	<AlertDialog.Content>
-		<AlertDialog.Header>
-			<AlertDialog.Title>{$i18n.t('dashboard.welcome.title')}</AlertDialog.Title>
-			<AlertDialog.Description>
+<AlertDialog open={firstTimeUser}>
+	<AlertDialogContent>
+		<AlertDialogHeader>
+			<AlertDialogTitle>{$i18n.t('dashboard.welcome.title')}</AlertDialogTitle>
+			<AlertDialogDescription>
 				{$i18n.t('dashboard.welcome.message')}
-			</AlertDialog.Description>
-		</AlertDialog.Header>
-		<AlertDialog.Footer>
-			<AlertDialog.Cancel>{$i18n.t('action.cancel')}</AlertDialog.Cancel>
-		</AlertDialog.Footer>
-	</AlertDialog.Content>
-</AlertDialog.Root>
+			</AlertDialogDescription>
+		</AlertDialogHeader>
+		<AlertDialogFooter>
+			<AlertDialogCancel>{$i18n.t('action.cancel')}</AlertDialogCancel>
+		</AlertDialogFooter>
+	</AlertDialogContent>
+</AlertDialog>
 
 <DefaultLayout title={$i18n.t('dashboard.title')}>
 	<svelte:fragment slot="titlebarActions">
-		<Dialog.Root>
-			<Dialog.Trigger>
+		<Dialog>
+			<DialogTrigger>
 				<IconButton icon={mdiPencil}>{$i18n.t('dashboard.edit_layout.button')}</IconButton>
-			</Dialog.Trigger>
-			<Dialog.Content>
-				<Dialog.Header>
-					<Dialog.Title>
+			</DialogTrigger>
+			<DialogContent>
+				<DialogHeader>
+					<DialogTitle>
 						<Text type="h3">{$i18n.t('dashboard.edit_layout.title')}</Text>
-					</Dialog.Title>
-					<Dialog.Description>
+					</DialogTitle>
+					<DialogDescription>
 						<Text type="p">{$i18n.t('dashboard.edit_layout.description')}</Text>
-					</Dialog.Description>
-				</Dialog.Header>
+					</DialogDescription>
+				</DialogHeader>
 				<div>
 					<DragDropList bind:data={dragDropList} />
 				</div>
-			</Dialog.Content>
-		</Dialog.Root>
+			</DialogContent>
+		</Dialog>
 	</svelte:fragment>
 	<div>
 		<div
@@ -440,31 +401,31 @@
 			{#each dragDropList as Widget}
 				{#if Widget.check === `${$i18n.t('dashboard.widget.changelog.title')}` && Widget.checked == true}
 					<!-- Changelog card -->
-					<Card.Root class=" flex flex-col">
-						<Card.Header>
-							<Card.Title>
+					<Card class=" flex flex-col">
+						<CardHeader>
+							<CardTitle>
 								<Text type="h4">
 									{$i18n.t('dashboard.widget.changelog.title')}:
 								</Text>
-							</Card.Title>
-						</Card.Header>
-						<Card.Content class="whitespace-pre-line">
+							</CardTitle>
+						</CardHeader>
+						<CardContent class="whitespace-pre-line">
 							<Text type="p">{changeLog}</Text>
-						</Card.Content>
-						<Card.Footer class="items-end justify-end mt-2.5">
+						</CardContent>
+						<CardFooter class="items-end justify-end mt-2.5">
 							<Button>{$i18n.t('action.more')}</Button>
-						</Card.Footer>
-					</Card.Root>
+						</CardFooter>
+					</Card>
 				{/if}
 				{#if Widget.check === `${$i18n.t('dashboard.widget.reminder.title')}` && Widget.checked == true}
 					<!-- Reminder card -->
-					<Card.Root class=" flex flex-col">
-						<Card.Header>
-							<Card.Title>
+					<Card class=" flex flex-col">
+						<CardHeader>
+							<CardTitle>
 								<Text type="h4">{$i18n.t('dashboard.widget.reminder.title')}</Text>
-							</Card.Title>
-						</Card.Header>
-						<Card.Content>
+							</CardTitle>
+						</CardHeader>
+						<CardContent>
 							<!-- The checks will uncheck themselves after N server resets -->
 
 							<!-- Daily -->
@@ -594,20 +555,20 @@
 									</Text>
 								</Label>
 							</div>
-						</Card.Content>
-					</Card.Root>
+						</CardContent>
+					</Card>
 				{/if}
 				{#if Widget.check === `${$i18n.t('dashboard.widget.events.title')}` && Widget.checked == true}
 					<!-- Events card -->
-					<Card.Root class=" flex flex-col">
-						<Card.Header>
-							<Card.Title>
+					<Card class=" flex flex-col">
+						<CardHeader>
+							<CardTitle>
 								<Text type="h4">
 									{$i18n.t('dashboard.widget.events.title')} Current Events
 								</Text>
-							</Card.Title>
-						</Card.Header>
-						<Card.Content>
+							</CardTitle>
+						</CardHeader>
+						<CardContent>
 							<Text type="large">
 								{$i18n.t('dashboard.widget.events.version')}
 								{currentVer}
@@ -691,53 +652,53 @@
 									</Text>
 								</div>
 							</div>
-						</Card.Content>
-						<Card.Footer class="mt-2.5">
+						</CardContent>
+						<CardFooter class="mt-2.5">
 							<Button class="w-full">
 								{$i18n.t('dashboard.widget.events.timeline.button')}
 							</Button>
-						</Card.Footer>
-					</Card.Root>{/if}
+						</CardFooter>
+					</Card>{/if}
 				{#if Widget.check === `${$i18n.t('dashboard.widget.todo.title')}` && Widget.checked == true}
 					<!-- To-do card -->
-					<Card.Root class=" flex flex-col">
-						<Card.Header>
-							<Card.Title>
+					<Card class=" flex flex-col">
+						<CardHeader>
+							<CardTitle>
 								<Text type="h4">{$i18n.t('dashboard.widget.todo.title')}</Text>
-							</Card.Title>
-						</Card.Header>
-						<Card.Content>
+							</CardTitle>
+						</CardHeader>
+						<CardContent>
 							<Text type="p">
 								Farmable today: thing thing thing thing summary: some more even more
 								thing
 							</Text>
-						</Card.Content>
-					</Card.Root>{/if}
+						</CardContent>
+					</Card>{/if}
 				{#if Widget.check === `${$i18n.t('dashboard.widget.domain.title')}` && Widget.checked == true}
 					<!-- Domain rotation card -->
-					<Card.Root class=" flex flex-col">
-						<Card.Header>
-							<Card.Title>
+					<Card class=" flex flex-col">
+						<CardHeader>
+							<CardTitle>
 								<Text type="h4">{$i18n.t('dashboard.widget.domain.title')}</Text>
-							</Card.Title>
-						</Card.Header>
-						<Card.Content>
+							</CardTitle>
+						</CardHeader>
+						<CardContent>
 							<Text type="p">
 								talent materials, weapon materials + corresponding chars/weaps
 							</Text>
-						</Card.Content>
-					</Card.Root>{/if}
+						</CardContent>
+					</Card>{/if}
 				{#if Widget.check === `${$i18n.t('dashboard.widget.achievements.title')}` && Widget.checked == true}
 					<!-- Achievements card -->
-					<Card.Root class=" flex flex-col">
-						<Card.Header>
-							<Card.Title>
+					<Card class=" flex flex-col">
+						<CardHeader>
+							<CardTitle>
 								<Text type="h4">
 									{$i18n.t('dashboard.widget.achievements.title')}
 								</Text>
-							</Card.Title>
-						</Card.Header>
-						<Card.Content>
+							</CardTitle>
+						</CardHeader>
+						<CardContent>
 							<div class="flex flex-row justify-between">
 								<Text type="p">
 									{$i18n.t('dashboard.widget.achievements.progress')}:
@@ -771,26 +732,26 @@
 									{/each}
 								</div>
 							</div>
-						</Card.Content>
-						<Card.Footer class="mt-2.5">
+						</CardContent>
+						<CardFooter class="mt-2.5">
 							<a href="/achievement">
 								<Button class="w-full">
 									{$i18n.t('dashboard.widget.achievements.more')}
 								</Button>
 							</a>
-						</Card.Footer>
-					</Card.Root>{/if}
+						</CardFooter>
+					</Card>{/if}
 				{#if Widget.check === `${$i18n.t('dashboard.widget.pity.title')}` && Widget.checked == true}<!-- Pity card -->
-					<Card.Root class=" flex flex-col gap-5">
-						<Card.Header>
-							<Card.Title class="flex flex-row justify-between items-center">
+					<Card class=" flex flex-col gap-5">
+						<CardHeader>
+							<CardTitle class="flex flex-row justify-between items-center">
 								<Text type="h4">{$i18n.t('dashboard.widget.pity.title')}</Text>
 								<Button href="wish-statistics/overview">
 									{$i18n.t('wish.overview.title')}
 								</Button>
-							</Card.Title>
-						</Card.Header>
-						<Card.Content>
+							</CardTitle>
+						</CardHeader>
+						<CardContent>
 							<div class="flex justify-between *:py-[5%] *:px-[8%] *:bg-neutral">
 								<!-- char -->
 								<div
@@ -847,20 +808,20 @@
 									</div>
 								</div>
 							</div>
-						</Card.Content>
-					</Card.Root>{/if}
+						</CardContent>
+					</Card>{/if}
 				{#if Widget.check === `${$i18n.t('dashboard.widget.wishing.title')}` && Widget.checked == true}
 					<!-- Wish card -->
-					<Card.Root class=" flex flex-col gap-5">
-						<Card.Header>
-							<Card.Title class="flex justify-between items-center">
+					<Card class=" flex flex-col gap-5">
+						<CardHeader>
+							<CardTitle class="flex justify-between items-center">
 								<Text type="h4">{$i18n.t('dashboard.widget.wishing.title')}</Text>
 								<Button href="wish-statistics/overview">
 									{$i18n.t('action.more')}
 								</Button>
-							</Card.Title>
-						</Card.Header>
-						<Card.Content class="flex flex-col gap-3">
+							</CardTitle>
+						</CardHeader>
+						<CardContent class="flex flex-col gap-3">
 							<!-- pity -->
 							<Text type="large">{$i18n.t('dashboard.widget.wishing.pity')}</Text>
 							<div class="flex justify-between *:py-[5%] *:px-[8%] *:bg-neutral">
@@ -950,23 +911,23 @@
 									{/each}
 								</div>
 							</div>
-						</Card.Content>
-						<Card.Footer class="flex justify-end">
+						</CardContent>
+						<CardFooter class="flex justify-end">
 							<IconButton icon={mdiImport} href="/settings/import">
 								{$i18n.t('wish.overview.import_wish_button')}
 							</IconButton>
-						</Card.Footer>
-					</Card.Root>
+						</CardFooter>
+					</Card>
 				{/if}
 				{#if Widget.check === `${$i18n.t('dashboard.widget.display.title')}` && Widget.checked == true}
 					<!-- Display card -->
-					<Card.Root class=" flex flex-col">
-						<Card.Header>
-							<Card.Title>
+					<Card class=" flex flex-col">
+						<CardHeader>
+							<CardTitle>
 								<Text type="h4">{$i18n.t('dashboard.widget.display.title')}</Text>
-							</Card.Title>
-						</Card.Header>
-						<Card.Content>
+							</CardTitle>
+						</CardHeader>
+						<CardContent>
 							<div class="flex flex-row justify-around mt-2">
 								<CharCard
 									link={displayed_character.link}
@@ -992,20 +953,20 @@
 								/>
 							</div>
 							<!-- Display setup will be in character/weapon tabs -->
-						</Card.Content>
-					</Card.Root>
+						</CardContent>
+					</Card>
 				{/if}
 				{#if Widget.check === `${$i18n.t('dashboard.widget.global_wishing.title')}` && Widget.checked == true}
 					<!-- Global wishing stats -->
-					<Card.Root class=" flex flex-col gap-5">
-						<Card.Header>
-							<Card.Title class="flex justify-between items-center">
+					<Card class=" flex flex-col gap-5">
+						<CardHeader>
+							<CardTitle class="flex justify-between items-center">
 								<Text type="h4">
 									{$i18n.t('dashboard.widget.global_wishing.title')}
 								</Text>
-							</Card.Title>
-						</Card.Header>
-						<Card.Content class="flex flex-col gap-3">
+							</CardTitle>
+						</CardHeader>
+						<CardContent class="flex flex-col gap-3">
 							<div class="flex flex-row justify-around">
 								<div class="flex flex-col items-center">
 									<img
@@ -1057,21 +1018,21 @@
 									number: submissions
 								})}
 							</Text>
-						</Card.Content>
-						<Card.Footer class="flex justify-end">
+						</CardContent>
+						<CardFooter class="flex justify-end">
 							<Button class="w-full">{$i18n.t('action.more')}</Button>
-						</Card.Footer>
-					</Card.Root>
+						</CardFooter>
+					</Card>
 				{/if}
 				{#if Widget.check === `${$i18n.t('dashboard.widget.resin.title')}` && Widget.checked == true}
 					<!-- Resin tracker  -->
-					<Card.Root class=" flex flex-col gap-5">
-						<Card.Header>
-							<Card.Title class="flex justify-between items-center">
+					<Card class=" flex flex-col gap-5">
+						<CardHeader>
+							<CardTitle class="flex justify-between items-center">
 								<Text type="h4">{$i18n.t('dashboard.widget.resin.title')}</Text>
-							</Card.Title>
-						</Card.Header>
-						<Card.Content class="flex flex-col gap-3">
+							</CardTitle>
+						</CardHeader>
+						<CardContent class="flex flex-col gap-3">
 							<div class="flex flex-row items-center justify-center gap-4">
 								<img class="w-8 h-8" src="" alt="Resin Icon" />
 								<Text type="large">
@@ -1152,11 +1113,11 @@
 									</Text>
 								</div>
 							{/if}
-						</Card.Content>
+						</CardContent>
 						<!-- <Card.Footer class="flex justify-end">
 							<Button class="w-full">View more</Button>
 						</Card.Footer> -->
-					</Card.Root>
+					</Card>
 				{/if}
 			{/each}
 		</div>

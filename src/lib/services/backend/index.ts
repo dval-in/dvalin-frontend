@@ -7,6 +7,8 @@ import { toast } from 'svelte-sonner';
 import { BackendUserService } from '$lib/services/backend/user';
 import type { QueryClient } from '@tanstack/svelte-query';
 import { applicationState } from '$lib/store/application_state';
+import { BackendAchievementService } from '$lib/services/backend/achievements';
+import type SocketService from '$lib/services/socket';
 
 export type BackendStateResponse = {
 	state: 'AUTHENTICATION_REQUIRED' | 'MAINTENANCE' | 'INITIALIZING' | 'MISSING_USER';
@@ -73,17 +75,26 @@ export default class BackendService {
 	public auth;
 	public hoyo;
 	public user;
+	public achievement;
 
-	private constructor(private queryClient: QueryClient) {
+	private constructor(
+		private queryClient: QueryClient,
+		private socket: SocketService
+	) {
 		this.data = new BackendDataService(this.env.variables.backendUrl, this.queryClient);
 		this.auth = new BackendAuthService(this.env.variables.backendUrl);
 		this.hoyo = new BackendHoyoService(this.env.variables.backendUrl, this.queryClient);
 		this.user = new BackendUserService(this.env.variables.backendUrl, this.queryClient);
+		this.achievement = new BackendAchievementService(
+			this.env.variables.backendUrl,
+			this.queryClient,
+			this.socket
+		);
 	}
 
-	public static setupInstance(queryClient: QueryClient): BackendService {
+	public static setupInstance(queryClient: QueryClient, socket: SocketService): BackendService {
 		if (this.instance === undefined) {
-			this.instance = new BackendService(queryClient);
+			this.instance = new BackendService(queryClient, socket);
 		}
 		return this.instance;
 	}

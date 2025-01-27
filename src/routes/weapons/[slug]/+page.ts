@@ -1,6 +1,5 @@
-import type { PageLoadEvent } from '../../weapons/[slug]/$types';
+import type { PageLoadEvent } from './$types';
 
-/** @type {import('./$types').PageLoad} */
 export async function load({ params, parent, fetch }: PageLoadEvent) {
 	const { queryClient, backend } = await parent();
 	const key = params.slug;

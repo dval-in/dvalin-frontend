@@ -3,9 +3,8 @@ import { QueryClient } from '@tanstack/svelte-query';
 import { browser } from '$app/environment';
 import { userProfile } from '$lib/store/user_profile';
 import { goto } from '$app/navigation';
-import { createSocketServer, socketStore } from '$lib/services/socketServer';
+import SocketService from '$lib/services/socket';
 
-/** @type {import('../../.svelte-kit/types/src/routes/$types').LayoutServerLoad} */
 export const load = async () => {
 	const queryClient = new QueryClient({
 		defaultOptions: {
@@ -14,7 +13,8 @@ export const load = async () => {
 			}
 		}
 	});
-	const backend = BackendService.setupInstance(queryClient);
+	const socket = SocketService.setupInstance(import.meta.env.VITE_BACKEND_URL, queryClient);
+	const backend = BackendService.setupInstance(queryClient, socket);
 
 	if (browser) {
 		backend.user.fetchUserProfile().subscribe((response) => {
@@ -34,9 +34,7 @@ export const load = async () => {
 				}
 			}
 		});
-
-		createSocketServer(import.meta.env.VITE_BACKEND_URL, queryClient);
 	}
 
-	return { queryClient, backend, socketStore };
+	return { queryClient, backend, socket };
 };

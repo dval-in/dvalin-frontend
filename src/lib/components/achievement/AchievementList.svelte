@@ -1,35 +1,27 @@
 <script lang="ts">
 	import type { achievementData } from '$lib/types/achievement';
 	import Text from '$lib/components/typography/Text.svelte';
-	import ScrollArea from '../ui/scroll-area/scroll-area.svelte';
 	import { Card } from '../ui/card';
 	import { Checkbox } from '../ui/checkbox';
 	import Badge from '../ui/badge/badge.svelte';
 	import { Collapsible, CollapsibleTrigger } from '../ui/collapsible';
 	import CollapsibleContent from '../ui/collapsible/collapsible-content.svelte';
 	import Separator from '../ui/separator/separator.svelte';
-	import { onMount } from 'svelte';
-	import { debounce } from 'lodash-es';
-	import { socketStore } from '$lib/services/socketServer';
-	import type { Socket } from 'socket.io-client';
 	import i18n from '$lib/services/i18n';
 	import Icon from '$lib/components/ui/icon/icon.svelte';
-	import { mdiStarFourPoints } from '@mdi/js';
+	import { mdiOpenInNew, mdiStarFourPoints } from '@mdi/js';
 	import { userProfile } from '$lib/store/user_profile';
+	import { get } from 'svelte/store';
+	import BackendService from '$lib/services/backend';
 
 	export let achievements: achievementData[];
-	export let showUnDoneFirst: boolean = false;
-	export let uid: string;
 
-	let socket: Socket | null;
+	$: mutateUserAchievements = BackendService.getInstance().achievement.mutateUserAchievements();
+
 	let achievementsState: { [key: number]: { achieved: boolean; progression: string } } = {};
 	let checkAllState: boolean = false;
 
-	$: sortedAchievements = showUnDoneFirst
-		? [...achievements].sort((a, b) => (a.achieved === b.achieved ? 0 : a.achieved ? 1 : -1))
-		: achievements;
-
-	function isCheckboxChecked(progression: string | undefined, index: number) {
+	const isCheckboxChecked = (progression: string | undefined, index: number) => {
 		if (!progression) {
 			return false;
 		}
@@ -41,44 +33,34 @@
 			const checkedSteps = progression.split('@').map(Number);
 			return checkedSteps.includes(index + 1);
 		}
-	}
+	};
 
-	function updateAchievement(id: number, achieved: boolean, progression?: string) {
-		achievementsState[id] = {
+	const updateAchievement = (achievementId: number, achieved: boolean, progression?: string) => {
+		achievementsState[achievementId] = {
 			achieved,
 			progression:
-				progression !== undefined ? progression : achievementsState[id]?.progression || '0'
+				progression !== undefined
+					? progression
+					: achievementsState[achievementId]?.progression || '0'
 		};
-		sendUpdate();
-	}
+		$mutateUserAchievements.mutate({
+			achievementsState,
+			uid: get(userProfile).account.uid.toString()
+		});
+	};
 
-	const sendUpdate = debounce(() => {
-		if (socket && socket.connected) {
-			socket.emit('updateAchievements', { achievements: achievementsState, uid });
-		}
-		const updatedAchievements = {
-			...($userProfile.achievements ?? {}),
-			...achievementsState
-		};
-
-		$userProfile.achievements = updatedAchievements;
-	}, 1000);
-
-	function handleAchievedChange(
-		achievement: achievementData,
-		checked: boolean | 'indeterminate'
-	) {
+	const handleCheckboxChange = (achievementId: number, checked: boolean | 'indeterminate') => {
 		if (checked === 'indeterminate') {
 			checked = false;
 		}
-		updateAchievement(achievement.id, checked);
-	}
+		updateAchievement(achievementId, checked);
+	};
 
-	function handleStepChange(
+	const handleStepChange = (
 		achievement: achievementData,
 		stepIndex: number,
 		checked: boolean | 'indeterminate'
-	) {
+	) => {
 		if (checked === 'indeterminate') {
 			checked = false;
 		}
@@ -123,9 +105,9 @@
 			achievementsState[achievement.id]?.achieved || false,
 			newProgression
 		);
-	}
+	};
 
-	function handleCheckAll(checked: boolean | 'indeterminate') {
+	const handleCheckAll = (checked: boolean | 'indeterminate') => {
 		if (checked === 'indeterminate') {
 			checked = false;
 		}
@@ -133,126 +115,128 @@
 		achievements.forEach((achievement) => {
 			updateAchievement(achievement.id, checked, checked ? '-1' : '0');
 		});
-	}
-
-	onMount(() => {
-		const unsubscribe = socketStore.subscribe((value) => {
-			socket = value;
-		});
-
-		return () => {
-			unsubscribe();
-		};
-	});
+	};
 </script>
 
-<ScrollArea class="h-screen">
-	<div class="flex flex-col">
-		<Card class="p-4 mb-4">
+<div class="flex flex-1 flex-col gap-2">
+	<Card class="p-4">
+		<div class="flex items-center justify-between gap-2">
+			<Text type="h4">
+				{`${(0 / achievements.length) * 100}% (${0} / ${achievements.length})`}
+			</Text>
 			<div class="flex items-center gap-2">
+				<Text type="p">{$i18n.t('achievement.check_all')}</Text>
 				<Checkbox checked={checkAllState} onCheckedChange={handleCheckAll} id="check-all" />
-				<Text type="h4">{$i18n.t('achievement.check_all')}</Text>
 			</div>
-		</Card>
-		{#each sortedAchievements as achievement}
-			<Card class={`${achievement.preStage ? '' : 'mt-4'} p-4`}>
-				<div class={`flex flex-row justify-between `}>
-					<div class="w-10/12">
-						<Text type="h4">{achievement.name}</Text>
-						<Text type="p">{achievement.desc}</Text>
-						<div class="flex flex-row gap-2">
-							{#if achievement.hidden === 'Yes'}
-								<Badge variant="secondary">Hidden</Badge>
-							{/if}
-							{#if achievement.type}
-								<Badge variant="secondary">{achievement.type}</Badge>
-							{/if}
-							{#if achievement.version}
-								<Badge variant="secondary">{achievement.version}</Badge>
-							{/if}
-						</div>
+		</div>
+	</Card>
+	{#each achievements as achievement (achievement.id)}
+		<Card class={`${achievement.preStage ? '' : ''} p-4`}>
+			<div class={`flex flex-row justify-between`}>
+				<div class="flex flex-1 flex-col gap-2">
+					<Text type="h4">{achievement.name}</Text>
+					<div class="flex flex-row flex-wrap gap-2">
+						{#if achievement.version}
+							<Badge variant="secondary">{achievement.version}</Badge>
+						{/if}
+						{#if achievement.type}
+							<Badge variant="secondary">{achievement.type}</Badge>
+						{/if}
+						{#if achievement.hidden === 'Yes'}
+							<Badge variant="secondary">Hidden</Badge>
+						{/if}
 					</div>
-					<div class="flex flex-col items-center justify-center gap-2">
-						<Text type="p" class="flex flex-row items-center">
-							{achievement.reward}
-							<Icon path={mdiStarFourPoints} class="w-4" />
-						</Text>
-						<Checkbox
-							checked={achievementsState[achievement.id]?.achieved ||
-								achievement.achieved}
-							onCheckedChange={(checked) =>
-								handleAchievedChange(achievement, checked)}
-						/>
-					</div>
-				</div>
-				{#if achievement.requirements || achievement.steps}
-					<Collapsible>
-						<div class="flex flex-row items-center gap-2">
-							<CollapsibleTrigger>
-								{$i18n.t('achievement.more_info')}
-							</CollapsibleTrigger>
-							<Separator class="w-2/3" />
-						</div>
-						<CollapsibleContent>
-							{#if achievement.requirements}
-								<Text type="h4">Requirements</Text>
-								{#if achievement.requirementQuestLink}
-									<Text type="small">
-										{achievement.requirements}
 
-										(
-										<a
-											href={'https://genshin-impact.fandom.com' +
-												achievement.requirementQuestLink}
-											class="underline text-primary"
-										>
-											wiki
-										</a>
-										)
-									</Text>
-								{:else}
-									<Text type="small">{achievement.requirements}</Text>
-								{/if}
-							{/if}
+					<Text type="p">{achievement.desc}</Text>
+					{#if achievement.requirements || achievement.steps}
+						<Collapsible>
+							<div class="flex flex-row items-center gap-2">
+								<CollapsibleTrigger>
+									{$i18n.t('achievement.more_info')}
+								</CollapsibleTrigger>
+								<Separator class="flex" />
+							</div>
+							<CollapsibleContent class="flex flex-col gap-3">
+								{#if achievement.requirements}
+									<div>
+										<Text type="h4">Requirements</Text>
 
-							{#if achievement.steps}
-								<Text type="h4">Steps</Text>
-								{#if Array.isArray(achievement.steps)}
-									{#each achievement.steps as step, index}
-										<div class="flex flex-row items-center gap-2">
-											<Checkbox
-												checked={isCheckboxChecked(
-													achievementsState[achievement.id]
-														?.progression || achievement.progression,
-													index
-												)}
-												onCheckedChange={(checked) =>
-													handleStepChange(achievement, index, checked)}
-												id={`${achievement.id}-${index}`}
-											/>
-											<Text type="small">{step}</Text>
-										</div>
-									{/each}
-								{:else}
-									<div class="flex flex-row items-center gap-2">
-										<Checkbox
-											checked={isCheckboxChecked(
-												achievementsState[achievement.id]?.progression ||
-													achievement.progression,
-												0
-											)}
-											onCheckedChange={(checked) =>
-												handleStepChange(achievement, 0, checked)}
-											id={`${achievement.id}-0`}
-										/>
-										<Text type="small">{achievement.steps}</Text>
+										<Text type="p">
+											{#if achievement.requirementQuestLink}
+												<a
+													href={'https://genshin-impact.fandom.com' +
+														achievement.requirementQuestLink}
+												>
+													{achievement.requirements}
+													<Icon path={mdiOpenInNew} />
+												</a>
+											{:else}
+												{achievement.requirements}
+											{/if}
+										</Text>
 									</div>
 								{/if}
-							{/if}
-						</CollapsibleContent>
-					</Collapsible>
-				{/if}
-			</Card>
-		{/each}
-	</div>
-</ScrollArea>
+
+								{#if achievement.steps}
+									<div>
+										<Text type="h4">Steps</Text>
+										{#if Array.isArray(achievement.steps)}
+											{#each achievement.steps as step, index}
+												<div class="flex flex-row items-center gap-2">
+													<Checkbox
+														checked={isCheckboxChecked(
+															achievementsState[achievement.id]
+																?.progression ||
+																achievement.progression,
+															index
+														)}
+														onCheckedChange={(checked) =>
+															handleStepChange(
+																achievement,
+																index,
+																checked
+															)}
+														id={`${achievement.id}-${index}`}
+													/>
+													<Text type="small">{step}</Text>
+												</div>
+											{/each}
+										{:else}
+											<div class="flex flex-row items-center gap-2">
+												<Checkbox
+													checked={isCheckboxChecked(
+														achievementsState[achievement.id]
+															?.progression ||
+															achievement.progression,
+														0
+													)}
+													onCheckedChange={(checked) =>
+														handleStepChange(achievement, 0, checked)}
+													id={`${achievement.id}-0`}
+												/>
+												<Text type="small">{achievement.steps}</Text>
+											</div>
+										{/if}
+									</div>
+								{/if}
+							</CollapsibleContent>
+						</Collapsible>
+					{/if}
+				</div>
+				<div class="flex flex-row items-center justify-center gap-2">
+					<Text
+						type="p"
+						class="flex flex-row items-center text-center justify-center min-w-16"
+					>
+						{achievement.reward}
+						<Icon path={mdiStarFourPoints} />
+					</Text>
+					<Checkbox
+						checked={achievement.achieved}
+						onCheckedChange={(checked) => handleCheckboxChange(achievement.id, checked)}
+					/>
+				</div>
+			</div>
+		</Card>
+	{/each}
+</div>

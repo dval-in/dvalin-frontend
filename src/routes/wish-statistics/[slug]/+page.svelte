@@ -11,7 +11,7 @@
 	import Icon from '$lib/components/ui/icon/icon.svelte';
 	import i18n from '$lib/services/i18n';
 	import { userProfile } from '$lib/store/user_profile';
-	import type { PageData } from '../../../../.svelte-kit/types/src/routes/wish-statistics/[slug]/$types';
+	import type { PageData } from './$types';
 	import { dataIndex } from '$lib/store/index_store';
 	import { derived } from 'svelte/store';
 

@@ -7,7 +7,7 @@
 	import Icon from '$lib/components/ui/icon/icon.svelte';
 	import DefaultLayout from '$lib/components/layout/DefaultLayout.svelte';
 	import { goto } from '$app/navigation';
-	import type { PageData } from '../../../../.svelte-kit/types/src/routes/weapons/[slug]/$types';
+	import type { PageData } from './$types';
 	import { page } from '$app/stores';
 	import UserWeaponCard from '$lib/components/ui/card/UserWeaponCard.svelte';
 	import { userProfile } from '$lib/store/user_profile';
@@ -16,7 +16,6 @@
 	import WeaponTabs from '$lib/components/ui/character-tabs/weapon-tabs.svelte';
 	import i18n from '$lib/services/i18n';
 
-	/** @type {import('../../../../.svelte-kit/types/src/routes/characters/[slug]').PageData} */
 	export let data: PageData;
 
 	$: fetchWeaponData = data.backend.data.fetchWeaponData(data.weaponKey);

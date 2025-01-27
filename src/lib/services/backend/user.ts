@@ -21,7 +21,7 @@ export class BackendUserService {
 	fetchUserProfile() {
 		return createQuery(
 			derived(applicationState, (appState) => ({
-				queryKey: ['fetchUserProfile', appState],
+				queryKey: ['fetchUserProfile', appState.isAuthenticated],
 				staleTime: 60 * 60 * 1000, //1h
 				enabled: appState.isAuthenticated,
 				queryFn: async () => await backendFetch<FetchUserProfileResponse>(`${this.baseUrl}`)
@@ -69,6 +69,14 @@ export class BackendUserService {
 				// For example, updating the application state
 				applicationState.update((state) => ({ ...state, isAuthenticated: false }));
 			}
+		});
+	}
+
+	mutateUserAchievements() {
+		return createMutation({
+			mutationKey: [''],
+			mutationFn: async () => {},
+			onSuccess: () => {}
 		});
 	}
 }

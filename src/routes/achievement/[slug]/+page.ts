@@ -8,9 +8,9 @@ export async function load({ params, parent, fetch }: PageLoadEvent) {
 	const key = params.slug;
 
 	await queryClient.prefetchQuery({
-		queryKey: ['fetchCharacterData', lang, key],
-		queryFn: async () => (await fetch(backend.data.getCharacterDataUrl(lang, key))).json()
+		queryKey: ['fetchAchievement', lang, key],
+		queryFn: async () => (await fetch(backend.data.getAchievementDataUrl(lang, key))).json()
 	});
 
-	return { characterKey: key };
+	return { category: key };
 }

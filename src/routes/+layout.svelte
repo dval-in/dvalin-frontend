@@ -10,30 +10,43 @@
 	import { userProfile } from '$lib/store/user_profile';
 	import DefaultLayout from '$lib/components/layout/DefaultLayout.svelte';
 	import { dataIndex } from '$lib/store/index_store';
-	import type { LayoutData } from '../../.svelte-kit/types/src/routes/$types';
+	import type { LayoutData } from './$types';
 	import { onMount } from 'svelte';
+	import i18n from '$lib/services/i18n';
 
-	/** @type {import('../../.svelte-kit/types/src/routes/$types').LayoutData} */
 	export let data: LayoutData;
 
 	$: webManifestLink = pwaInfo ? pwaInfo.webManifest.href : '';
 
-	const fetchCharacterDataIndex = data.backend.data.fetchCharacterDataIndex();
-	const fetchWeaponDataIndex = data.backend.data.fetchWeaponDataIndex();
+	const fetchCharacterDataIndex = data.backend.data.fetchCharacterDataIndex($i18n.language);
+	const fetchWeaponDataIndex = data.backend.data.fetchWeaponDataIndex($i18n.language);
+	const fetchAchievementCategoryDataIndex = data.backend.data.fetchAchievementCategoryDataIndex(
+		$i18n.language
+	);
+
 	let isLoading =
 		JSON.stringify(get(dataIndex).character) === '{}' ||
-		JSON.stringify(get(dataIndex).weapon) === '{}';
+		JSON.stringify(get(dataIndex).weapon) === '{}' ||
+		JSON.stringify(get(dataIndex).achievementCategory) === '{}';
 
 	$: {
 		let characterIndex = $fetchCharacterDataIndex;
 		let weaponIndex = $fetchWeaponDataIndex;
-		if (characterIndex.status === 'success' && weaponIndex.status === 'success') {
+		let achievementCategoryIndex = $fetchAchievementCategoryDataIndex;
+
+		if (
+			characterIndex.isSuccess &&
+			weaponIndex.isSuccess &&
+			achievementCategoryIndex.isSuccess
+		) {
 			weaponIndex.data['Unknown3Star'] = { name: 'Unknown 3 star', rarity: 3, type: 'sword' };
 
 			dataIndex.set({
 				character: characterIndex.data,
-				weapon: weaponIndex.data
+				weapon: weaponIndex.data,
+				achievementCategory: achievementCategoryIndex.data
 			});
+
 			isLoading = false;
 		}
 	}

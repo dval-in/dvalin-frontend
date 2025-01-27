@@ -12,9 +12,8 @@
 	import DefaultLayout from '$lib/components/layout/DefaultLayout.svelte';
 	import { goto } from '$app/navigation';
 	import i18n from '$lib/services/i18n';
-	import type { PageData } from '../../../../.svelte-kit/types/src/routes/characters/[slug]/$types';
+	import type { PageData } from './$types';
 
-	/** @type {import('../../../../.svelte-kit/types/src/routes/characters/[slug]').PageData} */
 	export let data: PageData;
 
 	$: fetchCharacterData = data.backend.data.fetchCharacterData($i18n.language, data.characterKey);

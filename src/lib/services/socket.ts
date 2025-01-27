@@ -1,23 +1,20 @@
-// socketServer.ts
 import { io, Socket } from 'socket.io-client';
 import { get } from 'svelte/store';
 import { toast } from 'svelte-sonner';
 import { applicationState } from '$lib/store/application_state';
 import type { QueryClient } from '@tanstack/svelte-query';
 import i18n from '$lib/services/i18n';
-import { writable } from 'svelte/store';
 
-export const socketStore = writable<Socket | null>(null);
-
-export class SocketServer {
-	private socket: Socket;
+export default class SocketService {
+	private static instance: SocketService | undefined;
+	public socket: Socket;
 	private queryClient: QueryClient;
 
-	constructor(backendUrl: string, queryClient: QueryClient) {
+	private constructor(backendUrl: string, queryClient: QueryClient) {
 		this.socket = io(backendUrl, { withCredentials: true });
 		this.queryClient = queryClient;
+
 		this.setupEventListeners();
-		socketStore.set(this.socket);
 	}
 
 	private setupEventListeners() {
@@ -55,11 +52,19 @@ export class SocketServer {
 		}
 	};
 
-	public getSocket() {
-		return this.socket;
+	public static setupInstance(backendUrl: string, queryClient: QueryClient): SocketService {
+		if (this.instance === undefined) {
+			this.instance = new SocketService(backendUrl, queryClient);
+		}
+
+		return this.instance;
+	}
+
+	public static getInstance(): SocketService {
+		if (this.instance) {
+			return this.instance;
+		} else {
+			throw new Error('Initialize SocketService with Backendurl and QueryClient first');
+		}
 	}
 }
-
-export const createSocketServer = (backendUrl: string, queryClient: QueryClient) => {
-	return new SocketServer(backendUrl, queryClient);
-};
