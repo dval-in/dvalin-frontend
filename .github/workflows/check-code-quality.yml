@@ -26,7 +26,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install
       - name: Generate sveltekit types
-        run: svelte-kit sync
+        run: pnpm svelte-kit sync
       - name: Check TypeScript
         run: pnpm tsc
   check-prettier:
@@ -44,7 +44,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install
       - name: Generate sveltekit types
-        run: svelte-kit sync
+        run: pnpm svelte-kit sync
       - name: Check Prettier & Eslint
         run: pnpm run lint
   build:
