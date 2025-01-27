@@ -65,7 +65,7 @@
 </script>
 
 <DefaultLayout title={$i18n.t('wish.detailed.title.' + data.pageType)}>
-	<div class="flex flex-1 flex-col sm:flex-row sm:flex-wrap gap-4">
+	<div class="flex flex-1 flex-col gap-4 sm:flex-row sm:flex-wrap">
 		<div class="flex flex-col gap-4">
 			<div class="flex flex-row gap-2">
 				<InfoCell

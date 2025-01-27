@@ -193,7 +193,7 @@
 								class="h-4 w-4 rounded-full"
 								style:background-color={colorKeys.at(Number.parseInt(value) - 3)}
 							/>
-							<div class="text-xs text-surface-content/50">{value}</div>
+							<div class="text-surface-content/50 text-xs">{value}</div>
 						</div>
 					{/each}
 				</div>
@@ -204,9 +204,9 @@
 			<Tooltip.Header>
 				{'Total pulls: ' + (data.data['3'] + data.data['4'] + data.data['5'])}
 			</Tooltip.Header>
-			<div class="flex flex-col gap-2 justify-center items-start">
+			<div class="flex flex-col items-start justify-center gap-2">
 				{#each keys as key}
-					<div class="flex gap-1 justify-center items-center">
+					<div class="flex items-center justify-center gap-1">
 						<Icon
 							path={mdiStar}
 							class={`fill-[${colorKeys.at(Number.parseInt(key) - 3)}]`}
@@ -218,7 +218,7 @@
 		</Tooltip.Root>
 		<Tooltip.Root
 			anchor="top"
-			class="text-sm font-semibold bg-primary text-text-content leading-3 px-2 py-1 rounded whitespace-nowrap"
+			class="bg-primary text-text-content whitespace-nowrap rounded-sm px-2 py-1 text-sm font-semibold leading-3"
 			let:data
 			variant="none"
 			x="data"

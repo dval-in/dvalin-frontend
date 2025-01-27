@@ -13,15 +13,15 @@
 	export let rarity: string = '';
 </script>
 
-<a class="w-64 mx-2 my-2" href={link}>
+<a class="mx-2 my-2 w-64" href={link}>
 	<Root>
 		<Content>
 			<div
-				class="relative h-50 mx-4 mt-6 overflow-hidden text-text shadow-lg bg-clip-border rounded-xl bg-tertiary shadow-background/40"
+				class="h-50 text-text bg-tertiary shadow-background/40 relative mx-4 mt-6 overflow-hidden rounded-xl bg-clip-border shadow-lg"
 			>
 				<img alt={name} class="h-20 w-20" src={img} />
 				<h5
-					class="block mb-3 text-xl text-center antialiased font-semibold leading-snug tracking-normal text-text"
+					class="text-text mb-3 block text-center text-xl font-semibold leading-snug tracking-normal antialiased"
 				>
 					{name}
 					{hp}

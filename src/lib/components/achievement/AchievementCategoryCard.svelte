@@ -26,12 +26,12 @@
 
 <div
 	class={`
-	  ${isSelected ? 'border-2 border-primary' : 'hover:scale-105'}${
+	  ${isSelected ? 'border-primary border-2' : 'hover:scale-105'}${
 			inSidebar
-				? ' flex flex-row h-auto w-auto justify-between rounded-md py-3 bg-tertiary/30'
-				: ' flex flex-col w-full rounded-md h-full overflow-y-auto bg-tertiary/30'
+				? ' bg-tertiary/30 flex h-auto w-auto flex-row justify-between rounded-md py-3'
+				: ' bg-tertiary/30 flex h-full w-full flex-col overflow-y-auto rounded-md'
 		}
-	  transition-transform duration-300 ease-in-out cursor-pointer
+	  cursor-pointer transition-transform duration-300 ease-in-out
 	`}
 	on:click={handleClick}
 	on:keydown={handleKeydown}
@@ -40,22 +40,22 @@
 	aria-label={`${name} - ${achieved} out of ${total} achieved`}
 >
 	{#if inSidebar}
-		<div class="flex p-2 md:h-full justify-center">
-			<img alt={name} class="object-contain w-20 max-w-none md:w-auto md:h-20" src={img} />
+		<div class="flex justify-center p-2 md:h-full">
+			<img alt={name} class="w-20 max-w-none object-contain md:h-20 md:w-auto" src={img} />
 		</div>
-		<div class={'text-left w-full content-end mx-3 my-3'}>
-			<Text type="p" class="font-bold line-clamp-2 text-ellipsis overflow-hidden min-w-28">
+		<div class={'mx-3 my-3 w-full content-end text-left'}>
+			<Text type="p" class="line-clamp-2 min-w-28 overflow-hidden text-ellipsis font-bold">
 				{name}
 			</Text>
 			<Progress value={achieved} max={total} class="left" />
 		</div>
 	{:else}
-		<div class="flex flex-col p-3 text-center pb-0">
+		<div class="flex flex-col p-3 pb-0 text-center">
 			<div class={`flex justify-center`}>
-				<img alt={name} class="xl:w-36 xl:h-36" src={img} />
+				<img alt={name} class="xl:h-36 xl:w-36" src={img} />
 			</div>
 		</div>
-		<div class={'text-center justify-center content-end mx-3 my-3 mt-0'}>
+		<div class={'mx-3 my-3 mt-0 content-end justify-center text-center'}>
 			<Progress value={achieved} max={total} class="my-3" />
 			<Text type="h4">
 				{name}

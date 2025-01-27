@@ -246,11 +246,11 @@
 	</div>
 	<div class="flex flex-col md:flex-row">
 		{#if selectedCategory}
-			<ScrollArea class="md:w-1/3 p-4 w-full pl-0 md:h-screen" orientation="both">
-				<div class="flex flex-row md:flex-col gap-2">
+			<ScrollArea class="w-full p-4 pl-0 md:h-screen md:w-1/3" orientation="both">
+				<div class="flex flex-row gap-2 md:flex-col">
 					{#each filteredAchievementsCat as [category, achievementData]}
 						{#if achievementData}
-							<div class="md:mb-4 w-full">
+							<div class="w-full md:mb-4">
 								<AchievementCategoryCard
 									name={achievementData.name}
 									img={achievementData.image || ''}
@@ -266,9 +266,9 @@
 					{/each}
 				</div>
 			</ScrollArea>
-			<div class="md:w-3/4 p-4">
-				<div class="w-full flex flex-row-reverse flex-wrap gap-4 mb-4">
-					<Button class="p-2 bg-transparent" on:click={closeAchievementList}>
+			<div class="p-4 md:w-3/4">
+				<div class="mb-4 flex w-full flex-row-reverse flex-wrap gap-4">
+					<Button class="bg-transparent p-2" on:click={closeAchievementList}>
 						<X size={24} />
 					</Button>
 					<div class="flex flex-row items-center gap-2">
@@ -289,7 +289,7 @@
 							</svelte:fragment>
 							<svelte:fragment slot="dropdown-content">
 								<DropdownMenuItem
-									class="flex hover:bg-tertiary gap-2"
+									class="hover:bg-tertiary flex gap-2"
 									on:click={() => handleFilterChange(filterType, null)}
 								>
 									<Icon path={mdiFilter} />
@@ -307,7 +307,7 @@
 										{#each options as majorVersion}
 											<Tabs.Content value={majorVersion}>
 												<div
-													class="grid grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-3"
+													class="grid grid-cols-4 gap-3 sm:grid-cols-2 md:grid-cols-3"
 												>
 													{#each getVersionSubmenu(majorVersion) as minorVersion}
 														<Button
@@ -328,7 +328,7 @@
 								{:else}
 									{#each options as option}
 										<DropdownMenuItem
-											class="flex hover:bg-tertiary gap-2"
+											class="hover:bg-tertiary flex gap-2"
 											on:click={() => handleFilterChange(filterType, option)}
 										>
 											<Icon path={getFilterIcon(filterType)} />
@@ -366,7 +366,7 @@
 					<p>Loading achievements...</p>
 				{:else}
 					<div
-						class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4"
+						class="grid grid-cols-1 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5"
 					>
 						{#each filteredAchievementsCat as [category, achievementData]}
 							{#if achievementData}

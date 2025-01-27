@@ -11,10 +11,10 @@
 
 <Tooltip>
 	<TooltipTrigger
-		class={`flex flex-1 flex-col p-2 min-w-24 items-center justify-center gap-2 rounded-md text-center ${exportedClass}`}
+		class={`flex min-w-24 flex-1 flex-col items-center justify-center gap-2 rounded-md p-2 text-center ${exportedClass}`}
 	>
 		<Text type="h4">{title}</Text>
-		<div class="flex flex-wrap gap-2 justify-center">
+		<div class="flex flex-wrap justify-center gap-2">
 			<slot />
 		</div>
 	</TooltipTrigger>

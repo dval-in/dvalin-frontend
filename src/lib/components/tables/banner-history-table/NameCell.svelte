@@ -14,6 +14,6 @@
 </script>
 
 <div class="flex flex-1 items-center gap-2">
-	<img alt={'Image of ' + name} class="w-6 h-6 rounded-full" src={imgUrl} />
+	<img alt={'Image of ' + name} class="h-6 w-6 rounded-full" src={imgUrl} />
 	{name}
 </div>

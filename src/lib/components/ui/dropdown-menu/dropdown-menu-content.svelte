@@ -15,7 +15,7 @@
 <DropdownMenuPrimitive.Content
 	{...$$restProps}
 	class={cn(
-		'z-50 min-w-[8rem] rounded-md border bg-neutral p-1 text-text shadow-md focus:outline-none',
+		'bg-neutral text-text focus:outline-hidden z-50 min-w-[8rem] rounded-md border p-1 shadow-md',
 		className
 	)}
 	on:keydown
