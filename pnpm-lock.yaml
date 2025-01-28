@@ -45,8 +45,8 @@ importers:
         specifier: ^24.2.2
         version: 24.2.2(typescript@5.7.3)
       layerchart:
-        specifier: ^0.60.3
-        version: 0.60.3(svelte@4.2.19)(typescript@5.7.3)
+        specifier: ^0.81.0
+        version: 0.81.0(svelte@4.2.19)(typescript@5.7.3)
       lodash-es:
         specifier: ^4.17.21
         version: 4.17.21
@@ -1209,8 +1209,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
 
-  '@layerstack/svelte-actions@0.0.9':
-    resolution: {integrity: sha512-1mDXM7R0pT3pvQvXS479hN9tkn6M812Iip9M7BSorDTQcccGNVGU67aqLO5qded7CuzRnyeN2id5KcVU5zfY8A==}
+  '@layerstack/svelte-actions@0.0.11':
+    resolution: {integrity: sha512-sfplFX8rOBW74xjDCAY7QzHilvUGjFQTkfQXxUO6e68cKCHmxsSuTCtFbHRCfIUJCQ31gAbeY1xpWKnlVfgZ9g==}
 
   '@layerstack/svelte-stores@0.0.9':
     resolution: {integrity: sha512-5yyi7eV/2hOraw7wQgEObVR4s2/4T3G/GjGaZLR9BQH8mnsLuXw1n3k6rFT8NxiRvpEjWJ9l9ILOGc/XzFJb3g==}
@@ -3218,8 +3218,8 @@ packages:
       svelte: 3 - 5 || >=5.0.0-next.120
       typescript: ^5.0.2
 
-  layerchart@0.60.3:
-    resolution: {integrity: sha512-3CzEdDgPvFTWKzTNF5Wlv+xOGIAUhzbHCMgi6zAC8n99jKGpHkEUI06m8F4Jm93rJvJYirEBsrWK5hZWsNk90A==}
+  layerchart@0.81.0:
+    resolution: {integrity: sha512-9brCMt1Kl36Y3SJOeFY4wfBflS6/fH/n3w6dB+ykxaCGB3uxKMf20H4UXXzcS/2INir9q3Vbf00eOHNjnK236A==}
     peerDependencies:
       svelte: ^3.56.0 || ^4.0.0 || ^5.0.0
 
@@ -5980,7 +5980,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
-  '@layerstack/svelte-actions@0.0.9':
+  '@layerstack/svelte-actions@0.0.11':
     dependencies:
       '@floating-ui/dom': 1.6.13
       '@layerstack/utils': 0.0.7
@@ -8133,10 +8133,10 @@ snapshots:
       svelte: 4.2.19
       typescript: 5.7.3
 
-  layerchart@0.60.3(svelte@4.2.19)(typescript@5.7.3):
+  layerchart@0.81.0(svelte@4.2.19)(typescript@5.7.3):
     dependencies:
       '@dagrejs/dagre': 1.1.4
-      '@layerstack/svelte-actions': 0.0.9
+      '@layerstack/svelte-actions': 0.0.11
       '@layerstack/svelte-stores': 0.0.9
       '@layerstack/tailwind': 0.0.11
       '@layerstack/utils': 0.0.7
