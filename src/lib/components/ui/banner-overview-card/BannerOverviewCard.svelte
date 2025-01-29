@@ -51,7 +51,7 @@
 			: data.findIndex((wish) => wish.rarity === 4);
 </script>
 
-<Card class="flex flex-1 flex-col bg-tertiary rounded-md gap-3">
+<Card class="bg-tertiary flex flex-1 flex-col gap-3 rounded-md">
 	<CardHeader class="flex flex-row flex-wrap justify-between">
 		<div class="flex items-center gap-1">
 			<Icon path={icon} />

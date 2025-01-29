@@ -5,8 +5,10 @@ export default {
 	printWidth: 100,
 	endOfLine: 'lf',
 	tabWidth: 4,
-	plugins: ['prettier-plugin-svelte'],
 	htmlWhitespaceSensitivity: 'ignore',
+	plugins: ['prettier-plugin-svelte', 'prettier-plugin-tailwindcss'],
+	tailwindStylesheet: '.src/app.css',
+	tailwindConfig: './tailwind.config.ts',
 	overrides: [
 		{
 			files: '*.svelte',

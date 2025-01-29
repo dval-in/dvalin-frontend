@@ -30,7 +30,7 @@
 {#if paths.length > 0}
 	<Collapsible class="mt-3" open={isOpen}>
 		<CollapsibleTrigger
-			class={`flex ${isSidebarOpen ? '' : 'sm:max-xl:hidden'} flex-1 items-center justify-between mb-3`}
+			class={`flex ${isSidebarOpen ? '' : 'sm:max-xl:hidden'} mb-3 flex-1 items-center justify-between`}
 			on:click={toggleCollapsible}
 		>
 			<Text type="h3">{title}</Text>

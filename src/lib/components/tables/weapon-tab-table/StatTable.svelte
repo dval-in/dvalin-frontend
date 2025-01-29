@@ -8,7 +8,7 @@
 
 <Table.Root class="h-full overflow-auto">
 	<Table.Header>
-		<Table.Row class="p-2 border-b border-secondary/50">
+		<Table.Row class="border-secondary/50 border-b p-2">
 			<Table.Head class="p-2 px-4 font-bold">Asc</Table.Head>
 			<Table.Head class="p-2 px-4 font-bold">Level</Table.Head>
 			{#each Object.values(stats) as value}
@@ -22,7 +22,7 @@
 	</Table.Header>
 	<Table.Body class="h-full">
 		{#each ascensions as ascension, j}
-			<Table.Row class="p-2 border-y border-secondary/50">
+			<Table.Row class="border-secondary/50 border-y p-2">
 				<Table.Cell class="p-2 px-4">
 					<div class="flex flex-col">
 						<p>

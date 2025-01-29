@@ -30,7 +30,7 @@
 <DefaultLayout isLoading={$fetchCharacterData.status === 'pending'}>
 	{#if $fetchCharacterData.status === 'success'}
 		<section
-			class="grid grid-cols-1 gap-4 box-content lg:h-max lg:min-h-[40vh] lg:grid-cols-[14rem_1fr] lg:grid-flow-dense lg:grid-rows-[auto_minmax(0,1fr)]"
+			class="box-content grid grid-cols-1 gap-4 lg:h-max lg:min-h-[40vh] lg:grid-flow-dense lg:grid-cols-[14rem_1fr] lg:grid-rows-[auto_minmax(0,1fr)]"
 		>
 			<div class="flex items-center gap-2 lg:col-start-2">
 				<Button class="" on:click={goBack} variant="ghost" size="icon">
@@ -39,7 +39,7 @@
 				<Text class="text-primary" type="h1">{$fetchCharacterData.data.name}</Text>
 			</div>
 
-			<Card class="p-0 sm:p-0 relative lg:w-full lg:row-span-full lg:h-full">
+			<Card class="relative p-0 sm:p-0 lg:row-span-full lg:h-full lg:w-full">
 				<img
 					class="aspect-auto w-full rounded-lg object-contain object-center lg:hidden"
 					src={splash}
@@ -50,7 +50,7 @@
 					src={card}
 					alt="{$fetchCharacterData.data.name} Gacha Card"
 				/>
-				<div class="flex w-full justify-center absolute bottom-3 left-0">
+				<div class="absolute bottom-3 left-0 flex w-full justify-center">
 					{#each { length: $fetchCharacterData.data.rarity } as _}
 						<Icon
 							path={mdiStar}
@@ -66,9 +66,9 @@
 				<span class="font-bold">
 					{$fetchCharacterData.data.element} • {$fetchCharacterData.data.weaponType}
 				</span>
-				<div class="flex flex-row w-full gap-2 lg:row-start-3">
+				<div class="flex w-full flex-row gap-2 lg:row-start-3">
 					{#each defaultBuilds as build}
-						<Badge class="rounded bg-tertiary h-min p-2" variant="default">
+						<Badge class="bg-tertiary h-min rounded-sm p-2" variant="default">
 							{build.name}
 						</Badge>
 					{/each}
@@ -84,7 +84,7 @@
 		</section>
 		<!--Basic Character Details-->
 
-		<section class="flex flex-col w-full gap-4 box-border">
+		<section class="box-border flex w-full flex-col gap-4">
 			<span class="flex justify-between">
 				<Text type="h2">{$i18n.t('characters.detailed.category.builds.title')}</Text>
 				<Button

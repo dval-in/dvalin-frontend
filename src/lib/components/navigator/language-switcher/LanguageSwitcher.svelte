@@ -86,7 +86,7 @@
 <img
 	src={matchLocaleToFlag($i18n.language)}
 	alt="language switcher"
-	class={`flex rounded-full size-10 object-cover`}
+	class={`flex size-10 rounded-full object-cover`}
 	role="button"
 	on:click={openDialog}
 />
@@ -107,7 +107,7 @@
 			</Alert>
 		</a>
 
-		<div class="grid-cols-2 grid gap-4">
+		<div class="grid grid-cols-2 gap-4">
 			{#each languages as language}
 				<Button
 					variant="ghost"
@@ -117,7 +117,7 @@
 					<img
 						src={matchLocaleToFlag(language)}
 						alt="language switcher"
-						class={`flex rounded-full w-10 h-10 object-cover ${selectedLanguage === language ? 'border-primary border-4' : 'border-0'} transition-all`}
+						class={`flex h-10 w-10 rounded-full object-cover ${selectedLanguage === language ? 'border-primary border-4' : 'border-0'} transition-all`}
 					/>
 					<Text type="p">{$i18n.t('language.' + language)}</Text>
 				</Button>

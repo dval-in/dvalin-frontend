@@ -11,13 +11,13 @@
 	export let value: string = '';
 </script>
 
-<div class="flex items-center border-b px-2 gap-2" data-cmdk-input-wrapper="">
+<div class="flex items-center gap-2 border-b px-2" data-cmdk-input-wrapper="">
 	<Icon path={mdiMagnify} />
 	<CommandPrimitive.Input
 		{...$$restProps}
 		bind:value
 		class={cn(
-			'flex h-11 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50',
+			'outline-hidden placeholder:text-muted-foreground flex h-11 w-full rounded-md bg-transparent py-3 text-sm disabled:cursor-not-allowed disabled:opacity-50',
 			className
 		)}
 	/>

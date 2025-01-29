@@ -7,7 +7,7 @@
 
 <Table.Root class="h-full overflow-auto">
 	<Table.Header>
-		<Table.Row class="p-2 border-b border-secondary/50">
+		<Table.Row class="border-secondary/50 border-b p-2">
 			{#each ascensions[0].stats as stat, i}
 				<Table.Head class="p-2 px-4 font-bold">
 					{stat.label === 'Ascend' ? 'ASC' : stat.label.replace('Base ', '')}
@@ -20,7 +20,7 @@
 	</Table.Header>
 	<Table.Body class="h-full">
 		{#each ascensions.slice(1, 8) as ascension, j}
-			<Table.Row class="p-2 border-y border-secondary/50">
+			<Table.Row class="border-secondary/50 border-y p-2">
 				{#each ascension.stats as stat, i}
 					<Table.Cell class="p-2 px-4">
 						<div class="flex flex-col">

@@ -76,7 +76,7 @@
 	}
 </script>
 
-<form on:submit|preventDefault={handleSubmit} class="space-y-4 col-span-2 p-5">
+<form on:submit|preventDefault={handleSubmit} class="col-span-2 space-y-4 p-5">
 	{#if Object.keys(errors).length > 0}
 		<Alert variant="destructive" class="mt-4">
 			<AlertCircle class="h-4 w-4" />
@@ -90,7 +90,7 @@
 		<Label for="uid">UID</Label>
 		<Input type="number" id="uid" bind:value={user.uid} />
 		{#if errors.uid}
-			<p class="text-red-500 text-sm mt-1">{errors.uid}</p>
+			<p class="mt-1 text-sm text-red-500">{errors.uid}</p>
 		{/if}
 	</div>
 	<H3>Add configuration information (optional)</H3>
@@ -114,7 +114,7 @@
 
 	<div>
 		<Label for="language">Preferred Language</Label>
-		<div class="grid grid-cols-2 gap-2 mt-2">
+		<div class="mt-2 grid grid-cols-2 gap-2">
 			{#each languages as lang}
 				<Button
 					type="button"
@@ -122,7 +122,7 @@
 					class="flex items-center justify-start space-x-2"
 					on:click={() => (config.preferedLanguage = lang.code)}
 				>
-					<img src={lang.flag} alt={lang.name} class="w-6 h-4" />
+					<img src={lang.flag} alt={lang.name} class="h-4 w-6" />
 					<span>{lang.name}</span>
 				</Button>
 			{/each}
@@ -130,7 +130,7 @@
 	</div>
 
 	<div class="flex space-x-4">
-		<Button type="submit" class="flex-1 bg-primary text-primary-foreground">
+		<Button type="submit" class="bg-primary text-primary-foreground flex-1">
 			Complete Profile
 		</Button>
 	</div>

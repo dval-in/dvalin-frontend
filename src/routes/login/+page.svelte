@@ -49,14 +49,14 @@
 </script>
 
 <DefaultLayout title={$i18n.t('login.title')}>
-	<div class="flex flex-col sm:flex-row gap-6 items-start">
+	<div class="flex flex-col items-start gap-6 sm:flex-row">
 		<div class="flex-1 space-y-6">
 			{#each perks as perk}
 				<div class="flex items-center gap-4">
 					<Icon class="size-32" path={perk.icon} />
 					<div>
 						<h4 class="text-lg font-semibold">{$i18n.t(perk.title)}</h4>
-						<p class="text-sm text-muted-foreground">{$i18n.t(perk.description)}</p>
+						<p class="text-muted-foreground text-sm">{$i18n.t(perk.description)}</p>
 					</div>
 				</div>
 			{/each}

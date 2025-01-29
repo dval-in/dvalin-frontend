@@ -19,7 +19,7 @@
 	<slot />
 	{#if isClosing}
 		<button
-			class="absolute right-0 w-8 p-2 h-full rounded-full backdrop-brightness-[.60] flex items-center justify-center hover:backdrop-brightness-110"
+			class="absolute right-0 flex h-full w-8 items-center justify-center rounded-full p-2 backdrop-brightness-[.60] hover:backdrop-brightness-110"
 			on:click={onClose}
 		>
 			X

@@ -24,13 +24,13 @@
 
 <div
 	data-open={detailOpen}
-	class="data-[open=true]:hidden flex flex-col gap-4 h-full flex-shrink lg:overflow-auto"
+	class="flex h-full shrink flex-col gap-4 data-[open=true]:hidden lg:overflow-auto"
 >
-	<div class="flex flex-col gap-2 h-full">
+	<div class="flex h-full flex-col gap-2">
 		{#each skills as skill, i}
 			<Button
 				variant="ghost"
-				class="h-full flex flex-col items-start bg-tertiary"
+				class="bg-tertiary flex h-full flex-col items-start"
 				on:click={() => {
 					currentSkill = i;
 					detailOpen = true;
@@ -41,14 +41,14 @@
 			</Button>
 		{/each}
 	</div>
-	<div class="flex flex-1 flex-col gap-2 lg:flex-row lg:max-h-full">
+	<div class="flex flex-1 flex-col gap-2 lg:max-h-full lg:flex-row">
 		{#each passives as passive}
 			<Card
-				class="flex flex-col bg-neutral border-secondary h-full w-full lg:overflow-auto sm:p-0"
+				class="bg-neutral border-secondary flex h-full w-full flex-col sm:p-0 lg:overflow-auto"
 			>
 				<Collapsible class="h-full">
-					<CollapsibleTrigger class="flex flex-col w-full p-4 h-full">
-						<Text type="p" class="font-bold text-lg w-full">
+					<CollapsibleTrigger class="flex h-full w-full flex-col p-4">
+						<Text type="p" class="w-full text-lg font-bold">
 							{`${passive.level === 0 ? 'Utility Passive: ' : `A${passive.level}: `} ${passive.name}`}
 						</Text>
 						<CollapsibleContent>
@@ -65,7 +65,7 @@
 
 <Card
 	data-open={detailOpen}
-	class="data-[open=true]:flex flex-col justify-between h-full border-0 hidden px-4"
+	class="hidden h-full flex-col justify-between border-0 px-4 data-[open=true]:flex"
 >
 	<div class="flex flex-col gap-0">
 		<span class="flex justify-between">
@@ -83,26 +83,26 @@
 		</span>
 		<Text type="p">{skillTypes[currentSkill]}</Text>
 	</div>
-	<div class="flex flex-col gap-4 lg:items-start lg:flex-row lg:h-full lg:max-h-full lg:min-h-0">
-		<div class="lg:flex lg:flex-col lg:w-full lg:h-full">
-			<Table class="flex-1 border border-secondary lg:overflow-auto">
+	<div class="flex flex-col gap-4 lg:h-full lg:max-h-full lg:min-h-0 lg:flex-row lg:items-start">
+		<div class="lg:flex lg:h-full lg:w-full lg:flex-col">
+			<Table class="border-secondary flex-1 border lg:overflow-auto">
 				<TableBody>
 					{#each skills[currentSkill].attributes as attr}
 						<TableRow class="border-secondary">
 							<TableCell
-								class="py-1 px-2 font-bold border-r border-secondary text-sm"
+								class="border-secondary border-r px-2 py-1 text-sm font-bold"
 							>
 								{attr.label}
 							</TableCell>
-							<TableCell class="py-1 px-2 text-sm">
+							<TableCell class="px-2 py-1 text-sm">
 								{attr.values[talentLevels[currentSkill]]}
 							</TableCell>
 						</TableRow>
 					{/each}
 				</TableBody>
 			</Table>
-			<div class="p-4 w-full flex flex-col gap-3 justify-between lg:flex-row">
-				<Text type="p" class="font-bold size-base w-full">
+			<div class="flex w-full flex-col justify-between gap-3 p-4 lg:flex-row">
+				<Text type="p" class="size-base w-full font-bold">
 					Skill Attributes: (Level {talentLevels[currentSkill] + 1})
 				</Text>
 				<Slider
@@ -116,7 +116,7 @@
 			</div>
 		</div>
 
-		<div id="skill" class="lg:w-full lg:overflow-auto lg:h-full text-sm">
+		<div id="skill" class="text-sm lg:h-full lg:w-full lg:overflow-auto">
 			{skills[currentSkill].description}
 		</div>
 	</div>

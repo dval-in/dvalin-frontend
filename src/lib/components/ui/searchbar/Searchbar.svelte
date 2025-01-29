@@ -29,7 +29,7 @@
 </script>
 
 <IconButton
-	class="min-w-48 max-sm:flex-1 justify-start"
+	class="min-w-48 justify-start max-sm:flex-1"
 	icon={mdiMagnify}
 	on:click={opencmd}
 	variant="outline"
@@ -45,12 +45,12 @@
 			{#each searchableDataList as data}
 				<CommandItem
 					onSelect={() => redirectToPage(data.link)}
-					class="cursor-pointer hover:bg-primary hover:text-black"
+					class="hover:bg-primary cursor-pointer hover:text-black"
 				>
 					<img
 						src={data.img}
 						alt={encodeAltText(`Image of ${data.name}`)}
-						class="w-8 h-8 mr-2 rounded-full"
+						class="mr-2 h-8 w-8 rounded-full"
 					/>
 					{encodeAltText(data.name)}
 				</CommandItem>

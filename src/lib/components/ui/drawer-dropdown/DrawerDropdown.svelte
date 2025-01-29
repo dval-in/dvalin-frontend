@@ -15,7 +15,7 @@
 		<DropdownMenuTrigger>
 			<slot name="trigger" />
 		</DropdownMenuTrigger>
-		<DropdownMenuContent class="p-3 flex flex-col">
+		<DropdownMenuContent class="flex flex-col p-3">
 			<slot name="dropdown-content" />
 		</DropdownMenuContent>
 	</DropdownMenu>
@@ -24,7 +24,7 @@
 		<DrawerTrigger>
 			<slot name="trigger" />
 		</DrawerTrigger>
-		<DrawerContent class="px-3 pb-3 flex flex-col">
+		<DrawerContent class="flex flex-col px-3 pb-3">
 			<slot name="drawer-content" />
 		</DrawerContent>
 	</Drawer>
