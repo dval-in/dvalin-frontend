@@ -175,6 +175,8 @@
 		"action.reset_filters": "Zresetuj filtry",
 		"filter.element": "Element",
 		"filter.weapon": "Broń",
+		"filter.rarity": "Rarity",
+		"filter.ownership": "Ownership",
 		"sort.rarity": "Rzadkość",
 		"sort.name": "Imię",
 		"sort.count": "Ilość",
