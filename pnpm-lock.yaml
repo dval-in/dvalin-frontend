@@ -45,8 +45,8 @@ importers:
         specifier: ^24.2.2
         version: 24.2.2(typescript@5.7.3)
       layerchart:
-        specifier: ^0.81.3
-        version: 0.81.3(svelte@4.2.19)(typescript@5.7.3)
+        specifier: ^0.91.1
+        version: 0.91.1(svelte@4.2.19)(typescript@5.7.3)
       lodash-es:
         specifier: ^4.17.21
         version: 4.17.21
@@ -2654,8 +2654,8 @@ packages:
   fast-uri@3.0.6:
     resolution: {integrity: sha512-Atfo14OibSv5wAp4VWNsFYE1AchQRTv9cBGWET4pZWHzYshFSS9NQI6I57rdKn9croWVMbYFbLhJ+yJvmZIIHw==}
 
-  fastq@1.18.0:
-    resolution: {integrity: sha512-QKHXPW0hD8g4UET03SdOdunzSouc9N4AuHdsX8XNcTsuz+yYFILVNIX4l9yHABMhiEI9Db0JTTIpu0wB+Y1QQw==}
+  fastq@1.19.0:
+    resolution: {integrity: sha512-7SFSRCNjBQIZH/xZR3iy5iQYR8aGBE0h3VG6/cwlbrpdciNYBMotQav8c1XI3HjHH+NikUpP53nPdlZSdWmFzA==}
 
   fdir@6.4.3:
     resolution: {integrity: sha512-PMXmW2y1hDDfTSRc9gaXIuCCRpuoz3Kaz8cUelp3smouvfT632ozg2vrT6lJsHKKOF59YLbOGfAWGUcKEfRMQw==}
@@ -3218,8 +3218,8 @@ packages:
       svelte: 3 - 5 || >=5.0.0-next.120
       typescript: ^5.0.2
 
-  layerchart@0.81.3:
-    resolution: {integrity: sha512-eRVSQqOZ6oZXRVybAXq5t2bE1YHFpAbGW9E+loGJFSBI+vQIv45UQK2F/xIShkKDvzBbevuihlN2Ay2MiHn3Zw==}
+  layerchart@0.91.1:
+    resolution: {integrity: sha512-Nsdv/5ZkzVZUvlyBZk/dAAy9CM5Mckp/mqMhYcvcdCugH2ZXiNJkEAXy1SEtvilNp30cKVxyJotx/gT9E1jVZA==}
     peerDependencies:
       svelte: ^3.56.0 || ^4.0.0 || ^5.0.0
 
@@ -6039,7 +6039,7 @@ snapshots:
   '@nodelib/fs.walk@1.2.8':
     dependencies:
       '@nodelib/fs.scandir': 2.1.5
-      fastq: 1.18.0
+      fastq: 1.19.0
 
   '@parcel/watcher-android-arm64@2.5.1':
     optional: true
@@ -7573,7 +7573,7 @@ snapshots:
 
   fast-uri@3.0.6: {}
 
-  fastq@1.18.0:
+  fastq@1.19.0:
     dependencies:
       reusify: 1.0.4
 
@@ -8133,7 +8133,7 @@ snapshots:
       svelte: 4.2.19
       typescript: 5.7.3
 
-  layerchart@0.81.3(svelte@4.2.19)(typescript@5.7.3):
+  layerchart@0.91.1(svelte@4.2.19)(typescript@5.7.3):
     dependencies:
       '@dagrejs/dagre': 1.1.4
       '@layerstack/svelte-actions': 0.0.11
