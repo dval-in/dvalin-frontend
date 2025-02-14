@@ -13,12 +13,12 @@
 </script>
 
 <div
-	class="relative flex flex-col w-full rounded-md hover:scale-105 transition-transform duration-300 ease-in-out"
+	class="relative flex w-full flex-col rounded-md transition-transform duration-300 ease-in-out hover:scale-105"
 >
 	{#if location !== ''}
-		<div class="absolute z-[4] -right-2 -top-2">
+		<div class="absolute -right-2 -top-2 z-[4]">
 			<img
-				class="bg-neutral/70 size-10 rounded-full border-solid border-white/70 border"
+				class="bg-neutral/70 size-10 rounded-full border border-solid border-white/70"
 				alt={location}
 				src={S3Service.getCharacter(location).icon}
 			/>
@@ -26,28 +26,28 @@
 	{/if}
 
 	<div
-		class="absolute z-[4] top-1 left-1 size-6 bg-neutral/60 rounded-sm text-center
-            flex flex-row justify-center items-center
+		class="bg-neutral/60 rounded-xs absolute left-1 top-1 z-[4] flex size-6
+            flex-row items-center justify-center text-center
             {refinement === 5 ? `text-primary bg-fivestar/60` : `text-text`} "
 	>
-		<p class="max-h-full text-xl leading-5 font-semibold">
+		<p class="max-h-full text-xl font-semibold leading-5">
 			{refinement}
 		</p>
 	</div>
 
 	<div
-		class={`rounded-t-md flex justify-center ${rarity === 5 ? 'bg-fivestar' : rarity === 4 ? 'bg-fourstar' : 'bg-threestar'}`}
+		class={`flex justify-center rounded-t-md ${rarity === 5 ? 'bg-fivestar' : rarity === 4 ? 'bg-fourstar' : 'bg-threestar'}`}
 	>
 		<img alt={name} class="size-24 xl:size-36" src={img} />
 	</div>
 
-	<div class="w-full h-6 bg-tertiaryHover flex justify-center text-center items-center py-0">
+	<div class="bg-tertiaryHover flex h-6 w-full items-center justify-center py-0 text-center">
 		<Text type="large">
 			Lv. {level}
 		</Text>
 	</div>
 
-	<div class="flex flex-1 justify-center p-2 text-center bg-tertiary items-center rounded-b-md">
+	<div class="bg-tertiary flex flex-1 items-center justify-center rounded-b-md p-2 text-center">
 		<Text type="h4">
 			{name}
 		</Text>

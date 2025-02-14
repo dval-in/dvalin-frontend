@@ -17,7 +17,7 @@
 <TooltipPrimitive.Content
 	{...$$restProps}
 	class={cn(
-		'z-50 overflow-hidden rounded-md border bg-neutral px-3 py-1.5 text-sm text-popover-foreground shadow-md',
+		'bg-neutral text-popover-foreground z-50 overflow-hidden rounded-md border px-3 py-1.5 text-sm shadow-md',
 		className
 	)}
 	{sideOffset}

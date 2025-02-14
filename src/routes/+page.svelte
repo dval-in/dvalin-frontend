@@ -396,7 +396,7 @@
 	</svelte:fragment>
 	<div>
 		<div
-			class="h-fit [column-count:auto] [column-width:370px] gap-2 [&>div:not(:first-child)]:mt-2 [&>div]:break-inside-avoid"
+			class="h-fit gap-2 [column-count:auto] [column-width:370px] [&>div:not(:first-child)]:mt-2 [&>div]:break-inside-avoid"
 		>
 			{#each dragDropList as Widget}
 				{#if Widget.check === `${$i18n.t('dashboard.widget.changelog.title')}` && Widget.checked == true}
@@ -411,8 +411,8 @@
 						</CardHeader>
 						<CardContent class="whitespace-pre-line">
 							<Text type="p">{changeLog}</Text>
-						</CardContent>
-						<CardFooter class="items-end justify-end mt-2.5">
+            </CardContent>
+						<CardFooter class="mt-2.5 items-end justify-end">
 							<Button>{$i18n.t('action.more')}</Button>
 						</CardFooter>
 					</Card>
@@ -573,10 +573,10 @@
 								{$i18n.t('dashboard.widget.events.version')}
 								{currentVer}
 							</Text>
-							<div class="flex flex-col gap-1.5 mt-2">
+							<div class="mt-2 flex flex-col gap-1.5">
 								<!-- TODO: get localized event names -->
 								<div
-									class="flex flex-row justify-between bg-neutral rounded-md py-3 px-2"
+									class="bg-neutral flex flex-row justify-between rounded-md px-2 py-3"
 								>
 									<Text type="p">{mockEvent.name}</Text>
 									<Text type="p">
@@ -595,7 +595,7 @@
 									</Text>
 								</div>
 								<div
-									class="flex flex-row justify-between bg-neutral rounded-md py-3 px-2"
+									class="bg-neutral flex flex-row justify-between rounded-md px-2 py-3"
 								>
 									<Text type="p">{mockEvent.name}</Text>
 									<Text type="p">
@@ -614,7 +614,7 @@
 									</Text>
 								</div>
 								<div
-									class="flex flex-row justify-between bg-neutral rounded-md py-3 px-2"
+									class="bg-neutral flex flex-row justify-between rounded-md px-2 py-3"
 								>
 									<Text type="p">{mockEvent.name}</Text>
 									<Text type="p">
@@ -633,7 +633,7 @@
 									</Text>
 								</div>
 								<div
-									class="flex flex-row justify-between bg-neutral rounded-md py-3 px-2"
+									class="bg-neutral flex flex-row justify-between rounded-md px-2 py-3"
 								>
 									<Text type="p">{mockEvent.name}</Text>
 									<Text type="p">
@@ -709,14 +709,14 @@
 							</div>
 							<Progress value={totalAchieved} max={totalAchievements} class="mt-1.5"
 							></Progress>
-							<div class="flex flex-col gap-1.5 justify-between">
+							<div class="flex flex-col justify-between gap-1.5">
 								<Text type="p">
 									{$i18n.t('dashboard.widget.achievements.latest')}:
 								</Text>
 								<div class="flex flex-col gap-2">
 									{#each topFiveUniqueAchievements as achievement}
 										<div
-											class="flex flex-col justify-between bg-neutral rounded-md py-3 px-2 relative"
+											class="bg-neutral relative flex flex-col justify-between rounded-md px-2 py-3"
 										>
 											<Icon
 												path={mdiCheckAll}
@@ -744,7 +744,7 @@
 				{#if Widget.check === `${$i18n.t('dashboard.widget.pity.title')}` && Widget.checked == true}<!-- Pity card -->
 					<Card class=" flex flex-col gap-5">
 						<CardHeader>
-							<CardTitle class="flex flex-row justify-between items-center">
+							<CardTitle class="flex flex-row items-center justify-between">
 								<Text type="h4">{$i18n.t('dashboard.widget.pity.title')}</Text>
 								<Button href="wish-statistics/overview">
 									{$i18n.t('wish.overview.title')}
@@ -752,10 +752,10 @@
 							</CardTitle>
 						</CardHeader>
 						<CardContent>
-							<div class="flex justify-between *:py-[5%] *:px-[8%] *:bg-neutral">
+							<div class="*:bg-neutral flex justify-between *:px-[8%] *:py-[5%]">
 								<!-- char -->
 								<div
-									class="flex flex-col gap-3 justify-center items-center rounded-md"
+									class="flex flex-col items-center justify-center gap-3 rounded-md"
 								>
 									<Icon path={mdiAccount} />
 									<div class="flex gap-4 font-semibold">
@@ -773,7 +773,7 @@
 								</div>
 								<!-- weap -->
 								<div
-									class="flex flex-col gap-3 justify-center items-center rounded-md"
+									class="flex flex-col items-center justify-center gap-3 rounded-md"
 								>
 									<Icon path={mdiSwordCross} />
 									<div class="flex gap-4 font-semibold">
@@ -791,7 +791,7 @@
 								</div>
 								<!-- standard -->
 								<div
-									class="flex flex-col gap-3 justify-center items-center rounded-md"
+									class="flex flex-col items-center justify-center gap-3 rounded-md"
 								>
 									<Icon path={mdiInfinity} />
 									<div class="flex gap-4 font-semibold">
@@ -814,7 +814,7 @@
 					<!-- Wish card -->
 					<Card class=" flex flex-col gap-5">
 						<CardHeader>
-							<CardTitle class="flex justify-between items-center">
+							<CardTitle class="flex items-center justify-between">
 								<Text type="h4">{$i18n.t('dashboard.widget.wishing.title')}</Text>
 								<Button href="wish-statistics/overview">
 									{$i18n.t('action.more')}
@@ -824,10 +824,10 @@
 						<CardContent class="flex flex-col gap-3">
 							<!-- pity -->
 							<Text type="large">{$i18n.t('dashboard.widget.wishing.pity')}</Text>
-							<div class="flex justify-between *:py-[5%] *:px-[8%] *:bg-neutral">
+							<div class="*:bg-neutral flex justify-between *:px-[8%] *:py-[5%]">
 								<!-- char -->
 								<div
-									class="flex flex-col gap-3 justify-center items-center rounded-md"
+									class="flex flex-col items-center justify-center gap-3 rounded-md"
 								>
 									<Icon path={mdiAccount} />
 									<div class="flex gap-4 font-semibold">
@@ -845,7 +845,7 @@
 								</div>
 								<!-- weap -->
 								<div
-									class="flex flex-col gap-3 justify-center items-center rounded-md"
+									class="flex flex-col items-center justify-center gap-3 rounded-md"
 								>
 									<Icon path={mdiSwordCross} />
 									<div class="flex gap-4 font-semibold">
@@ -863,7 +863,7 @@
 								</div>
 								<!-- standard -->
 								<div
-									class="flex flex-col gap-3 justify-center items-center rounded-md"
+									class="flex flex-col items-center justify-center gap-3 rounded-md"
 								>
 									<Icon path={mdiInfinity} />
 									<div class="flex gap-4 font-semibold">
@@ -882,7 +882,7 @@
 							</div>
 							<!-- total pulls -->
 							<div
-								class="flex justify-between items-center bg-neutral pl-3 rounded-md"
+								class="bg-neutral flex items-center justify-between rounded-md pl-3"
 							>
 								<Text type="large">
 									{$i18n.t('dashboard.widget.wishing.total')}
@@ -900,7 +900,7 @@
 								<Text type="large">
 									{$i18n.t('dashboard.widget.wishing.latest')}
 								</Text>
-								<div class="flex flex-row flex-wrap gap-3 mt-2">
+								<div class="mt-2 flex flex-row flex-wrap gap-3">
 									{#each getLatestWishes($userProfile, 6) as wish}
 										<PullChip
 											name={wish.key}
@@ -928,7 +928,7 @@
 							</CardTitle>
 						</CardHeader>
 						<CardContent>
-							<div class="flex flex-row justify-around mt-2">
+							<div class="mt-2 flex flex-row justify-around">
 								<CharCard
 									link={displayed_character.link}
 									name={displayed_character.name}
@@ -960,7 +960,7 @@
 					<!-- Global wishing stats -->
 					<Card class=" flex flex-col gap-5">
 						<CardHeader>
-							<CardTitle class="flex justify-between items-center">
+							<CardTitle class="flex items-center justify-between">
 								<Text type="h4">
 									{$i18n.t('dashboard.widget.global_wishing.title')}
 								</Text>
@@ -970,7 +970,7 @@
 							<div class="flex flex-row justify-around">
 								<div class="flex flex-col items-center">
 									<img
-										class="w-32 h-44"
+										class="h-44 w-32"
 										src={card}
 										alt="{currentGachaFirst.name} Gacha Card"
 									/>
@@ -992,7 +992,7 @@
 								</div>
 								<div class="flex flex-col items-center">
 									<img
-										class="w-32 h-44"
+										class="h-44 w-32"
 										src={card}
 										alt="{currentGachaSecond.name} Gacha Card"
 									/>
@@ -1028,21 +1028,21 @@
 					<!-- Resin tracker  -->
 					<Card class=" flex flex-col gap-5">
 						<CardHeader>
-							<CardTitle class="flex justify-between items-center">
+							<CardTitle class="flex items-center justify-between">
 								<Text type="h4">{$i18n.t('dashboard.widget.resin.title')}</Text>
 							</CardTitle>
 						</CardHeader>
 						<CardContent class="flex flex-col gap-3">
 							<div class="flex flex-row items-center justify-center gap-4">
-								<img class="w-8 h-8" src="" alt="Resin Icon" />
+								<img class="h-8 w-8" src="" alt="Resin Icon" />
 								<Text type="large">
 									<Input
 										type="number"
-										class="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none
-										w-12 h-5 border-none text-lg font-semibold inline text-right p-0 pl-1 rounded-none pb-1
-										hover:border-solid hover:border-0 hover:border-b-2 hover:border-text/30
-										focus-visible:border-solid focus-visible:border-0 focus-visible:border-b-2 focus-visible:border-text/30
-										focus-visible:ring-0 focus-visible:ring-offset-0"
+										class="hover:border-text/30 focus-visible:border-text/30 inline
+										h-5 w-12 rounded-none border-none p-0 pb-1 pl-1 text-right text-lg font-semibold [appearance:textfield]
+										hover:border-0 hover:border-b-2 hover:border-solid focus-visible:border-0
+										focus-visible:border-b-2 focus-visible:border-solid focus-visible:ring-0 focus-visible:ring-offset-0
+										[&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
 										bind:value={currentResin}
 										on:input={() => ResinCounter.HandleInput()}
 									/>/{maxResin}
@@ -1075,7 +1075,7 @@
 								</Button>
 								<Button
 									on:click={() => ResinCounter.increaseResin(60)}
-									class="rounded-r-md rounded-l-none"
+									class="rounded-l-none rounded-r-md"
 								>
 									+60
 								</Button>

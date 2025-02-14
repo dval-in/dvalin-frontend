@@ -7,6 +7,7 @@
 		mdiFilter,
 		mdiFilterOutline,
 		mdiFilterRemove,
+		mdiNumeric,
 		mdiSortAscending,
 		mdiSortDescending,
 		mdiSpear,
@@ -14,8 +15,7 @@
 		mdiSword,
 		mdiSwordCross,
 		mdiTagCheck,
-		mdiTagHidden,
-		mdiNumeric
+		mdiTagHidden
 	} from '@mdi/js';
 	import Searchbar from '$lib/components/ui/searchbar/Searchbar.svelte';
 	import S3Service from '$lib/services/s3';
@@ -214,21 +214,21 @@
 			</svelte:fragment>
 			<svelte:fragment slot="dropdown-content">
 				<DropdownMenuItem
-					class="flex hover:bg-tertiary gap-2"
+					class="hover:bg-tertiary flex gap-2"
 					on:click={() => setSortStore('Name')}
 				>
 					<Icon path={mdiAlphabetical} />
 					{$i18n.t('sort.name')}
 				</DropdownMenuItem>
 				<DropdownMenuItem
-					class="flex hover:bg-tertiary gap-2"
+					class="hover:bg-tertiary flex gap-2"
 					on:click={() => setSortStore('Count')}
 				>
 					<Icon path={mdiNumeric} />
 					{$i18n.t('sort.count')}
 				</DropdownMenuItem>
 				<DropdownMenuItem
-					class="flex hover:bg-tertiary gap-2"
+					class="hover:bg-tertiary flex gap-2"
 					on:click={() => setSortStore('Rarity')}
 				>
 					<Icon path={mdiStar} />
@@ -236,23 +236,23 @@
 				</DropdownMenuItem>
 			</svelte:fragment>
 			<svelte:fragment slot="drawer-content">
-				<div class="flex flex-col p-3 text-lg gap-4">
+				<div class="flex flex-col gap-4 p-3 text-lg">
 					<button
-						class="flex hover:bg-tertiary gap-2"
+						class="hover:bg-tertiary flex gap-2"
 						on:click={() => setSortStore('Name')}
 					>
 						<Icon path={mdiAlphabetical} />
 						{$i18n.t('sort.name')}
 					</button>
 					<button
-						class="flex hover:bg-tertiary gap-2"
+						class="hover:bg-tertiary flex gap-2"
 						on:click={() => setSortStore('Count')}
 					>
 						<Icon path={mdiNumeric} />
 						{$i18n.t('sort.count')}
 					</button>
 					<button
-						class="flex hover:bg-tertiary gap-2"
+						class="hover:bg-tertiary flex gap-2"
 						on:click={() => setSortStore('Rarity')}
 					>
 						<Icon path={mdiStar} />
@@ -322,7 +322,7 @@
 								? $checkedStore['rarity5']
 								: false}
 						>
-							<Icon path={mdiStar} class={`!size-7 !fill-fivestar`} />
+							<Icon path={mdiStar} class={`!fill-fivestar !size-7`} />
 						</Toggle>
 					</DropdownMenuItem>
 					<DropdownMenuItem
@@ -337,7 +337,7 @@
 								? $checkedStore['rarity4']
 								: false}
 						>
-							<Icon path={mdiStar} class={`!size-7 !fill-fourstar`} />
+							<Icon path={mdiStar} class={`!fill-fourstar !size-7`} />
 						</Toggle>
 					</DropdownMenuItem>
 					<DropdownMenuItem
@@ -352,7 +352,7 @@
 								? $checkedStore['rarity3']
 								: false}
 						>
-							<Icon path={mdiStar} class={`!size-7 !fill-threestar`} />
+							<Icon path={mdiStar} class={`!fill-threestar !size-7`} />
 						</Toggle>
 					</DropdownMenuItem>
 				</DropdownMenuGroup>
@@ -417,7 +417,7 @@
 							{#each weapons as { name, icon }}
 								<button
 									type="button"
-									class="p-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+									class="focus:outline-hidden focus:ring-primary p-2 focus:ring-2 focus:ring-offset-2"
 									aria-pressed={$checkedStore[name] || false}
 									on:click={() => {
 										setFilterStore('weapon', name);
@@ -446,7 +446,7 @@
 						<div class="flex gap-2" role="group" aria-label="Rarity filters">
 							<button
 								type="button"
-								class="p-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+								class="focus:outline-hidden focus:ring-primary p-2 focus:ring-2 focus:ring-offset-2"
 								aria-pressed={$checkedStore['rarity5'] || false}
 								on:click={() => {
 									setFilterStore('rarity', 5);
@@ -460,12 +460,12 @@
 								}}
 							>
 								<Toggle pressed={$checkedStore['rarity5'] || false}>
-									<Icon path={mdiStar} class={`!size-7 !fill-fivestar`} />
+									<Icon path={mdiStar} class={`!fill-fivestar !size-7`} />
 								</Toggle>
 							</button>
 							<button
 								type="button"
-								class="p-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+								class="focus:outline-hidden focus:ring-primary p-2 focus:ring-2 focus:ring-offset-2"
 								aria-pressed={$checkedStore['rarity4'] || false}
 								on:click={() => {
 									setFilterStore('rarity', 4);
@@ -479,12 +479,12 @@
 								}}
 							>
 								<Toggle pressed={$checkedStore['rarity4'] || false}>
-									<Icon path={mdiStar} class={`!size-7 !fill-fourstar`} />
+									<Icon path={mdiStar} class={`!fill-fourstar !size-7`} />
 								</Toggle>
 							</button>
 							<button
 								type="button"
-								class="p-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+								class="focus:outline-hidden focus:ring-primary p-2 focus:ring-2 focus:ring-offset-2"
 								aria-pressed={$checkedStore['rarity4'] || false}
 								on:click={() => {
 									setFilterStore('rarity', 3);
@@ -498,7 +498,7 @@
 								}}
 							>
 								<Toggle pressed={$checkedStore['rarity3'] || false}>
-									<Icon path={mdiStar} class={`!size-7 !fill-threestar`} />
+									<Icon path={mdiStar} class={`!fill-threestar !size-7`} />
 								</Toggle>
 							</button>
 						</div>
@@ -512,7 +512,7 @@
 						<div class="flex gap-2" role="group" aria-label="Ownership filters">
 							<button
 								type="button"
-								class="p-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+								class="focus:outline-hidden focus:ring-primary p-2 focus:ring-2 focus:ring-offset-2"
 								aria-pressed={$checkedStore['owned'] || false}
 								on:click={() => {
 									setFilterStore('owned', true);
@@ -531,7 +531,7 @@
 							</button>
 							<button
 								type="button"
-								class="p-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+								class="focus:outline-hidden focus:ring-primary p-2 focus:ring-2 focus:ring-offset-2"
 								aria-pressed={$checkedStore['notowned'] || false}
 								on:click={() => {
 									setFilterStore('owned', false);
@@ -555,7 +555,7 @@
 		</DrawerDropdown>
 	</svelte:fragment>
 	<div
-		class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 peer-aria-selected: gap-4"
+		class="peer-aria-selected: grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7"
 	>
 		{#each $sortedWeaponStore as weapon}
 			<WeapCard

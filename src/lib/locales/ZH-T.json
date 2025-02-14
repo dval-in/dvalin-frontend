@@ -175,6 +175,8 @@
 		"action.reset_filters": "重設過濾器",
 		"filter.element": "元素",
 		"filter.weapon": "武器",
+		"filter.rarity": "Rarity",
+		"filter.ownership": "Ownership",
 		"sort.rarity": "Rarity",
 		"sort.name": "名稱",
 		"sort.count": "Count",

@@ -41,7 +41,7 @@
 <DefaultLayout isLoading={$fetchWeaponData.status === 'pending'}>
 	{#if $fetchWeaponData.status === 'success'}
 		<section
-			class="grid grid-cols-1 gap-4 box-content lg:h-max lg:min-h-[40vh] lg:grid-cols-[14rem_1fr] lg:grid-flow-dense lg:grid-rows-[auto_minmax(0,1fr)]"
+			class="box-content grid grid-cols-1 gap-4 lg:h-max lg:min-h-[40vh] lg:grid-flow-dense lg:grid-cols-[14rem_1fr] lg:grid-rows-[auto_minmax(0,1fr)]"
 		>
 			<div class="flex items-center gap-2 lg:col-start-2">
 				<Button class="" on:click={goBack} variant="ghost" size="icon">
@@ -50,13 +50,13 @@
 				<Text class="text-primary" type="h1">{$fetchWeaponData.data.name}</Text>
 			</div>
 
-			<Card class="p-0 sm:p-0 relative lg:w-full lg:row-span-full lg:h-full">
+			<Card class="relative p-0 sm:p-0 lg:row-span-full lg:h-full lg:w-full">
 				<img
 					class="aspect-auto h-full w-full rounded-lg object-contain object-center"
 					src={card}
 					alt="{$fetchWeaponData.data.name} Card"
 				/>
-				<div class="flex w-full justify-center absolute bottom-3 left-0">
+				<div class="absolute bottom-3 left-0 flex w-full justify-center">
 					{#each { length: $fetchWeaponData.data.rarity } as _}
 						<Icon
 							path={mdiStar}
@@ -83,7 +83,7 @@
 		</section>
 		<Text type="h2">{$i18n.t('weapons.title.inventory')}</Text>
 		<div
-			class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 gap-4"
+			class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7"
 		>
 			{#each ownedWeapon as weapon}
 				<!-- Need to decide on different img depending on ascencion -->

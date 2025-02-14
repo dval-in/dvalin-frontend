@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { applicationState } from '$lib/store/application_state';
-	import '../app.pcss';
+	import '../app.css';
 	import Sidebar from '$lib/components/navigator/Sidebar.svelte';
 	import { get } from 'svelte/store';
 	import { Toaster } from 'svelte-sonner';
@@ -8,10 +8,12 @@
 	import { pwaAssetsHead } from 'virtual:pwa-assets/head';
 	import { QueryClientProvider } from '@tanstack/svelte-query';
 	import { userProfile } from '$lib/store/user_profile';
-	import DefaultLayout from '$lib/components/layout/DefaultLayout.svelte';
 	import { dataIndex } from '$lib/store/index_store';
 	import type { LayoutData } from './$types';
 	import { onMount } from 'svelte';
+	import Loading from '$lib/components/ui/loading/Loading.svelte';
+	import Text from '$lib/components/typography/Text.svelte';
+	import { Progress } from '$lib/components/ui/progress';
 	import i18n from '$lib/services/i18n';
 
 	export let data: LayoutData;
@@ -28,12 +30,13 @@
 		JSON.stringify(get(dataIndex).character) === '{}' ||
 		JSON.stringify(get(dataIndex).weapon) === '{}' ||
 		JSON.stringify(get(dataIndex).achievementCategory) === '{}';
+  let progress = 0;
 
 	$: {
 		let characterIndex = $fetchCharacterDataIndex;
 		let weaponIndex = $fetchWeaponDataIndex;
 		let achievementCategoryIndex = $fetchAchievementCategoryDataIndex;
-
+    progress = +characterIndex.isSuccess + +weaponIndex.isSuccess;
 		if (
 			characterIndex.isSuccess &&
 			weaponIndex.isSuccess &&
@@ -54,10 +57,14 @@
 	onMount(() => {
 		document.body.classList.add(get(applicationState).settings.theme);
 
-		applicationState.subscribe((a) => {
+		const unsub = applicationState.subscribe((a) => {
 			document.body.classList.remove(...['light', 'dark']);
 			document.body.classList.add(a.settings.theme);
 		});
+
+		return () => {
+			unsub();
+		};
 	});
 
 	console.log(get(applicationState));
@@ -78,13 +85,17 @@
 	<div class={`bg-neutral text-text min-h-screen`}>
 		<div class="min-h-screen" id="main">
 			{#if isLoading}
-				<div class="flex flex-1 flex-row justify-center items-center min-h-screen">
-					<DefaultLayout isLoading={true} />
+				<div
+					class="flex min-h-screen flex-1 flex-col items-center justify-center gap-3 p-10"
+				>
+					<Loading />
+					<Text type="h3">Loading resources...</Text>
+					<Progress value={progress} max={2} />
 				</div>
 			{:else}
 				<Sidebar />
 				<!--  Main content-->
-				<div class="sm:pl-20 xl:pl-72 max-sm:pt-16 sm:flex sm:justify-center min-h-screen">
+				<div class="min-h-screen max-sm:pt-16 sm:flex sm:justify-center sm:pl-20 xl:pl-72">
 					<slot />
 				</div>
 				<Toaster richColors />

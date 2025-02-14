@@ -10,7 +10,7 @@
 
 <div
 	{...$$restProps}
-	class={cn('rounded-lg border bg-tertiary text-text shadow-sm p-2 sm:p-4 gap-2', className)}
+	class={cn('bg-tertiary text-text shadow-xs gap-2 rounded-lg border p-2 sm:p-4', className)}
 >
 	<slot />
 </div>

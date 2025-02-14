@@ -12,16 +12,16 @@
 </script>
 
 <a
-	class="flex flex-col w-full rounded-md overflow-hidden hover:scale-105 transition-transform duration-300 ease-in-out"
+	class="flex w-full flex-col overflow-hidden rounded-md transition-transform duration-300 ease-in-out hover:scale-105"
 	href={link}
 >
 	<div
 		class={`flex justify-center ${rarity === 5 ? 'bg-fivestar' : rarity === 4 ? 'bg-fourstar' : 'bg-threestar'} ${obtained ? '' : 'opacity-50'} relative`}
 	>
-		<img alt={name} class="w-24 h-24 xl:w-36 xl:h-36" src={img} />
-		<span class="absolute bg-black/70 rounded px-4 text-sm right-2 bottom-2">{count}</span>
+		<img alt={name} class="h-24 w-24 xl:h-36 xl:w-36" src={img} />
+		<span class="absolute bottom-2 right-2 rounded-sm bg-black/70 px-4 text-sm">{count}</span>
 	</div>
-	<div class="flex flex-1 justify-center p-2 text-center bg-tertiary items-center">
+	<div class="bg-tertiary flex flex-1 items-center justify-center p-2 text-center">
 		<Text type="h4">
 			{name}
 		</Text>

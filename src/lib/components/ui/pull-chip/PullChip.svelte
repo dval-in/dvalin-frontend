@@ -16,9 +16,9 @@
 </script>
 
 <div
-	class={`flex items-center gap-2 bg-neutral p-1 rounded-md ${wonFiftyFifty ? 'outline' : ''} outline-1 outline-primary`}
+	class={`bg-neutral flex items-center gap-2 rounded-md p-1 ${wonFiftyFifty ? 'outline' : ''} outline-primary outline-1`}
 >
-	<img alt={'Image of ' + name} class="w-8 h-8 rounded-full" src={imgUrl} />
+	<img alt={'Image of ' + name} class="h-8 w-8 rounded-full" src={imgUrl} />
 	<Text type="p">{name}</Text>
 	<Text type="p">{counter}</Text>
 </div>

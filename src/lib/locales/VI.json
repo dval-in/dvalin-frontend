@@ -175,6 +175,8 @@
 		"action.reset_filters": "Đặt lại bộ lọc",
 		"filter.element": "Nguyên Tố",
 		"filter.weapon": "Vũ Khí",
+		"filter.rarity": "Rarity",
+		"filter.ownership": "Ownership",
 		"sort.rarity": "Rarity",
 		"sort.name": "Tên",
 		"sort.count": "Count",
