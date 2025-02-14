@@ -71,7 +71,7 @@
 	</svelte:fragment>
 
 	<div class="flex flex-1 flex-row gap-4">
-		<div class="lg:flex flex-col gap-2 hidden">
+		<div class="hidden flex-col gap-2 lg:flex">
 			{#each $transformedAchievementCategoryStore as category (category.key)}
 				<AchievementCategoryCard
 					name={category.name}

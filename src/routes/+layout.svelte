@@ -30,13 +30,13 @@
 		JSON.stringify(get(dataIndex).character) === '{}' ||
 		JSON.stringify(get(dataIndex).weapon) === '{}' ||
 		JSON.stringify(get(dataIndex).achievementCategory) === '{}';
-  let progress = 0;
+	let progress = 0;
 
 	$: {
 		let characterIndex = $fetchCharacterDataIndex;
 		let weaponIndex = $fetchWeaponDataIndex;
 		let achievementCategoryIndex = $fetchAchievementCategoryDataIndex;
-    progress = +characterIndex.isSuccess + +weaponIndex.isSuccess;
+		progress = +characterIndex.isSuccess + +weaponIndex.isSuccess;
 		if (
 			characterIndex.isSuccess &&
 			weaponIndex.isSuccess &&

@@ -411,7 +411,7 @@
 						</CardHeader>
 						<CardContent class="whitespace-pre-line">
 							<Text type="p">{changeLog}</Text>
-            </CardContent>
+						</CardContent>
 						<CardFooter class="mt-2.5 items-end justify-end">
 							<Button>{$i18n.t('action.more')}</Button>
 						</CardFooter>

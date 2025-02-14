@@ -226,7 +226,7 @@
 				<div class="flex flex-row items-center justify-center gap-2">
 					<Text
 						type="p"
-						class="flex flex-row items-center text-center justify-center min-w-16"
+						class="flex min-w-16 flex-row items-center justify-center text-center"
 					>
 						{achievement.reward}
 						<Icon path={mdiStarFourPoints} />

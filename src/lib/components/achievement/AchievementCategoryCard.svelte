@@ -13,18 +13,18 @@
 
 <a
 	href={link}
-	class={`${isSelected ? 'border-2 border-primary' : 'hover:scale-105'}
+	class={`${isSelected ? 'border-primary border-2' : 'hover:scale-105'}
 			${
 				inSidebar
-					? ' flex flex-row rounded-md py-3 bg-tertiary/30'
-					: ' flex flex-col w-full rounded-md h-full overflow-y-auto bg-tertiary/30'
+					? ' bg-tertiary/30 flex flex-row rounded-md py-3'
+					: ' bg-tertiary/30 flex h-full w-full flex-col overflow-y-auto rounded-md'
 			}
-			p-2 transition-transform duration-300 ease-in-out cursor-pointer`}
+			cursor-pointer p-2 transition-transform duration-300 ease-in-out`}
 	role="button"
 	aria-label={`${name} - ${achieved} out of ${total} achieved`}
 >
 	{#if inSidebar}
-		<img alt={name} class="flex object-contain size-20 p-2" src={img} />
+		<img alt={name} class="flex size-20 object-contain p-2" src={img} />
 		<div class={'flex flex-1 flex-col justify-center gap-2'}>
 			<Text type="p" class="flex max-w-72">
 				{name}
