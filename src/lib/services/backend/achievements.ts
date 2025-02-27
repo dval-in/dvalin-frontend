@@ -1,6 +1,7 @@
-import { createMutation, type QueryClient } from '@tanstack/svelte-query';
+import { createMutation, type QueryCache, type QueryClient } from '@tanstack/svelte-query';
 import type SocketService from '$lib/services/socket';
 import type { UserProfile } from '$lib/types/user_profile';
+import type { FetchUserProfileResponse } from '$lib/services/backend/user';
 
 export class BackendAchievementService {
 	private readonly baseUrl: string;
@@ -15,23 +16,18 @@ export class BackendAchievementService {
 
 	mutateUserAchievements() {
 		return createMutation({
-			mutationKey: [''],
+			mutationKey: ['userAchievements'],
 			mutationFn: async (mutationData: { achievementsState: any; uid: string }) => {
 				const a = await this.socketService.socket.emitWithAck('updateAchievements', {
 					achievements: mutationData.achievementsState,
 					uid: mutationData.uid
 				});
 
-				if (a.status === 'error') {
-					throw new Error('test');
+				if (a.state === 'error') {
+					throw new Error(a.message);
 				}
-
-				console.log(a);
-
-				return a;
 			},
 			onMutate: async (mutationData) => {
-				console.log('mutating');
 				await this.queryClient.cancelQueries({ queryKey: ['fetchUserProfile', true] });
 
 				const prevUserProfile = this.queryClient.getQueryData<UserProfile>([
@@ -39,27 +35,31 @@ export class BackendAchievementService {
 					true
 				]);
 
-				console.log(prevUserProfile);
+				this.queryClient.setQueryData<FetchUserProfileResponse>(
+					['fetchUserProfile', true],
+					(old) => {
+						if (old === undefined) return undefined;
+						if (old.state === 'NO_GENSHIN_ACCOUNTS') return old;
 
-				this.queryClient.setQueryData<UserProfile>(['fetchUserProfile', true], (old) => {
-					if (old === undefined) return undefined;
-
-					return {
-						...old,
-						achievements: { ...old.achievements, ...mutationData.achievementsState }
-					};
-				});
+						return {
+							...old,
+							data: {
+								...old.data,
+								achievements: {
+									...old.data.achievements,
+									...mutationData.achievementsState
+								}
+							}
+						};
+					}
+				);
 
 				return prevUserProfile;
 			},
 			onError: (err, mutationData, context) => {
-				console.log('error');
-				console.log(err);
-				console.log(context);
 				this.queryClient.setQueryData(['fetchUserProfile', true], context);
 			},
 			onSettled: () => {
-				console.log('refetch');
 				this.queryClient.invalidateQueries({ queryKey: ['fetchUserProfile'] });
 			}
 		});

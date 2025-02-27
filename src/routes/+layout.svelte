@@ -36,7 +36,10 @@
 		let characterIndex = $fetchCharacterDataIndex;
 		let weaponIndex = $fetchWeaponDataIndex;
 		let achievementCategoryIndex = $fetchAchievementCategoryDataIndex;
-		progress = +characterIndex.isSuccess + +weaponIndex.isSuccess;
+		progress =
+			+characterIndex.isSuccess +
+			+weaponIndex.isSuccess +
+			+achievementCategoryIndex.isSuccess;
 		if (
 			characterIndex.isSuccess &&
 			weaponIndex.isSuccess &&
@@ -90,7 +93,7 @@
 				>
 					<Loading />
 					<Text type="h3">Loading resources...</Text>
-					<Progress value={progress} max={2} />
+					<Progress value={progress} max={3} />
 				</div>
 			{:else}
 				<Sidebar />

@@ -145,21 +145,21 @@
 				placement="bottom"
 				rule
 			/>
-			{@const primaryColorScale = scaleOrdinal([colorKeys[2], colorKeys[1], colorKeys[0]])}
-			{@const secondaryColorScale = scaleOrdinal([
+			{@const primaryColors = [colorKeys[2], colorKeys[1], colorKeys[0]]}
+			{@const secondaryColors = [
 				`hsl(${hexToHSL(colorKeys[2])}, 0.2)`,
 				`hsl(${hexToHSL(colorKeys[1])}, 0.2)`,
 				`hsl(${hexToHSL(colorKeys[0])}, 0.2)`
-			])}
+			]}
 			{#each chartDataArray($getMonthlyData) as seriesData, index}
-				{@const primaryColor = primaryColorScale(String(index))}
-				{@const secondaryColor = secondaryColorScale(String(index))}
-				<LinearGradient stops={[primaryColor, secondaryColor]} vertical let:url>
+				{@const primaryColor = primaryColors[index]}
+				{@const secondaryColor = secondaryColors[index]}
+				<LinearGradient stops={[primaryColor, secondaryColor]} vertical let:gradient>
 					<Area
 						data={seriesData}
 						y0={(d) => d[0]}
 						y1={(d) => d[1]}
-						fill={url}
+						fill={gradient}
 						fill-opacity={0.5}
 						line={{ stroke: primaryColor, 'stroke-width': 2 }}
 					/>
@@ -174,7 +174,7 @@
 							data={seriesData}
 							y0={(d) => d[0]}
 							y1={(d) => d[1]}
-							fill={url}
+							fill={gradient}
 							line={{ stroke: primaryColor, 'stroke-width': 2 }}
 						/>
 					</RectClipPath>

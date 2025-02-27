@@ -7,15 +7,17 @@
 	import S3Service from '$lib/services/s3';
 	import { userProfile } from '$lib/store/user_profile';
 	import { dataIndex } from '$lib/store/index_store';
-	import { derived } from 'svelte/store';
+	import { derived, writable } from 'svelte/store';
+	import { applicationState } from '$lib/store/application_state';
 
-	$: showUnachievedCategory = false;
+	const hideAchievedCategories = writable(false);
 	$: totalAchivementCount = 0;
+	$: ac = 0;
 
 	const transformedAchievementCategoryStore = derived(
 		[userProfile, dataIndex],
 		([_userProfileStore, dataIndexStore]) => {
-			const categoryArray = Object.keys(dataIndexStore.achievementCategory).map((key) => ({
+			return Object.keys(dataIndexStore.achievementCategory).map((key) => ({
 				key: key,
 				name: dataIndexStore.achievementCategory[key].name,
 				order: dataIndexStore.achievementCategory[key].order,
@@ -23,12 +25,17 @@
 					dataIndexStore.achievementCategory[key].totalAchievementCount,
 				userAchievedCount: 0
 			}));
+		}
+	);
 
-			const filteredCategories = categoryArray.filter((a) => {
+	const filterStore = derived(
+		[transformedAchievementCategoryStore, hideAchievedCategories],
+		([achievementCategoryStore, hideAchievedCategoriesStore]) => {
+			const filteredCategories = achievementCategoryStore.filter((a) => {
 				if (a.order === undefined) {
 					return false;
 				}
-				if (showUnachievedCategory && a.totalAchievementCount === a.userAchievedCount) {
+				if (hideAchievedCategoriesStore && a.userAchievedCount >= a.totalAchievementCount) {
 					return false;
 				}
 
@@ -40,24 +47,38 @@
 	);
 
 	$: {
+		totalAchivementCount = 0;
+		ac = 0;
 		$transformedAchievementCategoryStore.forEach((category) => {
 			totalAchivementCount += category.totalAchievementCount;
 		});
+		const a = $userProfile.achievements;
+		if (a !== undefined) {
+			Object.keys(a).forEach((key) => {
+				if (a[key].achieved) {
+					ac++;
+				}
+			});
+		}
 	}
 </script>
 
 <DefaultLayout title={$i18n.t('achievement.title')}>
 	<svelte:fragment slot="titlebarActions">
-		<div class="flex flex-row items-center gap-2">
-			<Checkbox bind:checked={showUnachievedCategory} />
-			{$i18n.t('achievement.show_unachived_category')}
-		</div>
+		{#if $applicationState.isAuthenticated}
+			<div class="flex flex-row items-center gap-2">
+				<Checkbox bind:checked={$hideAchievedCategories} />
+				{$i18n.t('achievement.hide_achieved_category')}
+			</div>
+		{/if}
 	</svelte:fragment>
 
-	<Progress value={0} max={totalAchivementCount} />
+	{#if $applicationState.isAuthenticated}
+		<Progress value={ac} max={totalAchivementCount} />
+	{/if}
 
 	<div class="grid grid-cols-1 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
-		{#each $transformedAchievementCategoryStore as achievementCategory}
+		{#each $filterStore as achievementCategory}
 			<div class="achievement-category">
 				<AchievementCategoryCard
 					name={achievementCategory.name}

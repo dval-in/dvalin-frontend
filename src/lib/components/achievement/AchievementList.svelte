@@ -9,17 +9,38 @@
 	import Separator from '../ui/separator/separator.svelte';
 	import i18n from '$lib/services/i18n';
 	import Icon from '$lib/components/ui/icon/icon.svelte';
-	import { mdiOpenInNew, mdiStarFourPoints } from '@mdi/js';
+	import { mdiChevronLeft, mdiChevronRight, mdiOpenInNew, mdiStarFourPoints } from '@mdi/js';
 	import { userProfile } from '$lib/store/user_profile';
 	import { get } from 'svelte/store';
 	import BackendService from '$lib/services/backend';
+	import {
+		Pagination,
+		PaginationContent,
+		PaginationEllipsis,
+		PaginationItem,
+		PaginationLink,
+		PaginationNextButton,
+		PaginationPrevButton
+	} from '$lib/components/ui/pagination';
+	import { applicationState } from '$lib/store/application_state';
+	import { debounce } from 'lodash-es';
 
 	export let achievements: achievementData[];
+
+	const PAGE_SIZE = 25;
 
 	$: mutateUserAchievements = BackendService.getInstance().achievement.mutateUserAchievements();
 
 	let achievementsState: { [key: number]: { achieved: boolean; progression: string } } = {};
 	let checkAllState: boolean = false;
+	let currentPage = 1;
+
+	const debouncedUserAchievementsMutation = debounce(() => {
+		$mutateUserAchievements.mutate({
+			achievementsState,
+			uid: get(userProfile).account.uid.toString()
+		});
+	}, 1000);
 
 	const isCheckboxChecked = (progression: string | undefined, index: number) => {
 		if (!progression) {
@@ -43,10 +64,7 @@
 					? progression
 					: achievementsState[achievementId]?.progression || '0'
 		};
-		$mutateUserAchievements.mutate({
-			achievementsState,
-			uid: get(userProfile).account.uid.toString()
-		});
+		debouncedUserAchievementsMutation();
 	};
 
 	const handleCheckboxChange = (achievementId: number, checked: boolean | 'indeterminate') => {
@@ -119,18 +137,24 @@
 </script>
 
 <div class="flex flex-1 flex-col gap-2">
-	<Card class="p-4">
-		<div class="flex items-center justify-between gap-2">
-			<Text type="h4">
-				{`${(0 / achievements.length) * 100}% (${0} / ${achievements.length})`}
-			</Text>
-			<div class="flex items-center gap-2">
-				<Text type="p">{$i18n.t('achievement.check_all')}</Text>
-				<Checkbox checked={checkAllState} onCheckedChange={handleCheckAll} id="check-all" />
+	{#if $applicationState.isAuthenticated}
+		<Card class="p-4">
+			<div class="flex items-center justify-between gap-2">
+				<Text type="h4">
+					{`${(0 / achievements.length) * 100}% (${0} / ${achievements.length})`}
+				</Text>
+				<div class="flex items-center gap-2">
+					<Text type="p">{$i18n.t('achievement.check_all')}</Text>
+					<Checkbox
+						checked={checkAllState}
+						onCheckedChange={handleCheckAll}
+						id="check-all"
+					/>
+				</div>
 			</div>
-		</div>
-	</Card>
-	{#each achievements as achievement (achievement.id)}
+		</Card>
+	{/if}
+	{#each achievements.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE) as achievement (achievement.id)}
 		<Card class={`${achievement.preStage ? '' : ''} p-4`}>
 			<div class={`flex flex-row justify-between`}>
 				<div class="flex flex-1 flex-col gap-2">
@@ -231,12 +255,50 @@
 						{achievement.reward}
 						<Icon path={mdiStarFourPoints} />
 					</Text>
-					<Checkbox
-						checked={achievement.achieved}
-						onCheckedChange={(checked) => handleCheckboxChange(achievement.id, checked)}
-					/>
+					{#if $applicationState.isAuthenticated}
+						<Checkbox
+							checked={achievement.achieved}
+							onCheckedChange={(checked) =>
+								handleCheckboxChange(achievement.id, checked)}
+						/>
+					{/if}
 				</div>
 			</div>
 		</Card>
 	{/each}
+	<Pagination
+		count={achievements.length}
+		bind:page={currentPage}
+		let:pages
+		perPage={PAGE_SIZE}
+		siblingCount={0}
+	>
+		<PaginationContent>
+			<PaginationItem>
+				<PaginationPrevButton>
+					<Icon path={mdiChevronLeft} />
+					<Text type="p" class="max-sm:hidden">{$i18n.t('action.previous')}</Text>
+				</PaginationPrevButton>
+			</PaginationItem>
+			{#each pages as page (page.key)}
+				{#if page.type === 'ellipsis'}
+					<PaginationItem>
+						<PaginationEllipsis />
+					</PaginationItem>
+				{:else}
+					<PaginationItem>
+						<PaginationLink {page} isActive={currentPage === page.value}>
+							<Text type="p">{page.value}</Text>
+						</PaginationLink>
+					</PaginationItem>
+				{/if}
+			{/each}
+			<PaginationItem>
+				<PaginationNextButton>
+					<Text type="p" class="max-sm:hidden">{$i18n.t('action.next')}</Text>
+					<Icon path={mdiChevronRight} />
+				</PaginationNextButton>
+			</PaginationItem>
+		</PaginationContent>
+	</Pagination>
 </div>

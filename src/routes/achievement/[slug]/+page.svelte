@@ -20,7 +20,6 @@
 
 	$: fetchAchievements = backend.data.fetchAchievements($i18n.language, data.category);
 	$: totalAchivementCount = 0;
-	$: sortedAchievements = [];
 
 	const transformedAchievementCategoryStore = derived(
 		[userProfile, dataIndex],
@@ -48,7 +47,9 @@
 				...b,
 				achieved:
 					$userProfile.achievements !== undefined
-						? Object.keys($userProfile.achievements).includes(b.id.toString())
+						? $userProfile.achievements[b.id] !== undefined
+							? $userProfile.achievements[b.id].achieved
+							: false
 						: false
 			}));
 

@@ -9,6 +9,8 @@ import type { QueryClient } from '@tanstack/svelte-query';
 import { applicationState } from '$lib/store/application_state';
 import { BackendAchievementService } from '$lib/services/backend/achievements';
 import type SocketService from '$lib/services/socket';
+import { userProfile } from '$lib/store/user_profile';
+import { BackendGithubService } from '$lib/services/backend/github';
 
 export type BackendStateResponse = {
 	state: 'AUTHENTICATION_REQUIRED' | 'MAINTENANCE' | 'INITIALIZING' | 'MISSING_USER';
@@ -24,12 +26,14 @@ export const checkBackendResponse = async <T extends object>(r: Response): Promi
 				goto('/maintenance');
 				throw 'BACKEND_NOT_RUNNING';
 			case 'AUTHENTICATION_REQUIRED':
-				toast.error('You are not authenticated!', {
-					description: 'Please log in once again'
-				});
+				goto('/');
 				applicationState.update((state) => {
 					state.isAuthenticated = false;
 					return state;
+				});
+				userProfile.reset();
+				toast.error('You are not authenticated!', {
+					description: 'Please log in once again'
 				});
 				throw 'AUTHENTICATION_REQUIRED';
 			case 'MISSING_USER':
@@ -76,6 +80,7 @@ export default class BackendService {
 	public hoyo;
 	public user;
 	public achievement;
+	public github;
 
 	private constructor(
 		private queryClient: QueryClient,
@@ -90,6 +95,7 @@ export default class BackendService {
 			this.queryClient,
 			this.socket
 		);
+		this.github = new BackendGithubService(this.queryClient);
 	}
 
 	public static setupInstance(queryClient: QueryClient, socket: SocketService): BackendService {
