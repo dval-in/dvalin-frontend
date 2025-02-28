@@ -37,20 +37,6 @@
 		}
 	});
 
-	const fiveStars = derived([wishData], ([wishDataStore]) => {
-		return wishDataStore
-			.filter((wish: IWish) => wish.rarity === 5)
-			.sort((a: IWish, b: IWish) => b.order - a.order);
-	});
-
-	const fourStars = derived([wishData], ([wishDataStore]) => {
-		return wishDataStore.filter((wish: IWish) => wish.rarity === 4);
-	});
-
-	const threeStars = derived([wishData], ([wishDataStore]) => {
-		return wishDataStore.filter((wish: IWish) => wish.rarity === 3);
-	});
-
 	const fiveStarPity = derived([wishData], ([wishDataStore]) => {
 		return wishDataStore.findIndex((wish) => wish.rarity === 5) === -1
 			? wishDataStore.length
@@ -65,8 +51,8 @@
 </script>
 
 <DefaultLayout title={$i18n.t('wish.detailed.title.' + data.pageType)}>
-	<div class="flex flex-1 flex-col gap-4 sm:flex-row sm:flex-wrap">
-		<div class="flex flex-col gap-4">
+	<div class="flex flex-1 flex-col gap-4 lg:flex-row lg:flex-wrap">
+		<div class="flex min-w-80 flex-col gap-4">
 			<div class="flex flex-row gap-2">
 				<InfoCell
 					class="bg-tertiary"
@@ -79,29 +65,9 @@
 						<Text type="h4">{$wishData.length * 160}</Text>
 					</svelte:fragment>
 				</InfoCell>
-				<InfoCell
-					class="bg-tertiary"
-					title={$i18n.t('wish.detailed.info.total_pull_percentage')}
-				>
-					{#if $fiveStars.length > 0}
-						<Text class="text-fivestar" type="h4">
-							{(($fiveStars.length / $wishData.length) * 100).toFixed(1)}
-						</Text>
-					{/if}
-					{#if $fourStars.length > 0}
-						<Text class="text-fourstar" type="h4">
-							{(($fourStars.length / $wishData.length) * 100).toFixed(1)}
-						</Text>
-					{/if}
-					{#if $threeStars.length > 0}
-						<Text class="text-threestar" type="h4">
-							{(($threeStars.length / $wishData.length) * 100).toFixed(1)}
-						</Text>
-					{/if}
-				</InfoCell>
 				<InfoCell class="bg-tertiary" title={$i18n.t('wish.detailed.info.pity')}>
-					<Text type="h4">{$fiveStarPity}</Text>
-					<Text type="h4">{$fourStarPity}</Text>
+					<Text type="h4" class="text-fivestar">{$fiveStarPity}</Text>
+					<Text type="h4" class="text-fourstar">{$fourStarPity}</Text>
 				</InfoCell>
 			</div>
 

@@ -1,33 +1,14 @@
 <script lang="ts">
-	import { scaleOrdinal, scaleTime } from 'd3-scale';
-	import { stack } from 'd3-shape';
-	import { flatten } from 'svelte-ux/utils/array';
+	import { scaleTime } from 'd3-scale';
 	import type { WishBannerKey } from '$lib/types/keys/WishBannerKey';
-	import { mdiStar } from '@mdi/js';
-	import Icon from '$lib/components/ui/icon/icon.svelte';
-	import Text from '$lib/components/typography/Text.svelte';
 	import { applicationState } from '$lib/store/application_state';
 	import { derived, type Readable } from 'svelte/store';
 	import type { INamedWishes, IWish } from '$lib/types/wish';
-	import {
-		Area,
-		Axis,
-		Chart,
-		chartDataArray,
-		Highlight,
-		Legend,
-		LinearGradient,
-		RectClipPath,
-		Svg,
-		Tooltip
-	} from 'layerchart';
+	import { Area, AreaChart, LinearGradient, RectClipPath, Tooltip } from 'layerchart';
 
 	export let data: Readable<INamedWishes>;
 
-	const keys = ['5', '4', '3'];
-	const colorKeys = ['#5E93B2', '#7B5C90', '#FFB13F'];
-
-	const getMonthlyData = derived([data], ([dataStore]) => {
+	const monthlyData = derived([data], ([dataStore]) => {
 		let pullsByMonth: { [key: string]: { [key: string]: number } } = {};
 
 		const bannerHistoryData: IWish[] = [];
@@ -47,121 +28,71 @@
 			pullsByMonth[dateKey][d.rarity] = pullsByMonth[dateKey][d.rarity] + 1;
 		});
 
-		return stack().keys(keys)(
-			Object.keys(pullsByMonth)
-				.map((key) => {
-					return {
-						date: new Date(key).getTime(),
-						'5': pullsByMonth[key]['5'],
-						'4': pullsByMonth[key]['4'],
-						'3': pullsByMonth[key]['3']
-					};
-				})
-				.sort((a, b) => new Date(a.date).valueOf() - new Date(b.date).valueOf())
-		);
+		return Object.keys(pullsByMonth)
+			.map((key) => {
+				return {
+					date: new Date(key),
+					...pullsByMonth[key]
+				};
+			})
+			.sort((a, b) => new Date(a.date).valueOf() - new Date(b.date).valueOf());
 	});
 
-	const hexToHSL = (hex: string) => {
-		// Remove the # if present
-		hex = hex.replace(/^#/, '');
+	$: {
+		console.log($monthlyData);
+	}
 
-		// Convert hex to RGB
-		let r = parseInt(hex.slice(0, 2), 16) / 255;
-		let g = parseInt(hex.slice(2, 4), 16) / 255;
-		let b = parseInt(hex.slice(4, 6), 16) / 255;
-
-		// Find greatest and smallest channel values
-		let cmin = Math.min(r, g, b),
-			cmax = Math.max(r, g, b),
-			delta = cmax - cmin,
-			h = 0,
-			s = 0,
-			l = 0;
-
-		// Calculate hue
-		if (delta === 0) h = 0;
-		else if (cmax === r) h = ((g - b) / delta) % 6;
-		else if (cmax === g) h = (b - r) / delta + 2;
-		else h = (r - g) / delta + 4;
-
-		h = Math.round(h * 60);
-		if (h < 0) h += 360;
-
-		// Calculate lightness
-		l = (cmax + cmin) / 2;
-
-		// Calculate saturation
-		s = delta === 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
-
-		// Convert to percentages
-		s = +(s * 100).toFixed(1);
-		l = +(l * 100).toFixed(1);
-
-		return `${h}, ${s}%, ${l}%`;
-	};
-
-	const formatDateLabel = (d: string) =>
+	const formatDateLabel = (d: string, m: 'long' | 'short' = 'short') =>
 		new Date(d).toLocaleDateString($applicationState.settings.locale, {
-			month: 'short',
+			month: m,
 			year: '2-digit'
 		});
 </script>
 
-<div class="h-[350px] w-full">
-	<Chart
-		data={$getMonthlyData}
-		flatData={flatten($getMonthlyData)}
-		let:height
-		let:padding
-		let:tooltip
-		let:width
+<div class=" h-[350px] w-full">
+	<AreaChart
+		data={$monthlyData}
+		x="date"
+		series={[
+			{
+				key: '5',
+				label: 'Fivestar',
+				color: 'var(--fivestar)'
+			},
+			{
+				key: '4',
+				label: 'Fourstar',
+				color: 'var(--color-fourstar)'
+			},
+			{ key: '3', label: 'Threestar', color: 'var(--color-threestar)' }
+		]}
+		seriesLayout="stack"
+		legend={{ onclick: undefined }}
+		props={{
+			tooltip: {
+				header: {
+					format: formatDateLabel
+				}
+			},
+			xAxis: {
+				format: formatDateLabel,
+				ticks: (scale) => scaleTime(scale.domain(), scale.range()).ticks()
+			}
+		}}
 		padding={{ left: 16, bottom: 62 }}
-		r="key"
-		rDomain={keys}
-		rRange={colorKeys}
-		cScale={scaleOrdinal()}
-		tooltip={{ mode: 'bisect-x' }}
-		x={(d) => d.data.date}
-		xScale={scaleTime()}
-		y={['0', '1']}
-		yNice
 	>
-		<Svg>
-			<Axis
-				tickLabelProps={{
-					textAnchor: 'end',
-					class: 'fill-text font-semibold'
-				}}
-				ticks={5}
-				placement="left"
-				rule
-				grid={{ style: 'stroke-dasharray: 2; stroke: white' }}
-			/>
-			<Axis
-				format={formatDateLabel}
-				tickLabelProps={{
-					class: 'fill-text font-semibold'
-				}}
-				placement="bottom"
-				rule
-			/>
-			{@const primaryColors = [colorKeys[2], colorKeys[1], colorKeys[0]]}
-			{@const secondaryColors = [
-				`hsl(${hexToHSL(colorKeys[2])}, 0.2)`,
-				`hsl(${hexToHSL(colorKeys[1])}, 0.2)`,
-				`hsl(${hexToHSL(colorKeys[0])}, 0.2)`
-			]}
-			{#each chartDataArray($getMonthlyData) as seriesData, index}
-				{@const primaryColor = primaryColors[index]}
-				{@const secondaryColor = secondaryColors[index]}
-				<LinearGradient stops={[primaryColor, secondaryColor]} vertical let:gradient>
+		<svelte:fragment slot="marks" let:series let:getAreaProps let:tooltip let:width let:height>
+			{#each series as s, i (s.key)}
+				<LinearGradient
+					stops={[s.color, 'color-mix(in hsl, ' + s.color + ' 20%, transparent)']}
+					vertical
+					let:gradient
+				>
 					<Area
-						data={seriesData}
-						y0={(d) => d[0]}
-						y1={(d) => d[1]}
+						{...getAreaProps(s, i)}
 						fill={gradient}
-						fill-opacity={0.5}
-						line={{ stroke: primaryColor, 'stroke-width': 2 }}
+						fill-opacity={0.4}
+						line={{ class: `stroke-2`, stroke: s.color }}
 					/>
 					<RectClipPath
 						x={0}
@@ -171,63 +102,36 @@
 						spring
 					>
 						<Area
-							data={seriesData}
-							y0={(d) => d[0]}
-							y1={(d) => d[1]}
+							{...getAreaProps(s, i)}
 							fill={gradient}
-							line={{ stroke: primaryColor, 'stroke-width': 2 }}
+							fill-opacity={1}
+							line={{ class: 'stroke-2', stroke: s.color }}
 						/>
 					</RectClipPath>
 				</LinearGradient>
 			{/each}
-
-			<Highlight lines={{ class: 'stroke-text [stroke-dasharray:unset]' }} />
-		</Svg>
-
-		<Legend let:values placement="bottom">
-			{#if values !== undefined}
-				<div class="flex gap-4">
-					{#each values as value}
-						<div class="flex gap-1">
-							<div
-								class="h-4 w-4 rounded-full"
-								style:background-color={colorKeys.at(Number.parseInt(value) - 3)}
-							/>
-							<div class="text-surface-content/50 text-xs">{value}</div>
-						</div>
+		</svelte:fragment>
+		<svelte:fragment slot="tooltip" let:series let:height let:padding>
+			<Tooltip.Root class="bg-neutral" let:data x="data">
+				<Tooltip.Header>
+					{'Total pulls: ' + (data['3'] + data['4'] + data['5'])}
+				</Tooltip.Header>
+				<Tooltip.List>
+					{#each series as s}
+						<Tooltip.Item label={s.label} color={s.color}>{data[s.key]}</Tooltip.Item>
 					{/each}
-				</div>
-			{/if}
-		</Legend>
-
-		<Tooltip.Root class="bg-neutral" let:data x="data" y={0}>
-			<Tooltip.Header>
-				{'Total pulls: ' + (data.data['3'] + data.data['4'] + data.data['5'])}
-			</Tooltip.Header>
-			<div class="flex flex-col items-start justify-center gap-2">
-				{#each keys as key}
-					<div class="flex items-center justify-center gap-1">
-						<Icon
-							path={mdiStar}
-							class={`fill-[${colorKeys.at(Number.parseInt(key) - 3)}]`}
-						/>
-						<Text type="p">{key}: {data.data[key]}</Text>
-					</div>
-				{/each}
-			</div>
-		</Tooltip.Root>
-		<Tooltip.Root
-			anchor="top"
-			class="bg-primary text-text-content whitespace-nowrap rounded-sm px-2 py-1 text-sm font-semibold leading-3"
-			let:data
-			variant="none"
-			x="data"
-			y={height + padding.top + 2}
-		>
-			{new Date(data.data.date).toLocaleDateString($applicationState.settings.locale, {
-				month: 'long',
-				year: 'numeric'
-			})}
-		</Tooltip.Root>
-	</Chart>
+				</Tooltip.List>
+			</Tooltip.Root>
+			<Tooltip.Root
+				anchor="top"
+				class="bg-primary text-text-content whitespace-nowrap rounded-sm px-2 py-1 text-sm font-semibold leading-3"
+				let:data
+				variant="none"
+				x="data"
+				y={height + padding.top + 2}
+			>
+				{formatDateLabel(data.date, 'long')}
+			</Tooltip.Root>
+		</svelte:fragment>
+	</AreaChart>
 </div>
