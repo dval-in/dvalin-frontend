@@ -27,7 +27,7 @@
 		"i18next": "^24.2.2",
 		"layerchart": "^1.0.0",
 		"lodash-es": "^4.17.21",
-		"lucide-svelte": "^0.475.0",
+		"lucide-svelte": "^0.477.0",
 		"mode-watcher": "^0.5.0",
 		"simple-icons": "^14.4.0",
 		"socket.io": "^4.8.1",
