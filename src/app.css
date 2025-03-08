@@ -2,7 +2,15 @@
 
 @config "../tailwind.config.ts";
 
+@source '../node_modules/layerchart/**/*.{svelte,js}';
+@source '../src/**/*.{html,js,svelte,ts}';
+
 @theme inline {
+	--color-surface-100: hsl(var(--background));
+	--color-surface-200: hsl(var(--muted));
+	--color-surface-300: hsl(var(--background));
+	--color-surface-content: hsl(var(--card-foreground));
+
 	--color-border: var(--border);
 	--color-foreground: var(--foreground);
 	--color-primary: var(--primary);
@@ -14,8 +22,8 @@
 	--color-text: var(--text);
 
 	--color-fivestar: var(--fivestar);
-	--color-fourstar: #7b5c90;
-	--color-threestar: #5e93b2;
+	--color-fourstar: hsl(276, 22%, 46%);
+	--color-threestar: hsl(202, 35%, 53%);
 
 	--radius: 0.5rem;
 
@@ -51,7 +59,7 @@
 	--neutral: #1c1c22;
 	--text: #ffffff;
 
-	--fivestar: #ffb13f;
+	--fivestar: hsl(36, 100%, 62%);
 }
 
 [class='light'] {

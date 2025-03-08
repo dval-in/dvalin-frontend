@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { PieChart } from 'layerchart';
+	import { BarChart, Tooltip } from 'layerchart';
 	import type { IWish } from '$lib/types/wish';
 	import { derived, type Readable } from 'svelte/store';
 
 	export let wishData: Readable<IWish[]>;
 
-	const getData = derived([wishData], ([wishDataStore]) => {
+	const data = derived([wishData], ([wishDataStore]) => {
 		const rarityCount: { [key: number]: number } = {};
 
 		wishDataStore.forEach((wish: IWish) => {
@@ -18,29 +18,59 @@
 			rarityCount[wish.rarity] = rarityCount[wish.rarity] + 1;
 		});
 
-		return Object.keys(rarityCount)
-			.map((key) => {
-				const rarity = Number.parseInt(key);
-				return { rarity, value: rarityCount[rarity] };
-			})
-			.sort((a, b) => a.rarity - b.rarity);
+		return [
+			{
+				test: 0,
+				'3': rarityCount['3'] / wishDataStore.length,
+				'4': rarityCount['4'] / wishDataStore.length,
+				'5': rarityCount['5'] / wishDataStore.length,
+				count: { ...rarityCount }
+			}
+		];
 	});
-
-	const keyColors = ['#5E93B2', '#7B5C90', '#FFB13F'];
 </script>
 
-<div class="h-[300px] w-full">
-	<PieChart
-		data={$getData}
-		key="rarity"
-		cRange={keyColors}
-		value="value"
-		outerRadius={300 / 2}
-		innerRadius={-20}
-		cornerRadius={10}
-		padAngle={0.02}
-		range={[-90, 90]}
-		props={{ group: { y: 80 } }}
-		legend
-	/>
+<div class="h-[100px] w-full">
+	<BarChart
+		data={$data}
+		y="test"
+		orientation="horizontal"
+		series={[
+			{
+				key: '5',
+				label: 'Fivestar',
+				color: 'var(--fivestar)'
+			},
+			{
+				key: '4',
+				label: 'Fourstar',
+				color: 'var(--color-fourstar)'
+			},
+			{ key: '3', label: 'Threestar', color: 'var(--color-threestar)' }
+		]}
+		seriesLayout="stack"
+		axis={false}
+		grid={false}
+		props={{
+			bars: { radius: 4.0, rounded: 'all', strokeWidth: 0 },
+			highlight: { axis: 'none' }
+		}}
+		stackPadding={4}
+		legend={{ onclick: undefined }}
+	>
+		<svelte:fragment slot="tooltip" let:series>
+			<Tooltip.Root class="bg-neutral" let:data>
+				<Tooltip.Header>
+					{'Total pulls: ' + (data.count['3'] + data.count['4'] + data.count['5'])}
+				</Tooltip.Header>
+				<Tooltip.List>
+					{#each series as s}
+						<Tooltip.Item label={s.label} color={s.color}>
+							{`${data.count[s.key]} (${(data[s.key] * 100).toFixed(2)}%)`}
+						</Tooltip.Item>
+					{/each}
+				</Tooltip.List>
+			</Tooltip.Root>
+		</svelte:fragment>
+	</BarChart>
 </div>

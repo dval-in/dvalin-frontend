@@ -25,8 +25,8 @@ export default defineConfig({
 	},
 
 	plugins: [
-		sveltekit(),
 		tailwindcss(),
+		sveltekit(),
 		SvelteKitPWA({
 			registerType: 'autoUpdate',
 			includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'mask-icon.svg'],
