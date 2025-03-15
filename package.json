@@ -54,7 +54,7 @@
 		"@types/eslint": "9.6.1",
 		"@vite-pwa/assets-generator": "^0.2.6",
 		"@vite-pwa/sveltekit": "^0.6.7",
-		"autoprefixer": "^10.4.20",
+		"autoprefixer": "^10.4.21",
 		"eslint": "^9.21.0",
 		"eslint-config-prettier": "^10.1.1",
 		"eslint-plugin-prettier": "^5.2.1",
