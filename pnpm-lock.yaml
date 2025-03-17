@@ -42,8 +42,8 @@ importers:
         specifier: ^1.0.1
         version: 1.0.1(svelte@4.2.19)(sveltekit-superforms@2.23.1(@sveltejs/kit@2.19.0(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.14(@types/node@22.10.10)(lightningcss@1.29.2)(sass@1.85.1)(terser@5.39.0)))(svelte@4.2.19)(vite@5.4.14(@types/node@22.10.10)(lightningcss@1.29.2)(sass@1.85.1)(terser@5.39.0)))(@types/json-schema@7.0.15)(svelte@4.2.19)(typescript@5.7.3))
       i18next:
-        specifier: ^24.2.2
-        version: 24.2.2(typescript@5.7.3)
+        specifier: ^24.2.3
+        version: 24.2.3(typescript@5.7.3)
       layerchart:
         specifier: ^1.0.0
         version: 1.0.0(svelte@4.2.19)(typescript@5.7.3)
@@ -67,7 +67,7 @@ importers:
         version: 4.8.1
       svelte-i18next:
         specifier: ^2.2.2
-        version: 2.2.2(i18next@24.2.2(typescript@5.7.3))(svelte@4.2.19)
+        version: 2.2.2(i18next@24.2.3(typescript@5.7.3))(svelte@4.2.19)
       svelte-legos:
         specifier: ^0.2.5
         version: 0.2.5(svelte@4.2.19)
@@ -689,10 +689,6 @@ packages:
 
   '@babel/runtime@7.26.10':
     resolution: {integrity: sha512-2WJMeRQPHKSPemqk/awGrAiuFfzBmOIPXKizAsVhWH9YJqLZ0H+HS4c8loHGgW6utJ3E/ejXQUsiGaQy2NZ9Fw==}
-    engines: {node: '>=6.9.0'}
-
-  '@babel/runtime@7.26.7':
-    resolution: {integrity: sha512-AOPI3D+a8dXnja+iwsUqGRjr1BbZIe771sXdapOtYI531gSqpi92vXivKcq2asu/DFpdl1ceFAKZyRzK2PCVcQ==}
     engines: {node: '>=6.9.0'}
 
   '@babel/template@7.26.9':
@@ -2857,8 +2853,8 @@ packages:
     engines: {node: '>=18'}
     hasBin: true
 
-  i18next@24.2.2:
-    resolution: {integrity: sha512-NE6i86lBCKRYZa5TaUDkU5S4HFgLIEJRLr3Whf2psgaxBleQ2LC1YW1Vc+SCgkAW7VEzndT6al6+CzegSUHcTQ==}
+  i18next@24.2.3:
+    resolution: {integrity: sha512-lfbf80OzkocvX7nmZtu7nSTNbrTYR52sLWxPtlXX1zAhVw8WEnFk4puUkCR4B1dNQwbSpEHHHemcZu//7EcB7A==}
     peerDependencies:
       typescript: ^5
     peerDependenciesMeta:
@@ -5481,10 +5477,6 @@ snapshots:
     dependencies:
       regenerator-runtime: 0.14.1
 
-  '@babel/runtime@7.26.7':
-    dependencies:
-      regenerator-runtime: 0.14.1
-
   '@babel/template@7.26.9':
     dependencies:
       '@babel/code-frame': 7.26.2
@@ -7715,9 +7707,9 @@ snapshots:
 
   husky@9.1.7: {}
 
-  i18next@24.2.2(typescript@5.7.3):
+  i18next@24.2.3(typescript@5.7.3):
     dependencies:
-      '@babel/runtime': 7.26.7
+      '@babel/runtime': 7.26.10
     optionalDependencies:
       typescript: 5.7.3
 
@@ -7990,7 +7982,7 @@ snapshots:
 
   json-schema-to-ts@3.1.1:
     dependencies:
-      '@babel/runtime': 7.26.7
+      '@babel/runtime': 7.26.10
       ts-algebra: 2.0.0
     optional: true
 
@@ -9122,9 +9114,9 @@ snapshots:
     dependencies:
       svelte: 4.2.19
 
-  svelte-i18next@2.2.2(i18next@24.2.2(typescript@5.7.3))(svelte@4.2.19):
+  svelte-i18next@2.2.2(i18next@24.2.3(typescript@5.7.3))(svelte@4.2.19):
     dependencies:
-      i18next: 24.2.2(typescript@5.7.3)
+      i18next: 24.2.3(typescript@5.7.3)
       svelte: 4.2.19
 
   svelte-keyed@2.0.0(svelte@4.2.19):
