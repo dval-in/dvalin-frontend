@@ -198,17 +198,17 @@
 		"achievement.check_all": "Check All Achievements",
 		"achievement.show_unachived_category": "Show unachieved categories",
 		"rarity": "Rarity",
-		"language.DE": "德语",
-		"language.EN": "英语",
-		"language.ES": "西班牙语",
+		"language.DE": "Deutsch",
+		"language.EN": "English",
+		"language.ES": "Español",
 		"language.FR": "法语",
-		"language.IT": "意大利语",
+		"language.IT": "Italiano",
 		"language.PL": "波兰语",
-		"language.PT": "葡萄牙语",
-		"language.RU": "俄语",
-		"language.TH": "泰语",
+		"language.PT": "Português",
+		"language.RU": "Русский",
+		"language.TH": "แบบไทย",
 		"language.VI": "Tiếng Việt",
 		"language.ZHS": "简体中文",
-		"language.ZHT": "繁体中文"
+		"language.ZHT": "繁體中文"
 	}
 }
