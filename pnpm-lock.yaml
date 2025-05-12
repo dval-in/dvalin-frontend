@@ -15,8 +15,8 @@ importers:
         specifier: ^7.4.47
         version: 7.4.47
       '@tanstack/svelte-query':
-        specifier: ^5.65.0
-        version: 5.65.0(svelte@4.2.19)
+        specifier: ^5.75.7
+        version: 5.75.7(svelte@4.2.19)
       '@types/lodash-es':
         specifier: ^4.17.12
         version: 4.17.12
@@ -1621,13 +1621,13 @@ packages:
     peerDependencies:
       vite: ^5.2.0 || ^6
 
-  '@tanstack/query-core@5.65.0':
-    resolution: {integrity: sha512-Bnnq/1axf00r2grRT6gUyIkZRKzhHs+p4DijrCQ3wMlA3D3TTT71gtaSLtqnzGddj73/7X5JDGyjiSLdjvQN4w==}
+  '@tanstack/query-core@5.75.7':
+    resolution: {integrity: sha512-4BHu0qnxUHOSnTn3ow9fIoBKTelh0GY08yn1IO9cxjBTsGvnxz1ut42CHZqUE3Vl/8FAjcHsj8RNJMoXvjgHEA==}
 
-  '@tanstack/svelte-query@5.65.0':
-    resolution: {integrity: sha512-udTv4cNtSvj75Af/Je0xV38eWi/7MamsdwP302ivSVO8T0mlLRWhUaT35d0wF7JqfTU1MkUMue6KjKlHroiwGw==}
+  '@tanstack/svelte-query@5.75.7':
+    resolution: {integrity: sha512-KbAZoelJC8OJvh5fX0QRcbdBs8xu/1SJkEwaMs0rTgd0Do28ISLU+bMyb4H0E7whvnzKmh6CBCGqu2gxmfmvwA==}
     peerDependencies:
-      svelte: ^3.54.0 || ^4.0.0 || ^5.0.0-next.0
+      svelte: ^3.54.0 || ^4.0.0 || ^5.0.0
 
   '@types/conventional-commits-parser@5.0.1':
     resolution: {integrity: sha512-7uz5EHdzz2TqoMfV7ee61Egf5y6NkcO4FB/1iCCQnbeiI1F3xzv3vK5dBCXUCLQgGYS+mUeigK1iKQzvED+QnQ==}
@@ -6316,11 +6316,11 @@ snapshots:
       tailwindcss: 4.0.14
       vite: 5.4.14(@types/node@22.10.10)(lightningcss@1.29.2)(sass@1.87.0)(terser@5.39.0)
 
-  '@tanstack/query-core@5.65.0': {}
+  '@tanstack/query-core@5.75.7': {}
 
-  '@tanstack/svelte-query@5.65.0(svelte@4.2.19)':
+  '@tanstack/svelte-query@5.75.7(svelte@4.2.19)':
     dependencies:
-      '@tanstack/query-core': 5.65.0
+      '@tanstack/query-core': 5.75.7
       svelte: 4.2.19
 
   '@types/conventional-commits-parser@5.0.1':
